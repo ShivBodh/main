@@ -9,6 +9,7 @@ import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
 import { format } from 'date-fns';
 import { allEvents, peethamBadgeColors, peethamDotColors, Peetham } from '@/lib/events-data';
+import { Atom, BookOpen, HandHeart, VenetianMask } from 'lucide-react';
 
 export default function EventsPage() {
     const [date, setDate] = useState<Date | undefined>();
@@ -74,13 +75,13 @@ export default function EventsPage() {
                             onSelect={setDate}
                             className="p-0"
                             components={{
-                                DayContent: ({ date }) => {
-                                    const dayEvents = allEvents.filter(e => format(new Date(e.date + 'T00:00:00'), 'yyyy-MM-dd') === format(date, 'yyyy-MM-dd') && filters[e.peetham]);
+                                DayContent: ({ date: dayDate }) => {
+                                    const dayEvents = allEvents.filter(e => e.date === format(dayDate, 'yyyy-MM-dd') && filters[e.peetham]);
                                     const peethamsOnDay = [...new Set(dayEvents.map(e => e.peetham))];
                                     
                                     return (
                                         <div className='relative h-full w-full flex items-center justify-center'>
-                                            <span>{date.getDate()}</span>
+                                            <span>{dayDate.getDate()}</span>
                                             {peethamsOnDay.length > 0 && (
                                                 <div className="absolute bottom-1 flex space-x-0.5">
                                                     {peethamsOnDay.map(p => (
@@ -125,6 +126,7 @@ export default function EventsPage() {
                                 </div>
                             ) : (
                                 <div className="flex flex-col items-center justify-center h-full text-center text-muted-foreground pt-16">
+                                    <VenetianMask className="h-16 w-16 mb-4 text-primary" />
                                     <p className="text-lg font-semibold">No events scheduled for this day.</p>
                                     <p>Please select another date on the calendar to view upcoming events.</p>
                                 </div>
