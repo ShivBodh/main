@@ -1,20 +1,20 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Zap, Feather, Anchor } from "lucide-react";
+import { Circle, Sun, Infinity } from "lucide-react";
 
 const keyConcepts = [
     {
-        icon: <Zap className="h-8 w-8 text-primary" />,
+        icon: <Circle className="h-8 w-8 text-primary" />,
         title: 'Shunya (The Void)',
         description: 'Represents the starting point for many seekers: a sense of emptiness, confusion, or spiritual longing amidst the noise of modern life. It is the perceived separation from our true nature.'
     },
     {
-        icon: <Feather className="h-8 w-8 text-primary" />,
+        icon: <Sun className="h-8 w-8 text-primary" />,
         title: 'Purna (The Fullness)',
         description: 'The state of completeness, wholeness, and non-duality. It is the realization of the Atman as Brahman—the ultimate reality. It is not an attainment, but an awakening to what already is.'
     },
     {
-        icon: <Anchor className="h-8 w-8 text-primary" />,
+        icon: <Infinity className="h-8 w-8 text-primary" />,
         title: 'Advaita (Non-Duality)',
         description: 'The core philosophical tenet that there is no fundamental separation between the individual self (Atman) and the ultimate reality (Brahman). All is one.'
     }

@@ -1,21 +1,21 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { CheckCircle2, Shield, HeartHandshake } from "lucide-react";
+import { BadgeCheck, ShieldCheck, Network } from "lucide-react";
 import Link from "next/link";
 
 const corePrinciples = [
     {
-        icon: <CheckCircle2 className="h-8 w-8 text-primary" />,
+        icon: <BadgeCheck className="h-8 w-8 text-primary" />,
         title: 'Authenticity',
         description: 'We are committed to presenting only verified information sourced directly from the official channels of the four Peethams, ensuring you receive genuine teachings and announcements.'
     },
     {
-        icon: <Shield className="h-8 w-8 text-primary" />,
+        icon: <ShieldCheck className="h-8 w-8 text-primary" />,
         title: 'Integrity',
         description: 'This platform is a non-profit, volunteer-driven seva. Our sole purpose is to serve the community, free from commercial interests or external influences.'
     },
     {
-        icon: <HeartHandshake className="h-8 w-8 text-primary" />,
+        icon: <Network className="h-8 w-8 text-primary" />,
         title: 'Unity',
         description: 'We honor and respect the unique traditions of each Peetham while celebrating the unified foundation of Advaita Vedanta that binds them together as the four pillars of Sanatana Dharma.'
     }

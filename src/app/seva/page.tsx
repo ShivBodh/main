@@ -11,7 +11,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { allSevaOpportunities, SevaOpportunity, Peetham } from '@/lib/seva-data';
-import { HandHeart, MapPin, Briefcase, Globe } from 'lucide-react';
+import { HandHeart, MapPin, Landmark, Globe } from 'lucide-react';
 
 const peethams: Peetham[] = ['Sringeri', 'Dwaraka', 'Puri', 'Jyotirmath'];
 
@@ -115,7 +115,7 @@ export default function SevaPage() {
                                                 <div className="flex-grow">
                                                     <CardTitle className="font-headline text-lg">{opp.title}</CardTitle>
                                                     <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-muted-foreground mt-2">
-                                                        <span className="flex items-center gap-1.5"><Briefcase className="h-4 w-4" /> {opp.peetham}</span>
+                                                        <span className="flex items-center gap-1.5"><Landmark className="h-4 w-4" /> {opp.peetham}</span>
                                                         <span className="flex items-center gap-1.5">{opp.locationType === 'On-site' ? <MapPin className="h-4 w-4" /> : <Globe className="h-4 w-4" />} {opp.cityRegion}</span>
                                                     </div>
                                                 </div>
