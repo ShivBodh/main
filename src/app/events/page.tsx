@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useMemo, useEffect } from 'react';
@@ -10,9 +9,11 @@ import { Badge } from '@/components/ui/badge';
 import { format } from 'date-fns';
 import { allEvents, peethamBadgeColors, peethamDotColors, Peetham } from '@/lib/events-data';
 import { Atom, BookOpen, HandHeart, VenetianMask } from 'lucide-react';
+import { Skeleton } from '@/components/ui/skeleton';
 
 export default function EventsPage() {
     const [date, setDate] = useState<Date | undefined>();
+    const [isClient, setIsClient] = useState(false);
     const [filters, setFilters] = useState<Record<Peetham, boolean>>({
         Sringeri: true,
         Dwaraka: true,
@@ -22,6 +23,7 @@ export default function EventsPage() {
 
     useEffect(() => {
         setDate(new Date());
+        setIsClient(true);
     }, []);
 
     const handleFilterChange = (peetham: Peetham) => {
@@ -69,31 +71,48 @@ export default function EventsPage() {
                         </CardContent>
                     </Card>
                     <Card className="flex justify-center p-2">
-                       <Calendar
-                            mode="single"
-                            selected={date}
-                            onSelect={setDate}
-                            className="p-0"
-                            components={{
-                                DayContent: ({ date: dayDate }) => {
-                                    const dayEvents = allEvents.filter(e => e.date === format(dayDate, 'yyyy-MM-dd') && filters[e.peetham]);
-                                    const peethamsOnDay = [...new Set(dayEvents.map(e => e.peetham))];
-                                    
-                                    return (
-                                        <div className='relative h-full w-full flex items-center justify-center'>
-                                            <span>{dayDate.getDate()}</span>
-                                            {peethamsOnDay.length > 0 && (
-                                                <div className="absolute bottom-1 flex space-x-0.5">
-                                                    {peethamsOnDay.map(p => (
-                                                        <div key={p} className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: peethamDotColors[p] }}></div>
-                                                    ))}
-                                                </div>
-                                            )}
+                       {isClient ? (
+                           <Calendar
+                                mode="single"
+                                selected={date}
+                                onSelect={setDate}
+                                className="p-0"
+                                components={{
+                                    DayContent: ({ date: dayDate }) => {
+                                        const dayEvents = allEvents.filter(e => e.date === format(dayDate, 'yyyy-MM-dd') && filters[e.peetham]);
+                                        const peethamsOnDay = [...new Set(dayEvents.map(e => e.peetham))];
+                                        
+                                        return (
+                                            <div className='relative h-full w-full flex items-center justify-center'>
+                                                <span>{dayDate.getDate()}</span>
+                                                {peethamsOnDay.length > 0 && (
+                                                    <div className="absolute bottom-1 flex space-x-0.5">
+                                                        {peethamsOnDay.map(p => (
+                                                            <div key={p} className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: peethamDotColors[p] }}></div>
+                                                        ))}
+                                                    </div>
+                                                )}
+                                            </div>
+                                        )
+                                    }
+                                }}
+                            />
+                       ) : (
+                           <div className="p-3">
+                                <div className="flex justify-center pt-1 relative items-center mb-4">
+                                    <Skeleton className="h-6 w-28" />
+                                </div>
+                                <div className="space-y-2">
+                                    {[...Array(5)].map((_, i) => (
+                                        <div key={i} className="flex space-x-1">
+                                            {[...Array(7)].map((_, j) => (
+                                                <Skeleton key={j} className="h-9 w-9" />
+                                            ))}
                                         </div>
-                                    )
-                                }
-                            }}
-                        />
+                                    ))}
+                                </div>
+                           </div>
+                       )}
                     </Card>
                 </div>
 
@@ -101,35 +120,43 @@ export default function EventsPage() {
                     <Card className="min-h-[600px]">
                         <CardHeader>
                             <CardTitle className="font-headline text-2xl">
-                                Events on: {date ? format(date, 'MMMM d, yyyy') : 'No date selected'}
+                                {isClient && date ? `Events on: ${format(date, 'MMMM d, yyyy')}` : <Skeleton className="h-8 w-48" />}
                             </CardTitle>
                         </CardHeader>
                         <CardContent>
-                            {selectedDateEvents.length > 0 ? (
-                                <div className="space-y-4">
-                                    {selectedDateEvents.map(event => (
-                                        <Card key={event.id} className="border-l-4" style={{ borderColor: peethamDotColors[event.peetham] }}>
-                                            <CardHeader>
-                                                <div className="flex justify-between items-start">
-                                                    <CardTitle className="font-headline text-lg">{event.title}</CardTitle>
-                                                    <Badge variant="outline" className={`${peethamBadgeColors[event.peetham]}`}>
-                                                        {event.peetham}
-                                                    </Badge>
-                                                </div>
-                                                <p className="text-sm font-medium text-muted-foreground">{event.category}</p>
-                                            </CardHeader>
-                                            <CardContent>
-                                                <p className="text-foreground/80">{event.description}</p>
-                                            </CardContent>
-                                        </Card>
-                                    ))}
-                                </div>
+                            {isClient && date ? (
+                                selectedDateEvents.length > 0 ? (
+                                    <div className="space-y-4">
+                                        {selectedDateEvents.map(event => (
+                                            <Card key={event.id} className="border-l-4" style={{ borderColor: peethamDotColors[event.peetham] }}>
+                                                <CardHeader>
+                                                    <div className="flex justify-between items-start">
+                                                        <CardTitle className="font-headline text-lg">{event.title}</CardTitle>
+                                                        <Badge variant="outline" className={`${peethamBadgeColors[event.peetham]}`}>
+                                                            {event.peetham}
+                                                        </Badge>
+                                                    </div>
+                                                    <p className="text-sm font-medium text-muted-foreground">{event.category}</p>
+                                                </CardHeader>
+                                                <CardContent>
+                                                    <p className="text-foreground/80">{event.description}</p>
+                                                </CardContent>
+                                            </Card>
+                                        ))}
+                                    </div>
+                                ) : (
+                                    <div className="flex flex-col items-center justify-center h-full text-center text-muted-foreground pt-16">
+                                        <VenetianMask className="h-16 w-16 mb-4 text-primary" />
+                                        <p className="text-lg font-semibold">No events scheduled for this day.</p>
+                                        <p>Please select another date on the calendar to view upcoming events.</p>
+                                    </div>
+                                )
                             ) : (
-                                <div className="flex flex-col items-center justify-center h-full text-center text-muted-foreground pt-16">
-                                    <VenetianMask className="h-16 w-16 mb-4 text-primary" />
-                                    <p className="text-lg font-semibold">No events scheduled for this day.</p>
-                                    <p>Please select another date on the calendar to view upcoming events.</p>
-                                </div>
+                               <div className="space-y-4">
+                                 <Skeleton className="h-32 w-full" />
+                                 <Skeleton className="h-32 w-full" />
+                                 <Skeleton className="h-32 w-full" />
+                               </div>
                             )}
                         </CardContent>
                     </Card>
