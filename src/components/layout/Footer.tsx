@@ -7,7 +7,8 @@ export function Footer() {
         <p className="text-sm">
           &copy; {new Date().getFullYear()} Sanatana Peethams Portal. A Seva for Dharma.
         </p>
-        <div className="flex justify-center gap-4 mt-4">
+        <div className="flex justify-center flex-wrap gap-x-4 gap-y-2 mt-4">
+            <Link href="/sadhana" className="text-sm hover:text-accent">Sadhana</Link>
             <Link href="/philosophy" className="text-sm hover:text-accent">Our Philosophy</Link>
             <Link href="/mission" className="text-sm hover:text-accent">Our Mission</Link>
         </div>

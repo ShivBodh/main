@@ -11,6 +11,7 @@ export function Header() {
           <nav className="hidden md:flex items-center space-x-6 text-sm font-medium">
             <Link href="/peethams" className="transition-colors hover:text-accent">Peethams</Link>
             <Link href="/events" className="transition-colors hover:text-accent">Events Calendar</Link>
+            <Link href="/sadhana" className="transition-colors hover:text-accent">Sadhana</Link>
             <Link href="/philosophy" className="transition-colors hover:text-accent">Our Philosophy</Link>
             <Link href="/mission" className="transition-colors hover:text-accent">Our Mission</Link>
           </nav>
