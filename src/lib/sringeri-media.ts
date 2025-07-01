@@ -11,7 +11,7 @@ export type VideoArchiveItem = {
   export const sringeriVideoArchive: VideoArchiveItem[] = [
     {
       id: 'vyc-2024-07-20',
-      title: 'Jagadgurus' Anugraha Bhashanam on Vyasa Puja',
+      title: `Jagadgurus' Anugraha Bhashanam on Vyasa Puja`,
       description: 'The sacred address delivered by Jagadguru Sri Sri Bharati Tirtha Mahaswamiji and Jagadguru Sri Sri Vidhushekhara Bharati Mahaswamiji on the holy occasion of Guru Purnima / Vyasa Puja.',
       date: '2024-07-20',
       videoId: 'YOUR_YOUTUBE_VIDEO_ID_1', // Placeholder
