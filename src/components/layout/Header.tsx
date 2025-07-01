@@ -1,3 +1,4 @@
+
 import Link from 'next/link';
 
 export function Header() {
@@ -12,6 +13,7 @@ export function Header() {
             <Link href="/peethams" className="transition-colors hover:text-accent">Peethams</Link>
             <Link href="/events" className="transition-colors hover:text-accent">Events Calendar</Link>
             <Link href="/sadhana" className="transition-colors hover:text-accent">Sadhana</Link>
+            <Link href="/seva" className="transition-colors hover:text-accent">Seva Hub</Link>
             <Link href="/philosophy" className="transition-colors hover:text-accent">Our Philosophy</Link>
             <Link href="/mission" className="transition-colors hover:text-accent">Our Mission</Link>
           </nav>

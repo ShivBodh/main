@@ -1,3 +1,4 @@
+
 import Link from 'next/link';
 
 export function Footer() {
@@ -9,6 +10,7 @@ export function Footer() {
         </p>
         <div className="flex justify-center flex-wrap gap-x-4 gap-y-2 mt-4">
             <Link href="/sadhana" className="text-sm hover:text-accent">Sadhana</Link>
+            <Link href="/seva" className="text-sm hover:text-accent">Seva Hub</Link>
             <Link href="/philosophy" className="text-sm hover:text-accent">Our Philosophy</Link>
             <Link href="/mission" className="text-sm hover:text-accent">Our Mission</Link>
         </div>

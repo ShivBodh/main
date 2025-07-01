@@ -1,9 +1,16 @@
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { ExternalLink, BookOpen, Calendar, Video, Camera } from 'lucide-react';
+import { ExternalLink, BookOpen, Calendar, Video, Camera, MapPin, Mail, Briefcase, Globe } from 'lucide-react';
+import { allSevaOpportunities } from '@/lib/seva-data';
+import { Badge } from '@/components/ui/badge';
+import { Separator } from '@/components/ui/separator';
+
+const puriSeva = allSevaOpportunities.filter(o => o.peetham === 'Puri');
+
 
 export default function PuriPeethamPage() {
   return (
@@ -39,11 +46,12 @@ export default function PuriPeethamPage() {
         </section>
 
         <Tabs defaultValue="about" className="w-full">
-          <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 mb-8">
+          <TabsList className="grid w-full grid-cols-2 md:grid-cols-5 mb-8">
             <TabsTrigger value="about">About</TabsTrigger>
             <TabsTrigger value="teachings">Teachings</TabsTrigger>
             <TabsTrigger value="events">Events</TabsTrigger>
             <TabsTrigger value="gallery">Media Gallery</TabsTrigger>
+            <TabsTrigger value="seva">Community & Seva</TabsTrigger>
           </TabsList>
           
           <TabsContent value="about" className="prose prose-lg lg:prose-xl max-w-none text-foreground/90 leading-relaxed">
@@ -147,6 +155,54 @@ export default function PuriPeethamPage() {
                     </div>
                 </div>
              </div>
+          </TabsContent>
+           <TabsContent value="seva">
+            <h3 className="font-headline text-2xl text-primary mb-6">Seva Opportunities at Puri</h3>
+            {puriSeva.length > 0 ? (
+                <div className="space-y-4">
+                    {puriSeva.map(opp => (
+                        <Card key={opp.id}>
+                            <CardHeader>
+                                <CardTitle className="font-headline text-lg">{opp.title}</CardTitle>
+                                <div className="flex items-center gap-4 text-sm text-muted-foreground pt-1">
+                                    <span className="flex items-center gap-1.5">{opp.locationType === 'On-site' ? <MapPin className="h-4 w-4" /> : <Globe className="h-4 w-4" />} {opp.cityRegion}</span>
+                                </div>
+                            </CardHeader>
+                            <CardContent>
+                                <p className="text-foreground/80 mb-4">{opp.description}</p>
+                                <div className="flex flex-wrap gap-2 mb-4">
+                                    {opp.skills.map(skill => <Badge key={skill} variant="secondary">{skill}</Badge>)}
+                                </div>
+                                <Button asChild size="sm">
+                                    <a href={opp.applicationLink === '#' ? `mailto:${opp.contactEmail}` : opp.applicationLink} target="_blank" rel="noopener noreferrer">I'm Interested</a>
+                                </Button>
+                            </CardContent>
+                        </Card>
+                    ))}
+                </div>
+            ) : (
+                <p className="text-muted-foreground">There are currently no specific Seva opportunities listed for Puri. Please check the main <Link href="/seva" className="text-accent underline">Seva Hub</Link> for remote opportunities or contact the Peetham directly.</p>
+            )}
+
+            <Separator className="my-12" />
+
+            <h3 className="font-headline text-2xl text-primary mb-6">Main Ashram & Center</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="md:col-span-1">
+                    <Card>
+                        <CardHeader>
+                            <CardTitle className="font-headline text-lg">Govardhan Math</CardTitle>
+                        </CardHeader>
+                        <CardContent className="space-y-2 text-sm">
+                            <p className="flex items-start gap-2"><MapPin className="h-4 w-4 mt-1 shrink-0"/><span>Govardhan Math, Puri, Odisha - 752001, India.</span></p>
+                            <p className="flex items-center gap-2"><Mail className="h-4 w-4 shrink-0"/><a href="mailto:info.puri@example.com" className="text-accent hover:underline">info.puri@example.com</a></p>
+                        </CardContent>
+                    </Card>
+                </div>
+                <div className="md:col-span-2">
+                     <Image src="https://placehold.co/1200x600.png" alt="Map of Puri Peetham" width={1200} height={600} className="rounded-lg object-cover w-full h-full" data-ai-hint="city map" />
+                </div>
+            </div>
           </TabsContent>
         </Tabs>
       </div>
