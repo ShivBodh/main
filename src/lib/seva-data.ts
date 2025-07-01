@@ -4,80 +4,80 @@ export type Peetham = 'Sringeri' | 'Dwaraka' | 'Puri' | 'Jyotirmath';
 export type SevaOpportunity = {
   id: number;
   title: string;
-  description: string;
-  locationType: 'On-site' | 'Remote';
   peetham: Peetham;
-  cityRegion: string;
+  description: string;
   skills: string[];
-  contactEmail: string;
+  locationType: 'On-site' | 'Remote';
+  cityRegion: string;
   applicationLink: string;
+  contactEmail: string;
 };
 
 export const allSevaOpportunities: SevaOpportunity[] = [
-    {
-        id: 1,
-        title: 'Website Content Translation (Sanskrit to English)',
-        description: 'Assist in translating important discourses and texts from Sanskrit to English for the main Peetham website. A strong command of both languages is essential. This is a vital service to make timeless wisdom accessible to a global audience.',
-        locationType: 'Remote',
-        peetham: 'Sringeri',
-        cityRegion: 'Global',
-        skills: ['Translation', 'Sanskrit', 'English', 'Content Management'],
-        contactEmail: 'seva.sringeri@example.com',
-        applicationLink: '#',
-    },
-    {
-        id: 2,
-        title: 'Navaratri Festival On-site Volunteer',
-        description: 'Support the organization and smooth running of the annual Sharada Sharannavaratri festival. Responsibilities include crowd management, prasadam distribution, and assisting pilgrims. A fulfilling opportunity to serve during a most auspicious time.',
+    { 
+        id: 1, 
+        title: 'Annadana Seva for Pilgrims', 
+        peetham: 'Sringeri', 
+        description: `Assist in the preparation and distribution of blessed food (prasadam) to the thousands of pilgrims who visit the Peetham daily. This is a vital service that nourishes both body and soul.`,
+        skills: ['Teamwork', 'Service Attitude', 'Physical Stamina'],
         locationType: 'On-site',
-        peetham: 'Sringeri',
         cityRegion: 'Sringeri, Karnataka',
-        skills: ['Event Management', 'Public Speaking', 'Logistics'],
-        contactEmail: 'events.sringeri@example.com',
         applicationLink: '#',
+        contactEmail: 'seva@sringeri.net'
     },
-    {
-        id: 3,
-        title: 'Digital Archive Metadata Tagging',
-        description: 'Help categorize and tag thousands of hours of audio and video discourses from the Dwaraka Peetham archives. This remote role is crucial for making the teachings searchable and accessible to future generations of seekers.',
+    { 
+        id: 2, 
+        title: 'Translate Ancient Manuscripts to English', 
+        peetham: 'Dwaraka', 
+        description: `Help translate and digitize rare Sanskrit and Gujarati manuscripts for preservation and global access. A profound opportunity for those with language skills to contribute to the dissemination of knowledge.`,
+        skills: ['Sanskrit', 'English', 'Gujarati', 'Translation', 'Manuscript Handling'],
         locationType: 'Remote',
-        peetham: 'Dwaraka',
         cityRegion: 'Global',
-        skills: ['Archiving', 'Data Entry', 'Vedanta'],
-        contactEmail: 'archives.dwaraka@example.com',
         applicationLink: '#',
+        contactEmail: 'seva@dwarakapeetham.org'
     },
-    {
-        id: 4,
-        title: 'Social Media Content Creator',
-        description: 'Create engaging and reverent social media content for the Govardhana Peetham in Puri. Help share the teachings of the Jagadguru and important event updates on platforms like YouTube, Facebook, and Instagram. Requires graphic design and video editing skills.',
-        locationType: 'Remote',
-        peetham: 'Puri',
-        cityRegion: 'Global',
-        skills: ['Social Media', 'Graphic Design', 'Video Editing'],
-        contactEmail: 'media.puri@example.com',
-        applicationLink: '#',
-    },
-    {
-        id: 5,
-        title: 'Ashram Maintenance & Gardening Seva',
-        description: 'Participate in the daily upkeep and beautification of the Jyotirmath Ashram grounds in the Himalayas. This is a physically demanding but spiritually rewarding on-site seva for those who love nature and wish to serve in a sacred environment.',
+    { 
+        id: 3, 
+        title: 'Goshala Care and Maintenance', 
+        peetham: 'Puri', 
+        description: `Participate in the sacred duty of caring for the cows at the Peetham's Goshala. Responsibilities include feeding, cleaning, and general maintenance of the Goshala premises.`,
+        skills: ['Animal Care', 'Manual Labor', 'Devotion'],
         locationType: 'On-site',
-        peetham: 'Jyotirmath',
-        cityRegion: 'Jyotirmath, Uttarakhand',
-        skills: ['Gardening', 'Maintenance', 'Landscaping'],
-        contactEmail: 'ashram.jyotirmath@example.com',
-        applicationLink: '#',
-    },
-    {
-        id: 6,
-        title: 'Ratha Yatra Seva Coordination',
-        description: 'Join the team coordinating volunteer activities for the world-famous Ratha Yatra in Puri. This high-energy role involves logistics, communication, and ensuring a safe and spiritual experience for all participants.',
-        locationType: 'On-site',
-        peetham: 'Puri',
         cityRegion: 'Puri, Odisha',
-        skills: ['Event Coordination', 'Logistics', 'Communication'],
-        contactEmail: 'rathyatra.puri@example.com',
         applicationLink: '#',
+        contactEmail: 'seva@govardhanpeeth.org'
     },
+    { 
+        id: 4, 
+        title: 'Website & Social Media Content Creation', 
+        peetham: 'Jyotirmath', 
+        description: `Assist in creating engaging and informative content for the Peetham's digital platforms. Help spread the teachings of the Himalayas to a global audience.`,
+        skills: ['Content Writing', 'Social Media', 'Video Editing', 'Graphic Design'],
+        locationType: 'Remote',
+        cityRegion: 'Global',
+        applicationLink: '#',
+        contactEmail: 'seva@jyotirmath.org'
+    },
+    { 
+        id: 5, 
+        title: 'Event Management Support for Festivals', 
+        peetham: 'Sringeri', 
+        description: `Provide logistical and organizational support during major festivals like Sharannavaratri. Help with crowd management, volunteer coordination, and ensuring a smooth experience for all devotees.`,
+        skills: ['Event Management', 'Communication', 'Problem-Solving'],
+        locationType: 'On-site',
+        cityRegion: 'Sringeri, Karnataka',
+        applicationLink: '#',
+        contactEmail: 'seva@sringeri.net'
+    },
+    { 
+        id: 6, 
+        title: 'Audio Transcription of Discourses', 
+        peetham: 'Puri', 
+        description: `Transcribe the audio recordings of the Shankaracharya's discourses into text for publication in books and on the website. A great opportunity for those who are good listeners and typists.`,
+        skills: ['Transcription', 'Oriya', 'English', 'Attention to Detail'],
+        locationType: 'Remote',
+        cityRegion: 'Global',
+        applicationLink: '#',
+        contactEmail: 'seva@govardhanpeeth.org'
+    }
 ];

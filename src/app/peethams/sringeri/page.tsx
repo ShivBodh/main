@@ -1,23 +1,55 @@
 
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { ExternalLink, BookOpen, Calendar, Video, Camera, MapPin, Mail, Briefcase, Globe } from 'lucide-react';
+import { ExternalLink, BookOpen, Calendar, Video, Camera, MapPin, Mail, Briefcase, Globe, Facebook } from 'lucide-react';
 import { allSevaOpportunities } from '@/lib/seva-data';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
+import { sringeriVideoArchive, sringeriPhotoGallery } from '@/lib/sringeri-media';
+import { sringeriFacebookVideos } from '@/lib/sringeri-facebook-videos';
+import { format } from 'date-fns';
+import { useState } from 'react';
 
 const sringeriSeva = allSevaOpportunities.filter(o => o.peetham === 'Sringeri');
 
+const YouTubeEmbed = ({ videoId, title }: { videoId: string, title: string }) => (
+    <div className="aspect-video">
+      <iframe
+        width="100%"
+        height="100%"
+        src={`https://www.youtube.com/embed/${videoId}`}
+        title={title}
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+        className="rounded-lg"
+      ></iframe>
+    </div>
+  );
+
 export default function SringeriPeethamPage() {
+    const [visibleYoutubeVideos, setVisibleYoutubeVideos] = useState(2);
+    const [visibleFacebookVideos, setVisibleFacebookVideos] = useState(2);
+
+    const loadMoreYoutubeVideos = () => {
+        setVisibleYoutubeVideos(prev => prev + 2);
+    };
+
+    const loadMoreFacebookVideos = () => {
+        setVisibleFacebookVideos(prev => prev + 2);
+    };
+
   return (
     <div className="bg-background text-foreground">
       <div className="container mx-auto max-w-6xl py-16 md:py-24 px-4">
         <section className="flex flex-col md:flex-row items-center gap-8 mb-12">
           <Image
-            src="https://placehold.co/800x600.png"
+            src="https://source.unsplash.com/random/800x600/?sringeri,temple"
             alt="Sringeri Sharada Peetham"
             width={800}
             height={600}
@@ -117,42 +149,66 @@ export default function SringeriPeethamPage() {
           </TabsContent>
 
           <TabsContent value="gallery">
-             <div className="space-y-12">
-                <div>
-                    <h3 className="font-headline text-2xl text-primary mb-4 flex items-center gap-2"><Camera className="h-6 w-6" /> Photo Gallery</h3>
+             <Tabs defaultValue="youtube" className="w-full">
+                <TabsList className="grid w-full grid-cols-3">
+                    <TabsTrigger value="photos">Photos</TabsTrigger>
+                    <TabsTrigger value="youtube">YouTube</TabsTrigger>
+                    <TabsTrigger value="facebook">Facebook</TabsTrigger>
+                </TabsList>
+                <TabsContent value="photos" className="mt-8">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        <Image src="https://placehold.co/400x300.png" alt="Gallery Image 1" width={400} height={300} className="rounded-lg object-cover" data-ai-hint="temple architecture" />
-                        <Image src="https://placehold.co/400x300.png" alt="Gallery Image 2" width={400} height={300} className="rounded-lg object-cover" data-ai-hint="religious ceremony" />
-                        <Image src="https://placehold.co/400x300.png" alt="Gallery Image 3" width={400} height={300} className="rounded-lg object-cover" data-ai-hint="spiritual leader" />
-                        <Image src="https://placehold.co/400x300.png" alt="Gallery Image 4" width={400} height={300} className="rounded-lg object-cover" data-ai-hint="devotees crowd" />
+                        {sringeriPhotoGallery.map(photo => (
+                            <Image key={photo.id} src={photo.src} alt={photo.alt} width={400} height={300} className="rounded-lg object-cover" data-ai-hint={photo.aiHint} />
+                        ))}
                     </div>
-                </div>
-                <div>
-                    <h3 className="font-headline text-2xl text-primary mb-4 flex items-center gap-2"><Video className="h-6 w-6" /> Video Archive</h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <Card>
-                            <CardHeader>
-                                <CardTitle className="font-headline text-lg">Discourse on Vivekachudamani</CardTitle>
-                            </CardHeader>
-                            <CardContent>
-                                <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
-                                    <p className="text-muted-foreground">Video Placeholder</p>
-                                </div>
-                            </CardContent>
-                        </Card>
-                        <Card>
-                            <CardHeader>
-                                <CardTitle className="font-headline text-lg">Highlights from the 2023 Aradhana</CardTitle>
-                            </CardHeader>
-                            <CardContent>
-                                <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
-                                    <p className="text-muted-foreground">Video Placeholder</p>
-                                </div>
-                            </CardContent>
-                        </Card>
+                </TabsContent>
+                <TabsContent value="youtube" className="mt-8">
+                    <div className="space-y-6">
+                        {sringeriVideoArchive.slice(0, visibleYoutubeVideos).map(video => (
+                            <Card key={video.id}>
+                                <CardHeader>
+                                    <CardTitle className="font-headline text-lg">{video.title}</CardTitle>
+                                    <p className="text-sm text-muted-foreground">{format(new Date(video.date), 'MMMM d, yyyy')}</p>
+                                </CardHeader>
+                                <CardContent>
+                                    <YouTubeEmbed videoId={video.videoId} title={video.title} />
+                                    <p className="mt-4 text-foreground/80">{video.description}</p>
+                                </CardContent>
+                            </Card>
+                        ))}
                     </div>
-                </div>
-             </div>
+                    {visibleYoutubeVideos < sringeriVideoArchive.length && (
+                        <div className="text-center mt-8">
+                            <Button onClick={loadMoreYoutubeVideos}>Load More Videos</Button>
+                        </div>
+                    )}
+                </TabsContent>
+                <TabsContent value="facebook" className="mt-8">
+                    <div className="space-y-6">
+                        {sringeriFacebookVideos.slice(0, visibleFacebookVideos).map(video => (
+                             <Card key={video.id}>
+                                <CardHeader>
+                                    <CardTitle className="font-headline text-lg">{video.title}</CardTitle>
+                                     <p className="text-sm text-muted-foreground">{format(new Date(video.date), 'MMMM d, yyyy')}</p>
+                                </CardHeader>
+                                <CardContent>
+                                    <p className="mb-4 text-foreground/80">{video.description}</p>
+                                    <Button asChild>
+                                        <a href={video.url} target="_blank" rel="noopener noreferrer">
+                                            <Facebook className="mr-2 h-4 w-4" /> Watch on Facebook
+                                        </a>
+                                    </Button>
+                                </CardContent>
+                             </Card>
+                        ))}
+                    </div>
+                    {visibleFacebookVideos < sringeriFacebookVideos.length && (
+                        <div className="text-center mt-8">
+                            <Button onClick={loadMoreFacebookVideos}>Load More Videos</Button>
+                        </div>
+                    )}
+                </TabsContent>
+             </Tabs>
           </TabsContent>
           <TabsContent value="seva">
             <h3 className="font-headline text-2xl text-primary mb-6">Seva Opportunities at Sringeri</h3>
@@ -198,7 +254,7 @@ export default function SringeriPeethamPage() {
                     </Card>
                 </div>
                 <div className="md:col-span-2">
-                     <Image src="https://placehold.co/1200x600.png" alt="Map of Sringeri Peetham" width={1200} height={600} className="rounded-lg object-cover w-full h-full" data-ai-hint="city map" />
+                     <Image src="https://source.unsplash.com/random/1200x600/?city,map" alt="Map of Sringeri Peetham" width={1200} height={600} className="rounded-lg object-cover w-full h-full" data-ai-hint="city map" />
                 </div>
             </div>
           </TabsContent>

@@ -1,39 +1,11 @@
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
+import { peethams } from '@/lib/peethams-data';
 
-const peethams = [
-  {
-    name: 'Sringeri Sharada Peetham',
-    description: 'The first and foremost of the four Amnaya Peethams, the southern seat of wisdom for the Yajur Veda.',
-    link: '/peethams/sringeri',
-    image: 'https://placehold.co/600x400.png',
-    aiHint: 'indian temple'
-  },
-  {
-    name: 'Dwaraka Sharada Peetham',
-    description: 'The western Peetham, representing the Sama Veda and upholding the principles of Advaita.',
-    link: '/peethams/dwaraka',
-    image: 'https://placehold.co/600x400.png',
-    aiHint: 'ancient architecture'
-  },
-  {
-    name: 'Govardhana Peetham, Puri',
-    description: 'The eastern Peetham in Puri, associated with the Rig Veda and the worship of Lord Jagannath.',
-    link: '/peethams/puri',
-    image: 'https://placehold.co/600x400.png',
-    aiHint: 'hindu monastery'
-  },
-  {
-    name: 'Jyotirmath Peetham, Badrinath',
-    description: 'The northern Peetham, situated in the Himalayas and connected to the Atharva Veda.',
-    link: '/peethams/jyotirmath',
-    image: 'https://placehold.co/600x400.png',
-    aiHint: 'himalayan temple'
-  },
-];
 
 export default function PeethamsPage() {
   return (
@@ -44,7 +16,7 @@ export default function PeethamsPage() {
             The Four Pillars of Sanatana Dharma
           </h1>
           <p className="mt-4 text-lg md:text-xl text-foreground/80 max-w-3xl mx-auto">
-            Established by Jagadguru Adi Shankaracharya, these four Peethams serve as the cardinal institutions for the preservation and propagation of Advaita Vedanta. Each stands as a beacon of spiritual wisdom, guiding seekers for over a millennium.
+            Established by Jagadguru Adi Shankaracharya, these four Peethams serve as the cardinal institutions for the preservation and propagation of Advaita Vedanta. Each stands as a beacon of spiritual wisdom, guiding seekers for over a millennium and upholding the sacred traditions of Sanatana Dharma.
           </p>
         </div>
 

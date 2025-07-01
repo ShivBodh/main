@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useMemo } from 'react';
@@ -7,48 +8,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
 import { format } from 'date-fns';
-
-// Define a type for our events for better type safety
-type Peetham = 'Sringeri' | 'Dwaraka' | 'Puri' | 'Jyotirmath';
-
-type Event = {
-  id: number;
-  title: string;
-  date: string; // YYYY-MM-DD
-  peetham: Peetham;
-  description: string;
-  category: string;
-};
-
-// Placeholder data simulating a database of events
-const allEvents: Event[] = [
-    { id: 1, title: 'Sharada Sharannavaratri', date: '2024-10-03', peetham: 'Sringeri', description: 'The grand nine-night festival dedicated to Goddess Sharada, featuring elaborate pujas, cultural performances, and discourses.', category: 'Festival' },
-    { id: 2, title: 'Chaturmasya Vrata Anushtanam Begins', date: '2024-07-21', peetham: 'Sringeri', description: 'The commencement of the four-month spiritual retreat observed by the Jagadguru.', category: 'Observance' },
-    { id: 3, title: 'Janmashtami Mahotsav', date: '2024-08-26', peetham: 'Dwaraka', description: 'Grand celebrations for Sri Krishna Janmashtami at his sacred city.', category: 'Festival' },
-    { id: 4, title: 'Shankara Jayanti', date: '2024-05-12', peetham: 'Dwaraka', description: 'Celebrating the birth of Adi Shankaracharya with special lectures on Advaita Vedanta.', category: 'Jayanti' },
-    { id: 5, title: 'Ratha Yatra', date: '2024-07-07', peetham: 'Puri', description: 'The world-famous chariot festival of Lord Jagannath.', category: 'Festival' },
-    { id: 6, title: 'Vedanta Sammelan', date: '2024-12-20', peetham: 'Puri', description: 'An annual conference of scholars discussing Vedanta philosophy.', category: 'Sammelan' },
-    { id: 7, title: 'Badrinath Temple Opening Ceremony', date: '2024-05-10', peetham: 'Jyotirmath', description: 'The ceremonial opening of the Badrinath shrine after the winter closure.', category: 'Ceremony' },
-    { id: 8, title: 'Summer Meditation Retreat', date: '2024-06-15', peetham: 'Jyotirmath', description: 'A guided retreat for seekers focusing on intensive meditation.', category: 'Retreat' },
-    { id: 9, title: 'Guru Purnima', date: '2024-07-21', peetham: 'Sringeri', description: 'Special pujas to honor the Guru Parampara.', category: 'Festival' },
-    { id: 10, title: 'Guru Purnima', date: '2024-07-21', peetham: 'Dwaraka', description: 'Devotees gather to offer respects to the Jagadguru.', category: 'Festival' },
-    { id: 11, title: 'Guru Purnima', date: '2024-07-21', peetham: 'Puri', description: 'Observance of the sacred day dedicated to the Guru.', category: 'Festival' },
-    { id: 12, title: 'Guru Purnima', date: '2024-07-21', peetham: 'Jyotirmath', description: 'Paying homage to the lineage of spiritual masters.', category: 'Festival' },
-];
-
-const peethamBadgeColors: Record<Peetham, string> = {
-    Sringeri: 'bg-primary/10 text-primary border-primary/20',
-    Dwaraka: 'bg-accent/10 text-accent border-accent/20',
-    Puri: 'bg-secondary/20 text-secondary-foreground border-secondary/30',
-    Jyotirmath: 'bg-muted text-muted-foreground border-border',
-};
-
-const peethamDotColors: Record<Peetham, string> = {
-    Sringeri: 'hsl(var(--primary))',
-    Dwaraka: 'hsl(var(--accent))',
-    Puri: 'hsl(var(--secondary-foreground))',
-    Jyotirmath: 'hsl(var(--muted-foreground))',
-};
+import { allEvents, peethamBadgeColors, peethamDotColors, Peetham } from '@/lib/events-data';
 
 export default function EventsPage() {
     const [date, setDate] = useState<Date | undefined>(new Date());
@@ -75,10 +35,10 @@ export default function EventsPage() {
         <div className="container mx-auto max-w-7xl py-16 md:py-24 px-4">
             <div className="text-center mb-12">
                 <h1 className="text-4xl md:text-5xl font-headline font-bold text-primary tracking-tight">
-                    Events Calendar
+                    Unified Events Calendar
                 </h1>
                 <p className="mt-4 text-lg md:text-xl text-foreground/80 max-w-3xl mx-auto">
-                    A unified calendar of spiritual and cultural events from the four cardinal Peethams.
+                    Discover a comprehensive calendar of spiritual and cultural events from the four cardinal Peethams. Stay connected with the sacred traditions and festivities happening across the country.
                 </p>
             </div>
 
@@ -161,8 +121,8 @@ export default function EventsPage() {
                                 </div>
                             ) : (
                                 <div className="flex flex-col items-center justify-center h-full text-center text-muted-foreground pt-16">
-                                    <p className="text-lg">No events scheduled for this day.</p>
-                                    <p>Please select another date on the calendar.</p>
+                                    <p className="text-lg font-semibold">No events scheduled for this day.</p>
+                                    <p>Please select another date on the calendar to view upcoming events.</p>
                                 </div>
                             )}
                         </CardContent>

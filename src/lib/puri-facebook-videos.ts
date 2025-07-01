@@ -1,0 +1,32 @@
+
+export type FacebookVideo = {
+    id: string;
+    title: string;
+    date: string; // YYYY-MM-DD
+    url: string; // Direct link to the Facebook video
+    description: string;
+};
+
+export const puriFacebookVideos: FacebookVideo[] = [
+    {
+        id: 'fb-video-1',
+        title: 'Ratha Yatra Darshan',
+        date: '2024-07-07',
+        url: 'https://www.facebook.com/watch/live/?ref=watch_permalink&v=1135803450997873', // Example link
+        description: 'Experience the divine spectacle of the Ratha Yatra, the grand chariot festival of Lord Jagannath.'
+    },
+    {
+        id: 'fb-video-2',
+        title: 'Discourse on the Bhagavad Gita',
+        date: '2024-07-15',
+        url: 'https://www.facebook.com/watch/live/?ref=watch_permalink&v=1135803450997873', // Example link
+        description: 'A profound discourse on the timeless wisdom of the Bhagavad Gita by the Shankaracharya.'
+    },
+    {
+        id: 'fb-video-3',
+        title: 'Evening Aarti at Govardhan Peeth',
+        date: '2024-07-22',
+        url: 'https://www.facebook.com/watch/live/?ref=watch_permalink&v=1135803450997873', // Example link
+        description: 'Join the serene evening aarti live from the Govardhan Peeth in Puri.'
+    }
+];

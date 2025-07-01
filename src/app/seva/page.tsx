@@ -41,18 +41,18 @@ export default function SevaPage() {
 
     return (
         <div className="container mx-auto max-w-7xl py-16 md:py-24 px-4">
-            <div className="text-center mb-12">
+            <div className="text-center mb-16">
                 <h1 className="text-4xl md:text-5xl font-headline font-bold text-primary tracking-tight">
                     Seva & Community Hub
                 </h1>
                 <p className="mt-4 text-lg md:text-xl text-foreground/80 max-w-3xl mx-auto">
-                    Discover opportunities for selfless service (Seva) and connect with the community. Your participation strengthens Dharma.
+                    Discover meaningful opportunities for selfless service (Seva) and connect with a vibrant community of volunteers. Your participation is a vital contribution to the preservation and propagation of Dharma.
                 </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                 {/* Filters Column */}
-                <div className="md:col-span-1">
+                <div className="md:col-span-1 space-y-6">
                     <Card>
                         <CardHeader>
                             <CardTitle className="font-headline text-xl">Filter Opportunities</CardTitle>
@@ -94,6 +94,13 @@ export default function SevaPage() {
                             </div>
                         </CardContent>
                     </Card>
+                    <Card className="p-6 text-center bg-card">
+                        <HandHeart className="mx-auto h-12 w-12 text-primary" />
+                        <h3 className="mt-4 font-headline text-lg font-semibold">Why Seva?</h3>
+                        <p className="mt-2 text-sm text-foreground/80">
+                            Seva, or selfless service, is a cornerstone of spiritual practice. It purifies the heart, cultivates humility, and allows us to offer our skills and time for the greater good of the community and the preservation of Dharma.
+                        </p>
+                    </Card>
                 </div>
 
                 {/* Opportunities List */}
@@ -104,16 +111,16 @@ export default function SevaPage() {
                                 <Card key={opp.id}>
                                     <AccordionItem value={`item-${opp.id}`} className="border-b-0">
                                         <CardHeader>
-                                            <div className="flex justify-between items-start gap-4">
-                                                <div>
+                                            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4">
+                                                <div className="flex-grow">
                                                     <CardTitle className="font-headline text-lg">{opp.title}</CardTitle>
-                                                    <div className="flex items-center gap-4 text-sm text-muted-foreground mt-2">
+                                                    <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-muted-foreground mt-2">
                                                         <span className="flex items-center gap-1.5"><Briefcase className="h-4 w-4" /> {opp.peetham}</span>
                                                         <span className="flex items-center gap-1.5">{opp.locationType === 'On-site' ? <MapPin className="h-4 w-4" /> : <Globe className="h-4 w-4" />} {opp.cityRegion}</span>
                                                     </div>
                                                 </div>
-                                                <Button asChild>
-                                                    <a href={opp.applicationLink === '#' ? `mailto:${opp.contactEmail}` : opp.applicationLink} target="_blank" rel="noopener noreferrer">
+                                                <Button asChild className="mt-2 sm:mt-0 flex-shrink-0">
+                                                    <a href={opp.applicationLink === '#' ? `mailto:${opp.contactEmail}?subject=Interest in ${opp.title} Seva` : opp.applicationLink} target="_blank" rel="noopener noreferrer">
                                                         I'm Interested
                                                     </a>
                                                 </Button>
@@ -138,9 +145,9 @@ export default function SevaPage() {
                         </Accordion>
                     ) : (
                         <Card className="flex flex-col items-center justify-center h-96 text-center text-muted-foreground">
-                             <HandHeart className="h-16 w-16 mb-4" />
-                            <p className="text-lg">No matching Seva opportunities found.</p>
-                            <p>Try adjusting your filters or check back later.</p>
+                             <HandHeart className="h-16 w-16 mb-4 text-primary" />
+                            <h3 className="text-lg font-semibold">No Matching Seva Opportunities</h3>
+                            <p>Your search and filter combination did not return any results. Please try adjusting your filters or check back later for new opportunities.</p>
                         </Card>
                     )}
                 </div>

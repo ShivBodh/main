@@ -1,60 +1,11 @@
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowRight } from 'lucide-react';
+import { peethams, recentItems, actionItems } from '@/lib/home-page-data';
 
-const peethams = [
-  {
-    name: 'Sringeri Sharada Peetham',
-    description: 'The first and foremost of the four Amnaya Peethams, the seat of wisdom for the Yajur Veda.',
-    link: '/peethams/sringeri',
-    image: 'https://placehold.co/600x400.png',
-    aiHint: 'indian temple'
-  },
-  {
-    name: 'Dwaraka Sharada Peetham',
-    description: 'The western Peetham, representing the Sama Veda and upholding the principles of Advaita.',
-    link: '/peethams/dwaraka',
-    image: 'https://placehold.co/600x400.png',
-    aiHint: 'ancient architecture'
-  },
-  {
-    name: 'Govardhana Peetham, Puri',
-    description: 'The eastern Peetham in Puri, associated with the Rig Veda and the worship of Lord Jagannath.',
-    link: '/peethams/puri',
-    image: 'https://placehold.co/600x400.png',
-    aiHint: 'hindu monastery'
-  },
-  {
-    name: 'Jyotirmath Peetham, Badrinath',
-    description: 'The northern Peetham, situated in the Himalayas and connected to the Atharva Veda.',
-    link: '/peethams/jyotirmath',
-    image: 'https://placehold.co/600x400.png',
-    aiHint: 'himalayan temple'
-  },
-];
-
-const recentItems = [
-    {
-        type: 'Event',
-        title: "Jagadguru's Chaturmasya Vrata Begins in Sringeri",
-        description: "Thousands gather for the sacred observance.",
-        link: "/events/chaturmasya-vrata-2024"
-    },
-    {
-        type: 'Discourse',
-        title: "VIDEO: Swami Sri Nischalananda Saraswatiji Maharaj on the Essence of the Rigveda",
-        description: "A profound talk on the timeless wisdom of the Vedas.",
-        link: "/teachings/rigveda-essence"
-    },
-    {
-        type: 'News',
-        title: "New library inaugurated at Dwaraka Peetham",
-        description: "A new resource for scholars and devotees alike.",
-        link: "/news/dwaraka-library"
-    }
-];
 
 export default function HomePage() {
   return (
@@ -62,18 +13,17 @@ export default function HomePage() {
       <section className="w-full py-20 md:py-32 bg-card">
         <div className="container mx-auto text-center px-4">
           <h1 className="text-4xl md:text-6xl font-headline font-bold text-primary tracking-tighter">
-            The Eternal Lineage, Unified for a Digital Age.
+            The Eternal Lineage, Unified for a Digital Age
           </h1>
           <p className="max-w-3xl mx-auto mt-4 text-lg md:text-xl text-foreground/80">
-            Connecting devotees worldwide to the authentic teachings, live events, and profound wisdom of the four cardinal Peethams established by Adi Shankaracharya.
+            Connecting devotees worldwide to the authentic teachings, live events, and profound wisdom of the four cardinal Peethams established by Adi Shankaracharya. This portal is a seva—a selfless service to strengthen the eternal chain of wisdom.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground">
-              <Link href="/peethams">Explore the Peethams</Link>
-            </Button>
-            <Button asChild size="lg" variant="outline" className="border-accent text-accent hover:bg-accent hover:text-white">
-              <Link href="/events">View Events Calendar</Link>
-            </Button>
+            {actionItems.map((item) => (
+                <Button asChild size="lg" key={item.title}>
+                  <Link href={item.href}>{item.title}</Link>
+                </Button>
+            ))}
           </div>
         </div>
       </section>
@@ -135,7 +85,7 @@ export default function HomePage() {
                 Our Sacred Vow (Sankalpa)
             </h2>
             <p className="text-lg text-foreground/80 leading-relaxed">
-                In a world of scattered information, our mission is to serve as a humble, unified, and trusted resource for all followers of Sanatana Dharma. This portal is a seva—a selfless service dedicated to meticulously curating and presenting verified knowledge from the official sources of the four Peethams, strengthening the eternal chain of wisdom for generations to come.
+                In a world of scattered information, our mission is to serve as a humble, unified, and trusted resource for all followers of Sanatana Dharma. We are dedicated to meticulously curating and presenting verified knowledge from the official sources of the four Peethams, ensuring the timeless wisdom of Adi Shankaracharya is accessible to all.
             </p>
         </div>
       </section>
