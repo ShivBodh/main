@@ -1,7 +1,7 @@
 
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Calendar } from '@/components/ui/calendar';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -11,13 +11,17 @@ import { format } from 'date-fns';
 import { allEvents, peethamBadgeColors, peethamDotColors, Peetham } from '@/lib/events-data';
 
 export default function EventsPage() {
-    const [date, setDate] = useState<Date | undefined>(new Date());
+    const [date, setDate] = useState<Date | undefined>();
     const [filters, setFilters] = useState<Record<Peetham, boolean>>({
         Sringeri: true,
         Dwaraka: true,
         Puri: true,
         Jyotirmath: true,
     });
+
+    useEffect(() => {
+        setDate(new Date());
+    }, []);
 
     const handleFilterChange = (peetham: Peetham) => {
         setFilters(prev => ({ ...prev, [peetham]: !prev[peetham] }));
