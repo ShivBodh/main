@@ -2,37 +2,38 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
-}
-
 @layer base {
   :root {
-    --background: 60 56% 91%;
-    --foreground: 60 10% 20%;
-    --card: 60 50% 96%;
-    --card-foreground: 60 10% 20%;
-    --popover: 60 50% 96%;
-    --popover-foreground: 60 10% 20%;
-    --primary: 43 74% 49%;
-    --primary-foreground: 43 74% 10%;
-    --secondary: 60 25% 85%;
-    --secondary-foreground: 60 10% 10%;
-    --muted: 60 25% 88%;
-    --muted-foreground: 60 10% 40%;
-    --accent: 43 89% 38%;
-    --accent-foreground: 43 80% 95%;
+    --background: 40 100% 97%; /* Serene Cream */
+    --foreground: 0 0% 20%; /* Scholarly Charcoal */
+
+    --card: 40 100% 97%;
+    --card-foreground: 0 0% 20%;
+
+    --popover: 40 100% 97%;
+    --popover-foreground: 0 0% 20%;
+
+    --primary: 0 100% 25%; /* Dharma Maroon */
+    --primary-foreground: 40 100% 97%; /* Serene Cream */
+
+    --secondary: 30 100% 90%; /* Light Saffron */
+    --secondary-foreground: 30 100% 25%; /* Dark Saffron */
+
+    --muted: 40 60% 95%; /* Desaturated Cream */
+    --muted-foreground: 0 0% 40%; /* Lighter Charcoal */
+
+    --accent: 30 100% 60%; /* Luminous Saffron */
+    --accent-foreground: 0 0% 10%; /* Darkest Charcoal for contrast */
+
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 60 20% 80%;
-    --input: 60 20% 85%;
-    --ring: 43 74% 49%;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
+
+    --border: 0 25% 85%;
+    --input: 0 25% 88%;
+    --ring: 30 100% 60%;
+
     --radius: 0.5rem;
+
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
     --sidebar-primary: 240 5.9% 10%;
@@ -42,31 +43,36 @@ body {
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
+
   .dark {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 43 74% 49%;
-    --primary-foreground: 43 74% 10%;
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
-    --accent: 43 89% 38%;
-    --accent-foreground: 43 80% 95%;
+    --background: 0 5% 15%; /* Dark, slightly warm gray */
+    --foreground: 40 60% 95%; /* Off-white cream */
+    
+    --card: 0 5% 15%;
+    --card-foreground: 40 60% 95%;
+
+    --popover: 0 5% 15%;
+    --popover-foreground: 40 60% 95%;
+
+    --primary: 0 100% 35%; /* Brighter Maroon for dark bg */
+    --primary-foreground: 40 60% 95%;
+
+    --secondary: 30 100% 20%; /* Dark saffron */
+    --secondary-foreground: 30 100% 80%; /* Light saffron */
+
+    --muted: 0 5% 20%;
+    --muted-foreground: 40 20% 70%;
+
+    --accent: 30 100% 60%; /* Saffron remains bright */
+    --accent-foreground: 0 0% 10%;
+
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 43 74% 49%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
+
+    --border: 0 10% 25%;
+    --input: 0 10% 25%;
+    --ring: 30 100% 60%;
+
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
