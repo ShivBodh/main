@@ -1,0 +1,74 @@
+import Link from 'next/link';
+import Image from 'next/image';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { ArrowRight } from 'lucide-react';
+
+const peethams = [
+  {
+    name: 'Sringeri Sharada Peetham',
+    description: 'The first and foremost of the four Amnaya Peethams, the southern seat of wisdom for the Yajur Veda.',
+    link: '/peethams/sringeri',
+    image: 'https://placehold.co/600x400.png',
+    aiHint: 'indian temple'
+  },
+  {
+    name: 'Dwaraka Sharada Peetham',
+    description: 'The western Peetham, representing the Sama Veda and upholding the principles of Advaita.',
+    link: '/peethams/dwaraka',
+    image: 'https://placehold.co/600x400.png',
+    aiHint: 'ancient architecture'
+  },
+  {
+    name: 'Govardhana Peetham, Puri',
+    description: 'The eastern Peetham in Puri, associated with the Rig Veda and the worship of Lord Jagannath.',
+    link: '/peethams/puri',
+    image: 'https://placehold.co/600x400.png',
+    aiHint: 'hindu monastery'
+  },
+  {
+    name: 'Jyotirmath Peetham, Badrinath',
+    description: 'The northern Peetham, situated in the Himalayas and connected to the Atharva Veda.',
+    link: '/peethams/jyotirmath',
+    image: 'https://placehold.co/600x400.png',
+    aiHint: 'himalayan temple'
+  },
+];
+
+export default function PeethamsPage() {
+  return (
+    <div className="bg-background text-foreground">
+      <div className="container mx-auto max-w-6xl py-16 md:py-24 px-4">
+        <div className="text-center mb-16">
+          <h1 className="text-4xl md:text-5xl font-headline font-bold text-primary tracking-tight">
+            The Four Pillars of Sanatana Dharma
+          </h1>
+          <p className="mt-4 text-lg md:text-xl text-foreground/80 max-w-3xl mx-auto">
+            Established by Jagadguru Adi Shankaracharya, these four Peethams serve as the cardinal institutions for the preservation and propagation of Advaita Vedanta. Each stands as a beacon of spiritual wisdom, guiding seekers for over a millennium.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+          {peethams.map((peetham) => (
+            <Card key={peetham.name} className="flex flex-col overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border-border/50">
+              <Image src={peetham.image} alt={peetham.name} width={600} height={400} className="w-full object-cover" data-ai-hint={peetham.aiHint} />
+              <CardHeader>
+                <CardTitle className="font-headline text-2xl">{peetham.name}</CardTitle>
+              </CardHeader>
+              <CardContent className="flex-grow">
+                <p className="text-foreground/80">{peetham.description}</p>
+              </CardContent>
+              <div className="p-6 pt-0">
+                <Button asChild className="bg-primary hover:bg-primary/90 text-primary-foreground">
+                  <Link href={peetham.link}>
+                    Explore {peetham.name.split(' ')[0]} <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+              </div>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}

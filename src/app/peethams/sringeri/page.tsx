@@ -1,0 +1,154 @@
+import Image from 'next/image';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { ExternalLink, BookOpen, Calendar, Video, Camera } from 'lucide-react';
+
+export default function SringeriPeethamPage() {
+  return (
+    <div className="bg-background text-foreground">
+      <div className="container mx-auto max-w-6xl py-16 md:py-24 px-4">
+        <section className="flex flex-col md:flex-row items-center gap-8 mb-12">
+          <Image
+            src="https://placehold.co/800x600.png"
+            alt="Sringeri Sharada Peetham"
+            width={800}
+            height={600}
+            className="w-full md:w-1/3 rounded-lg shadow-lg object-cover"
+            data-ai-hint="indian monastery"
+          />
+          <div className="md:w-2/3">
+            <h1 className="text-4xl md:text-5xl font-headline font-bold text-primary tracking-tight mb-4">
+              Sringeri Sharada Peetham
+            </h1>
+            <p className="text-lg text-foreground/80 mb-2">
+              The Southern Āmnāya Pīṭham, established by Sri Adi Shankaracharya.
+            </p>
+            <div className="text-md text-foreground/90 mb-4">
+              <p><span className="font-semibold">Current Acharya:</span> Jagadguru Shankaracharya Sri Sri Bharati Tirtha Mahaswamiji</p>
+              <p><span className="font-semibold">Associated Veda:</span> Yajur Veda</p>
+              <p><span className="font-semibold">Mahāvākya:</span> Aham Brahmāsmi</p>
+            </div>
+            <Button asChild variant="outline">
+              <Link href="https://www.sringeri.net/" target="_blank">
+                Official Website <ExternalLink className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+          </div>
+        </section>
+
+        <Tabs defaultValue="about" className="w-full">
+          <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 mb-8">
+            <TabsTrigger value="about">About</TabsTrigger>
+            <TabsTrigger value="teachings">Teachings</TabsTrigger>
+            <TabsTrigger value="events">Events</TabsTrigger>
+            <TabsTrigger value="gallery">Media Gallery</TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="about" className="prose prose-lg lg:prose-xl max-w-none text-foreground/90 leading-relaxed">
+            <h2 className="font-headline text-primary">History and Significance</h2>
+            <p>
+              The Sringeri Sharada Peetham is the first and foremost of the four cardinal peethams established by the revered pontiff Jagadguru Sri Adi Shankaracharya in the 8th century C.E. It is the southern seat of the Advaita Vedanta tradition, located on the serene banks of the river Tunga in Sringeri, Karnataka. The Peetham is dedicated to the propagation of Sanatana Dharma and the philosophy of non-dualism.
+            </p>
+            <p>
+              Sri Shankaracharya installed a sandalwood idol of Goddess Sharada, the goddess of learning and wisdom, which was later replaced with a golden idol by Sri Vidyaranya in the 14th century. The Peetham has been a focal point for spiritual learning and has been blessed by an unbroken lineage of illustrious Jagadgurus who have guided the faithful for over 1200 years.
+            </p>
+            <h3 className="font-headline text-primary/90">Main Ashram Details</h3>
+            <p>
+              Sri Sharada Peetham,<br />
+              Sringeri,<br />
+              Chikkamagaluru District,<br />
+              Karnataka - 577139, India.
+            </p>
+          </TabsContent>
+
+          <TabsContent value="teachings">
+             <Card>
+                <CardHeader>
+                    <CardTitle className="font-headline text-primary flex items-center gap-2"><BookOpen className="h-6 w-6" /> Core Philosophy</CardTitle>
+                </CardHeader>
+                <CardContent className="prose max-w-none text-foreground/90">
+                    <p>
+                        The core teaching of the Sringeri Sharada Peetham is Advaita Vedanta, as expounded by Sri Adi Shankaracharya. It emphasizes the non-duality of the individual soul (Atman) and the ultimate reality (Brahman). The path to liberation (Moksha) is through the attainment of Self-knowledge (Atma-jnana), which dispels the illusion of separation born of ignorance (Avidya).
+                    </p>
+                </CardContent>
+             </Card>
+             <h3 className="font-headline text-2xl text-primary mt-8 mb-4">Wisdom from the Lineage</h3>
+             <div className="space-y-4">
+                <blockquote className="border-l-4 border-accent pl-4 italic text-foreground/80">
+                "Just as the one sun illumines the whole world, so does the one Atman illumine the whole body." - Sri Adi Shankaracharya
+                </blockquote>
+                <blockquote className="border-l-4 border-accent pl-4 italic text-foreground/80">
+                "A mind that is not agitated by desires and is free from cravings is the fittest to receive the knowledge of the Self." - Sri Sri Bharati Tirtha Mahaswamiji
+                </blockquote>
+             </div>
+          </TabsContent>
+
+          <TabsContent value="events">
+             <p className="text-center text-muted-foreground mb-8">A filtered view of upcoming and recent events related to the Sringeri Peetham. (This is placeholder data)</p>
+             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <Card>
+                    <CardHeader>
+                        <CardTitle className="font-headline text-primary flex items-center gap-2"><Calendar className="h-5 w-5" /> Sharada Sharannavaratri</CardTitle>
+                        <p className="text-sm text-muted-foreground">October 3, 2024 - October 12, 2024</p>
+                    </CardHeader>
+                    <CardContent>
+                        <p>The annual Navaratri festival celebrated with grandeur, featuring daily pujas, cultural events, and discourses by the Jagadguru.</p>
+                    </CardContent>
+                </Card>
+                <Card>
+                    <CardHeader>
+                        <CardTitle className="font-headline text-primary flex items-center gap-2"><Calendar className="h-5 w-5" /> Chaturmasya Vrata Anushtanam</CardTitle>
+                        <p className="text-sm text-muted-foreground">July 21, 2024 - September 18, 2024</p>
+                    </CardHeader>
+                    <CardContent>
+                        <p>The sacred four-month period of spiritual retreat and penance observed by the Jagadguru. Devotees can attend special discourses during this time.</p>
+                    </CardContent>
+                </Card>
+             </div>
+          </TabsContent>
+
+          <TabsContent value="gallery">
+             <div className="space-y-12">
+                <div>
+                    <h3 className="font-headline text-2xl text-primary mb-4 flex items-center gap-2"><Camera className="h-6 w-6" /> Photo Gallery</h3>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <Image src="https://placehold.co/400x300.png" alt="Gallery Image 1" width={400} height={300} className="rounded-lg object-cover" data-ai-hint="temple architecture" />
+                        <Image src="https://placehold.co/400x300.png" alt="Gallery Image 2" width={400} height={300} className="rounded-lg object-cover" data-ai-hint="religious ceremony" />
+                        <Image src="https://placehold.co/400x300.png" alt="Gallery Image 3" width={400} height={300} className="rounded-lg object-cover" data-ai-hint="spiritual leader" />
+                        <Image src="https://placehold.co/400x300.png" alt="Gallery Image 4" width={400} height={300} className="rounded-lg object-cover" data-ai-hint="devotees crowd" />
+                    </div>
+                </div>
+                <div>
+                    <h3 className="font-headline text-2xl text-primary mb-4 flex items-center gap-2"><Video className="h-6 w-6" /> Video Archive</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <Card>
+                            <CardHeader>
+                                <CardTitle className="font-headline text-lg">Discourse on Vivekachudamani</CardTitle>
+                            </CardHeader>
+                            <CardContent>
+                                <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
+                                    <p className="text-muted-foreground">Video Placeholder</p>
+                                </div>
+                            </CardContent>
+                        </Card>
+                        <Card>
+                            <CardHeader>
+                                <CardTitle className="font-headline text-lg">Highlights from the 2023 Aradhana</CardTitle>
+                            </CardHeader>
+                            <CardContent>
+                                <div className="aspect-video bg-muted rounded-lg flex items-center justify-center">
+                                    <p className="text-muted-foreground">Video Placeholder</p>
+                                </div>
+                            </CardContent>
+                        </Card>
+                    </div>
+                </div>
+             </div>
+          </TabsContent>
+        </Tabs>
+      </div>
+    </div>
+  );
+}
