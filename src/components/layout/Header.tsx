@@ -5,6 +5,20 @@ import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Menu, Mail, Twitter, Facebook, Podcast, Gem } from 'lucide-react';
 
+const navLinks = [
+    { href: "/peethams", label: "Peethams" },
+    { href: "/events", label: "Bodha Calendar" },
+    { href: "/panchanga", label: "Panchanga" },
+    { href: "/reading", label: "Reading" },
+    { href: "/sadhana", label: "Sadhana" },
+    { href: "/quiz", label: "Quiz" },
+    { href: "/chess", label: "Chess AI" },
+    { href: "/kids", label: "Kids Corner" },
+    { href: "/seva", label: "Seva Hub" },
+    { href: "/philosophy", label: "Our Philosophy" },
+    { href: "/mission", label: "Our Mission" }
+];
+
 export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -14,18 +28,10 @@ export function Header() {
             <Gem className="h-6 w-6 text-primary" />
             <span className="font-bold font-headline text-primary sm:text-lg">Sanatana Peethams Portal</span>
           </Link>
-          <nav className="hidden md:flex items-center space-x-6 text-sm font-medium">
-            <Link href="/peethams" className="transition-colors hover:text-accent">Peethams</Link>
-            <Link href="/events" className="transition-colors hover:text-accent">Bodha Calendar</Link>
-            <Link href="/panchanga" className="transition-colors hover:text-accent">Panchanga</Link>
-            <Link href="/reading" className="transition-colors hover:text-accent">Reading</Link>
-            <Link href="/sadhana" className="transition-colors hover:text-accent">Sadhana</Link>
-            <Link href="/quiz" className="transition-colors hover:text-accent">Quiz</Link>
-            <Link href="/chess" className="transition-colors hover:text-accent">Chess AI</Link>
-            <Link href="/kids" className="transition-colors hover:text-accent">Kids Corner</Link>
-            <Link href="/seva" className="transition-colors hover:text-accent">Seva Hub</Link>
-            <Link href="/philosophy" className="transition-colors hover:text-accent">Our Philosophy</Link>
-            <Link href="/mission" className="transition-colors hover:text-accent">Our Mission</Link>
+          <nav className="hidden lg:flex items-center space-x-6 text-sm font-medium">
+            {navLinks.slice(0, 5).map(link => (
+                <Link key={link.href} href={link.href} className="transition-colors hover:text-accent">{link.label}</Link>
+            ))}
           </nav>
         </div>
 
@@ -45,7 +51,7 @@ export function Header() {
           </Link>
         </div>
 
-        <div className="md:hidden">
+        <div className="lg:hidden">
           <Sheet>
             <SheetTrigger asChild>
               <Button variant="outline" size="icon">
@@ -60,17 +66,9 @@ export function Header() {
                     <span className="font-bold font-headline text-primary text-lg">Sanatana Peethams Portal</span>
                 </Link>
                 <nav className="flex flex-col space-y-4">
-                    <Link href="/peethams" className="text-lg font-medium transition-colors hover:text-accent">Peethams</Link>
-                    <Link href="/events" className="text-lg font-medium transition-colors hover:text-accent">Bodha Calendar</Link>
-                    <Link href="/panchanga" className="text-lg font-medium transition-colors hover:text-accent">Panchanga</Link>
-                    <Link href="/reading" className="text-lg font-medium transition-colors hover:text-accent">Reading</Link>
-                    <Link href="/sadhana" className="text-lg font-medium transition-colors hover:text-accent">Sadhana</Link>
-                    <Link href="/quiz" className="text-lg font-medium transition-colors hover:text-accent">Quiz</Link>
-                    <Link href="/chess" className="text-lg font-medium transition-colors hover:text-accent">Chess AI</Link>
-                    <Link href="/kids" className="text-lg font-medium transition-colors hover:text-accent">Kids Corner</Link>
-                    <Link href="/seva" className="text-lg font-medium transition-colors hover:text-accent">Seva Hub</Link>
-                    <Link href="/philosophy" className="text-lg font-medium transition-colors hover:text-accent">Our Philosophy</Link>
-                    <Link href="/mission" className="text-lg font-medium transition-colors hover:text-accent">Our Mission</Link>
+                    {navLinks.map(link => (
+                       <Link key={link.href} href={link.href} className="text-lg font-medium transition-colors hover:text-accent">{link.label}</Link>
+                    ))}
                 </nav>
                 <div className="border-t pt-6 space-y-4">
                   <Link href="/contact" className="flex items-center space-x-2 text-lg font-medium transition-colors hover:text-accent">

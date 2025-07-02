@@ -26,8 +26,7 @@ const ScratchImage = ({ imageUrl, width, height, brushSize, aiHint }: { imageUrl
     const context = canvas.getContext('2d');
     if (!context) return;
 
-    // Fill the canvas with a solid color
-    context.fillStyle = '#d1d5db'; // A neutral gray color
+    context.fillStyle = '#d1d5db'; 
     context.fillRect(0, 0, width, height);
     context.globalCompositeOperation = 'destination-out';
 
@@ -37,14 +36,12 @@ const ScratchImage = ({ imageUrl, width, height, brushSize, aiHint }: { imageUrl
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    // For mouse events, only draw if the primary button is pressed
     if ('buttons' in e && e.buttons !== 1) return;
 
     const rect = canvas.getBoundingClientRect();
     let clientX, clientY;
 
     if ('touches' in e) {
-      // For touch events, prevent default scroll behavior
       e.preventDefault();
       if (e.touches.length === 0) return;
       clientX = e.touches[0].clientX;
@@ -54,7 +51,6 @@ const ScratchImage = ({ imageUrl, width, height, brushSize, aiHint }: { imageUrl
       clientY = e.clientY;
     }
 
-    // Scale coordinates to match canvas resolution if display size is different
     const scaleX = canvas.width / rect.width;
     const scaleY = canvas.height / rect.height;
     const x = (clientX - rect.left) * scaleX;
@@ -64,7 +60,7 @@ const ScratchImage = ({ imageUrl, width, height, brushSize, aiHint }: { imageUrl
     if (!context) return;
 
     context.beginPath();
-    context.arc(x, y, brushSize * scaleX, 0, 2 * Math.PI); // Scale brush size too
+    context.arc(x, y, brushSize * scaleX, 0, 2 * Math.PI); 
     context.fill();
   }
 
@@ -171,7 +167,7 @@ export default function KidsCornerPage() {
             <CardHeader>
                 <CardTitle className="font-headline text-xl">Choose an Image</CardTitle>
             </CardHeader>
-            <CardContent className="grid grid-cols-3 gap-2">
+            <CardContent className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                 {scratchableImages.map(image => (
                     <button key={image.id} onClick={() => setSelectedImage(image)} className={`rounded-lg overflow-hidden border-4 ${selectedImage.id === image.id ? 'border-primary' : 'border-transparent'} focus:outline-none focus:ring-2 focus:ring-ring`}>
                          <Image src={image.imageUrl} alt={image.name} width={200} height={150} className="w-full h-20 object-cover" data-ai-hint={image.aiHint} />

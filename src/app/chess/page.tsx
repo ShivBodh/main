@@ -85,22 +85,20 @@ export default function ChessPage() {
     const handleSquareClick = (square: Square) => {
         if (!game || gameOver || isAiThinking) return;
 
-        // Player's turn (white)
         if (game.turn() === 'w') {
             if (selectedSquare) {
                 try {
                     const move = game.move({
                         from: selectedSquare,
                         to: square,
-                        promotion: 'q' // Always promote to queen for simplicity
+                        promotion: 'q' 
                     });
                     
                     if (move) {
-                        setGame(new Chess(game.fen())); // force update
+                        setGame(new Chess(game.fen())); 
                         checkGameState();
                     }
                 } catch (e) {
-                    // Invalid move, try to select the new square if it has a white piece
                     const piece = game.get(square);
                     if (piece && piece.color === 'w') {
                         setSelectedSquare(square);
@@ -147,7 +145,7 @@ export default function ChessPage() {
                 try {
                     const result = await getAiMove({ fen: game.fen(), history });
                     game.move(result.move);
-                    setGame(new Chess(game.fen())); // force update
+                    setGame(new Chess(game.fen()));
                     checkGameState();
                 } catch (error) {
                     console.error("AI move failed:", error);
@@ -155,7 +153,6 @@ export default function ChessPage() {
                     setIsAiThinking(false);
                 }
             };
-            // A slight delay to make it feel like the AI is "thinking"
             setTimeout(makeAiMove, 500);
         }
     }, [game, gameOver, history]);
@@ -257,11 +254,11 @@ export default function ChessPage() {
                                 {history.length === 0 ? (
                                     <p className="text-muted-foreground">No moves yet.</p>
                                 ) : (
-                                    <ol className="list-decimal list-inside">
-                                      {Array.from({ length: Math.ceil(history.length / 2) }).map((_, i) => (
-                                        <li key={i} className="grid grid-cols-2 gap-2">
-                                            <span>{history[i*2]}</span>
-                                            {history[i*2+1] && <span>{history[i*2+1]}</span>}
+                                    <ol className="list-decimal list-inside columns-1 sm:columns-2 gap-x-4">
+                                      {history.map((move, index) => (
+                                        <li key={index} className="flex gap-2">
+                                            {index % 2 === 0 && <span className="w-4 text-right text-muted-foreground">{Math.floor(index/2)+1}.</span>}
+                                            <span>{move}</span>
                                         </li>
                                       ))}
                                     </ol>
