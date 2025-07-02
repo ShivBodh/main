@@ -4,9 +4,7 @@ export const peethams = [
     name: 'Sringeri Sharada Peetham',
     description: 'The first and foremost of the four Amnaya Peethams, the southern seat of wisdom for the Yajur Veda. Nestled on the banks of the Tunga river, it is a center for spiritual learning and Vedic scholarship.',
     link: '/peethams/sringeri',
-    image: 'https://source.unsplash.com/CnM0ArcIEvQ',
-    aiHint: 'himalayan temple',
-    imageFit: 'cover',
+    icon: 'ScrollText',
   },
   {
     name: 'Dwaraka Sharada Peetham',
@@ -28,8 +26,6 @@ export const peethams = [
     name: 'Jyotirmath Peetham, Badrinath',
     description: 'The northern Peetham, situated in the holy town of Jyotirmath in the Himalayas. Linked to the Atharva Veda, it serves as a beacon of spiritual wisdom in the serene and challenging mountain terrain.',
     link: '/peethams/jyotirmath',
-    image: 'https://source.unsplash.com/CnM0ArcIEvQ',
-    aiHint: 'himalayan temple',
-    imageFit: 'cover',
+    icon: 'ScrollText',
   },
 ];

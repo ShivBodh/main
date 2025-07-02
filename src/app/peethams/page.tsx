@@ -3,13 +3,22 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, icons } from 'lucide-react';
 import { peethams } from '@/lib/peethams-data';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'The Four Peethams | Sanatana Peethams Portal',
   description: 'Explore the four cardinal Peethams established by Adi Shankaracharya: Sringeri, Dwaraka, Puri, and Jyotirmath. Learn about their history, teachings, and significance.',
+};
+
+// Helper component for dynamic icons
+const LucideIcon = ({ name, ...props }: { name: string; [key: string]: any }) => {
+  const Icon = icons[name as keyof typeof icons];
+  if (!Icon) {
+    return null;
+  }
+  return <Icon {...props} />;
 };
 
 
@@ -27,9 +36,15 @@ export default function PeethamsPage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-          {peethams.map((peetham) => (
+          {peethams.map((peetham: any) => (
             <Card key={peetham.name} className="flex flex-col overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border-border/50">
-              <Image src={peetham.image} alt={peetham.name} width={600} height={400} className="w-full h-64 object-cover" data-ai-hint={peetham.aiHint} />
+              <div className="w-full h-64 bg-secondary/20 flex items-center justify-center">
+                {peetham.icon ? (
+                  <LucideIcon name={peetham.icon} className="w-32 h-32 text-primary/50" />
+                ) : (
+                  <Image src={peetham.image} alt={peetham.name} width={600} height={400} className="w-full h-full object-cover" data-ai-hint={peetham.aiHint} />
+                )}
+              </div>
               <CardHeader>
                 <CardTitle className="font-headline text-2xl">{peetham.name}</CardTitle>
               </CardHeader>

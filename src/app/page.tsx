@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, icons } from 'lucide-react';
 import { recentItems, actionItems } from '@/lib/home-page-data';
 import { peethams } from '@/lib/peethams-data';
 import type { Metadata } from 'next';
@@ -11,6 +11,15 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Sanatana Peethams Portal | Home',
   description: 'A single, trusted digital beacon for the timeless wisdom of the four cardinal Peethams established by Adi Shankaracharya. Connecting devotees worldwide.',
+};
+
+// Helper component for dynamic icons
+const LucideIcon = ({ name, ...props }: { name: string; [key: string]: any }) => {
+  const Icon = icons[name as keyof typeof icons];
+  if (!Icon) {
+    return null;
+  }
+  return <Icon {...props} />;
 };
 
 
@@ -41,9 +50,12 @@ export default function HomePage() {
             The Four Pillars of Sanatana Dharma
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {peethams.map((peetham) => (
+            {peethams.map((peetham: any) => (
               <Card key={peetham.name} className="flex flex-col overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border-border/50">
-                <div className="relative w-full h-48 bg-secondary/20">
+                <div className="relative w-full h-48 bg-secondary/20 flex items-center justify-center">
+                  {peetham.icon ? (
+                    <LucideIcon name={peetham.icon} className="w-24 h-24 text-primary/50" />
+                  ) : (
                     <Image 
                       src={peetham.image} 
                       alt={peetham.name} 
@@ -52,6 +64,7 @@ export default function HomePage() {
                       className={`w-full h-full ${peetham.imageFit === 'contain' ? 'object-contain' : 'object-cover'}`}
                       {...(peetham.aiHint && { 'data-ai-hint': peetham.aiHint })}
                     />
+                  )}
                 </div>
                 <CardHeader>
                   <CardTitle className="font-headline text-xl">{peetham.name}</CardTitle>
