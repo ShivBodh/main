@@ -211,7 +211,7 @@ export default function EventsPage() {
                                             <div className='relative h-full w-full flex items-center justify-center'>
                                                 <span>{dayDate.getDate()}</span>
                                                 {peethamsOnDay.length > 0 && (
-                                                    <div className="absolute bottom-1 flex space-x-0.5">
+                                                    <div className="absolute top-1 flex space-x-0.5">
                                                         {peethamsOnDay.map(p => (
                                                             <div key={p} className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: peethamDotColors[p] }}></div>
                                                         ))}
@@ -269,8 +269,8 @@ export default function EventsPage() {
                                 ) : (
                                     <div className="flex flex-col items-center justify-center h-full text-center text-muted-foreground pt-16">
                                         <VenetianMask className="h-16 w-16 mb-4 text-primary" />
-                                        <p className="text-lg font-semibold">No events or media for this day.</p>
-                                        <p>Please select another date on the calendar.</p>
+                                        <p className="text-lg font-semibold">No content found for this day.</p>
+                                        <p>Try selecting a date with colored dots, which indicate available content.</p>
                                     </div>
                                 )
                             ) : (
