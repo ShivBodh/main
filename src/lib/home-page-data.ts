@@ -58,7 +58,7 @@ export const actionItems = [
         variant: 'primary'
     },
     {
-        title: 'View Unified Calendar',
+        title: 'View Bodha Calendar',
         href: '/events',
         variant: 'outline'
     }

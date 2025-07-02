@@ -152,7 +152,7 @@ export default function EventsPage() {
         <div className="container mx-auto max-w-7xl py-16 md:py-24 px-4">
             <div className="text-center mb-12">
                 <h1 className="text-4xl md:text-5xl font-headline font-bold text-primary tracking-tight">
-                    Unified Calendar
+                    Bodha Calendar
                 </h1>
                 <p className="mt-4 text-lg md:text-xl text-foreground/80 max-w-3xl mx-auto">
                     Explore a living calendar of daily events, discourses, and media from the four cardinal Peethams. Select a date to discover the sacred activities and teachings from that day.

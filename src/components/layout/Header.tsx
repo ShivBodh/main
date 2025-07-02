@@ -9,7 +9,7 @@ import { Menu, Mail, Twitter, Facebook, Podcast, Gem } from 'lucide-react';
 export function Header() {
   const navLinks = [
     { href: '/peethams', label: 'Peethams' },
-    { href: '/events', label: 'Unified Calendar' },
+    { href: '/events', label: 'Bodha Calendar' },
     { href: '/panchanga', label: 'Panchanga' },
     { href: '/sadhana', label: 'Sadhana' },
     { href: '/quiz', label: 'Quiz' },
