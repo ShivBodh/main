@@ -1,3 +1,4 @@
+
 export interface Book {
   id: string;
   title: string;
@@ -16,7 +17,7 @@ export const readingList: Book[] = [
     author: 'Adi Shankaracharya',
     description: 'A masterpiece of Advaita Vedanta, this "Crest-Jewel of Discrimination" outlines the path to self-realization through discerning the real from the unreal.',
     pdfUrl: '#', // Placeholder link
-    imageUrl: '/images/reading/vivekachudamani.svg',
+    imageUrl: 'https://placehold.co/400x600.png',
     aiHint: 'book cover',
   },
   {
@@ -25,7 +26,7 @@ export const readingList: Book[] = [
     author: 'Adi Shankaracharya',
     description: 'A short treatise on Advaita Vedanta, "Self-Knowledge" is composed of sixty-eight verses, providing a clear exposition of the nature of the Self.',
     pdfUrl: '#', // Placeholder link
-    imageUrl: '/images/reading/atma-bodha.svg',
+    imageUrl: 'https://placehold.co/400x600.png',
     aiHint: 'book cover',
   },
   {
@@ -34,7 +35,7 @@ export const readingList: Book[] = [
     author: 'Adi Shankaracharya',
     description: 'An introductory text that explains the fundamental terms and concepts of Vedanta, making it an essential prerequisite for deeper study.',
     pdfUrl: '#', // Placeholder link
-    imageUrl: '/images/reading/tattva-bodha.svg',
+    imageUrl: 'https://placehold.co/400x600.png',
     aiHint: 'book cover',
   },
     {
@@ -43,7 +44,7 @@ export const readingList: Book[] = [
     author: 'Adi Shankaracharya',
     description: 'A powerful hymn that emphasizes the importance of devotion and seeking Govinda (God) as the ultimate goal, cutting through worldly attachments.',
     pdfUrl: '#', // Placeholder link
-    imageUrl: '/images/reading/bhaja-govindam.svg',
+    imageUrl: 'https://placehold.co/400x600.png',
     aiHint: 'book cover',
   },
     {
@@ -52,7 +53,7 @@ export const readingList: Book[] = [
     author: 'Adi Shankaracharya',
     description: '"A Thousand Teachings" is one of the most important works of Shankara, consisting of a prose and a poetry section, detailing the path to liberation.',
     pdfUrl: '#', // Placeholder link
-    imageUrl: '/images/reading/upadesasahasri.svg',
+    imageUrl: 'https://placehold.co/400x600.png',
     aiHint: 'book cover',
   },
     {
@@ -61,7 +62,7 @@ export const readingList: Book[] = [
     author: 'Adi Shankaracharya',
     description: '"Direct Experience," this work outlines the path of Jnana Yoga and provides a step-by-step method for experiencing the Self directly.',
     pdfUrl: '#', // Placeholder link
-    imageUrl: '/images/reading/aparokshanubhuti.svg',
+    imageUrl: 'https://placehold.co/400x600.png',
     aiHint: 'book cover',
   },
 ];

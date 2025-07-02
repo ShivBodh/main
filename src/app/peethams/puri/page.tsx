@@ -43,8 +43,9 @@ export default function PuriPeethamPage() {
         <section className="flex flex-col md:flex-row items-center gap-8 mb-12">
           <div className="w-full md:w-1/3">
             <Image
-              src="/images/peethams/puri.jpeg"
+              src="https://placehold.co/800x600.png"
               alt="Govardhana Peetham, Puri"
+              data-ai-hint="temple chariot"
               width={800}
               height={600}
               className="rounded-lg shadow-lg object-cover aspect-[4/3]"

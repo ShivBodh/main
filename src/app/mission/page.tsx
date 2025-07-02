@@ -82,8 +82,9 @@ export default function MissionPage() {
 
             <div className="not-prose text-center mt-16 p-8 bg-card rounded-lg border">
                 <Image
-                  src="/images/mission/seva-hands.svg"
+                  src="https://placehold.co/80x80.png"
                   alt="An illustration representing selfless service (Seva)"
+                  data-ai-hint="seva hands"
                   width={80}
                   height={80}
                   className="mx-auto mb-4"
@@ -101,4 +102,3 @@ export default function MissionPage() {
       </div>
     );
   }
-  

@@ -2,7 +2,6 @@
 'use client';
 
 import { useRef, useEffect, useState } from 'react';
-import type { Metadata } from 'next';
 import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -13,12 +12,12 @@ import { Slider } from '@/components/ui/slider';
 import { Label } from '@/components/ui/label';
 
 const scratchableImages = [
-    { id: 1, name: 'Adi Shankaracharya', imageUrl: '/images/acharya.png' },
-    { id: 2, name: 'A Wise Sage', imageUrl: '/images/acharya.png' },
-    { id: 3, name: 'Goddess Sharada', imageUrl: '/images/acharya.png' },
+    { id: 1, name: 'Adi Shankaracharya', imageUrl: 'https://placehold.co/600x400.png', aiHint: 'acharya portrait' },
+    { id: 2, name: 'A Wise Sage', imageUrl: 'https://placehold.co/600x400.png', aiHint: 'wise sage' },
+    { id: 3, name: 'Goddess Sharada', imageUrl: 'https://placehold.co/600x400.png', aiHint: 'goddess Sharada' },
 ];
 
-const ScratchImage = ({ imageUrl, width, height, brushSize }: { imageUrl: string; width: number; height: number; brushSize: number; }) => {
+const ScratchImage = ({ imageUrl, width, height, brushSize, aiHint }: { imageUrl: string; width: number; height: number; brushSize: number; aiHint: string; }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   
   useEffect(() => {
@@ -83,6 +82,7 @@ const ScratchImage = ({ imageUrl, width, height, brushSize }: { imageUrl: string
         <Image
           src={imageUrl}
           alt="Hidden spiritual image"
+          data-ai-hint={aiHint}
           fill
           className="object-cover"
         />
@@ -160,6 +160,7 @@ export default function KidsCornerPage() {
               width={600}
               height={400}
               brushSize={brushSize}
+              aiHint={selectedImage.aiHint}
             />
           </div>
         </CardContent>
@@ -173,7 +174,7 @@ export default function KidsCornerPage() {
             <CardContent className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                 {scratchableImages.map(image => (
                     <button key={image.id} onClick={() => setSelectedImage(image)} className={`rounded-lg overflow-hidden border-4 ${selectedImage.id === image.id ? 'border-primary' : 'border-transparent'} focus:outline-none focus:ring-2 focus:ring-ring`}>
-                         <Image src={image.imageUrl} alt={image.name} width={200} height={150} className="w-full h-20 object-cover" />
+                         <Image src={image.imageUrl} alt={image.name} width={200} height={150} className="w-full h-20 object-cover" data-ai-hint={image.aiHint} />
                         <p className="p-2 text-xs font-medium bg-muted/50 truncate">{image.name}</p>
                     </button>
                 ))}

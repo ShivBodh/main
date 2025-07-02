@@ -5,6 +5,7 @@ export type FacebookVideo = {
     date: string; // YYYY-MM-DD
     url: string; // Direct link to the Facebook video
     description: string;
+    thumbnailUrl: string;
 };
 
 export const dwarakaFacebookVideos: FacebookVideo[] = [
@@ -13,20 +14,23 @@ export const dwarakaFacebookVideos: FacebookVideo[] = [
         title: 'Evening Aarti at Dwaraka Peetham',
         date: '2024-07-22',
         url: 'https://www.facebook.com/SwamiSadanandSaraswatiDwarkaGujarat/videos/1005822397095493/',
-        description: 'Experience the divine evening aarti live from the Sharada Peetham in Dwaraka.'
+        description: 'Experience the divine evening aarti live from the Sharada Peetham in Dwaraka.',
+        thumbnailUrl: 'https://placehold.co/1280x720.png',
     },
     {
         id: 'fb-video-2',
         title: 'Discourse on the Significance of Dwaraka',
         date: '2024-07-20',
         url: 'https://www.facebook.com/SwamiSadanandSaraswatiDwarkaGujarat/videos/1131735534645871/',
-        description: 'A special discourse on the history and spiritual significance of the holy city of Dwaraka.'
+        description: 'A special discourse on the history and spiritual significance of the holy city of Dwaraka.',
+        thumbnailUrl: 'https://placehold.co/1280x720.png',
     },
     {
         id: 'fb-video-3',
         title: 'Janmashtami Celebrations',
         date: '2023-09-07',
         url: 'https://www.facebook.com/SwamiSadanandSaraswatiDwarkaGujarat/videos/238407842567883/',
-        description: 'Glimpses of the grand Janmashtami celebrations at the Dwaraka Peetham.'
+        description: 'Glimpses of the grand Janmashtami celebrations at the Dwaraka Peetham.',
+        thumbnailUrl: 'https://placehold.co/1280x720.png',
     }
 ];
