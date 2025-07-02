@@ -39,7 +39,7 @@ export default function PuriPeethamPage() {
         <section className="flex flex-col md:flex-row items-center gap-8 mb-12">
           <div className="w-full md:w-1/3">
             <Image
-              src="https://source.unsplash.com/random/800x600/?puri,temple"
+              src="https://source.unsplash.com/800x600/?puri,temple"
               alt="Govardhana Peetham, Puri"
               width={800}
               height={600}
@@ -166,7 +166,7 @@ export default function PuriPeethamPage() {
                                     <Dialog>
                                         <DialogTrigger asChild>
                                             <div className="block relative aspect-video rounded-lg overflow-hidden group bg-secondary cursor-pointer">
-                                                <Image src={`https://placehold.co/800x450.png`} alt={video.title} fill className="object-cover transition-transform duration-300 group-hover:scale-105" data-ai-hint="puri video" />
+                                                <Image src={'https://source.unsplash.com/800x450/?puri,video'} alt={video.title} fill className="object-cover transition-transform duration-300 group-hover:scale-105" data-ai-hint="puri video" />
                                                 <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
                                                     <PlayCircle className="h-16 w-16 text-white/80 transition-transform duration-300 group-hover:scale-110" />
                                                 </div>
@@ -214,7 +214,7 @@ export default function PuriPeethamPage() {
                                         <Dialog>
                                             <DialogTrigger asChild>
                                                 <div className="block relative aspect-video rounded-lg overflow-hidden group bg-secondary cursor-pointer">
-                                                    <Image src={`https://placehold.co/800x450.png`} alt={video.title} fill className="object-cover transition-transform duration-300 group-hover:scale-105" data-ai-hint="puri facebook video" />
+                                                    <Image src={'https://source.unsplash.com/800x450/?puri,facebook,video'} alt={video.title} fill className="object-cover transition-transform duration-300 group-hover:scale-105" data-ai-hint="puri facebook video" />
                                                     <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
                                                         <Facebook className="h-16 w-16 text-white/80 transition-transform duration-300 group-hover:scale-110" />
                                                     </div>
@@ -293,7 +293,7 @@ export default function PuriPeethamPage() {
                     </Card>
                 </div>
                 <div className="md:col-span-2">
-                     <Image src="https://source.unsplash.com/random/1200x600/?city,map,puri" alt="Map of Puri Peetham" width={1200} height={600} className="rounded-lg object-cover w-full h-full aspect-video" data-ai-hint="city map" />
+                     <Image src="https://source.unsplash.com/1200x600/?city,map" alt="Map of Puri Peetham" width={1200} height={600} className="rounded-lg object-cover w-full h-full aspect-video" data-ai-hint="city map" />
                 </div>
             </div>
           </TabsContent>

@@ -4,28 +4,28 @@ export const peethams = [
     name: 'Sringeri Sharada Peetham',
     description: 'The southern seat of wisdom for the Yajur Veda, and the first of the four cardinal Peethams established by Adi Shankaracharya.',
     link: '/peethams/sringeri',
-    image: 'https://source.unsplash.com/random/600x400/?sringeri,temple',
+    image: 'https://source.unsplash.com/600x400/?sringeri,temple',
     aiHint: 'Sringeri temple'
   },
   {
     name: 'Dwaraka Sharada Peetham',
     description: 'The western Peetham on the coast of Gujarat. It is the guardian of the Sama Veda and a vital spiritual hub for the region.',
     link: '/peethams/dwaraka',
-    image: 'https://source.unsplash.com/random/600x400/?dwaraka,temple',
+    image: 'https://source.unsplash.com/600x400/?dwaraka,temple',
     aiHint: 'Dwaraka temple'
   },
   {
     name: 'Govardhana Peetham, Puri',
     description: 'The eastern Peetham, intrinsically linked with the Rig Veda and the sacred worship of Lord Jagannath in Puri.',
     link: '/peethams/puri',
-    image: 'https://source.unsplash.com/random/600x400/?puri,monastery',
+    image: 'https://source.unsplash.com/600x400/?puri,monastery',
     aiHint: 'Puri monastery'
   },
   {
     name: 'Jyotirmath Peetham, Badrinath',
     description: 'The northern Peetham, a beacon of light for the Atharva Veda, nestled in the serene and majestic Himalayas.',
     link: '/peethams/jyotirmath',
-    image: 'https://source.unsplash.com/random/600x400/?himalayan,monastery',
+    image: 'https://source.unsplash.com/600x400/?himalayan,monastery',
     aiHint: 'Himalayan monastery'
   },
 ];

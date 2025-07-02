@@ -12,9 +12,9 @@ import { Slider } from '@/components/ui/slider';
 import { Label } from '@/components/ui/label';
 
 const scratchableImages = [
-    { id: 1, name: 'Adi Shankaracharya', imageUrl: 'https://source.unsplash.com/random/600x400/?hindu,acharya,philosopher', aiHint: 'Adi Shankaracharya' },
-    { id: 2, name: 'A Wise Sage', imageUrl: 'https://source.unsplash.com/random/600x400/?hindu,sage,meditating', aiHint: 'hindu sage' },
-    { id: 3, name: 'Goddess Sharada', imageUrl: 'https://source.unsplash.com/random/600x400/?hindu,goddess,saraswati', aiHint: 'goddess saraswati' },
+    { id: 1, name: 'Adi Shankaracharya', imageUrl: 'https://source.unsplash.com/600x400/?hindu,acharya,philosopher', aiHint: 'Adi Shankaracharya' },
+    { id: 2, name: 'A Wise Sage', imageUrl: 'https://source.unsplash.com/600x400/?hindu,sage,meditating', aiHint: 'hindu sage' },
+    { id: 3, name: 'Goddess Sharada', imageUrl: 'https://source.unsplash.com/600x400/?hindu,goddess,saraswati', aiHint: 'goddess saraswati' },
 ];
 
 const ScratchImage = ({ imageUrl, width, height, brushSize, aiHint }: { imageUrl: string; width: number; height: number; brushSize: number; aiHint: string }) => {

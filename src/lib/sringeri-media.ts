@@ -36,9 +36,8 @@ export type VideoArchiveItem = {
   ];
   
   export const sringeriPhotoGallery = [
-    { id: 'sringeri-photo-1', date: '2024-07-18', title: 'Blessings from the Jagadguru', description: 'Jagadguru Sri Sri Vidhushekhara Bharati Mahaswamiji blessing devotees.', alt: 'Jagadguru blessing devotees', src: 'https://source.unsplash.com/random/400x300/?spiritual,leader', aiHint: 'spiritual leader' },
-    { id: 'sringeri-photo-2', date: '2024-07-17', title: 'Vidyasankara Temple Architecture', description: 'A view of the intricate architecture of the Vidyasankara Temple.', alt: 'Vidyasankara Temple architecture', src: 'https://source.unsplash.com/random/400x300/?indian,temple,architecture', aiHint: 'temple architecture' },
-    { id: 'sringeri-photo-3', date: '2024-07-16', title: 'Sacred Puja Ceremony', description: 'A glimpse of a puja ceremony at the main shrine of Goddess Sharadamba.', alt: 'Puja ceremony at the main shrine', src: 'https://source.unsplash.com/random/400x300/?religious,ceremony', aiHint: 'religious ceremony' },
-    { id: 'sringeri-photo-4', date: '2024-07-15', title: 'Festival Gathering', description: 'Devotees gathered during a recent festival at Sringeri.', alt: 'Crowd of devotees during a festival', src: 'https://source.unsplash.com/random/400x300/?devotees,crowd', aiHint: 'devotees crowd' },
+    { id: 'sringeri-photo-1', date: '2024-07-18', title: 'Blessings from the Jagadguru', description: 'Jagadguru Sri Sri Vidhushekhara Bharati Mahaswamiji blessing devotees.', alt: 'Jagadguru blessing devotees', src: 'https://source.unsplash.com/400x300/?spiritual,leader', aiHint: 'spiritual leader' },
+    { id: 'sringeri-photo-2', date: '2024-07-17', title: 'Vidyasankara Temple Architecture', description: 'A view of the intricate architecture of the Vidyasankara Temple.', alt: 'Vidyasankara Temple architecture', src: 'https://source.unsplash.com/400x300/?indian,temple,architecture', aiHint: 'temple architecture' },
+    { id: 'sringeri-photo-3', date: '2024-07-16', title: 'Sacred Puja Ceremony', description: 'A glimpse of a puja ceremony at the main shrine of Goddess Sharadamba.', alt: 'Puja ceremony at the main shrine', src: 'https://source.unsplash.com/400x300/?religious,ceremony', aiHint: 'religious ceremony' },
+    { id: 'sringeri-photo-4', date: '2024-07-15', title: 'Festival Gathering', description: 'Devotees gathered during a recent festival at Sringeri.', alt: 'Crowd of devotees during a festival', src: 'https://source.unsplash.com/400x300/?devotees,crowd', aiHint: 'devotees crowd' },
   ];
-  
