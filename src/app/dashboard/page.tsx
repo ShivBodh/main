@@ -9,6 +9,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Skeleton } from '@/components/ui/skeleton';
 import { LogOut, Mail, User as UserIcon, BookOpen, Brain, BookMarked } from 'lucide-react';
 import Link from 'next/link';
+import { DonationDiary } from '@/components/dashboard/DonationDiary';
 
 export default function DashboardPage() {
   const { user, loading, logout } = useAuth();
@@ -37,6 +38,9 @@ export default function DashboardPage() {
             <div className="grid gap-8 md:grid-cols-2">
                 <Skeleton className="h-48 w-full rounded-lg" />
                 <Skeleton className="h-48 w-full rounded-lg" />
+            </div>
+             <div className="mt-8">
+                <Skeleton className="h-96 w-full rounded-lg" />
             </div>
         </div>
     );
@@ -68,7 +72,7 @@ export default function DashboardPage() {
             </div>
         </div>
       
-        <div className="grid gap-8 md:grid-cols-2">
+        <div className="grid gap-8 md:grid-cols-2 mb-8">
             <Card className="shadow-md">
                 <CardHeader>
                     <CardTitle className="font-headline flex items-center gap-2">
@@ -76,11 +80,11 @@ export default function DashboardPage() {
                         My Profile
                     </CardTitle>
                     <CardDescription>
-                        This is your personal dashboard. More personalized features are coming soon!
+                        This is your personal dashboard. Use the tools below to enrich your spiritual journey.
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <p>In the future, you'll find your saved notes, quiz progress, and watched video history here, creating a personalized spiritual journey just for you.</p>
+                    <p>Your personalized space is evolving. You can now track your donations and plan your offerings in the Donation Diary below.</p>
                 </CardContent>
                 <CardFooter>
                     <Button onClick={logout} variant="destructive">
@@ -117,6 +121,10 @@ export default function DashboardPage() {
                     </Button>
                 </CardContent>
             </Card>
+        </div>
+
+        <div className="mt-8">
+            <DonationDiary />
         </div>
     </div>
   );
