@@ -213,9 +213,12 @@ export default function JyotirmathPeethamPage() {
                                         <p className="mb-4 text-foreground/80">{video.description}</p>
                                         <Dialog>
                                             <DialogTrigger asChild>
-                                                <Button>
-                                                    <Facebook className="mr-2 h-4 w-4" /> Watch Video
-                                                </Button>
+                                                <div className="block relative aspect-video rounded-lg overflow-hidden group bg-secondary cursor-pointer">
+                                                    <Image src={`https://placehold.co/800x450.png`} alt={video.title} fill className="object-cover transition-transform duration-300 group-hover:scale-105" data-ai-hint="jyotirmath facebook video" />
+                                                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                                                        <Facebook className="h-16 w-16 text-white/80 transition-transform duration-300 group-hover:scale-110" />
+                                                    </div>
+                                                </div>
                                             </DialogTrigger>
                                             <DialogContent className="max-w-4xl p-0">
                                                 <DialogHeader className="p-4 border-b">

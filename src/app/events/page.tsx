@@ -84,18 +84,16 @@ const MediaCard = ({ item }: { item: CalendarYouTubeItem | CalendarFacebookItem 
                 <CardContent>
                     <p className="text-foreground/80 mb-4">{item.description}</p>
                      <DialogTrigger asChild>
-                        {isYoutube ? (
-                             <div className="block relative aspect-video rounded-lg overflow-hidden group bg-secondary cursor-pointer">
-                                <Image src={`https://placehold.co/800x450.png`} alt={item.title} fill className="object-cover transition-transform duration-300 group-hover:scale-105" data-ai-hint={`${item.peetham.toLowerCase()} monastery`} />
-                                <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                        <div className="block relative aspect-video rounded-lg overflow-hidden group bg-secondary cursor-pointer">
+                            <Image src={`https://placehold.co/800x450.png`} alt={item.title} fill className="object-cover transition-transform duration-300 group-hover:scale-105" data-ai-hint={`${item.peetham.toLowerCase()} monastery`} />
+                            <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                                {isYoutube ? (
                                     <PlayCircle className="h-16 w-16 text-white/80 transition-transform duration-300 group-hover:scale-110" />
-                                </div>
+                                ) : (
+                                    <Facebook className="h-16 w-16 text-white/80 transition-transform duration-300 group-hover:scale-110" />
+                                )}
                             </div>
-                        ) : (
-                            <Button>
-                                <Facebook className="mr-2 h-4 w-4" /> Watch Video
-                            </Button>
-                        )}
+                        </div>
                     </DialogTrigger>
                 </CardContent>
             </Card>
