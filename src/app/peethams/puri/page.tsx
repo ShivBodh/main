@@ -153,7 +153,7 @@ export default function PuriPeethamPage() {
                 <TabsContent value="photos" className="mt-8">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                         {puriPhotoGallery.map(photo => (
-                            <Image key={photo.id} src={photo.src} alt={photo.alt} width={400} height={300} className="rounded-lg object-cover aspect-[4/3]" />
+                            <Image key={photo.id} src={photo.src} alt={photo.alt} width={400} height={300} className="rounded-lg object-cover aspect-[4/3]" data-ai-hint={photo.aiHint}/>
                         ))}
                     </div>
                 </TabsContent>
@@ -169,7 +169,7 @@ export default function PuriPeethamPage() {
                                     <Dialog>
                                         <DialogTrigger asChild>
                                             <div className="block relative aspect-video rounded-lg overflow-hidden group bg-secondary cursor-pointer">
-                                                <Image src={'/images/acharya.png'} alt={video.title} fill className="object-cover transition-transform duration-300 group-hover:scale-105" />
+                                                <Image src={video.thumbnailUrl} alt={video.title} fill className="object-cover transition-transform duration-300 group-hover:scale-105" data-ai-hint="youtube thumbnail"/>
                                                 <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
                                                     <PlayCircle className="h-16 w-16 text-white/80 transition-transform duration-300 group-hover:scale-110" />
                                                 </div>
@@ -217,7 +217,7 @@ export default function PuriPeethamPage() {
                                         <Dialog>
                                             <DialogTrigger asChild>
                                                 <div className="block relative aspect-video rounded-lg overflow-hidden group bg-secondary cursor-pointer">
-                                                    <Image src={'/images/acharya.png'} alt={video.title} fill className="object-cover transition-transform duration-300 group-hover:scale-105" />
+                                                    <Image src={video.thumbnailUrl} alt={video.title} fill className="object-cover transition-transform duration-300 group-hover:scale-105" data-ai-hint="facebook thumbnail"/>
                                                     <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
                                                         <Facebook className="h-16 w-16 text-white/80 transition-transform duration-300 group-hover:scale-110" />
                                                     </div>
@@ -296,7 +296,7 @@ export default function PuriPeethamPage() {
                     </Card>
                 </div>
                 <div className="md:col-span-2">
-                     <Image src="/images/acharya.png" alt="Map of Puri Peetham" width={1200} height={600} className="rounded-lg object-cover w-full h-full aspect-video" />
+                     <Image src="https://placehold.co/1200x600.png" alt="Map of Puri Peetham" width={1200} height={600} className="rounded-lg object-cover w-full h-full aspect-video" data-ai-hint="map location" />
                 </div>
             </div>
           </TabsContent>

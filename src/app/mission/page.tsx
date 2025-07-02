@@ -90,7 +90,7 @@ export default function MissionPage() {
                 />
                 <h2 className="text-2xl font-headline font-bold text-primary">Join Us in this Seva</h2>
                 <p className="mt-4 text-foreground/90 leading-relaxed">
-                    This platform is built by the community, for the community. If you have skills in content curation, translation, web development, or simply a heartfelt desire to contribute, we welcome your participation.
+                    This platform is built by the community, for the community. If you have a skills in content curation, translation, web development, or simply a heartfelt desire to contribute, we welcome your participation.
                 </p>
                 <Link href="/seva" className="inline-block mt-6 px-6 py-3 bg-primary text-primary-foreground font-semibold rounded-lg shadow-md hover:bg-primary/90 transition-colors">
                     Explore Seva Opportunities
