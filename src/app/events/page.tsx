@@ -4,15 +4,16 @@
 import { useState, useMemo, useEffect } from 'react';
 import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Calendar } from '@/components/ui/calendar';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
 import { format } from 'date-fns';
 import { allCalendarItems, UnifiedCalendarItem, CalendarEventItem, CalendarYouTubeItem, CalendarFacebookItem, CalendarPhotoItem } from '@/lib/calendar-data';
 import { peethamBadgeColors, peethamDotColors, Peetham } from '@/lib/events-data';
-import { VenetianMask, Video, Facebook, PlayCircle, Camera } from 'lucide-react';
+import { VenetianMask, Video, Facebook, PlayCircle, Camera, CalendarDays } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
@@ -141,9 +142,18 @@ const PhotoCard = ({ item }: { item: CalendarPhotoItem }) => (
     </Card>
 );
 
+const groupItemsByDate = (items: UnifiedCalendarItem[]): Record<string, UnifiedCalendarItem[]> => {
+    return items.reduce((acc, item) => {
+        const date = item.date;
+        if (!acc[date]) {
+            acc[date] = [];
+        }
+        acc[date].push(item);
+        return acc;
+    }, {} as Record<string, UnifiedCalendarItem[]>);
+};
 
 export default function EventsPage() {
-    const [date, setDate] = useState<Date | undefined>();
     const [isClient, setIsClient] = useState(false);
     const [filters, setFilters] = useState<Record<Peetham, boolean>>({
         Sringeri: true,
@@ -151,39 +161,33 @@ export default function EventsPage() {
         Puri: true,
         Jyotirmath: true,
     });
+    const [jumpToDate, setJumpToDate] = useState<Date | undefined>();
 
     useEffect(() => {
-        // Set initial date only on the client
-        setDate(new Date());
         setIsClient(true);
     }, []);
+
+    useEffect(() => {
+        if (jumpToDate) {
+            const dateString = format(jumpToDate, 'yyyy-MM-dd');
+            const element = document.getElementById(`date-card-${dateString}`);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+            setJumpToDate(undefined);
+        }
+    }, [jumpToDate]);
 
     const handleFilterChange = (peetham: Peetham) => {
         setFilters(prev => ({ ...prev, [peetham]: !prev[peetham] }));
     };
-    
-    const selectedDateItems = useMemo(() => {
-        if (!date) return [];
-        const selectedDateString = format(date, 'yyyy-MM-dd');
-        return allCalendarItems.filter(item =>
-            item.date === selectedDateString && filters[item.peetham]
-        );
-    }, [date, filters]);
 
-    const calendarDayItems = useMemo(() => {
-        const itemsByDate: Record<string, Peetham[]> = {};
-        allCalendarItems.forEach(item => {
-            if (filters[item.peetham]) {
-                if (!itemsByDate[item.date]) {
-                    itemsByDate[item.date] = [];
-                }
-                if (!itemsByDate[item.date].includes(item.peetham)) {
-                    itemsByDate[item.date].push(item.peetham);
-                }
-            }
-        });
-        return itemsByDate;
+    const filteredItems = useMemo(() => {
+        return allCalendarItems.filter(item => filters[item.peetham]);
     }, [filters]);
+
+    const groupedItems = useMemo(() => groupItemsByDate(filteredItems), [filteredItems]);
+    const sortedDates = useMemo(() => Object.keys(groupedItems).sort((a, b) => new Date(b).getTime() - new Date(a).getTime()), [groupedItems]);
 
     return (
         <div className="container mx-auto max-w-7xl py-16 md:py-24 px-4">
@@ -192,12 +196,12 @@ export default function EventsPage() {
                     Bodha Calendar
                 </h1>
                 <p className="mt-4 text-lg md:text-xl text-foreground/80 max-w-3xl mx-auto">
-                    Explore a living calendar of daily events, discourses, and media from the four cardinal Peethams. Select a date to discover the sacred activities and teachings from that day.
+                    Explore a living archive of daily events, discourses, and media from the four cardinal Peethams. Scroll to browse or select a date to jump to specific content.
                 </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
-                <div className="md:col-span-1 space-y-8">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 items-start">
+                <aside className="md:col-span-1 space-y-8 sticky top-24">
                     <Card>
                         <CardHeader>
                             <CardTitle className="font-headline text-xl">Filter by Peetham</CardTitle>
@@ -217,94 +221,82 @@ export default function EventsPage() {
                             ))}
                         </CardContent>
                     </Card>
-                    <Card className="flex justify-center p-2">
-                       {isClient ? (
-                           <Calendar
-                                mode="single"
-                                selected={date}
-                                onSelect={setDate}
-                                className="p-0"
-                                components={{
-                                    DayContent: ({ date: dayDate, ...props }) => {
-                                        const dateString = format(dayDate, 'yyyy-MM-dd');
-                                        const peethamsOnDay = calendarDayItems[dateString] || [];
-                                        
-                                        return (
-                                            <div className='relative h-full w-full flex items-center justify-center'>
-                                                 {props.children}
-                                                {peethamsOnDay.length > 0 && (
-                                                    <div className="absolute bottom-1 flex space-x-0.5">
-                                                        {peethamsOnDay.map(p => (
-                                                            <div key={p} className="h-1 w-1 rounded-full" style={{ backgroundColor: peethamDotColors[p] }}></div>
-                                                        ))}
-                                                    </div>
-                                                )}
-                                            </div>
-                                        )
-                                    }
-                                }}
-                            />
-                       ) : (
-                           <div className="p-3">
-                                <div className="flex justify-center pt-1 relative items-center mb-4">
-                                    <Skeleton className="h-6 w-28" />
-                                </div>
-                                <div className="space-y-2">
-                                    {[...Array(5)].map((_, i) => (
-                                        <div key={i} className="flex space-x-1">
-                                            {[...Array(7)].map((_, j) => (
-                                                <Skeleton key={j} className="h-9 w-9" />
-                                            ))}
-                                        </div>
-                                    ))}
-                                </div>
-                           </div>
-                       )}
-                    </Card>
-                </div>
-
-                <div className="md:col-span-2">
-                    <Card className="min-h-[600px]">
+                    <Card>
                         <CardHeader>
-                            <CardTitle className="font-headline text-2xl">
-                                {isClient && date ? `Content for: ${format(date, 'MMMM d, yyyy')}` : <Skeleton className="h-8 w-48" />}
-                            </CardTitle>
+                            <CardTitle className="font-headline text-xl">Jump to Date</CardTitle>
                         </CardHeader>
                         <CardContent>
-                            {isClient && date ? (
-                                selectedDateItems.length > 0 ? (
-                                    <div className="space-y-4">
-                                        {selectedDateItems.map(item => {
-                                            switch (item.type) {
-                                                case 'event':
-                                                    return <EventCard key={item.id} event={item as CalendarEventItem} />;
-                                                case 'youtube':
-                                                case 'facebook':
-                                                    return <MediaCard key={item.id} item={item as CalendarYouTubeItem | CalendarFacebookItem} />;
-                                                case 'photo':
-                                                    return <PhotoCard key={item.id} item={item as CalendarPhotoItem} />;
-                                                default:
-                                                    return null;
-                                            }
-                                        })}
-                                    </div>
-                                ) : (
-                                    <div className="flex flex-col items-center justify-center h-full text-center text-muted-foreground pt-16">
-                                        <VenetianMask className="h-16 w-16 mb-4 text-primary" />
-                                        <p className="text-lg font-semibold">No content found for this day.</p>
-                                        <p>Try selecting a date with colored dots, which indicate available content.</p>
-                                    </div>
-                                )
-                            ) : (
-                               <div className="space-y-4">
-                                 <Skeleton className="h-40 w-full" />
-                                 <Skeleton className="h-40 w-full" />
-                                 <Skeleton className="h-40 w-full" />
-                               </div>
-                            )}
+                            <Popover>
+                                <PopoverTrigger asChild>
+                                    <Button variant="outline" className="w-full justify-start text-left font-normal">
+                                        <CalendarDays className="mr-2 h-4 w-4" />
+                                        <span>Pick a date</span>
+                                    </Button>
+                                </PopoverTrigger>
+                                <PopoverContent className="w-auto p-0">
+                                    <Calendar
+                                        mode="single"
+                                        onSelect={setJumpToDate}
+                                        initialFocus
+                                    />
+                                </PopoverContent>
+                            </Popover>
                         </CardContent>
                     </Card>
-                </div>
+                </aside>
+                
+                <main className="md:col-span-3">
+                    {isClient ? (
+                        sortedDates.length > 0 ? (
+                            <div className="space-y-8">
+                                {sortedDates.map(date => (
+                                    <Card key={date} id={`date-card-${date}`} className="overflow-hidden">
+                                        <CardHeader className="bg-muted/50 border-b">
+                                            <CardTitle className="font-headline text-2xl text-primary">
+                                                {format(new Date(date.replace(/-/g, '/')), 'EEEE, MMMM d, yyyy')}
+                                            </CardTitle>
+                                        </CardHeader>
+                                        <CardContent className="p-4 space-y-4">
+                                            {groupedItems[date].map(item => {
+                                                switch (item.type) {
+                                                    case 'event':
+                                                        return <EventCard key={item.id} event={item as CalendarEventItem} />;
+                                                    case 'youtube':
+                                                    case 'facebook':
+                                                        return <MediaCard key={item.id} item={item as CalendarYouTubeItem | CalendarFacebookItem} />;
+                                                    case 'photo':
+                                                        return <PhotoCard key={item.id} item={item as CalendarPhotoItem} />;
+                                                    default:
+                                                        return null;
+                                                }
+                                            })}
+                                        </CardContent>
+                                    </Card>
+                                ))}
+                            </div>
+                        ) : (
+                            <div className="flex flex-col items-center justify-center h-96 text-center text-muted-foreground">
+                                <VenetianMask className="h-16 w-16 mb-4 text-primary" />
+                                <p className="text-lg font-semibold">No content found for the selected filters.</p>
+                                <p>Try adjusting your filters to see more content.</p>
+                            </div>
+                        )
+                    ) : (
+                        <div className="space-y-8">
+                             {[...Array(3)].map((_, i) => (
+                                <Card key={i}>
+                                    <CardHeader className="bg-muted/50 border-b">
+                                        <Skeleton className="h-8 w-64" />
+                                    </CardHeader>
+                                    <CardContent className="p-4 space-y-4">
+                                        <Skeleton className="h-40 w-full" />
+                                        <Skeleton className="h-40 w-full" />
+                                    </CardContent>
+                                </Card>
+                            ))}
+                        </div>
+                    )}
+                </main>
             </div>
         </div>
     );
