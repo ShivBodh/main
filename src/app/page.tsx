@@ -43,7 +43,16 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {peethams.map((peetham) => (
               <Card key={peetham.name} className="flex flex-col overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border-border/50">
-                <Image src={peetham.image} alt={peetham.name} width={600} height={400} className="w-full h-48 object-cover" />
+                <div className="relative w-full h-48 bg-secondary/20">
+                    <Image 
+                      src={peetham.image} 
+                      alt={peetham.name} 
+                      width={600} 
+                      height={400} 
+                      className={`w-full h-full ${peetham.imageFit === 'contain' ? 'object-contain' : 'object-cover'}`}
+                      {...(peetham.aiHint && { 'data-ai-hint': peetham.aiHint })}
+                    />
+                </div>
                 <CardHeader>
                   <CardTitle className="font-headline text-xl">{peetham.name}</CardTitle>
                 </CardHeader>
