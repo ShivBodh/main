@@ -33,40 +33,40 @@ const ScratchImage = ({ imageUrl, width, height, brushSize }: { imageUrl: string
 
   }, [width, height]);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLCanvasElement>) => {
+  const draw = (e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const context = canvas.getContext('2d');
-    if (!context) return;
-    
-    if (e.buttons !== 1) return; // only draw when mouse is clicked
+
+    // For mouse events, only draw if the primary button is pressed
+    if ('buttons' in e && e.buttons !== 1) return;
 
     const rect = canvas.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+    let clientX, clientY;
 
-    context.beginPath();
-    context.arc(x, y, brushSize, 0, 2 * Math.PI);
-    context.fill();
-  };
-  
-    const handleTouchMove = (e: React.TouchEvent<HTMLCanvasElement>) => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
+    if ('touches' in e) {
+      // For touch events, prevent default scroll behavior
+      e.preventDefault();
+      if (e.touches.length === 0) return;
+      clientX = e.touches[0].clientX;
+      clientY = e.touches[0].clientY;
+    } else {
+      clientX = e.clientX;
+      clientY = e.clientY;
+    }
+
+    // Scale coordinates to match canvas resolution if display size is different
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+    const x = (clientX - rect.left) * scaleX;
+    const y = (clientY - rect.top) * scaleY;
+    
     const context = canvas.getContext('2d');
     if (!context) return;
-    
-    e.preventDefault();
-
-    const rect = canvas.getBoundingClientRect();
-    const touch = e.touches[0];
-    const x = touch.clientX - rect.left;
-    const y = touch.clientY - rect.top;
 
     context.beginPath();
-    context.arc(x, y, brushSize, 0, 2 * Math.PI);
+    context.arc(x, y, brushSize * scaleX, 0, 2 * Math.PI); // Scale brush size too
     context.fill();
-  };
+  }
 
   const resetCanvas = () => {
     const canvas = canvasRef.current;
@@ -82,21 +82,21 @@ const ScratchImage = ({ imageUrl, width, height, brushSize }: { imageUrl: string
 
   return (
     <div className="relative flex justify-center items-center w-full" style={{ maxWidth: `${width}px`}}>
-      <div className="aspect-w-3 aspect-h-2 w-full">
+      <div className="relative w-full aspect-[3/2] rounded-lg overflow-hidden">
         <Image
           src={imageUrl}
           alt="Hidden spiritual image"
           fill
-          className="absolute top-0 left-0 z-0 rounded-lg object-cover"
-          data-ai-hint="Adi Shankaracharya"
+          className="object-cover"
+          data-ai-hint={selectedImage.aiHint}
         />
         <canvas
           ref={canvasRef}
           width={width}
           height={height}
-          className="relative z-10 cursor-pointer rounded-lg w-full h-full"
-          onMouseMove={handleMouseMove}
-          onTouchMove={handleTouchMove}
+          className="absolute top-0 left-0 z-10 cursor-pointer w-full h-full"
+          onMouseMove={draw}
+          onTouchMove={draw}
         />
       </div>
       <Button onClick={resetCanvas} className="absolute bottom-4 z-20">Reset</Button>
