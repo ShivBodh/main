@@ -4,7 +4,8 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowRight } from 'lucide-react';
-import { peethams, recentItems, actionItems } from '@/lib/home-page-data';
+import { recentItems, actionItems } from '@/lib/home-page-data';
+import { peethams } from '@/lib/peethams-data';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
