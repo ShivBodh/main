@@ -11,6 +11,7 @@ const navLinks = [
   { href: '/panchanga', label: 'Panchanga' },
   { href: '/sadhana', label: 'Sadhana' },
   { href: '/quiz', label: 'Quiz' },
+  { href: '/chess', label: 'Chess AI' },
   { href: '/kids', label: 'Kids Corner' },
   { href: '/seva', label: 'Seva Hub' },
   { href: '/philosophy', label: 'Our Philosophy' },
