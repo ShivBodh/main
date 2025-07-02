@@ -4,9 +4,9 @@ export const peethams = [
     name: 'Sringeri Sharada Peetham',
     description: 'The first and foremost of the four Amnaya Peethams, the southern seat of wisdom for the Yajur Veda. Nestled on the banks of the Tunga river, it is a center for spiritual learning and Vedic scholarship.',
     link: '/peethams/sringeri',
-    image: '/images/peethams/sringeri.jpeg',
-    aiHint: 'temple river',
-    imageFit: 'cover',
+    image: '/images/peethams/sringeri_acharya.png',
+    aiHint: 'acharya portrait',
+    imageFit: 'contain',
   },
   {
     name: 'Dwaraka Sharada Peetham',

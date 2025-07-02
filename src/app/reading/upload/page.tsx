@@ -15,7 +15,8 @@ export default function UploadBookPage() {
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
   const [description, setDescription] = useState('');
-  const [file, setFile] = useState<File | null>(null);
+  const [pdfFile, setPdfFile] = useState<File | null>(null);
+  const [coverImageFile, setCoverImageFile] = useState<File | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
@@ -25,7 +26,7 @@ export default function UploadBookPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!title || !author || !description || !file) {
+    if (!title || !author || !description || !pdfFile) {
       toast({
         variant: 'destructive',
         title: 'Missing Information',
@@ -37,12 +38,18 @@ export default function UploadBookPage() {
     // This is a placeholder for the actual upload logic.
     // In a real application, this would involve:
     // 1. Authenticating the user.
-    // 2. Getting a secure upload URL from a serverless function.
-    // 3. Uploading the file to a service like Firebase Storage.
-    // 4. Saving the book metadata (title, author, description, file URL) to a database like Firestore.
+    // 2. Getting secure upload URLs from a serverless function.
+    // 3. Uploading the files to a service like Firebase Storage.
+    // 4. Saving the book metadata (title, author, description, file URLs) to a database like Firestore.
 
     setIsSubmitting(true);
-    console.log('Submitting book:', { title, author, description, fileName: file.name });
+    console.log('Submitting book:', { 
+        title, 
+        author, 
+        description, 
+        pdfFileName: pdfFile.name,
+        coverImageFileName: coverImageFile?.name 
+    });
 
     // Simulate network request
     await new Promise(resolve => setTimeout(resolve, 2000));
@@ -58,9 +65,12 @@ export default function UploadBookPage() {
     setTitle('');
     setAuthor('');
     setDescription('');
-    setFile(null);
-    const fileInput = document.getElementById('pdf-file') as HTMLInputElement;
-    if(fileInput) fileInput.value = '';
+    setPdfFile(null);
+    setCoverImageFile(null);
+    const pdfInput = document.getElementById('pdf-file') as HTMLInputElement;
+    if(pdfInput) pdfInput.value = '';
+    const imageInput = document.getElementById('cover-image-file') as HTMLInputElement;
+    if(imageInput) imageInput.value = '';
   };
 
   return (
@@ -123,11 +133,22 @@ export default function UploadBookPage() {
                 id="pdf-file"
                 type="file"
                 accept=".pdf"
-                onChange={(e) => setFile(e.target.files ? e.target.files[0] : null)}
+                onChange={(e) => setPdfFile(e.target.files ? e.target.files[0] : null)}
                 disabled={isSubmitting}
                 required
               />
-               {file && <p className="text-sm text-muted-foreground mt-2">Selected: {file.name}</p>}
+               {pdfFile && <p className="text-sm text-muted-foreground mt-2">Selected PDF: {pdfFile.name}</p>}
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="cover-image-file">Book Cover Image (Optional)</Label>
+              <Input
+                id="cover-image-file"
+                type="file"
+                accept="image/png, image/jpeg, image/webp"
+                onChange={(e) => setCoverImageFile(e.target.files ? e.target.files[0] : null)}
+                disabled={isSubmitting}
+              />
+               {coverImageFile && <p className="text-sm text-muted-foreground mt-2">Selected Image: {coverImageFile.name}</p>}
             </div>
           </CardContent>
           <CardFooter className="flex justify-between">

@@ -44,12 +44,12 @@ export default function SringeriPeethamPage() {
         <section className="flex flex-col md:flex-row items-center gap-8 mb-12">
           <div className="w-full md:w-1/3">
             <Image
-              src="https://placehold.co/800x600.png"
-              alt="Sringeri Sharada Peetham"
-              data-ai-hint="temple river"
+              src="/images/peethams/sringeri_acharya.png"
+              alt="Jagadguru Shankaracharya of Sringeri Sharada Peetham"
+              data-ai-hint="acharya portrait"
               width={800}
               height={600}
-              className="rounded-lg shadow-lg object-cover aspect-[4/3]"
+              className="rounded-lg shadow-lg object-contain aspect-[4/3]"
             />
           </div>
           <div className="md:w-2/3">
