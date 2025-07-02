@@ -40,7 +40,7 @@ export default function SringeriPeethamPage() {
         <section className="flex flex-col md:flex-row items-center gap-8 mb-12">
           <div className="w-full md:w-1/3">
             <Image
-              src="https://source.unsplash.com/800x600/?indian,monastery"
+              src="https://images.unsplash.com/photo-1621453444265-4d7a4c901962?q=80&w=2070&auto=format&fit=crop"
               alt="Sringeri Sharada Peetham"
               width={800}
               height={600}

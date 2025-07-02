@@ -39,7 +39,7 @@ export default function PuriPeethamPage() {
         <section className="flex flex-col md:flex-row items-center gap-8 mb-12">
           <div className="w-full md:w-1/3">
             <Image
-              src="https://source.unsplash.com/800x600/?puri,temple"
+              src="https://images.unsplash.com/photo-1599422089437-43df8c063544?q=80&w=1974&auto=format&fit=crop"
               alt="Govardhana Peetham, Puri"
               width={800}
               height={600}
@@ -238,7 +238,7 @@ export default function PuriPeethamPage() {
                                         </Dialog>
                                     </CardContent>
                                  </Card>
-                            )
+                             )
                         })}
                     </div>
                     {visibleFacebookVideos < sortedFacebookVideos.length && (

@@ -39,7 +39,7 @@ export default function DwarakaPeethamPage() {
         <section className="flex flex-col md:flex-row items-center gap-8 mb-12">
           <div className="w-full md:w-1/3">
             <Image
-              src="https://source.unsplash.com/800x600/?coastal,temple"
+              src="https://images.unsplash.com/photo-1628177990538-552685188439?q=80&w=1974&auto=format&fit=crop"
               alt="Dwaraka Sharada Peetham"
               width={800}
               height={600}
