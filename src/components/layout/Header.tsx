@@ -1,3 +1,4 @@
+
 'use client';
 
 import Link from 'next/link';
@@ -27,6 +28,7 @@ const navLinks = [
     { href: "/chess", label: "Chess AI" },
     { href: "/kids", label: "Kids Corner" },
     { href: "/seva", label: "Seva Hub" },
+    { href: "/donate", label: "Donate" },
     { href: "/philosophy", label: "Our Philosophy" },
     { href: "/mission", label: "Our Mission" }
 ];
@@ -133,8 +135,8 @@ export function Header() {
               </Button>
             </SheetTrigger>
             <SheetContent side="right">
-              <SheetHeader className="sr-only">
-                <SheetTitle>Main Menu</SheetTitle>
+              <SheetHeader>
+                <SheetTitle className="sr-only">Main Menu</SheetTitle>
               </SheetHeader>
               <div className="flex flex-col space-y-6">
                 <Link href="/" className="mb-2 flex items-center space-x-2">
