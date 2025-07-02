@@ -2,20 +2,20 @@
 import type { Peetham } from './events-data';
 import { allEvents } from './events-data';
 
-import { sringeriVideoArchive } from './sringeri-media';
+import { sringeriVideoArchive, sringeriPhotoGallery } from './sringeri-media';
 import { sringeriFacebookVideos } from './sringeri-facebook-videos';
 
-import { dwarakaVideoArchive } from './dwaraka-media';
+import { dwarakaVideoArchive, dwarakaPhotoGallery } from './dwaraka-media';
 import { dwarakaFacebookVideos } from './dwaraka-facebook-videos';
 
-import { puriVideoArchive } from './puri-media';
+import { puriVideoArchive, puriPhotoGallery } from './puri-media';
 import { puriFacebookVideos } from './puri-facebook-videos';
 
-import { jyotirmathVideoArchive } from './jyotirmath-media';
+import { jyotirmathVideoArchive, jyotirmathPhotoGallery } from './jyotirmath-media';
 import { jyotirmathFacebookVideos } from './jyotirmath-facebook-videos';
 
 // Define the unified types
-export type CalendarItemType = 'event' | 'youtube' | 'facebook';
+export type CalendarItemType = 'event' | 'youtube' | 'facebook' | 'photo';
 
 export interface BaseCalendarItem {
     id: string;
@@ -43,7 +43,13 @@ export interface CalendarFacebookItem extends BaseCalendarItem {
     url: string;
 }
 
-export type UnifiedCalendarItem = CalendarEventItem | CalendarYouTubeItem | CalendarFacebookItem;
+export interface CalendarPhotoItem extends BaseCalendarItem {
+    type: 'photo';
+    imageUrl: string;
+    aiHint: string;
+}
+
+export type UnifiedCalendarItem = CalendarEventItem | CalendarYouTubeItem | CalendarFacebookItem | CalendarPhotoItem;
 
 // Transform the data
 const eventItems: CalendarEventItem[] = allEvents.map(e => ({
@@ -66,9 +72,53 @@ const facebookItems: CalendarFacebookItem[] = [
     ...jyotirmathFacebookVideos.map(v => ({ ...v, peetham: 'Jyotirmath' as const, type: 'facebook' as const })),
 ];
 
+const photoItems: CalendarPhotoItem[] = [
+    ...sringeriPhotoGallery.map(p => ({
+        id: `photo-${p.id}`,
+        date: p.date,
+        peetham: 'Sringeri' as const,
+        type: 'photo' as const,
+        title: p.title,
+        description: p.description,
+        imageUrl: p.src,
+        aiHint: p.aiHint,
+    })),
+    ...dwarakaPhotoGallery.map(p => ({
+        id: `photo-${p.id}`,
+        date: p.date,
+        peetham: 'Dwaraka' as const,
+        type: 'photo' as const,
+        title: p.title,
+        description: p.description,
+        imageUrl: p.src,
+        aiHint: p.aiHint,
+    })),
+    ...puriPhotoGallery.map(p => ({
+        id: `photo-${p.id}`,
+        date: p.date,
+        peetham: 'Puri' as const,
+        type: 'photo' as const,
+        title: p.title,
+        description: p.description,
+        imageUrl: p.src,
+        aiHint: p.aiHint,
+    })),
+    ...jyotirmathPhotoGallery.map(p => ({
+        id: `photo-${p.id}`,
+        date: p.date,
+        peetham: 'Jyotirmath' as const,
+        type: 'photo' as const,
+        title: p.title,
+        description: p.description,
+        imageUrl: p.src,
+        aiHint: p.aiHint,
+    })),
+];
+
 
 export const allCalendarItems: UnifiedCalendarItem[] = [
     ...eventItems,
     ...youtubeItems,
     ...facebookItems,
+    ...photoItems,
 ].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());

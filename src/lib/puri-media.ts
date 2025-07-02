@@ -1,9 +1,9 @@
 
 export const puriPhotoGallery = [
-    { id: 1, alt: 'Jagannath Temple, Puri', src: 'https://source.unsplash.com/random/400x300/?puri,jagannath,temple', aiHint: 'jagannath temple' },
-    { id: 2, alt: 'Ratha Yatra festival', src: 'https://source.unsplash.com/random/400x300/?ratha,yatra,festival', aiHint: 'ratha yatra' },
-    { id: 3, alt: 'Shankaracharya giving a speech', src: 'https://source.unsplash.com/random/400x300/?spiritual,conference', aiHint: 'shankaracharya giving speech' },
-    { id: 4, alt: 'A spiritual gathering at the Peetham', src: 'https://source.unsplash.com/random/400x300/?spiritual,gathering,india', aiHint: 'spiritual gathering' },
+    { id: 'puri-photo-1', date: '2024-07-18', title: 'Lord Jagannath Temple, Puri', description: 'The iconic Jagannath Temple, a major pilgrimage destination.', alt: 'Jagannath Temple, Puri', src: 'https://source.unsplash.com/random/400x300/?puri,jagannath,temple', aiHint: 'jagannath temple' },
+    { id: 'puri-photo-2', date: '2024-07-07', title: 'Grandeur of Ratha Yatra', description: 'The chariots during the world-famous Ratha Yatra festival.', alt: 'Ratha Yatra festival', src: 'https://source.unsplash.com/random/400x300/?ratha,yatra,festival', aiHint: 'ratha yatra' },
+    { id: 'puri-photo-3', date: '2024-07-16', title: 'Shankaracharya Addresses a Gathering', description: 'The Shankaracharya of Puri delivering a speech at a spiritual conference.', alt: 'Shankaracharya giving a speech', src: 'https://source.unsplash.com/random/400x300/?spiritual,conference', aiHint: 'shankaracharya giving speech' },
+    { id: 'puri-photo-4', date: '2024-07-15', title: 'Devotees at the Peetham', description: 'A spiritual gathering of devotees at the Govardhana Peetham.', alt: 'A spiritual gathering at the Peetham', src: 'https://source.unsplash.com/random/400x300/?spiritual,gathering,india', aiHint: 'spiritual gathering' },
 ];
 
 export const puriVideoArchive = [

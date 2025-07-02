@@ -10,9 +10,9 @@ import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { format } from 'date-fns';
-import { allCalendarItems, UnifiedCalendarItem, CalendarEventItem, CalendarYouTubeItem, CalendarFacebookItem } from '@/lib/calendar-data';
+import { allCalendarItems, UnifiedCalendarItem, CalendarEventItem, CalendarYouTubeItem, CalendarFacebookItem, CalendarPhotoItem } from '@/lib/calendar-data';
 import { peethamBadgeColors, peethamDotColors, Peetham } from '@/lib/events-data';
-import { VenetianMask, Video, Facebook, PlayCircle } from 'lucide-react';
+import { VenetianMask, Video, Facebook, PlayCircle, Camera } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 
@@ -95,6 +95,29 @@ const MediaCard = ({ item }: { item: CalendarYouTubeItem | CalendarFacebookItem 
         </Card>
     );
 };
+
+const PhotoCard = ({ item }: { item: CalendarPhotoItem }) => (
+    <Card key={item.id} className="border-l-4" style={{ borderColor: peethamDotColors[item.peetham] }}>
+        <CardHeader>
+            <div className="flex justify-between items-start">
+                <CardTitle className="font-headline text-lg">{item.title}</CardTitle>
+                <Badge variant="outline" className={`${peethamBadgeColors[item.peetham]}`}>
+                    {item.peetham}
+                </Badge>
+            </div>
+            <p className="text-sm font-medium text-muted-foreground flex items-center gap-2">
+                <Camera className="h-4 w-4 text-accent" />
+                Photo from Gallery
+            </p>
+        </CardHeader>
+        <CardContent>
+             <div className="relative aspect-video rounded-lg overflow-hidden group bg-secondary">
+                <Image src={item.imageUrl} alt={item.title} fill className="object-cover transition-transform duration-300 group-hover:scale-105" data-ai-hint={item.aiHint} />
+            </div>
+            <p className="text-foreground/80 mt-4">{item.description}</p>
+        </CardContent>
+    </Card>
+);
 
 
 export default function EventsPage() {
@@ -236,6 +259,8 @@ export default function EventsPage() {
                                                 case 'youtube':
                                                 case 'facebook':
                                                     return <MediaCard key={item.id} item={item as CalendarYouTubeItem | CalendarFacebookItem} />;
+                                                case 'photo':
+                                                    return <PhotoCard key={item.id} item={item as CalendarPhotoItem} />;
                                                 default:
                                                     return null;
                                             }
