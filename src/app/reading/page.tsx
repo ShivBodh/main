@@ -20,12 +20,12 @@ export default function ReadingPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {readingList.map((book) => (
           <Card key={book.id} className="flex flex-col overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-            <div className="relative h-64 w-full">
+            <div className="relative h-96 w-full bg-card">
               <Image
                 src={book.imageUrl}
                 alt={book.title}
                 fill
-                className="object-cover"
+                className="object-contain p-4"
                 data-ai-hint={book.aiHint}
               />
             </div>
@@ -49,10 +49,13 @@ export default function ReadingPage() {
       </div>
        <div className="mt-16 text-center max-w-3xl mx-auto p-8 bg-card rounded-lg border">
             <h2 className="text-2xl font-headline font-bold text-primary flex items-center justify-center gap-2">
-                <BookOpen className="h-6 w-6" /> A Note to the Reader
+                <BookOpen className="h-6 w-6" /> A Note on These Texts
             </h2>
             <p className="mt-4 text-foreground/90 leading-relaxed">
-                The texts provided here are for educational and spiritual enrichment. For a deeper understanding, it is always recommended to study these sacred works under the guidance of a qualified Guru. The links currently point to placeholder documents.
+                The sacred works listed here are foundational to Advaita Vedanta. For a complete understanding, it is always recommended to study them under the guidance of a qualified Guru.
+            </p>
+            <p className="mt-2 text-sm text-muted-foreground">
+                Please note: The "View PDF" links are placeholders. As an AI, I cannot provide or host copyrighted documents. You will need to replace these links with your own PDF files.
             </p>
         </div>
     </div>

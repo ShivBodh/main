@@ -16,8 +16,8 @@ export const readingList: Book[] = [
     author: 'Adi Shankaracharya',
     description: 'A masterpiece of Advaita Vedanta, this "Crest-Jewel of Discrimination" outlines the path to self-realization through discerning the real from the unreal.',
     pdfUrl: '#', // Placeholder link
-    imageUrl: 'https://source.unsplash.com/random/400x600/?ancient,book,scroll',
-    aiHint: 'ancient book',
+    imageUrl: '/images/reading/vivekachudamani.svg',
+    aiHint: 'book cover',
   },
   {
     id: 'atma-bodha',
@@ -25,8 +25,8 @@ export const readingList: Book[] = [
     author: 'Adi Shankaracharya',
     description: 'A short treatise on Advaita Vedanta, "Self-Knowledge" is composed of sixty-eight verses, providing a clear exposition of the nature of the Self.',
     pdfUrl: '#', // Placeholder link
-    imageUrl: 'https://source.unsplash.com/random/400x600/?manuscript,paper',
-    aiHint: 'manuscript paper',
+    imageUrl: '/images/reading/atma-bodha.svg',
+    aiHint: 'book cover',
   },
   {
     id: 'tattva-bodha',
@@ -34,8 +34,8 @@ export const readingList: Book[] = [
     author: 'Adi Shankaracharya',
     description: 'An introductory text that explains the fundamental terms and concepts of Vedanta, making it an essential prerequisite for deeper study.',
     pdfUrl: '#', // Placeholder link
-    imageUrl: 'https://source.unsplash.com/random/400x600/?philosophy,book',
-    aiHint: 'philosophy book',
+    imageUrl: '/images/reading/tattva-bodha.svg',
+    aiHint: 'book cover',
   },
     {
     id: 'bhaja-govindam',
@@ -43,8 +43,8 @@ export const readingList: Book[] = [
     author: 'Adi Shankaracharya',
     description: 'A powerful hymn that emphasizes the importance of devotion and seeking Govinda (God) as the ultimate goal, cutting through worldly attachments.',
     pdfUrl: '#', // Placeholder link
-    imageUrl: 'https://source.unsplash.com/random/400x600/?devotion,prayer',
-    aiHint: 'devotion prayer',
+    imageUrl: '/images/reading/bhaja-govindam.svg',
+    aiHint: 'book cover',
   },
     {
     id: 'upadesasahasri',
@@ -52,8 +52,8 @@ export const readingList: Book[] = [
     author: 'Adi Shankaracharya',
     description: '"A Thousand Teachings" is one of the most important works of Shankara, consisting of a prose and a poetry section, detailing the path to liberation.',
     pdfUrl: '#', // Placeholder link
-    imageUrl: 'https://source.unsplash.com/random/400x600/?vedic,scripture',
-    aiHint: 'vedic scripture',
+    imageUrl: '/images/reading/upadesasahasri.svg',
+    aiHint: 'book cover',
   },
     {
     id: 'aparokshanubhuti',
@@ -61,7 +61,7 @@ export const readingList: Book[] = [
     author: 'Adi Shankaracharya',
     description: '"Direct Experience," this work outlines the path of Jnana Yoga and provides a step-by-step method for experiencing the Self directly.',
     pdfUrl: '#', // Placeholder link
-    imageUrl: 'https://source.unsplash.com/random/400x600/?spiritual,wisdom',
-    aiHint: 'spiritual wisdom',
+    imageUrl: '/images/reading/aparokshanubhuti.svg',
+    aiHint: 'book cover',
   },
 ];
