@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BadgeCheck, ShieldCheck, Network } from "lucide-react";
 import Link from "next/link";
 import type { Metadata } from 'next';
+import Image from 'next/image';
 
 export const metadata: Metadata = {
   title: 'Our Mission | Sanatana Peethams Portal',
@@ -80,6 +81,13 @@ export default function MissionPage() {
             </section>
 
             <div className="not-prose text-center mt-16 p-8 bg-card rounded-lg border">
+                <Image
+                  src="/images/mission/seva-hands.svg"
+                  alt="An illustration representing selfless service (Seva)"
+                  width={80}
+                  height={80}
+                  className="mx-auto mb-4"
+                />
                 <h2 className="text-2xl font-headline font-bold text-primary">Join Us in this Seva</h2>
                 <p className="mt-4 text-foreground/90 leading-relaxed">
                     This platform is built by the community, for the community. If you have skills in content curation, translation, web development, or simply a heartfelt desire to contribute, we welcome your participation.
