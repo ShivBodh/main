@@ -19,9 +19,9 @@ export const peethams = [
     name: 'Govardhana Peetham, Puri',
     description: 'The eastern Peetham in the sacred city of Puri, associated with the Rig Veda. It is intrinsically linked with the worship of Lord Jagannath and the spiritual life of Eastern India.',
     link: '/peethams/puri',
-    image: '/images/peethams/puri.jpeg',
-    aiHint: 'temple chariot',
-    imageFit: 'cover',
+    image: '/images/peethams/puri_acharya.jpeg',
+    aiHint: 'acharya portrait',
+    imageFit: 'contain',
   },
   {
     name: 'Jyotirmath Peetham, Badrinath',
