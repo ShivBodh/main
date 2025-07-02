@@ -17,7 +17,7 @@ const scratchableImages = [
     { id: 3, name: 'Goddess Sharada', imageUrl: 'https://source.unsplash.com/random/600x400/?hindu,goddess,saraswati', aiHint: 'goddess saraswati' },
 ];
 
-const ScratchImage = ({ imageUrl, width, height, brushSize }: { imageUrl: string; width: number; height: number; brushSize: number }) => {
+const ScratchImage = ({ imageUrl, width, height, brushSize, aiHint }: { imageUrl: string; width: number; height: number; brushSize: number; aiHint: string }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   
   useEffect(() => {
@@ -88,7 +88,7 @@ const ScratchImage = ({ imageUrl, width, height, brushSize }: { imageUrl: string
           alt="Hidden spiritual image"
           fill
           className="object-cover"
-          data-ai-hint={selectedImage.aiHint}
+          data-ai-hint={aiHint}
         />
         <canvas
           ref={canvasRef}
@@ -160,6 +160,7 @@ export default function KidsCornerPage() {
               width={600}
               height={400}
               brushSize={brushSize}
+              aiHint={selectedImage.aiHint}
             />
           </div>
         </CardContent>
