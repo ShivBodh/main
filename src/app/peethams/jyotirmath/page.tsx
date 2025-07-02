@@ -6,31 +6,16 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { ExternalLink, BookOpen, Calendar, Video, Camera, MapPin, Mail, Briefcase, Globe, Facebook } from 'lucide-react';
+import { ExternalLink, BookOpen, Calendar, Camera, MapPin, Mail, Briefcase, Globe, Facebook, PlayCircle } from 'lucide-react';
 import { allSevaOpportunities } from '@/lib/seva-data';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { jyotirmathVideoArchive, jyotirmathPhotoGallery } from '@/lib/jyotirmath-media';
 import { jyotirmathFacebookVideos } from '@/lib/jyotirmath-facebook-videos';
 import { format } from 'date-fns';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 
 const jyotirmathSeva = allSevaOpportunities.filter(o => o.peetham === 'Jyotirmath');
-
-const YouTubeEmbed = ({ videoId, title }: { videoId: string, title: string }) => (
-    <div className="aspect-video">
-      <iframe
-        width="100%"
-        height="100%"
-        src={`https://www.youtube.com/embed/${videoId}`}
-        title={title}
-        frameBorder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen
-        className="rounded-lg"
-      ></iframe>
-    </div>
-  );
 
 export default function JyotirmathPeethamPage() {
     const [visibleYoutubeVideos, setVisibleYoutubeVideos] = useState(2);
@@ -43,6 +28,9 @@ export default function JyotirmathPeethamPage() {
     const loadMoreFacebookVideos = () => {
         setVisibleFacebookVideos(prev => prev + 2);
     };
+
+    const sortedYoutubeVideos = useMemo(() => [...jyotirmathVideoArchive].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()), []);
+    const sortedFacebookVideos = useMemo(() => [...jyotirmathFacebookVideos].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()), []);
 
   return (
     <div className="bg-background text-foreground">
@@ -167,20 +155,25 @@ export default function JyotirmathPeethamPage() {
                 </TabsContent>
                 <TabsContent value="youtube" className="mt-8">
                     <div className="space-y-6">
-                        {jyotirmathVideoArchive.slice(0, visibleYoutubeVideos).map(video => (
+                        {sortedYoutubeVideos.slice(0, visibleYoutubeVideos).map(video => (
                             <Card key={video.id}>
                                 <CardHeader>
                                     <CardTitle className="font-headline text-lg">{video.title}</CardTitle>
                                     <p className="text-sm text-muted-foreground">{format(new Date(video.date), 'MMMM d, yyyy')}</p>
                                 </CardHeader>
                                 <CardContent>
-                                    <YouTubeEmbed videoId={video.videoId} title={video.title} />
+                                    <a href={`https://www.youtube.com/watch?v=${video.videoId}`} target="_blank" rel="noopener noreferrer" className="block relative aspect-video rounded-lg overflow-hidden group bg-secondary">
+                                        <Image src={`https://source.unsplash.com/random/800x600/?himalayan,video,thumbnail`} alt={video.title} fill className="object-cover transition-transform duration-300 group-hover:scale-105" data-ai-hint="video thumbnail" />
+                                        <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                                            <PlayCircle className="h-16 w-16 text-white/80 transition-transform duration-300 group-hover:scale-110" />
+                                        </div>
+                                    </a>
                                     <p className="mt-4 text-foreground/80">{video.description}</p>
                                 </CardContent>
                             </Card>
                         ))}
                     </div>
-                    {visibleYoutubeVideos < jyotirmathVideoArchive.length && (
+                    {visibleYoutubeVideos < sortedYoutubeVideos.length && (
                         <div className="text-center mt-8">
                             <Button onClick={loadMoreYoutubeVideos}>Load More Videos</Button>
                         </div>
@@ -188,7 +181,7 @@ export default function JyotirmathPeethamPage() {
                 </TabsContent>
                 <TabsContent value="facebook" className="mt-8">
                     <div className="space-y-6">
-                        {jyotirmathFacebookVideos.slice(0, visibleFacebookVideos).map(video => (
+                        {sortedFacebookVideos.slice(0, visibleFacebookVideos).map(video => (
                              <Card key={video.id}>
                                 <CardHeader>
                                     <CardTitle className="font-headline text-lg">{video.title}</CardTitle>
@@ -205,7 +198,7 @@ export default function JyotirmathPeethamPage() {
                              </Card>
                         ))}
                     </div>
-                    {visibleFacebookVideos < jyotirmathFacebookVideos.length && (
+                    {visibleFacebookVideos < sortedFacebookVideos.length && (
                         <div className="text-center mt-8">
                             <Button onClick={loadMoreFacebookVideos}>Load More Videos</Button>
                         </div>
