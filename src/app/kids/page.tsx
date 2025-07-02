@@ -6,6 +6,8 @@ import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Paintbrush } from 'lucide-react';
+import { Skeleton } from '@/components/ui/skeleton';
+import { getKidsGuide } from '@/ai/flows/kids-guide-flow';
 
 const ScratchImage = ({ imageUrl, width, height }: { imageUrl: string; width: number; height: number; }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -76,9 +78,9 @@ const ScratchImage = ({ imageUrl, width, height }: { imageUrl: string; width: nu
         <Image
           src={imageUrl}
           alt="Hidden spiritual image"
-          layout="fill"
+          fill
           className="absolute top-0 left-0 z-0 rounded-lg object-cover"
-          data-ai-hint="spiritual painting"
+          data-ai-hint="Adi Shankaracharya"
         />
         <canvas
           ref={canvasRef}
@@ -96,6 +98,26 @@ const ScratchImage = ({ imageUrl, width, height }: { imageUrl: string; width: nu
 
 
 export default function KidsCornerPage() {
+    const [guideText, setGuideText] = useState('');
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchGuide = async () => {
+            setIsLoading(true);
+            try {
+                const result = await getKidsGuide({ figureName: 'Adi Shankaracharya' });
+                setGuideText(result.guideText);
+            } catch (error) {
+                console.error("Failed to fetch AI guide:", error);
+                setGuideText("Click and drag your mouse (or use your finger on touch screens) over the gray box to reveal the sacred image hidden beneath!");
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        fetchGuide();
+    }, []);
+
   return (
     <div className="container mx-auto max-w-4xl py-16 md:py-24 px-4">
       <div className="text-center mb-12">
@@ -111,12 +133,19 @@ export default function KidsCornerPage() {
         <CardHeader className="text-center">
           <Paintbrush className="mx-auto h-10 w-10 text-accent" />
           <CardTitle className="font-headline text-2xl mt-4">Scratch to Reveal!</CardTitle>
-          <p className="text-muted-foreground">Click and drag your mouse (or use your finger on touch screens) over the gray box to reveal the sacred image hidden beneath!</p>
+           {isLoading ? (
+            <div className="space-y-2 mt-2 px-4">
+                <Skeleton className="h-4 w-3/4 mx-auto" />
+                <Skeleton className="h-4 w-1/2 mx-auto" />
+            </div>
+          ) : (
+            <p className="text-muted-foreground px-4">{guideText}</p>
+          )}
         </CardHeader>
         <CardContent>
           <div className="flex justify-center">
             <ScratchImage
-              imageUrl="https://source.unsplash.com/random/600x400/?hindu,deity"
+              imageUrl="https://source.unsplash.com/random/600x400/?hindu,acharya,philosopher"
               width={600}
               height={400}
             />
