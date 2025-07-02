@@ -14,6 +14,7 @@ import { puriVideoArchive, puriPhotoGallery } from '@/lib/puri-media';
 import { puriFacebookVideos } from '@/lib/puri-facebook-videos';
 import { format } from 'date-fns';
 import { useState, useMemo } from 'react';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 
 const puriSeva = allSevaOpportunities.filter(o => o.peetham === 'Puri');
 
@@ -156,18 +157,37 @@ export default function PuriPeethamPage() {
                 <TabsContent value="youtube" className="mt-8">
                     <div className="space-y-6">
                         {sortedYoutubeVideos.slice(0, visibleYoutubeVideos).map(video => (
-                            <Card key={video.id}>
+                             <Card key={video.id}>
                                 <CardHeader>
                                     <CardTitle className="font-headline text-lg">{video.title}</CardTitle>
                                     <p className="text-sm text-muted-foreground">{format(new Date(video.date), 'MMMM d, yyyy')}</p>
                                 </CardHeader>
                                 <CardContent>
-                                    <a href={`https://www.youtube.com/watch?v=${video.videoId}`} target="_blank" rel="noopener noreferrer" className="block relative aspect-video rounded-lg overflow-hidden group bg-secondary">
-                                        <Image src={`https://placehold.co/800x450.png`} alt={video.title} fill className="object-cover transition-transform duration-300 group-hover:scale-105" data-ai-hint="puri video" />
-                                        <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-                                            <PlayCircle className="h-16 w-16 text-white/80 transition-transform duration-300 group-hover:scale-110" />
-                                        </div>
-                                    </a>
+                                    <Dialog>
+                                        <DialogTrigger asChild>
+                                            <div className="block relative aspect-video rounded-lg overflow-hidden group bg-secondary cursor-pointer">
+                                                <Image src={`https://placehold.co/800x450.png`} alt={video.title} fill className="object-cover transition-transform duration-300 group-hover:scale-105" data-ai-hint="puri video" />
+                                                <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                                                    <PlayCircle className="h-16 w-16 text-white/80 transition-transform duration-300 group-hover:scale-110" />
+                                                </div>
+                                            </div>
+                                        </DialogTrigger>
+                                        <DialogContent className="max-w-4xl p-0">
+                                            <DialogHeader className="p-4 border-b">
+                                                <DialogTitle>{video.title}</DialogTitle>
+                                            </DialogHeader>
+                                            <div className="aspect-video bg-black">
+                                                <iframe
+                                                    src={`https://www.youtube.com/embed/${video.videoId}`}
+                                                    title={video.title}
+                                                    frameBorder="0"
+                                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                                    allowFullScreen
+                                                    className="w-full h-full"
+                                                ></iframe>
+                                            </div>
+                                        </DialogContent>
+                                    </Dialog>
                                     <p className="mt-4 text-foreground/80">{video.description}</p>
                                 </CardContent>
                             </Card>
@@ -181,22 +201,42 @@ export default function PuriPeethamPage() {
                 </TabsContent>
                 <TabsContent value="facebook" className="mt-8">
                     <div className="space-y-6">
-                        {sortedFacebookVideos.slice(0, visibleFacebookVideos).map(video => (
-                             <Card key={video.id}>
-                                <CardHeader>
-                                    <CardTitle className="font-headline text-lg">{video.title}</CardTitle>
-                                     <p className="text-sm text-muted-foreground">{format(new Date(video.date), 'MMMM d, yyyy')}</p>
-                                </CardHeader>
-                                <CardContent>
-                                    <p className="mb-4 text-foreground/80">{video.description}</p>
-                                    <Button asChild>
-                                        <a href={video.url} target="_blank" rel="noopener noreferrer">
-                                            <Facebook className="mr-2 h-4 w-4" /> Watch on Facebook
-                                        </a>
-                                    </Button>
-                                </CardContent>
-                             </Card>
-                        ))}
+                        {sortedFacebookVideos.slice(0, visibleFacebookVideos).map(video => {
+                            const facebookEmbedUrl = `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(video.url)}&show_text=0`;
+                            return (
+                                 <Card key={video.id}>
+                                    <CardHeader>
+                                        <CardTitle className="font-headline text-lg">{video.title}</CardTitle>
+                                         <p className="text-sm text-muted-foreground">{format(new Date(video.date), 'MMMM d, yyyy')}</p>
+                                    </CardHeader>
+                                    <CardContent>
+                                        <p className="mb-4 text-foreground/80">{video.description}</p>
+                                        <Dialog>
+                                            <DialogTrigger asChild>
+                                                <Button>
+                                                    <Facebook className="mr-2 h-4 w-4" /> Watch Video
+                                                </Button>
+                                            </DialogTrigger>
+                                            <DialogContent className="max-w-4xl p-0">
+                                                <DialogHeader className="p-4 border-b">
+                                                    <DialogTitle>{video.title}</DialogTitle>
+                                                </DialogHeader>
+                                                <div className="aspect-video bg-black">
+                                                    <iframe
+                                                        src={facebookEmbedUrl}
+                                                        title={video.title}
+                                                        frameBorder="0"
+                                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                                        allowFullScreen
+                                                        className="w-full h-full"
+                                                    ></iframe>
+                                                </div>
+                                            </DialogContent>
+                                        </Dialog>
+                                    </CardContent>
+                                 </Card>
+                            )
+                        })}
                     </div>
                     {visibleFacebookVideos < sortedFacebookVideos.length && (
                         <div className="text-center mt-8">

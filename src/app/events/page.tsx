@@ -15,6 +15,7 @@ import { peethamBadgeColors, peethamDotColors, Peetham } from '@/lib/events-data
 import { VenetianMask, Video, Facebook, PlayCircle, Camera } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 
 const EventCard = ({ event }: { event: CalendarEventItem }) => (
     <Card key={event.id} className="border-l-4" style={{ borderColor: peethamDotColors[event.peetham] }}>
@@ -59,40 +60,61 @@ const MediaCard = ({ item }: { item: CalendarYouTubeItem | CalendarFacebookItem 
     const isYoutube = item.type === 'youtube';
     const videoId = isYoutube ? (item as CalendarYouTubeItem).videoId : '';
     const facebookUrl = !isYoutube ? (item as CalendarFacebookItem).url : '';
-    const youtubeUrl = isYoutube ? `https://www.youtube.com/watch?v=${videoId}` : '';
+    
+    const videoSourceUrl = isYoutube 
+        ? `https://www.youtube.com/embed/${videoId}` 
+        : `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(facebookUrl)}&show_text=0`;
 
     return (
-        <Card key={item.id} className="border-l-4" style={{ borderColor: peethamDotColors[item.peetham] }}>
-            <CardHeader>
-                <div className="flex justify-between items-start">
-                    <CardTitle className="font-headline text-lg">{item.title}</CardTitle>
-                    <Badge variant="outline" className={`${peethamBadgeColors[item.peetham]}`}>
-                        {item.peetham}
-                    </Badge>
+        <Dialog>
+            <Card key={item.id} className="border-l-4" style={{ borderColor: peethamDotColors[item.peetham] }}>
+                <CardHeader>
+                    <div className="flex justify-between items-start">
+                        <CardTitle className="font-headline text-lg">{item.title}</CardTitle>
+                        <Badge variant="outline" className={`${peethamBadgeColors[item.peetham]}`}>
+                            {item.peetham}
+                        </Badge>
+                    </div>
+                    <p className="text-sm font-medium text-muted-foreground flex items-center gap-2">
+                        {isYoutube ? <Video className="h-4 w-4 text-accent" /> : <Facebook className="h-4 w-4 text-accent" />}
+                        {isYoutube ? 'YouTube Video' : 'Facebook Post'}
+                    </p>
+                </CardHeader>
+                <CardContent>
+                    <p className="text-foreground/80 mb-4">{item.description}</p>
+                     <DialogTrigger asChild>
+                        {isYoutube ? (
+                             <div className="block relative aspect-video rounded-lg overflow-hidden group bg-secondary cursor-pointer">
+                                <Image src={`https://placehold.co/800x450.png`} alt={item.title} fill className="object-cover transition-transform duration-300 group-hover:scale-105" data-ai-hint={`${item.peetham.toLowerCase()} monastery`} />
+                                <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                                    <PlayCircle className="h-16 w-16 text-white/80 transition-transform duration-300 group-hover:scale-110" />
+                                </div>
+                            </div>
+                        ) : (
+                            <Button>
+                                <Facebook className="mr-2 h-4 w-4" /> Watch Video
+                            </Button>
+                        )}
+                    </DialogTrigger>
+                </CardContent>
+            </Card>
+            <DialogContent className="max-w-4xl p-0">
+                <DialogHeader className="p-4 border-b">
+                    <DialogTitle>{item.title}</DialogTitle>
+                </DialogHeader>
+                <div className="aspect-video bg-black">
+                    <iframe
+                        key={item.id}
+                        src={videoSourceUrl}
+                        title={item.title}
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowFullScreen
+                        className="w-full h-full"
+                    ></iframe>
                 </div>
-                <p className="text-sm font-medium text-muted-foreground flex items-center gap-2">
-                    {isYoutube ? <Video className="h-4 w-4 text-accent" /> : <Facebook className="h-4 w-4 text-accent" />}
-                    {isYoutube ? 'YouTube Video' : 'Facebook Post'}
-                </p>
-            </CardHeader>
-            <CardContent>
-                <p className="text-foreground/80 mb-4">{item.description}</p>
-                {isYoutube ? (
-                     <a href={youtubeUrl} target="_blank" rel="noopener noreferrer" className="block relative aspect-video rounded-lg overflow-hidden group bg-secondary">
-                        <Image src={`https://placehold.co/800x450.png`} alt={item.title} fill className="object-cover transition-transform duration-300 group-hover:scale-105" data-ai-hint={`${item.peetham.toLowerCase()} monastery`} />
-                        <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-                            <PlayCircle className="h-16 w-16 text-white/80 transition-transform duration-300 group-hover:scale-110" />
-                        </div>
-                    </a>
-                ) : (
-                    <Button asChild>
-                        <a href={facebookUrl} target="_blank" rel="noopener noreferrer">
-                            <Facebook className="mr-2 h-4 w-4" /> View on Facebook
-                        </a>
-                    </Button>
-                )}
-            </CardContent>
-        </Card>
+            </DialogContent>
+        </Dialog>
     );
 };
 
@@ -203,17 +225,17 @@ export default function EventsPage() {
                                 onSelect={setDate}
                                 className="p-0"
                                 components={{
-                                    DayContent: ({ date: dayDate }) => {
+                                    DayContent: ({ date: dayDate, ...props }) => {
                                         const dateString = format(dayDate, 'yyyy-MM-dd');
                                         const peethamsOnDay = calendarDayItems[dateString] || [];
                                         
                                         return (
                                             <div className='relative h-full w-full flex items-center justify-center'>
-                                                <span>{dayDate.getDate()}</span>
+                                                 {props.children}
                                                 {peethamsOnDay.length > 0 && (
-                                                    <div className="absolute top-1 flex space-x-0.5">
+                                                    <div className="absolute bottom-1 flex space-x-0.5">
                                                         {peethamsOnDay.map(p => (
-                                                            <div key={p} className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: peethamDotColors[p] }}></div>
+                                                            <div key={p} className="h-1 w-1 rounded-full" style={{ backgroundColor: peethamDotColors[p] }}></div>
                                                         ))}
                                                     </div>
                                                 )}
