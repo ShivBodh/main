@@ -56,6 +56,7 @@ const EventCard = ({ event }: { event: CalendarEventItem }) => (
 );
 
 const MediaCard = ({ item }: { item: CalendarYouTubeItem | CalendarFacebookItem }) => {
+    const [isOpen, setIsOpen] = useState(false);
     const isYoutube = item.type === 'youtube';
     const videoId = isYoutube ? (item as CalendarYouTubeItem).videoId : '';
     const facebookUrl = !isYoutube ? (item as CalendarFacebookItem).url : '';
@@ -65,7 +66,7 @@ const MediaCard = ({ item }: { item: CalendarYouTubeItem | CalendarFacebookItem 
         : `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(facebookUrl)}&show_text=0`;
 
     return (
-        <Dialog>
+        <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <Card key={item.id} className="border-l-4" style={{ borderColor: peethamDotColors[item.peetham] }}>
                 <CardHeader>
                     <div className="flex justify-between items-start">
@@ -100,15 +101,17 @@ const MediaCard = ({ item }: { item: CalendarYouTubeItem | CalendarFacebookItem 
                     <DialogTitle>{item.title}</DialogTitle>
                 </DialogHeader>
                 <div className="aspect-video bg-black">
-                    <iframe
-                        key={item.id}
-                        src={videoSourceUrl}
-                        title={item.title}
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowFullScreen
-                        className="w-full h-full"
-                    ></iframe>
+                    {isOpen && (
+                        <iframe
+                            key={item.id}
+                            src={videoSourceUrl}
+                            title={item.title}
+                            frameBorder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowFullScreen
+                            className="w-full h-full"
+                        ></iframe>
+                    )}
                 </div>
             </DialogContent>
         </Dialog>
