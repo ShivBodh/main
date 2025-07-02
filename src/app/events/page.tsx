@@ -2,6 +2,7 @@
 'use client';
 
 import { useState, useMemo, useEffect } from 'react';
+import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Calendar } from '@/components/ui/calendar';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -11,25 +12,10 @@ import { Button } from '@/components/ui/button';
 import { format } from 'date-fns';
 import { allCalendarItems, UnifiedCalendarItem, CalendarEventItem, CalendarYouTubeItem, CalendarFacebookItem } from '@/lib/calendar-data';
 import { peethamBadgeColors, peethamDotColors, Peetham } from '@/lib/events-data';
-import { VenetianMask, Video, Facebook } from 'lucide-react';
+import { VenetianMask, Video, Facebook, PlayCircle } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 
-const YouTubeEmbed = ({ videoId, title }: { videoId: string, title: string }) => (
-    <div className="aspect-video mt-2">
-      <iframe
-        width="100%"
-        height="100%"
-        src={`https://www.youtube.com/embed/${videoId}`}
-        title={title}
-        frameBorder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen
-        className="rounded-lg"
-      ></iframe>
-    </div>
-  );
-  
 const EventCard = ({ event }: { event: CalendarEventItem }) => (
     <Card key={event.id} className="border-l-4" style={{ borderColor: peethamDotColors[event.peetham] }}>
         <CardHeader>
@@ -72,7 +58,8 @@ const EventCard = ({ event }: { event: CalendarEventItem }) => (
 const MediaCard = ({ item }: { item: CalendarYouTubeItem | CalendarFacebookItem }) => {
     const isYoutube = item.type === 'youtube';
     const videoId = isYoutube ? (item as CalendarYouTubeItem).videoId : '';
-    const url = !isYoutube ? (item as CalendarFacebookItem).url : '';
+    const facebookUrl = !isYoutube ? (item as CalendarFacebookItem).url : '';
+    const youtubeUrl = isYoutube ? `https://www.youtube.com/watch?v=${videoId}` : '';
 
     return (
         <Card key={item.id} className="border-l-4" style={{ borderColor: peethamDotColors[item.peetham] }}>
@@ -90,15 +77,20 @@ const MediaCard = ({ item }: { item: CalendarYouTubeItem | CalendarFacebookItem 
             </CardHeader>
             <CardContent>
                 <p className="text-foreground/80 mb-4">{item.description}</p>
-                {isYoutube && videoId !== 'YOUR_YOUTUBE_VIDEO_ID_1' && videoId !== 'YOUR_YOUTUBE_VIDEO_ID_2' && videoId !== 'YOUR_YOUTUBE_VIDEO_ID_3' && videoId !== 'YOUR_YOUTUBE_VIDEO_ID_4' && videoId !== 'YOUR_YOUTUBE_VIDEO_ID_5' && videoId !== 'YOUR_YOUTUBE_VIDEO_ID_6' && videoId !== 'YOUR_YOUTUBE_VIDEO_ID_7' && videoId !== 'YOUR_YOUTUBE_VIDEO_ID_8' && videoId !== 'YOUR_YOUTUBE_VIDEO_ID_9' ? (
-                    <YouTubeEmbed videoId={videoId} title={item.title} />
-                ) : !isYoutube ? (
+                {isYoutube ? (
+                     <a href={youtubeUrl} target="_blank" rel="noopener noreferrer" className="block relative aspect-video rounded-lg overflow-hidden group bg-secondary">
+                        <Image src={`https://source.unsplash.com/random/800x600/?${item.peetham.toLowerCase()}-monastery`} alt={item.title} fill className="object-cover transition-transform duration-300 group-hover:scale-105" data-ai-hint="video thumbnail" />
+                        <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                            <PlayCircle className="h-16 w-16 text-white/80 transition-transform duration-300 group-hover:scale-110" />
+                        </div>
+                    </a>
+                ) : (
                     <Button asChild>
-                        <a href={url} target="_blank" rel="noopener noreferrer">
+                        <a href={facebookUrl} target="_blank" rel="noopener noreferrer">
                             <Facebook className="mr-2 h-4 w-4" /> View on Facebook
                         </a>
                     </Button>
-                ) : null }
+                )}
             </CardContent>
         </Card>
     );
