@@ -113,6 +113,7 @@ const MenubarContent = React.forwardRef<
     <MenubarPrimitive.Portal>
       <MenubarPrimitive.Content
         ref={ref}
+        suppressHydrationWarning
         align={align}
         alignOffset={alignOffset}
         sideOffset={sideOffset}
