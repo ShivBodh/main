@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetTrigger, SheetClose, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { Menu, Mail, Twitter, Facebook, Podcast, Gem, LogIn, LogOut, LayoutDashboard } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -133,6 +133,9 @@ export function Header() {
               </Button>
             </SheetTrigger>
             <SheetContent side="right">
+              <SheetHeader className="sr-only">
+                <SheetTitle>Main Menu</SheetTitle>
+              </SheetHeader>
               <div className="flex flex-col space-y-6">
                 <Link href="/" className="mb-2 flex items-center space-x-2">
                     <Gem className="h-7 w-7 text-primary" />
