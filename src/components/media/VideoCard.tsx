@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -28,14 +29,16 @@ export function VideoCard({ video }: { video: VideoCardData }) {
     
     const isYoutube = !!video.videoId;
     const embedUrl = isYoutube
-        ? `https://www.youtube.com/embed/${video.videoId}`
-        : `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(video.url || '')}&show_text=0`;
+        ? `https://www.youtube.com/embed/${video.videoId}?autoplay=1`
+        : `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(video.url || '')}&show_text=false&width=560`;
     
     const Icon = isYoutube ? PlayCircle : Facebook;
 
     useEffect(() => {
+        // This effect only runs on the client, after the component has mounted.
         const generateAiThumbnail = async () => {
-            if (video.thumbnailUrl.includes('placehold.co')) {
+            // Check if we are in a browser environment before generating
+            if (typeof window !== 'undefined' && video.thumbnailUrl.includes('placehold.co')) {
                 setIsGenerating(true);
                 try {
                     const result = await generateThumbnail({ title: video.title, description: video.description || '' });
@@ -90,16 +93,15 @@ export function VideoCard({ video }: { video: VideoCardData }) {
                             <DialogTitle>{video.title}</DialogTitle>
                         </DialogHeader>
                         <div className="aspect-video bg-black">
-                            {isOpen && (
-                                <iframe
-                                    src={embedUrl}
-                                    title={video.title}
-                                    frameBorder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                    allowFullScreen
-                                    className="w-full h-full"
-                                ></iframe>
-                            )}
+                            {/* By removing the `isOpen` check here, we let the Dialog component manage the iframe's lifecycle, which is more reliable. */}
+                            <iframe
+                                src={embedUrl}
+                                title={video.title}
+                                frameBorder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowFullScreen
+                                className="w-full h-full"
+                            ></iframe>
                         </div>
                     </DialogContent>
                 </Dialog>
