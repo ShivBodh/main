@@ -1,14 +1,14 @@
-
 'use client';
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { Menu, Mail, Twitter, Facebook, Podcast } from 'lucide-react';
+import { Menu, Mail, Twitter, Facebook, Podcast, Gem } from 'lucide-react';
 
 const navLinks = [
   { href: '/peethams', label: 'Peethams' },
   { href: '/events', label: 'Events Calendar' },
+  { href: '/panchanga', label: 'Panchanga' },
   { href: '/sadhana', label: 'Sadhana' },
   { href: '/quiz', label: 'Quiz' },
   { href: '/kids', label: 'Kids Corner' },
@@ -23,6 +23,7 @@ export function Header() {
       <div className="container flex h-16 max-w-screen-2xl items-center justify-between">
         <div className="flex items-center">
           <Link href="/" className="mr-6 flex items-center space-x-2">
+            <Gem className="h-6 w-6 text-primary" />
             <span className="font-bold font-headline text-primary sm:text-lg">Sanatana Peethams Portal</span>
           </Link>
           <nav className="hidden md:flex items-center space-x-6 text-sm font-medium">
@@ -60,7 +61,8 @@ export function Header() {
             </SheetTrigger>
             <SheetContent side="right">
               <div className="flex flex-col space-y-6">
-                <Link href="/" className="mb-2 flex items-center">
+                <Link href="/" className="mb-2 flex items-center space-x-2">
+                    <Gem className="h-7 w-7 text-primary" />
                     <span className="font-bold font-headline text-primary text-lg">Sanatana Peethams Portal</span>
                 </Link>
                 <nav className="flex flex-col space-y-4">

@@ -1,4 +1,3 @@
-
 import Link from 'next/link';
 
 export function Footer() {
@@ -9,6 +8,7 @@ export function Footer() {
           &copy; {new Date().getFullYear()} Sanatana Peethams Portal. A Seva for Dharma.
         </p>
         <div className="flex justify-center flex-wrap gap-x-4 gap-y-2 mt-4">
+            <Link href="/panchanga" className="text-sm hover:text-accent">Panchanga</Link>
             <Link href="/sadhana" className="text-sm hover:text-accent">Sadhana</Link>
             <Link href="/quiz" className="text-sm hover:text-accent">Quiz</Link>
             <Link href="/kids" className="text-sm hover:text-accent">Kids Corner</Link>
