@@ -1,9 +1,9 @@
 
 export const jyotirmathPhotoGallery = [
-    { id: 'jyotirmath-photo-1', date: '2024-07-18', title: 'Snow-Capped Himalayan Peaks', description: 'The majestic beauty of the Himalayan mountains surrounding Jyotirmath.', alt: 'Himalayan mountains', src: 'https://source.unsplash.com/400x300/?himalayas,snow,mountains', aiHint: 'snowy mountains' },
-    { id: 'jyotirmath-photo-2', date: '2024-07-17', title: 'The Sacred Badrinath Shrine', description: 'A view of the sacred Badrinath Temple shrine.', alt: 'Badrinath Temple shrine', src: 'https://source.unsplash.com/400x300/?badrinath,temple,shrine', aiHint: 'badrinath shrine' },
-    { id: 'jyotirmath-photo-3', date: '2024-07-16', title: 'A Sadhu in Meditation', description: 'A Sadhu meditates in a cave, embodying the spirit of the Himalayas.', alt: 'A sadhu meditating in a cave', src: 'https://source.unsplash.com/400x300/?sadhu,meditating,cave', aiHint: 'sadhu meditating' },
-    { id: 'jyotirmath-photo-4', date: '2024-07-15', title: 'The Alaknanda River Valley', description: 'The pristine and beautiful valley of the Alaknanda river.', alt: 'The Alaknanda river valley', src: 'https://source.unsplash.com/400x300/?himalayan,valley,river', aiHint: 'himalayan valley' },
+    { id: 'jyotirmath-photo-1', date: '2024-07-18', title: 'Snow-Capped Himalayan Peaks', description: 'The majestic beauty of the Himalayan mountains surrounding Jyotirmath.', alt: 'Himalayan mountains', src: '/images/acharya.png' },
+    { id: 'jyotirmath-photo-2', date: '2024-07-17', title: 'The Sacred Badrinath Shrine', description: 'A view of the sacred Badrinath Temple shrine.', alt: 'Badrinath Temple shrine', src: '/images/acharya.png' },
+    { id: 'jyotirmath-photo-3', date: '2024-07-16', title: 'A Sadhu in Meditation', description: 'A Sadhu meditates in a cave, embodying the spirit of the Himalayas.', alt: 'A sadhu meditating in a cave', src: '/images/acharya.png' },
+    { id: 'jyotirmath-photo-4', date: '2024-07-15', title: 'The Alaknanda River Valley', description: 'The pristine and beautiful valley of the Alaknanda river.', alt: 'The Alaknanda river valley', src: '/images/acharya.png' },
 ];
 
 export const jyotirmathVideoArchive = [

@@ -44,12 +44,11 @@ export default function SringeriPeethamPage() {
         <section className="flex flex-col md:flex-row items-center gap-8 mb-12">
           <div className="w-full md:w-1/3">
             <Image
-              src="https://images.unsplash.com/photo-1621453444265-4d7a4c901962?q=80&w=2070&auto=format&fit=crop"
+              src="/images/acharya.png"
               alt="Sringeri Sharada Peetham"
               width={800}
               height={600}
               className="rounded-lg shadow-lg object-cover aspect-[4/3]"
-              data-ai-hint="indian monastery"
             />
           </div>
           <div className="md:w-2/3">
@@ -154,7 +153,7 @@ export default function SringeriPeethamPage() {
                 <TabsContent value="photos" className="mt-8">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                         {sringeriPhotoGallery.map(photo => (
-                            <Image key={photo.id} src={photo.src} alt={photo.alt} width={400} height={300} className="rounded-lg object-cover aspect-[4/3]" data-ai-hint={photo.aiHint} />
+                            <Image key={photo.id} src={photo.src} alt={photo.alt} width={400} height={300} className="rounded-lg object-cover aspect-[4/3]" />
                         ))}
                     </div>
                 </TabsContent>
@@ -170,7 +169,7 @@ export default function SringeriPeethamPage() {
                                     <Dialog>
                                         <DialogTrigger asChild>
                                             <div className="block relative aspect-video rounded-lg overflow-hidden group bg-secondary cursor-pointer">
-                                                <Image src={`https://source.unsplash.com/800x450/?sringeri,video`} alt={video.title} fill className="object-cover transition-transform duration-300 group-hover:scale-105" data-ai-hint="sringeri video" />
+                                                <Image src={'/images/acharya.png'} alt={video.title} fill className="object-cover transition-transform duration-300 group-hover:scale-105" />
                                                 <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
                                                     <PlayCircle className="h-16 w-16 text-white/80 transition-transform duration-300 group-hover:scale-110" />
                                                 </div>
@@ -218,7 +217,7 @@ export default function SringeriPeethamPage() {
                                         <Dialog>
                                             <DialogTrigger asChild>
                                                 <div className="block relative aspect-video rounded-lg overflow-hidden group bg-secondary cursor-pointer">
-                                                    <Image src={`https://source.unsplash.com/800x450/?sringeri,facebook,video`} alt={video.title} fill className="object-cover transition-transform duration-300 group-hover:scale-105" data-ai-hint="sringeri facebook video" />
+                                                    <Image src={'/images/acharya.png'} alt={video.title} fill className="object-cover transition-transform duration-300 group-hover:scale-105" />
                                                     <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
                                                         <Facebook className="h-16 w-16 text-white/80 transition-transform duration-300 group-hover:scale-110" />
                                                     </div>
@@ -297,7 +296,7 @@ export default function SringeriPeethamPage() {
                     </Card>
                 </div>
                 <div className="md:col-span-2">
-                     <Image src="https://source.unsplash.com/1200x600/?city,map" alt="Map of Sringeri Peetham" width={1200} height={600} className="rounded-lg object-cover w-full h-full aspect-video" data-ai-hint="city map" />
+                     <Image src="/images/acharya.png" alt="Map of Sringeri Peetham" width={1200} height={600} className="rounded-lg object-cover w-full h-full aspect-video" />
                 </div>
             </div>
           </TabsContent>

@@ -83,7 +83,7 @@ const MediaCard = ({ item }: { item: CalendarYouTubeItem | CalendarFacebookItem 
                     <p className="text-foreground/80 mb-4">{item.description}</p>
                      <DialogTrigger asChild>
                         <div className="block relative aspect-video rounded-lg overflow-hidden group bg-secondary cursor-pointer">
-                            <Image src={`https://source.unsplash.com/800x450/?${item.peetham.toLowerCase()},monastery`} alt={item.title} fill className="object-cover transition-transform duration-300 group-hover:scale-105" data-ai-hint={`${item.peetham.toLowerCase()} monastery`} />
+                            <Image src={'/images/acharya.png'} alt={item.title} fill className="object-cover transition-transform duration-300 group-hover:scale-105" />
                             <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
                                 {isYoutube ? (
                                     <PlayCircle className="h-16 w-16 text-white/80 transition-transform duration-300 group-hover:scale-110" />
@@ -131,7 +131,7 @@ const PhotoCard = ({ item }: { item: CalendarPhotoItem }) => (
         </CardHeader>
         <CardContent>
              <div className="relative aspect-video rounded-lg overflow-hidden group bg-secondary">
-                <Image src={item.imageUrl} alt={item.title} fill className="object-cover transition-transform duration-300 group-hover:scale-105" data-ai-hint={item.aiHint} />
+                <Image src={item.imageUrl} alt={item.title} fill className="object-cover transition-transform duration-300 group-hover:scale-105" />
             </div>
             <p className="text-foreground/80 mt-4">{item.description}</p>
         </CardContent>

@@ -1,9 +1,9 @@
 
 export const dwarakaPhotoGallery = [
-    { id: 'dwaraka-photo-1', date: '2024-07-18', title: 'The Majestic Dwarakadhish Temple', description: 'The grand Dwarakadhish Temple standing tall against the sky.', alt: 'Dwarakadhish Temple', src: 'https://source.unsplash.com/400x300/?dwaraka,temple', aiHint: 'dwaraka temple' },
-    { id: 'dwaraka-photo-2', date: '2024-07-17', title: "An Acharya's Discourse", description: 'The Shankaracharya of Dwaraka delivering a profound discourse.', alt: 'Acharya giving a discourse', src: 'https://source.unsplash.com/400x300/?spiritual,teacher', aiHint: 'acharya giving discourse' },
-    { id: 'dwaraka-photo-3', date: '2024-07-16', title: 'Peaceful Gomti Ghat', description: 'The serene steps of the Gomti Ghat leading to the river.', alt: 'Gomti Ghat', src: 'https://source.unsplash.com/400x300/?ghat,river', aiHint: 'gomti ghat' },
-    { id: 'dwaraka-photo-4', date: '2024-07-15', title: 'Ancient Vedic Scriptures', description: 'A collection of ancient scriptures preserved at the Peetham.', alt: 'Ancient scriptures', src: 'https://source.unsplash.com/400x300/?ancient,manuscript', aiHint: 'ancient scripture' },
+    { id: 'dwaraka-photo-1', date: '2024-07-18', title: 'The Majestic Dwarakadhish Temple', description: 'The grand Dwarakadhish Temple standing tall against the sky.', alt: 'Dwarakadhish Temple', src: '/images/acharya.png' },
+    { id: 'dwaraka-photo-2', date: '2024-07-17', title: "An Acharya's Discourse", description: 'The Shankaracharya of Dwaraka delivering a profound discourse.', alt: 'Acharya giving a discourse', src: '/images/acharya.png' },
+    { id: 'dwaraka-photo-3', date: '2024-07-16', title: 'Peaceful Gomti Ghat', description: 'The serene steps of the Gomti Ghat leading to the river.', alt: 'Gomti Ghat', src: '/images/acharya.png' },
+    { id: 'dwaraka-photo-4', date: '2024-07-15', title: 'Ancient Vedic Scriptures', description: 'A collection of ancient scriptures preserved at the Peetham.', alt: 'Ancient scriptures', src: '/images/acharya.png' },
   ];
   
   export const dwarakaVideoArchive = [
