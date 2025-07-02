@@ -4,9 +4,11 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowRight, icons } from 'lucide-react';
-import { recentItems, actionItems } from '@/lib/home-page-data';
+import { actionItems } from '@/lib/home-page-data';
 import { peethams } from '@/lib/peethams-data';
 import type { Metadata } from 'next';
+import { allCalendarItems, CalendarPhotoItem, CalendarYouTubeItem, CalendarFacebookItem } from '@/lib/calendar-data';
+
 
 export const metadata: Metadata = {
   title: 'Sanatana Peethams Portal | Home',
@@ -24,6 +26,10 @@ const LucideIcon = ({ name, ...props }: { name: string; [key: string]: any }) =>
 
 
 export default function HomePage() {
+  const featuredItems = allCalendarItems.filter(
+    item => item.type === 'youtube' || item.type === 'facebook' || item.type === 'photo'
+  ).slice(0, 3);
+
   return (
     <div className="flex flex-col items-center">
       <section className="w-full py-20 md:py-32 bg-card">
@@ -88,23 +94,48 @@ export default function HomePage() {
       <section className="w-full py-16 md:py-24 bg-card">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-headline font-bold text-center text-primary mb-12">
-            Dharma in Action: Latest Events & Discourses
+            Dharma in Action: Latest from the Peethams
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {recentItems.map((item) => (
-              <Link href={item.link} key={item.title} className="block group">
-                <Card className="h-full transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border-border/50">
-                    <CardHeader>
-                        <span className="text-sm font-semibold text-accent">{item.type.toUpperCase()}</span>
-                        <CardTitle className="font-headline text-xl mt-1 group-hover:text-primary transition-colors">{item.title}</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        <p className="text-foreground/80">{item.description}</p>
-                    </CardContent>
-                </Card>
-              </Link>
-            ))}
+            {featuredItems.map((item) => {
+               const imageUrl = item.type === 'photo' 
+                ? (item as CalendarPhotoItem).imageUrl 
+                : (item as CalendarYouTubeItem | CalendarFacebookItem).thumbnailUrl;
+              
+              const itemTypeLabel = item.type === 'photo' ? 'Photo' : 'Video';
+              const aiHint = item.type === 'photo' ? (item as CalendarPhotoItem).aiHint : 'youtube thumbnail';
+
+              return (
+                <Link href="/events" key={item.id} className="block group">
+                  <Card className="h-full flex flex-col overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border-border/50">
+                      <div className="relative aspect-video w-full bg-secondary/20">
+                        <Image
+                          src={imageUrl}
+                          alt={item.title}
+                          fill
+                          className="object-cover"
+                          data-ai-hint={aiHint}
+                        />
+                      </div>
+                      <CardHeader>
+                          <span className="text-sm font-semibold text-accent">{itemTypeLabel.toUpperCase()} from {item.peetham}</span>
+                          <CardTitle className="font-headline text-xl mt-1 group-hover:text-primary transition-colors">{item.title}</CardTitle>
+                      </CardHeader>
+                      <CardContent className="flex-grow">
+                          <p className="text-foreground/80 line-clamp-3">{item.description}</p>
+                      </CardContent>
+                  </Card>
+                </Link>
+              )
+            })}
           </div>
+           <div className="text-center mt-12">
+                <Button asChild size="lg" variant="outline">
+                    <Link href="/events">
+                        View All in Bodha Calendar <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
+                </Button>
+            </div>
         </div>
       </section>
 
