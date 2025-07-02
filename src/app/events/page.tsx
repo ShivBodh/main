@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useMemo, useEffect } from 'react';
@@ -10,6 +11,7 @@ import { format } from 'date-fns';
 import { allEvents, peethamBadgeColors, peethamDotColors, Peetham } from '@/lib/events-data';
 import { Atom, BookOpen, HandHeart, VenetianMask } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 
 export default function EventsPage() {
     const [date, setDate] = useState<Date | undefined>();
@@ -22,6 +24,7 @@ export default function EventsPage() {
     });
 
     useEffect(() => {
+        // Set initial date only on the client
         setDate(new Date());
         setIsClient(true);
     }, []);
@@ -139,7 +142,29 @@ export default function EventsPage() {
                                                     <p className="text-sm font-medium text-muted-foreground">{event.category}</p>
                                                 </CardHeader>
                                                 <CardContent>
-                                                    <p className="text-foreground/80">{event.description}</p>
+                                                    <p className="text-foreground/80 mb-4">{event.description}</p>
+                                                    {(event.story || (event.references && event.references.length > 0)) && (
+                                                        <Accordion type="single" collapsible className="w-full">
+                                                            <AccordionItem value={`event-${event.id}`} className="border-b-0">
+                                                                <AccordionTrigger className="text-sm p-0 hover:no-underline text-accent">
+                                                                    Learn More
+                                                                </AccordionTrigger>
+                                                                <AccordionContent className="pt-2 text-sm text-foreground/80 prose prose-sm max-w-none">
+                                                                    {event.story && <p className="mb-4">{event.story}</p>}
+                                                                    {event.references && event.references.length > 0 && (
+                                                                        <div>
+                                                                            <h4 className="font-semibold text-foreground/90 not-prose">References:</h4>
+                                                                            <ul className="list-disc list-inside mt-1">
+                                                                                {event.references.map((ref, index) => (
+                                                                                    <li key={index}>{ref}</li>
+                                                                                ))}
+                                                                            </ul>
+                                                                        </div>
+                                                                    )}
+                                                                </AccordionContent>
+                                                            </AccordionItem>
+                                                        </Accordion>
+                                                    )}
                                                 </CardContent>
                                             </Card>
                                         ))}
