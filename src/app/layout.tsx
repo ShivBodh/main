@@ -6,6 +6,7 @@ import { Footer } from '@/components/layout/Footer';
 import { AuthProvider } from '@/context/AuthContext';
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://shivbodh.info'),
   title: 'Sanatana Peethams Portal',
   description: 'A single, trusted digital beacon for the timeless wisdom of the four cardinal Peethams.',
 };
