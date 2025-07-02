@@ -27,10 +27,26 @@ export const dwarakaFacebookVideos: FacebookVideo[] = [
     },
     {
         id: 'fb-video-3',
-        title: 'Janmashtami Celebrations',
+        title: 'Janmashtami Celebrations 2023',
         date: '2023-09-07',
         url: 'https://www.facebook.com/SwamiSadanandSaraswatiDwarkaGujarat/videos/238407842567883/',
-        description: 'Glimpses of the grand Janmashtami celebrations at the Dwaraka Peetham.',
+        description: 'Glimpses of the grand Janmashtami celebrations at the Dwaraka Peetham from 2023.',
+        thumbnailUrl: 'https://placehold.co/1280x720.png',
+    },
+    {
+        id: 'fb-video-4',
+        title: 'Archival Discourse on Seva',
+        date: '2022-12-15',
+        url: 'https://www.facebook.com/SwamiSadanandSaraswatiDwarkaGujarat/videos/238407842567883/',
+        description: 'An old but timeless discourse on the importance of selfless service (Seva) in spiritual life.',
+        thumbnailUrl: 'https://placehold.co/1280x720.png',
+    },
+    {
+        id: 'fb-video-5',
+        title: 'Gita Jayanti 2022',
+        date: '2022-12-03',
+        url: 'https://www.facebook.com/SwamiSadanandSaraswatiDwarkaGujarat/videos/238407842567883/',
+        description: 'Celebrations from Gita Jayanti in 2022, marking the day Lord Krishna imparted the Bhagavad Gita.',
         thumbnailUrl: 'https://placehold.co/1280x720.png',
     }
 ];

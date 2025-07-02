@@ -32,5 +32,21 @@ export const jyotirmathFacebookVideos: FacebookVideo[] = [
         url: 'https://www.facebook.com/1008.guru/videos/1135803450997873/', // Example link
         description: 'Virtual darshan of the sacred Badrinath Temple, the holy abode of Lord Vishnu.',
         thumbnailUrl: 'https://placehold.co/1280x720.png',
+    },
+    {
+        id: 'fb-video-4',
+        title: 'Message for Diwali 2023',
+        date: '2023-11-12',
+        url: 'https://www.facebook.com/1008.guru/videos/1135803450997873/',
+        description: 'An archival message from the Shankaracharya on the festival of lights, Diwali 2023.',
+        thumbnailUrl: 'https://placehold.co/1280x720.png',
+    },
+    {
+        id: 'fb-video-5',
+        title: 'Glimpses of the Himalayas (2022)',
+        date: '2022-08-15',
+        url: 'https://www.facebook.com/1008.guru/videos/1135803450997873/',
+        description: 'A video from the archives showcasing the stunning natural beauty around Jyotirmath.',
+        thumbnailUrl: 'https://placehold.co/1280x720.png',
     }
 ];

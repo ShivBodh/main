@@ -37,6 +37,33 @@ export type VideoArchiveItem = {
       thumbnailUrl: 'https://placehold.co/1280x720.png',
       source: 'YouTube',
     },
+    {
+      id: 'navaratri-2023-10-20',
+      title: 'Navaratri 2023: Day 5 Puja and Darbar',
+      description: 'Glimpses of the fifth day of the Sharadamba Navaratri celebrations in 2023, including the evening Durbar.',
+      date: '2023-10-20',
+      videoId: 'YOUR_YOUTUBE_VIDEO_ID_10',
+      thumbnailUrl: 'https://placehold.co/1280x720.png',
+      source: 'YouTube',
+    },
+    {
+      id: 'discourse-2023-01-15',
+      title: 'Discourse on Dharma',
+      description: 'A timeless discourse from early 2023 on the principles of Dharma and its importance in modern life.',
+      date: '2023-01-15',
+      videoId: 'YOUR_YOUTUBE_VIDEO_ID_11',
+      thumbnailUrl: 'https://placehold.co/1280x720.png',
+      source: 'YouTube',
+    },
+    {
+      id: 'archive-2022-08-30',
+      title: 'From the Archives: Ganesh Chaturthi 2022',
+      description: 'An archival recording of the special pujas performed for Lord Ganesha during the 2022 festival.',
+      date: '2022-08-30',
+      videoId: 'YOUR_YOUTUBE_VIDEO_ID_12',
+      thumbnailUrl: 'https://placehold.co/1280x720.png',
+      source: 'YouTube',
+    },
   ];
   
   export const sringeriPhotoGallery = [
@@ -44,4 +71,6 @@ export type VideoArchiveItem = {
     { id: 'sringeri-photo-2', date: '2024-07-17', title: 'Vidyasankara Temple Architecture', description: 'A view of the intricate architecture of the Vidyasankara Temple.', alt: 'Vidyasankara Temple architecture', src: 'https://placehold.co/400x300.png', aiHint: 'temple architecture' },
     { id: 'sringeri-photo-3', date: '2024-07-16', title: 'Sacred Puja Ceremony', description: 'A glimpse of a puja ceremony at the main shrine of Goddess Sharadamba.', alt: 'Puja ceremony at the main shrine', src: 'https://placehold.co/400x300.png', aiHint: 'puja ceremony' },
     { id: 'sringeri-photo-4', date: '2024-07-15', title: 'Festival Gathering', description: 'Devotees gathered during a recent festival at Sringeri.', alt: 'Crowd of devotees during a festival', src: 'https://placehold.co/400x300.png', aiHint: 'devotees gathering' },
+    { id: 'sringeri-photo-5', date: '2023-04-22', title: 'Akshaya Tritiya 2023', description: 'Special golden chariot festival for Goddess Sharada on Akshaya Tritiya.', alt: 'Golden chariot festival', src: 'https://placehold.co/400x300.png', aiHint: 'golden chariot' },
+    { id: 'sringeri-photo-6', date: '2022-11-08', title: 'Tunga River Aarti', description: 'The serene evening aarti performed on the banks of the Tunga River.', alt: 'Evening aarti on river bank', src: 'https://placehold.co/400x300.png', aiHint: 'river aarti' },
   ];

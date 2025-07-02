@@ -52,6 +52,10 @@ export const allEvents: Event[] = [
     { id: 10, title: 'Guru Purnima', date: '2024-07-21', peetham: 'Dwaraka', description: 'Devotees from all over the world gather to offer their respects to the Jagadguru and receive his blessings on this auspicious day.', category: 'Festival' },
     { id: 11, title: 'Guru Purnima', date: '2024-07-21', peetham: 'Puri', description: 'A special observance of the sacred day dedicated to the Guru, with discourses and pujas held at the Peetham.', category: 'Festival' },
     { id: 12, title: 'Guru Purnima', date: '2024-07-21', peetham: 'Jyotirmath', description: 'Paying homage to the lineage of spiritual masters, with special events and opportunities for darshan of the Shankaracharya.', category: 'Festival' },
+    { id: 13, title: 'Maha Shivaratri', date: '2023-02-18', peetham: 'Sringeri', description: 'An all-night vigil and special pujas in honor of Lord Shiva, a major festival at Sringeri.', category: 'Festival' },
+    { id: 14, title: 'Puri Beach Festival Address', date: '2022-11-25', peetham: 'Puri', description: 'The Shankaracharya of Puri delivers an address on Dharma at the annual Puri Beach Festival.', category: 'Discourse' },
+    { id: 15, title: 'Winter Discourses in Delhi', date: '2023-12-10', peetham: 'Dwaraka', description: 'A series of discourses delivered by the Shankaracharya of Dwaraka to devotees in the national capital.', category: 'Discourse' },
+    { id: 16, title: 'Ganga Aarti at Haridwar', date: '2022-09-05', peetham: 'Jyotirmath', description: 'The Shankaracharya of Jyotirmath participates in the evening Ganga Aarti at Har Ki Pauri in Haridwar.', category: 'Ceremony' },
 ];
 
 export const peethamBadgeColors: Record<Peetham, string> = {
