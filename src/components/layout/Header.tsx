@@ -1,3 +1,4 @@
+
 'use client';
 
 import Link from 'next/link';
@@ -9,6 +10,8 @@ const navLinks = [
   { href: '/peethams', label: 'Peethams' },
   { href: '/events', label: 'Events Calendar' },
   { href: '/sadhana', label: 'Sadhana' },
+  { href: '/quiz', label: 'Quiz' },
+  { href: '/kids', label: 'Kids Corner' },
   { href: '/seva', label: 'Seva Hub' },
   { href: '/philosophy', label: 'Our Philosophy' },
   { href: '/mission', label: 'Our Mission' },
