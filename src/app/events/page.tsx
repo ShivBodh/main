@@ -5,15 +5,13 @@ import { useState, useMemo, useEffect } from 'react';
 import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { Calendar } from '@/components/ui/calendar';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
 import { format } from 'date-fns';
 import { allCalendarItems, UnifiedCalendarItem, CalendarEventItem, CalendarYouTubeItem, CalendarFacebookItem, CalendarPhotoItem } from '@/lib/calendar-data';
 import { peethamBadgeColors, peethamDotColors, Peetham } from '@/lib/events-data';
-import { VenetianMask, Video, Facebook, PlayCircle, Camera, CalendarDays } from 'lucide-react';
+import { VenetianMask, Video, Facebook, PlayCircle, Camera } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
@@ -97,7 +95,7 @@ const MediaCard = ({ item }: { item: CalendarYouTubeItem | CalendarFacebookItem 
                     </DialogTrigger>
                 </CardContent>
             </Card>
-            <DialogContent className="max-w-4xl p-0">
+            <DialogContent className="max-w-4xl p-0" suppressHydrationWarning>
                 <DialogHeader className="p-4 border-b">
                     <DialogTitle>{item.title}</DialogTitle>
                 </DialogHeader>
@@ -171,10 +169,20 @@ export default function EventsPage() {
             const element = document.getElementById(`date-card-${dateString}`);
             if (element) {
                 element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                element.classList.add('flash-highlight');
+                const timer = setTimeout(() => {
+                    element.classList.remove('flash-highlight');
+                }, 1500);
+
+                setJumpToDate(undefined); // Reset state after triggering
+                
+                return () => clearTimeout(timer); // Cleanup timer on unmount or re-run
+            } else {
+                 setJumpToDate(undefined); // Reset even if element not found
             }
-            setJumpToDate(undefined);
         }
     }, [jumpToDate]);
+
 
     const handleFilterChange = (peetham: Peetham) => {
         setFilters(prev => ({ ...prev, [peetham]: !prev[peetham] }));
@@ -186,6 +194,29 @@ export default function EventsPage() {
 
     const groupedItems = useMemo(() => groupItemsByDate(filteredItems), [filteredItems]);
     const sortedDates = useMemo(() => Object.keys(groupedItems).sort((a, b) => new Date(b).getTime() - new Date(a).getTime()), [groupedItems]);
+    
+    const monthOrder = useMemo(() => ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"], []);
+
+    const groupedDatesForAccordion = useMemo(() => {
+        const groups: Record<string, Record<string, Date[]>> = {};
+        const datesWithContent = sortedDates.map(ds => new Date(ds.replace(/-/g, '/')));
+
+        datesWithContent.forEach(date => {
+            const year = format(date, 'yyyy');
+            const month = format(date, 'MMMM');
+
+            if (!groups[year]) {
+                groups[year] = {};
+            }
+            if (!groups[year][month]) {
+                groups[year][month] = [];
+            }
+            groups[year][month].push(date);
+        });
+
+        return groups;
+    }, [sortedDates]);
+
 
     return (
         <div className="container mx-auto max-w-7xl py-16 md:py-24 px-4">
@@ -194,7 +225,7 @@ export default function EventsPage() {
                     Bodha Calendar
                 </h1>
                 <p className="mt-4 text-lg md:text-xl text-foreground/80 max-w-3xl mx-auto">
-                    Explore a living archive of daily events, discourses, and media from the four cardinal Peethams. Scroll to browse or select a date to jump to specific content.
+                    Explore a living archive of daily events, discourses, and media from the four cardinal Peethams. Scroll to browse or use the filters to jump to specific content.
                 </p>
             </div>
 
@@ -224,21 +255,34 @@ export default function EventsPage() {
                             <CardTitle className="font-headline text-xl">Jump to Date</CardTitle>
                         </CardHeader>
                         <CardContent>
-                            <Popover>
-                                <PopoverTrigger asChild>
-                                    <Button variant="outline" className="w-full justify-start text-left font-normal">
-                                        <CalendarDays className="mr-2 h-4 w-4" />
-                                        <span>Pick a date</span>
-                                    </Button>
-                                </PopoverTrigger>
-                                <PopoverContent className="w-auto p-0">
-                                    <Calendar
-                                        mode="single"
-                                        onSelect={setJumpToDate}
-                                        initialFocus
-                                    />
-                                </PopoverContent>
-                            </Popover>
+                            <Accordion type="single" collapsible className="w-full">
+                                {Object.keys(groupedDatesForAccordion).sort((a,b) => parseInt(b) - parseInt(a)).map(year => (
+                                    <AccordionItem key={year} value={year}>
+                                        <AccordionTrigger>{year}</AccordionTrigger>
+                                        <AccordionContent>
+                                            <Accordion type="single" collapsible className="w-full pl-2">
+                                                {Object.keys(groupedDatesForAccordion[year]).sort((a,b) => monthOrder.indexOf(b) - monthOrder.indexOf(a)).map(month => (
+                                                    <AccordionItem key={`${year}-${month}`} value={`${year}-${month}`}>
+                                                        <AccordionTrigger>{month}</AccordionTrigger>
+                                                        <AccordionContent className="flex flex-col items-start gap-1 pt-2 pl-4">
+                                                            {groupedDatesForAccordion[year][month].sort((a, b) => b.getTime() - a.getTime()).map(day => (
+                                                                <Button
+                                                                    key={format(day, 'yyyy-MM-dd')}
+                                                                    variant="link"
+                                                                    className="p-0 h-auto text-sm text-muted-foreground hover:text-accent"
+                                                                    onClick={() => setJumpToDate(day)}
+                                                                >
+                                                                    {format(day, 'EEEE, do')}
+                                                                </Button>
+                                                            ))}
+                                                        </AccordionContent>
+                                                    </AccordionItem>
+                                                ))}
+                                            </Accordion>
+                                        </AccordionContent>
+                                    </AccordionItem>
+                                ))}
+                            </Accordion>
                         </CardContent>
                     </Card>
                 </aside>
@@ -248,7 +292,7 @@ export default function EventsPage() {
                         sortedDates.length > 0 ? (
                             <div className="space-y-8">
                                 {sortedDates.map(date => (
-                                    <Card key={date} id={`date-card-${date}`} className="overflow-hidden">
+                                    <Card key={date} id={`date-card-${date}`} className="overflow-hidden transition-colors duration-300">
                                         <CardHeader className="bg-muted/50 border-b">
                                             <CardTitle className="font-headline text-2xl text-primary">
                                                 {format(new Date(date.replace(/-/g, '/')), 'EEEE, MMMM d, yyyy')}
