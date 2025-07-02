@@ -27,6 +27,15 @@ export default function PeethamsPage() {
     <div className="bg-background text-foreground">
       <div className="container mx-auto max-w-6xl py-16 md:py-24 px-4">
         <div className="text-center mb-16">
+          <div className="mb-8">
+            <Image
+              src="https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/AADI-GURU-SHANKARACHARYA.svg"
+              alt="Jagadguru Adi Shankaracharya"
+              width={150}
+              height={150}
+              className="mx-auto object-contain aspect-square"
+            />
+          </div>
           <h1 className="text-4xl md:text-5xl font-headline font-bold text-primary tracking-tight">
             The Four Pillars of Sanatana Dharma
           </h1>
