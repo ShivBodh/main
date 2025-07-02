@@ -48,14 +48,16 @@ export default function SringeriPeethamPage() {
     <div className="bg-background text-foreground">
       <div className="container mx-auto max-w-6xl py-16 md:py-24 px-4">
         <section className="flex flex-col md:flex-row items-center gap-8 mb-12">
-          <Image
-            src="https://source.unsplash.com/random/800x600/?sringeri,temple"
-            alt="Sringeri Sharada Peetham"
-            width={800}
-            height={600}
-            className="w-full md:w-1/3 rounded-lg shadow-lg object-cover"
-            data-ai-hint="indian monastery"
-          />
+          <div className="w-full md:w-1/3">
+            <Image
+              src="https://source.unsplash.com/random/800x600/?sringeri,temple"
+              alt="Sringeri Sharada Peetham"
+              width={800}
+              height={600}
+              className="rounded-lg shadow-lg object-cover aspect-[4/3]"
+              data-ai-hint="indian monastery"
+            />
+          </div>
           <div className="md:w-2/3">
             <h1 className="text-4xl md:text-5xl font-headline font-bold text-primary tracking-tight mb-4">
               Sringeri Sharada Peetham
@@ -158,7 +160,7 @@ export default function SringeriPeethamPage() {
                 <TabsContent value="photos" className="mt-8">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                         {sringeriPhotoGallery.map(photo => (
-                            <Image key={photo.id} src={photo.src} alt={photo.alt} width={400} height={300} className="rounded-lg object-cover" data-ai-hint={photo.aiHint} />
+                            <Image key={photo.id} src={photo.src} alt={photo.alt} width={400} height={300} className="rounded-lg object-cover aspect-[4/3]" data-ai-hint={photo.aiHint} />
                         ))}
                     </div>
                 </TabsContent>
@@ -254,7 +256,7 @@ export default function SringeriPeethamPage() {
                     </Card>
                 </div>
                 <div className="md:col-span-2">
-                     <Image src="https://source.unsplash.com/random/1200x600/?city,map" alt="Map of Sringeri Peetham" width={1200} height={600} className="rounded-lg object-cover w-full h-full" data-ai-hint="city map" />
+                     <Image src="https://source.unsplash.com/random/1200x600/?city,map,sringeri" alt="Map of Sringeri Peetham" width={1200} height={600} className="rounded-lg object-cover w-full h-full aspect-video" data-ai-hint="city map" />
                 </div>
             </div>
           </TabsContent>

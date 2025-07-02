@@ -23,7 +23,7 @@ export default function PeethamsPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           {peethams.map((peetham) => (
             <Card key={peetham.name} className="flex flex-col overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border-border/50">
-              <Image src={peetham.image} alt={peetham.name} width={600} height={400} className="w-full object-cover" data-ai-hint={peetham.aiHint} />
+              <Image src={peetham.image} alt={peetham.name} width={600} height={400} className="w-full h-64 object-cover" data-ai-hint={peetham.aiHint} />
               <CardHeader>
                 <CardTitle className="font-headline text-2xl">{peetham.name}</CardTitle>
               </CardHeader>
