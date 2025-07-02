@@ -1,9 +1,11 @@
+
 'use client';
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Menu, Mail, Twitter, Facebook, Podcast, Gem } from 'lucide-react';
+import { useState, useEffect } from 'react';
 
 const navLinks = [
     { href: "/peethams", label: "Peethams" },
@@ -20,6 +22,28 @@ const navLinks = [
 ];
 
 export function Header() {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) {
+    // Render a static placeholder on the server to prevent hydration mismatch
+    return (
+      <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95">
+        <div className="container flex h-16 max-w-screen-2xl items-center justify-between">
+          <div className="flex items-center">
+            <Link href="/" className="mr-6 flex items-center space-x-2">
+              <Gem className="h-6 w-6 text-primary" />
+              <span className="font-bold font-headline text-primary sm:text-lg">Sanatana Peethams Portal</span>
+            </Link>
+          </div>
+        </div>
+      </header>
+    );
+  }
+  
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 max-w-screen-2xl items-center justify-between">
