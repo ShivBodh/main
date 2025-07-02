@@ -4,9 +4,12 @@ import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { panchangaData, Panchanga, PanchangaRegion } from '@/lib/panchanga-data';
-import { Sunrise, Sunset, Moon, Star, SunMoon, AlertTriangle, Atom } from 'lucide-react';
+import { Sunrise, Sunset, Moon, Star, SunMoon, Download, Atom } from 'lucide-react';
 import { format } from 'date-fns';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Button } from '@/components/ui/button';
+import * as ics from 'ics';
+import { generateYearlyPanchangaEvents } from '@/lib/panchanga-generator';
 
 const regionOrder: PanchangaRegion[] = ['North', 'South', 'East', 'West'];
 
@@ -38,6 +41,30 @@ export default function PanchangaPage() {
         setIsClient(true);
     }, []);
 
+    const handleDownload = () => {
+        const panchangEvents = generateYearlyPanchangaEvents();
+
+        const { error, value } = ics.createEvents(panchangEvents);
+
+        if (error) {
+            console.error("Could not create .ics file:", error);
+            alert("Sorry, there was an error generating the calendar file.");
+            return;
+        }
+
+        if (value) {
+            const blob = new Blob([value], { type: 'text/calendar;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', 'Sanatana_Panchanga.ics');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }
+    };
+
     return (
         <div className="container mx-auto max-w-4xl py-16 md:py-24 px-4">
             <div className="text-center mb-12">
@@ -47,6 +74,10 @@ export default function PanchangaPage() {
                 <p className="mt-4 text-lg md:text-xl text-foreground/80 max-w-3xl mx-auto">
                     Today's astrological details based on traditional Hindu timekeeping, presented for the four cardinal regions.
                 </p>
+                <Button onClick={handleDownload} className="mt-6" disabled={!isClient}>
+                    <Download className="mr-2 h-4 w-4" />
+                    Download Yearly Calendar (.ics)
+                </Button>
             </div>
 
             <Tabs defaultValue="North" className="w-full">
