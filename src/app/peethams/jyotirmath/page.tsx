@@ -43,9 +43,9 @@ export default function JyotirmathPeethamPage() {
         <section className="flex flex-col md:flex-row items-center gap-8 mb-12">
           <div className="w-full md:w-1/3">
             <Image
-              src="https://placehold.co/800x600.png"
+              src="https://source.unsplash.com/CnM0ArcIEvQ"
               alt="Jyotirmath Peetham, Badrinath"
-              data-ai-hint="temple mountains"
+              data-ai-hint="himalayan temple"
               width={800}
               height={600}
               className="rounded-lg shadow-lg object-cover aspect-[4/3]"

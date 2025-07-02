@@ -13,6 +13,7 @@ export const peethams = [
     description: 'The western Peetham, representing the Sama Veda in the ancient city of Dwaraka. It stands as a guardian of Advaita Vedanta and a vital spiritual hub on the Arabian Sea coast.',
     link: '/peethams/dwaraka',
     image: '/images/peethams/dwaraka_acharya.png',
+    aiHint: 'acharya portrait',
     imageFit: 'contain',
   },
   {
@@ -27,8 +28,8 @@ export const peethams = [
     name: 'Jyotirmath Peetham, Badrinath',
     description: 'The northern Peetham, situated in the holy town of Jyotirmath in the Himalayas. Linked to the Atharva Veda, it serves as a beacon of spiritual wisdom in the serene and challenging mountain terrain.',
     link: '/peethams/jyotirmath',
-    image: '/images/peethams/jyotirmath.jpeg',
-    aiHint: 'temple mountains',
+    image: 'https://source.unsplash.com/CnM0ArcIEvQ',
+    aiHint: 'himalayan temple',
     imageFit: 'cover',
   },
 ];
