@@ -79,7 +79,7 @@ const MediaCard = ({ item }: { item: CalendarYouTubeItem | CalendarFacebookItem 
                 <p className="text-foreground/80 mb-4">{item.description}</p>
                 {isYoutube ? (
                      <a href={youtubeUrl} target="_blank" rel="noopener noreferrer" className="block relative aspect-video rounded-lg overflow-hidden group bg-secondary">
-                        <Image src={`https://source.unsplash.com/random/800x600/?${item.peetham.toLowerCase()}-monastery`} alt={item.title} fill className="object-cover transition-transform duration-300 group-hover:scale-105" data-ai-hint="video thumbnail" />
+                        <Image src={`https://placehold.co/800x450.png`} alt={item.title} fill className="object-cover transition-transform duration-300 group-hover:scale-105" data-ai-hint={`${item.peetham.toLowerCase()} monastery`} />
                         <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
                             <PlayCircle className="h-16 w-16 text-white/80 transition-transform duration-300 group-hover:scale-110" />
                         </div>
