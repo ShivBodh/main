@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { readingList } from '@/lib/reading-data';
-import { BookOpen, Download } from 'lucide-react';
+import { BookOpen, Download, UploadCloud } from 'lucide-react';
 
 export default function ReadingPage() {
   return (
@@ -47,7 +47,8 @@ export default function ReadingPage() {
           </Card>
         ))}
       </div>
-       <div className="mt-16 text-center max-w-3xl mx-auto p-8 bg-card rounded-lg border">
+       <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="p-8 bg-card rounded-lg border flex flex-col items-center justify-center text-center">
             <h2 className="text-2xl font-headline font-bold text-primary flex items-center justify-center gap-2">
                 <BookOpen className="h-6 w-6" /> A Note on These Texts
             </h2>
@@ -58,6 +59,20 @@ export default function ReadingPage() {
                 Please note: The "View PDF" links are placeholders. As an AI, I cannot provide or host copyrighted documents. You will need to replace these links with your own PDF files.
             </p>
         </div>
+        <div className="p-8 bg-card rounded-lg border flex flex-col items-center justify-center text-center">
+            <h2 className="text-2xl font-headline font-bold text-primary flex items-center justify-center gap-2">
+                <UploadCloud className="h-6 w-6" /> Contribute to the Library
+            </h2>
+            <p className="mt-4 text-foreground/90 leading-relaxed">
+                Help us grow this sacred library. If you have a PDF of a book by an Acharya of the Shankara lineage, you can submit it for review.
+            </p>
+            <Button asChild className="mt-6">
+                <Link href="/reading/upload">
+                    Upload a Book
+                </Link>
+            </Button>
+        </div>
+      </div>
     </div>
   );
 }
