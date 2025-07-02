@@ -1,3 +1,4 @@
+
 'use client';
 
 import Link from 'next/link';
@@ -7,7 +8,7 @@ import { Menu, Mail, Twitter, Facebook, Podcast, Gem } from 'lucide-react';
 
 const navLinks = [
   { href: '/peethams', label: 'Peethams' },
-  { href: '/events', label: 'Events Calendar' },
+  { href: '/events', label: 'Unified Calendar' },
   { href: '/panchanga', label: 'Panchanga' },
   { href: '/sadhana', label: 'Sadhana' },
   { href: '/quiz', label: 'Quiz' },
