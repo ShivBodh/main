@@ -3,7 +3,7 @@
 
 import { useState, useMemo, useEffect } from 'react';
 import Image from 'next/image';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
@@ -11,10 +11,13 @@ import { Badge } from '@/components/ui/badge';
 import { format } from 'date-fns';
 import { allCalendarItems, UnifiedCalendarItem, CalendarEventItem, CalendarYouTubeItem, CalendarFacebookItem, CalendarPhotoItem } from '@/lib/calendar-data';
 import { peethamBadgeColors, peethamDotColors, Peetham } from '@/lib/events-data';
-import { VenetianMask, Video, Facebook, PlayCircle, Camera } from 'lucide-react';
+import { VenetianMask, Video, Facebook, PlayCircle, Camera, Wand2, Copy, Loader2 } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { useToast } from '@/hooks/use-toast';
+import { generateThumbnail } from '@/ai/flows/thumbnail-generator-flow';
+import { Textarea } from '@/components/ui/textarea';
 
 const EventCard = ({ event }: { event: CalendarEventItem }) => (
     <Card key={event.id} className="border-l-4" style={{ borderColor: peethamDotColors[event.peetham] }}>
@@ -56,7 +59,12 @@ const EventCard = ({ event }: { event: CalendarEventItem }) => (
 );
 
 const MediaCard = ({ item }: { item: CalendarYouTubeItem | CalendarFacebookItem }) => {
-    const [isOpen, setIsOpen] = useState(false);
+    const [isVideoPlayerOpen, setIsVideoPlayerOpen] = useState(false);
+    const [isGenerating, setIsGenerating] = useState(false);
+    const [generatedThumbnail, setGeneratedThumbnail] = useState<string | null>(null);
+    const [showResultDialog, setShowResultDialog] = useState(false);
+    const { toast } = useToast();
+
     const isYoutube = item.type === 'youtube';
     const videoId = isYoutube ? (item as CalendarYouTubeItem).videoId : '';
     const facebookUrl = !isYoutube ? (item as CalendarFacebookItem).url : '';
@@ -65,56 +73,135 @@ const MediaCard = ({ item }: { item: CalendarYouTubeItem | CalendarFacebookItem 
         ? `https://www.youtube.com/embed/${videoId}` 
         : `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(facebookUrl)}&show_text=0`;
 
+    const handleGenerateThumbnail = async () => {
+        setIsGenerating(true);
+        setGeneratedThumbnail(null);
+        try {
+            const result = await generateThumbnail({ title: item.title, description: item.description });
+            setGeneratedThumbnail(result.imageDataUri);
+            setShowResultDialog(true);
+            toast({
+                title: 'Thumbnail Generated!',
+                description: 'A new thumbnail has been created by the AI.',
+            });
+        } catch (error) {
+            console.error('Thumbnail generation failed:', error);
+            toast({
+                variant: 'destructive',
+                title: 'Generation Failed',
+                description: 'The AI could not generate a thumbnail. Please try again.',
+            });
+        } finally {
+            setIsGenerating(false);
+        }
+    };
+    
+    const copyToClipboard = () => {
+        if (generatedThumbnail) {
+            navigator.clipboard.writeText(generatedThumbnail);
+            toast({ title: 'Copied to Clipboard!' });
+        }
+    };
+
+
     return (
-        <Dialog open={isOpen} onOpenChange={setIsOpen}>
-            <Card key={item.id} className="border-l-4" style={{ borderColor: peethamDotColors[item.peetham] }}>
-                <CardHeader>
-                    <div className="flex justify-between items-start">
-                        <CardTitle className="font-headline text-lg">{item.title}</CardTitle>
-                        <Badge variant="outline" className={`${peethamBadgeColors[item.peetham]}`}>
-                            {item.peetham}
-                        </Badge>
-                    </div>
-                    <p className="text-sm font-medium text-muted-foreground flex items-center gap-2">
-                        {isYoutube ? <Video className="h-4 w-4 text-accent" /> : <Facebook className="h-4 w-4 text-accent" />}
-                        {isYoutube ? 'YouTube Video' : 'Facebook Post'}
-                    </p>
-                </CardHeader>
-                <CardContent>
-                    <p className="text-foreground/80 mb-4">{item.description}</p>
-                     <DialogTrigger asChild>
-                        <div className="block relative aspect-video rounded-lg overflow-hidden group bg-secondary cursor-pointer">
-                            <Image src={item.thumbnailUrl} alt={item.title} fill className="object-cover transition-transform duration-300 group-hover:scale-105" data-ai-hint="youtube thumbnail" />
-                            <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-                                {isYoutube ? (
-                                    <PlayCircle className="h-16 w-16 text-white/80 transition-transform duration-300 group-hover:scale-110" />
-                                ) : (
-                                    <Facebook className="h-16 w-16 text-white/80 transition-transform duration-300 group-hover:scale-110" />
-                                )}
-                            </div>
+        <>
+            <Dialog open={isVideoPlayerOpen} onOpenChange={setIsVideoPlayerOpen}>
+                <Card key={item.id} className="border-l-4 flex flex-col" style={{ borderColor: peethamDotColors[item.peetham] }}>
+                    <CardHeader>
+                        <div className="flex justify-between items-start">
+                            <CardTitle className="font-headline text-lg">{item.title}</CardTitle>
+                            <Badge variant="outline" className={`${peethamBadgeColors[item.peetham]}`}>
+                                {item.peetham}
+                            </Badge>
                         </div>
-                    </DialogTrigger>
-                </CardContent>
-            </Card>
-            <DialogContent className="max-w-4xl p-0" suppressHydrationWarning>
-                <DialogHeader className="p-4 border-b">
-                    <DialogTitle>{item.title}</DialogTitle>
-                </DialogHeader>
-                <div className="aspect-video bg-black">
-                    {isOpen && (
-                        <iframe
-                            key={item.id}
-                            src={videoSourceUrl}
-                            title={item.title}
-                            frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            allowFullScreen
-                            className="w-full h-full"
-                        ></iframe>
-                    )}
-                </div>
-            </DialogContent>
-        </Dialog>
+                        <p className="text-sm font-medium text-muted-foreground flex items-center gap-2">
+                            {isYoutube ? <Video className="h-4 w-4 text-accent" /> : <Facebook className="h-4 w-4 text-accent" />}
+                            {isYoutube ? 'YouTube Video' : 'Facebook Post'}
+                        </p>
+                    </CardHeader>
+                    <CardContent className="flex-grow">
+                        <p className="text-foreground/80 mb-4">{item.description}</p>
+                        <DialogTrigger asChild>
+                            <div className="block relative aspect-video rounded-lg overflow-hidden group bg-secondary cursor-pointer">
+                                <Image src={item.thumbnailUrl} alt={item.title} fill className="object-cover transition-transform duration-300 group-hover:scale-105" data-ai-hint="youtube thumbnail" />
+                                <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                                    {isYoutube ? (
+                                        <PlayCircle className="h-16 w-16 text-white/80 transition-transform duration-300 group-hover:scale-110" />
+                                    ) : (
+                                        <Facebook className="h-16 w-16 text-white/80 transition-transform duration-300 group-hover:scale-110" />
+                                    )}
+                                </div>
+                            </div>
+                        </DialogTrigger>
+                    </CardContent>
+                    <CardFooter className="p-4 pt-0">
+                        <Button onClick={handleGenerateThumbnail} disabled={isGenerating} size="sm" variant="outline" className="w-full">
+                            {isGenerating ? (
+                                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                            ) : (
+                                <Wand2 className="mr-2 h-4 w-4" />
+                            )}
+                            {isGenerating ? 'Generating...' : 'Create AI Thumbnail'}
+                        </Button>
+                    </CardFooter>
+                </Card>
+                <DialogContent className="max-w-4xl p-0" suppressHydrationWarning>
+                    <DialogHeader className="p-4 border-b">
+                        <DialogTitle>{item.title}</DialogTitle>
+                    </DialogHeader>
+                    <div className="aspect-video bg-black">
+                        {isVideoPlayerOpen && (
+                            <iframe
+                                key={item.id}
+                                src={videoSourceUrl}
+                                title={item.title}
+                                frameBorder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowFullScreen
+                                className="w-full h-full"
+                            ></iframe>
+                        )}
+                    </div>
+                </DialogContent>
+            </Dialog>
+
+            <Dialog open={showResultDialog} onOpenChange={setShowResultDialog}>
+                <DialogContent className="max-w-2xl">
+                    <DialogHeader>
+                        <DialogTitle>AI-Generated Thumbnail</DialogTitle>
+                        <DialogDescription>
+                            Here is the new thumbnail. To use it, copy the data URI below and update the `thumbnailUrl` in your data files.
+                        </DialogDescription>
+                    </DialogHeader>
+                    <div className="space-y-4">
+                        {generatedThumbnail ? (
+                            <Image
+                                src={generatedThumbnail}
+                                alt="AI-generated thumbnail"
+                                width={1280}
+                                height={720}
+                                className="rounded-md aspect-video object-cover border bg-muted"
+                            />
+                        ) : <Skeleton className="w-full aspect-video" />
+                        }
+                        <div className="space-y-2">
+                            <Label htmlFor="thumbnail-uri">Thumbnail Data URI</Label>
+                            <Textarea
+                                id="thumbnail-uri"
+                                readOnly
+                                value={generatedThumbnail || 'Generating...'}
+                                className="h-24 font-mono text-xs"
+                            />
+                        </div>
+                        <Button onClick={copyToClipboard} className="w-full" disabled={!generatedThumbnail}>
+                            <Copy className="mr-2 h-4 w-4" />
+                            Copy Data URI
+                        </Button>
+                    </div>
+                </DialogContent>
+            </Dialog>
+        </>
     );
 };
 
