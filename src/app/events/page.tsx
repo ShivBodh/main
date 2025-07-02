@@ -15,6 +15,12 @@ import { VenetianMask, Video, Facebook, PlayCircle, Camera } from 'lucide-react'
 import { Skeleton } from '@/components/ui/skeleton';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Bodha Calendar | Sanatana Peethams Portal',
+  description: 'Explore a living archive of daily events, discourses, and media from the four cardinal Peethams. Filter by date and Peetham to follow the latest updates.',
+};
 
 const EventCard = ({ event }: { event: CalendarEventItem }) => (
     <Card key={event.id} className="border-l-4" style={{ borderColor: peethamDotColors[event.peetham] }}>
@@ -161,10 +167,6 @@ export default function EventsPage() {
         Jyotirmath: true,
     });
     const [jumpToDate, setJumpToDate] = useState<Date | undefined>();
-
-    useEffect(() => {
-        document.title = 'Bodha Calendar | Sanatana Peethams Portal';
-    }, []);
 
     useEffect(() => {
         setIsClient(true);

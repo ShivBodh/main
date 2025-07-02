@@ -10,6 +10,12 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Button } from '@/components/ui/button';
 import * as ics from 'ics';
 import { generateYearlyPanchangaEvents } from '@/lib/panchanga-generator';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Daily Panchanga | Sanatana Peethams Portal',
+  description: "View today's astrological details (Panchanga) for the four cardinal regions of India, including Tithi, Nakshatra, Yoga, Karana, and auspicious timings.",
+};
 
 const regionOrder: PanchangaRegion[] = ['North', 'South', 'East', 'West'];
 
@@ -38,7 +44,6 @@ export default function PanchangaPage() {
     const [isClient, setIsClient] = useState(false);
     
     useEffect(() => {
-        document.title = 'Daily Panchanga | Sanatana Peethams Portal';
         setIsClient(true);
     }, []);
 

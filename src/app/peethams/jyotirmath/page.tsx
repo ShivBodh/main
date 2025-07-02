@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { ExternalLink, BookOpen, Calendar, Camera, MapPin, Mail, Briefcase, Globe, Facebook, PlayCircle, ScrollText } from 'lucide-react';
+import { ExternalLink, BookOpen, Calendar, Camera, MapPin, Mail, Briefcase, Globe, Facebook, PlayCircle, ScrollText, Mountain } from 'lucide-react';
 import { allSevaOpportunities } from '@/lib/seva-data';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
@@ -16,6 +16,12 @@ import { format } from 'date-fns';
 import { useState, useMemo, useEffect } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import type { VideoArchiveItem } from '@/lib/sringeri-media';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Jyotirmath Peetham, Badrinath | Sanatana Peethams Portal',
+  description: 'Explore the Jyotirmath Peetham, the northern Himalayan seat of Advaita Vedanta. Discover its history, teachings, and the serene spiritual environment of Badrinath.',
+};
 
 const jyotirmathSeva = allSevaOpportunities.filter(o => o.peetham === 'Jyotirmath');
 
@@ -72,10 +78,6 @@ export default function JyotirmathPeethamPage() {
     const [visibleYoutubeVideos, setVisibleYoutubeVideos] = useState(2);
     const [visibleFacebookVideos, setVisibleFacebookVideos] = useState(2);
 
-    useEffect(() => {
-        document.title = 'Jyotirmath Peetham | Sanatana Peethams Portal';
-    }, []);
-
     const loadMoreYoutubeVideos = () => {
         setVisibleYoutubeVideos(prev => prev + 2);
     };
@@ -91,14 +93,8 @@ export default function JyotirmathPeethamPage() {
     <div className="bg-background text-foreground">
       <div className="container mx-auto max-w-6xl py-16 md:py-24 px-4">
         <section className="flex flex-col md:flex-row items-center gap-8 mb-12">
-          <div className="w-full md:w-1/3">
-            <Image
-              src="https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/SRI-AVIMUKTESHWARANANDA-JI-.svg"
-              alt="Jagadguru Shankaracharya of Jyotirmath Peetham"
-              width={800}
-              height={600}
-              className="rounded-lg shadow-lg object-contain aspect-[4/3]"
-            />
+          <div className="w-full md:w-1/3 flex items-center justify-center">
+             <Mountain className="w-48 h-48 text-primary/30" />
           </div>
           <div className="md:w-2/3">
             <h1 className="text-4xl md:text-5xl font-headline font-bold text-primary tracking-tight mb-4">

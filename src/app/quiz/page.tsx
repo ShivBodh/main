@@ -9,6 +9,12 @@ import { Label } from '@/components/ui/label';
 import { peethamQuiz, QuizQuestion } from '@/lib/quiz-data';
 import { CheckCircle, XCircle, RotateCcw } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Peetham Knowledge Quiz | Sanatana Peethams Portal',
+  description: 'Test your knowledge about the history, philosophy, and key figures of the four cardinal Peethams established by Adi Shankaracharya.',
+};
 
 export default function QuizPage() {
   const [questions, setQuestions] = useState<QuizQuestion[]>(peethamQuiz);
@@ -18,10 +24,6 @@ export default function QuizPage() {
   const [score, setScore] = useState(0);
   const [quizFinished, setQuizFinished] = useState(false);
   const [showResult, setShowResult] = useState(false);
-
-  useEffect(() => {
-    document.title = 'Peetham Knowledge Quiz | Sanatana Peethams Portal';
-  }, []);
 
   useEffect(() => {
     // Shuffle questions only on the client side to avoid hydration mismatch

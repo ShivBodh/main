@@ -4,13 +4,15 @@ import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { RotateCcw } from 'lucide-react';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Japa Counter | Sanatana Peethams Portal',
+  description: 'A simple digital Japa mala to assist you in your daily mantra recitation practice. Keep track of your count with ease.',
+};
 
 export default function JapaCounterPage() {
   const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    document.title = 'Japa Counter | Sanatana Peethams Portal';
-  }, []);
 
   const increment = () => {
     setCount(prevCount => prevCount + 1);

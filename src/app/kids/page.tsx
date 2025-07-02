@@ -10,6 +10,12 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { getKidsGuide } from '@/ai/flows/kids-guide-flow';
 import { Slider } from '@/components/ui/slider';
 import { Label } from '@/components/ui/label';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Kids Corner | Sanatana Peethams Portal',
+  description: 'A fun and creative space for young devotees. Enjoy our digital scratch-to-reveal activity featuring sacred figures.',
+};
 
 const scratchableImages = [
     { id: 1, name: 'Adi Shankaracharya', imageUrl: 'https://placehold.co/600x400.png', aiHint: 'acharya portrait' },
@@ -106,10 +112,6 @@ export default function KidsCornerPage() {
     const [brushSize, setBrushSize] = useState(25);
     const [guideText, setGuideText] = useState('');
     const [isLoading, setIsLoading] = useState(true);
-
-    useEffect(() => {
-        document.title = "Kids Corner | Sanatana Peethams Portal";
-    }, []);
 
     useEffect(() => {
         const fetchGuide = async () => {

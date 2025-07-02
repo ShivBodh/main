@@ -15,6 +15,12 @@ import { sringeriFacebookVideos, type FacebookVideo } from '@/lib/sringeri-faceb
 import { format } from 'date-fns';
 import { useState, useMemo, useEffect } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Sringeri Sharada Peetham | Sanatana Peethams Portal',
+  description: 'Explore the Sringeri Sharada Peetham, the southern seat of Advaita Vedanta established by Adi Shankaracharya. Discover its history, teachings, media, and community initiatives.',
+};
 
 const sringeriSeva = allSevaOpportunities.filter(o => o.peetham === 'Sringeri');
 
@@ -71,10 +77,6 @@ export default function SringeriPeethamPage() {
     const [visibleYoutubeVideos, setVisibleYoutubeVideos] = useState(2);
     const [visibleFacebookVideos, setVisibleFacebookVideos] = useState(2);
 
-    useEffect(() => {
-        document.title = 'Sringeri Sharada Peetham | Sanatana Peethams Portal';
-    }, []);
-
     const loadMoreYoutubeVideos = () => {
         setVisibleYoutubeVideos(prev => prev + 2);
     };
@@ -91,14 +93,8 @@ export default function SringeriPeethamPage() {
     <div className="bg-background text-foreground">
       <div className="container mx-auto max-w-6xl py-16 md:py-24 px-4">
         <section className="flex flex-col md:flex-row items-center gap-8 mb-12">
-          <div className="w-full md:w-1/3">
-            <Image
-              src="https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/SRI-VIDHUSHEKHAR-BHARTEE-JI-.svg"
-              alt="Jagadguru Shankaracharya of Sringeri Sharada Peetham"
-              width={800}
-              height={600}
-              className="rounded-lg shadow-lg object-contain aspect-[4/3]"
-            />
+          <div className="w-full md:w-1/3 flex items-center justify-center">
+             <BookOpen className="w-48 h-48 text-primary/30" />
           </div>
           <div className="md:w-2/3">
             <h1 className="text-4xl md:text-5xl font-headline font-bold text-primary tracking-tight mb-4">

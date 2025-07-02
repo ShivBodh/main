@@ -6,16 +6,18 @@ import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/componen
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Play, Pause, RotateCcw } from 'lucide-react';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Meditation Timer | Sanatana Peethams Portal',
+  description: 'A configurable timer to support your meditation practice. Set a duration, find your focus, and begin your session.',
+};
 
 export default function MeditationTimerPage() {
   const [duration, setDuration] = useState(10); // Default duration in minutes
   const [timeLeft, setTimeLeft] = useState(duration * 60);
   const [isActive, setIsActive] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
-
-  useEffect(() => {
-    document.title = 'Meditation Timer | Sanatana Peethams Portal';
-  }, []);
 
   useEffect(() => {
     if (isActive) {

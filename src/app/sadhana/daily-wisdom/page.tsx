@@ -5,6 +5,12 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { RefreshCw } from 'lucide-react';
 import { wisdomQuotes, Wisdom } from '@/lib/wisdom-data';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Daily Wisdom | Sanatana Peethams Portal',
+  description: 'Receive a daily pearl of wisdom from the great Acharyas for your contemplation and spiritual reflection. Part of the Sādhanā Suite.',
+};
 
 export default function DailyWisdomPage() {
   const [currentWisdom, setCurrentWisdom] = useState<Wisdom | null>(null);
@@ -15,7 +21,6 @@ export default function DailyWisdomPage() {
   };
 
   useEffect(() => {
-    document.title = 'Daily Wisdom | Sanatana Peethams Portal';
     getNewWisdom();
   }, []);
 

@@ -12,6 +12,12 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { allSevaOpportunities, SevaOpportunity, Peetham } from '@/lib/seva-data';
 import { HandHeart, MapPin, Landmark, Globe } from 'lucide-react';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Seva & Community Hub | Sanatana Peethams Portal',
+  description: 'Find meaningful volunteer opportunities (Seva) to contribute your skills and time to the mission of preserving and propagating Dharma. Connect with our community.',
+};
 
 const peethams: Peetham[] = ['Sringeri', 'Dwaraka', 'Puri', 'Jyotirmath'];
 
@@ -20,10 +26,6 @@ export default function SevaPage() {
     const [locationFilter, setLocationFilter] = useState<{ onsite: boolean; remote: boolean }>({ onsite: true, remote: true });
     const [peethamFilter, setPeethamFilter] = useState<string>('all');
     const [searchFilter, setSearchFilter] = useState<string>('');
-
-    useEffect(() => {
-        document.title = 'Seva & Community Hub | Sanatana Peethams Portal';
-    }, []);
 
     const filteredOpportunities = useMemo(() => {
         return opportunities.filter(opp => {

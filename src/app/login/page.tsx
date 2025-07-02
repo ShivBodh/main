@@ -7,14 +7,20 @@ import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { Chrome, Facebook } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Login | Sanatana Peethams Portal',
+  description: 'Sign in to the Sanatana Peethams Portal to access your personal dashboard and community features.',
+  robots: {
+    index: false,
+    follow: true,
+  },
+};
 
 export default function LoginPage() {
   const { user, signInWithGoogle, signInWithFacebook, loading } = useAuth();
   const router = useRouter();
-
-  useEffect(() => {
-    document.title = 'Login | Sanatana Peethams Portal';
-  }, []);
 
   useEffect(() => {
     if (!loading && user) {

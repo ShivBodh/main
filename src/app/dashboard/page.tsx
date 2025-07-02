@@ -10,18 +10,24 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { LogOut, Mail, User as UserIcon, BookOpen, Brain, BookMarked } from 'lucide-react';
 import Link from 'next/link';
 import { DonationDiary } from '@/components/dashboard/DonationDiary';
+import type { Metadata } from 'next';
+
+// This page is not for public consumption and should not be indexed.
+export const metadata: Metadata = {
+  title: 'Dashboard | Sanatana Peethams Portal',
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 export default function DashboardPage() {
   const { user, loading, logout } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
-    if (!loading) {
-      if (user) {
-        document.title = `Dashboard | Sanatana Peethams Portal`;
-      } else {
+    if (!loading && !user) {
         router.push('/login');
-      }
     }
   }, [user, loading, router]);
 

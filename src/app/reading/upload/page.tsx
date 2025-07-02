@@ -10,6 +10,12 @@ import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { UploadCloud } from 'lucide-react';
 import Link from 'next/link';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Upload a Book | Sanatana Peethams Portal',
+  description: 'Contribute to our community library by uploading a book by an Acharya of the Shankara lineage. All submissions are reviewed by our team.',
+};
 
 export default function UploadBookPage() {
   const [title, setTitle] = useState('');
@@ -19,10 +25,6 @@ export default function UploadBookPage() {
   const [coverImageFile, setCoverImageFile] = useState<File | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
-
-  useEffect(() => {
-    document.title = 'Upload a Book | Sanatana Peethams Portal';
-  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

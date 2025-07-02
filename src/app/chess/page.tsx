@@ -10,6 +10,11 @@ import { getAiMove } from '@/ai/flows/chess-ai-flow';
 import { Crown, BrainCircuit, RotateCcw, AlertTriangle } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 
+export const metadata: Metadata = {
+  title: 'Chess AI | Sanatana Peethams Portal',
+  description: 'Challenge "Bodhi," our custom-trained chess AI. Play as white and test your strategic skills against the machine.',
+};
+
 const pieceUnicode: Record<string, Record<string, string>> = {
     w: { p: '♙', r: '♖', n: '♘', b: '♗', q: '♕', k: '♔' },
     b: { p: '♟', r: '♜', n: '♞', b: '♝', q: '♛', k: '♚' }
@@ -68,10 +73,6 @@ export default function ChessPage() {
     const [isClient, setIsClient] = useState(false);
     const [isAiThinking, setIsAiThinking] = useState(false);
     const [gameOver, setGameOver] = useState<{ status: string, winner?: string } | null>(null);
-
-    useEffect(() => {
-        document.title = 'Chess AI | Sanatana Peethams Portal';
-    }, []);
 
     useEffect(() => {
         setGame(new Chess());
