@@ -59,22 +59,22 @@ const eventItems: CalendarEventItem[] = allEvents.map(e => ({
 }));
 
 const youtubeItems: CalendarYouTubeItem[] = [
-    ...sringeriVideoArchive.map(v => ({...v, peetham: 'Sringeri' as const, type: 'youtube' as const })),
-    ...dwarakaVideoArchive.map(v => ({...v, peetham: 'Dwaraka' as const, type: 'youtube' as const })),
-    ...puriVideoArchive.map(v => ({...v, peetham: 'Puri' as const, type: 'youtube' as const })),
-    ...jyotirmathVideoArchive.map(v => ({...v, peetham: 'Jyotirmath' as const, type: 'youtube' as const })),
+    ...sringeriVideoArchive.map(v => ({...v, id: `sringeri-yt-${v.id}`, peetham: 'Sringeri' as const, type: 'youtube' as const })),
+    ...dwarakaVideoArchive.map(v => ({...v, id: `dwaraka-yt-${v.id}`, peetham: 'Dwaraka' as const, type: 'youtube' as const })),
+    ...puriVideoArchive.map(v => ({...v, id: `puri-yt-${v.id}`, peetham: 'Puri' as const, type: 'youtube' as const })),
+    ...jyotirmathVideoArchive.map(v => ({...v, id: `jyotirmath-yt-${v.id}`, peetham: 'Jyotirmath' as const, type: 'youtube' as const })),
 ];
 
 const facebookItems: CalendarFacebookItem[] = [
-    ...sringeriFacebookVideos.map(v => ({ ...v, peetham: 'Sringeri' as const, type: 'facebook' as const })),
-    ...dwarakaFacebookVideos.map(v => ({ ...v, peetham: 'Dwaraka' as const, type: 'facebook' as const })),
-    ...puriFacebookVideos.map(v => ({ ...v, peetham: 'Puri' as const, type: 'facebook' as const })),
-    ...jyotirmathFacebookVideos.map(v => ({ ...v, peetham: 'Jyotirmath' as const, type: 'facebook' as const })),
+    ...sringeriFacebookVideos.map(v => ({ ...v, id: `sringeri-${v.id}`, peetham: 'Sringeri' as const, type: 'facebook' as const })),
+    ...dwarakaFacebookVideos.map(v => ({ ...v, id: `dwaraka-${v.id}`, peetham: 'Dwaraka' as const, type: 'facebook' as const })),
+    ...puriFacebookVideos.map(v => ({ ...v, id: `puri-${v.id}`, peetham: 'Puri' as const, type: 'facebook' as const })),
+    ...jyotirmathFacebookVideos.map(v => ({ ...v, id: `jyotirmath-${v.id}`, peetham: 'Jyotirmath' as const, type: 'facebook' as const })),
 ];
 
 const photoItems: CalendarPhotoItem[] = [
     ...sringeriPhotoGallery.map(p => ({
-        id: `photo-${p.id}`,
+        id: `sringeri-photo-${p.id}`,
         date: p.date,
         peetham: 'Sringeri' as const,
         type: 'photo' as const,
@@ -84,7 +84,7 @@ const photoItems: CalendarPhotoItem[] = [
         aiHint: p.aiHint,
     })),
     ...dwarakaPhotoGallery.map(p => ({
-        id: `photo-${p.id}`,
+        id: `dwaraka-photo-${p.id}`,
         date: p.date,
         peetham: 'Dwaraka' as const,
         type: 'photo' as const,
@@ -94,7 +94,7 @@ const photoItems: CalendarPhotoItem[] = [
         aiHint: p.aiHint,
     })),
     ...puriPhotoGallery.map(p => ({
-        id: `photo-${p.id}`,
+        id: `puri-photo-${p.id}`,
         date: p.date,
         peetham: 'Puri' as const,
         type: 'photo' as const,
@@ -104,7 +104,7 @@ const photoItems: CalendarPhotoItem[] = [
         aiHint: p.aiHint,
     })),
     ...jyotirmathPhotoGallery.map(p => ({
-        id: `photo-${p.id}`,
+        id: `jyotirmath-photo-${p.id}`,
         date: p.date,
         peetham: 'Jyotirmath' as const,
         type: 'photo' as const,
