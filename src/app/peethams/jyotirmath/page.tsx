@@ -117,7 +117,7 @@ export default function JyotirmathPeethamPage() {
           <TabsContent value="events">
              <p className="text-center text-muted-foreground mb-8">A filtered view of upcoming and recent events related to the Jyotirmath Peetham. (This is placeholder data)</p>
              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <Card>
+                <Card className="transition-shadow hover:shadow-lg">
                     <CardHeader>
                         <CardTitle className="font-headline text-primary flex items-center gap-2"><Calendar className="h-5 w-5" /> Badrinath Temple Opening</CardTitle>
                         <p className="text-sm text-muted-foreground">April-May (Annual)</p>
@@ -126,7 +126,7 @@ export default function JyotirmathPeethamPage() {
                         <p>The Shankaracharya of Jyotirmath plays a key role in the ceremonial opening of the Badrinath shrine after the winter season.</p>
                     </CardContent>
                 </Card>
-                <Card>
+                <Card className="transition-shadow hover:shadow-lg">
                     <CardHeader>
                         <CardTitle className="font-headline text-primary flex items-center gap-2"><Calendar className="h-5 w-5" /> Special Meditational Retreats</CardTitle>
                         <p className="text-sm text-muted-foreground">Summer Months</p>
@@ -183,7 +183,7 @@ export default function JyotirmathPeethamPage() {
             {jyotirmathSeva.length > 0 ? (
                 <div className="space-y-4">
                     {jyotirmathSeva.map(opp => (
-                        <Card key={opp.id}>
+                        <Card key={opp.id} className="transition-all duration-300 hover:shadow-lg">
                             <CardHeader>
                                 <CardTitle className="font-headline text-lg">{opp.title}</CardTitle>
                                 <div className="flex items-center gap-4 text-sm text-muted-foreground pt-1">

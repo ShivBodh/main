@@ -123,7 +123,7 @@ export default function DwarakaPeethamPage() {
           <TabsContent value="events">
              <p className="text-center text-muted-foreground mb-8">A filtered view of upcoming and recent events related to the Dwaraka Peetham. (This is placeholder data)</p>
              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <Card>
+                <Card className="transition-shadow hover:shadow-lg">
                     <CardHeader>
                         <CardTitle className="font-headline text-primary flex items-center gap-2"><Calendar className="h-5 w-5" /> Janmashtami Mahotsav</CardTitle>
                         <p className="text-sm text-muted-foreground">August 26, 2024</p>
@@ -132,7 +132,7 @@ export default function DwarakaPeethamPage() {
                         <p>Grand celebrations for Sri Krishna Janmashtami, attracting devotees from across the globe for special pujas and festivities.</p>
                     </CardContent>
                 </Card>
-                <Card>
+                <Card className="transition-shadow hover:shadow-lg">
                     <CardHeader>
                         <CardTitle className="font-headline text-primary flex items-center gap-2"><Calendar className="h-5 w-5" /> Shankara Jayanti</CardTitle>
                         <p className="text-sm text-muted-foreground">May 12, 2024</p>
@@ -189,7 +189,7 @@ export default function DwarakaPeethamPage() {
             {dwarakaSeva.length > 0 ? (
                 <div className="space-y-4">
                     {dwarakaSeva.map(opp => (
-                        <Card key={opp.id}>
+                        <Card key={opp.id} className="transition-all duration-300 hover:shadow-lg">
                             <CardHeader>
                                 <CardTitle className="font-headline text-lg">{opp.title}</CardTitle>
                                 <div className="flex items-center gap-4 text-sm text-muted-foreground pt-1">

@@ -117,7 +117,7 @@ export default function PuriPeethamPage() {
           <TabsContent value="events">
              <p className="text-center text-muted-foreground mb-8">A filtered view of upcoming and recent events related to the Puri Peetham. (This is placeholder data)</p>
              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <Card>
+                <Card className="transition-shadow hover:shadow-lg">
                     <CardHeader>
                         <CardTitle className="font-headline text-primary flex items-center gap-2"><Calendar className="h-5 w-5" /> Ratha Yatra</CardTitle>
                         <p className="text-sm text-muted-foreground">July 7, 2024</p>
@@ -126,7 +126,7 @@ export default function PuriPeethamPage() {
                         <p>The world-famous chariot festival of Lord Jagannath, where the Shankaracharya of Puri holds a traditional, prominent role.</p>
                     </CardContent>
                 </Card>
-                <Card>
+                <Card className="transition-shadow hover:shadow-lg">
                     <CardHeader>
                         <CardTitle className="font-headline text-primary flex items-center gap-2"><Calendar className="h-5 w-5" /> Vedanta Sammelan</CardTitle>
                         <p className="text-sm text-muted-foreground">December 20-22, 2024</p>
@@ -183,7 +183,7 @@ export default function PuriPeethamPage() {
             {puriSeva.length > 0 ? (
                 <div className="space-y-4">
                     {puriSeva.map(opp => (
-                        <Card key={opp.id}>
+                        <Card key={opp.id} className="transition-all duration-300 hover:shadow-lg">
                             <CardHeader>
                                 <CardTitle className="font-headline text-lg">{opp.title}</CardTitle>
                                 <div className="flex items-center gap-4 text-sm text-muted-foreground pt-1">

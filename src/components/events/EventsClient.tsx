@@ -57,7 +57,7 @@ const EventCard = ({ event }: { event: CalendarEventItem }) => (
 );
 
 const PhotoCard = ({ item }: { item: CalendarPhotoItem }) => (
-    <Card key={item.id} className="border-l-4" style={{ borderColor: peethamDotColors[item.peetham] }}>
+    <Card key={item.id} className="border-l-4 transition-shadow hover:shadow-lg" style={{ borderColor: peethamDotColors[item.peetham] }}>
         <CardHeader>
             <div className="flex justify-between items-start">
                 <CardTitle className="font-headline text-lg">{item.title}</CardTitle>

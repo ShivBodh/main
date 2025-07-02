@@ -74,3 +74,18 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  @keyframes flash-bg {
+    from {
+      background-color: hsl(var(--accent) / 0.15);
+    }
+    to {
+      background-color: hsl(var(--card));
+    }
+  }
+
+  .flash-highlight {
+    animation: flash-bg 1.5s ease-out;
+  }
+}

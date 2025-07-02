@@ -32,7 +32,7 @@ export function VideoCard({ video }: { video: VideoCardData }) {
     const Icon = isYoutube ? PlayCircle : Facebook;
 
     return (
-        <Card>
+        <Card className="transition-shadow hover:shadow-lg">
             <CardHeader>
                 <CardTitle className="font-headline text-lg">{video.title}</CardTitle>
                 <p className="text-sm text-muted-foreground">{format(new Date(video.date), 'MMMM d, yyyy')}</p>
