@@ -6,20 +6,20 @@ import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Menu, Mail, Twitter, Facebook, Podcast, Gem } from 'lucide-react';
 
-const navLinks = [
-  { href: '/peethams', label: 'Peethams' },
-  { href: '/events', label: 'Unified Calendar' },
-  { href: '/panchanga', label: 'Panchanga' },
-  { href: '/sadhana', label: 'Sadhana' },
-  { href: '/quiz', label: 'Quiz' },
-  { href: '/chess', label: 'Chess AI' },
-  { href: '/kids', label: 'Kids Corner' },
-  { href: '/seva', label: 'Seva Hub' },
-  { href: '/philosophy', label: 'Our Philosophy' },
-  { href: '/mission', label: 'Our Mission' },
-];
-
 export function Header() {
+  const navLinks = [
+    { href: '/peethams', label: 'Peethams' },
+    { href: '/events', label: 'Unified Calendar' },
+    { href: '/panchanga', label: 'Panchanga' },
+    { href: '/sadhana', label: 'Sadhana' },
+    { href: '/quiz', label: 'Quiz' },
+    { href: '/chess', label: 'Chess AI' },
+    { href: '/kids', label: 'Kids Corner' },
+    { href: '/seva', label: 'Seva Hub' },
+    { href: '/philosophy', label: 'Our Philosophy' },
+    { href: '/mission', label: 'Our Mission' },
+  ];
+
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 max-w-screen-2xl items-center justify-between">
