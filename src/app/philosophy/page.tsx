@@ -1,6 +1,12 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Circle, Sun, Infinity } from "lucide-react";
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Our Philosophy: Shivbodh | Sanatana Peethams Portal',
+  description: 'Learn about our guiding philosophy, Shivbodh: The Journey from Shunya to Purna, a modern interpretation of the timeless journey of self-realization rooted in Advaita Vedanta.',
+};
 
 const keyConcepts = [
     {

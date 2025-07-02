@@ -13,7 +13,7 @@ import { Separator } from '@/components/ui/separator';
 import { puriVideoArchive, puriPhotoGallery } from '@/lib/puri-media';
 import { puriFacebookVideos } from '@/lib/puri-facebook-videos';
 import { format } from 'date-fns';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 
 const puriSeva = allSevaOpportunities.filter(o => o.peetham === 'Puri');
@@ -21,6 +21,10 @@ const puriSeva = allSevaOpportunities.filter(o => o.peetham === 'Puri');
 export default function PuriPeethamPage() {
     const [visibleYoutubeVideos, setVisibleYoutubeVideos] = useState(2);
     const [visibleFacebookVideos, setVisibleFacebookVideos] = useState(2);
+
+    useEffect(() => {
+        document.title = 'Puri Govardhana Peetham | Sanatana Peethams Portal';
+    }, []);
 
     const loadMoreYoutubeVideos = () => {
         setVisibleYoutubeVideos(prev => prev + 2);

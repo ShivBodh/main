@@ -1,5 +1,11 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Mail, Phone } from 'lucide-react';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Connect with Us | Sanatana Peethams Portal',
+  description: 'Contact the Sanatana Peethams Portal team. We welcome your questions, feedback, and participation in this Seva.',
+};
 
 export default function ContactPage() {
   return (

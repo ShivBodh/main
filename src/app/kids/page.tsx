@@ -2,6 +2,7 @@
 'use client';
 
 import { useRef, useEffect, useState } from 'react';
+import type { Metadata } from 'next';
 import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -106,6 +107,10 @@ export default function KidsCornerPage() {
     const [brushSize, setBrushSize] = useState(25);
     const [guideText, setGuideText] = useState('');
     const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        document.title = "Kids Corner | Sanatana Peethams Portal";
+    }, []);
 
     useEffect(() => {
         const fetchGuide = async () => {

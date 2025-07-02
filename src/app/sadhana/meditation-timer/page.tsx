@@ -14,6 +14,10 @@ export default function MeditationTimerPage() {
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
+    document.title = 'Meditation Timer | Sanatana Peethams Portal';
+  }, []);
+
+  useEffect(() => {
     if (isActive) {
       intervalRef.current = setInterval(() => {
         setTimeLeft(prev => {

@@ -15,8 +15,12 @@ export default function DashboardPage() {
   const router = useRouter();
 
   useEffect(() => {
-    if (!loading && !user) {
-      router.push('/login');
+    if (!loading) {
+      if (user) {
+        document.title = `Dashboard | Sanatana Peethams Portal`;
+      } else {
+        router.push('/login');
+      }
     }
   }, [user, loading, router]);
 

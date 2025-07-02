@@ -20,6 +20,10 @@ export default function QuizPage() {
   const [showResult, setShowResult] = useState(false);
 
   useEffect(() => {
+    document.title = 'Peetham Knowledge Quiz | Sanatana Peethams Portal';
+  }, []);
+
+  useEffect(() => {
     // Shuffle questions only on the client side to avoid hydration mismatch
     setQuestions(prev => [...prev].sort(() => Math.random() - 0.5));
     setIsClient(true);

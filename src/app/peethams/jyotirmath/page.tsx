@@ -13,7 +13,7 @@ import { Separator } from '@/components/ui/separator';
 import { jyotirmathVideoArchive, jyotirmathPhotoGallery } from '@/lib/jyotirmath-media';
 import { jyotirmathFacebookVideos } from '@/lib/jyotirmath-facebook-videos';
 import { format } from 'date-fns';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 
 const jyotirmathSeva = allSevaOpportunities.filter(o => o.peetham === 'Jyotirmath');
@@ -21,6 +21,10 @@ const jyotirmathSeva = allSevaOpportunities.filter(o => o.peetham === 'Jyotirmat
 export default function JyotirmathPeethamPage() {
     const [visibleYoutubeVideos, setVisibleYoutubeVideos] = useState(2);
     const [visibleFacebookVideos, setVisibleFacebookVideos] = useState(2);
+
+    useEffect(() => {
+        document.title = 'Jyotirmath Peetham | Sanatana Peethams Portal';
+    }, []);
 
     const loadMoreYoutubeVideos = () => {
         setVisibleYoutubeVideos(prev => prev + 2);

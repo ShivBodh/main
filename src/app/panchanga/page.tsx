@@ -38,6 +38,7 @@ export default function PanchangaPage() {
     const [isClient, setIsClient] = useState(false);
     
     useEffect(() => {
+        document.title = 'Daily Panchanga | Sanatana Peethams Portal';
         setIsClient(true);
     }, []);
 

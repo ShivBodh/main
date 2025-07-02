@@ -5,6 +5,12 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 import { peethams } from '@/lib/peethams-data';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'The Four Peethams | Sanatana Peethams Portal',
+  description: 'Explore the four cardinal Peethams established by Adi Shankaracharya: Sringeri, Dwaraka, Puri, and Jyotirmath. Learn about their history, teachings, and significance.',
+};
 
 
 export default function PeethamsPage() {

@@ -5,6 +5,12 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowRight } from 'lucide-react';
 import { peethams, recentItems, actionItems } from '@/lib/home-page-data';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Sanatana Peethams Portal | Home',
+  description: 'A single, trusted digital beacon for the timeless wisdom of the four cardinal Peethams established by Adi Shankaracharya. Connecting devotees worldwide.',
+};
 
 
 export default function HomePage() {

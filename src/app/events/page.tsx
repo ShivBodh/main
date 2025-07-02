@@ -160,6 +160,10 @@ export default function EventsPage() {
     const [jumpToDate, setJumpToDate] = useState<Date | undefined>();
 
     useEffect(() => {
+        document.title = 'Bodha Calendar | Sanatana Peethams Portal';
+    }, []);
+
+    useEffect(() => {
         setIsClient(true);
     }, []);
 

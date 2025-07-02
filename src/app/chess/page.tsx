@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useMemo } from 'react';
+import type { Metadata } from 'next';
 import { Chess, Square, PieceSymbol } from 'chess.js';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -67,6 +68,10 @@ export default function ChessPage() {
     const [isClient, setIsClient] = useState(false);
     const [isAiThinking, setIsAiThinking] = useState(false);
     const [gameOver, setGameOver] = useState<{ status: string, winner?: string } | null>(null);
+
+    useEffect(() => {
+        document.title = 'Chess AI | Sanatana Peethams Portal';
+    }, []);
 
     useEffect(() => {
         setGame(new Chess());

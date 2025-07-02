@@ -2,6 +2,12 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import Link from 'next/link';
 import { sadhanaTools } from '@/lib/sadhana-data';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Sādhanā Suite | Sanatana Peethams Portal',
+  description: 'Digital tools to support your daily spiritual practice (sādhanā), including a Japa Counter, Meditation Timer, and Daily Wisdom quotes from the great Acharyas.',
+};
 
 export default function SadhanaPage() {
   return (

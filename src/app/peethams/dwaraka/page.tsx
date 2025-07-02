@@ -13,7 +13,7 @@ import { Separator } from '@/components/ui/separator';
 import { dwarakaVideoArchive, dwarakaPhotoGallery } from '@/lib/dwaraka-media';
 import { dwarakaFacebookVideos } from '@/lib/dwaraka-facebook-videos';
 import { format } from 'date-fns';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 
 const dwarakaSeva = allSevaOpportunities.filter(o => o.peetham === 'Dwaraka');
@@ -21,6 +21,10 @@ const dwarakaSeva = allSevaOpportunities.filter(o => o.peetham === 'Dwaraka');
 export default function DwarakaPeethamPage() {
     const [visibleYoutubeVideos, setVisibleYoutubeVideos] = useState(2);
     const [visibleFacebookVideos, setVisibleFacebookVideos] = useState(2);
+
+    useEffect(() => {
+        document.title = 'Dwaraka Peetham | Sanatana Peethams Portal';
+    }, []);
 
     const loadMoreYoutubeVideos = () => {
         setVisibleYoutubeVideos(prev => prev + 2);

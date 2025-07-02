@@ -4,6 +4,12 @@ import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/componen
 import { Button } from '@/components/ui/button';
 import { readingList } from '@/lib/reading-data';
 import { BookOpen, Download, UploadCloud } from 'lucide-react';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Reading Room | Sanatana Peethams Portal',
+  description: 'A curated library of foundational texts by Jagadguru Adi Shankaracharya and other great masters. Immerse yourself in the timeless wisdom of Advaita Vedanta.',
+};
 
 export default function ReadingPage() {
   return (

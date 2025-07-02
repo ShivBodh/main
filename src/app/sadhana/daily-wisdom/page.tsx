@@ -15,6 +15,7 @@ export default function DailyWisdomPage() {
   };
 
   useEffect(() => {
+    document.title = 'Daily Wisdom | Sanatana Peethams Portal';
     getNewWisdom();
   }, []);
 

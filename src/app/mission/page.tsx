@@ -2,6 +2,12 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BadgeCheck, ShieldCheck, Network } from "lucide-react";
 import Link from "next/link";
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Our Mission | Sanatana Peethams Portal',
+  description: 'Learn about our mission to build a trusted, unified, and authoritative digital home for the four cardinal Peethams established by Jagadguru Adi Shankaracharya.',
+};
 
 const corePrinciples = [
     {

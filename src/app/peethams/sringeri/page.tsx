@@ -13,7 +13,7 @@ import { Separator } from '@/components/ui/separator';
 import { sringeriVideoArchive, sringeriPhotoGallery } from '@/lib/sringeri-media';
 import { sringeriFacebookVideos } from '@/lib/sringeri-facebook-videos';
 import { format } from 'date-fns';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 
 const sringeriSeva = allSevaOpportunities.filter(o => o.peetham === 'Sringeri');
@@ -21,6 +21,10 @@ const sringeriSeva = allSevaOpportunities.filter(o => o.peetham === 'Sringeri');
 export default function SringeriPeethamPage() {
     const [visibleYoutubeVideos, setVisibleYoutubeVideos] = useState(2);
     const [visibleFacebookVideos, setVisibleFacebookVideos] = useState(2);
+
+    useEffect(() => {
+        document.title = 'Sringeri Sharada Peetham | Sanatana Peethams Portal';
+    }, []);
 
     const loadMoreYoutubeVideos = () => {
         setVisibleYoutubeVideos(prev => prev + 2);

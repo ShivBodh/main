@@ -1,12 +1,16 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { RotateCcw } from 'lucide-react';
 
 export default function JapaCounterPage() {
   const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    document.title = 'Japa Counter | Sanatana Peethams Portal';
+  }, []);
 
   const increment = () => {
     setCount(prevCount => prevCount + 1);
