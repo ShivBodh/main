@@ -6,16 +6,15 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { ExternalLink, BookOpen, Calendar, Camera, MapPin, Mail, Briefcase, Globe, Facebook, PlayCircle, ScrollText } from 'lucide-react';
+import { ExternalLink, BookOpen, Calendar, Camera, MapPin, Mail, Briefcase, Globe, ScrollText } from 'lucide-react';
 import { allSevaOpportunities } from '@/lib/seva-data';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { sringeriVideoArchive, sringeriPhotoGallery, type VideoArchiveItem } from '@/lib/sringeri-media';
 import { sringeriFacebookVideos, type FacebookVideo } from '@/lib/sringeri-facebook-videos';
-import { format } from 'date-fns';
-import { useState, useMemo, useEffect } from 'react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { useState, useMemo } from 'react';
 import type { Metadata } from 'next';
+import { VideoCard } from '@/components/media/VideoCard';
 
 export const metadata: Metadata = {
   title: 'Sringeri Sharada Peetham | Sanatana Peethams Portal',
@@ -23,55 +22,6 @@ export const metadata: Metadata = {
 };
 
 const sringeriSeva = allSevaOpportunities.filter(o => o.peetham === 'Sringeri');
-
-const VideoCard = ({ video, type }: { video: VideoArchiveItem | FacebookVideo, type: 'youtube' | 'facebook' }) => {
-    const [isOpen, setIsOpen] = useState(false);
-
-    const embedUrl = type === 'youtube'
-        ? `https://www.youtube.com/embed/${(video as VideoArchiveItem).videoId}`
-        : `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(video.url)}&show_text=0`;
-    
-    const Icon = type === 'youtube' ? PlayCircle : Facebook;
-
-    return (
-        <Card>
-            <CardHeader>
-                <CardTitle className="font-headline text-lg">{video.title}</CardTitle>
-                <p className="text-sm text-muted-foreground">{format(new Date(video.date), 'MMMM d, yyyy')}</p>
-            </CardHeader>
-            <CardContent>
-                <Dialog open={isOpen} onOpenChange={setIsOpen}>
-                    <DialogTrigger asChild>
-                        <div className="block relative aspect-video rounded-lg overflow-hidden group bg-secondary cursor-pointer">
-                            <Image src={video.thumbnailUrl} alt={video.title} fill className="object-cover transition-transform duration-300 group-hover:scale-105" data-ai-hint="youtube thumbnail"/>
-                            <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-                                <Icon className="h-16 w-16 text-white/80 transition-transform duration-300 group-hover:scale-110" />
-                            </div>
-                        </div>
-                    </DialogTrigger>
-                    <DialogContent className="max-w-4xl p-0">
-                        <DialogHeader className="p-4 border-b">
-                            <DialogTitle>{video.title}</DialogTitle>
-                        </DialogHeader>
-                        <div className="aspect-video bg-black">
-                            {isOpen && (
-                                <iframe
-                                    src={embedUrl}
-                                    title={video.title}
-                                    frameBorder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                    allowFullScreen
-                                    className="w-full h-full"
-                                ></iframe>
-                            )}
-                        </div>
-                    </DialogContent>
-                </Dialog>
-                <p className="mt-4 text-foreground/80">{video.description}</p>
-            </CardContent>
-        </Card>
-    );
-};
 
 export default function SringeriPeethamPage() {
     const [visibleYoutubeVideos, setVisibleYoutubeVideos] = useState(2);
@@ -205,7 +155,7 @@ export default function SringeriPeethamPage() {
                 <TabsContent value="youtube" className="mt-8">
                     <div className="space-y-6">
                         {sortedYoutubeVideos.slice(0, visibleYoutubeVideos).map(video => (
-                           <VideoCard key={video.id} video={video} type="youtube" />
+                           <VideoCard key={video.id} video={video} />
                         ))}
                     </div>
                     {visibleYoutubeVideos < sortedYoutubeVideos.length && (
@@ -217,7 +167,7 @@ export default function SringeriPeethamPage() {
                 <TabsContent value="facebook" className="mt-8">
                     <div className="space-y-6">
                         {sortedFacebookVideos.slice(0, visibleFacebookVideos).map(video => (
-                            <VideoCard key={video.id} video={video} type="facebook" />
+                            <VideoCard key={video.id} video={video} />
                         ))}
                     </div>
                     {visibleFacebookVideos < sortedFacebookVideos.length && (
