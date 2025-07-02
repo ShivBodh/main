@@ -8,8 +8,16 @@ import { Button } from '@/components/ui/button';
 import { Paintbrush } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { getKidsGuide } from '@/ai/flows/kids-guide-flow';
+import { Slider } from '@/components/ui/slider';
+import { Label } from '@/components/ui/label';
 
-const ScratchImage = ({ imageUrl, width, height }: { imageUrl: string; width: number; height: number; }) => {
+const scratchableImages = [
+    { id: 1, name: 'Adi Shankaracharya', imageUrl: 'https://source.unsplash.com/random/600x400/?hindu,acharya,philosopher', aiHint: 'Adi Shankaracharya' },
+    { id: 2, name: 'A Wise Sage', imageUrl: 'https://source.unsplash.com/random/600x400/?hindu,sage,meditating', aiHint: 'hindu sage' },
+    { id: 3, name: 'Goddess Sharada', imageUrl: 'https://source.unsplash.com/random/600x400/?hindu,goddess,saraswati', aiHint: 'goddess saraswati' },
+];
+
+const ScratchImage = ({ imageUrl, width, height, brushSize }: { imageUrl: string; width: number; height: number; brushSize: number }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   
   useEffect(() => {
@@ -38,7 +46,7 @@ const ScratchImage = ({ imageUrl, width, height }: { imageUrl: string; width: nu
     const y = e.clientY - rect.top;
 
     context.beginPath();
-    context.arc(x, y, 25, 0, 2 * Math.PI); // Increased radius for easier scratching
+    context.arc(x, y, brushSize, 0, 2 * Math.PI);
     context.fill();
   };
   
@@ -56,7 +64,7 @@ const ScratchImage = ({ imageUrl, width, height }: { imageUrl: string; width: nu
     const y = touch.clientY - rect.top;
 
     context.beginPath();
-    context.arc(x, y, 25, 0, 2 * Math.PI);
+    context.arc(x, y, brushSize, 0, 2 * Math.PI);
     context.fill();
   };
 
@@ -98,6 +106,8 @@ const ScratchImage = ({ imageUrl, width, height }: { imageUrl: string; width: nu
 
 
 export default function KidsCornerPage() {
+    const [selectedImage, setSelectedImage] = useState(scratchableImages[0]);
+    const [brushSize, setBrushSize] = useState(25);
     const [guideText, setGuideText] = useState('');
     const [isLoading, setIsLoading] = useState(true);
 
@@ -105,7 +115,7 @@ export default function KidsCornerPage() {
         const fetchGuide = async () => {
             setIsLoading(true);
             try {
-                const result = await getKidsGuide({ figureName: 'Adi Shankaracharya' });
+                const result = await getKidsGuide({ figureName: selectedImage.name });
                 setGuideText(result.guideText);
             } catch (error) {
                 console.error("Failed to fetch AI guide:", error);
@@ -116,7 +126,7 @@ export default function KidsCornerPage() {
         };
 
         fetchGuide();
-    }, []);
+    }, [selectedImage]);
 
   return (
     <div className="container mx-auto max-w-4xl py-16 md:py-24 px-4">
@@ -145,13 +155,52 @@ export default function KidsCornerPage() {
         <CardContent>
           <div className="flex justify-center">
             <ScratchImage
-              imageUrl="https://source.unsplash.com/random/600x400/?hindu,acharya,philosopher"
+              key={selectedImage.id}
+              imageUrl={selectedImage.imageUrl}
               width={600}
               height={400}
+              brushSize={brushSize}
             />
           </div>
         </CardContent>
       </Card>
+      
+       <div className="grid md:grid-cols-2 gap-8 mt-8">
+        <Card>
+            <CardHeader>
+                <CardTitle className="font-headline text-xl">Choose an Image</CardTitle>
+            </CardHeader>
+            <CardContent className="grid grid-cols-3 gap-2">
+                {scratchableImages.map(image => (
+                    <button key={image.id} onClick={() => setSelectedImage(image)} className={`rounded-lg overflow-hidden border-4 ${selectedImage.id === image.id ? 'border-primary' : 'border-transparent'} focus:outline-none focus:ring-2 focus:ring-ring`}>
+                         <Image src={image.imageUrl} alt={image.name} width={200} height={150} className="w-full h-20 object-cover" data-ai-hint={image.aiHint} />
+                        <p className="p-2 text-xs font-medium bg-muted/50 truncate">{image.name}</p>
+                    </button>
+                ))}
+            </CardContent>
+        </Card>
+
+        <Card>
+            <CardHeader>
+                <CardTitle className="font-headline text-xl">Tools</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4 pt-6">
+                <div>
+                    <Label htmlFor="brush-size" className="text-base">Brush Size: {brushSize}px</Label>
+                    <Slider
+                        id="brush-size"
+                        min={5}
+                        max={50}
+                        step={1}
+                        value={[brushSize]}
+                        onValueChange={(value) => setBrushSize(value[0])}
+                        className="mt-2"
+                    />
+                </div>
+            </CardContent>
+        </Card>
+      </div>
+
     </div>
   );
 }
