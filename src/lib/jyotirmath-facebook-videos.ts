@@ -48,5 +48,21 @@ export const jyotirmathFacebookVideos: FacebookVideo[] = [
         url: 'https://www.facebook.com/1008.guru/videos/1135803450997873/',
         description: 'A video from the archives showcasing the stunning natural beauty around Jyotirmath.',
         thumbnailUrl: 'https://placehold.co/1280x720.png',
+    },
+    {
+        id: 'fb-video-6',
+        title: 'Archival Message from 2017',
+        date: '2017-01-01',
+        url: 'https://www.facebook.com/1008.guru/videos/1135803450997873/',
+        description: 'A new year message to devotees from the archives of 2017.',
+        thumbnailUrl: 'https://placehold.co/1280x720.png',
+    },
+    {
+        id: 'fb-video-7',
+        title: 'Badrinath Opening Ceremony 2014',
+        date: '2014-05-05',
+        url: 'https://www.facebook.com/1008.guru/videos/1135803450997873/',
+        description: 'Rare footage from the temple opening ceremony in 2014.',
+        thumbnailUrl: 'https://placehold.co/1280x720.png',
     }
 ];

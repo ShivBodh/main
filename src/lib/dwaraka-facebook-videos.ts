@@ -48,5 +48,21 @@ export const dwarakaFacebookVideos: FacebookVideo[] = [
         url: 'https://www.facebook.com/SwamiSadanandSaraswatiDwarkaGujarat/videos/238407842567883/',
         description: 'Celebrations from Gita Jayanti in 2022, marking the day Lord Krishna imparted the Bhagavad Gita.',
         thumbnailUrl: 'https://placehold.co/1280x720.png',
+    },
+    {
+        id: 'fb-video-6',
+        title: 'Archive: Message from 2018',
+        date: '2018-05-10',
+        url: 'https://www.facebook.com/SwamiSadanandSaraswatiDwarkaGujarat/videos/238407842567883/',
+        description: 'A message to devotees from the archives of 2018.',
+        thumbnailUrl: 'https://placehold.co/1280x720.png',
+    },
+    {
+        id: 'fb-video-7',
+        title: 'Archive: Janmashtami 2015',
+        date: '2015-09-05',
+        url: 'https://www.facebook.com/SwamiSadanandSaraswatiDwarkaGujarat/videos/238407842567883/',
+        description: 'Rare footage from the Janmashtami festival in 2015.',
+        thumbnailUrl: 'https://placehold.co/1280x720.png',
     }
 ];

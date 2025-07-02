@@ -8,6 +8,9 @@ export const jyotirmathPhotoGallery = [
     { id: 'jyotirmath-photo-4', date: '2024-07-15', title: 'The Alaknanda River Valley', description: 'The pristine and beautiful valley of the Alaknanda river.', alt: 'The Alaknanda river valley', src: 'https://placehold.co/400x300.png', aiHint: 'river valley' },
     { id: 'jyotirmath-photo-5', date: '2023-05-15', title: 'Badrinath Temple Opening 2023', description: 'The gates of the Badrinath shrine opening for the season in 2023.', alt: 'Badrinath temple doors opening', src: 'https://placehold.co/400x300.png', aiHint: 'temple opening' },
     { id: 'jyotirmath-photo-6', date: '2022-10-20', title: 'Autumn in Jyotirmath', description: 'The vibrant autumn colors in the town of Jyotirmath.', alt: 'Autumn colors in the Himalayas', src: 'https://placehold.co/400x300.png', aiHint: 'autumn mountains' },
+    { id: 'jyotirmath-photo-7', date: '2015-06-01', title: 'Himalayan Summer 2015', description: 'A view of the lush green Himalayas during the summer of 2015.', alt: 'Summer in the Himalayas', src: 'https://placehold.co/400x300.png', aiHint: 'summer mountains' },
+    { id: 'jyotirmath-photo-8', date: '2013-06-20', title: 'Monsoon Clouds over Jyotirmath', description: 'Dramatic monsoon clouds gathering over the mountains in 2013.', alt: 'Monsoon clouds in the mountains', src: 'https://placehold.co/400x300.png', aiHint: 'monsoon clouds' },
+    { id: 'jyotirmath-photo-9', date: '2010-09-10', title: 'Ancient Jyotirmath Temple', description: 'A photograph of the ancient temple at Jyotirmath from 2010.', alt: 'Old temple in Jyotirmath', src: 'https://placehold.co/400x300.png', aiHint: 'ancient temple' },
 ];
 
 export const jyotirmathVideoArchive: VideoArchiveItem[] = [
@@ -53,6 +56,24 @@ export const jyotirmathVideoArchive: VideoArchiveItem[] = [
         description: 'Rare footage from 2022 showing the Jyotirmath Peetham covered in a blanket of snow during winter.',
         date: '2022-12-30',
         videoId: 'YOUR_YOUTUBE_VIDEO_ID_21', // Placeholder
+        thumbnailUrl: 'https://placehold.co/1280x720.png',
+        source: 'YouTube',
+    },
+    {
+        id: 'jyotirmath-yt-6',
+        title: 'Talk on Meditation from 2016',
+        description: 'An archival discourse on the techniques and benefits of dhyana (meditation).',
+        date: '2016-08-11',
+        videoId: 'YOUR_YOUTUBE_VIDEO_ID_32',
+        thumbnailUrl: 'https://placehold.co/1280x720.png',
+        source: 'YouTube',
+    },
+    {
+        id: 'jyotirmath-yt-7',
+        title: 'Ganga Dussehra 2012',
+        description: 'Footage from the Ganga Dussehra festival celebrations in 2012.',
+        date: '2012-05-30',
+        videoId: 'YOUR_YOUTUBE_VIDEO_ID_33',
         thumbnailUrl: 'https://placehold.co/1280x720.png',
         source: 'YouTube',
     },

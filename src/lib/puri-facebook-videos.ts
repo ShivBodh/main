@@ -48,5 +48,21 @@ export const puriFacebookVideos: FacebookVideo[] = [
         url: 'https://www.facebook.com/watch/live/?ref=watch_permalink&v=1135803450997873',
         description: 'An important archival discourse on the role of Dharma in society.',
         thumbnailUrl: 'https://placehold.co/1280x720.png',
+    },
+    {
+        id: 'fb-video-6',
+        title: 'Archive: Ratha Yatra 2016',
+        date: '2016-07-06',
+        url: 'https://www.facebook.com/watch/live/?ref=watch_permalink&v=1135803450997873',
+        description: 'Rare footage from the Ratha Yatra festival in 2016.',
+        thumbnailUrl: 'https://placehold.co/1280x720.png',
+    },
+    {
+        id: 'fb-video-7',
+        title: 'Archive: Vedanta Sammelan 2012',
+        date: '2012-12-22',
+        url: 'https://www.facebook.com/watch/live/?ref=watch_permalink&v=1135803450997873',
+        description: 'A glimpse into the Vedanta Sammelan held in 2012.',
+        thumbnailUrl: 'https://placehold.co/1280x720.png',
     }
 ];

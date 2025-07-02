@@ -56,6 +56,11 @@ export const allEvents: Event[] = [
     { id: 14, title: 'Puri Beach Festival Address', date: '2022-11-25', peetham: 'Puri', description: 'The Shankaracharya of Puri delivers an address on Dharma at the annual Puri Beach Festival.', category: 'Discourse' },
     { id: 15, title: 'Winter Discourses in Delhi', date: '2023-12-10', peetham: 'Dwaraka', description: 'A series of discourses delivered by the Shankaracharya of Dwaraka to devotees in the national capital.', category: 'Discourse' },
     { id: 16, title: 'Ganga Aarti at Haridwar', date: '2022-09-05', peetham: 'Jyotirmath', description: 'The Shankaracharya of Jyotirmath participates in the evening Ganga Aarti at Har Ki Pauri in Haridwar.', category: 'Ceremony' },
+    { id: 17, title: 'Historic Kumbh Mela Address', date: '2013-02-10', peetham: 'Puri', description: 'An address delivered by the Shankaracharya of Puri during the Maha Kumbh Mela in Prayagraj.', category: 'Discourse' },
+    { id: 18, title: 'Dwaraka Temple Renovation Seva', date: '2012-06-15', peetham: 'Dwaraka', description: 'Launch of a major seva project for the renovation and upkeep of ancient temples in the Dwaraka region.', category: 'Seva' },
+    { id: 19, title: 'Sringeri Pathashala Expansion', date: '2011-08-20', peetham: 'Sringeri', description: 'Inauguration of a new building for the Sringeri Pathashala to accommodate more students of Vedic studies.', category: 'Inauguration' },
+    { id: 20, title: 'Himalayan Flood Relief Efforts', date: '2013-06-25', peetham: 'Jyotirmath', description: 'Jyotirmath Peetham organizes relief efforts for those affected by the devastating floods in Uttarakhand.', category: 'Seva' },
+    { id: 21, title: 'Ratha Yatra 2010', date: '2010-07-13', peetham: 'Puri', description: 'The world-renowned chariot festival of Lord Jagannath, as it was celebrated in 2010.', category: 'Festival' },
 ];
 
 export const peethamBadgeColors: Record<Peetham, string> = {

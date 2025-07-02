@@ -8,6 +8,9 @@ export const puriPhotoGallery = [
     { id: 'puri-photo-4', date: '2024-07-15', title: 'Devotees at the Peetham', description: 'A spiritual gathering of devotees at the Peetham.', alt: 'A spiritual gathering at the Peetham', src: 'https://placehold.co/400x300.png', aiHint: 'devotees gathering' },
     { id: 'puri-photo-5', date: '2023-06-20', title: 'Ratha Yatra 2023', description: 'An archival photo of the grand chariots from the 2023 Ratha Yatra.', alt: 'Ratha Yatra 2023', src: 'https://placehold.co/400x300.png', aiHint: 'festival chariot' },
     { id: 'puri-photo-6', date: '2022-10-05', title: 'Govardhan Math Entrance', description: 'The serene entrance to the Govardhan Math in Puri.', alt: 'Entrance to Govardhan Math', src: 'https://placehold.co/400x300.png', aiHint: 'monastery entrance' },
+    { id: 'puri-photo-7', date: '2015-07-18', title: 'Ratha Yatra 2015', description: 'A look back at the Ratha Yatra from 2015.', alt: 'Ratha Yatra 2015', src: 'https://placehold.co/400x300.png', aiHint: 'festival parade' },
+    { id: 'puri-photo-8', date: '2012-04-01', title: 'Puri Sea Beach', description: 'The holy sea beach at Puri in 2012.', alt: 'Puri sea beach', src: 'https://placehold.co/400x300.png', aiHint: 'sea beach' },
+    { id: 'puri-photo-9', date: '2010-01-26', title: 'Saraswati Puja 2010', description: 'Archival image of Saraswati Puja celebrations at the Peetham.', alt: 'Saraswati Puja ceremony', src: 'https://placehold.co/400x300.png', aiHint: 'goddess statue' },
 ];
 
 export const puriVideoArchive: VideoArchiveItem[] = [
@@ -53,6 +56,33 @@ export const puriVideoArchive: VideoArchiveItem[] = [
         description: 'The keynote address from the annual Vedanta Sammelan held in December 2023.',
         date: '2023-12-21',
         videoId: 'YOUR_YOUTUBE_VIDEO_ID_18', // Placeholder
+        thumbnailUrl: 'https://placehold.co/1280x720.png',
+        source: 'YouTube',
+    },
+    {
+        id: 'puri-yt-6',
+        title: 'Archival Discourse on Jagannath Culture',
+        description: 'An old talk from 2013 explaining the unique cultural and spiritual aspects of Lord Jagannath.',
+        date: '2013-05-15',
+        videoId: 'YOUR_YOUTUBE_VIDEO_ID_29', // Placeholder
+        thumbnailUrl: 'https://placehold.co/1280x720.png',
+        source: 'YouTube',
+    },
+    {
+        id: 'puri-yt-7',
+        title: 'Ratha Yatra 2011 Highlights',
+        description: 'A video compilation of the key moments from the 2011 Ratha Yatra in Puri.',
+        date: '2011-07-03',
+        videoId: 'YOUR_YOUTUBE_VIDEO_ID_30', // Placeholder
+        thumbnailUrl: 'https://placehold.co/1280x720.png',
+        source: 'YouTube',
+    },
+    {
+        id: 'puri-yt-8',
+        title: 'Talk on Dharma (2010)',
+        description: 'A foundational discourse on Dharma delivered by the Shankaracharya in 2010.',
+        date: '2010-02-20',
+        videoId: 'YOUR_YOUTUBE_VIDEO_ID_31', // Placeholder
         thumbnailUrl: 'https://placehold.co/1280x720.png',
         source: 'YouTube',
     },
