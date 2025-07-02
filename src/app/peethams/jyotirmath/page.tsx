@@ -43,7 +43,7 @@ export default function JyotirmathPeethamPage() {
         <section className="flex flex-col md:flex-row items-center gap-8 mb-12">
           <div className="w-full md:w-1/3">
             <Image
-              src="/images/acharya.png"
+              src="/images/peethams/jyotirmath.jpeg"
               alt="Jyotirmath Peetham, Badrinath"
               width={800}
               height={600}
