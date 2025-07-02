@@ -9,6 +9,7 @@ export function Footer() {
         </p>
         <div className="flex justify-center flex-wrap gap-x-4 gap-y-2 mt-4">
             <Link href="/panchanga" className="text-sm hover:text-accent">Panchanga</Link>
+            <Link href="/reading" className="text-sm hover:text-accent">Reading</Link>
             <Link href="/sadhana" className="text-sm hover:text-accent">Sadhana</Link>
             <Link href="/quiz" className="text-sm hover:text-accent">Quiz</Link>
             <Link href="/chess" className="text-sm hover:text-accent">Chess AI</Link>

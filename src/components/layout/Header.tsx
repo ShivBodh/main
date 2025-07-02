@@ -18,6 +18,7 @@ export function Header() {
             <Link href="/peethams" className="transition-colors hover:text-accent">Peethams</Link>
             <Link href="/events" className="transition-colors hover:text-accent">Bodha Calendar</Link>
             <Link href="/panchanga" className="transition-colors hover:text-accent">Panchanga</Link>
+            <Link href="/reading" className="transition-colors hover:text-accent">Reading</Link>
             <Link href="/sadhana" className="transition-colors hover:text-accent">Sadhana</Link>
             <Link href="/quiz" className="transition-colors hover:text-accent">Quiz</Link>
             <Link href="/chess" className="transition-colors hover:text-accent">Chess AI</Link>
@@ -62,6 +63,7 @@ export function Header() {
                     <Link href="/peethams" className="text-lg font-medium transition-colors hover:text-accent">Peethams</Link>
                     <Link href="/events" className="text-lg font-medium transition-colors hover:text-accent">Bodha Calendar</Link>
                     <Link href="/panchanga" className="text-lg font-medium transition-colors hover:text-accent">Panchanga</Link>
+                    <Link href="/reading" className="text-lg font-medium transition-colors hover:text-accent">Reading</Link>
                     <Link href="/sadhana" className="text-lg font-medium transition-colors hover:text-accent">Sadhana</Link>
                     <Link href="/quiz" className="text-lg font-medium transition-colors hover:text-accent">Quiz</Link>
                     <Link href="/chess" className="text-lg font-medium transition-colors hover:text-accent">Chess AI</Link>
