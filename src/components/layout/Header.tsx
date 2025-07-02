@@ -59,7 +59,7 @@ export function Header() {
           </nav>
         </div>
 
-        <div className="hidden md:flex items-center space-x-4">
+        <div className="hidden lg:flex items-center space-x-4">
           <Link href="https://twitter.com/shivabodha_org" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
             <Twitter className="h-5 w-5 text-muted-foreground hover:text-foreground" />
           </Link>
@@ -71,7 +71,7 @@ export function Header() {
           </Link>
           <Link href="/contact" className="flex items-center space-x-2 text-sm font-medium transition-colors hover:text-accent">
             <Mail className="h-5 w-5" />
-            <span className="hidden lg:inline">Connect with Us</span>
+            <span className="lg:inline">Connect with Us</span>
           </Link>
         </div>
 
