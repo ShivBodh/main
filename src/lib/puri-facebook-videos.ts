@@ -42,6 +42,14 @@ export const puriFacebookVideos: FacebookVideo[] = [
         thumbnailUrl: 'https://placehold.co/1280x720.png',
     },
     {
+        id: 'fb-puri-2019',
+        title: 'Puri Beach Address 2019',
+        date: '2019-11-23',
+        url: 'https://www.facebook.com/watch/live/?ref=watch_permalink&v=1135803450997873',
+        description: 'A discourse from the Shankaracharya at the annual Puri Beach Festival in 2019.',
+        thumbnailUrl: 'https://placehold.co/1280x720.png',
+    },
+    {
         id: 'fb-video-5',
         title: 'Discourse on Dharma from 2022',
         date: '2022-09-30',
@@ -55,6 +63,14 @@ export const puriFacebookVideos: FacebookVideo[] = [
         date: '2016-07-06',
         url: 'https://www.facebook.com/watch/live/?ref=watch_permalink&v=1135803450997873',
         description: 'Rare footage from the Ratha Yatra festival in 2016.',
+        thumbnailUrl: 'https://placehold.co/1280x720.png',
+    },
+    {
+        id: 'fb-puri-2014',
+        title: 'Gundicha Temple Visit 2014',
+        date: '2014-07-02',
+        url: 'https://www.facebook.com/watch/live/?ref=watch_permalink&v=1135803450997873',
+        description: 'Archival video of the deities at the Gundicha Temple during Ratha Yatra 2014.',
         thumbnailUrl: 'https://placehold.co/1280x720.png',
     },
     {

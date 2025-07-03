@@ -41,6 +41,14 @@ export const dwarakaFacebookVideos: FacebookVideo[] = [
         description: 'An old but timeless discourse on the importance of selfless service (Seva) in spiritual life.',
         thumbnailUrl: 'https://placehold.co/1280x720.png',
     },
+     {
+        id: 'fb-dwaraka-2019',
+        title: 'Discourse on Bhakti Yoga 2019',
+        date: '2019-10-25',
+        url: 'https://www.facebook.com/SwamiSadanandSaraswatiDwarkaGujarat/videos/238407842567883/',
+        description: 'An archival discourse from 2019 on the path of devotion.',
+        thumbnailUrl: 'https://placehold.co/1280x720.png',
+    },
     {
         id: 'fb-video-5',
         title: 'Gita Jayanti 2022',
@@ -55,6 +63,14 @@ export const dwarakaFacebookVideos: FacebookVideo[] = [
         date: '2018-05-10',
         url: 'https://www.facebook.com/SwamiSadanandSaraswatiDwarkaGujarat/videos/238407842567883/',
         description: 'A message to devotees from the archives of 2018.',
+        thumbnailUrl: 'https://placehold.co/1280x720.png',
+    },
+    {
+        id: 'fb-dwaraka-2014',
+        title: 'Guru Purnima Darshan 2014',
+        date: '2014-07-12',
+        url: 'https://www.facebook.com/SwamiSadanandSaraswatiDwarkaGujarat/videos/238407842567883/',
+        description: 'Darshan of the Acharya on the auspicious day of Guru Purnima in 2014.',
         thumbnailUrl: 'https://placehold.co/1280x720.png',
     },
     {

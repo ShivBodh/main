@@ -18,15 +18,15 @@ import { format } from 'date-fns';
 const dwarakaSeva = allSevaOpportunities.filter(o => o.peetham === 'Dwaraka');
 
 export default function DwarakaClient() {
-    const [visibleYoutubeVideos, setVisibleYoutubeVideos] = useState(2);
-    const [visibleFacebookVideos, setVisibleFacebookVideos] = useState(2);
+    const [visibleYoutubeVideos, setVisibleYoutubeVideos] = useState(6);
+    const [visibleFacebookVideos, setVisibleFacebookVideos] = useState(6);
 
     const loadMoreYoutubeVideos = () => {
-        setVisibleYoutubeVideos(prev => prev + 4);
+        setVisibleYoutubeVideos(prev => prev + 6);
     };
 
     const loadMoreFacebookVideos = () => {
-        setVisibleFacebookVideos(prev => prev + 4);
+        setVisibleFacebookVideos(prev => prev + 6);
     };
 
     const dwarakaMedia = useMemo(() => allCalendarItems.filter(item => item.peetham === 'Dwaraka'), []);
@@ -157,49 +157,67 @@ export default function DwarakaClient() {
           </TabsContent>
           
           <TabsContent value="gallery">
-             <Tabs defaultValue="youtube" className="w-full">
+             <Tabs defaultValue="photos" className="w-full">
                 <TabsList className="grid w-full grid-cols-3">
                     <TabsTrigger value="photos">Photos</TabsTrigger>
                     <TabsTrigger value="youtube">YouTube</TabsTrigger>
                     <TabsTrigger value="facebook">Facebook</TabsTrigger>
                 </TabsList>
                 <TabsContent value="photos" className="mt-8">
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        {dwarakaPhotos.map(photo => (
-                            <div key={photo.id} className="group relative aspect-video rounded-lg overflow-hidden">
-                                <Image src={photo.imageUrl} alt={photo.title} fill className="object-cover transition-transform duration-300 group-hover:scale-105" data-ai-hint={photo.aiHint}/>
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                                <p className="absolute bottom-2 left-2 text-white text-sm font-semibold p-1">{photo.title}</p>
-                            </div>
-                        ))}
-                    </div>
-                     {dwarakaPhotos.length === 0 && <p className="text-center text-muted-foreground py-8">No photos available.</p>}
+                     {dwarakaPhotos.length > 0 ? (
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                            {dwarakaPhotos.map(photo => (
+                                <Card key={photo.id} className="overflow-hidden transition-shadow hover:shadow-xl flex flex-col">
+                                     <CardContent className="p-0">
+                                        <div className="relative aspect-video rounded-t-lg overflow-hidden group bg-secondary">
+                                            <Image src={photo.imageUrl} alt={photo.title} fill className="object-cover transition-transform duration-300 group-hover:scale-105" data-ai-hint={photo.aiHint}/>
+                                        </div>
+                                    </CardContent>
+                                    <CardHeader>
+                                        <CardTitle className="font-headline text-lg">{photo.title}</CardTitle>
+                                        <p className="text-sm text-muted-foreground pt-1">{format(new Date(photo.date.replace(/-/g, '/')), 'MMMM d, yyyy')}</p>
+                                    </CardHeader>
+                                    <CardContent className="flex-grow">
+                                        <p className="text-foreground/80 text-sm">{photo.description}</p>
+                                    </CardContent>
+                                </Card>
+                            ))}
+                        </div>
+                    ) : (
+                        <p className="text-center text-muted-foreground py-8">No photos available.</p>
+                    )}
                 </TabsContent>
                 <TabsContent value="youtube" className="mt-8">
-                    <div className="space-y-6">
-                        {dwarakaYoutube.slice(0, visibleYoutubeVideos).map(video => (
-                           <VideoCard key={video.id} video={video as CalendarYouTubeItem} />
-                        ))}
-                    </div>
+                     {dwarakaYoutube.length > 0 ? (
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                            {dwarakaYoutube.slice(0, visibleYoutubeVideos).map(video => (
+                               <VideoCard key={video.id} video={video as CalendarYouTubeItem} />
+                            ))}
+                        </div>
+                    ) : (
+                        <p className="text-center text-muted-foreground py-8">No YouTube videos available.</p>
+                    )}
                     {visibleYoutubeVideos < dwarakaYoutube.length && (
                         <div className="text-center mt-8">
                             <Button onClick={loadMoreYoutubeVideos}>Load More YouTube Videos</Button>
                         </div>
                     )}
-                     {dwarakaYoutube.length === 0 && <p className="text-center text-muted-foreground py-8">No YouTube videos available.</p>}
                 </TabsContent>
                 <TabsContent value="facebook" className="mt-8">
-                    <div className="space-y-6">
-                        {dwarakaFacebook.slice(0, visibleFacebookVideos).map(video => (
-                           <VideoCard key={video.id} video={video as CalendarFacebookItem} />
-                        ))}
-                    </div>
+                    {dwarakaFacebook.length > 0 ? (
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                            {dwarakaFacebook.slice(0, visibleFacebookVideos).map(video => (
+                                <VideoCard key={video.id} video={video as CalendarFacebookItem} />
+                            ))}
+                        </div>
+                    ) : (
+                        <p className="text-center text-muted-foreground py-8">No Facebook videos available.</p>
+                    )}
                     {visibleFacebookVideos < dwarakaFacebook.length && (
                         <div className="text-center mt-8">
                             <Button onClick={loadMoreFacebookVideos}>Load More Facebook Videos</Button>
                         </div>
                     )}
-                    {dwarakaFacebook.length === 0 && <p className="text-center text-muted-foreground py-8">No Facebook videos available.</p>}
                 </TabsContent>
              </Tabs>
           </TabsContent>

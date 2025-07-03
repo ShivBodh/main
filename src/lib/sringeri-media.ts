@@ -65,6 +65,15 @@ export type VideoArchiveItem = {
       source: 'YouTube',
     },
     {
+      id: 'archive-sringeri-2019',
+      title: 'Discourse on Vedanta (2019)',
+      description: 'An archival discourse on the core principles of Advaita Vedanta from 2019.',
+      date: '2019-03-22',
+      videoId: 'YOUR_YOUTUBE_VIDEO_ID_41',
+      thumbnailUrl: 'https://placehold.co/1280x720.png',
+      source: 'YouTube',
+    },
+    {
       id: 'archive-2015-11-11',
       title: 'Deepavali Celebrations 2015',
       description: 'Archival footage of the Deepavali festival celebrations at Sringeri from 2015.',
@@ -109,8 +118,10 @@ export type VideoArchiveItem = {
     { id: 'sringeri-photo-4', date: '2024-07-15', title: 'Festival Gathering', description: 'Devotees gathered during a recent festival at Sringeri.', alt: 'Crowd of devotees during a festival', src: 'https://placehold.co/400x300.png', aiHint: 'devotees gathering' },
     { id: 'sringeri-photo-5', date: '2023-04-22', title: 'Akshaya Tritiya 2023', description: 'Special golden chariot festival for Goddess Sharada on Akshaya Tritiya.', alt: 'Golden chariot festival', src: 'https://placehold.co/400x300.png', aiHint: 'golden chariot' },
     { id: 'sringeri-photo-6', date: '2022-11-08', title: 'Tunga River Aarti', description: 'The serene evening aarti performed on the banks of the Tunga River.', alt: 'Evening aarti on river bank', src: 'https://placehold.co/400x300.png', aiHint: 'river aarti' },
+    { id: 'sringeri-photo-11', date: '2019-09-02', title: 'Ganesh Chaturthi 2019', description: 'An image from the Ganesh Chaturthi festival celebrations in 2019.', alt: 'Ganesh Chaturthi 2019', src: 'https://placehold.co/400x300.png', aiHint: 'ganesha festival' },
     { id: 'sringeri-photo-7', date: '2014-03-31', title: 'Ugadi Celebrations 2014', description: 'Celebrating the Telugu and Kannada New Year in 2014.', alt: 'Ugadi festival celebrations', src: 'https://placehold.co/400x300.png', aiHint: 'new year festival' },
     { id: 'sringeri-photo-8', date: '2013-11-03', title: 'Deepavali at Sringeri 2013', description: 'The Vidyasankara Temple illuminated for Deepavali in 2013.', alt: 'Temple illuminated for festival of lights', src: 'https://placehold.co/400x300.png', aiHint: 'temple lights' },
+    { id: 'sringeri-photo-12', date: '2012-02-20', title: 'Maha Shivaratri 2012', description: 'Night-long vigil and prayers during Maha Shivaratri in 2012.', alt: 'Maha Shivaratri 2012', src: 'https://placehold.co/400x300.png', aiHint: 'shiva lingam' },
     { id: 'sringeri-photo-9', date: '2011-02-10', title: 'Pathashala Students 2011', description: 'A group photograph of students at the Sringeri Pathashala in 2011.', alt: 'Vedic school students', src: 'https://placehold.co/400x300.png', aiHint: 'students scholars' },
     { id: 'sringeri-photo-10', date: '2010-01-15', title: 'Makara Sankranti 2010', description: 'Early morning rituals for Makara Sankranti in 2010.', alt: 'Sankranti festival rituals', src: 'https://placehold.co/400x300.png', aiHint: 'festival ritual' },
   ];

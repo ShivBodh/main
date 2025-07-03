@@ -42,6 +42,14 @@ export const jyotirmathFacebookVideos: FacebookVideo[] = [
         thumbnailUrl: 'https://placehold.co/1280x720.png',
     },
     {
+        id: 'fb-jyotirmath-2019',
+        title: 'Ganga Dussehra Message 2019',
+        date: '2019-06-12',
+        url: 'https://www.facebook.com/1008.guru/videos/1135803450997873/',
+        description: 'A message on the occasion of Ganga Dussehra from 2019.',
+        thumbnailUrl: 'https://placehold.co/1280x720.png',
+    },
+    {
         id: 'fb-video-5',
         title: 'Glimpses of the Himalayas (2022)',
         date: '2022-08-15',
@@ -51,10 +59,18 @@ export const jyotirmathFacebookVideos: FacebookVideo[] = [
     },
     {
         id: 'fb-video-6',
-        title: 'Archival Message from 2017',
+        title: 'Archive: Message from 2017',
         date: '2017-01-01',
         url: 'https://www.facebook.com/1008.guru/videos/1135803450997873/',
         description: 'A new year message to devotees from the archives of 2017.',
+        thumbnailUrl: 'https://placehold.co/1280x720.png',
+    },
+    {
+        id: 'fb-jyotirmath-2015',
+        title: 'Badrinath Opening 2015',
+        date: '2015-04-26',
+        url: 'https://www.facebook.com/1008.guru/videos/1135803450997873/',
+        description: 'Archival footage from the Badrinath temple opening in 2015.',
         thumbnailUrl: 'https://placehold.co/1280x720.png',
     },
     {
@@ -63,6 +79,14 @@ export const jyotirmathFacebookVideos: FacebookVideo[] = [
         date: '2014-05-05',
         url: 'https://www.facebook.com/1008.guru/videos/1135803450997873/',
         description: 'Rare footage from the temple opening ceremony in 2014.',
+        thumbnailUrl: 'https://placehold.co/1280x720.png',
+    },
+    {
+        id: 'fb-jyotirmath-2012',
+        title: 'Discourse from 2012',
+        date: '2012-07-20',
+        url: 'https://www.facebook.com/1008.guru/videos/1135803450997873/',
+        description: 'An old discourse on Vedanta from the summer of 2012.',
         thumbnailUrl: 'https://placehold.co/1280x720.png',
     }
 ];
