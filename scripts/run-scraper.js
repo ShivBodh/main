@@ -1,3 +1,4 @@
+
 /**
  * @fileoverview Placeholder Scraper Tool for Sanatana Peethams Portal.
  *
@@ -19,10 +20,8 @@
  */
 
 const puppeteer = require('puppeteer');
-// In a real application, you would initialize the Firebase Admin SDK here
-// to write the scraped data directly to Firestore and Cloud Storage.
-// const admin = require('firebase-admin');
-// admin.initializeApp({ ... });
+const fs = require('fs');
+const path = require('path');
 
 // --- CONFIGURATION ---
 // You MUST update these values.
@@ -31,16 +30,8 @@ const FACEBOOK_EMAIL = process.env.FACEBOOK_EMAIL || 'your_facebook_email@exampl
 const FACEBOOK_PASSWORD = process.env.FACEBOOK_PASSWORD || 'your_facebook_password';
 const SCROLL_COUNT = 5; // How many times to scroll down to load more posts.
 const HEADLESS_MODE = true; // Set to `false` to see the browser in action.
+const OUTPUT_FILE_PATH = path.join(__dirname, '../src/lib/sringeri-media.json');
 
-// This is a placeholder for your Firebase connection.
-const firestoreDb = {
-    collection: (name) => ({
-        add: (data) => {
-            console.log(`[Firestore Mock] Adding to ${name}:`, data);
-            return Promise.resolve({ id: 'mock-firestore-id' });
-        }
-    })
-};
 
 async function runScraper() {
     console.log(`Starting scraper for: ${TARGET_URL}`);
@@ -100,27 +91,34 @@ async function runScraper() {
 
         console.log(`Found ${postsData.length} posts with images.`);
 
-        // 4. Process and Save Data
-        // In a real application, you would loop through `postsData` and:
-        //  a. Download the image from `imageUrl`.
-        //  b. Upload the image to your Firebase Cloud Storage bucket.
-        //  c. Get the new Cloud Storage URL (and thumbnail URL).
-        //  d. Create a new document in your Firestore `media` collection with all the metadata.
-        for (const post of postsData) {
-            const mediaDoc = {
-                title: 'Scraped Image', // You might derive this from the description
-                description: post.description,
-                date: post.date.split('T')[0], // Format to YYYY-MM-DD
-                peetham: 'Sringeri', // This should be a parameter
-                imageUrl: 'URL_FROM_CLOUD_STORAGE', // Placeholder
-                thumbnailUrl: 'URL_FROM_CLOUD_STORAGE_THUMBNAIL', // Placeholder
-                sourceUrl: TARGET_URL, // Original source
-                aiHint: 'scraped image', // Default AI hint
-                type: 'photo'
-            };
-            // await firestoreDb.collection('media').add(mediaDoc);
-            console.log('[MOCK] Saving document:', mediaDoc);
+        if (postsData.length === 0) {
+            console.warn("[Warning] No posts were found. The CSS selectors in the script are likely outdated. Please update them by inspecting the Facebook page structure.");
+            return;
         }
+
+        // 4. Process and Save Data
+        // In a real application, you would also download the image and upload it to your own
+        // cloud storage, then use that URL here. For now, we use placeholders.
+        const allScrapedMedia = [];
+        for (const [index, post] of postsData.entries()) {
+             const mediaDoc = {
+                id: `scraped-${Date.now()}-${index}`,
+                date: post.date.split('T')[0],
+                title: post.description.substring(0, 50) + (post.description.length > 50 ? '...' : ''),
+                description: post.description,
+                // In a real flow, you'd upload post.imageUrl to your own storage
+                // and get back a new URL and thumbnailUrl.
+                imageUrl: 'https://placehold.co/600x400.png', 
+                thumbnailUrl: 'https://placehold.co/400x300.png',
+                aiHint: 'scraped image',
+            };
+            allScrapedMedia.push(mediaDoc);
+        }
+
+        // 5. Write to JSON database file
+        fs.writeFileSync(OUTPUT_FILE_PATH, JSON.stringify(allScrapedMedia, null, 4), 'utf-8');
+        console.log(`[SUCCESS] Scraped data for ${allScrapedMedia.length} images written to ${OUTPUT_FILE_PATH}`);
+
 
     } catch (error) {
         console.error('An error occurred during scraping:', error);
