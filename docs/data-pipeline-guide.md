@@ -7,9 +7,9 @@ This process transforms your portal from being dependent on external platforms t
 
 ---
 
-## The Architecture: The Four-Step Process
+## The Architecture: The Five-Step Process
 
-Building a proper media pipeline involves four key steps. This is a backend process that you would run separately from the website itself.
+Building a proper media pipeline involves five key steps. This is a backend process that you would run separately from the website itself.
 
 ### Step 1: Scraping from the Source (e.g., Facebook)
 
@@ -30,7 +30,15 @@ Once you have the image URLs, you need to download them and save them in your ow
 *   **Process:** Your scraper script would download each image and then upload it to a designated bucket in your Firebase Cloud Storage.
 *   **Benefit:** The images are now yours. They are stored securely, and you are not dependent on the original source link remaining active.
 
-### Step 3: Organizing Your Metadata (Firestore)
+### Step 3: Generating Thumbnails (Storage Extension)
+
+This is a critical step for website performance. The gallery pages will show many images at once, and loading the full-resolution versions would be very slow.
+
+*   **Tool:** You have the **`storage-generate-thumbnails`** extension installed.
+*   **Process:** This extension runs automatically. Whenever a new image is uploaded to your Firebase Cloud Storage (in Step 2), it will instantly create a smaller, optimized "thumbnail" version of that image. You don't need to do anything manually.
+*   **Benefit:** Your website can now load the small thumbnails on gallery pages for a fast user experience, and only show the large, high-quality image when a user clicks on it.
+
+### Step 4: Organizing Your Metadata (Firestore)
 
 An image file is useless without its context. **Firestore** is the perfect database for this.
 
@@ -40,10 +48,11 @@ An image file is useless without its context. **Firestore** is the perfect datab
     *   `date`: The date of the event.
     *   `peetham`: The Peetham it belongs to (e.g., 'Sringeri').
     *   `imageUrl`: The new URL of the image in your own Firebase Cloud Storage.
+    *   `thumbnailUrl`: The URL of the automatically generated thumbnail.
     *   `sourceUrl`: The original Facebook post URL, for reference.
 *   **Benefit:** This creates a structured, searchable database of all your media content.
 
-### Step 4: Backing Up Your Assets (Google Drive)
+### Step 5: Backing Up Your Assets (Google Drive)
 
 You have the `storage-googledrive-export` extension installed. This provides an excellent, automated backup solution.
 

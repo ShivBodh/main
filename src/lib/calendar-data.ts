@@ -29,6 +29,7 @@ export interface CalendarEventItem extends BaseCalendarItem {
 export interface CalendarPhotoItem extends BaseCalendarItem {
     type: 'photo';
     imageUrl: string;
+    thumbnailUrl?: string; // For fast-loading gallery thumbnails
     aiHint: string;
 }
 
@@ -50,6 +51,7 @@ const photoItems: CalendarPhotoItem[] = [
         title: p.title,
         description: p.description,
         imageUrl: p.src,
+        thumbnailUrl: p.thumbnailUrl,
         aiHint: p.aiHint,
     })),
     ...dwarakaPhotoGallery.map(p => ({
@@ -60,6 +62,7 @@ const photoItems: CalendarPhotoItem[] = [
         title: p.title,
         description: p.description,
         imageUrl: p.src,
+        thumbnailUrl: p.thumbnailUrl,
         aiHint: p.aiHint,
     })),
     ...puriPhotoGallery.map(p => ({
@@ -70,6 +73,7 @@ const photoItems: CalendarPhotoItem[] = [
         title: p.title,
         description: p.description,
         imageUrl: p.src,
+        thumbnailUrl: p.thumbnailUrl,
         aiHint: p.aiHint,
     })),
     ...jyotirmathPhotoGallery.map(p => ({
@@ -80,6 +84,7 @@ const photoItems: CalendarPhotoItem[] = [
         title: p.title,
         description: p.description,
         imageUrl: p.src,
+        thumbnailUrl: p.thumbnailUrl,
         aiHint: p.aiHint,
     })),
 ];
