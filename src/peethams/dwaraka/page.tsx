@@ -10,11 +10,9 @@ import { ExternalLink, BookOpen, Calendar, Camera, MapPin, Mail, Briefcase, Glob
 import { allSevaOpportunities } from '@/lib/seva-data';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
-import { dwarakaVideoArchive, dwarakaPhotoGallery } from '@/lib/dwaraka-media';
-import { dwarakaFacebookVideos } from '@/lib/dwaraka-facebook-videos';
+import { dwarakaPhotoGallery } from '@/lib/dwaraka-media';
 import { useState, useMemo } from 'react';
 import type { Metadata } from 'next';
-import { VideoCard } from '@/components/media/VideoCard';
 
 export const metadata: Metadata = {
   title: 'Dwaraka Sharada Peetham | Sanatana Peethams Portal',
@@ -24,28 +22,16 @@ export const metadata: Metadata = {
 const dwarakaSeva = allSevaOpportunities.filter(o => o.peetham === 'Dwaraka');
 
 export default function DwarakaPeethamPage() {
-    const [visibleYoutubeVideos, setVisibleYoutubeVideos] = useState(2);
-    const [visibleFacebookVideos, setVisibleFacebookVideos] = useState(2);
-
-    const loadMoreYoutubeVideos = () => {
-        setVisibleYoutubeVideos(prev => prev + 2);
-    };
-
-    const loadMoreFacebookVideos = () => {
-        setVisibleFacebookVideos(prev => prev + 2);
-    };
-
-    const sortedYoutubeVideos = useMemo(() => [...dwarakaVideoArchive].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()), []);
-    const sortedFacebookVideos = useMemo(() => [...dwarakaFacebookVideos].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()), []);
-
-  return (
+    
+    return (
     <div className="bg-background text-foreground">
       <div className="container mx-auto max-w-6xl py-16 md:py-24 px-4">
         <section className="flex flex-col md:flex-row items-center gap-8 mb-12">
           <div className="w-full md:w-1/3">
             <Image
-              src="https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/SRI-SADANANDA-JI.svg"
+              src="https://placehold.co/800x600.png"
               alt="Jagadguru Shankaracharya of Dwaraka Sharada Peetham"
+              data-ai-hint="acharya portrait"
               width={800}
               height={600}
               className="rounded-lg shadow-lg object-contain aspect-[4/3]"
@@ -145,45 +131,13 @@ export default function DwarakaPeethamPage() {
           </TabsContent>
           
           <TabsContent value="gallery">
-             <Tabs defaultValue="youtube" className="w-full">
-                <TabsList className="grid w-full grid-cols-3">
-                    <TabsTrigger value="photos">Photos</TabsTrigger>
-                    <TabsTrigger value="youtube">YouTube</TabsTrigger>
-                    <TabsTrigger value="facebook">Facebook</TabsTrigger>
-                </TabsList>
-                <TabsContent value="photos" className="mt-8">
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        {dwarakaPhotoGallery.map(photo => (
-                            <Image key={photo.id} src={photo.src} alt={photo.alt} width={400} height={300} className="rounded-lg object-cover aspect-[4/3]" data-ai-hint={photo.aiHint}/>
-                        ))}
-                    </div>
-                </TabsContent>
-                <TabsContent value="youtube" className="mt-8">
-                    <div className="space-y-6">
-                        {sortedYoutubeVideos.slice(0, visibleYoutubeVideos).map(video => (
-                           <VideoCard key={video.id} video={video} />
-                        ))}
-                    </div>
-                    {visibleYoutubeVideos < sortedYoutubeVideos.length && (
-                        <div className="text-center mt-8">
-                            <Button onClick={loadMoreYoutubeVideos}>Load More Videos</Button>
-                        </div>
-                    )}
-                </TabsContent>
-                <TabsContent value="facebook" className="mt-8">
-                    <div className="space-y-6">
-                        {sortedFacebookVideos.slice(0, visibleFacebookVideos).map(video => (
-                            <VideoCard key={video.id} video={video} />
-                        ))}
-                    </div>
-                    {visibleFacebookVideos < sortedFacebookVideos.length && (
-                        <div className="text-center mt-8">
-                            <Button onClick={loadMoreFacebookVideos}>Load More Videos</Button>
-                        </div>
-                    )}
-                </TabsContent>
-             </Tabs>
+             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {dwarakaPhotoGallery.map(photo => (
+                    <Image key={photo.id} src={photo.src} alt={photo.alt} width={400} height={300} className="rounded-lg object-cover aspect-[4/3]" data-ai-hint={photo.aiHint}/>
+                ))}
+            </div>
           </TabsContent>
+
            <TabsContent value="seva">
             <h3 className="font-headline text-2xl text-primary mb-6">Seva Opportunities at Dwaraka</h3>
             {dwarakaSeva.length > 0 ? (

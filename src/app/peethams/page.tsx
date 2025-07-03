@@ -29,7 +29,7 @@ export default function PeethamsPage() {
         <div className="text-center mb-16">
           <div className="mb-8">
             <Image
-              src="https://source.unsplash.com/150x150/?statue,guru"
+              src="https://placehold.co/150x150.png"
               data-ai-hint="statue guru"
               alt="Jagadguru Adi Shankaracharya"
               width={150}
