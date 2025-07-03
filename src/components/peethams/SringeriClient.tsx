@@ -4,22 +4,19 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { ExternalLink, BookOpen, Calendar, Camera, MapPin, Mail, Briefcase, Globe, ScrollText } from 'lucide-react';
+import { ExternalLink, BookOpen, Calendar, Camera, MapPin, Mail, Briefcase, Globe, ScrollText, ArrowRight } from 'lucide-react';
 import { allSevaOpportunities } from '@/lib/seva-data';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
-import { sringeriVideoArchive, sringeriPhotoGallery, type VideoArchiveItem } from '@/lib/sringeri-media';
-import { sringeriFacebookVideos, type FacebookVideo } from '@/lib/sringeri-facebook-videos';
+import { sringeriPhotoGallery } from '@/lib/sringeri-media';
 import { useState, useMemo } from 'react';
 import { VideoCard } from '@/components/media/VideoCard';
-import { allCalendarItems } from '@/lib/calendar-data';
+import { allCalendarItems, CalendarEventItem } from '@/lib/calendar-data';
+import { format } from 'date-fns';
 
 const sringeriSeva = allSevaOpportunities.filter(o => o.peetham === 'Sringeri');
-const sringeriMedia = allCalendarItems.filter(item => item.peetham === 'Sringeri');
-const sringeriYoutube = sringeriMedia.filter(item => item.type === 'youtube');
-const sringeriFacebook = sringeriMedia.filter(item => item.type === 'facebook');
 
 export default function SringeriClient() {
     const [visibleYoutubeVideos, setVisibleYoutubeVideos] = useState(2);
@@ -32,6 +29,11 @@ export default function SringeriClient() {
     const loadMoreFacebookVideos = () => {
         setVisibleFacebookVideos(prev => prev + 2);
     };
+
+    const sringeriMedia = useMemo(() => allCalendarItems.filter(item => item.peetham === 'Sringeri'), []);
+    const sringeriYoutube = useMemo(() => sringeriMedia.filter(item => item.type === 'youtube'), [sringeriMedia]);
+    const sringeriFacebook = useMemo(() => sringeriMedia.filter(item => item.type === 'facebook'), [sringeriMedia]);
+    const sringeriEvents = useMemo(() => sringeriMedia.filter((item): item is CalendarEventItem => item.type === 'event').slice(0, 3), [sringeriMedia]);
 
   return (
     <div className="bg-background text-foreground">
@@ -109,27 +111,42 @@ export default function SringeriClient() {
           </TabsContent>
 
           <TabsContent value="events">
-             <p className="text-center text-muted-foreground mb-8">A filtered view of upcoming and recent events related to the Sringeri Peetham. (This is placeholder data)</p>
-             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <Card className="transition-shadow hover:shadow-lg">
-                    <CardHeader>
-                        <CardTitle className="font-headline text-primary flex items-center gap-2"><Calendar className="h-5 w-5" /> Sharada Sharannavaratri</CardTitle>
-                        <p className="text-sm text-muted-foreground">October 3, 2024 - October 12, 2024</p>
-                    </CardHeader>
-                    <CardContent>
-                        <p>The annual Navaratri festival celebrated with grandeur, featuring daily pujas, cultural events, and discourses by the Jagadguru.</p>
-                    </CardContent>
-                </Card>
-                <Card className="transition-shadow hover:shadow-lg">
-                    <CardHeader>
-                        <CardTitle className="font-headline text-primary flex items-center gap-2"><Calendar className="h-5 w-5" /> Chaturmasya Vrata Anushtanam</CardTitle>
-                        <p className="text-sm text-muted-foreground">July 21, 2024 - September 18, 2024</p>
-                    </CardHeader>
-                    <CardContent>
-                        <p>The sacred four-month period of spiritual retreat and penance observed by the Jagadguru. Devotees can attend special discourses during this time.</p>
-                    </CardContent>
-                </Card>
-             </div>
+            <Card>
+                <CardHeader>
+                    <CardTitle className="font-headline text-primary flex items-center gap-2">
+                        <Calendar className="h-6 w-6" /> Recent & Upcoming Events
+                    </CardTitle>
+                    <CardDescription>
+                        The latest happenings connected to the Sringeri Sharada Peetham.
+                    </CardDescription>
+                </CardHeader>
+                <CardContent>
+                    {sringeriEvents.length > 0 ? (
+                        <ul className="space-y-4">
+                            {sringeriEvents.map(event => (
+                                <li key={event.id} className="flex flex-col sm:flex-row justify-between sm:items-center p-3 rounded-md border bg-muted/20">
+                                    <div>
+                                        <p className="font-semibold text-foreground/90">{event.title}</p>
+                                        <p className="text-sm text-muted-foreground">{format(new Date(event.date.replace(/-/g, '/')), 'MMMM d, yyyy')}</p>
+                                    </div>
+                                    <p className="text-sm font-medium text-primary mt-2 sm:mt-0">{event.category}</p>
+                                </li>
+                            ))}
+                        </ul>
+                    ) : (
+                        <p className="text-muted-foreground text-center p-4">
+                            No specific events found. Check the main Bodha Calendar for all activities.
+                        </p>
+                    )}
+                </CardContent>
+                <CardFooter>
+                    <Button asChild className="w-full">
+                        <Link href="/events">
+                            View Full Bodha Calendar <ArrowRight className="ml-2 h-4 w-4" />
+                        </Link>
+                    </Button>
+                </CardFooter>
+            </Card>
           </TabsContent>
 
           <TabsContent value="gallery">

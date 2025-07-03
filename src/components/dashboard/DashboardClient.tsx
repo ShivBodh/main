@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Skeleton } from '@/components/ui/skeleton';
-import { LogOut, Mail, User as UserIcon, BookOpen, Brain, BookMarked } from 'lucide-react';
+import { LogOut, Mail, User as UserIcon, BookOpen, Brain, BookMarked, History } from 'lucide-react';
 import Link from 'next/link';
 import { DonationDiary } from '@/components/dashboard/DonationDiary';
 
@@ -32,7 +32,8 @@ export default function DashboardClient() {
                     <Skeleton className="h-5 w-80" />
                 </div>
             </div>
-            <div className="grid gap-8 md:grid-cols-2">
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                <Skeleton className="h-48 w-full rounded-lg" />
                 <Skeleton className="h-48 w-full rounded-lg" />
                 <Skeleton className="h-48 w-full rounded-lg" />
             </div>
@@ -69,7 +70,7 @@ export default function DashboardClient() {
             </div>
         </div>
       
-        <div className="grid gap-8 md:grid-cols-2 mb-8">
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mb-8">
             <Card className="shadow-md">
                 <CardHeader>
                     <CardTitle className="font-headline flex items-center gap-2">
@@ -116,6 +117,23 @@ export default function DashboardClient() {
                             <span>Go to the Reading Room</span>
                         </Link>
                     </Button>
+                </CardContent>
+            </Card>
+
+            <Card className="shadow-md md:col-span-2 lg:col-span-1">
+                <CardHeader>
+                    <CardTitle className="font-headline flex items-center gap-2">
+                        <History className="h-6 w-6 text-accent" />
+                        Your Activity
+                    </CardTitle>
+                    <CardDescription>
+                        A log of your recent interactions across the portal.
+                    </CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <p className="text-sm text-muted-foreground text-center p-4">
+                        Activity feed is being configured and will appear here soon.
+                    </p>
                 </CardContent>
             </Card>
         </div>

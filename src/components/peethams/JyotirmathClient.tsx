@@ -4,22 +4,19 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { ExternalLink, BookOpen, Calendar, Camera, MapPin, Mail, Briefcase, Globe, Mountain } from 'lucide-react';
+import { ExternalLink, BookOpen, Calendar, Camera, MapPin, Mail, Briefcase, Globe, Mountain, ArrowRight } from 'lucide-react';
 import { allSevaOpportunities } from '@/lib/seva-data';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
-import { jyotirmathVideoArchive, jyotirmathPhotoGallery } from '@/lib/jyotirmath-media';
-import { jyotirmathFacebookVideos } from '@/lib/jyotirmath-facebook-videos';
+import { jyotirmathPhotoGallery } from '@/lib/jyotirmath-media';
 import { useState, useMemo } from 'react';
 import { VideoCard } from '@/components/media/VideoCard';
-import { allCalendarItems } from '@/lib/calendar-data';
+import { allCalendarItems, CalendarEventItem } from '@/lib/calendar-data';
+import { format } from 'date-fns';
 
 const jyotirmathSeva = allSevaOpportunities.filter(o => o.peetham === 'Jyotirmath');
-const jyotirmathMedia = allCalendarItems.filter(item => item.peetham === 'Jyotirmath');
-const jyotirmathYoutube = jyotirmathMedia.filter(item => item.type === 'youtube');
-const jyotirmathFacebook = jyotirmathMedia.filter(item => item.type === 'facebook');
 
 export default function JyotirmathClient() {
     const [visibleYoutubeVideos, setVisibleYoutubeVideos] = useState(2);
@@ -32,6 +29,11 @@ export default function JyotirmathClient() {
     const loadMoreFacebookVideos = () => {
         setVisibleFacebookVideos(prev => prev + 2);
     };
+
+    const jyotirmathMedia = useMemo(() => allCalendarItems.filter(item => item.peetham === 'Jyotirmath'), []);
+    const jyotirmathYoutube = useMemo(() => jyotirmathMedia.filter(item => item.type === 'youtube'), [jyotirmathMedia]);
+    const jyotirmathFacebook = useMemo(() => jyotirmathMedia.filter(item => item.type === 'facebook'), [jyotirmathMedia]);
+    const jyotirmathEvents = useMemo(() => jyotirmathMedia.filter((item): item is CalendarEventItem => item.type === 'event').slice(0, 3), [jyotirmathMedia]);
 
   return (
     <div className="bg-background text-foreground">
@@ -110,27 +112,42 @@ export default function JyotirmathClient() {
           </TabsContent>
 
           <TabsContent value="events">
-             <p className="text-center text-muted-foreground mb-8">A filtered view of upcoming and recent events related to the Jyotirmath Peetham. (This is placeholder data)</p>
-             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <Card className="transition-shadow hover:shadow-lg">
-                    <CardHeader>
-                        <CardTitle className="font-headline text-primary flex items-center gap-2"><Calendar className="h-5 w-5" /> Badrinath Temple Opening</CardTitle>
-                        <p className="text-sm text-muted-foreground">April-May (Annual)</p>
-                    </CardHeader>
-                    <CardContent>
-                        <p>The Shankaracharya of Jyotirmath plays a key role in the ceremonial opening of the Badrinath shrine after the winter season.</p>
-                    </CardContent>
-                </Card>
-                <Card className="transition-shadow hover:shadow-lg">
-                    <CardHeader>
-                        <CardTitle className="font-headline text-primary flex items-center gap-2"><Calendar className="h-5 w-5" /> Special Meditational Retreats</CardTitle>
-                        <p className="text-sm text-muted-foreground">Summer Months</p>
-                    </CardHeader>
-                    <CardContent>
-                        <p>Guided retreats for advanced seekers, focusing on intensive meditation and study of the Upanishads.</p>
-                    </CardContent>
-                </Card>
-             </div>
+            <Card>
+                <CardHeader>
+                    <CardTitle className="font-headline text-primary flex items-center gap-2">
+                        <Calendar className="h-6 w-6" /> Recent & Upcoming Events
+                    </CardTitle>
+                    <CardDescription>
+                        The latest happenings connected to the Jyotirmath Peetham.
+                    </CardDescription>
+                </CardHeader>
+                <CardContent>
+                    {jyotirmathEvents.length > 0 ? (
+                        <ul className="space-y-4">
+                            {jyotirmathEvents.map(event => (
+                                <li key={event.id} className="flex flex-col sm:flex-row justify-between sm:items-center p-3 rounded-md border bg-muted/20">
+                                    <div>
+                                        <p className="font-semibold text-foreground/90">{event.title}</p>
+                                        <p className="text-sm text-muted-foreground">{format(new Date(event.date.replace(/-/g, '/')), 'MMMM d, yyyy')}</p>
+                                    </div>
+                                    <p className="text-sm font-medium text-primary mt-2 sm:mt-0">{event.category}</p>
+                                </li>
+                            ))}
+                        </ul>
+                    ) : (
+                        <p className="text-muted-foreground text-center p-4">
+                            No specific events found. Check the main Bodha Calendar for all activities.
+                        </p>
+                    )}
+                </CardContent>
+                <CardFooter>
+                    <Button asChild className="w-full">
+                        <Link href="/events">
+                            View Full Bodha Calendar <ArrowRight className="ml-2 h-4 w-4" />
+                        </Link>
+                    </Button>
+                </CardFooter>
+            </Card>
           </TabsContent>
           
           <TabsContent value="gallery">
