@@ -2,60 +2,19 @@
 'use client';
 
 import { useState, useMemo, useEffect } from 'react';
-import Image from 'next/image';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
-import { Badge } from '@/components/ui/badge';
 import { format } from 'date-fns';
-import { allCalendarItems, UnifiedCalendarItem, CalendarEventItem, CalendarPhotoItem } from '@/lib/calendar-data';
-import { peethamBadgeColors, peethamDotColors, Peetham } from '@/lib/events-data';
-import { VenetianMask, Camera } from 'lucide-react';
+import { allCalendarItems, CalendarPhotoItem } from '@/lib/calendar-data';
+import { Peetham } from '@/lib/events-data';
+import { ImageOff, Camera } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { PhotoCard } from '@/components/media/PhotoCard';
 
-const EventCard = ({ event }: { event: CalendarEventItem }) => (
-    <Card key={event.id} className="border-l-4" style={{ borderColor: peethamDotColors[event.peetham] }}>
-        <CardHeader>
-            <div className="flex justify-between items-start">
-                <CardTitle className="font-headline text-lg">{event.title}</CardTitle>
-                <Badge variant="outline" className={`${peethamBadgeColors[event.peetham]}`}>
-                    {event.peetham}
-                </Badge>
-            </div>
-            <p className="text-sm font-medium text-muted-foreground">{event.category}</p>
-        </CardHeader>
-        <CardContent>
-            <p className="text-foreground/80 mb-4">{event.description}</p>
-            {(event.story || (event.references && event.references.length > 0)) && (
-                <Accordion type="single" collapsible className="w-full">
-                    <AccordionItem value={`event-${event.id}`} className="border-b-0">
-                        <AccordionTrigger className="text-sm p-0 hover:no-underline text-accent">
-                            Learn More
-                        </AccordionTrigger>
-                        <AccordionContent className="pt-2 text-sm text-foreground/80 prose prose-sm max-w-none">
-                            {event.story && <p className="mb-4">{event.story}</p>}
-                            {event.references && event.references.length > 0 && (
-                                <div>
-                                    <h4 className="font-semibold text-foreground/90 not-prose">References:</h4>
-                                    <ul className="list-disc list-inside mt-1">
-                                        {event.references.map((ref, index) => (
-                                            <li key={index}>{ref}</li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            )}
-                        </AccordionContent>
-                    </AccordionItem>
-                </Accordion>
-            )}
-        </CardContent>
-    </Card>
-);
-
-const groupItemsByDate = (items: UnifiedCalendarItem[]): Record<string, UnifiedCalendarItem[]> => {
+const groupItemsByDate = (items: CalendarPhotoItem[]): Record<string, CalendarPhotoItem[]> => {
     return items.reduce((acc, item) => {
         const date = item.date;
         if (!acc[date]) {
@@ -63,10 +22,10 @@ const groupItemsByDate = (items: UnifiedCalendarItem[]): Record<string, UnifiedC
         }
         acc[date].push(item);
         return acc;
-    }, {} as Record<string, UnifiedCalendarItem[]>);
+    }, {} as Record<string, CalendarPhotoItem[]>);
 };
 
-export default function EventsClient() {
+export default function GalleryClient() {
     const [isClient, setIsClient] = useState(false);
     const [filters, setFilters] = useState<Record<Peetham, boolean>>({
         Sringeri: true,
@@ -91,11 +50,10 @@ export default function EventsClient() {
                     element.classList.remove('flash-highlight');
                 }, 1500);
 
-                setJumpToDate(undefined); // Reset state after triggering
-                
-                return () => clearTimeout(timer); // Cleanup timer on unmount or re-run
+                setJumpToDate(undefined);
+                return () => clearTimeout(timer);
             } else {
-                 setJumpToDate(undefined); // Reset even if element not found
+                 setJumpToDate(undefined);
             }
         }
     }, [jumpToDate]);
@@ -106,7 +64,9 @@ export default function EventsClient() {
     };
 
     const filteredItems = useMemo(() => {
-        return allCalendarItems.filter(item => filters[item.peetham]);
+        return allCalendarItems
+            .filter((item): item is CalendarPhotoItem => item.type === 'photo')
+            .filter(item => filters[item.peetham]);
     }, [filters]);
 
     const groupedItems = useMemo(() => groupItemsByDate(filteredItems), [filteredItems]);
@@ -121,16 +81,10 @@ export default function EventsClient() {
         datesWithContent.forEach(date => {
             const year = format(date, 'yyyy');
             const month = format(date, 'MMMM');
-
-            if (!groups[year]) {
-                groups[year] = {};
-            }
-            if (!groups[year][month]) {
-                groups[year][month] = [];
-            }
+            if (!groups[year]) groups[year] = {};
+            if (!groups[year][month]) groups[year][month] = [];
             groups[year][month].push(date);
         });
-
         return groups;
     }, [sortedDates]);
 
@@ -138,11 +92,12 @@ export default function EventsClient() {
     return (
         <div className="container mx-auto max-w-7xl py-16 md:py-24 px-4">
             <div className="text-center mb-12">
-                <h1 className="text-4xl md:text-5xl font-headline font-bold text-primary tracking-tight">
-                    Bodha Calendar
+                 <Camera className="mx-auto h-12 w-12 text-primary" />
+                <h1 className="mt-4 text-4xl md:text-5xl font-headline font-bold text-primary tracking-tight">
+                    Unified Media Gallery
                 </h1>
                 <p className="mt-4 text-lg md:text-xl text-foreground/80 max-w-3xl mx-auto">
-                    Explore a living archive of daily events, discourses, and media from the four cardinal Peethams. Scroll to browse or use the filters to jump to specific content.
+                    A living, chronological archive of photos from the four cardinal Peethams. This gallery is designed to be populated by your own independent media database.
                 </p>
             </div>
 
@@ -155,19 +110,13 @@ export default function EventsClient() {
                         <CardContent className="space-y-4">
                             {(Object.keys(filters) as Peetham[]).map((peetham) => (
                                 <div key={peetham} className="flex items-center space-x-2">
-                                    <Checkbox
-                                        id={peetham}
-                                        checked={filters[peetham]}
-                                        onCheckedChange={() => handleFilterChange(peetham)}
-                                    />
-                                    <Label htmlFor={peetham} className="text-base font-medium">
-                                        {peetham}
-                                    </Label>
+                                    <Checkbox id={peetham} checked={filters[peetham]} onCheckedChange={() => handleFilterChange(peetham)} />
+                                    <Label htmlFor={peetham} className="text-base font-medium">{peetham}</Label>
                                 </div>
                             ))}
                         </CardContent>
                     </Card>
-                    <Card>
+                     <Card>
                         <CardHeader>
                             <CardTitle className="font-headline text-xl">Jump to Date</CardTitle>
                         </CardHeader>
@@ -189,7 +138,7 @@ export default function EventsClient() {
                                                                     className="p-0 h-auto text-sm text-muted-foreground hover:text-accent"
                                                                     onClick={() => setJumpToDate(day)}
                                                                 >
-                                                                    {format(day, 'EEEE, do')}
+                                                                    {format(day, 'do')}
                                                                 </Button>
                                                             ))}
                                                         </AccordionContent>
@@ -209,46 +158,35 @@ export default function EventsClient() {
                         sortedDates.length > 0 ? (
                             <div className="space-y-8">
                                 {sortedDates.map(date => (
-                                    <Card key={date} id={`date-card-${date}`} className="overflow-hidden transition-colors duration-300">
-                                        <CardHeader className="bg-muted/50 border-b">
-                                            <CardTitle className="font-headline text-2xl text-primary">
-                                                {format(new Date(date.replace(/-/g, '/')), 'EEEE, MMMM d, yyyy')}
-                                            </CardTitle>
-                                        </CardHeader>
-                                        <CardContent className="p-4 space-y-4">
-                                            {groupedItems[date].map(item => {
-                                                switch (item.type) {
-                                                    case 'event':
-                                                        return <EventCard key={item.id} event={item as CalendarEventItem} />;
-                                                    case 'photo':
-                                                        return <PhotoCard key={item.id} item={item as CalendarPhotoItem} />;
-                                                    default:
-                                                        return null;
-                                                }
-                                            })}
-                                        </CardContent>
-                                    </Card>
+                                    <div key={date} id={`date-card-${date}`} className="transition-colors duration-300">
+                                        <h2 className="font-headline text-2xl text-primary mb-4 border-b pb-2">
+                                            {format(new Date(date.replace(/-/g, '/')), 'EEEE, MMMM d, yyyy')}
+                                        </h2>
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                            {groupedItems[date].map(item => (
+                                                <PhotoCard key={item.id} item={item} />
+                                            ))}
+                                        </div>
+                                    </div>
                                 ))}
                             </div>
                         ) : (
-                            <div className="flex flex-col items-center justify-center h-96 text-center text-muted-foreground">
-                                <VenetianMask className="h-16 w-16 mb-4 text-primary" />
-                                <p className="text-lg font-semibold">No content found for the selected filters.</p>
+                            <div className="flex flex-col items-center justify-center h-96 text-center text-muted-foreground bg-card rounded-lg">
+                                <ImageOff className="h-16 w-16 mb-4 text-primary" />
+                                <p className="text-lg font-semibold">No photos found for the selected filters.</p>
                                 <p>Try adjusting your filters to see more content.</p>
                             </div>
                         )
                     ) : (
-                        <div className="space-y-8">
-                             {[...Array(3)].map((_, i) => (
-                                <Card key={i}>
-                                    <CardHeader className="bg-muted/50 border-b">
-                                        <Skeleton className="h-8 w-64" />
-                                    </CardHeader>
-                                    <CardContent className="p-4 space-y-4">
-                                        <Skeleton className="h-40 w-full" />
-                                        <Skeleton className="h-40 w-full" />
-                                    </CardContent>
-                                </Card>
+                       <div className="space-y-8">
+                            {[...Array(2)].map((_, i) => (
+                                <div key={i}>
+                                    <Skeleton className="h-8 w-64 mb-4" />
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <Skeleton className="h-80 w-full" />
+                                        <Skeleton className="h-80 w-full" />
+                                    </div>
+                                </div>
                             ))}
                         </div>
                     )}

@@ -1,16 +1,4 @@
 
-export type VideoArchiveItem = {
-    id: string;
-    title: string;
-    description: string;
-    date: string; // YYYY-MM-DD
-    videoId: string; // YouTube Video ID
-    source: 'YouTube';
-    thumbnailUrl: string;
-  };
-  
-  export const sringeriVideoArchive: VideoArchiveItem[] = [];
-  
   export const sringeriPhotoGallery = [
     { id: 'sringeri-photo-1', date: '2024-07-18', title: 'Blessings from the Jagadguru', description: 'Jagadguru Sri Sri Vidhushekhara Bharati Mahaswamiji blessing devotees.', alt: 'Jagadguru blessing devotees', src: 'https://placehold.co/400x300.png', aiHint: 'acharya blessing' },
     { id: 'sringeri-photo-2', date: '2024-07-17', title: 'Vidyasankara Temple Architecture', description: 'A view of the intricate architecture of the Vidyasankara Temple.', alt: 'Vidyasankara Temple architecture', src: 'https://placehold.co/400x300.png', aiHint: 'temple architecture' },

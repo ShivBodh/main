@@ -13,6 +13,7 @@ import { Separator } from '@/components/ui/separator';
 import { useMemo } from 'react';
 import { allCalendarItems, CalendarEventItem, CalendarPhotoItem } from '@/lib/calendar-data';
 import { format } from 'date-fns';
+import { PhotoCard } from '@/components/media/PhotoCard';
 
 const jyotirmathSeva = allSevaOpportunities.filter(o => o.peetham === 'Jyotirmath');
 
@@ -138,30 +139,23 @@ export default function JyotirmathClient() {
           </TabsContent>
           
           <TabsContent value="gallery">
-            <h3 className="font-headline text-2xl text-primary mb-4">Photo Gallery</h3>
+            <h3 className="font-headline text-2xl text-primary mb-4 flex items-center gap-2"><Camera className="h-6 w-6" /> Photo Gallery</h3>
             {jyotirmathPhotos.length > 0 ? (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {jyotirmathPhotos.map(photo => (
-                        <Card key={photo.id} className="overflow-hidden transition-shadow hover:shadow-xl flex flex-col">
-                             <CardContent className="p-0">
-                                <div className="relative aspect-video rounded-t-lg overflow-hidden group bg-secondary">
-                                    <Image src={photo.imageUrl} alt={photo.title} fill className="object-cover transition-transform duration-300 group-hover:scale-105" data-ai-hint={photo.aiHint}/>
-                                </div>
-                            </CardContent>
-                            <CardHeader>
-                                <CardTitle className="font-headline text-lg">{photo.title}</CardTitle>
-                                <p className="text-sm text-muted-foreground pt-1">{format(new Date(photo.date.replace(/-/g, '/')), 'MMMM d, yyyy')}</p>
-                            </CardHeader>
-                            <CardContent className="flex-grow">
-                                <p className="text-foreground/80 text-sm">{photo.description}</p>
-                            </CardContent>
-                        </Card>
+                       <PhotoCard key={photo.id} item={photo} />
                     ))}
                 </div>
             ) : (
                 <p className="text-center text-muted-foreground py-8">No photos available.</p>
             )}
+             <div className="text-center mt-8">
+                <Button asChild>
+                    <Link href="/gallery">View Full Chronological Gallery</Link>
+                </Button>
+             </div>
           </TabsContent>
+
            <TabsContent value="seva">
             <h3 className="font-headline text-2xl text-primary mb-6">Seva Opportunities at Jyotirmath</h3>
             {jyotirmathSeva.length > 0 ? (

@@ -9,6 +9,8 @@ export function Footer() {
           &copy; {new Date().getFullYear()} Sanatana Peethams Portal. A Seva for Dharma.
         </p>
         <div className="flex justify-center flex-wrap gap-x-4 gap-y-2 mt-4">
+            <Link href="/events" className="text-sm hover:text-accent">Bodha Calendar</Link>
+            <Link href="/gallery" className="text-sm hover:text-accent">Gallery</Link>
             <Link href="/panchanga" className="text-sm hover:text-accent">Panchanga</Link>
             <Link href="/reading" className="text-sm hover:text-accent">Reading</Link>
             <Link href="/sadhana" className="text-sm hover:text-accent">Sadhana</Link>

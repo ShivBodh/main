@@ -1,6 +1,4 @@
 
-import type { VideoArchiveItem } from './sringeri-media'; // Reuse type
-
 export const jyotirmathPhotoGallery = [
     { id: 'jyotirmath-photo-1', date: '2024-07-18', title: 'Snow-Capped Himalayan Peaks', description: 'The majestic beauty of the Himalayan mountains surrounding Jyotirmath.', alt: 'Himalayan mountains', src: 'https://placehold.co/400x300.png', aiHint: 'himalayan mountains' },
     { id: 'jyotirmath-photo-2', date: '2024-07-17', title: 'The Sacred Badrinath Shrine', description: 'A view of the sacred Badrinath Temple shrine.', alt: 'Badrinath Temple shrine', src: 'https://placehold.co/400x300.png', aiHint: 'badrinath temple' },
@@ -15,5 +13,3 @@ export const jyotirmathPhotoGallery = [
     { id: 'jyotirmath-photo-12', date: '2011-05-10', title: 'Pilgrims at Badrinath', description: 'A group of pilgrims at the Badrinath temple in 2011.', alt: 'Pilgrims at temple', src: 'https://placehold.co/400x300.png', aiHint: 'pilgrims temple' },
     { id: 'jyotirmath-photo-9', date: '2010-09-10', title: 'Ancient Jyotirmath Temple', description: 'A photograph of the ancient temple at Jyotirmath from 2010.', alt: 'Old temple in Jyotirmath', src: 'https://placehold.co/400x300.png', aiHint: 'ancient temple' },
 ];
-
-export const jyotirmathVideoArchive: VideoArchiveItem[] = [];

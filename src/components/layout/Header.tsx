@@ -21,6 +21,7 @@ import { Separator } from '@/components/ui/separator';
 const navLinks = [
     { href: "/peethams", label: "Peethams" },
     { href: "/events", label: "Bodha Calendar" },
+    { href: "/gallery", label: "Gallery" },
     { href: "/panchanga", label: "Panchanga" },
     { href: "/reading", label: "Reading" },
     { href: "/sadhana", label: "Sadhana" },

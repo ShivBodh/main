@@ -8,6 +8,7 @@ import { actionItems } from '@/lib/home-page-data';
 import { peethams } from '@/lib/peethams-data';
 import type { Metadata } from 'next';
 import { allCalendarItems, CalendarPhotoItem } from '@/lib/calendar-data';
+import { PhotoCard } from '@/components/media/PhotoCard';
 
 
 export const metadata: Metadata = {
@@ -26,8 +27,8 @@ const LucideIcon = ({ name, ...props }: { name: string; [key: string]: any }) =>
 
 
 export default function HomePage() {
-  const featuredItems = allCalendarItems.filter(
-    item => item.type === 'photo'
+  const featuredPhotos = allCalendarItems.filter(
+    (item): item is CalendarPhotoItem => item.type === 'photo'
   ).slice(0, 3);
 
   return (
@@ -97,33 +98,11 @@ export default function HomePage() {
             Dharma in Action: Latest from the Peethams
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {featuredItems.map((item) => {
-              const photoItem = item as CalendarPhotoItem;
-              const itemTypeLabel = 'Photo';
-
-              return (
-                <Link href="/events" key={item.id} className="block group">
-                  <Card className="h-full flex flex-col overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border-border/50">
-                      <div className="relative aspect-video w-full bg-secondary/20">
-                        <Image
-                          src={photoItem.imageUrl}
-                          alt={item.title}
-                          fill
-                          className="object-cover"
-                          data-ai-hint={photoItem.aiHint}
-                        />
-                      </div>
-                      <CardHeader>
-                          <span className="text-sm font-semibold text-accent">{itemTypeLabel.toUpperCase()} from {item.peetham}</span>
-                          <CardTitle className="font-headline text-xl mt-1 group-hover:text-primary transition-colors">{item.title}</CardTitle>
-                      </CardHeader>
-                      <CardContent className="flex-grow">
-                          <p className="text-foreground/80 line-clamp-3">{item.description}</p>
-                      </CardContent>
-                  </Card>
-                </Link>
-              )
-            })}
+            {featuredPhotos.map((item) => (
+              <Link href="/gallery" key={item.id} className="block group">
+                <PhotoCard item={item} />
+              </Link>
+            ))}
           </div>
            <div className="text-center mt-12">
                 <Button asChild size="lg" variant="outline">

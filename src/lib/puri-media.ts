@@ -1,6 +1,4 @@
 
-import type { VideoArchiveItem } from './sringeri-media'; // Reuse type
-
 export const puriPhotoGallery = [
     { id: 'puri-photo-1', date: '2024-07-18', title: 'Lord Jagannath Temple, Puri', description: 'The iconic Jagannath Temple, a major pilgrimage destination.', alt: 'Jagannath Temple, Puri', src: 'https://placehold.co/400x300.png', aiHint: 'jagannath temple' },
     { id: 'puri-photo-2', date: '2024-07-07', title: 'Grandeur of Ratha Yatra', description: 'The chariots during the world-famous Ratha Yatra festival.', alt: 'Ratha Yatra festival', src: 'https://placehold.co/400x300.png', aiHint: 'chariot festival' },
@@ -15,5 +13,3 @@ export const puriPhotoGallery = [
     { id: 'puri-photo-12', date: '2011-03-03', title: 'Holi Celebrations 2011', description: 'Devotees celebrating the festival of Holi at the Peetham.', alt: 'Holi festival celebrations', src: 'https://placehold.co/400x300.png', aiHint: 'holi festival' },
     { id: 'puri-photo-9', date: '2010-01-26', title: 'Saraswati Puja 2010', description: 'Archival image of Saraswati Puja celebrations at the Peetham.', alt: 'Saraswati Puja ceremony', src: 'https://placehold.co/400x300.png', aiHint: 'goddess statue' },
 ];
-
-export const puriVideoArchive: VideoArchiveItem[] = [];
