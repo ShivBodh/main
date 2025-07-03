@@ -10,12 +10,13 @@ export function PhotoCard({ item }: { item: CalendarPhotoItem }) {
   return (
     <Card className="h-full flex flex-col overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border-border/50">
       <CardContent className="p-0">
-        <div className="relative aspect-video w-full bg-secondary/20">
+        <div className="aspect-video w-full bg-secondary/20 overflow-hidden">
           <Image
             src={item.imageUrl}
             alt={item.title}
-            fill
-            className="object-cover"
+            width={400}
+            height={300}
+            className="w-full h-full object-cover"
             data-ai-hint={item.aiHint}
           />
         </div>
