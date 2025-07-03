@@ -12,9 +12,9 @@ import { Slider } from '@/components/ui/slider';
 import { Label } from '@/components/ui/label';
 
 const scratchableImages = [
-    { id: 1, name: 'Adi Shankaracharya', imageUrl: 'https://placehold.co/600x400.png', aiHint: 'acharya portrait' },
-    { id: 2, name: 'A Wise Sage', imageUrl: 'https://placehold.co/600x400.png', aiHint: 'wise sage' },
-    { id: 3, name: 'Goddess Sharada', imageUrl: 'https://placehold.co/600x400.png', aiHint: 'goddess Sharada' },
+    { id: 1, name: 'Adi Shankaracharya', imageUrl: 'https://source.unsplash.com/600x400/?acharya,portrait', aiHint: 'acharya portrait' },
+    { id: 2, name: 'A Wise Sage', imageUrl: 'https://source.unsplash.com/600x400/?wise,sage', aiHint: 'wise sage' },
+    { id: 3, name: 'Goddess Sharada', imageUrl: 'https://source.unsplash.com/600x400/?goddess,sharada', aiHint: 'goddess Sharada' },
 ];
 
 const ScratchImage = ({ imageUrl, width, height, brushSize, aiHint }: { imageUrl: string; width: number; height: number; brushSize: number; aiHint: string; }) => {
@@ -83,8 +83,9 @@ const ScratchImage = ({ imageUrl, width, height, brushSize, aiHint }: { imageUrl
           src={imageUrl}
           alt="Hidden spiritual image"
           data-ai-hint={aiHint}
-          fill
-          className="object-cover"
+          width={600}
+          height={400}
+          className="w-full h-auto object-cover"
         />
         <canvas
           ref={canvasRef}

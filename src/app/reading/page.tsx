@@ -32,7 +32,7 @@ export default function ReadingPage() {
                 src={book.imageUrl}
                 alt={book.title}
                 fill
-                className="object-contain p-4"
+                className="object-contain p-8"
                 data-ai-hint={book.aiHint}
               />
             </div>
