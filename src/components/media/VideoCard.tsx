@@ -47,15 +47,16 @@ export function VideoCard({ video }: { video: CalendarYouTubeItem | CalendarFace
                             <DialogTitle>{video.title}</DialogTitle>
                         </DialogHeader>
                         <div className="aspect-video bg-black">
-                            {/* By removing the `isOpen` check here, we let the Dialog component manage the iframe's lifecycle, which is more reliable. */}
-                            <iframe
-                                src={embedUrl}
-                                title={video.title}
-                                frameBorder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                allowFullScreen
-                                className="w-full h-full"
-                            ></iframe>
+                            {isOpen && (
+                                <iframe
+                                    src={embedUrl}
+                                    title={video.title}
+                                    frameBorder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    allowFullScreen
+                                    className="w-full h-full"
+                                ></iframe>
+                            )}
                         </div>
                     </DialogContent>
                 </Dialog>

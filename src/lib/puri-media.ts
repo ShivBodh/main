@@ -22,7 +22,7 @@ export const puriVideoArchive: VideoArchiveItem[] = [
       title: 'The Significance of the Rig Veda in Daily Life',
       description: 'An enlightening discourse by the Shankaracharya on how the ancient wisdom of the Rig Veda can be applied in our modern lives.',
       date: '2024-05-20',
-      videoId: 'YOUR_YOUTUBE_VIDEO_ID_6', // Placeholder
+      videoId: 'aqz-KE-bpKQ', // Placeholder
       thumbnailUrl: 'https://placehold.co/1280x720.png',
       source: 'YouTube',
     },
@@ -31,7 +31,7 @@ export const puriVideoArchive: VideoArchiveItem[] = [
         title: 'The Connection Between Jagannath Culture & Advaita Vedanta',
         description: 'Explore the deep philosophical links between the devotional traditions of Lord Jagannath and the non-dualistic philosophy of Advaita Vedanta.',
         date: '2024-04-25',
-        videoId: 'YOUR_YOUTUBE_VIDEO_ID_7', // Placeholder
+        videoId: 'aqz-KE-bpKQ', // Placeholder
         thumbnailUrl: 'https://placehold.co/1280x720.png',
         source: 'YouTube',
     },
@@ -40,7 +40,7 @@ export const puriVideoArchive: VideoArchiveItem[] = [
         title: 'Archival: Ratha Yatra 2022 Address',
         description: 'A discourse from the Shankaracharya during the 2022 Ratha Yatra festival in Puri.',
         date: '2022-07-01',
-        videoId: 'YOUR_YOUTUBE_VIDEO_ID_16', // Placeholder
+        videoId: 'aqz-KE-bpKQ', // Placeholder
         thumbnailUrl: 'https://placehold.co/1280x720.png',
         source: 'YouTube',
     },
@@ -49,7 +49,7 @@ export const puriVideoArchive: VideoArchiveItem[] = [
         title: 'Explaining "Prajnanam Brahma"',
         description: 'A deep dive into the Mahavakya of the Puri Peetham, "Prajnanam Brahma" (Consciousness is Brahman).',
         date: '2023-08-10',
-        videoId: 'YOUR_YOUTUBE_VIDEO_ID_17', // Placeholder
+        videoId: 'aqz-KE-bpKQ', // Placeholder
         thumbnailUrl: 'https://placehold.co/1280x720.png',
         source: 'YouTube',
     },
@@ -58,7 +58,7 @@ export const puriVideoArchive: VideoArchiveItem[] = [
         title: 'Vedanta Sammelan 2023 Keynote',
         description: 'The keynote address from the annual Vedanta Sammelan held in December 2023.',
         date: '2023-12-21',
-        videoId: 'YOUR_YOUTUBE_VIDEO_ID_18', // Placeholder
+        videoId: 'aqz-KE-bpKQ', // Placeholder
         thumbnailUrl: 'https://placehold.co/1280x720.png',
         source: 'YouTube',
     },
@@ -67,7 +67,7 @@ export const puriVideoArchive: VideoArchiveItem[] = [
         title: 'Discourse from 2019',
         description: 'An archival discourse on the importance of Sadachar (right conduct).',
         date: '2019-09-05',
-        videoId: 'YOUR_YOUTUBE_VIDEO_ID_39',
+        videoId: 'aqz-KE-bpKQ',
         thumbnailUrl: 'https://placehold.co/1280x720.png',
         source: 'YouTube',
     },
@@ -76,7 +76,7 @@ export const puriVideoArchive: VideoArchiveItem[] = [
         title: 'Ratha Yatra 2014 Highlights',
         description: 'A look back at the 2014 Ratha Yatra festival.',
         date: '2014-06-29',
-        videoId: 'YOUR_YOUTUBE_VIDEO_ID_40',
+        videoId: 'aqz-KE-bpKQ',
         thumbnailUrl: 'https://placehold.co/1280x720.png',
         source: 'YouTube',
     },
@@ -85,7 +85,7 @@ export const puriVideoArchive: VideoArchiveItem[] = [
         title: 'Archival Discourse on Jagannath Culture',
         description: 'An old talk from 2013 explaining the unique cultural and spiritual aspects of Lord Jagannath.',
         date: '2013-05-15',
-        videoId: 'YOUR_YOUTUBE_VIDEO_ID_29', // Placeholder
+        videoId: 'aqz-KE-bpKQ', // Placeholder
         thumbnailUrl: 'https://placehold.co/1280x720.png',
         source: 'YouTube',
     },
@@ -94,7 +94,7 @@ export const puriVideoArchive: VideoArchiveItem[] = [
         title: 'Ratha Yatra 2011 Highlights',
         description: 'A video compilation of the key moments from the 2011 Ratha Yatra in Puri.',
         date: '2011-07-03',
-        videoId: 'YOUR_YOUTUBE_VIDEO_ID_30', // Placeholder
+        videoId: 'aqz-KE-bpKQ', // Placeholder
         thumbnailUrl: 'https://placehold.co/1280x720.png',
         source: 'YouTube',
     },
@@ -103,7 +103,7 @@ export const puriVideoArchive: VideoArchiveItem[] = [
         title: 'Talk on Dharma (2010)',
         description: 'A foundational discourse on Dharma delivered by the Shankaracharya in 2010.',
         date: '2010-02-20',
-        videoId: 'YOUR_YOUTUBE_VIDEO_ID_31', // Placeholder
+        videoId: 'aqz-KE-bpKQ', // Placeholder
         thumbnailUrl: 'https://placehold.co/1280x720.png',
         source: 'YouTube',
     },
