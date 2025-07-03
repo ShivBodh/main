@@ -13,7 +13,7 @@ const VideoPlayer = ({ video }: { video: CalendarYouTubeItem | CalendarFacebookI
     const isYoutube = video.type === 'youtube';
     const embedUrl = isYoutube
         ? `https://www.youtube.com/embed/${(video as CalendarYouTubeItem).videoId}?autoplay=1&rel=0`
-        : `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent((video as CalendarFacebookItem).url)}&show_text=0&width=auto&autoplay=1&appId`;
+        : `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent((video as CalendarFacebookItem).url)}&show_text=false&width=560&autoplay=1`;
 
     return (
         <iframe
@@ -34,7 +34,7 @@ export function VideoCard({ video }: { video: CalendarYouTubeItem | CalendarFace
 
     return (
         <>
-            <Card className="transition-shadow hover:shadow-lg flex flex-col">
+            <Card className="transition-shadow hover:shadow-lg flex flex-col h-full">
                 <CardHeader>
                     <CardTitle className="font-headline text-lg">{video.title}</CardTitle>
                     <p className="text-sm text-muted-foreground">{format(new Date(video.date.replace(/-/g, '/')), 'MMMM d, yyyy')}</p>
