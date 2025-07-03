@@ -26,7 +26,7 @@ const puppeteer = require('puppeteer');
 
 // --- CONFIGURATION ---
 // You MUST update these values.
-const TARGET_URL = 'https://www.facebook.com/SringeriSharadaPeetham'; // The Facebook page URL to scrape.
+const TARGET_URL = 'https://www.facebook.com/sringerimath/photos_by'; // The Facebook page URL to scrape.
 const FACEBOOK_EMAIL = process.env.FACEBOOK_EMAIL || 'your_facebook_email@example.com';
 const FACEBOOK_PASSWORD = process.env.FACEBOOK_PASSWORD || 'your_facebook_password';
 const SCROLL_COUNT = 5; // How many times to scroll down to load more posts.
