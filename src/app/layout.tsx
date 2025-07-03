@@ -1,3 +1,4 @@
+
 import type {Metadata} from 'next';
 import Script from 'next/script';
 import './globals.css';
@@ -7,7 +8,7 @@ import { Footer } from '@/components/layout/Footer';
 import { AuthProvider } from '@/context/AuthContext';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://shivbodh.info'),
+  metadataBase: new URL('https://shivala.info'),
   title: 'Sanatana Peethams Portal',
   description: 'A single, trusted digital beacon for the timeless wisdom of the four cardinal Peethams.',
 };

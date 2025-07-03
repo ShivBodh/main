@@ -29,11 +29,12 @@ export default function PeethamsPage() {
         <div className="text-center mb-16">
           <div className="mb-8">
             <Image
-              src="https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/AADI-GURU-SHANKARACHARYA.svg"
+              src="https://source.unsplash.com/150x150/?statue,guru"
+              data-ai-hint="statue guru"
               alt="Jagadguru Adi Shankaracharya"
               width={150}
               height={150}
-              className="mx-auto object-contain aspect-square"
+              className="mx-auto object-cover aspect-square rounded-full"
             />
           </div>
           <h1 className="text-4xl md:text-5xl font-headline font-bold text-primary tracking-tight">
