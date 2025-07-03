@@ -16,7 +16,6 @@ export default function UploadBookClient() {
   const [author, setAuthor] = useState('');
   const [description, setDescription] = useState('');
   const [pdfFile, setPdfFile] = useState<File | null>(null);
-  const [coverImageFile, setCoverImageFile] = useState<File | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
@@ -44,7 +43,6 @@ export default function UploadBookClient() {
         author, 
         description, 
         pdfFileName: pdfFile.name,
-        coverImageFileName: coverImageFile?.name 
     });
 
     // Simulate network request
@@ -62,11 +60,8 @@ export default function UploadBookClient() {
     setAuthor('');
     setDescription('');
     setPdfFile(null);
-    setCoverImageFile(null);
     const pdfInput = document.getElementById('pdf-file') as HTMLInputElement;
     if(pdfInput) pdfInput.value = '';
-    const imageInput = document.getElementById('cover-image-file') as HTMLInputElement;
-    if(imageInput) imageInput.value = '';
   };
 
   return (
@@ -85,7 +80,7 @@ export default function UploadBookClient() {
           <CardHeader>
             <CardTitle>Book Details</CardTitle>
             <CardDescription>
-              Please provide the details for the book you wish to upload. All submissions will be reviewed. Note that user authentication will be required for this feature in the future.
+              Please provide the details for the book you wish to upload. A cover image will be automatically generated from the first page of your PDF upon upload. All submissions will be reviewed.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
@@ -134,17 +129,6 @@ export default function UploadBookClient() {
                 required
               />
                {pdfFile && <p className="text-sm text-muted-foreground mt-2">Selected PDF: {pdfFile.name}</p>}
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="cover-image-file">Book Cover Image (Optional)</Label>
-              <Input
-                id="cover-image-file"
-                type="file"
-                accept="image/png, image/jpeg, image/webp"
-                onChange={(e) => setCoverImageFile(e.target.files ? e.target.files[0] : null)}
-                disabled={isSubmitting}
-              />
-               {coverImageFile && <p className="text-sm text-muted-foreground mt-2">Selected Image: {coverImageFile.name}</p>}
             </div>
           </CardContent>
           <CardFooter className="flex justify-between">
