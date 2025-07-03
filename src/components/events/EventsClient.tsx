@@ -9,13 +9,11 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
 import { format } from 'date-fns';
-import { allCalendarItems, UnifiedCalendarItem, CalendarEventItem, CalendarYouTubeItem, CalendarFacebookItem, CalendarPhotoItem } from '@/lib/calendar-data';
+import { allCalendarItems, UnifiedCalendarItem, CalendarEventItem, CalendarPhotoItem } from '@/lib/calendar-data';
 import { peethamBadgeColors, peethamDotColors, Peetham } from '@/lib/events-data';
-import { VenetianMask, Video, Facebook, Camera } from 'lucide-react';
+import { VenetianMask, Camera } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { useToast } from '@/hooks/use-toast';
-import { VideoCard } from '@/components/media/VideoCard';
 
 const EventCard = ({ event }: { event: CalendarEventItem }) => (
     <Card key={event.id} className="border-l-4" style={{ borderColor: peethamDotColors[event.peetham] }}>
@@ -244,9 +242,6 @@ export default function EventsClient() {
                                                 switch (item.type) {
                                                     case 'event':
                                                         return <EventCard key={item.id} event={item as CalendarEventItem} />;
-                                                    case 'youtube':
-                                                    case 'facebook':
-                                                        return <VideoCard key={item.id} video={item as CalendarYouTubeItem | CalendarFacebookItem} />;
                                                     case 'photo':
                                                         return <PhotoCard key={item.id} item={item as CalendarPhotoItem} />;
                                                     default:

@@ -2,20 +2,13 @@
 import type { Peetham } from './events-data';
 import { allEvents } from './events-data';
 
-import { sringeriVideoArchive, sringeriPhotoGallery } from './sringeri-media';
-import { sringeriFacebookVideos } from './sringeri-facebook-videos';
-
-import { dwarakaVideoArchive, dwarakaPhotoGallery } from './dwaraka-media';
-import { dwarakaFacebookVideos } from './dwaraka-facebook-videos';
-
-import { puriVideoArchive, puriPhotoGallery } from './puri-media';
-import { puriFacebookVideos } from './puri-facebook-videos';
-
-import { jyotirmathVideoArchive, jyotirmathPhotoGallery } from './jyotirmath-media';
-import { jyotirmathFacebookVideos } from './jyotirmath-facebook-videos';
+import { sringeriPhotoGallery } from './sringeri-media';
+import { dwarakaPhotoGallery } from './dwaraka-media';
+import { puriPhotoGallery } from './puri-media';
+import { jyotirmathPhotoGallery } from './jyotirmath-media';
 
 // Define the unified types
-export type CalendarItemType = 'event' | 'youtube' | 'facebook' | 'photo';
+export type CalendarItemType = 'event' | 'photo';
 
 export interface BaseCalendarItem {
     id: string;
@@ -33,25 +26,13 @@ export interface CalendarEventItem extends BaseCalendarItem {
     references?: string[];
 }
 
-export interface CalendarYouTubeItem extends BaseCalendarItem {
-    type: 'youtube';
-    videoId: string;
-    thumbnailUrl: string;
-}
-
-export interface CalendarFacebookItem extends BaseCalendarItem {
-    type: 'facebook';
-    url: string;
-    thumbnailUrl: string;
-}
-
 export interface CalendarPhotoItem extends BaseCalendarItem {
     type: 'photo';
     imageUrl: string;
     aiHint: string;
 }
 
-export type UnifiedCalendarItem = CalendarEventItem | CalendarYouTubeItem | CalendarFacebookItem | CalendarPhotoItem;
+export type UnifiedCalendarItem = CalendarEventItem | CalendarPhotoItem;
 
 // Transform the data
 const eventItems: CalendarEventItem[] = allEvents.map(e => ({
@@ -59,20 +40,6 @@ const eventItems: CalendarEventItem[] = allEvents.map(e => ({
     id: `event-${e.id}`,
     type: 'event',
 }));
-
-const youtubeItems: CalendarYouTubeItem[] = [
-    ...sringeriVideoArchive.map(v => ({...v, id: `sringeri-yt-${v.id}`, peetham: 'Sringeri' as const, type: 'youtube' as const, description: v.description || "" })),
-    ...dwarakaVideoArchive.map(v => ({...v, id: `dwaraka-yt-${v.id}`, peetham: 'Dwaraka' as const, type: 'youtube' as const, description: v.description || "" })),
-    ...puriVideoArchive.map(v => ({...v, id: `puri-yt-${v.id}`, peetham: 'Puri' as const, type: 'youtube' as const, description: v.description || "" })),
-    ...jyotirmathVideoArchive.map(v => ({...v, id: `jyotirmath-yt-${v.id}`, peetham: 'Jyotirmath' as const, type: 'youtube' as const, description: v.description || "" })),
-];
-
-const facebookItems: CalendarFacebookItem[] = [
-    ...sringeriFacebookVideos.map(v => ({ ...v, id: `sringeri-fb-${v.id}`, peetham: 'Sringeri' as const, type: 'facebook' as const })),
-    ...dwarakaFacebookVideos.map(v => ({ ...v, id: `dwaraka-fb-${v.id}`, peetham: 'Dwaraka' as const, type: 'facebook' as const })),
-    ...puriFacebookVideos.map(v => ({ ...v, id: `puri-fb-${v.id}`, peetham: 'Puri' as const, type: 'facebook' as const })),
-    ...jyotirmathFacebookVideos.map(v => ({ ...v, id: `jyotirmath-fb-${v.id}`, peetham: 'Jyotirmath' as const, type: 'facebook' as const })),
-];
 
 const photoItems: CalendarPhotoItem[] = [
     ...sringeriPhotoGallery.map(p => ({
@@ -120,7 +87,5 @@ const photoItems: CalendarPhotoItem[] = [
 
 export const allCalendarItems: UnifiedCalendarItem[] = [
     ...eventItems,
-    ...youtubeItems,
-    ...facebookItems,
     ...photoItems,
 ].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());

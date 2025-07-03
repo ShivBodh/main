@@ -10,28 +10,15 @@ import { ExternalLink, BookOpen, Calendar, Camera, MapPin, Mail, Briefcase, Glob
 import { allSevaOpportunities } from '@/lib/seva-data';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
-import { useState, useMemo } from 'react';
-import { VideoCard } from '@/components/media/VideoCard';
-import { allCalendarItems, CalendarEventItem, CalendarPhotoItem, CalendarYouTubeItem, CalendarFacebookItem } from '@/lib/calendar-data';
+import { useMemo } from 'react';
+import { allCalendarItems, CalendarEventItem, CalendarPhotoItem } from '@/lib/calendar-data';
 import { format } from 'date-fns';
 
 const sringeriSeva = allSevaOpportunities.filter(o => o.peetham === 'Sringeri');
 
 export default function SringeriClient() {
-    const [visibleYoutubeVideos, setVisibleYoutubeVideos] = useState(6);
-    const [visibleFacebookVideos, setVisibleFacebookVideos] = useState(6);
-
-    const loadMoreYoutubeVideos = () => {
-        setVisibleYoutubeVideos(prev => prev + 6);
-    };
-
-    const loadMoreFacebookVideos = () => {
-        setVisibleFacebookVideos(prev => prev + 6);
-    };
 
     const sringeriMedia = useMemo(() => allCalendarItems.filter(item => item.peetham === 'Sringeri'), []);
-    const sringeriYoutube = useMemo(() => sringeriMedia.filter((item): item is CalendarYouTubeItem => item.type === 'youtube'), [sringeriMedia]);
-    const sringeriFacebook = useMemo(() => sringeriMedia.filter((item): item is CalendarFacebookItem => item.type === 'facebook'), [sringeriMedia]);
     const sringeriPhotos = useMemo(() => sringeriMedia.filter((item): item is CalendarPhotoItem => item.type === 'photo'), [sringeriMedia]);
     const sringeriEvents = useMemo(() => sringeriMedia.filter((item): item is CalendarEventItem => item.type === 'event').slice(0, 3), [sringeriMedia]);
 
@@ -150,69 +137,29 @@ export default function SringeriClient() {
           </TabsContent>
 
           <TabsContent value="gallery">
-             <Tabs defaultValue="photos" className="w-full">
-                <TabsList className="grid w-full grid-cols-3">
-                    <TabsTrigger value="photos">Photos</TabsTrigger>
-                    <TabsTrigger value="youtube">YouTube</TabsTrigger>
-                    <TabsTrigger value="facebook">Facebook</TabsTrigger>
-                </TabsList>
-                 <TabsContent value="photos" className="mt-8">
-                     {sringeriPhotos.length > 0 ? (
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                            {sringeriPhotos.map(photo => (
-                                <Card key={photo.id} className="overflow-hidden transition-shadow hover:shadow-xl flex flex-col">
-                                     <CardContent className="p-0">
-                                        <div className="relative aspect-video rounded-t-lg overflow-hidden group bg-secondary">
-                                            <Image src={photo.imageUrl} alt={photo.title} fill className="object-cover transition-transform duration-300 group-hover:scale-105" data-ai-hint={photo.aiHint}/>
-                                        </div>
-                                    </CardContent>
-                                    <CardHeader>
-                                        <CardTitle className="font-headline text-lg">{photo.title}</CardTitle>
-                                        <p className="text-sm text-muted-foreground pt-1">{format(new Date(photo.date.replace(/-/g, '/')), 'MMMM d, yyyy')}</p>
-                                    </CardHeader>
-                                    <CardContent className="flex-grow">
-                                        <p className="text-foreground/80 text-sm">{photo.description}</p>
-                                    </CardContent>
-                                </Card>
-                            ))}
-                        </div>
-                    ) : (
-                        <p className="text-center text-muted-foreground py-8">No photos available.</p>
-                    )}
-                </TabsContent>
-                <TabsContent value="youtube" className="mt-8">
-                     {sringeriYoutube.length > 0 ? (
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                            {sringeriYoutube.slice(0, visibleYoutubeVideos).map(video => (
-                               <VideoCard key={video.id} video={video as CalendarYouTubeItem} />
-                            ))}
-                        </div>
-                    ) : (
-                        <p className="text-center text-muted-foreground py-8">No YouTube videos available.</p>
-                    )}
-                    {visibleYoutubeVideos < sringeriYoutube.length && (
-                        <div className="text-center mt-8">
-                            <Button onClick={loadMoreYoutubeVideos}>Load More YouTube Videos</Button>
-                        </div>
-                    )}
-                </TabsContent>
-                <TabsContent value="facebook" className="mt-8">
-                    {sringeriFacebook.length > 0 ? (
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                            {sringeriFacebook.slice(0, visibleFacebookVideos).map(video => (
-                                <VideoCard key={video.id} video={video as CalendarFacebookItem} />
-                            ))}
-                        </div>
-                    ) : (
-                         <p className="text-center text-muted-foreground py-8">No Facebook videos available.</p>
-                    )}
-                    {visibleFacebookVideos < sringeriFacebook.length && (
-                        <div className="text-center mt-8">
-                            <Button onClick={loadMoreFacebookVideos}>Load More Facebook Videos</Button>
-                        </div>
-                    )}
-                </TabsContent>
-             </Tabs>
+            <h3 className="font-headline text-2xl text-primary mb-4">Photo Gallery</h3>
+            {sringeriPhotos.length > 0 ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {sringeriPhotos.map(photo => (
+                        <Card key={photo.id} className="overflow-hidden transition-shadow hover:shadow-xl flex flex-col">
+                             <CardContent className="p-0">
+                                <div className="relative aspect-video rounded-t-lg overflow-hidden group bg-secondary">
+                                    <Image src={photo.imageUrl} alt={photo.title} fill className="object-cover transition-transform duration-300 group-hover:scale-105" data-ai-hint={photo.aiHint}/>
+                                </div>
+                            </CardContent>
+                            <CardHeader>
+                                <CardTitle className="font-headline text-lg">{photo.title}</CardTitle>
+                                <p className="text-sm text-muted-foreground pt-1">{format(new Date(photo.date.replace(/-/g, '/')), 'MMMM d, yyyy')}</p>
+                            </CardHeader>
+                            <CardContent className="flex-grow">
+                                <p className="text-foreground/80 text-sm">{photo.description}</p>
+                            </CardContent>
+                        </Card>
+                    ))}
+                </div>
+            ) : (
+                <p className="text-center text-muted-foreground py-8">No photos available.</p>
+            )}
           </TabsContent>
           <TabsContent value="seva">
             <h3 className="font-headline text-2xl text-primary mb-6">Seva Opportunities at Sringeri</h3>
