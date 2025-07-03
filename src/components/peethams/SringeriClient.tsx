@@ -10,10 +10,9 @@ import { ExternalLink, BookOpen, Calendar, Camera, MapPin, Mail, Briefcase, Glob
 import { allSevaOpportunities } from '@/lib/seva-data';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
-import { sringeriPhotoGallery } from '@/lib/sringeri-media';
 import { useState, useMemo } from 'react';
 import { VideoCard } from '@/components/media/VideoCard';
-import { allCalendarItems, CalendarEventItem } from '@/lib/calendar-data';
+import { allCalendarItems, CalendarEventItem, CalendarPhotoItem, CalendarYouTubeItem, CalendarFacebookItem } from '@/lib/calendar-data';
 import { format } from 'date-fns';
 
 const sringeriSeva = allSevaOpportunities.filter(o => o.peetham === 'Sringeri');
@@ -23,16 +22,17 @@ export default function SringeriClient() {
     const [visibleFacebookVideos, setVisibleFacebookVideos] = useState(2);
 
     const loadMoreYoutubeVideos = () => {
-        setVisibleYoutubeVideos(prev => prev + 2);
+        setVisibleYoutubeVideos(prev => prev + 4);
     };
 
     const loadMoreFacebookVideos = () => {
-        setVisibleFacebookVideos(prev => prev + 2);
+        setVisibleFacebookVideos(prev => prev + 4);
     };
 
     const sringeriMedia = useMemo(() => allCalendarItems.filter(item => item.peetham === 'Sringeri'), []);
-    const sringeriYoutube = useMemo(() => sringeriMedia.filter(item => item.type === 'youtube'), [sringeriMedia]);
-    const sringeriFacebook = useMemo(() => sringeriMedia.filter(item => item.type === 'facebook'), [sringeriMedia]);
+    const sringeriYoutube = useMemo(() => sringeriMedia.filter((item): item is CalendarYouTubeItem => item.type === 'youtube'), [sringeriMedia]);
+    const sringeriFacebook = useMemo(() => sringeriMedia.filter((item): item is CalendarFacebookItem => item.type === 'facebook'), [sringeriMedia]);
+    const sringeriPhotos = useMemo(() => sringeriMedia.filter((item): item is CalendarPhotoItem => item.type === 'photo'), [sringeriMedia]);
     const sringeriEvents = useMemo(() => sringeriMedia.filter((item): item is CalendarEventItem => item.type === 'event').slice(0, 3), [sringeriMedia]);
 
   return (
@@ -158,34 +158,41 @@ export default function SringeriClient() {
                 </TabsList>
                 <TabsContent value="photos" className="mt-8">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        {sringeriPhotoGallery.map(photo => (
-                            <Image key={photo.id} src={photo.src} alt={photo.alt} width={400} height={300} className="rounded-lg object-cover aspect-[4/3]" data-ai-hint={photo.aiHint}/>
+                        {sringeriPhotos.map(photo => (
+                             <div key={photo.id} className="group relative aspect-video rounded-lg overflow-hidden">
+                                <Image src={photo.imageUrl} alt={photo.title} fill className="object-cover transition-transform duration-300 group-hover:scale-105" data-ai-hint={photo.aiHint}/>
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                                <p className="absolute bottom-2 left-2 text-white text-sm font-semibold p-1">{photo.title}</p>
+                            </div>
                         ))}
                     </div>
+                    {sringeriPhotos.length === 0 && <p className="text-center text-muted-foreground py-8">No photos available.</p>}
                 </TabsContent>
                 <TabsContent value="youtube" className="mt-8">
                     <div className="space-y-6">
                         {sringeriYoutube.slice(0, visibleYoutubeVideos).map(video => (
-                           <VideoCard key={video.id} video={video} />
+                           <VideoCard key={video.id} video={video as CalendarYouTubeItem} />
                         ))}
                     </div>
                     {visibleYoutubeVideos < sringeriYoutube.length && (
                         <div className="text-center mt-8">
-                            <Button onClick={loadMoreYoutubeVideos}>Load More Videos</Button>
+                            <Button onClick={loadMoreYoutubeVideos}>Load More YouTube Videos</Button>
                         </div>
                     )}
+                    {sringeriYoutube.length === 0 && <p className="text-center text-muted-foreground py-8">No YouTube videos available.</p>}
                 </TabsContent>
                 <TabsContent value="facebook" className="mt-8">
                     <div className="space-y-6">
                         {sringeriFacebook.slice(0, visibleFacebookVideos).map(video => (
-                            <VideoCard key={video.id} video={video} />
+                            <VideoCard key={video.id} video={video as CalendarFacebookItem} />
                         ))}
                     </div>
                     {visibleFacebookVideos < sringeriFacebook.length && (
                         <div className="text-center mt-8">
-                            <Button onClick={loadMoreFacebookVideos}>Load More Videos</Button>
+                            <Button onClick={loadMoreFacebookVideos}>Load More Facebook Videos</Button>
                         </div>
                     )}
+                     {sringeriFacebook.length === 0 && <p className="text-center text-muted-foreground py-8">No Facebook videos available.</p>}
                 </TabsContent>
              </Tabs>
           </TabsContent>

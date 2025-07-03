@@ -8,26 +8,15 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Facebook, PlayCircle } from 'lucide-react';
 import { format } from 'date-fns';
 import { Skeleton } from '@/components/ui/skeleton';
+import { CalendarYouTubeItem, CalendarFacebookItem } from '@/lib/calendar-data';
 
-// Define a unified type for video data from different sources
-export type VideoCardData = {
-    id: string;
-    title: string;
-    date: string | Date;
-    description?: string;
-    thumbnailUrl: string;
-    // One of these should be present
-    videoId?: string; // for YouTube
-    url?: string; // for Facebook
-};
-
-export function VideoCard({ video }: { video: VideoCardData }) {
+export function VideoCard({ video }: { video: CalendarYouTubeItem | CalendarFacebookItem }) {
     const [isOpen, setIsOpen] = useState(false);
     
-    const isYoutube = !!video.videoId;
+    const isYoutube = video.type === 'youtube';
     const embedUrl = isYoutube
-        ? `https://www.youtube.com/embed/${video.videoId}?autoplay=1`
-        : `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(video.url || '')}&show_text=false&width=560`;
+        ? `https://www.youtube.com/embed/${(video as CalendarYouTubeItem).videoId}?autoplay=1`
+        : `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent((video as CalendarFacebookItem).url || '')}&show_text=false&width=560`;
     
     const Icon = isYoutube ? PlayCircle : Facebook;
 
