@@ -4,7 +4,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Dialog, DialogContent } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import { Facebook, PlayCircle } from 'lucide-react';
 import { format } from 'date-fns';
 import { CalendarYouTubeItem, CalendarFacebookItem } from '@/lib/calendar-data';
@@ -62,6 +62,7 @@ export function VideoCard({ video }: { video: CalendarYouTubeItem | CalendarFace
 
             <Dialog open={isDialogOpen} onOpenChange={setDialogOpen}>
                 <DialogContent className="max-w-4xl p-0 border-0 bg-transparent shadow-none" onOpenAutoFocus={(e) => e.preventDefault()}>
+                    <DialogTitle className="sr-only">{video.title}</DialogTitle>
                     <div className="aspect-video bg-black rounded-lg overflow-hidden">
                         {isDialogOpen && <VideoPlayer video={video} />}
                     </div>
