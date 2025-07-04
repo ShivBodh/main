@@ -9,7 +9,7 @@ import { allCalendarItems, CalendarPhotoItem, CalendarVideoItem } from '@/lib/ca
 import { PhotoCard } from '@/components/media/PhotoCard';
 import { VideoCard } from '@/components/media/VideoCard';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { LineageTimeline } from '@/components/peethams/LineageTimeline';
 
 export const metadata: Metadata = {
@@ -126,29 +126,24 @@ export default function HomePage() {
               The Great Guru Parampara
             </h2>
             <p className="mt-2 text-lg text-foreground/80 max-w-2xl mx-auto">
-              A glimpse into the unbroken lineage of spiritual masters who have guided each Peetham for centuries.
+              A glimpse into the unbroken lineage of spiritual masters who have guided each Peetham for centuries. Click a Peetham to reveal its timeline.
             </p>
           </div>
-          <Tabs defaultValue="sringeri" className="w-full">
-            <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 mb-8">
-              {peethams.map((peetham) => {
-                const shortName = peetham.link.split('/').pop()!;
-                return (
-                  <TabsTrigger key={shortName} value={shortName}>
-                    {peetham.name.split(' ')[0]}
-                  </TabsTrigger>
-                )
-              })}
-            </TabsList>
+          <Accordion type="single" collapsible defaultValue="sringeri" className="w-full max-w-4xl mx-auto">
             {peethams.map((peetham) => {
-                const shortName = peetham.link.split('/').pop()!;
-                return (
-                  <TabsContent key={shortName} value={shortName}>
+              const shortName = peetham.link.split('/').pop()!;
+              return (
+                <AccordionItem key={shortName} value={shortName} className="border-b-2 border-primary/10">
+                  <AccordionTrigger className="text-2xl font-headline hover:text-primary py-6 text-primary/80 data-[state=open]:text-primary">
+                    {peetham.name}
+                  </AccordionTrigger>
+                  <AccordionContent className="pt-4 pb-8">
                     <LineageTimeline lineage={peetham.lineage} />
-                  </TabsContent>
-                )
+                  </AccordionContent>
+                </AccordionItem>
+              )
             })}
-          </Tabs>
+          </Accordion>
         </div>
       </section>
 
