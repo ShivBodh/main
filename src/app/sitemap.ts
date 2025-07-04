@@ -12,7 +12,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/peethams',
     '/social',
     '/events',
-    '/gallery',
     '/reading',
     '/sadhana',
     '/sadhana/japa-counter',

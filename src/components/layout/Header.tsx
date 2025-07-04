@@ -51,12 +51,6 @@ const mainNavLinks = [
         icon: CalendarDays,
     },
     { 
-        title: "Gallery",
-        href: "/gallery",
-        description: "A rich, chronological photo gallery from the four Peethams.",
-        icon: Camera,
-    },
-    { 
         title: "Reading Room",
         href: "/reading",
         description: "A curated library of foundational texts by great masters.",

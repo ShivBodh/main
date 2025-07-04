@@ -206,12 +206,18 @@ export default function HomePage() {
 
       <section className="w-full py-16 md:py-24 bg-card">
         <div className="container mx-auto max-w-4xl text-center px-4">
-            <h2 className="text-3xl md:text-4xl font-headline font-bold text-center text-primary mb-6">
-                Our Sacred Vow (Sankalpa)
+            <Users className="h-12 w-12 text-primary mx-auto" />
+            <h2 className="text-3xl md:text-4xl font-headline font-bold text-center text-primary mt-4 mb-6">
+                Join Our Global Community: Sanatan Social
             </h2>
-            <p className="text-lg text-foreground/80 leading-relaxed">
-                In a world of scattered information, our mission is to serve as a humble, unified, and trusted resource for all followers of Sanatana Dharma. We are dedicated to meticulously curating and presenting verified knowledge from the official sources of the four Peethams, ensuring the timeless wisdom of Adi Shankaracharya is accessible to all.
+            <p className="text-lg text-foreground/80 leading-relaxed max-w-3xl mx-auto">
+                Sanatan Social is our dedicated, secure social media platform for all Sanatanis worldwide. Connect with fellow devotees, share your spiritual journey, start campaigns for dharmic causes, and maintain a personal diary. This is a space built for our community, by our community.
             </p>
+            <div className="mt-8">
+                <Button asChild size="lg">
+                    <Link href="/social">Enter Sanatan Social</Link>
+                </Button>
+            </div>
         </div>
       </section>
     </div>
