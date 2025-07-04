@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useRef, useEffect, useState } from 'react';
@@ -12,9 +11,9 @@ import { Slider } from '@/components/ui/slider';
 import { Label } from '@/components/ui/label';
 
 const scratchableImages = [
-    { id: 1, name: 'Adi Shankaracharya', imageUrl: 'https://placehold.co/600x400.png', aiHint: 'acharya portrait' },
-    { id: 2, name: 'A Wise Sage', imageUrl: 'https://placehold.co/600x400.png', aiHint: 'wise sage' },
-    { id: 3, name: 'Goddess Sharada', imageUrl: 'https://placehold.co/600x400.png', aiHint: 'goddess Sharada' },
+    { id: 1, name: 'Adi Shankaracharya', imageUrl: 'https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/aadi-guru.png', aiHint: 'acharya portrait' },
+    { id: 2, name: 'A Wise Sage', imageUrl: 'https://images.unsplash.com/photo-1547787344-9d1a3c64f434?w=600&h=400&fit=crop', aiHint: 'wise sage' },
+    { id: 3, name: 'Goddess Sharada', imageUrl: 'https://images.unsplash.com/photo-1599422037748-0051b8581048?w=600&h=400&fit=crop', aiHint: 'goddess statue' },
 ];
 
 const ScratchImage = ({ imageUrl, width, height, brushSize, aiHint }: { imageUrl: string; width: number; height: number; brushSize: number; aiHint: string; }) => {
@@ -115,7 +114,7 @@ export default function KidsCornerClient() {
                 const result = await getKidsGuide({ figureName: selectedImage.name });
                 setGuideText(result.guideText);
             } catch (error) {
-                console.error("Failed to fetch AI guide:", error);
+                console.error("Failed to fetch guide:", error);
                 setGuideText("Click and drag your mouse (or use your finger on touch screens) over the gray box to reveal the sacred image hidden beneath!");
             } finally {
                 setIsLoading(false);

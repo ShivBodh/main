@@ -57,7 +57,7 @@ export default function DailyWisdomClient() {
         const wisdom = await getDailyWisdom();
         setCurrentWisdom(wisdom);
     } catch (error) {
-        console.error("Failed to fetch AI wisdom:", error);
+        console.error("Failed to fetch wisdom:", error);
         // Provide a graceful fallback in case of an API error
         setCurrentWisdom({
             quote: "The Self is not to be known by the study of the scriptures, nor by the intellect, nor by much hearing.",
@@ -80,7 +80,7 @@ export default function DailyWisdomClient() {
           Daily Wisdom
         </h1>
         <p className="mt-4 text-lg md:text-xl text-foreground/80 max-w-3xl mx-auto">
-          A pearl of wisdom from the great Acharyas, with Hindi translation, powered by AI.
+          A daily pearl of wisdom from the great Acharyas, with its Hindi translation, to inspire your day.
         </p>
       </div>
 

@@ -148,7 +148,7 @@ export default function HomePage() {
                     Dharma Art Wallpapers
                 </h2>
                 <p className="mt-2 text-lg text-foreground/80 max-w-3xl mx-auto">
-                    A scrolling filmstrip of AI-generated wallpapers. Hover over the art to pause the animation and download.
+                    A scrolling filmstrip of beautiful, generated wallpapers. Hover over the art to pause the animation and download.
                 </p>
             </div>
 

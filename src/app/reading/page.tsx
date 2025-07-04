@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -8,7 +7,6 @@ import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/componen
 import { Button } from '@/components/ui/button';
 import { readingList } from '@/lib/reading-data';
 import { BookOpen, UploadCloud } from 'lucide-react';
-import type { Metadata } from 'next';
 import { generateThumbnail } from '@/ai/flows/thumbnail-generator-flow';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useToast } from '@/hooks/use-toast';
@@ -35,7 +33,7 @@ export default function ReadingPage() {
         console.error("Failed to generate book cover:", error);
         toast({
           variant: 'destructive',
-          title: 'AI Error',
+          title: 'Generation Error',
           description: 'Could not generate a new book cover. Displaying default.',
         });
         setCoverImageUrl(book.imageUrl); // Fallback to placeholder

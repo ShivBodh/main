@@ -1,10 +1,9 @@
-
 'use client';
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetClose, SheetHeader, SheetTitle } from '@/components/ui/sheet';
-import { Menu, Mail, Twitter, Facebook, Podcast, Gem, LogIn, LogOut, LayoutDashboard, ChevronDown, HandHeart, Users, Landmark, CalendarDays, Camera, BookOpen, Heart, Sparkles, Smile } from 'lucide-react';
+import { Menu, Mail, Twitter, Facebook, Podcast, Gem, LogIn, LogOut, LayoutDashboard, ChevronDown, HandHeart, Users, Landmark, CalendarDays, Camera, BookOpen, Heart, Sparkles, Smile, MessageSquareQuote } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
@@ -85,6 +84,12 @@ const communityLinks = [
         href: "/seva",
         description: "Find meaningful volunteer opportunities.",
         icon: HandHeart,
+    },
+     {
+        title: "Knowledge Quiz",
+        href: "/quiz",
+        description: "Test your knowledge about the Peethams.",
+        icon: MessageSquareQuote,
     },
     {
         title: "Kids Corner",
@@ -210,15 +215,11 @@ export function Header() {
                                     </a>
                                 </NavigationMenuLink>
                             </li>
-                            <ListItem href="/quiz" title="Knowledge Quiz">
-                                Test your knowledge about the Peethams.
-                            </ListItem>
-                             <ListItem href="/chess" title="Chess AI">
-                                Challenge our AI, "Bodhi".
-                            </ListItem>
-                             <ListItem href="/kids" title="Kids Corner">
-                                A fun and creative space for young devotees.
-                            </ListItem>
+                            {communityLinks.map((link) => (
+                                <ListItem key={link.title} title={link.title} href={link.href}>
+                                    {link.description}
+                                </ListItem>
+                            ))}
                         </ul>
                     </NavigationMenuContent>
                 </NavigationMenuItem>
@@ -355,5 +356,3 @@ const ListItem = React.forwardRef<
   )
 })
 ListItem.displayName = "ListItem"
-
-    

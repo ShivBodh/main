@@ -34,13 +34,13 @@ export function InteractiveWallpaperGenerator() {
             if (result.imageUrl) {
                 setImageUrl(result.imageUrl);
             } else {
-                throw new Error("No image URL returned from AI flow.");
+                throw new Error("No image URL returned from generation flow.");
             }
         } catch (error) {
             console.error(`Failed to generate art for prompt "${prompt}":`, error);
             toast({
                 variant: 'destructive',
-                title: 'AI Art Generation Failed',
+                title: 'Art Generation Failed',
                 description: 'Could not generate the wallpaper. Please try a different prompt or try again later.',
             });
         } finally {
@@ -66,7 +66,7 @@ export function InteractiveWallpaperGenerator() {
                     Create Your Own Wallpaper
                 </CardTitle>
                 <CardDescription>
-                    Enter a concept from Sanatana Dharma (e.g., "The Trimurti", "The cosmic dance of Shiva", "Ganesha writing the Mahabharata") and let AI create a unique wallpaper for you.
+                    Enter a concept from Sanatana Dharma (e.g., "The Trimurti", "The cosmic dance of Shiva", "Ganesha writing the Mahabharata") to generate a unique wallpaper.
                 </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">

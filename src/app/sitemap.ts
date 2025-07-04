@@ -1,4 +1,3 @@
-
 import { MetadataRoute } from 'next';
 import { peethams } from '@/lib/peethams-data';
 
@@ -19,7 +18,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/sadhana/daily-wisdom',
     '/panchanga',
     '/quiz',
-    '/chess',
     '/kids',
     '/seva',
     '/contact',
