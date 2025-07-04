@@ -1,0 +1,22 @@
+
+{
+  "name": "Sanatana Peethams Portal",
+  "short_name": "Peethams Portal",
+  "description": "A single, trusted digital beacon for the timeless wisdom of the four cardinal Peethams established by Adi Shankaracharya.",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23800000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='M6 3h12l4 6-10 13L2 9z' /%3e%3cpath d='M12 22V9' /%3e%3cpath d='M2 9h20' /%3e%3c/svg%3e",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23800000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='M6 3h12l4 6-10 13L2 9z' /%3e%3cpath d='M12 22V9' /%3e%3cpath d='M2 9h20' /%3e%3c/svg%3e",
+      "sizes": "512x512",
+      "type": "image/svg+xml"
+    }
+  ],
+  "start_url": "/?source=pwa",
+  "display": "standalone",
+  "background_color": "#FDFCFB",
+  "theme_color": "#800000"
+}

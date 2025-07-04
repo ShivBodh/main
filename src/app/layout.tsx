@@ -46,6 +46,7 @@ export const metadata: Metadata = {
     creator: '@shivabodha_org',
     images: ['https://images.unsplash.com/photo-1588243178229-17d3b66955e4?q=80&w=1200&h=630&fit=crop'],
   },
+  manifest: '/manifest.json',
 };
 
 export default function RootLayout({
@@ -74,6 +75,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet" />
+        <meta name="theme-color" content="#800000" />
       </head>
       <body className="font-body antialiased" suppressHydrationWarning>
         <AuthProvider>
