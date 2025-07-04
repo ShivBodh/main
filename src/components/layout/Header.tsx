@@ -264,9 +264,9 @@ export function Header() {
                     <span className="font-bold font-headline text-primary text-lg">Sanatana Peethams Portal</span>
                 </Link>
                 <nav className="flex flex-col space-y-2">
-                    {[...mainNavLinks, ...sadhanaTools, ...communityLinks, ...aboutLinks].map(link => (
-                      <SheetClose asChild key={link.href}>
-                       <Link href={link.href} className="text-lg font-medium transition-colors hover:text-accent py-1">{link.title}</Link>
+                    {[...mainNavLinks, ...sadhanaTools, ...communityLinks, ...aboutLinks].map((item: any) => (
+                      <SheetClose asChild key={item.title}>
+                       <Link href={item.href || item.link} className="text-lg font-medium transition-colors hover:text-accent py-1">{item.title}</Link>
                       </SheetClose>
                     ))}
                 </nav>
