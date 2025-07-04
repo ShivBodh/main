@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { ExternalLink, BookOpen, Calendar, Camera, MapPin, Mail, Briefcase, Globe, ScrollText, ArrowRight, Video } from 'lucide-react';
+import { ExternalLink, BookOpen, Calendar, Camera, MapPin, Mail, Briefcase, Globe, ScrollText, ArrowRight, Video, Landmark } from 'lucide-react';
 import { allSevaOpportunities } from '@/lib/seva-data';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
@@ -16,6 +16,7 @@ import { format } from 'date-fns';
 import { PhotoCard } from '@/components/media/PhotoCard';
 import { VideoCard } from '@/components/media/VideoCard';
 import { peethams } from '@/lib/peethams-data';
+import { LineageTimeline } from './LineageTimeline';
 
 const sringeriSeva = allSevaOpportunities.filter(o => o.peetham === 'Sringeri');
 const peethamInfo = peethams.find(p => p.name.includes('Sringeri'))!;
@@ -62,9 +63,10 @@ export default function SringeriClient() {
         </section>
 
         <Tabs defaultValue="about" className="w-full">
-          <TabsList className="grid w-full grid-cols-3 md:grid-cols-6 mb-8">
+          <TabsList className="grid w-full grid-cols-3 sm:grid-cols-4 md:grid-cols-7 mb-8">
             <TabsTrigger value="about">About</TabsTrigger>
             <TabsTrigger value="teachings">Teachings</TabsTrigger>
+            <TabsTrigger value="lineage">Lineage</TabsTrigger>
             <TabsTrigger value="events">Events</TabsTrigger>
             <TabsTrigger value="gallery">Photos</TabsTrigger>
             <TabsTrigger value="videos">Videos</TabsTrigger>
@@ -108,6 +110,11 @@ export default function SringeriClient() {
                 "A mind that is not agitated by desires and is free from cravings is the fittest to receive the knowledge of the Self." - Sri Sri Bharati Tirtha Mahaswamiji
                 </blockquote>
              </div>
+          </TabsContent>
+
+          <TabsContent value="lineage">
+             <h3 className="font-headline text-2xl text-primary mb-6 flex items-center gap-2"><Landmark className="h-6 w-6" /> Guru Parampara</h3>
+             {peethamInfo.lineage && <LineageTimeline lineage={peethamInfo.lineage} />}
           </TabsContent>
 
           <TabsContent value="events">
