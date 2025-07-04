@@ -98,6 +98,7 @@ export default function SringeriClient() {
              <Card>
                 <CardHeader>
                     <CardTitle className="font-headline text-primary flex items-center gap-2"><BookOpen className="h-6 w-6" /> Core Philosophy</CardTitle>
+                    <CardDescription>The foundational teachings of the Peetham, rooted in the Mahāvākya "Aham Brahmāsmi" (I am Brahman).</CardDescription>
                 </CardHeader>
                 <CardContent className="prose max-w-none text-foreground/90">
                     <p>
@@ -128,7 +129,7 @@ export default function SringeriClient() {
                         <Calendar className="h-6 w-6" /> Recent & Upcoming Events
                     </CardTitle>
                     <CardDescription>
-                        The latest happenings connected to the Sringeri Sharada Peetham.
+                        The latest happenings connected to the Sringeri Sharada Peetham. For a full list of all events, visit the main Bodha Calendar.
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -162,6 +163,7 @@ export default function SringeriClient() {
 
           <TabsContent value="gallery">
             <h3 className="font-headline text-2xl text-primary mb-4 flex items-center gap-2"><Camera className="h-6 w-6" /> Photo Gallery</h3>
+            <p className="text-muted-foreground mb-6">A visual journey through recent events and moments at the Peetham. Click any photo to view it in full screen.</p>
             {sringeriPhotos.length > 0 ? (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {sringeriPhotos.map(photo => (
@@ -180,6 +182,7 @@ export default function SringeriClient() {
 
            <TabsContent value="videos">
              <h3 className="font-headline text-2xl text-primary mb-4 flex items-center gap-2"><Video className="h-6 w-6" /> Video Gallery</h3>
+             <p className="text-muted-foreground mb-6">Watch discourses, festival highlights, and other video content from the Peetham. Click any video to play.</p>
              {sringeriVideos.length > 0 ? (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {sringeriVideos.map(video => (
@@ -193,6 +196,7 @@ export default function SringeriClient() {
 
           <TabsContent value="seva">
             <h3 className="font-headline text-2xl text-primary mb-6">Seva Opportunities at Sringeri</h3>
+            <p className="text-muted-foreground mb-6">Explore opportunities for selfless service at the Peetham. Your contribution of time and skills is invaluable.</p>
             {sringeriSeva.length > 0 ? (
                 <div className="space-y-4">
                     {sringeriSeva.map(opp => (
