@@ -89,11 +89,6 @@ const communityLinks = [
         description: "Support our sacred mission."
     },
     {
-        title: "Campaigns",
-        href: "/campaigns",
-        description: "Start or support campaigns for Dharma."
-    },
-    {
         title: "Kids Corner",
         href: "/kids",
         description: "A fun and creative space for young devotees."
@@ -136,9 +131,9 @@ const AuthNav = () => {
                     </DropdownMenuLabel>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem asChild>
-                        <Link href="/dashboard">
+                        <Link href="/social">
                             <LayoutDashboard className="mr-2 h-4 w-4" />
-                            <span>Dashboard</span>
+                            <span>My Hub</span>
                         </Link>
                     </DropdownMenuItem>
                     <DropdownMenuSeparator />
@@ -216,7 +211,7 @@ export function Header() {
                                 </NavigationMenuLink>
                             </li>
                             <ListItem href="/donate" title="Donate">
-                                Support our mission to preserve Dharma.
+                                Support our sacred mission.
                             </ListItem>
                             <ListItem href="/quiz" title="Knowledge Quiz">
                                 Test your knowledge about the Peethams.
@@ -286,9 +281,9 @@ export function Header() {
                   {loading ? <Skeleton className="h-10 w-full" /> : user ? (
                     <>
                       <SheetClose asChild>
-                        <Link href="/dashboard" className="flex items-center space-x-2 text-lg font-medium transition-colors hover:text-accent">
+                        <Link href="/social" className="flex items-center space-x-2 text-lg font-medium transition-colors hover:text-accent">
                           <LayoutDashboard className="h-6 w-6" />
-                          <span>Dashboard</span>
+                          <span>My Hub</span>
                         </Link>
                       </SheetClose>
                        <SheetClose asChild>

@@ -1,16 +1,36 @@
 
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Users } from 'lucide-react';
 import type { Metadata } from 'next';
-import DashboardClient from '@/components/dashboard/DashboardClient';
+import Link from 'next/link';
 
-// This page is not for public consumption and should not be indexed.
 export const metadata: Metadata = {
-  title: 'Dashboard | Sanatana Peethams Portal',
+  title: 'Feature Moved | Sanatana Peethams Portal',
+  description: 'The User Dashboard has been integrated into the new Sanatan Social hub.',
   robots: {
     index: false,
     follow: false,
   },
 };
 
-export default function DashboardPage() {
-  return <DashboardClient />;
+export default function DeprecatedDashboardPage() {
+  return (
+    <div className="container mx-auto max-w-2xl py-16 md:py-24 px-4 flex justify-center">
+      <Card className="w-full text-center">
+        <CardHeader>
+          <Users className="mx-auto h-12 w-12 text-primary" />
+          <CardTitle className="font-headline text-3xl mt-4">This Feature Has Moved</CardTitle>
+          <CardDescription>
+            Your dashboard is now the "My Profile" tab within the new Sanatan Social hub.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Button asChild size="lg">
+            <Link href="/social">Go to Sanatan Social</Link>
+          </Button>
+        </CardContent>
+      </Card>
+    </div>
+  );
 }
