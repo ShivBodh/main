@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -31,7 +30,8 @@ export default function DainandiniClient() {
   const { user, loading } = useAuth();
   const router = useRouter();
   
-  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
+  // Initialize state to undefined to prevent server/client mismatch
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>();
   const [isClient, setIsClient] = useState(false);
   
   const [notes, setNotes] = useState('');
@@ -41,6 +41,8 @@ export default function DainandiniClient() {
   // This effect ensures browser-specific logic runs only on the client
   useEffect(() => {
     setIsClient(true);
+    // Set initial date only on the client to avoid hydration errors
+    setSelectedDate(new Date());
   }, []);
 
   // Effect for handling auth state
@@ -52,7 +54,7 @@ export default function DainandiniClient() {
   
   // Effect to load data when the selected date or user changes
   useEffect(() => {
-    if (!user || !isClient) return;
+    if (!user || !isClient || !selectedDate) return;
     
     const dateKey = format(selectedDate, 'yyyy-MM-dd');
     const data = localStorage.getItem(`dainandini_${user.uid}_${dateKey}`);
@@ -68,7 +70,7 @@ export default function DainandiniClient() {
 
   // Effect for auto-saving data to localStorage on change
   useEffect(() => {
-    if (!user || !isClient) return;
+    if (!user || !isClient || !selectedDate) return;
     
     const handler = setTimeout(() => {
       const dateKey = format(selectedDate, 'yyyy-MM-dd');
@@ -104,7 +106,7 @@ export default function DainandiniClient() {
   const handleDeleteTask = (taskId: string) => {
     setTasks(prev => prev.filter(task => task.id !== taskId));
   };
-
+  
   if (!isClient || loading) {
     return (
         <div className="container mx-auto max-w-7xl py-16 md:py-24 px-4">
@@ -140,7 +142,7 @@ export default function DainandiniClient() {
                     <Calendar
                         mode="single"
                         selected={selectedDate}
-                        onSelect={(date) => date && setSelectedDate(date)}
+                        onSelect={setSelectedDate}
                         className="p-3"
                     />
                 </CardContent>
@@ -164,7 +166,7 @@ export default function DainandiniClient() {
                         {/* Header */}
                         <header className="border-b pb-4 mb-6">
                             <h2 className="text-2xl font-bold font-headline text-primary">
-                                {format(selectedDate, 'EEEE, do MMMM yyyy')}
+                                {selectedDate ? format(selectedDate, 'EEEE, do MMMM yyyy') : 'Select a date'}
                             </h2>
                         </header>
 
