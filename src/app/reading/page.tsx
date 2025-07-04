@@ -1,4 +1,7 @@
 
+'use client';
+
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
@@ -6,14 +9,43 @@ import { Button } from '@/components/ui/button';
 import { readingList } from '@/lib/reading-data';
 import { BookOpen, UploadCloud } from 'lucide-react';
 import type { Metadata } from 'next';
+import { generateThumbnail } from '@/ai/flows/thumbnail-generator-flow';
+import { Skeleton } from '@/components/ui/skeleton';
+import { useToast } from '@/hooks/use-toast';
 
-export const metadata: Metadata = {
-  title: 'Reading Room',
-  description: 'A digital library of foundational Advaita Vedanta texts by masters like Adi Shankaracharya. Read Bhaja Govindam and other sacred scriptures (grantha).',
-};
+// We can't use generateMetadata in a Client Component,
+// but we can manage the title through other means if needed.
+// For now, we'll keep a static title for the main library page.
 
 export default function ReadingPage() {
-  const book = readingList[0]; // We are focusing on Bhaja Govindam for now
+  const book = readingList[0]; // We are focusing on Bhaja Govindam
+  const [coverImageUrl, setCoverImageUrl] = useState(book.imageUrl);
+  const [isLoading, setIsLoading] = useState(true);
+  const { toast } = useToast();
+
+  useEffect(() => {
+    const createCover = async () => {
+      setIsLoading(true);
+      try {
+        const result = await generateThumbnail({ prompt: `Bhaja Govindam: the folly of worldly attachments and the importance of devotion to the divine.` });
+        if (result.imageUrl) {
+          setCoverImageUrl(result.imageUrl);
+        }
+      } catch (error) {
+        console.error("Failed to generate book cover:", error);
+        toast({
+          variant: 'destructive',
+          title: 'AI Error',
+          description: 'Could not generate a new book cover. Displaying default.',
+        });
+        setCoverImageUrl(book.imageUrl); // Fallback to placeholder
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    createCover();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [book.id]);
 
   return (
     <div className="container mx-auto max-w-6xl py-16 md:py-24 px-4">
@@ -30,13 +62,17 @@ export default function ReadingPage() {
         <div className="w-full max-w-xs">
           <Card key={book.id} className="flex flex-col overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 group">
             <div className="relative aspect-[2/3] w-full bg-card">
-              <Image
-                src={book.imageUrl}
-                alt={`Cover for ${book.title}`}
-                fill
-                className="object-cover"
-                data-ai-hint={book.aiHint}
-              />
+              {isLoading ? (
+                <Skeleton className="h-full w-full" />
+              ) : (
+                <Image
+                  src={coverImageUrl}
+                  alt={`Cover for ${book.title}`}
+                  fill
+                  className="object-cover"
+                  data-ai-hint={book.aiHint}
+                />
+              )}
             </div>
              <div className="flex flex-col flex-grow p-4">
                 <CardHeader className="p-0">
