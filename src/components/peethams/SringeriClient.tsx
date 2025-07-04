@@ -230,7 +230,7 @@ export default function SringeriClient() {
                     </Card>
                 </div>
                 <div className="md:col-span-2">
-                     <Image src="https://placehold.co/1200x600.png" alt="Map of Sringeri Peetham" width={1200} height={600} className="rounded-lg object-cover w-full h-full aspect-video" data-ai-hint="map location"/>
+                     <Image src="https://images.unsplash.com/photo-1594398972283-a74797a92237?q=80&w=1200&h=600&fit=crop" alt="Map of Sringeri Peetham" width={1200} height={600} className="rounded-lg object-cover w-full h-full aspect-video" data-ai-hint="map location"/>
                 </div>
             </div>
           </TabsContent>

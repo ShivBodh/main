@@ -24,7 +24,7 @@ export const readingList: Book[] = [
     author: 'Adi Shankaracharya',
     description: 'A powerful hymn that emphasizes the importance of devotion and seeking Govinda (God) as the ultimate goal, cutting through worldly attachments.',
     pdfUrl: '#',
-    imageUrl: 'https://placehold.co/400x600.png',
+    imageUrl: 'https://images.unsplash.com/photo-1547973787-82772a814c33?q=80&w=400&h=600&fit=crop',
     aiHint: 'devotion supreme being',
     content: [
       {

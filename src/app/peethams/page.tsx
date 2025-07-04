@@ -1,4 +1,3 @@
-
 import Link from 'next/link';
 import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -29,7 +28,7 @@ export default function PeethamsPage() {
         <div className="text-center mb-16">
           <div className="mb-8">
             <Image
-              src="https://placehold.co/150x150.png"
+              src="https://images.unsplash.com/photo-1596541539218-350570a04d12?q=80&w=150&h=150&fit=crop"
               data-ai-hint="statue guru"
               alt="Jagadguru Adi Shankaracharya"
               width={150}
