@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowRight, CalendarDays, Sparkles, Megaphone, BookOpen, Smile, MoonStar, icons, Users } from 'lucide-react';
+import { ArrowRight, CalendarDays, Sparkles, Megaphone, BookOpen, Smile, MoonStar, Users } from 'lucide-react';
 import { peethams } from '@/lib/peethams-data';
 import type { Metadata } from 'next';
 import { allCalendarItems, CalendarPhotoItem, CalendarVideoItem } from '@/lib/calendar-data';
