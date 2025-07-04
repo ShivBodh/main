@@ -15,23 +15,21 @@ let auth: Auth;
 const googleProvider = new GoogleAuthProvider();
 const facebookProvider = new FacebookAuthProvider();
 
-const isFirebaseConfigured = firebaseConfig.apiKey && firebaseConfig.apiKey !== 'YOUR_API_KEY';
+// Check if the required environment variables are set and not the placeholder values.
+const isFirebaseConfigured = 
+    firebaseConfig.apiKey && firebaseConfig.apiKey !== 'YOUR_API_KEY' &&
+    firebaseConfig.authDomain && firebaseConfig.authDomain !== 'YOUR_PROJECT_ID.firebaseapp.com';
 
 if (!isFirebaseConfigured) {
-  console.error("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-  console.error("!!! FIREBASE IS NOT CONFIGURED! PLEASE ADD YOUR CREDENTIALS TO the .env FILE !!!");
-  console.error("!!! You can find your credentials in your Firebase project settings.             !!!");
-  console.error("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-  
-  // Provide dummy objects to prevent the app from crashing.
-  // Authentication will not work until you configure your credentials.
+  // If Firebase is not configured, we provide dummy objects to prevent the app from crashing.
+  // Authentication will not work, but the rest of the site will be functional.
   const createDummyAuth = (): Auth => ({
     currentUser: null,
     onAuthStateChanged: (observer: any): Unsubscribe => {
       observer(null);
       return () => {}; // Return an empty unsubscribe function
     },
-    signInWithPopup: () => Promise.reject(new Error("Firebase not configured. Please check your .env file.")),
+    signInWithPopup: () => Promise.reject(new Error("Firebase is not configured. Please add your credentials to the .env file to enable authentication.")),
     signOut: () => Promise.resolve(),
   } as unknown as Auth);
 
@@ -39,7 +37,7 @@ if (!isFirebaseConfigured) {
   auth = createDummyAuth();
 
 } else {
-  // Initialize Firebase
+  // Initialize Firebase only if it's configured and not already initialized.
   app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
   auth = getAuth(app);
 }
