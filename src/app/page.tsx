@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowRight, CalendarDays, Sparkles, Megaphone, BookOpen, Smile, MoonStar, icons } from 'lucide-react';
+import { ArrowRight, CalendarDays, Sparkles, Megaphone, BookOpen, Smile, MoonStar, icons, Users } from 'lucide-react';
 import { peethams } from '@/lib/peethams-data';
 import type { Metadata } from 'next';
 import { allCalendarItems, CalendarPhotoItem, CalendarVideoItem } from '@/lib/calendar-data';
@@ -27,6 +27,12 @@ export default function HomePage() {
       title: 'Bodha Calendar',
       description: 'A living archive of events, discourses, and media from the Peethams.',
       href: '/events',
+    },
+     {
+      icon: Users,
+      title: 'Sanatan Social',
+      description: 'A safe platform for the global Hindu community to connect and share.',
+      href: '/social',
     },
     {
       icon: Sparkles,
@@ -128,15 +134,18 @@ export default function HomePage() {
               Explore a rich ecosystem of tools and content designed to connect you with Dharma.
             </p>
           </div>
-          <div className="relative">
-            <div className="flex overflow-x-auto space-x-6 pb-4 -mx-4 px-4 snap-x snap-mandatory scrollbar-thin scrollbar-thumb-primary/50 scrollbar-track-transparent">
-              {features.map((feature, index) => (
-                <div key={index} className="snap-start shrink-0 w-[80%] sm:w-[45%] md:w-1/3 lg:w-1/4">
-                  <Link href={feature.href} className="block group h-full">
-                    <Card className="h-full flex flex-col items-center text-center p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-                      <feature.icon className="h-10 w-10 text-primary mb-4" />
-                      <CardTitle className="font-headline text-xl mb-2">{feature.title}</CardTitle>
-                      <CardContent className="p-0 text-sm text-foreground/80 flex-grow">
+          <div
+            className="group w-full overflow-hidden"
+            style={{ maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)' }}
+          >
+            <div className="flex w-max animate-autoscroll space-x-6 pb-4 group-hover:[animation-play-state:paused]">
+              {[...features, ...features].map((feature, index) => (
+                <div key={index} className="w-[80vw] shrink-0 sm:w-[45vw] md:w-[30vw] lg:w-[23vw]">
+                  <Link href={feature.href} className="group/card block h-full">
+                    <Card className="flex h-full flex-col items-center p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                      <feature.icon className="mb-4 h-10 w-10 text-primary" />
+                      <CardTitle className="mb-2 font-headline text-xl transition-colors group-hover/card:text-accent">{feature.title}</CardTitle>
+                      <CardContent className="flex-grow p-0 text-sm text-foreground/80">
                         <p>{feature.description}</p>
                       </CardContent>
                     </Card>
