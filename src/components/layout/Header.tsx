@@ -4,7 +4,7 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetClose, SheetHeader, SheetTitle } from '@/components/ui/sheet';
-import { Menu, Mail, Twitter, Facebook, Podcast, Gem, LogIn, LogOut, LayoutDashboard, ChevronDown, HandHeart, Users, Landmark, CalendarDays, Camera, BookOpen } from 'lucide-react';
+import { Menu, Mail, Twitter, Facebook, Podcast, Gem, LogIn, LogOut, LayoutDashboard, ChevronDown, HandHeart, Users, Landmark, CalendarDays, Camera, BookOpen, Heart, Sparkles, Smile } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
@@ -68,17 +68,20 @@ const aboutLinks = [
     {
         title: "Our Mission",
         href: "/mission",
-        description: "Learn why this portal was created as a service to Dharma."
+        description: "Learn why this portal was created as a service to Dharma.",
+        icon: Heart,
     },
     {
         title: "Our Philosophy",
         href: "/philosophy",
-        description: "Understand Shivbodh, our guiding principle."
+        description: "Understand Shivbodh, our guiding principle.",
+        icon: Sparkles,
     },
     {
         title: "Contact Us",
         href: "/contact",
-        description: "Get in touch with the volunteer team."
+        description: "Get in touch with the volunteer team.",
+        icon: Mail,
     }
 ]
 
@@ -86,12 +89,14 @@ const communityLinks = [
     {
         title: "Seva Hub",
         href: "/seva",
-        description: "Find meaningful volunteer opportunities."
+        description: "Find meaningful volunteer opportunities.",
+        icon: HandHeart,
     },
     {
         title: "Kids Corner",
         href: "/kids",
-        description: "A fun and creative space for young devotees."
+        description: "A fun and creative space for young devotees.",
+        icon: Smile,
     },
 ];
 
@@ -356,3 +361,5 @@ const ListItem = React.forwardRef<
   )
 })
 ListItem.displayName = "ListItem"
+
+    
