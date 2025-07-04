@@ -1,3 +1,4 @@
+
 'use client';
 
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
@@ -39,15 +40,37 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }
 
   const handleSignInError = (error: any, providerName: string) => {
-     console.error(`Error signing in with ${providerName}`, error);
+     console.error(`Error signing in with ${providerName}:`, error);
+     let description = `Could not sign in with ${providerName}. Please try again.`;
+
+     // Provide more specific feedback for common errors.
+     switch (error.code) {
+        case 'auth/account-exists-with-different-credential':
+            description = 'An account with this email already exists using a different sign-in method. Please use your original login provider.';
+            break;
+        case 'auth/popup-closed-by-user':
+            description = 'The sign-in popup was closed before completing the process. Please try again.';
+            break;
+        case 'auth/cancelled-popup-request':
+            description = 'The sign-in process was cancelled. Please try again.';
+            break;
+        case 'auth/operation-not-allowed':
+             description = `Sign-in with ${providerName} is not enabled. Please enable it in your Firebase project's Authentication settings.`;
+             break;
+        default:
+            description = `An unknown error occurred. (${error.code || 'UNKNOWN_ERROR'})`;
+            break;
+     }
+
      toast({
         variant: 'destructive',
         title: 'Authentication Failed',
-        description: `Could not sign in with ${providerName}. Please try again.`,
+        description: description,
     });
   }
 
   const signInWithGoogle = async () => {
+    if (!auth) return;
     setLoading(true);
     try {
       await signInWithPopup(auth, googleProvider);
@@ -60,6 +83,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
   
   const signInWithFacebook = async () => {
+    if (!auth) return;
     setLoading(true);
     try {
       await signInWithPopup(auth, facebookProvider);
@@ -72,6 +96,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const logout = async () => {
+    if (!auth) return;
     setLoading(true);
     try {
       await signOut(auth);
