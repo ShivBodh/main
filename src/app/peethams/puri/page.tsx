@@ -16,7 +16,7 @@ import { format } from 'date-fns';
 import { PhotoCard } from '@/components/media/PhotoCard';
 import { VideoCard } from '@/components/media/VideoCard';
 import { peethams } from '@/lib/peethams-data';
-import { LineageTimeline } from './LineageTimeline';
+import { LineageTimeline } from '@/components/peethams/LineageTimeline';
 
 const puriSeva = allSevaOpportunities.filter(o => o.peetham === 'Puri');
 const peethamInfo = peethams.find(p => p.name.includes('Puri'))!;
