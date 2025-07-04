@@ -3,8 +3,8 @@ import EventsClient from '@/components/events/EventsClient';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Bodha Calendar | Sanatana Peethams Portal',
-  description: 'Explore a living archive of daily events, discourses, and media from the four cardinal Peethams. Filter by date and Peetham to follow the latest updates.',
+  title: 'Bodha Calendar',
+  description: 'A living archive of daily events, discourses (pravachan), festivals, and pujas from the four cardinal Peethams of Sanatana Dharma. Follow the latest updates from Sringeri, Dwaraka, Puri, and Jyotirmath.',
 };
 
 export default function EventsPage() {

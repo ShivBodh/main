@@ -3,8 +3,8 @@ import PanchangaClient from '@/components/panchanga/PanchangaClient';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Daily Panchanga | Sanatana Peethams Portal',
-  description: "View today's astrological details (Panchanga) for the four cardinal regions of India, including Tithi, Nakshatra, Yoga, Karana, and auspicious timings.",
+  title: 'Daily Panchanga',
+  description: "Today's Hindu astrological details for North, South, East, and West India. View Tithi, Nakshatra, Yoga, Karana, Rahu Kalam, and other auspicious and inauspicious timings.",
 };
 
 export default function PanchangaPage() {

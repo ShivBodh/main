@@ -3,8 +3,8 @@ import type { Metadata } from 'next';
 import JyotirmathClient from '@/components/peethams/JyotirmathClient';
 
 export const metadata: Metadata = {
-  title: 'Jyotirmath Peetham, Badrinath | Sanatana Peethams Portal',
-  description: 'Explore the Jyotirmath Peetham, the northern Himalayan seat of Advaita Vedanta. Discover its history, teachings, and the serene spiritual environment of Badrinath.',
+  title: 'Jyotirmath Peetham, Badrinath',
+  description: "Explore the northern seat (Uttara Āmnāya Pīṭha) of Advaita Vedanta in the Himalayas. Discover its history, association with the Atharva Veda, and the Mahāvākya 'Ayam Ātmā Brahma'.",
 };
 
 export default function JyotirmathPeethamPage() {

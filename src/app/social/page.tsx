@@ -9,8 +9,8 @@ import { Rocket, Heart, MessageCircle, Share2, Image as ImageIcon, Video } from 
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Sanatan Social | Sanatana Peethams Portal',
-  description: 'A secure, family-friendly social media platform for the global Hindu community to connect, share, and grow together.',
+  title: 'Sanatan Social',
+  description: 'A secure social media platform for the global Hindu community. Connect with fellow Sanatanis, share dharmic content, and grow together in a safe, family-friendly environment.',
 };
 
 const placeholderPosts = [

@@ -8,8 +8,8 @@ import { BookOpen, Download, UploadCloud } from 'lucide-react';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Reading Room | Sanatana Peethams Portal',
-  description: 'A curated library of foundational texts by Jagadguru Adi Shankaracharya and other great masters. Immerse yourself in the timeless wisdom of Advaita Vedanta.',
+  title: 'Reading Room',
+  description: 'A digital library of foundational Advaita Vedanta texts by masters like Adi Shankaracharya. Download PDFs of Vivekachudamani, Atma Bodha, and more sacred scriptures (grantha).',
 };
 
 export default function ReadingPage() {

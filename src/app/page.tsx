@@ -12,7 +12,7 @@ import { VideoCard } from '@/components/media/VideoCard';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 
 export const metadata: Metadata = {
-  title: 'Sanatana Peethams Portal | Home',
+  title: 'Home',
   description: 'A single, trusted digital beacon for the timeless wisdom of the four cardinal Peethams established by Adi Shankaracharya. Connecting devotees worldwide.',
 };
 

@@ -9,8 +9,44 @@ import { AuthProvider } from '@/context/AuthContext';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://shivala.info'),
-  title: 'Sanatana Peethams Portal',
-  description: 'A single, trusted digital beacon for the timeless wisdom of the four cardinal Peethams.',
+  title: {
+    default: 'Sanatana Peethams Portal',
+    template: '%s | Sanatana Peethams Portal',
+  },
+  description: 'A single, trusted digital beacon for the timeless wisdom of the four cardinal Peethams established by Adi Shankaracharya. Connecting devotees worldwide.',
+  openGraph: {
+    title: 'Sanatana Peethams Portal',
+    description: 'A single, trusted digital beacon for the timeless wisdom of the four cardinal Peethams.',
+    url: 'https://shivala.info',
+    siteName: 'Sanatana Peethams Portal',
+    images: [
+      {
+        url: 'https://placehold.co/1200x630.png',
+        width: 1200,
+        height: 630,
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Sanatana Peethams Portal',
+    description: 'A single, trusted digital beacon for the timeless wisdom of the four cardinal Peethams.',
+    creator: '@shivabodha_org',
+    images: ['https://placehold.co/1200x630.png'],
+  },
 };
 
 export default function RootLayout({

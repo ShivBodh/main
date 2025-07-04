@@ -3,8 +3,8 @@ import GalleryClient from '@/components/gallery/GalleryClient';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Gallery | Sanatana Peethams Portal',
-  description: 'Explore a rich, chronological gallery of photos from the events and daily life of the four cardinal Peethams.',
+  title: 'Photo Gallery',
+  description: 'A rich, chronological gallery of photos from the events, festivals, and daily life of the four cardinal Shankaracharya Peethams: Sringeri, Dwaraka, Puri, and Jyotirmath.',
 };
 
 export default function GalleryPage() {
