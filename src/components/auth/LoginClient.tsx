@@ -5,14 +5,12 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { useAuth } from '@/context/AuthContext';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import { Chrome, Facebook, Fingerprint } from 'lucide-react';
+import { Chrome } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
-import { useToast } from '@/hooks/use-toast';
 
 export default function LoginClient() {
-  const { user, signInWithGoogle, signInWithFacebook, loading } = useAuth();
+  const { user, signInWithGoogle, loading } = useAuth();
   const router = useRouter();
-  const { toast } = useToast();
 
   useEffect(() => {
     if (!loading && user) {
@@ -20,13 +18,6 @@ export default function LoginClient() {
     }
   }, [user, loading, router]);
   
-  const handlePasskeySignIn = () => {
-    toast({
-        title: 'Feature In Progress',
-        description: 'Passkey sign-in (WebAuthn) is being configured. Please use Google or Facebook for now.',
-    });
-  };
-
   if (loading || user) {
     return (
         <div className="container mx-auto flex items-center justify-center min-h-[80vh] py-12">
@@ -36,8 +27,6 @@ export default function LoginClient() {
                     <Skeleton className="h-4 w-full mx-auto mt-2" />
                 </CardHeader>
                 <CardContent className="grid gap-4">
-                    <Skeleton className="h-12 w-full" />
-                    <Skeleton className="h-12 w-full" />
                     <Skeleton className="h-12 w-full" />
                 </CardContent>
             </Card>
@@ -55,12 +44,6 @@ export default function LoginClient() {
         <CardContent className="grid gap-4">
           <Button onClick={signInWithGoogle} className="w-full" size="lg" variant="outline">
             <Chrome className="mr-2 h-5 w-5" /> Sign in with Google
-          </Button>
-          <Button onClick={signInWithFacebook} className="w-full bg-[#1877F2] hover:bg-[#166fe5] text-white" size="lg">
-            <Facebook className="mr-2 h-5 w-5" /> Sign in with Facebook
-          </Button>
-          <Button onClick={handlePasskeySignIn} className="w-full" size="lg" variant="outline">
-            <Fingerprint className="mr-2 h-5 w-5" /> Sign in with a Passkey
           </Button>
         </CardContent>
       </Card>
