@@ -4,6 +4,7 @@ import { BadgeCheck, ShieldCheck, Network } from "lucide-react";
 import Link from "next/link";
 import type { Metadata } from 'next';
 import Image from 'next/image';
+import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
   title: 'Our Mission | Sanatana Peethams Portal',
@@ -76,7 +77,7 @@ export default function MissionPage() {
             <section>
               <h2>The Vision for the Future</h2>
               <p>
-                We envision this portal evolving into far more than a repository of information. It will become a living archive, preserving priceless discourses for future generations. It will be a community hub, fostering connection and shared learning among a global family of devotees. It will be a resource for daily practice (<strong>sādhanā</strong>), offering inspiration and guidance. Above all, it will stand as a testament to the enduring power and unbroken chain of the Guru-shishya parampara in the 21st century and beyond, ensuring that the light of the Jagadgurus' wisdom shines brightly for all who seek it.
+                Our work is for the future. We envision this portal evolving into far more than a repository of information. It will become a living archive for future generations, a community hub for shared learning, and a resource for daily practice. Our ultimate vision is to work towards a more beautiful and harmonious future for all, grounded in the timeless principles of Sanatana Dharma. This portal stands as a testament to the enduring power of the Guru-shishya parampara, ensuring the light of the Jagadgurus' wisdom shines brightly for all who seek it.
               </p>
             </section>
 
@@ -91,11 +92,13 @@ export default function MissionPage() {
                 />
                 <h2 className="text-2xl font-headline font-bold text-primary">Join Us in this Seva</h2>
                 <p className="mt-4 text-foreground/90 leading-relaxed">
-                    This platform is built by the community, for the community. If you have a skills in content curation, translation, web development, or simply a heartfelt desire to contribute, we welcome your participation.
+                    This platform is built by the community, for the community. If you have skills in content curation, translation, web development, or simply a heartfelt desire to contribute, we welcome your participation in our shared vision.
                 </p>
-                <Link href="/seva" className="inline-block mt-6 px-6 py-3 bg-primary text-primary-foreground font-semibold rounded-lg shadow-md hover:bg-primary/90 transition-colors">
-                    Explore Seva Opportunities
-                </Link>
+                <Button asChild size="lg" className="mt-6">
+                    <Link href="/seva">
+                        Explore Seva Opportunities
+                    </Link>
+                </Button>
             </div>
           </article>
         </div>

@@ -75,12 +75,12 @@ export default function PhilosophyPage() {
             </section>
   
             <section>
-              <h2>The Portal as a Path</h2>
+              <h2>The Portal as a Path to a Beautiful Future</h2>
               <p>
-                This portal is the practical application of that journey. It is our humble attempt to bring order to the digital chaos. We take the '0' of countless disconnected articles, unverified videos, and scattered event schedules, and through meticulous, reverent curation, we transform it into the '1'—a single, integrated, and trustworthy platform. 
+                This portal is the practical application of that journey. We take the '0' of countless disconnected articles and scattered schedules, and through reverent curation, we transform it into the '1'—a single, integrated, and trustworthy platform. 
               </p>
               <p>
-                Every event on the calendar, every teaching shared, every piece of history preserved here is a data point on the sacred map from Shunya to Purna. It is not merely a website; it is a <strong>seva</strong>, a selfless service designed to provide a clear, accessible path for you to begin your own journey of discovery, to engage with the authentic lineage, and to start your own redefinition of reality. It is your first step from the '0' of searching to the '1' of finding.
+                Every event on the calendar and every teaching shared is a data point on the sacred map from Shunya to Purna. This platform is more than a website; it is a seva and a tool in our collective work to build a more beautiful, conscious, and connected world. It is our hope that by providing a clear, accessible path to the authentic lineage, we empower you to not only start your own redefinition of reality but also to become a beacon of light for the future.
               </p>
             </section>
           </article>
@@ -88,4 +88,3 @@ export default function PhilosophyPage() {
       </div>
     );
   }
-  
