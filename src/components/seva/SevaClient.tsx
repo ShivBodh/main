@@ -1,149 +1,77 @@
+
 'use client';
 
-import { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { allSevaOpportunities, SevaOpportunity } from '@/lib/seva-data';
-import { HandHeart, MapPin, Landmark, Globe, Mail } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
+import { Landmark } from 'lucide-react';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
+
+// Approximate coordinates for the Peethams on the SVG map below.
+// This data is specific to the visual representation on this page.
+const peethamLocations = [
+    { name: 'Sringeri Sharada Peetham', link: '/peethams/sringeri', x: '46%', y: '78%' },
+    { name: 'Dwaraka Sharada Peetham', link: '/peethams/dwaraka', x: '18%', y: '58%' },
+    { name: 'Govardhana Peetham, Puri', link: '/peethams/puri', x: '78%', y: '65%' },
+    { name: 'Jyotirmath Peetham, Badrinath', link: '/peethams/jyotirmath', x: '58%', y: '20%' }
+];
+
+const PeethamMarker = ({ location }: { location: typeof peethamLocations[0] }) => (
+    <TooltipProvider delayDuration={100}>
+        <Tooltip>
+            <TooltipTrigger asChild>
+                <Link href={location.link} className="absolute z-10" style={{ top: location.y, left: location.x }}>
+                    <div className="relative flex items-center justify-center -translate-x-1/2 -translate-y-1/2">
+                        <div className="absolute h-5 w-5 rounded-full bg-primary/50 animate-pulse"></div>
+                        <div className="relative h-3 w-3 rounded-full bg-primary border-2 border-primary-foreground"></div>
+                    </div>
+                </Link>
+            </TooltipTrigger>
+            <TooltipContent>
+                <p>{location.name}</p>
+            </TooltipContent>
+        </Tooltip>
+    </TooltipProvider>
+);
 
 export default function SevaClient() {
-    const [opportunities] = useState<SevaOpportunity[]>(allSevaOpportunities);
-    const [locationFilter, setLocationFilter] = useState<{ onsite: boolean; remote: boolean }>({ onsite: true, remote: true });
-    const [searchFilter, setSearchFilter] = useState<string>('');
-
-    const filteredOpportunities = useMemo(() => {
-        return opportunities.filter(opp => {
-            const locationMatch = 
-                (locationFilter.onsite && opp.locationType === 'On-site') || 
-                (locationFilter.remote && opp.locationType === 'Remote');
-            
-            const searchMatch = searchFilter === '' || 
-                opp.title.toLowerCase().includes(searchFilter.toLowerCase()) ||
-                opp.description.toLowerCase().includes(searchFilter.toLowerCase()) ||
-                opp.skills.some(skill => skill.toLowerCase().includes(searchFilter.toLowerCase())) ||
-                opp.cityRegion.toLowerCase().includes(searchFilter.toLowerCase());
-
-            return locationMatch && searchMatch;
-        });
-    }, [opportunities, locationFilter, searchFilter]);
-
     return (
-        <div className="container mx-auto max-w-7xl py-16 md:py-24 px-4">
+        <div className="container mx-auto max-w-5xl py-16 md:py-24 px-4">
             <div className="text-center mb-16">
-                <h1 className="text-4xl md:text-5xl font-headline font-bold text-primary tracking-tight">
-                    Seva & Community Hub
+                <Landmark className="mx-auto h-12 w-12 text-primary" />
+                <h1 className="mt-4 text-4xl md:text-5xl font-headline font-bold text-primary tracking-tight">
+                    Connect with the Peethams
                 </h1>
                 <p className="mt-4 text-lg md:text-xl text-foreground/80 max-w-3xl mx-auto">
-                    Discover meaningful opportunities for selfless service (Seva) and connect with a vibrant community of volunteers. Your participation is a vital contribution to the preservation and propagation of Dharma.
+                   A visual journey to the four cardinal centers of Sanatana Dharma. Hover over a point to see the name, and click to explore its history, teachings, and contact information.
                 </p>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-                {/* Filters Column */}
-                <aside className="lg:col-span-1 space-y-6 lg:sticky lg:top-24">
-                    <Card>
-                        <CardHeader>
-                            <CardTitle className="font-headline text-xl">Filter Opportunities</CardTitle>
-                        </CardHeader>
-                        <CardContent className="space-y-6">
-                            <div>
-                                <Label className="text-base font-semibold">Search</Label>
-                                <Input 
-                                    placeholder="e.g., 'translation' or 'Puri'"
-                                    value={searchFilter}
-                                    onChange={e => setSearchFilter(e.target.value)}
-                                    className="mt-2"
-                                />
-                            </div>
-                            <div>
-                                <Label className="text-base font-semibold">Location Type</Label>
-                                <div className="space-y-2 mt-2">
-                                    <div className="flex items-center space-x-2">
-                                        <Checkbox id="onsite" checked={locationFilter.onsite} onCheckedChange={(checked) => setLocationFilter(f => ({...f, onsite: !!checked}))} />
-                                        <Label htmlFor="onsite">On-site</Label>
-                                    </div>
-                                    <div className="flex items-center space-x-2">
-                                        <Checkbox id="remote" checked={locationFilter.remote} onCheckedChange={(checked) => setLocationFilter(f => ({...f, remote: !!checked}))} />
-                                        <Label htmlFor="remote">Remote</Label>
-                                    </div>
-                                </div>
-                            </div>
-                        </CardContent>
-                    </Card>
-                    <Card className="p-6 text-center bg-card">
-                        <HandHeart className="mx-auto h-12 w-12 text-primary" />
-                        <h3 className="mt-4 font-headline text-lg font-semibold">Why Seva?</h3>
-                        <p className="mt-2 text-sm text-foreground/80">
-                            Seva, or selfless service, is a cornerstone of spiritual practice. It purifies the heart, cultivates humility, and allows us to offer our skills and time for the greater good of the community and the preservation of Dharma.
-                        </p>
-                    </Card>
-                    <Card className="p-6 text-center bg-card">
-                        <Mail className="mx-auto h-12 w-12 text-primary" />
-                        <h3 className="mt-4 font-headline text-lg font-semibold">Offer Your Skills</h3>
-                        <p className="mt-2 text-sm text-foreground/80">
-                            Don't see a role that fits? We would still love to hear from you. Please get in touch and let us know how you'd like to contribute.
-                        </p>
-                        <Button asChild className="mt-4 w-full">
-                            <Link href="/contact">Contact Us</Link>
-                        </Button>
-                    </Card>
-                </aside>
+            <Card>
+                <CardContent className="p-2 sm:p-6 relative w-full aspect-square md:aspect-[4/3] overflow-hidden">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 800 900"
+                        className="absolute inset-0 w-full h-full"
+                        aria-hidden="true"
+                    >
+                        <path
+                            d="M 285,100 C 275,120 270,140 260,180 C 240,240 210,300 210,350 C 210,400 230,450 250,480 C 270,510 300,530 330,550 C 360,570 390,580 420,580 C 450,580 480,570 510,550 C 540,530 570,510 590,480 C 610,450 630,400 630,350 C 630,300 610,250 590,200 C 570,150 540,110 510,80 C 480,50 440,30 400,20 C 360,10 320,10 290,40 C 280,50 275,70 285,100 Z"
+                            fill="hsl(var(--muted))"
+                            stroke="hsl(var(--border))"
+                            strokeWidth="1"
+                        />
+                    </svg>
 
-                {/* Opportunities List */}
-                <main className="lg:col-span-3">
-                    {filteredOpportunities.length > 0 ? (
-                        <Accordion type="single" collapsible className="w-full space-y-4">
-                            {filteredOpportunities.map(opp => (
-                                <Card key={opp.id}>
-                                    <AccordionItem value={`item-${opp.id}`} className="border-b-0">
-                                        <CardHeader>
-                                            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4">
-                                                <div className="flex-grow">
-                                                    <CardTitle className="font-headline text-lg">{opp.title}</CardTitle>
-                                                    <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-muted-foreground mt-2">
-                                                        <span className="flex items-center gap-1.5"><Landmark className="h-4 w-4" /> {opp.peetham}</span>
-                                                        <span className="flex items-center gap-1.5">{opp.locationType === 'On-site' ? <MapPin className="h-4 w-4" /> : <Globe className="h-4 w-4" />} {opp.cityRegion}</span>
-                                                    </div>
-                                                </div>
-                                                <Button asChild className="mt-2 sm:mt-0 flex-shrink-0">
-                                                    <a href={opp.applicationLink === '#' ? `mailto:${opp.contactEmail}?subject=Interest in ${opp.title} Seva` : opp.applicationLink} target="_blank" rel="noopener noreferrer">
-                                                        I'm Interested
-                                                    </a>
-                                                </Button>
-                                            </div>
-                                        </CardHeader>
-                                        <CardContent>
-                                             <div className="flex flex-wrap gap-2 mb-4">
-                                                {opp.skills.map(skill => (
-                                                    <Badge key={skill} variant="secondary">{skill}</Badge>
-                                                ))}
-                                            </div>
-                                            <AccordionTrigger className="text-accent hover:no-underline -ml-1 p-1 rounded">Learn More</AccordionTrigger>
-                                            <AccordionContent>
-                                                <div className="prose prose-sm max-w-none text-foreground/80 pt-2">
-                                                    <p>{opp.description}</p>
-                                                </div>
-                                            </AccordionContent>
-                                        </CardContent>
-                                    </AccordionItem>
-                                </Card>
-                            ))}
-                        </Accordion>
-                    ) : (
-                        <Card className="flex flex-col items-center justify-center h-96 text-center text-muted-foreground">
-                             <HandHeart className="h-16 w-16 mb-4 text-primary" />
-                            <h3 className="text-lg font-semibold">No Matching Seva Opportunities</h3>
-                            <p>Your search and filter combination did not return any results. Please try adjusting your filters or check back later for new opportunities.</p>
-                        </Card>
-                    )}
-                </main>
-            </div>
+                    {peethamLocations.map((location) => (
+                        <PeethamMarker key={location.name} location={location} />
+                    ))}
+                </CardContent>
+            </Card>
         </div>
     );
 }

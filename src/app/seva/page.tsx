@@ -3,8 +3,8 @@ import type { Metadata } from 'next';
 import SevaClient from '@/components/seva/SevaClient';
 
 export const metadata: Metadata = {
-  title: 'Seva & Community Hub | Sanatana Peethams Portal',
-  description: 'Find meaningful volunteer opportunities (Seva) to contribute your skills and time to the mission of preserving and propagating Dharma. Connect with our community.',
+  title: 'Connect with the Peethams | Sanatana Peethams Portal',
+  description: 'An interactive map to the four cardinal Peethams established by Adi Shankaracharya. Discover the location and explore the history of Sringeri, Dwaraka, Puri, and Jyotirmath.',
 };
 
 export default function SevaPage() {
