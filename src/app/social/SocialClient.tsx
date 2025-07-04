@@ -1,7 +1,7 @@
 
 'use client';
 
-import { useState, useEffect, useMemo, Suspense, ChangeEvent } from 'react';
+import { useState, useEffect, useMemo, Suspense, ChangeEvent, useRef } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { format } from 'date-fns';
@@ -11,7 +11,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Trash2, Plus, LogOut, Mail, Brain, BookMarked, BookOpen, HandHeart, Users, NotebookText, Megaphone, PlusCircle, Image as ImageIcon, Video, Heart, MessageCircle, Share2, Lock, Globe, Bell, Sunrise, Sunset, Moon, Star, SunMoon, Atom } from 'lucide-react';
+import { Trash2, Plus, LogOut, Mail, Brain, BookMarked, BookOpen, HandHeart, Users, NotebookText, Megaphone, PlusCircle, Image as ImageIcon, Video, Heart, MessageCircle, Share2, Lock, Globe, Bell, Sunrise, Sunset, Moon, Star, SunMoon, Atom, Pencil, Brush, Eraser, Download, Trash } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import Link from 'next/link';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -23,6 +23,7 @@ import { panchangaData, PanchangaDetails } from '@/lib/panchanga-data';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
+import { Slider } from '@/components/ui/slider';
 
 
 // --- TYPES ---
@@ -48,7 +49,8 @@ interface Campaign {
     userHasSupported?: boolean;
 }
 interface Task { id: string; text: string; completed: boolean; }
-interface DayEntry { notes: string; tasks: Task[]; journalStyle: 'classical' | 'canvas' }
+interface DayEntry { notes: string; tasks: Task[]; sketchData?: string; }
+type DrawingTool = 'pencil' | 'brush' | 'eraser';
 
 // --- HELPERS ---
 const getInitials = (name: string | null | undefined) => {
@@ -251,15 +253,143 @@ function PanchangaHeader({ data }: { data: PanchangaDetails }) {
     );
 }
 
+const colors = ['#000000', '#ef4444', '#3b82f6', '#22c55e', '#facc15', '#a855f7', '#ffffff'];
+
+function DrawingCanvas({ initialData, onSave, tool, brushSize, color, onClearRequest }: {
+    initialData: string | null;
+    onSave: (dataUrl: string) => void;
+    tool: DrawingTool;
+    brushSize: number;
+    color: string;
+    onClearRequest: () => void;
+}) {
+    const canvasRef = useRef<HTMLCanvasElement>(null);
+    const [isDrawing, setIsDrawing] = useState(false);
+
+    useEffect(() => {
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+        const context = canvas.getContext('2d');
+        if (!context) return;
+        
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        
+        if (initialData) {
+            const image = new Image();
+            image.onload = () => {
+                context.drawImage(image, 0, 0);
+            };
+            image.src = initialData;
+        }
+    }, [initialData]);
+
+    const getCoords = (e: React.MouseEvent | React.TouchEvent) => {
+        const canvas = canvasRef.current;
+        if (!canvas) return { x: 0, y: 0 };
+        const rect = canvas.getBoundingClientRect();
+        if ('touches' in e) {
+            return { x: e.touches[0].clientX - rect.left, y: e.touches[0].clientY - rect.top };
+        }
+        return { x: e.clientX - rect.left, y: e.clientY - rect.top };
+    }
+
+    const startDrawing = (e: React.MouseEvent | React.TouchEvent) => {
+        e.preventDefault();
+        const canvas = canvasRef.current;
+        const context = canvas?.getContext('2d');
+        if (!context) return;
+        const { x, y } = getCoords(e);
+        context.beginPath();
+        context.moveTo(x, y);
+        setIsDrawing(true);
+    };
+
+    const draw = (e: React.MouseEvent | React.TouchEvent) => {
+        e.preventDefault();
+        if (!isDrawing) return;
+        const canvas = canvasRef.current;
+        const context = canvas?.getContext('2d');
+        if (!context) return;
+
+        context.globalCompositeOperation = tool === 'eraser' ? 'destination-out' : 'source-over';
+        context.strokeStyle = color;
+        context.lineWidth = brushSize;
+        context.lineCap = tool === 'brush' ? 'round' : 'square';
+        
+        const { x, y } = getCoords(e);
+        context.lineTo(x, y);
+        context.stroke();
+    };
+
+    const stopDrawing = () => {
+        const canvas = canvasRef.current;
+        const context = canvas?.getContext('2d');
+        if (!context) return;
+        context.closePath();
+        setIsDrawing(false);
+        onSave(canvas.toDataURL());
+    };
+    
+    const handleDownload = () => {
+        const canvas = canvasRef.current;
+        if(!canvas) return;
+        const link = document.createElement('a');
+        link.download = `dainandini-sketch-${new Date().toISOString()}.png`;
+        link.href = canvas.toDataURL();
+        link.click();
+    }
+
+    return (
+        <div className='flex flex-col items-center gap-4'>
+            <canvas
+                ref={canvasRef}
+                width={800}
+                height={600}
+                className="bg-stone-50 border border-stone-200 rounded-md w-full aspect-[4/3] cursor-crosshair"
+                onMouseDown={startDrawing}
+                onMouseMove={draw}
+                onMouseUp={stopDrawing}
+                onMouseLeave={stopDrawing}
+                onTouchStart={startDrawing}
+                onTouchMove={draw}
+                onTouchEnd={stopDrawing}
+            />
+            <div className='flex gap-2'>
+                <Button onClick={handleDownload} variant="outline" size="sm"><Download className="mr-2"/> Download</Button>
+                <Button onClick={onClearRequest} variant="destructive" size="sm"><Trash className="mr-2"/> Clear Canvas</Button>
+            </div>
+        </div>
+    );
+}
+
 function DainandiniClientContent() {
     const { user } = useAuth();
     const { toast } = useToast();
     const [selectedDate, setSelectedDate] = useState<Date>();
+    // Journal state
     const [notes, setNotes] = useState('');
     const [tasks, setTasks] = useState<Task[]>([]);
     const [newTaskText, setNewTaskText] = useState('');
-    const [journalStyle, setJournalStyle] = useState<'classical' | 'canvas'>('classical');
+    // Sketchpad state
+    const [sketchData, setSketchData] = useState<string | null>(null);
+    const [tool, setTool] = useState<DrawingTool>('pencil');
+    const [brushSize, setBrushSize] = useState(5);
+    const [color, setColor] = useState('#000000');
+    
     const todayPanchang = useMemo(() => panchangaData.find(p => p.region === 'North')?.data, []);
+
+    const saveDayEntry = (data: Partial<DayEntry>) => {
+        if (!user || !selectedDate) return;
+        const dateKey = format(selectedDate, 'yyyy-MM-dd');
+        const existingDataRaw = localStorage.getItem(`dainandini_${user.uid}_${dateKey}`);
+        const existingData = existingDataRaw ? JSON.parse(existingDataRaw) : {};
+        const dataToSave: DayEntry = {
+            notes: data.notes ?? existingData.notes ?? '',
+            tasks: data.tasks ?? existingData.tasks ?? [],
+            sketchData: data.sketchData ?? existingData.sketchData ?? null,
+        };
+        localStorage.setItem(`dainandini_${user.uid}_${dateKey}`, JSON.stringify(dataToSave));
+    };
 
     useEffect(() => {
         setSelectedDate(new Date());
@@ -273,23 +403,29 @@ function DainandiniClientContent() {
             const parsedData: DayEntry = JSON.parse(data);
             setNotes(parsedData.notes || '');
             setTasks(parsedData.tasks || []);
-            setJournalStyle(parsedData.journalStyle || 'classical');
+            setSketchData(parsedData.sketchData || null);
         } else {
             setNotes('');
             setTasks([]);
-            setJournalStyle('classical');
+            setSketchData(null);
         }
     }, [selectedDate, user]);
 
     useEffect(() => {
         if (!user || !selectedDate) return;
-        const handler = setTimeout(() => {
-            const dateKey = format(selectedDate, 'yyyy-MM-dd');
-            const dataToSave: DayEntry = { notes, tasks, journalStyle };
-            localStorage.setItem(`dainandini_${user.uid}_${dateKey}`, JSON.stringify(dataToSave));
-        }, 500);
+        const handler = setTimeout(() => saveDayEntry({ notes, tasks }), 500);
         return () => clearTimeout(handler);
-    }, [notes, tasks, journalStyle, selectedDate, user]);
+    }, [notes, tasks, selectedDate, user]);
+
+    const handleSaveSketch = (dataUrl: string) => {
+        setSketchData(dataUrl);
+        saveDayEntry({ sketchData: dataUrl });
+    };
+
+    const handleClearSketch = () => {
+        setSketchData(null);
+        saveDayEntry({ sketchData: null });
+    }
 
     const handleAddTask = (e: React.FormEvent) => { e.preventDefault(); if (newTaskText.trim() === '') return; setTasks(prev => [...prev, { id: new Date().toISOString(), text: newTaskText.trim(), completed: false }]); setNewTaskText(''); };
     const handleToggleTask = (taskId: string) => { setTasks(prev => prev.map(task => task.id === taskId ? { ...task, completed: !task.completed } : task)); };
@@ -303,52 +439,60 @@ function DainandiniClientContent() {
                 <div className="lg:col-span-1 lg:sticky lg:top-24"><Card><CardContent className="p-0"><Calendar mode="single" selected={selectedDate} onSelect={setSelectedDate} className="p-3" /></CardContent></Card></div>
                 <div className="lg:col-span-2">
                     <Card className="shadow-lg">
-                        <div className="flex rounded-lg">
-                           <div className="flex-1 p-6 sm:p-8">
-                                <header className="flex justify-between items-center border-b pb-4 mb-6">
-                                    <h2 className="text-2xl font-bold font-headline text-primary">{selectedDate ? format(selectedDate, 'EEEE, do MMMM yyyy') : 'Select a date'}</h2>
-                                    <div className="flex items-center space-x-2">
-                                        <Label htmlFor="style-switch" className="text-sm text-muted-foreground">Canvas</Label>
-                                        <Switch 
-                                            id="style-switch"
-                                            checked={journalStyle === 'canvas'}
-                                            onCheckedChange={(checked) => setJournalStyle(checked ? 'canvas' : 'classical')}
-                                            aria-label="Toggle journal style"
-                                        />
-                                    </div>
-                                </header>
-                                <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
-                                    <div className="space-y-2">
-                                        <h3 className="text-lg font-semibold tracking-wider text-muted-foreground uppercase">Notes</h3>
-                                        <Textarea 
-                                            value={notes} 
-                                            onChange={(e) => setNotes(e.target.value)} 
-                                            placeholder="Your reflections..." 
-                                            className={cn(
-                                                "h-[500px] text-lg resize-none transition-all duration-300",
-                                                journalStyle === 'classical' 
-                                                    ? "bg-stone-50 border-stone-200 font-serif leading-[2.1rem] bg-repeat-y bg-[linear-gradient(to_bottom,hsl(var(--primary)/0.1)_1px,transparent_1px)] bg-[length:100%_2.1rem]"
-                                                    : "bg-background border-input font-sans",
-                                            )}
-                                            rows={15}
-                                        />
-                                    </div>
-                                    <div className="space-y-2">
-                                        <h3 className="text-lg font-semibold tracking-wider text-muted-foreground uppercase">Tasks</h3><form onSubmit={handleAddTask} className="flex gap-2"><Input value={newTaskText} onChange={(e) => setNewTaskText(e.target.value)} placeholder="Add a new task" /><Button type="submit" size="icon" variant="outline"><Plus className="h-4 w-4" /></Button></form>
-                                        <div className="space-y-3 pt-2">
-                                            {tasks.length > 0 ? tasks.map(task => (
-                                                <div key={task.id} className="flex items-center gap-3 group">
-                                                    <Checkbox id={task.id} checked={task.completed} onCheckedChange={() => handleToggleTask(task.id)} className="h-5 w-5" />
-                                                    <label htmlFor={task.id} className={`flex-1 text-sm ${task.completed ? 'line-through text-muted-foreground' : ''}`}>{task.text}</label>
-                                                    <Button variant="ghost" size="icon" className="h-7 w-7 opacity-0 group-hover:opacity-100 text-muted-foreground hover:text-primary" onClick={() => handleSetReminder(task.text)}><Bell className="h-4 w-4" /></Button>
-                                                    <Button variant="ghost" size="icon" className="h-7 w-7 opacity-0 group-hover:opacity-100 text-muted-foreground hover:text-destructive" onClick={() => handleDeleteTask(task.id)}><Trash2 className="h-4 w-4" /></Button>
-                                                </div>
-                                            )) : <p className="text-sm text-muted-foreground text-center pt-4">No tasks for today.</p>}
+                        <CardHeader className="border-b">
+                             <h2 className="text-2xl font-bold font-headline text-primary">{selectedDate ? format(selectedDate, 'EEEE, do MMMM yyyy') : 'Select a date'}</h2>
+                        </CardHeader>
+                        <CardContent className="p-4 sm:p-6">
+                            <Tabs defaultValue="journal" className="w-full">
+                                <TabsList className="grid w-full grid-cols-2">
+                                    <TabsTrigger value="journal"><Pencil className="mr-2"/>Journal</TabsTrigger>
+                                    <TabsTrigger value="sketchpad"><Brush className="mr-2"/>Sketchpad</TabsTrigger>
+                                </TabsList>
+                                <TabsContent value="journal" className="mt-6">
+                                    <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
+                                        <div className="space-y-2">
+                                            <h3 className="text-lg font-semibold tracking-wider text-muted-foreground uppercase">Notes</h3>
+                                            <Textarea value={notes} onChange={(e) => setNotes(e.target.value)} placeholder="Your reflections..." className="h-[400px] text-lg resize-none transition-all duration-300 bg-stone-50 border-stone-200 font-serif leading-[2.1rem] bg-repeat-y bg-[linear-gradient(to_bottom,hsl(var(--primary)/0.1)_1px,transparent_1px)] bg-[length:100%_2.1rem]" rows={15} />
+                                        </div>
+                                        <div className="space-y-2">
+                                            <h3 className="text-lg font-semibold tracking-wider text-muted-foreground uppercase">Tasks</h3>
+                                            <form onSubmit={handleAddTask} className="flex gap-2"><Input value={newTaskText} onChange={(e) => setNewTaskText(e.target.value)} placeholder="Add a new task" /><Button type="submit" size="icon" variant="outline"><Plus className="h-4 w-4" /></Button></form>
+                                            <div className="space-y-3 pt-2 h-[350px] overflow-y-auto">
+                                                {tasks.length > 0 ? tasks.map(task => (
+                                                    <div key={task.id} className="flex items-center gap-3 group">
+                                                        <Checkbox id={task.id} checked={task.completed} onCheckedChange={() => handleToggleTask(task.id)} className="h-5 w-5" />
+                                                        <label htmlFor={task.id} className={`flex-1 text-sm ${task.completed ? 'line-through text-muted-foreground' : ''}`}>{task.text}</label>
+                                                        <Button variant="ghost" size="icon" className="h-7 w-7 opacity-0 group-hover:opacity-100 text-muted-foreground hover:text-primary" onClick={() => handleSetReminder(task.text)}><Bell className="h-4 w-4" /></Button>
+                                                        <Button variant="ghost" size="icon" className="h-7 w-7 opacity-0 group-hover:opacity-100 text-muted-foreground hover:text-destructive" onClick={() => handleDeleteTask(task.id)}><Trash2 className="h-4 w-4" /></Button>
+                                                    </div>
+                                                )) : <p className="text-sm text-muted-foreground text-center pt-4">No tasks for today.</p>}
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
+                                </TabsContent>
+                                <TabsContent value="sketchpad" className="mt-6">
+                                     <div className="flex flex-col md:flex-row gap-4 mb-4">
+                                        <div className="flex items-center gap-2">
+                                            <Label>Tool:</Label>
+                                            <Button onClick={() => setTool('pencil')} variant={tool === 'pencil' ? 'default' : 'outline'} size="icon"><Pencil/></Button>
+                                            <Button onClick={() => setTool('brush')} variant={tool === 'brush' ? 'default' : 'outline'} size="icon"><Brush/></Button>
+                                            <Button onClick={() => setTool('eraser')} variant={tool === 'eraser' ? 'default' : 'outline'} size="icon"><Eraser/></Button>
+                                        </div>
+                                        <div className="flex-1">
+                                            <Label>Size: {brushSize}px</Label>
+                                            <Slider min={1} max={50} step={1} value={[brushSize]} onValueChange={(v) => setBrushSize(v[0])} />
+                                        </div>
+                                    </div>
+                                    <div className="flex items-center gap-2 mb-4">
+                                        <Label>Color:</Label>
+                                        <div className="flex gap-1">
+                                        {colors.map(c => <button key={c} onClick={() => setColor(c)} style={{ backgroundColor: c }} className={`h-8 w-8 rounded-full border-2 ${color === c ? 'border-primary' : 'border-muted'}`} />)}
+                                        </div>
+                                    </div>
+                                    <DrawingCanvas initialData={sketchData} onSave={handleSaveSketch} tool={tool} brushSize={brushSize} color={color} onClearRequest={handleClearSketch} />
+                                </TabsContent>
+                            </Tabs>
+                        </CardContent>
                     </Card>
                 </div>
             </div>
