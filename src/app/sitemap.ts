@@ -18,6 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/sadhana/japa-counter',
     '/sadhana/meditation-timer',
     '/sadhana/daily-wisdom',
+    '/diary',
     '/panchanga',
     '/quiz',
     '/chess',

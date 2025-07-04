@@ -5,12 +5,50 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Skeleton } from '@/components/ui/skeleton';
-import { LogOut, Mail, User as UserIcon, BookOpen, Brain, BookMarked, History } from 'lucide-react';
+import { LogOut, Mail, Brain, BookMarked, BookOpen, HandHeart, Users, NotebookText } from 'lucide-react';
 import Link from 'next/link';
-import { DonationDiary } from '@/components/dashboard/DonationDiary';
+
+const dashboardLinks = [
+    {
+        title: "My Dainandini",
+        description: "Access your personal diary for reflections.",
+        href: "/diary",
+        icon: NotebookText,
+    },
+    {
+        title: "Sādhanā Suite",
+        description: "Tools for japa, meditation, and daily wisdom.",
+        href: "/sadhana",
+        icon: Brain,
+    },
+    {
+        title: "Knowledge Quiz",
+        description: "Test your knowledge on the four Peethams.",
+        href: "/quiz",
+        icon: BookMarked,
+    },
+    {
+        title: "Reading Room",
+        description: "Read foundational texts from great masters.",
+        href: "/reading",
+        icon: BookOpen,
+    },
+    {
+        title: "Seva Hub",
+        description: "Find meaningful volunteer opportunities.",
+        href: "/seva",
+        icon: HandHeart,
+    },
+    {
+        title: "Sanatan Social",
+        description: "Connect with the global community.",
+        href: "/social",
+        icon: Users,
+    }
+];
 
 export default function DashboardClient() {
   const { user, loading, logout } = useAuth();
@@ -36,9 +74,6 @@ export default function DashboardClient() {
                 <Skeleton className="h-48 w-full rounded-lg" />
                 <Skeleton className="h-48 w-full rounded-lg" />
                 <Skeleton className="h-48 w-full rounded-lg" />
-            </div>
-             <div className="mt-8">
-                <Skeleton className="h-96 w-full rounded-lg" />
             </div>
         </div>
     );
@@ -75,59 +110,24 @@ export default function DashboardClient() {
             </div>
         </div>
       
-        <div className="grid gap-8 md:grid-cols-3">
-            <div className="md:col-span-1 space-y-8">
-                <Card className="shadow-md">
-                    <CardHeader>
-                        <CardTitle className="font-headline">Quick Links</CardTitle>
-                        <CardDescription>
-                            Continue your journey through the portal.
-                        </CardDescription>
-                    </CardHeader>
-                    <CardContent className="flex flex-col space-y-2">
-                        <Button variant="link" className="justify-start p-0 h-auto text-base" asChild>
-                            <Link href="/sadhana" className="flex items-center gap-2">
-                                <Brain className="h-4 w-4" />
-                                <span>Visit the Sādhanā Suite</span>
-                            </Link>
-                        </Button>
-                        <Button variant="link" className="justify-start p-0 h-auto text-base" asChild>
-                            <Link href="/quiz" className="flex items-center gap-2">
-                                <BookMarked className="h-4 w-4" />
-                                <span>Test Your Knowledge</span>
-                            </Link>
-                        </Button>
-                        <Button variant="link" className="justify-start p-0 h-auto text-base" asChild>
-                            <Link href="/reading" className="flex items-center gap-2">
-                                <BookOpen className="h-4 w-4" />
-                                <span>Go to the Reading Room</span>
-                            </Link>
-                        </Button>
-                    </CardContent>
-                </Card>
-
-                <Card className="shadow-md">
-                    <CardHeader>
-                        <CardTitle className="font-headline flex items-center gap-2">
-                            <History className="h-6 w-6 text-accent" />
-                            Your Activity
-                        </CardTitle>
-                        <CardDescription>
-                            A log of your recent interactions across the portal.
-                        </CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                        <p className="text-sm text-muted-foreground text-center p-4">
-                            Activity feed is being configured and will appear here soon.
-                        </p>
-                    </CardContent>
-                </Card>
-            </div>
-            <div className="md:col-span-2">
-                <DonationDiary />
-            </div>
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {dashboardLinks.map(link => {
+                const Icon = link.icon;
+                return (
+                    <Link href={link.href} key={link.href} className="block group">
+                        <Card className="h-full flex flex-col items-start p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border-border/50">
+                            <Icon className="h-8 w-8 text-primary mb-4" />
+                            <CardTitle className="font-headline text-xl group-hover:text-accent transition-colors">
+                                {link.title}
+                            </CardTitle>
+                            <CardDescription className="mt-2 text-foreground/80 flex-grow">
+                                {link.description}
+                            </CardDescription>
+                        </Card>
+                    </Link>
+                );
+            })}
         </div>
-
     </div>
   );
 }

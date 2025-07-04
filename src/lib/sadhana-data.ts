@@ -1,5 +1,5 @@
 
-import { Scroll, BrainCircuit, Sparkles } from 'lucide-react';
+import { Scroll, BrainCircuit, Sparkles, NotebookText } from 'lucide-react';
 
 export const sadhanaTools = [
   {
@@ -23,4 +23,11 @@ export const sadhanaTools = [
     link: '/sadhana/daily-wisdom',
     aiHint: 'ancient book'
   },
+  {
+    title: 'Dainandini',
+    description: 'Your personal, private diary for spiritual reflections, gratitude journaling, and recording your life\'s journey.',
+    icon: NotebookText,
+    link: '/diary',
+    aiHint: 'journal book'
+  }
 ];
