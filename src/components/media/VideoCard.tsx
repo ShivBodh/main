@@ -22,6 +22,7 @@ export function VideoCard({ item }: { item: CalendarVideoItem }) {
               width={400}
               height={225}
               className="w-full h-auto object-cover aspect-video rounded-t-lg bg-secondary/20"
+              data-ai-hint={item.aiHint || 'video thumbnail'}
             />
             <div className="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
               <PlayCircle className="h-16 w-16 text-white/80" />

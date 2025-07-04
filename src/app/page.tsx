@@ -6,9 +6,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowRight, CalendarDays, Sparkles, BookOpen, Smile, MoonStar, Users, Landmark, Shell, Flag, Mountain } from 'lucide-react';
 import { peethams } from '@/lib/peethams-data';
 import type { Metadata } from 'next';
-import { allCalendarItems, CalendarPhotoItem, CalendarVideoItem } from '@/lib/calendar-data';
-import { PhotoCard } from '@/components/media/PhotoCard';
 import { VideoCard } from '@/components/media/VideoCard';
+import type { CalendarVideoItem } from '@/lib/calendar-data';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { LineageTimeline } from '@/components/peethams/LineageTimeline';
@@ -19,47 +18,51 @@ export const metadata: Metadata = {
 };
 
 export default function HomePage() {
-  const featuredMedia = allCalendarItems
-    .filter((item): item is CalendarPhotoItem | CalendarVideoItem => item.type === 'photo' || item.type === 'video')
-    .slice(0, 9);
-
-  const features = [
+  const featuredVideos: CalendarVideoItem[] = [
     {
-      icon: CalendarDays,
-      title: 'Bodha Calendar',
-      description: 'A living archive of events, discourses, and media from the Peethams.',
-      href: '/events',
-    },
-     {
-      icon: Users,
-      title: 'Sanatan Social',
-      description: 'A safe platform for the global Hindu community to connect and share.',
-      href: '/social',
+      id: 'video-sringeri-vedanta',
+      date: '2024-07-20',
+      peetham: 'Sringeri',
+      type: 'video',
+      title: 'Advaita Vedanta: A Discourse by Sringeri Shankaracharya',
+      description: 'A profound talk on the core principles of non-duality and the path to self-realization from the southern seat of learning.',
+      url: 'https://www.youtube.com/embed/s_h0kFtrL9c?autoplay=1',
+      thumbnailUrl: 'https://images.unsplash.com/photo-1617877630248-842c7594d2e1?w=400&h=225&fit=crop',
+      aiHint: 'acharya discourse',
     },
     {
-      icon: Sparkles,
-      title: 'Sādhanā Suite',
-      description: 'Digital tools for japa, meditation, and daily wisdom to support your practice.',
-      href: '/sadhana',
+      id: 'video-dwaraka-vedanta',
+      date: '2024-07-19',
+      peetham: 'Dwaraka',
+      type: 'video',
+      title: "Tat Tvam Asi: The Essence of Sama Veda's Wisdom",
+      description: 'The Shankaracharya of Dwaraka elucidates the meaning and significance of the Mahavakya "That Thou Art".',
+      url: 'https://www.youtube.com/embed/s_h0kFtrL9c?autoplay=1',
+      thumbnailUrl: 'https://images.unsplash.com/photo-1547826039-bfc35e0f1ea8?w=400&h=225&fit=crop',
+      aiHint: 'acharya blessing',
     },
     {
-      icon: BookOpen,
-      title: 'Reading Room',
-      description: 'A curated library of foundational texts by great masters of the lineage.',
-      href: '/reading',
+      id: 'video-puri-vedanta',
+      date: '2024-07-18',
+      peetham: 'Puri',
+      type: 'video',
+      title: 'Prajñānam Brahma: Consciousness as the Ultimate Reality',
+      description: 'A deep dive into the nature of consciousness as the foundation of all existence by the Shankaracharya of Puri.',
+      url: 'https://www.youtube.com/embed/s_h0kFtrL9c?autoplay=1',
+      thumbnailUrl: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=400&h=225&fit=crop',
+      aiHint: 'scholars discussion',
     },
     {
-      icon: Smile,
-      title: 'Kids Corner',
-      description: 'A fun and creative space for young devotees with interactive activities.',
-      href: '/kids',
-    },
-    {
-      icon: MoonStar,
-      title: 'Daily Panchanga',
-      description: 'View daily astrological details including Tithi, Nakshatra, and auspicious timings.',
-      href: '/panchanga',
-    },
+      id: 'video-jyotirmath-vedanta',
+      date: '2024-07-17',
+      peetham: 'Jyotirmath',
+      type: 'video',
+      title: 'Ayam Ātmā Brahma: Wisdom from the Himalayan Abode',
+      description: 'Guidance on self-realization and introspection from the Shankaracharya of the northern Himalayan seat, Jyotirmath.',
+      url: 'https://www.youtube.com/embed/s_h0kFtrL9c?autoplay=1',
+      thumbnailUrl: 'https://images.unsplash.com/photo-1547787344-9d1a3c64f434?w=400&h=225&fit=crop',
+      aiHint: 'sadhu meditation',
+    }
   ];
 
   return (
@@ -170,7 +173,7 @@ export default function HomePage() {
       <section className="w-full py-16 md:py-24">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-headline font-bold text-center text-primary mb-12">
-            Dharma in Action: Latest from the Peethams
+            Dharma in Action: Wisdom from the Peethams
           </h2>
           <Carousel
             opts={{
@@ -180,16 +183,10 @@ export default function HomePage() {
             className="w-full"
           >
             <CarouselContent>
-              {featuredMedia.map((item) => (
-                <CarouselItem key={item.id} className="md:basis-1/2 lg:basis-1/3">
+              {featuredVideos.map((video) => (
+                <CarouselItem key={video.id} className="md:basis-1/2 lg:basis-1/2">
                   <div className="p-1 h-full">
-                    {item.type === 'photo' ? (
-                       <Link href="/gallery" className="block group h-full">
-                        <PhotoCard item={item} />
-                       </Link>
-                    ) : (
-                       <VideoCard item={item} />
-                    )}
+                    <VideoCard item={video} />
                   </div>
                 </CarouselItem>
               ))}

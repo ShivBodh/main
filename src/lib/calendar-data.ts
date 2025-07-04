@@ -42,6 +42,7 @@ export interface CalendarVideoItem extends BaseCalendarItem {
     type: 'video';
     url: string;
     thumbnailUrl: string;
+    aiHint?: string;
 }
 
 export type UnifiedCalendarItem = CalendarEventItem | CalendarPhotoItem | CalendarVideoItem;
@@ -61,10 +62,10 @@ const photoItems: CalendarPhotoItem[] = [
 ];
 
 const videoItems: CalendarVideoItem[] = [
-    ...sringeriVideos.map(v => ({ ...v, peetham: 'Sringeri' as const, type: 'video' as const })),
-    ...dwarakaVideos.map(v => ({ ...v, peetham: 'Dwaraka' as const, type: 'video' as const })),
-    ...puriVideos.map(v => ({ ...v, peetham: 'Puri' as const, type: 'video' as const })),
-    ...jyotirmathVideos.map(v => ({ ...v, peetham: 'Jyotirmath' as const, type: 'video' as const })),
+    ...sringeriVideos.map(v => ({ ...v, peetham: 'Sringeri' as const, type: 'video' as const, aiHint: 'acharya discourse' })),
+    ...dwarakaVideos.map(v => ({ ...v, peetham: 'Dwaraka' as const, type: 'video' as const, aiHint: 'acharya blessing' })),
+    ...puriVideos.map(v => ({ ...v, peetham: 'Puri' as const, type: 'video' as const, aiHint: 'vedic chanting' })),
+    ...jyotirmathVideos.map(v => ({ ...v, peetham: 'Jyotirmath' as const, type: 'video' as const, aiHint: 'himalayan mountains' })),
 ];
 
 export const allCalendarItems: UnifiedCalendarItem[] = [
