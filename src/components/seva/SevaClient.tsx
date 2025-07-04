@@ -8,17 +8,13 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { allSevaOpportunities, SevaOpportunity, Peetham } from '@/lib/seva-data';
+import { allSevaOpportunities, SevaOpportunity } from '@/lib/seva-data';
 import { HandHeart, MapPin, Landmark, Globe, Mail } from 'lucide-react';
-
-const peethams: Peetham[] = ['Sringeri', 'Dwaraka', 'Puri', 'Jyotirmath'];
 
 export default function SevaClient() {
     const [opportunities] = useState<SevaOpportunity[]>(allSevaOpportunities);
     const [locationFilter, setLocationFilter] = useState<{ onsite: boolean; remote: boolean }>({ onsite: true, remote: true });
-    const [peethamFilter, setPeethamFilter] = useState<string>('all');
     const [searchFilter, setSearchFilter] = useState<string>('');
 
     const filteredOpportunities = useMemo(() => {
@@ -27,17 +23,15 @@ export default function SevaClient() {
                 (locationFilter.onsite && opp.locationType === 'On-site') || 
                 (locationFilter.remote && opp.locationType === 'Remote');
             
-            const peethamMatch = peethamFilter === 'all' || opp.peetham === peethamFilter;
-
             const searchMatch = searchFilter === '' || 
                 opp.title.toLowerCase().includes(searchFilter.toLowerCase()) ||
                 opp.description.toLowerCase().includes(searchFilter.toLowerCase()) ||
                 opp.skills.some(skill => skill.toLowerCase().includes(searchFilter.toLowerCase())) ||
                 opp.cityRegion.toLowerCase().includes(searchFilter.toLowerCase());
 
-            return locationMatch && peethamMatch && searchMatch;
+            return locationMatch && searchMatch;
         });
-    }, [opportunities, locationFilter, peethamFilter, searchFilter]);
+    }, [opportunities, locationFilter, searchFilter]);
 
     return (
         <div className="container mx-auto max-w-7xl py-16 md:py-24 px-4">
@@ -79,18 +73,6 @@ export default function SevaClient() {
                                         <Label htmlFor="remote">Remote</Label>
                                     </div>
                                 </div>
-                            </div>
-                            <div>
-                                <Label className="text-base font-semibold">Associated Peetham</Label>
-                                 <Select value={peethamFilter} onValueChange={setPeethamFilter}>
-                                    <SelectTrigger className="w-full mt-2">
-                                        <SelectValue placeholder="Select a Peetham" />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        <SelectItem value="all">All Peethams</SelectItem>
-                                        {peethams.map(p => <SelectItem key={p} value={p}>{p}</SelectItem>)}
-                                    </SelectContent>
-                                </Select>
                             </div>
                         </CardContent>
                     </Card>
