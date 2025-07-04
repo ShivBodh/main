@@ -1,3 +1,4 @@
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
@@ -31,6 +32,22 @@ const dharmaSymbols = [
     {
         prompt: 'A swastika, an ancient symbol of well-being and good fortune',
         aiHint: 'swastika symbol'
+    },
+    {
+        prompt: 'Lord Ganesha writing the Mahabharata with his tusk',
+        aiHint: 'ganesha writing'
+    },
+    {
+        prompt: 'The Trimurti (Brahma, Vishnu, Shiva) representing creation, preservation, destruction',
+        aiHint: 'trimurti deities'
+    },
+    {
+        prompt: 'A Kalasha, the sacred pot with a coconut and mango leaves, symbolizing abundance',
+        aiHint: 'kalasha pot'
+    },
+    {
+        prompt: 'The Gayatri Mantra visualized as radiant light and sound waves',
+        aiHint: 'sacred mantra'
     }
 ];
 
