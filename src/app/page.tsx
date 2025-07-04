@@ -1,7 +1,6 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowRight, Sparkles, Users, Landmark } from 'lucide-react';
 import { peethams } from '@/lib/peethams-data';
@@ -10,6 +9,8 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import { LineageTimeline } from '@/components/peethams/LineageTimeline';
 import { DharmaArtFrame } from '@/components/home/DharmaArtFrame';
 import { InteractiveWallpaperGenerator } from '@/components/home/InteractiveWallpaperGenerator';
+import { HeroSection } from '@/components/home/HeroSection';
+import { Button } from '@/components/ui/button';
 
 export const metadata: Metadata = {
   title: 'Home',
@@ -54,24 +55,7 @@ const dharmaSymbols = [
 export default function HomePage() {
   return (
     <div className="flex flex-col items-center">
-      <section className="w-full py-20 md:py-32 bg-card">
-        <div className="container mx-auto text-center px-4">
-          <h1 className="text-4xl md:text-6xl font-headline font-bold text-primary tracking-tighter">
-            The Eternal Lineage, Unified for a Digital Age
-          </h1>
-          <p className="max-w-3xl mx-auto mt-4 text-lg md:text-xl text-foreground/80">
-            Connecting devotees worldwide to the authentic teachings, live events, and profound wisdom of the four cardinal Peethams established by Adi Shankaracharya. This portal is a seva—a selfless service to strengthen the eternal chain of wisdom.
-          </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <Button asChild size="lg">
-              <Link href="/peethams">Explore the Peethams</Link>
-            </Button>
-            <Button asChild size="lg" variant="outline">
-              <Link href="/events">View Bodha Calendar</Link>
-            </Button>
-          </div>
-        </div>
-      </section>
+      <HeroSection />
 
       <section className="w-full py-16 md:py-24">
         <div className="container mx-auto px-4">
