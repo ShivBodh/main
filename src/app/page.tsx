@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowRight, icons } from 'lucide-react';
+import { ArrowRight, CalendarDays, Sparkles, Megaphone, BookOpen, Smile, MoonStar, icons } from 'lucide-react';
 import { peethams } from '@/lib/peethams-data';
 import type { Metadata } from 'next';
 import { allCalendarItems, CalendarPhotoItem, CalendarVideoItem } from '@/lib/calendar-data';
@@ -16,19 +16,49 @@ export const metadata: Metadata = {
   description: 'A single, trusted digital beacon for the timeless wisdom of the four cardinal Peethams established by Adi Shankaracharya. Connecting devotees worldwide.',
 };
 
-// Helper component for dynamic icons
-const LucideIcon = ({ name, ...props }: { name: string; [key: string]: any }) => {
-  const Icon = icons[name as keyof typeof icons];
-  if (!Icon) {
-    return null;
-  }
-  return <Icon {...props} />;
-};
-
 export default function HomePage() {
   const featuredMedia = allCalendarItems
     .filter((item): item is CalendarPhotoItem | CalendarVideoItem => item.type === 'photo' || item.type === 'video')
     .slice(0, 9);
+
+  const features = [
+    {
+      icon: CalendarDays,
+      title: 'Bodha Calendar',
+      description: 'A living archive of events, discourses, and media from the Peethams.',
+      href: '/events',
+    },
+    {
+      icon: Sparkles,
+      title: 'Sādhanā Suite',
+      description: 'Digital tools for japa, meditation, and daily wisdom to support your practice.',
+      href: '/sadhana',
+    },
+    {
+      icon: Megaphone,
+      title: 'Campaigns Hub',
+      description: 'Start and support petitions for causes that uphold Sanatana Dharma.',
+      href: '/campaigns',
+    },
+    {
+      icon: BookOpen,
+      title: 'Reading Room',
+      description: 'A curated library of foundational texts by great masters of the lineage.',
+      href: '/reading',
+    },
+    {
+      icon: Smile,
+      title: 'Kids Corner',
+      description: 'A fun and creative space for young devotees with interactive activities.',
+      href: '/kids',
+    },
+    {
+      icon: MoonStar,
+      title: 'Daily Panchanga',
+      description: 'View daily astrological details including Tithi, Nakshatra, and auspicious timings.',
+      href: '/panchanga',
+    },
+  ];
 
   return (
     <div className="flex flex-col items-center">
@@ -90,6 +120,36 @@ export default function HomePage() {
 
       <section className="w-full py-16 md:py-24 bg-card">
         <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-headline font-bold text-primary">
+              A Portal for Your Spiritual Journey
+            </h2>
+            <p className="mt-2 text-lg text-foreground/80 max-w-2xl mx-auto">
+              Explore a rich ecosystem of tools and content designed to connect you with Dharma.
+            </p>
+          </div>
+          <div className="relative">
+            <div className="flex overflow-x-auto space-x-6 pb-4 -mx-4 px-4 snap-x snap-mandatory scrollbar-thin scrollbar-thumb-primary/50 scrollbar-track-transparent">
+              {features.map((feature, index) => (
+                <div key={index} className="snap-start shrink-0 w-[80%] sm:w-[45%] md:w-1/3 lg:w-1/4">
+                  <Link href={feature.href} className="block group h-full">
+                    <Card className="h-full flex flex-col items-center text-center p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                      <feature.icon className="h-10 w-10 text-primary mb-4" />
+                      <CardTitle className="font-headline text-xl mb-2">{feature.title}</CardTitle>
+                      <CardContent className="p-0 text-sm text-foreground/80 flex-grow">
+                        <p>{feature.description}</p>
+                      </CardContent>
+                    </Card>
+                  </Link>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="w-full py-16 md:py-24">
+        <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-headline font-bold text-center text-primary mb-12">
             Dharma in Action: Latest from the Peethams
           </h2>
@@ -128,7 +188,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="w-full py-16 md:py-24">
+      <section className="w-full py-16 md:py-24 bg-card">
         <div className="container mx-auto max-w-4xl text-center px-4">
             <h2 className="text-3xl md:text-4xl font-headline font-bold text-center text-primary mb-6">
                 Our Sacred Vow (Sankalpa)
