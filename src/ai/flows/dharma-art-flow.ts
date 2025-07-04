@@ -33,7 +33,7 @@ const dharmaArtFlow = ai.defineFlow(
   async ({prompt}) => {
     const {media} = await ai.generate({
       model: 'googleai/gemini-2.0-flash-preview-image-generation',
-      prompt: `Create a beautiful, artistic painting representing a sacred symbol of Sanatana Dharma. The style should be evocative, spiritual, and artistic, not a simple graphic. The symbol is: '${prompt}'. Do not include any text in the image.`,
+      prompt: `Create a beautiful, high-resolution mobile wallpaper suitable for a modern smartphone. The style should be artistic, spiritual, and symbolic, representing the following concept from Sanatana Dharma: '${prompt}'. The image should be in a vertical portrait orientation (9:16 aspect ratio). Do not include any text in the image.`,
       config: {
         responseModalities: ['TEXT', 'IMAGE'],
         safetySettings: [

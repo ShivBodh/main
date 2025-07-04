@@ -9,6 +9,7 @@ import type { Metadata } from 'next';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { LineageTimeline } from '@/components/peethams/LineageTimeline';
 import { DharmaArtFrame } from '@/components/home/DharmaArtFrame';
+import { InteractiveWallpaperGenerator } from '@/components/home/InteractiveWallpaperGenerator';
 
 export const metadata: Metadata = {
   title: 'Home',
@@ -17,20 +18,20 @@ export const metadata: Metadata = {
 
 const dharmaSymbols = [
     {
-        prompt: 'A painting of the Aum (ॐ) symbol, the primordial sound of the universe, representing the ultimate reality, Brahman.',
+        prompt: 'Aum (ॐ), the primordial sound of the universe',
         aiHint: 'aum symbol'
     },
     {
-        prompt: 'A painting of the Padma (पद्म), or lotus flower, symbolizing purity, spiritual enlightenment, and detachment from the material world.',
+        prompt: 'The Padma (lotus flower), symbolizing purity and enlightenment',
         aiHint: 'lotus flower'
     },
     {
-        prompt: 'A painting of the Swastika (स्वस्तिक), an ancient symbol of well-being, good fortune, and the eternal nature of Brahman.',
-        aiHint: 'swastika symbol'
+        prompt: 'The cosmic dance of Shiva (Nataraja) within a ring of fire',
+        aiHint: 'dancing shiva'
     },
     {
-        prompt: 'A painting of the Purna-Kalasha, a pot filled with water and topped with a coconut and mango leaves, symbolizing abundance, wisdom, and immortality.',
-        aiHint: 'kalasha pot'
+        prompt: 'A swastika, an ancient symbol of well-being and good fortune',
+        aiHint: 'swastika symbol'
     }
 ];
 
@@ -145,17 +146,18 @@ export default function HomePage() {
             <div className="text-center mb-12">
                 <Sparkles className="h-10 w-10 text-primary mx-auto" />
                 <h2 className="text-3xl md:text-4xl font-headline font-bold text-center text-primary mt-4">
-                    Artistic Visions of Dharma
+                    Dharma Art Wallpapers
                 </h2>
-                <p className="mt-2 text-lg text-foreground/80 max-w-2xl mx-auto">
-                    AI-generated artistic interpretations of timeless spiritual concepts, created to inspire contemplation.
+                <p className="mt-2 text-lg text-foreground/80 max-w-3xl mx-auto">
+                    AI-generated mobile wallpapers to inspire contemplation. Download one of our creations, or generate your own.
                 </p>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
                 {dharmaSymbols.map((symbol) => (
                     <DharmaArtFrame key={symbol.prompt} prompt={symbol.prompt} aiHint={symbol.aiHint} />
                 ))}
             </div>
+             <InteractiveWallpaperGenerator />
         </div>
       </section>
 
