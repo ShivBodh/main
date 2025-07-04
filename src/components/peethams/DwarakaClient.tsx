@@ -6,21 +6,25 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { ExternalLink, BookOpen, Calendar, Camera, MapPin, Mail, Briefcase, Globe, ArrowRight } from 'lucide-react';
+import { ExternalLink, BookOpen, Calendar, Camera, MapPin, Mail, Briefcase, Globe, ArrowRight, Video } from 'lucide-react';
 import { allSevaOpportunities } from '@/lib/seva-data';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { useMemo } from 'react';
-import { allCalendarItems, CalendarEventItem, CalendarPhotoItem } from '@/lib/calendar-data';
+import { allCalendarItems, CalendarEventItem, CalendarPhotoItem, CalendarVideoItem } from '@/lib/calendar-data';
 import { format } from 'date-fns';
 import { PhotoCard } from '@/components/media/PhotoCard';
+import { VideoCard } from '@/components/media/VideoCard';
+import { peethams } from '@/lib/peethams-data';
 
 const dwarakaSeva = allSevaOpportunities.filter(o => o.peetham === 'Dwaraka');
+const peethamInfo = peethams.find(p => p.name.includes('Dwaraka'))!;
 
 export default function DwarakaClient() {
 
     const dwarakaMedia = useMemo(() => allCalendarItems.filter(item => item.peetham === 'Dwaraka'), []);
     const dwarakaPhotos = useMemo(() => dwarakaMedia.filter((item): item is CalendarPhotoItem => item.type === 'photo'), [dwarakaMedia]);
+    const dwarakaVideos = useMemo(() => dwarakaMedia.filter((item): item is CalendarVideoItem => item.type === 'video'), [dwarakaMedia]);
     const dwarakaEvents = useMemo(() => dwarakaMedia.filter((item): item is CalendarEventItem => item.type === 'event').slice(0, 3), [dwarakaMedia]);
 
   return (
@@ -29,8 +33,8 @@ export default function DwarakaClient() {
         <section className="flex flex-col md:flex-row items-center gap-8 mb-12">
           <div className="w-full md:w-1/3">
             <Image
-              src="https://source.unsplash.com/800x600/?acharya,portrait"
-              data-ai-hint="acharya portrait"
+              src={peethamInfo.acharyaImage}
+              data-ai-hint={peethamInfo.acharyaAiHint}
               alt="Jagadguru Shankaracharya of Dwaraka Sharada Peetham"
               width={800}
               height={600}
@@ -58,12 +62,13 @@ export default function DwarakaClient() {
         </section>
 
         <Tabs defaultValue="about" className="w-full">
-          <TabsList className="grid w-full grid-cols-2 md:grid-cols-5 mb-8">
+          <TabsList className="grid w-full grid-cols-3 md:grid-cols-6 mb-8">
             <TabsTrigger value="about">About</TabsTrigger>
             <TabsTrigger value="teachings">Teachings</TabsTrigger>
             <TabsTrigger value="events">Events</TabsTrigger>
-            <TabsTrigger value="gallery">Media Gallery</TabsTrigger>
-            <TabsTrigger value="seva">Community & Seva</TabsTrigger>
+            <TabsTrigger value="gallery">Photos</TabsTrigger>
+            <TabsTrigger value="videos">Videos</TabsTrigger>
+            <TabsTrigger value="seva">Seva</TabsTrigger>
           </TabsList>
           
           <TabsContent value="about" className="prose prose-lg lg:prose-xl max-w-none text-foreground/90 leading-relaxed">
@@ -161,6 +166,19 @@ export default function DwarakaClient() {
                     <Link href="/gallery">View Full Chronological Gallery</Link>
                 </Button>
              </div>
+          </TabsContent>
+
+           <TabsContent value="videos">
+             <h3 className="font-headline text-2xl text-primary mb-4 flex items-center gap-2"><Video className="h-6 w-6" /> Video Gallery</h3>
+             {dwarakaVideos.length > 0 ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {dwarakaVideos.map(video => (
+                       <VideoCard key={video.id} item={video} />
+                    ))}
+                </div>
+            ) : (
+                <p className="text-center text-muted-foreground py-8">No videos available.</p>
+            )}
           </TabsContent>
 
            <TabsContent value="seva">

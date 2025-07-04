@@ -4,12 +4,12 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowRight, icons } from 'lucide-react';
-import { actionItems } from '@/lib/home-page-data';
 import { peethams } from '@/lib/peethams-data';
 import type { Metadata } from 'next';
-import { allCalendarItems, CalendarPhotoItem } from '@/lib/calendar-data';
+import { allCalendarItems, CalendarPhotoItem, CalendarVideoItem } from '@/lib/calendar-data';
 import { PhotoCard } from '@/components/media/PhotoCard';
-
+import { VideoCard } from '@/components/media/VideoCard';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 
 export const metadata: Metadata = {
   title: 'Sanatana Peethams Portal | Home',
@@ -25,11 +25,10 @@ const LucideIcon = ({ name, ...props }: { name: string; [key: string]: any }) =>
   return <Icon {...props} />;
 };
 
-
 export default function HomePage() {
-  const featuredPhotos = allCalendarItems.filter(
-    (item): item is CalendarPhotoItem => item.type === 'photo'
-  ).slice(0, 3);
+  const featuredMedia = allCalendarItems
+    .filter((item): item is CalendarPhotoItem | CalendarVideoItem => item.type === 'photo' || item.type === 'video')
+    .slice(0, 9);
 
   return (
     <div className="flex flex-col items-center">
@@ -42,11 +41,12 @@ export default function HomePage() {
             Connecting devotees worldwide to the authentic teachings, live events, and profound wisdom of the four cardinal Peethams established by Adi Shankaracharya. This portal is a seva—a selfless service to strengthen the eternal chain of wisdom.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
-            {actionItems.map((item) => (
-                <Button asChild size="lg" key={item.title}>
-                  <Link href={item.href}>{item.title}</Link>
-                </Button>
-            ))}
+            <Button asChild size="lg">
+              <Link href="/peethams">Explore the Peethams</Link>
+            </Button>
+            <Button asChild size="lg" variant="outline">
+              <Link href="/events">View Bodha Calendar</Link>
+            </Button>
           </div>
         </div>
       </section>
@@ -60,18 +60,14 @@ export default function HomePage() {
             {peethams.map((peetham: any) => (
               <Card key={peetham.name} className="flex flex-col overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border-border/50">
                 <div className="relative w-full h-48 bg-secondary/20 flex items-center justify-center">
-                  {peetham.icon ? (
-                    <LucideIcon name={peetham.icon} className="w-24 h-24 text-primary/50" />
-                  ) : (
-                    <Image 
-                      src={peetham.image} 
-                      alt={peetham.name} 
-                      width={600} 
-                      height={400} 
-                      className={`w-full h-full ${peetham.imageFit === 'contain' ? 'object-contain' : 'object-cover'}`}
-                      {...(peetham.aiHint && { 'data-ai-hint': peetham.aiHint })}
-                    />
-                  )}
+                  <Image
+                    src={peetham.image}
+                    alt={peetham.name}
+                    width={600}
+                    height={400}
+                    className="w-full h-full object-cover"
+                    {...(peetham.aiHint && { 'data-ai-hint': peetham.aiHint })}
+                  />
                 </div>
                 <CardHeader>
                   <CardTitle className="font-headline text-xl">{peetham.name}</CardTitle>
@@ -97,17 +93,35 @@ export default function HomePage() {
           <h2 className="text-3xl md:text-4xl font-headline font-bold text-center text-primary mb-12">
             Dharma in Action: Latest from the Peethams
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {featuredPhotos.map((item) => (
-              <Link href="/gallery" key={item.id} className="block group">
-                <PhotoCard item={item} />
-              </Link>
-            ))}
-          </div>
+          <Carousel
+            opts={{
+              align: 'start',
+              loop: true,
+            }}
+            className="w-full"
+          >
+            <CarouselContent>
+              {featuredMedia.map((item) => (
+                <CarouselItem key={item.id} className="md:basis-1/2 lg:basis-1/3">
+                  <div className="p-1 h-full">
+                    {item.type === 'photo' ? (
+                       <Link href="/gallery" className="block group h-full">
+                        <PhotoCard item={item} />
+                       </Link>
+                    ) : (
+                       <VideoCard item={item} />
+                    )}
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
            <div className="text-center mt-12">
                 <Button asChild size="lg" variant="outline">
                     <Link href="/events">
-                        View All in Bodha Calendar <ArrowRight className="ml-2 h-4 w-4" />
+                        View Full Bodha Calendar <ArrowRight className="ml-2 h-4 w-4" />
                     </Link>
                 </Button>
             </div>

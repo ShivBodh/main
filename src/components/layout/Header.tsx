@@ -4,7 +4,7 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetClose, SheetHeader, SheetTitle } from '@/components/ui/sheet';
-import { Menu, Mail, Twitter, Facebook, Podcast, Gem, LogIn, LogOut, LayoutDashboard } from 'lucide-react';
+import { Menu, Mail, Twitter, Facebook, Podcast, Gem, LogIn, LogOut, LayoutDashboard, ChevronDown } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
@@ -15,23 +15,78 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  navigationMenuTriggerStyle,
+} from '@/components/ui/navigation-menu';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Separator } from '@/components/ui/separator';
+import React from 'react';
+import { cn } from '@/lib/utils';
+import { sadhanaTools } from '@/lib/sadhana-data';
 
-const navLinks = [
-    { href: "/peethams", label: "Peethams" },
-    { href: "/events", label: "Bodha Calendar" },
-    { href: "/gallery", label: "Gallery" },
-    { href: "/panchanga", label: "Panchanga" },
-    { href: "/reading", label: "Reading" },
-    { href: "/sadhana", label: "Sadhana" },
-    { href: "/quiz", label: "Quiz" },
-    { href: "/chess", label: "Chess AI" },
-    { href: "/kids", label: "Kids Corner" },
-    { href: "/seva", label: "Seva Hub" },
-    { href: "/donate", label: "Donate" },
-    { href: "/philosophy", label: "Our Philosophy" },
-    { href: "/mission", label: "Our Mission" }
+const mainNavLinks = [
+    { 
+        title: "Peethams",
+        href: "/peethams",
+        description: "Explore the four cardinal institutions established by Adi Shankaracharya.",
+    },
+    { 
+        title: "Bodha Calendar",
+        href: "/events",
+        description: "A living archive of events, discourses, and media from the Peethams.",
+    },
+    { 
+        title: "Gallery",
+        href: "/gallery",
+        description: "A rich, chronological photo gallery from the four Peethams.",
+    },
+    { 
+        title: "Reading Room",
+        href: "/reading",
+        description: "A curated library of foundational texts by great masters.",
+    },
+];
+
+const aboutLinks = [
+    {
+        title: "Our Mission",
+        href: "/mission",
+        description: "Learn why this portal was created as a service to Dharma."
+    },
+    {
+        title: "Our Philosophy",
+        href: "/philosophy",
+        description: "Understand Shivbodh, our guiding principle."
+    },
+    {
+        title: "Contact Us",
+        href: "/contact",
+        description: "Get in touch with the volunteer team."
+    }
+]
+
+const communityLinks = [
+    {
+        title: "Seva Hub",
+        href: "/seva",
+        description: "Find meaningful volunteer opportunities."
+    },
+    {
+        title: "Donate",
+        href: "/donate",
+        description: "Support our sacred mission."
+    },
+    {
+        title: "Kids Corner",
+        href: "/kids",
+        description: "A fun and creative space for young devotees."
+    },
 ];
 
 const getInitials = (name: string | null | undefined) => {
@@ -99,18 +154,82 @@ export function Header() {
   const { user, loading, logout } = useAuth();
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95">
+    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 max-w-screen-2xl items-center justify-between">
         <div className="flex items-center">
           <Link href="/" className="mr-6 flex items-center space-x-2">
             <Gem className="h-6 w-6 text-primary" />
             <span className="font-bold font-headline text-primary sm:text-lg">Sanatana Peethams Portal</span>
           </Link>
-          <nav className="hidden lg:flex items-center space-x-6 text-sm font-medium">
-            {navLinks.slice(0, 5).map(link => (
-                <Link key={link.href} href={link.href} className="transition-colors hover:text-accent">{link.label}</Link>
-            ))}
-          </nav>
+          <NavigationMenu className="hidden lg:flex">
+            <NavigationMenuList>
+                {mainNavLinks.map(link => (
+                    <NavigationMenuItem key={link.href}>
+                        <Link href={link.href} legacyBehavior passHref>
+                            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                                {link.title}
+                            </NavigationMenuLink>
+                        </Link>
+                    </NavigationMenuItem>
+                ))}
+                <NavigationMenuItem>
+                    <NavigationMenuTrigger>Sādhanā</NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                        <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
+                            {sadhanaTools.map((tool) => (
+                                <ListItem key={tool.title} title={tool.title} href={tool.link}>
+                                    {tool.description}
+                                </ListItem>
+                            ))}
+                             <ListItem title="Daily Panchanga" href="/panchanga">
+                                Astrological details for the four cardinal regions.
+                            </ListItem>
+                        </ul>
+                    </NavigationMenuContent>
+                </NavigationMenuItem>
+                 <NavigationMenuItem>
+                    <NavigationMenuTrigger>Community</NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                        <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+                            <li className="row-span-3">
+                                <NavigationMenuLink asChild>
+                                    <a className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md" href="/seva">
+                                        <HandHeart className="h-8 w-8 text-primary" />
+                                        <div className="mb-2 mt-4 text-lg font-headline font-medium">
+                                            Seva Hub
+                                        </div>
+                                        <p className="text-sm leading-tight text-muted-foreground">
+                                            Contribute your skills and time. Find meaningful volunteer opportunities.
+                                        </p>
+                                    </a>
+                                </NavigationMenuLink>
+                            </li>
+                            <ListItem href="/donate" title="Donate">
+                                Support our mission to preserve Dharma.
+                            </ListItem>
+                            <ListItem href="/quiz" title="Knowledge Quiz">
+                                Test your knowledge about the Peethams.
+                            </ListItem>
+                             <ListItem href="/chess" title="Chess AI">
+                                Challenge our AI, "Bodhi".
+                            </ListItem>
+                        </ul>
+                    </NavigationMenuContent>
+                </NavigationMenuItem>
+                 <NavigationMenuItem>
+                    <NavigationMenuTrigger>About</NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                         <ul className="grid w-[300px] gap-3 p-4">
+                            {aboutLinks.map((link) => (
+                                <ListItem key={link.title} title={link.title} href={link.href}>
+                                    {link.description}
+                                </ListItem>
+                            ))}
+                         </ul>
+                    </NavigationMenuContent>
+                </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu>
         </div>
 
         <div className="hidden lg:flex items-center space-x-4">
@@ -139,15 +258,15 @@ export function Header() {
               <SheetHeader>
                 <SheetTitle className="sr-only">Main Menu</SheetTitle>
               </SheetHeader>
-              <div className="flex flex-col space-y-6">
+              <div className="flex flex-col space-y-4">
                 <Link href="/" className="mb-2 flex items-center space-x-2">
                     <Gem className="h-7 w-7 text-primary" />
                     <span className="font-bold font-headline text-primary text-lg">Sanatana Peethams Portal</span>
                 </Link>
-                <nav className="flex flex-col space-y-4">
-                    {navLinks.map(link => (
+                <nav className="flex flex-col space-y-2">
+                    {[...mainNavLinks, ...sadhanaTools, ...communityLinks, ...aboutLinks].map(link => (
                       <SheetClose asChild key={link.href}>
-                       <Link href={link.href} className="text-lg font-medium transition-colors hover:text-accent">{link.label}</Link>
+                       <Link href={link.href} className="text-lg font-medium transition-colors hover:text-accent py-1">{link.title}</Link>
                       </SheetClose>
                     ))}
                 </nav>
@@ -176,11 +295,7 @@ export function Header() {
                     </SheetClose>
                   )}
                   <Separator />
-                   <Link href="/contact" className="flex items-center space-x-2 text-lg font-medium transition-colors hover:text-accent">
-                    <Mail className="h-6 w-6" />
-                    <span>Connect with Us</span>
-                  </Link>
-                  <div className="flex items-center space-x-4">
+                   <div className="flex items-center space-x-4">
                     <Link href="https://twitter.com/shivabodha_org" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
                         <Twitter className="h-6 w-6 text-muted-foreground hover:text-foreground" />
                     </Link>
@@ -200,3 +315,30 @@ export function Header() {
     </header>
   );
 }
+
+
+const ListItem = React.forwardRef<
+  React.ElementRef<"a">,
+  React.ComponentPropsWithoutRef<"a">
+>(({ className, title, children, ...props }, ref) => {
+  return (
+    <li>
+      <NavigationMenuLink asChild>
+        <a
+          ref={ref}
+          className={cn(
+            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+            className
+          )}
+          {...props}
+        >
+          <div className="text-sm font-medium leading-none">{title}</div>
+          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+            {children}
+          </p>
+        </a>
+      </NavigationMenuLink>
+    </li>
+  )
+})
+ListItem.displayName = "ListItem"

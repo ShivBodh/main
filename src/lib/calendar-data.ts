@@ -7,8 +7,13 @@ import { dwarakaPhotoGallery } from './dwaraka-media';
 import { puriPhotoGallery } from './puri-media';
 import { jyotirmathPhotoGallery } from './jyotirmath-media';
 
+import { sringeriVideos } from './sringeri-videos';
+import { dwarakaVideos } from './dwaraka-videos';
+import { puriVideos } from './puri-videos';
+import { jyotirmathVideos } from './jyotirmath-videos';
+
 // Define the unified types
-export type CalendarItemType = 'event' | 'photo';
+export type CalendarItemType = 'event' | 'photo' | 'video';
 
 export interface BaseCalendarItem {
     id: string;
@@ -29,11 +34,17 @@ export interface CalendarEventItem extends BaseCalendarItem {
 export interface CalendarPhotoItem extends BaseCalendarItem {
     type: 'photo';
     imageUrl: string;
-    thumbnailUrl?: string; // For fast-loading gallery thumbnails
+    thumbnailUrl: string;
     aiHint: string;
 }
 
-export type UnifiedCalendarItem = CalendarEventItem | CalendarPhotoItem;
+export interface CalendarVideoItem extends BaseCalendarItem {
+    type: 'video';
+    url: string;
+    thumbnailUrl: string;
+}
+
+export type UnifiedCalendarItem = CalendarEventItem | CalendarPhotoItem | CalendarVideoItem;
 
 // Transform the data
 const eventItems: CalendarEventItem[] = allEvents.map(e => ({
@@ -43,54 +54,21 @@ const eventItems: CalendarEventItem[] = allEvents.map(e => ({
 }));
 
 const photoItems: CalendarPhotoItem[] = [
-    ...sringeriPhotoGallery.map(p => ({
-        id: p.id,
-        date: p.date,
-        peetham: 'Sringeri' as const,
-        type: 'photo' as const,
-        title: p.title,
-        description: p.description,
-        imageUrl: p.imageUrl,
-        thumbnailUrl: p.thumbnailUrl,
-        aiHint: p.aiHint,
-    })),
-    ...dwarakaPhotoGallery.map(p => ({
-        id: p.id,
-        date: p.date,
-        peetham: 'Dwaraka' as const,
-        type: 'photo' as const,
-        title: p.title,
-        description: p.description,
-        imageUrl: p.imageUrl,
-        thumbnailUrl: p.thumbnailUrl,
-        aiHint: p.aiHint,
-    })),
-    ...puriPhotoGallery.map(p => ({
-        id: p.id,
-        date: p.date,
-        peetham: 'Puri' as const,
-        type: 'photo' as const,
-        title: p.title,
-        description: p.description,
-        imageUrl: p.imageUrl,
-        thumbnailUrl: p.thumbnailUrl,
-        aiHint: p.aiHint,
-    })),
-    ...jyotirmathPhotoGallery.map(p => ({
-        id: p.id,
-        date: p.date,
-        peetham: 'Jyotirmath' as const,
-        type: 'photo' as const,
-        title: p.title,
-        description: p.description,
-        imageUrl: p.imageUrl,
-        thumbnailUrl: p.thumbnailUrl,
-        aiHint: p.aiHint,
-    })),
+    ...sringeriPhotoGallery.map(p => ({ ...p, peetham: 'Sringeri' as const, type: 'photo' as const })),
+    ...dwarakaPhotoGallery.map(p => ({ ...p, peetham: 'Dwaraka' as const, type: 'photo' as const })),
+    ...puriPhotoGallery.map(p => ({ ...p, peetham: 'Puri' as const, type: 'photo' as const })),
+    ...jyotirmathPhotoGallery.map(p => ({ ...p, peetham: 'Jyotirmath' as const, type: 'photo' as const })),
 ];
 
+const videoItems: CalendarVideoItem[] = [
+    ...sringeriVideos.map(v => ({ ...v, peetham: 'Sringeri' as const, type: 'video' as const })),
+    ...dwarakaVideos.map(v => ({ ...v, peetham: 'Dwaraka' as const, type: 'video' as const })),
+    ...puriVideos.map(v => ({ ...v, peetham: 'Puri' as const, type: 'video' as const })),
+    ...jyotirmathVideos.map(v => ({ ...v, peetham: 'Jyotirmath' as const, type: 'video' as const })),
+];
 
 export const allCalendarItems: UnifiedCalendarItem[] = [
     ...eventItems,
     ...photoItems,
+    ...videoItems,
 ].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());

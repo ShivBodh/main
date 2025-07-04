@@ -6,29 +6,40 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { ExternalLink, BookOpen, Calendar, Camera, MapPin, Mail, Briefcase, Globe, Flag, ArrowRight } from 'lucide-react';
+import { ExternalLink, BookOpen, Calendar, Camera, MapPin, Mail, Briefcase, Globe, Flag, ArrowRight, Video } from 'lucide-react';
 import { allSevaOpportunities } from '@/lib/seva-data';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { useMemo } from 'react';
-import { allCalendarItems, CalendarEventItem, CalendarPhotoItem } from '@/lib/calendar-data';
+import { allCalendarItems, CalendarEventItem, CalendarPhotoItem, CalendarVideoItem } from '@/lib/calendar-data';
 import { format } from 'date-fns';
 import { PhotoCard } from '@/components/media/PhotoCard';
+import { VideoCard } from '@/components/media/VideoCard';
+import { peethams } from '@/lib/peethams-data';
 
 const puriSeva = allSevaOpportunities.filter(o => o.peetham === 'Puri');
+const peethamInfo = peethams.find(p => p.name.includes('Puri'))!;
 
 export default function PuriClient() {
 
     const puriMedia = useMemo(() => allCalendarItems.filter(item => item.peetham === 'Puri'), []);
     const puriPhotos = useMemo(() => puriMedia.filter((item): item is CalendarPhotoItem => item.type === 'photo'), [puriMedia]);
+    const puriVideos = useMemo(() => puriMedia.filter((item): item is CalendarVideoItem => item.type === 'video'), [puriMedia]);
     const puriEvents = useMemo(() => puriMedia.filter((item): item is CalendarEventItem => item.type === 'event').slice(0, 3), [puriMedia]);
 
   return (
     <div className="bg-background text-foreground">
       <div className="container mx-auto max-w-6xl py-16 md:py-24 px-4">
         <section className="flex flex-col md:flex-row items-center gap-8 mb-12">
-          <div className="w-full md:w-1/3 flex items-center justify-center">
-            <Flag className="w-48 h-48 text-primary/30" />
+          <div className="w-full md:w-1/3">
+            <Image
+              src={peethamInfo.acharyaImage}
+              data-ai-hint={peethamInfo.acharyaAiHint}
+              alt="Jagadguru Shankaracharya of Govardhana Peetham"
+              width={800}
+              height={600}
+              className="rounded-lg shadow-lg object-cover aspect-[4/3]"
+            />
           </div>
           <div className="md:w-2/3">
             <h1 className="text-4xl md:text-5xl font-headline font-bold text-primary tracking-tight mb-4">
@@ -51,12 +62,13 @@ export default function PuriClient() {
         </section>
 
         <Tabs defaultValue="about" className="w-full">
-          <TabsList className="grid w-full grid-cols-2 md:grid-cols-5 mb-8">
+          <TabsList className="grid w-full grid-cols-3 md:grid-cols-6 mb-8">
             <TabsTrigger value="about">About</TabsTrigger>
             <TabsTrigger value="teachings">Teachings</TabsTrigger>
             <TabsTrigger value="events">Events</TabsTrigger>
-            <TabsTrigger value="gallery">Media Gallery</TabsTrigger>
-            <TabsTrigger value="seva">Community & Seva</TabsTrigger>
+            <TabsTrigger value="gallery">Photos</TabsTrigger>
+            <TabsTrigger value="videos">Videos</TabsTrigger>
+            <TabsTrigger value="seva">Seva</TabsTrigger>
           </TabsList>
           
           <TabsContent value="about" className="prose prose-lg lg:prose-xl max-w-none text-foreground/90 leading-relaxed">
@@ -154,6 +166,19 @@ export default function PuriClient() {
                     <Link href="/gallery">View Full Chronological Gallery</Link>
                 </Button>
              </div>
+          </TabsContent>
+
+            <TabsContent value="videos">
+             <h3 className="font-headline text-2xl text-primary mb-4 flex items-center gap-2"><Video className="h-6 w-6" /> Video Gallery</h3>
+             {puriVideos.length > 0 ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {puriVideos.map(video => (
+                       <VideoCard key={video.id} item={video} />
+                    ))}
+                </div>
+            ) : (
+                <p className="text-center text-muted-foreground py-8">No videos available.</p>
+            )}
           </TabsContent>
 
            <TabsContent value="seva">
