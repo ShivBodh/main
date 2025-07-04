@@ -1,3 +1,4 @@
+
 export const peethams = [
   {
     name: 'Sringeri Sharada Peetham',
@@ -6,6 +7,7 @@ export const peethams = [
     icon: 'BookOpen',
     image: 'https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/sringeri.png',
     acharyaImage: 'https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/sringeri.png',
+    acharyaAiHint: 'acharya portrait',
     lineage: [
         { name: 'Sri Vidyaranya', period: '1380–1386', description: 'A renowned sage and commentator, often credited as a guiding force in the establishment of the Vijayanagara Empire.' },
         { name: 'Sri Sacchidananda Bharati I', period: '1623–1663', description: 'A great tapasvin (ascetic) who travelled extensively and composed many devotional hymns that are sung to this day.' },
@@ -19,6 +21,7 @@ export const peethams = [
     icon: 'Shell',
     image: 'https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/sharda-peetha.png',
     acharyaImage: 'https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/sharda-peetha.png',
+    acharyaAiHint: 'acharya portrait',
     lineage: [
         { name: 'Sri Rajarajeshwarashram', period: '18th Century', description: 'A notable Acharya known for his scholarly works and efforts in preserving Vedic traditions in Western India.' },
         { name: 'Sri Abhinava Satchidananda Tirtha', period: '1945–1982', description: 'The 77th Shankaracharya, he was a powerful orator and worked tirelessly to promote Sanatana Dharma.' }
@@ -31,6 +34,7 @@ export const peethams = [
     icon: 'Flag',
     image: 'https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/puri.png',
     acharyaImage: 'https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/puri.png',
+    acharyaAiHint: 'acharya portrait',
     lineage: [
         { name: 'Sri Padmapadacharya', period: '8th Century', description: 'A direct disciple of Adi Shankaracharya and the first Acharya of the Puri Peetham. He was a profound scholar and author of the "Panchapadika".' },
         { name: 'Swami Bharati Krishna Tirtha', period: '1925–1960', description: 'The 143rd Shankaracharya, he was a polymath renowned for his work on "Vedic Mathematics".' }
@@ -43,6 +47,7 @@ export const peethams = [
     icon: 'Mountain',
     image: 'https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/jyotirpeetha.png',
     acharyaImage: 'https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/jyotirpeetha.png',
+    acharyaAiHint: 'acharya portrait',
     lineage: [
         { name: 'Sri Totakacharya', period: '8th Century', description: 'A direct disciple of Adi Shankaracharya, known for his deep devotion and humility. He composed the "Totakashtakam".' },
         { name: 'Swami Brahmananda Saraswati', period: '1941–1953', description: 'A revered master who revived the Jyotirmath Peetham after a long period of dormancy, restoring its significance as the northern seat.' }

@@ -1,3 +1,4 @@
+
 import type { Metadata } from 'next';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
@@ -18,7 +19,6 @@ const placeholderPosts = [
         author: {
             name: 'Sringeri Peetham',
             handle: '@sringeri_matham',
-            avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=48&h=48&fit=crop'
         },
         content: "The annual Sharada Sharannavaratri Mahotsava begins today. Join us in celebrating the Divine Mother. Watch the live stream on our YouTube channel.",
         image: 'https://images.unsplash.com/photo-1617478324403-56272b3a9e33?q=80&w=600&h=300&fit=crop',
@@ -31,7 +31,6 @@ const placeholderPosts = [
         author: {
             name: 'Gita Devotee',
             handle: '@gita_seeker',
-            avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=48&h=48&fit=crop'
         },
         content: "Just finished reading Chapter 2 of the Bhagavad Gita. The concept of the eternal, indestructible nature of the Atman is truly profound. 'nainam chindanti shastrani...'",
         image: null,
@@ -39,6 +38,9 @@ const placeholderPosts = [
         comments: 42
     }
 ]
+
+const getInitials = (name: string) => name.split(' ').map(n => n[0]).slice(0, 2).join('');
+
 
 export default function SocialPage() {
   return (
@@ -108,8 +110,7 @@ export default function SocialPage() {
                             <CardHeader>
                                 <div className="flex gap-3">
                                     <Avatar>
-                                        <AvatarImage src={post.author.avatar} alt={post.author.name} />
-                                        <AvatarFallback>{post.author.name.charAt(0)}</AvatarFallback>
+                                        <AvatarFallback>{getInitials(post.author.name)}</AvatarFallback>
                                     </Avatar>
                                     <div>
                                         <p className="font-bold">{post.author.name}</p>
