@@ -18,9 +18,10 @@ export function Footer() {
             <Link href="/chess" className="text-sm hover:text-accent">Chess AI</Link>
             <Link href="/kids" className="text-sm hover:text-accent">Kids Corner</Link>
             <Link href="/seva" className="text-sm hover:text-accent">Seva Hub</Link>
-            <Link href="/donate" className="text-sm hover:text-accent">Donate</Link>
             <Link href="/philosophy" className="text-sm hover:text-accent">Our Philosophy</Link>
             <Link href="/mission" className="text-sm hover:text-accent">Our Mission</Link>
+            <Link href="/privacy-policy" className="text-sm hover:text-accent">Privacy Policy</Link>
+            <Link href="/user-agreement" className="text-sm hover:text-accent">User Agreement</Link>
         </div>
       </div>
     </footer>

@@ -23,8 +23,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/chess',
     '/kids',
     '/seva',
-    '/donate',
     '/contact',
+    '/privacy-policy',
+    '/user-agreement',
   ].map((route) => ({
     url: `${siteUrl}${route}`,
     lastModified: new Date(),

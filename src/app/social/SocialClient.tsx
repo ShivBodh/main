@@ -22,6 +22,7 @@ import { useToast } from '@/hooks/use-toast';
 import { Progress } from '@/components/ui/progress';
 import { panchangaData, PanchangaDetails } from '@/lib/panchanga-data';
 import { Badge } from '@/components/ui/badge';
+import { cn } from '@/lib/utils';
 
 
 // --- TYPES ---
@@ -47,7 +48,7 @@ interface Campaign {
     timestamp: Date;
 }
 interface Task { id: string; text: string; completed: boolean; }
-interface DayEntry { notes: string; tasks: Task[]; }
+interface DayEntry { notes: string; tasks: Task[]; journalStyle: 'classical' | 'canvas' }
 
 // --- HELPERS ---
 const getInitials = (name: string | null | undefined) => {
@@ -253,6 +254,7 @@ function DainandiniClientContent() {
     const [notes, setNotes] = useState('');
     const [tasks, setTasks] = useState<Task[]>([]);
     const [newTaskText, setNewTaskText] = useState('');
+    const [journalStyle, setJournalStyle] = useState<'classical' | 'canvas'>('classical');
     const todayPanchang = useMemo(() => panchangaData.find(p => p.region === 'North')?.data, []);
 
     useEffect(() => {
@@ -267,9 +269,11 @@ function DainandiniClientContent() {
             const parsedData: DayEntry = JSON.parse(data);
             setNotes(parsedData.notes || '');
             setTasks(parsedData.tasks || []);
+            setJournalStyle(parsedData.journalStyle || 'classical');
         } else {
             setNotes('');
             setTasks([]);
+            setJournalStyle('classical');
         }
     }, [selectedDate, user]);
 
@@ -277,11 +281,11 @@ function DainandiniClientContent() {
         if (!user || !selectedDate) return;
         const handler = setTimeout(() => {
             const dateKey = format(selectedDate, 'yyyy-MM-dd');
-            const dataToSave: DayEntry = { notes, tasks };
+            const dataToSave: DayEntry = { notes, tasks, journalStyle };
             localStorage.setItem(`dainandini_${user.uid}_${dateKey}`, JSON.stringify(dataToSave));
         }, 500);
         return () => clearTimeout(handler);
-    }, [notes, tasks, selectedDate, user]);
+    }, [notes, tasks, journalStyle, selectedDate, user]);
 
     const handleAddTask = (e: React.FormEvent) => { e.preventDefault(); if (newTaskText.trim() === '') return; setTasks(prev => [...prev, { id: new Date().toISOString(), text: newTaskText.trim(), completed: false }]); setNewTaskText(''); };
     const handleToggleTask = (taskId: string) => { setTasks(prev => prev.map(task => task.id === taskId ? { ...task, completed: !task.completed } : task)); };
@@ -295,12 +299,36 @@ function DainandiniClientContent() {
                 <div className="lg:col-span-1 lg:sticky lg:top-24"><Card><CardContent className="p-0"><Calendar mode="single" selected={selectedDate} onSelect={setSelectedDate} className="p-3" /></CardContent></Card></div>
                 <div className="lg:col-span-2">
                     <Card className="shadow-lg">
-                        <div className="flex bg-white rounded-lg">
-                            <div className="w-16 bg-gray-100 p-4 flex flex-col justify-around items-center border-r border-gray-200">{[...Array(6)].map((_, i) => (<div key={i} className="w-8 h-8 rounded-full bg-gray-300 shadow-inner ring-1 ring-gray-400/50" />))}</div>
-                            <div className="flex-1 p-6 sm:p-8">
-                                <header className="border-b pb-4 mb-6"><h2 className="text-2xl font-bold font-headline text-primary">{selectedDate ? format(selectedDate, 'EEEE, do MMMM yyyy') : 'Select a date'}</h2></header>
+                        <div className="flex rounded-lg">
+                           <div className="flex-1 p-6 sm:p-8">
+                                <header className="flex justify-between items-center border-b pb-4 mb-6">
+                                    <h2 className="text-2xl font-bold font-headline text-primary">{selectedDate ? format(selectedDate, 'EEEE, do MMMM yyyy') : 'Select a date'}</h2>
+                                    <div className="flex items-center space-x-2">
+                                        <Label htmlFor="style-switch" className="text-sm text-muted-foreground">Canvas</Label>
+                                        <Switch 
+                                            id="style-switch"
+                                            checked={journalStyle === 'canvas'}
+                                            onCheckedChange={(checked) => setJournalStyle(checked ? 'canvas' : 'classical')}
+                                            aria-label="Toggle journal style"
+                                        />
+                                    </div>
+                                </header>
                                 <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
-                                    <div className="space-y-2"><h3 className="text-lg font-semibold tracking-wider text-muted-foreground uppercase">Notes</h3><Textarea value={notes} onChange={(e) => setNotes(e.target.value)} placeholder="Your reflections..." className="h-96 text-base" rows={20} /></div>
+                                    <div className="space-y-2">
+                                        <h3 className="text-lg font-semibold tracking-wider text-muted-foreground uppercase">Notes</h3>
+                                        <Textarea 
+                                            value={notes} 
+                                            onChange={(e) => setNotes(e.target.value)} 
+                                            placeholder="Your reflections..." 
+                                            className={cn(
+                                                "h-[500px] text-lg resize-none transition-all duration-300",
+                                                journalStyle === 'classical' 
+                                                    ? "bg-stone-50 border-stone-200 font-serif leading-[2.1rem] bg-repeat-y bg-[linear-gradient(to_bottom,hsl(var(--primary)/0.1)_1px,transparent_1px)] bg-[length:100%_2.1rem]"
+                                                    : "bg-background border-input font-sans",
+                                            )}
+                                            rows={15}
+                                        />
+                                    </div>
                                     <div className="space-y-2">
                                         <h3 className="text-lg font-semibold tracking-wider text-muted-foreground uppercase">Tasks</h3><form onSubmit={handleAddTask} className="flex gap-2"><Input value={newTaskText} onChange={(e) => setNewTaskText(e.target.value)} placeholder="Add a new task" /><Button type="submit" size="icon" variant="outline"><Plus className="h-4 w-4" /></Button></form>
                                         <div className="space-y-3 pt-2">
@@ -459,7 +487,10 @@ function SocialPageRouter() {
     return (
       <div className="container mx-auto max-w-7xl py-16 md:py-24 px-4">
         <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-5xl font-headline font-bold text-primary tracking-tight">Sanatan Social</h1>
+            <h1 className="text-4xl md:text-5xl font-headline font-bold text-primary tracking-tight flex items-center justify-center gap-3">
+              <Users className="h-10 w-10" />
+              Sanatan Social
+            </h1>
             <p className="mt-4 text-lg md:text-xl text-foreground/80 max-w-3xl mx-auto">Your hub for community, personal growth, and dharmic action.</p>
         </div>
         <Tabs defaultValue={tab} onValueChange={(t) => router.push(`/social?tab=${t}`)} className="w-full">

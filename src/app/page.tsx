@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowRight, CalendarDays, Sparkles, Megaphone, BookOpen, Smile, MoonStar, Users } from 'lucide-react';
+import { ArrowRight, CalendarDays, Sparkles, BookOpen, Smile, MoonStar, Users } from 'lucide-react';
 import { peethams } from '@/lib/peethams-data';
 import type { Metadata } from 'next';
 import { allCalendarItems, CalendarPhotoItem, CalendarVideoItem } from '@/lib/calendar-data';
@@ -38,12 +38,6 @@ export default function HomePage() {
       title: 'Sādhanā Suite',
       description: 'Digital tools for japa, meditation, and daily wisdom to support your practice.',
       href: '/sadhana',
-    },
-    {
-      icon: Megaphone,
-      title: 'Campaigns Hub',
-      description: 'Start and support petitions for causes that uphold Sanatana Dharma.',
-      href: '/campaigns',
     },
     {
       icon: BookOpen,

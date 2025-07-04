@@ -4,7 +4,7 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetClose, SheetHeader, SheetTitle } from '@/components/ui/sheet';
-import { Menu, Mail, Twitter, Facebook, Podcast, Gem, LogIn, LogOut, LayoutDashboard, ChevronDown, HandHeart, Users } from 'lucide-react';
+import { Menu, Mail, Twitter, Facebook, Podcast, Gem, LogIn, LogOut, LayoutDashboard, ChevronDown, HandHeart, Users, Landmark, CalendarDays, Camera, BookOpen } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
@@ -36,26 +36,31 @@ const mainNavLinks = [
         title: "Peethams",
         href: "/peethams",
         description: "Explore the four cardinal institutions established by Adi Shankaracharya.",
+        icon: Landmark
     },
     { 
         title: "Social",
         href: "/social",
         description: "Connect with the global Sanatani community on our secure platform.",
+        icon: Users
     },
     { 
         title: "Bodha Calendar",
         href: "/events",
         description: "A living archive of events, discourses, and media from the Peethams.",
+        icon: CalendarDays,
     },
     { 
         title: "Gallery",
         href: "/gallery",
         description: "A rich, chronological photo gallery from the four Peethams.",
+        icon: Camera,
     },
     { 
         title: "Reading Room",
         href: "/reading",
         description: "A curated library of foundational texts by great masters.",
+        icon: BookOpen,
     },
 ];
 
@@ -82,11 +87,6 @@ const communityLinks = [
         title: "Seva Hub",
         href: "/seva",
         description: "Find meaningful volunteer opportunities."
-    },
-    {
-        title: "Donate",
-        href: "/donate",
-        description: "Support our sacred mission."
     },
     {
         title: "Kids Corner",
@@ -173,6 +173,7 @@ export function Header() {
                     <NavigationMenuItem key={link.href}>
                         <NavigationMenuLink asChild>
                             <Link href={link.href} className={navigationMenuTriggerStyle()}>
+                                <link.icon className="mr-2 h-4 w-4" />
                                 {link.title}
                             </Link>
                         </NavigationMenuLink>
@@ -210,14 +211,14 @@ export function Header() {
                                     </a>
                                 </NavigationMenuLink>
                             </li>
-                            <ListItem href="/donate" title="Donate">
-                                Support our sacred mission.
-                            </ListItem>
                             <ListItem href="/quiz" title="Knowledge Quiz">
                                 Test your knowledge about the Peethams.
                             </ListItem>
                              <ListItem href="/chess" title="Chess AI">
                                 Challenge our AI, "Bodhi".
+                            </ListItem>
+                             <ListItem href="/kids" title="Kids Corner">
+                                A fun and creative space for young devotees.
                             </ListItem>
                         </ul>
                     </NavigationMenuContent>
@@ -273,7 +274,10 @@ export function Header() {
                 <nav className="flex flex-col space-y-2">
                     {[...mainNavLinks, ...sadhanaTools, ...communityLinks, ...aboutLinks].map((item: any) => (
                       <SheetClose asChild key={item.title}>
-                       <Link href={item.href || item.link} className="text-lg font-medium transition-colors hover:text-accent py-1">{item.title}</Link>
+                       <Link href={item.href || item.link} className="flex items-center gap-3 text-lg font-medium transition-colors hover:text-accent py-1">
+                          <item.icon className="h-5 w-5" />
+                          {item.title}
+                       </Link>
                       </SheetClose>
                     ))}
                 </nav>
