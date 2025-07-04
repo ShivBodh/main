@@ -3,8 +3,6 @@ import { getAuth, GoogleAuthProvider, FacebookAuthProvider, Auth } from 'firebas
 import { getAnalytics, isSupported } from "firebase/analytics";
 
 // Your web app's Firebase configuration
-// NOTE: For better security, it is recommended to move these credentials to a .env file
-// and load them using process.env, rather than hardcoding them in the source code.
 const firebaseConfig: FirebaseOptions = {
   apiKey: "AIzaSyBGj2TGscv3kJgb0SC8ZS912ZtQ9pGIRcM",
   authDomain: "sdhan-suite.firebaseapp.com",

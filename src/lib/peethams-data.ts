@@ -1,4 +1,3 @@
-
 export const peethams = [
   {
     name: 'Sringeri Sharada Peetham',

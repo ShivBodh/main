@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Circle, Sun, Infinity } from "lucide-react";
 import type { Metadata } from 'next';
