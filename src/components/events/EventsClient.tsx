@@ -146,8 +146,8 @@ export default function EventsClient() {
                 </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 items-start">
-                <aside className="md:col-span-1 space-y-8 sticky top-24">
+            <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
+                <aside className="lg:col-span-1 space-y-8 sticky top-24">
                     <Card>
                         <CardHeader>
                             <CardTitle className="font-headline text-xl">Filter by Peetham</CardTitle>
@@ -204,7 +204,7 @@ export default function EventsClient() {
                     </Card>
                 </aside>
                 
-                <main className="md:col-span-3">
+                <main className="lg:col-span-3">
                     {isClient ? (
                         sortedDates.length > 0 ? (
                             <div className="space-y-8">

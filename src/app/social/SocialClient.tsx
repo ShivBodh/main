@@ -116,7 +116,11 @@ function CreatePost({ onCreatePost, user }: { onCreatePost: (data: { content: st
 
     return (
         <Card>
-            <CardContent className="p-4">
+            <CardHeader>
+                <CardTitle>Create a Post</CardTitle>
+                <CardDescription>Share your spiritual insights, experiences, or announcements with the community.</CardDescription>
+            </CardHeader>
+            <CardContent>
                 <div className="flex gap-4">
                     <Avatar><AvatarImage src={user.photoURL || ''} /><AvatarFallback>{getInitials(user.displayName)}</AvatarFallback></Avatar>
                     <div className="w-full space-y-3">
@@ -385,7 +389,7 @@ function CreateCampaign({ onCreateCampaign }: { onCreateCampaign: (data: { title
 
     return (
         <Card className="mb-6">
-            <CardHeader><CardTitle>Start a New Campaign</CardTitle><CardDescription>Rally support for a cause you believe in.</CardDescription></CardHeader>
+            <CardHeader><CardTitle>Start a New Campaign</CardTitle><CardDescription>Rally support for a cause you believe in. Use this for community initiatives like temple repairs, feeding programs, or supporting local artisans.</CardDescription></CardHeader>
             <CardContent className="space-y-4">
                 <div className="space-y-2"><Label htmlFor="campaign-title">Campaign Title</Label><Input id="campaign-title" placeholder="e.g., Fund for Goshala Maintenance" value={title} onChange={(e) => setTitle(e.target.value)} /></div>
                 <div className="space-y-2"><Label htmlFor="campaign-desc">Description</Label><Textarea id="campaign-desc" placeholder="Explain the purpose and importance of your campaign." value={description} onChange={(e) => setDescription(e.target.value)} /></div>
