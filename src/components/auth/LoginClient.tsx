@@ -1,4 +1,3 @@
-
 'use client';
 
 import { Button } from '@/components/ui/button';
@@ -6,9 +5,26 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { useAuth } from '@/context/AuthContext';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import { Chrome, Facebook, Fingerprint } from 'lucide-react';
+import { Chrome, Facebook, Fingerprint, AlertTriangle } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useToast } from '@/hooks/use-toast';
+import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
+import { isFirebaseConfigured } from '@/lib/firebase';
+import Link from 'next/link';
+
+const FirebaseWarning = () => (
+    <Alert variant="destructive">
+        <AlertTriangle className="h-4 w-4" />
+        <AlertTitle>Firebase Not Configured</AlertTitle>
+        <AlertDescription>
+            Authentication is currently disabled because the app is running in demo mode. To enable login, you must provide your own Firebase project credentials in the 
+            <code className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold">.env</code> 
+            file.
+            <br/><br/>
+            Please refer to the project's README or Firebase documentation for instructions on obtaining your credentials.
+        </AlertDescription>
+    </Alert>
+);
 
 export default function LoginClient() {
   const { user, signInWithGoogle, signInWithFacebook, loading } = useAuth();
@@ -54,15 +70,19 @@ export default function LoginClient() {
           <CardDescription>Sign in to access your dashboard and personal features.</CardDescription>
         </CardHeader>
         <CardContent className="grid gap-4">
-          <Button onClick={signInWithGoogle} className="w-full" size="lg" variant="outline">
-            <Chrome className="mr-2 h-5 w-5" /> Sign in with Google
-          </Button>
-          <Button onClick={signInWithFacebook} className="w-full bg-[#1877F2] hover:bg-[#166fe5] text-white" size="lg">
-            <Facebook className="mr-2 h-5 w-5" /> Sign in with Facebook
-          </Button>
-           <Button onClick={handlePasskeySignIn} className="w-full" size="lg" variant="outline">
-            <Fingerprint className="mr-2 h-5 w-5" /> Sign in with a Passkey
-          </Button>
+          {!isFirebaseConfigured ? <FirebaseWarning /> : (
+            <>
+              <Button onClick={signInWithGoogle} className="w-full" size="lg" variant="outline">
+                <Chrome className="mr-2 h-5 w-5" /> Sign in with Google
+              </Button>
+              <Button onClick={signInWithFacebook} className="w-full bg-[#1877F2] hover:bg-[#166fe5] text-white" size="lg">
+                <Facebook className="mr-2 h-5 w-5" /> Sign in with Facebook
+              </Button>
+              <Button onClick={handlePasskeySignIn} className="w-full" size="lg" variant="outline">
+                <Fingerprint className="mr-2 h-5 w-5" /> Sign in with a Passkey
+              </Button>
+            </>
+          )}
         </CardContent>
       </Card>
     </div>

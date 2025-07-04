@@ -10,15 +10,15 @@ const firebaseConfig: FirebaseOptions = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
+// Check if the required environment variables are set and not the placeholder values.
+export const isFirebaseConfigured = 
+    !!firebaseConfig.apiKey && firebaseConfig.apiKey !== 'YOUR_API_KEY' &&
+    !!firebaseConfig.authDomain && firebaseConfig.authDomain !== 'YOUR_PROJECT_ID.firebaseapp.com';
+
 let app: FirebaseApp;
 let auth: Auth;
 const googleProvider = new GoogleAuthProvider();
 const facebookProvider = new FacebookAuthProvider();
-
-// Check if the required environment variables are set and not the placeholder values.
-const isFirebaseConfigured = 
-    firebaseConfig.apiKey && firebaseConfig.apiKey !== 'YOUR_API_KEY' &&
-    firebaseConfig.authDomain && firebaseConfig.authDomain !== 'YOUR_PROJECT_ID.firebaseapp.com';
 
 if (!isFirebaseConfigured) {
   // If Firebase is not configured, we provide dummy objects to prevent the app from crashing.
