@@ -9,7 +9,7 @@ import { Label } from '@/components/ui/label';
 import { format } from 'date-fns';
 import { allCalendarItems, CalendarPhotoItem } from '@/lib/calendar-data';
 import { Peetham } from '@/lib/events-data';
-import { ImageOff, Camera } from 'lucide-react';
+import { Gem, Camera } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { PhotoCard } from '@/components/media/PhotoCard';
@@ -171,11 +171,24 @@ export default function GalleryClient() {
                                 ))}
                             </div>
                         ) : (
-                            <div className="flex flex-col items-center justify-center h-96 text-center text-muted-foreground bg-card rounded-lg">
-                                <ImageOff className="h-16 w-16 mb-4 text-primary" />
-                                <p className="text-lg font-semibold">No photos found for the selected filters.</p>
-                                <p>Try adjusting your filters to see more content.</p>
-                            </div>
+                            <Card className="flex flex-col items-center justify-center h-96 text-center bg-muted/30 border-dashed">
+                                <CardHeader>
+                                    <div className="mx-auto p-4 bg-primary/10 rounded-full animate-breath">
+                                        <Gem className="h-12 w-12 text-primary" />
+                                    </div>
+                                    <CardTitle className="mt-6 text-2xl font-headline text-primary">
+                                        A Sacred Archive is Unfolding
+                                    </CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                    <p className="text-lg text-foreground/80">
+                                        Our team is diligently curating a living history of events and media.
+                                    </p>
+                                    <p className="mt-2 text-muted-foreground">
+                                        Please check back soon to witness this sacred space come to life.
+                                    </p>
+                                </CardContent>
+                            </Card>
                         )
                     ) : (
                        <div className="space-y-8">
