@@ -17,8 +17,8 @@ export const readingList: Book[] = [
     author: 'Adi Shankaracharya',
     description: 'A masterpiece of Advaita Vedanta, this "Crest-Jewel of Discrimination" outlines the path to self-realization through discerning the real from the unreal.',
     pdfUrl: '#', // Placeholder link
-    imageUrl: 'https://placehold.co/400x600.png',
-    aiHint: 'book cover',
+    imageUrl: '',
+    aiHint: 'the jewel of discrimination between the real and unreal',
   },
   {
     id: 'atma-bodha',
@@ -26,8 +26,8 @@ export const readingList: Book[] = [
     author: 'Adi Shankaracharya',
     description: 'A short treatise on Advaita Vedanta, "Self-Knowledge" is composed of sixty-eight verses, providing a clear exposition of the nature of the Self.',
     pdfUrl: '#', // Placeholder link
-    imageUrl: 'https://placehold.co/400x600.png',
-    aiHint: 'book cover abstract',
+    imageUrl: '',
+    aiHint: 'the knowledge of the true self',
   },
   {
     id: 'tattva-bodha',
@@ -35,8 +35,8 @@ export const readingList: Book[] = [
     author: 'Adi Shankaracharya',
     description: 'An introductory text that explains the fundamental terms and concepts of Vedanta, making it an essential prerequisite for deeper study.',
     pdfUrl: '#', // Placeholder link
-    imageUrl: 'https://placehold.co/400x600.png',
-    aiHint: 'book cover knowledge',
+    imageUrl: '',
+    aiHint: 'the foundational knowledge of truth',
   },
     {
     id: 'bhaja-govindam',
@@ -44,8 +44,8 @@ export const readingList: Book[] = [
     author: 'Adi Shankaracharya',
     description: 'A powerful hymn that emphasizes the importance of devotion and seeking Govinda (God) as the ultimate goal, cutting through worldly attachments.',
     pdfUrl: '#', // Placeholder link
-    imageUrl: 'https://placehold.co/400x600.png',
-    aiHint: 'book cover devotion',
+    imageUrl: '',
+    aiHint: 'devotion to the supreme being Govinda',
   },
     {
     id: 'upadesasahasri',
@@ -53,8 +53,8 @@ export const readingList: Book[] = [
     author: 'Adi Shankaracharya',
     description: '"A Thousand Teachings" is one of the most important works of Shankara, consisting of a prose and a poetry section, detailing the path to liberation.',
     pdfUrl: '#', // Placeholder link
-    imageUrl: 'https://placehold.co/400x600.png',
-    aiHint: 'book cover wisdom',
+    imageUrl: '',
+    aiHint: 'a thousand teachings of wisdom',
   },
     {
     id: 'aparokshanubhuti',
@@ -62,7 +62,7 @@ export const readingList: Book[] = [
     author: 'Adi Shankaracharya',
     description: '"Direct Experience," this work outlines the path of Jnana Yoga and provides a step-by-step method for experiencing the Self directly.',
     pdfUrl: '#', // Placeholder link
-    imageUrl: 'https://placehold.co/400x600.png',
-    aiHint: 'book cover experience',
+    imageUrl: '',
+    aiHint: 'the direct experience of ultimate reality',
   },
 ];
