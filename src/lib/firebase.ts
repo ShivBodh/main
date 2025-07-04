@@ -1,5 +1,6 @@
 import { initializeApp, getApps, getApp, FirebaseOptions, FirebaseApp } from 'firebase/app';
 import { getAuth, GoogleAuthProvider, FacebookAuthProvider, Auth, Unsubscribe } from 'firebase/auth';
+import { getAnalytics, isSupported } from "firebase/analytics";
 
 const firebaseConfig: FirebaseOptions = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -8,12 +9,13 @@ const firebaseConfig: FirebaseOptions = {
   storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
   messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
-// Check if the required environment variables are set and not the placeholder values.
+// Check if the required environment variables are set.
 export const isFirebaseConfigured = 
-    !!firebaseConfig.apiKey && firebaseConfig.apiKey !== 'YOUR_API_KEY' &&
-    !!firebaseConfig.authDomain && firebaseConfig.authDomain !== 'YOUR_PROJECT_ID.firebaseapp.com';
+    !!firebaseConfig.apiKey &&
+    !!firebaseConfig.authDomain;
 
 let app: FirebaseApp;
 let auth: Auth;
@@ -22,14 +24,14 @@ const facebookProvider = new FacebookAuthProvider();
 
 if (!isFirebaseConfigured) {
   // If Firebase is not configured, we provide dummy objects to prevent the app from crashing.
-  // Authentication will not work, but the rest of the site will be functional.
+  // The Login page will show a warning.
   const createDummyAuth = (): Auth => ({
     currentUser: null,
     onAuthStateChanged: (observer: any): Unsubscribe => {
       observer(null);
       return () => {}; // Return an empty unsubscribe function
     },
-    signInWithPopup: () => Promise.reject(new Error("Firebase is not configured. Please add your credentials to the .env file to enable authentication.")),
+    signInWithPopup: () => Promise.reject(new Error("Firebase is not configured.")),
     signOut: () => Promise.resolve(),
   } as unknown as Auth);
 
@@ -40,6 +42,13 @@ if (!isFirebaseConfigured) {
   // Initialize Firebase only if it's configured and not already initialized.
   app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
   auth = getAuth(app);
+  if (typeof window !== 'undefined') {
+    isSupported().then(supported => {
+        if(supported) {
+            getAnalytics(app);
+        }
+    });
+  }
 }
 
 export { app, auth, googleProvider, facebookProvider };
