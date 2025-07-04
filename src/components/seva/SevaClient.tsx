@@ -1,7 +1,7 @@
-
 'use client';
 
 import { useState, useMemo, useEffect } from 'react';
+import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -11,7 +11,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { allSevaOpportunities, SevaOpportunity, Peetham } from '@/lib/seva-data';
-import { HandHeart, MapPin, Landmark, Globe } from 'lucide-react';
+import { HandHeart, MapPin, Landmark, Globe, Mail } from 'lucide-react';
 
 const peethams: Peetham[] = ['Sringeri', 'Dwaraka', 'Puri', 'Jyotirmath'];
 
@@ -100,6 +100,16 @@ export default function SevaClient() {
                         <p className="mt-2 text-sm text-foreground/80">
                             Seva, or selfless service, is a cornerstone of spiritual practice. It purifies the heart, cultivates humility, and allows us to offer our skills and time for the greater good of the community and the preservation of Dharma.
                         </p>
+                    </Card>
+                    <Card className="p-6 text-center bg-card">
+                        <Mail className="mx-auto h-12 w-12 text-primary" />
+                        <h3 className="mt-4 font-headline text-lg font-semibold">Offer Your Skills</h3>
+                        <p className="mt-2 text-sm text-foreground/80">
+                            Don't see a role that fits? We would still love to hear from you. Please get in touch and let us know how you'd like to contribute.
+                        </p>
+                        <Button asChild className="mt-4 w-full">
+                            <Link href="/contact">Contact Us</Link>
+                        </Button>
                     </Card>
                 </aside>
 
