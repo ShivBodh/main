@@ -83,6 +83,11 @@ const communityLinks = [
         description: "Support our sacred mission."
     },
     {
+        title: "Campaigns",
+        href: "/campaigns",
+        description: "Start or support campaigns for Dharma."
+    },
+    {
         title: "Kids Corner",
         href: "/kids",
         description: "A fun and creative space for young devotees."
