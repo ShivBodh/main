@@ -9,9 +9,14 @@ export const peethams = [
     acharyaImage: 'https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/sringeri.png',
     acharyaAiHint: 'acharya portrait',
     lineage: [
+        { name: 'Sri Adi Shankaracharya', period: 'c. 509 BCE', description: 'The founder of the four Peethams and the foremost exponent of Advaita Vedanta.' },
+        { name: 'Sri Sureshwaracharya', period: 'c. 5th Century BCE', description: 'A direct disciple of Adi Shankaracharya and the first head of the Sringeri Peetham.' },
         { name: 'Sri Vidyaranya', period: '1380–1386', description: 'A renowned sage and commentator, often credited as a guiding force in the establishment of the Vijayanagara Empire.' },
-        { name: 'Sri Sacchidananda Bharati I', period: '1623–1663', description: 'A great tapasvin (ascetic) who travelled extensively and composed many devotional hymns that are sung to this day.' },
-        { name: 'Sri Sacchidananda Sivabhinava Nrisimha Bharati', period: '1879–1912', description: 'A revered Jivanmukta (liberated soul) who rediscovered the birthplace of Adi Shankaracharya at Kalady and consecrated a shrine there.' }
+        { name: 'Sri Narasimha Bharati VIII', period: '1817-1879', description: 'A great scholar and tapasvin who initiated many public works and renovations at Sringeri.' },
+        { name: 'Sri Sacchidananda Sivabhinava Nrisimha Bharati', period: '1879–1912', description: 'A revered Jivanmukta (liberated soul) who rediscovered the birthplace of Adi Shankaracharya at Kalady and consecrated a shrine there.' },
+        { name: 'Sri Chandrashekhara Bharati III', period: '1912-1954', description: 'A great sage and scholar of immense spiritual attainment, revered as a Jivanmukta.' },
+        { name: 'Sri Abhinava Vidyatirtha', period: '1954-1989', description: 'The 35th Jagadguru, he traveled extensively and established many branches of the Matha across India.' },
+        { name: 'Sri Bharathi Tirtha', period: '1989-Present', description: 'The 36th Jagadguru, a profound scholar in Tarka, Mimamsa, and Vedanta, who continues to guide millions.' },
     ]
   },
   {
@@ -23,8 +28,12 @@ export const peethams = [
     acharyaImage: 'https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/sharda-peetha.png',
     acharyaAiHint: 'acharya portrait',
     lineage: [
+        { name: 'Sri Adi Shankaracharya', period: 'c. 509 BCE', description: 'The founder who established this western seat of learning.' },
+        { name: 'Sri Hastamalakacharya', period: 'c. 5th Century BCE', description: 'A direct disciple of Adi Shankaracharya and the first Acharya of the Dwaraka Peetham.' },
         { name: 'Sri Rajarajeshwarashram', period: '18th Century', description: 'A notable Acharya known for his scholarly works and efforts in preserving Vedic traditions in Western India.' },
-        { name: 'Sri Abhinava Satchidananda Tirtha', period: '1945–1982', description: 'The 77th Shankaracharya, he was a powerful orator and worked tirelessly to promote Sanatana Dharma.' }
+        { name: 'Sri Madhavatirtha', period: 'Early 20th Century', description: 'An influential Acharya who contributed significantly to the administration and activities of the Peetham.' },
+        { name: 'Sri Abhinava Satchidananda Tirtha', period: '1945–1982', description: 'The 77th Shankaracharya, he was a powerful orator and worked tirelessly to promote Sanatana Dharma.' },
+        { name: 'Sri Swaroopanand Saraswati', period: '1982-2022', description: 'The 79th Shankaracharya, who was also the head of the Jyotirmath Peetham, a prominent voice for Hindu unity.' },
     ]
   },
   {
@@ -36,8 +45,12 @@ export const peethams = [
     acharyaImage: 'https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/puri.png',
     acharyaAiHint: 'acharya portrait',
     lineage: [
-        { name: 'Sri Padmapadacharya', period: '8th Century', description: 'A direct disciple of Adi Shankaracharya and the first Acharya of the Puri Peetham. He was a profound scholar and author of the "Panchapadika".' },
-        { name: 'Swami Bharati Krishna Tirtha', period: '1925–1960', description: 'The 143rd Shankaracharya, he was a polymath renowned for his work on "Vedic Mathematics".' }
+        { name: 'Sri Adi Shankaracharya', period: 'c. 509 BCE', description: 'The founder of the eastern seat, intrinsically linked with Lord Jagannath.' },
+        { name: 'Sri Padmapadacharya', period: 'c. 5th Century BCE', description: 'A direct disciple of Adi Shankaracharya and the first Acharya of the Puri Peetham. He was a profound scholar and author of the "Panchapadika".' },
+        { name: 'Sri Narasimha Bharati', period: '17th Century', description: 'An Acharya who played a key role in the religious affairs concerning the Jagannath Temple.' },
+        { name: 'Swami Bharati Krishna Tirtha', period: '1925–1960', description: 'The 143rd Shankaracharya, he was a polymath renowned for his work on "Vedic Mathematics".' },
+        { name: 'Swami Niranjana Deva Tirtha', period: '1964-1992', description: 'The 144th Shankaracharya, known for his strong advocacy for Hindu rights and traditions.' },
+        { name: 'Swami Nischalananda Saraswati', period: '1992-Present', description: 'The 145th Shankaracharya, a renowned scholar of scripture and mathematics, and a powerful voice on national issues.' },
     ]
   },
   {
@@ -49,8 +62,12 @@ export const peethams = [
     acharyaImage: 'https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/jyotirpeetha.png',
     acharyaAiHint: 'acharya portrait',
     lineage: [
-        { name: 'Sri Totakacharya', period: '8th Century', description: 'A direct disciple of Adi Shankaracharya, known for his deep devotion and humility. He composed the "Totakashtakam".' },
-        { name: 'Swami Brahmananda Saraswati', period: '1941–1953', description: 'A revered master who revived the Jyotirmath Peetham after a long period of dormancy, restoring its significance as the northern seat.' }
+        { name: 'Sri Adi Shankaracharya', period: 'c. 509 BCE', description: 'The founder who established this northern seat in the serene Himalayas.' },
+        { name: 'Sri Totakacharya', period: 'c. 5th Century BCE', description: 'A direct disciple of Adi Shankaracharya, known for his deep devotion and humility. He composed the "Totakashtakam".' },
+        { name: 'Swami Shantanand Saraswati', period: '1953–1980', description: 'An Acharya who played a key role during a transitional period for the Peetham.' },
+        { name: 'Swami Vishnudevanand Saraswati', period: '1980-1990', description: 'A revered Acharya who continued the traditions of the northern Matha.' },
+        { name: 'Swami Brahmananda Saraswati', period: '1941–1953', description: 'A revered master who revived the Jyotirmath Peetham after a long period of dormancy, restoring its significance as the northern seat.' },
+        { name: 'Sri Swaroopanand Saraswati', period: '1973-2022', description: 'He also held the title of Shankaracharya of Dwaraka Peetham, working for Hindu welfare.' },
     ]
   },
 ];

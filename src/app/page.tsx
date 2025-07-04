@@ -2,13 +2,15 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowRight, CalendarDays, Sparkles, BookOpen, Smile, MoonStar, Users } from 'lucide-react';
+import { ArrowRight, CalendarDays, Sparkles, BookOpen, Smile, MoonStar, Users, Landmark } from 'lucide-react';
 import { peethams } from '@/lib/peethams-data';
 import type { Metadata } from 'next';
 import { allCalendarItems, CalendarPhotoItem, CalendarVideoItem } from '@/lib/calendar-data';
 import { PhotoCard } from '@/components/media/PhotoCard';
 import { VideoCard } from '@/components/media/VideoCard';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { LineageTimeline } from '@/components/peethams/LineageTimeline';
 
 export const metadata: Metadata = {
   title: 'Home',
@@ -116,36 +118,37 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="w-full py-16 md:py-24 bg-card">
+       <section className="w-full py-16 md:py-24 bg-card">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-headline font-bold text-primary">
-              A Portal for Your Spiritual Journey
+            <h2 className="text-3xl md:text-4xl font-headline font-bold text-primary flex items-center justify-center gap-3">
+              <Landmark className="h-8 w-8" />
+              The Great Guru Parampara
             </h2>
             <p className="mt-2 text-lg text-foreground/80 max-w-2xl mx-auto">
-              Explore a rich ecosystem of tools and content designed to connect you with Dharma.
+              A glimpse into the unbroken lineage of spiritual masters who have guided each Peetham for centuries.
             </p>
           </div>
-          <div
-            className="group w-full overflow-hidden"
-            style={{ maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)' }}
-          >
-            <div className="flex w-max animate-autoscroll space-x-6 pb-4 group-hover:[animation-play-state:paused]">
-              {[...features, ...features].map((feature, index) => (
-                <div key={index} className="w-[80vw] shrink-0 sm:w-[45vw] md:w-[30vw] lg:w-[23vw]">
-                  <Link href={feature.href} className="group/card block h-full">
-                    <Card className="flex h-full flex-col items-center p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
-                      <feature.icon className="mb-4 h-10 w-10 text-primary" />
-                      <CardTitle className="mb-2 font-headline text-xl transition-colors group-hover/card:text-accent">{feature.title}</CardTitle>
-                      <CardContent className="flex-grow p-0 text-sm text-foreground/80">
-                        <p>{feature.description}</p>
-                      </CardContent>
-                    </Card>
-                  </Link>
-                </div>
-              ))}
-            </div>
-          </div>
+          <Tabs defaultValue="sringeri" className="w-full">
+            <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 mb-8">
+              {peethams.map((peetham) => {
+                const shortName = peetham.link.split('/').pop()!;
+                return (
+                  <TabsTrigger key={shortName} value={shortName}>
+                    {peetham.name.split(' ')[0]}
+                  </TabsTrigger>
+                )
+              })}
+            </TabsList>
+            {peethams.map((peetham) => {
+                const shortName = peetham.link.split('/').pop()!;
+                return (
+                  <TabsContent key={shortName} value={shortName}>
+                    <LineageTimeline lineage={peetham.lineage} />
+                  </TabsContent>
+                )
+            })}
+          </Tabs>
         </div>
       </section>
 
