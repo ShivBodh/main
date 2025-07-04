@@ -1,3 +1,4 @@
+
 import type {Config} from 'tailwindcss';
 
 export default {
@@ -100,6 +101,10 @@ export default {
           'from': { opacity: '0', transform: 'translateX(50%) rotateY(-90deg)' },
           'to': { opacity: '1', transform: 'translateX(0) rotateY(0deg)' },
         },
+        'breath': {
+            '0%, 100%': { transform: 'scale(1)', opacity: '0.8' },
+            '50%': { transform: 'scale(1.05)', opacity: '1' },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
@@ -107,6 +112,7 @@ export default {
         'autoscroll': 'autoscroll 40s linear infinite',
         'page-flip-out': 'page-flip-out 0.3s ease-in-out forwards',
         'page-flip-in': 'page-flip-in 0.3s ease-in-out forwards',
+        'breath': 'breath 4s ease-in-out infinite',
       },
     },
   },
