@@ -1,22 +1,18 @@
 
 'use client';
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { useRouter } from 'next/navigation';
-import { useForm, useFieldArray } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import * as z from 'zod';
-import { format, parseISO } from 'date-fns';
+import { format } from 'date-fns';
 import { Calendar } from '@/components/ui/calendar';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Trash2, Plus } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
-import { useToast } from '@/hooks/use-toast';
 
 // New data structure for a single day's entry
 interface Task {
@@ -34,40 +30,29 @@ interface DayEntry {
 export default function DainandiniClient() {
   const { user, loading } = useAuth();
   const router = useRouter();
-  const { toast } = useToast();
   
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
-  const [isDataLoading, setIsDataLoading] = useState(true);
+  const [isClient, setIsClient] = useState(false);
   
   const [notes, setNotes] = useState('');
   const [tasks, setTasks] = useState<Task[]>([]);
   const [newTaskText, setNewTaskText] = useState('');
 
-  // Effect for handling auth state and initial data load
+  // This effect ensures browser-specific logic runs only on the client
   useEffect(() => {
-    if (loading) return;
-    if (!user) {
+    setIsClient(true);
+  }, []);
+
+  // Effect for handling auth state
+  useEffect(() => {
+    if (!loading && !user) {
       router.push('/login');
-      return;
     }
-    
-    // Load data for the initially selected date
-    const dateKey = format(selectedDate, 'yyyy-MM-dd');
-    const data = localStorage.getItem(`dainandini_${user.uid}_${dateKey}`);
-    if (data) {
-      const parsedData: DayEntry = JSON.parse(data);
-      setNotes(parsedData.notes || '');
-      setTasks(parsedData.tasks || []);
-    } else {
-      setNotes('');
-      setTasks([]);
-    }
-    setIsDataLoading(false);
   }, [user, loading, router]);
   
-  // Effect to load data when the selected date changes
+  // Effect to load data when the selected date or user changes
   useEffect(() => {
-    if (!user || isDataLoading) return;
+    if (!user || !isClient) return;
     
     const dateKey = format(selectedDate, 'yyyy-MM-dd');
     const data = localStorage.getItem(`dainandini_${user.uid}_${dateKey}`);
@@ -79,11 +64,11 @@ export default function DainandiniClient() {
       setNotes('');
       setTasks([]);
     }
-  }, [selectedDate, user, isDataLoading]);
+  }, [selectedDate, user, isClient]);
 
   // Effect for auto-saving data to localStorage on change
   useEffect(() => {
-    if (!user || isDataLoading) return;
+    if (!user || !isClient) return;
     
     const handler = setTimeout(() => {
       const dateKey = format(selectedDate, 'yyyy-MM-dd');
@@ -94,7 +79,7 @@ export default function DainandiniClient() {
     return () => {
       clearTimeout(handler);
     };
-  }, [notes, tasks, selectedDate, user, isDataLoading]);
+  }, [notes, tasks, selectedDate, user, isClient]);
 
   const handleAddTask = (e: React.FormEvent) => {
     e.preventDefault();
@@ -120,8 +105,7 @@ export default function DainandiniClient() {
     setTasks(prev => prev.filter(task => task.id !== taskId));
   };
 
-
-  if (loading || isDataLoading) {
+  if (!isClient || loading) {
     return (
         <div className="container mx-auto max-w-7xl py-16 md:py-24 px-4">
              <Skeleton className="h-12 w-64 mb-12" />
