@@ -1,4 +1,3 @@
-
 'use server';
 /**
  * @fileOverview An AI flow for generating artistic representations of Dharma symbols.
@@ -37,6 +36,12 @@ const dharmaArtFlow = ai.defineFlow(
       prompt: `Create a beautiful, artistic painting representing a sacred symbol of Sanatana Dharma. The style should be evocative, spiritual, and artistic, not a simple graphic. The symbol is: '${prompt}'. Do not include any text in the image.`,
       config: {
         responseModalities: ['TEXT', 'IMAGE'],
+        safetySettings: [
+            { category: 'HARM_CATEGORY_HATE_SPEECH', threshold: 'BLOCK_NONE' },
+            { category: 'HARM_CATEGORY_DANGEROUS_CONTENT', threshold: 'BLOCK_NONE' },
+            { category: 'HARM_CATEGORY_HARASSMENT', threshold: 'BLOCK_NONE' },
+            { category: 'HARM_CATEGORY_SEXUALLY_EXPLICIT', threshold: 'BLOCK_NONE' },
+        ],
       },
     });
 
