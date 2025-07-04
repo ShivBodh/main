@@ -19,10 +19,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { useToast } from '@/hooks/use-toast';
-import { Progress } from '@/components/ui/progress';
 import { panchangaData, PanchangaDetails } from '@/lib/panchanga-data';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
+import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 
 
 // --- TYPES ---
@@ -42,10 +42,10 @@ interface Campaign {
     author: { name: string; handle: string; avatar?: string; };
     title: string;
     description: string;
-    goal: number;
-    current: number;
+    supporters: number;
     isPublic: boolean;
     timestamp: Date;
+    userHasSupported?: boolean;
 }
 interface Task { id: string; text: string; completed: boolean; }
 interface DayEntry { notes: string; tasks: Task[]; journalStyle: 'classical' | 'canvas' }
@@ -254,7 +254,7 @@ function PanchangaHeader({ data }: { data: PanchangaDetails }) {
 function DainandiniClientContent() {
     const { user } = useAuth();
     const { toast } = useToast();
-    const [selectedDate, setSelectedDate] = useState<Date | undefined>();
+    const [selectedDate, setSelectedDate] = useState<Date>();
     const [notes, setNotes] = useState('');
     const [tasks, setTasks] = useState<Task[]>([]);
     const [newTaskText, setNewTaskText] = useState('');
@@ -374,26 +374,27 @@ function DainandiniTab() {
     return <DainandiniClientContent />;
 }
 
-function CreateCampaign({ onCreateCampaign }: { onCreateCampaign: (data: { title: string, description: string, goal: number, isPublic: boolean }) => void }) {
+function CreateCampaign({ onCreateCampaign }: { onCreateCampaign: (data: { title: string, description: string, isPublic: boolean }) => void }) {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
-    const [goal, setGoal] = useState(10000);
     const [isPublic, setIsPublic] = useState(true);
 
     const handleSubmit = () => {
         if (!title.trim() || !description.trim()) return;
-        onCreateCampaign({ title, description, goal, isPublic });
+        onCreateCampaign({ title, description, isPublic });
         setTitle('');
         setDescription('');
     };
 
     return (
         <Card className="mb-6">
-            <CardHeader><CardTitle>Start a New Campaign</CardTitle><CardDescription>Rally support for a cause you believe in. Use this for community initiatives like temple repairs, feeding programs, or supporting local artisans.</CardDescription></CardHeader>
+            <CardHeader>
+                <CardTitle>Start a New Campaign</CardTitle>
+                <CardDescription>Rally support for a dharmic cause you believe in. Raise awareness, gather support for community initiatives, or call for action.</CardDescription>
+            </CardHeader>
             <CardContent className="space-y-4">
-                <div className="space-y-2"><Label htmlFor="campaign-title">Campaign Title</Label><Input id="campaign-title" placeholder="e.g., Fund for Goshala Maintenance" value={title} onChange={(e) => setTitle(e.target.value)} /></div>
-                <div className="space-y-2"><Label htmlFor="campaign-desc">Description</Label><Textarea id="campaign-desc" placeholder="Explain the purpose and importance of your campaign." value={description} onChange={(e) => setDescription(e.target.value)} /></div>
-                <div className="space-y-2"><Label htmlFor="campaign-goal">Fundraising Goal (₹)</Label><Input id="campaign-goal" type="number" value={goal} onChange={(e) => setGoal(Number(e.target.value))} /></div>
+                <div className="space-y-2"><Label htmlFor="campaign-title">Campaign Title</Label><Input id="campaign-title" placeholder="e.g., Preserve Local Temple Murals" value={title} onChange={(e) => setTitle(e.target.value)} /></div>
+                <div className="space-y-2"><Label htmlFor="campaign-desc">Description</Label><Textarea id="campaign-desc" placeholder="Explain the purpose and importance of your campaign and what action you are proposing." value={description} onChange={(e) => setDescription(e.target.value)} /></div>
             </CardContent>
             <CardFooter className="flex justify-between items-center">
                  <div className="flex items-center space-x-2">
@@ -412,19 +413,32 @@ function CreateCampaign({ onCreateCampaign }: { onCreateCampaign: (data: { title
 function CampaignsTab({ user }: { user: any }) {
     const [campaigns, setCampaigns] = useState<Campaign[]>([]);
 
-    const handleCreateCampaign = (newCampaignData: { title: string; description: string; goal: number; isPublic: boolean }) => {
+    const handleCreateCampaign = (newCampaignData: { title: string; description: string; isPublic: boolean }) => {
         const newCampaign: Campaign = {
             id: new Date().toISOString(),
             author: { name: user?.displayName || 'Anonymous', handle: `@${user?.email?.split('@')[0] || 'user'}`, avatar: user?.photoURL || undefined },
             title: newCampaignData.title,
             description: newCampaignData.description,
-            goal: newCampaignData.goal,
-            current: Math.floor(Math.random() * newCampaignData.goal * 0.1), // Seed with some initial random funds
+            supporters: Math.floor(Math.random() * 250),
             isPublic: newCampaignData.isPublic,
             timestamp: new Date(),
+            userHasSupported: false,
         };
         setCampaigns(prev => [newCampaign, ...prev]);
     };
+
+    const handleSupport = (campaignId: string) => {
+        setCampaigns(campaigns.map(c => {
+            if (c.id === campaignId) {
+                return { 
+                    ...c, 
+                    supporters: c.userHasSupported ? c.supporters - 1 : c.supporters + 1,
+                    userHasSupported: !c.userHasSupported
+                };
+            }
+            return c;
+        }))
+    }
 
     return (
         <div className="space-y-8">
@@ -450,11 +464,16 @@ function CampaignsTab({ user }: { user: any }) {
                             </CardHeader>
                             <CardContent>
                                 <p className="mb-4">{campaign.description}</p>
-                                <Progress value={(campaign.current / campaign.goal) * 100} className="w-full" />
-                                <p className="text-sm text-muted-foreground mt-2 text-right">₹{campaign.current.toLocaleString()} / ₹{campaign.goal.toLocaleString()} raised</p>
+                                <div className="flex items-center gap-2 text-primary font-semibold">
+                                    <Users className="h-5 w-5" />
+                                    <span>{campaign.supporters.toLocaleString()} Supporters</span>
+                                </div>
                             </CardContent>
                             <CardFooter>
-                                <Button>Donate Now</Button>
+                                <Button onClick={() => handleSupport(campaign.id)} variant={campaign.userHasSupported ? 'secondary' : 'default'}>
+                                    <Heart className="mr-2" />
+                                    {campaign.userHasSupported ? 'Supported' : 'Show Support'}
+                                </Button>
                             </CardFooter>
                         </Card>
                     ))}
@@ -498,12 +517,15 @@ function SocialPageRouter() {
             <p className="mt-4 text-lg md:text-xl text-foreground/80 max-w-3xl mx-auto">Your hub for community, personal growth, and dharmic action.</p>
         </div>
         <Tabs defaultValue={tab} onValueChange={(t) => router.push(`/social?tab=${t}`)} className="w-full">
-            <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 mb-8">
-                <TabsTrigger value="feed">Feed</TabsTrigger>
-                <TabsTrigger value="profile">My Profile</TabsTrigger>
-                <TabsTrigger value="dainandini">Dainandini</TabsTrigger>
-                <TabsTrigger value="campaigns">Campaigns</TabsTrigger>
-            </TabsList>
+            <ScrollArea className="w-full whitespace-nowrap rounded-lg">
+                <TabsList className="grid w-max grid-cols-4 mb-8">
+                    <TabsTrigger value="feed">Feed</TabsTrigger>
+                    <TabsTrigger value="profile">My Profile</TabsTrigger>
+                    <TabsTrigger value="dainandini">Dainandini</TabsTrigger>
+                    <TabsTrigger value="campaigns">Campaigns</TabsTrigger>
+                </TabsList>
+                 <ScrollBar orientation="horizontal" />
+            </ScrollArea>
             <TabsContent value="feed"><FeedTab user={user} /></TabsContent>
             <TabsContent value="profile"><ProfileTab /></TabsContent>
             <TabsContent value="dainandini"><DainandiniTab /></TabsContent>
@@ -520,3 +542,5 @@ export default function SocialClient() {
         </Suspense>
     )
 }
+
+    
