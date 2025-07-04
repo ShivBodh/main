@@ -17,6 +17,7 @@ import { PhotoCard } from '@/components/media/PhotoCard';
 import { VideoCard } from '@/components/media/VideoCard';
 import { peethams } from '@/lib/peethams-data';
 import { LineageTimeline } from '@/components/peethams/LineageTimeline';
+import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 
 const jyotirmathSeva = allSevaOpportunities.filter(o => o.peetham === 'Jyotirmath');
 const peethamInfo = peethams.find(p => p.name.includes('Jyotirmath'))!;
@@ -63,15 +64,18 @@ export default function JyotirmathClient() {
         </section>
 
         <Tabs defaultValue="about" className="w-full">
-          <TabsList className="grid w-full grid-cols-3 sm:grid-cols-4 md:grid-cols-7 mb-8">
-            <TabsTrigger value="about">About</TabsTrigger>
-            <TabsTrigger value="teachings">Teachings</TabsTrigger>
-            <TabsTrigger value="lineage">Lineage</TabsTrigger>
-            <TabsTrigger value="events">Events</TabsTrigger>
-            <TabsTrigger value="gallery">Photos</TabsTrigger>
-            <TabsTrigger value="videos">Videos</TabsTrigger>
-            <TabsTrigger value="seva">Seva</TabsTrigger>
-          </TabsList>
+          <ScrollArea className="w-full whitespace-nowrap rounded-lg">
+              <TabsList className="mb-8 inline-flex w-max">
+                <TabsTrigger value="about">About</TabsTrigger>
+                <TabsTrigger value="teachings">Teachings</TabsTrigger>
+                <TabsTrigger value="lineage">Lineage</TabsTrigger>
+                <TabsTrigger value="events">Events</TabsTrigger>
+                <TabsTrigger value="gallery">Photos</TabsTrigger>
+                <TabsTrigger value="videos">Videos</TabsTrigger>
+                <TabsTrigger value="seva">Seva</TabsTrigger>
+              </TabsList>
+            <ScrollBar orientation="horizontal" />
+          </ScrollArea>
           
           <TabsContent value="about" className="prose prose-lg lg:prose-xl max-w-none text-foreground/90 leading-relaxed">
             <h2 className="font-headline text-primary">History and Significance</h2>

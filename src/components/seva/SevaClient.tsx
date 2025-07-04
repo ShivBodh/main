@@ -50,9 +50,9 @@ export default function SevaClient() {
                 </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
                 {/* Filters Column */}
-                <div className="md:col-span-1 space-y-6">
+                <aside className="lg:col-span-1 space-y-6 lg:sticky lg:top-24">
                     <Card>
                         <CardHeader>
                             <CardTitle className="font-headline text-xl">Filter Opportunities</CardTitle>
@@ -101,10 +101,10 @@ export default function SevaClient() {
                             Seva, or selfless service, is a cornerstone of spiritual practice. It purifies the heart, cultivates humility, and allows us to offer our skills and time for the greater good of the community and the preservation of Dharma.
                         </p>
                     </Card>
-                </div>
+                </aside>
 
                 {/* Opportunities List */}
-                <div className="md:col-span-3">
+                <main className="lg:col-span-3">
                     {filteredOpportunities.length > 0 ? (
                         <Accordion type="single" collapsible className="w-full space-y-4">
                             {filteredOpportunities.map(opp => (
@@ -150,7 +150,7 @@ export default function SevaClient() {
                             <p>Your search and filter combination did not return any results. Please try adjusting your filters or check back later for new opportunities.</p>
                         </Card>
                     )}
-                </div>
+                </main>
             </div>
         </div>
     );

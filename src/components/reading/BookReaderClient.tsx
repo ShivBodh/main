@@ -12,7 +12,7 @@ const VERSES_PER_PAGE = 3;
 
 export default function BookReaderClient({ book }: { book: Book }) {
   const [currentPage, setCurrentPage] = useState(0);
-  const [animationClass, setAnimationClass] = useState('animate-page-flip-in');
+  const [animationClass, setAnimationClass] = useState('animate-in fade-in');
 
   const totalPages = useMemo(() => {
     if (!book.content) return 0;
@@ -83,7 +83,7 @@ export default function BookReaderClient({ book }: { book: Book }) {
               disabled={currentPage === 0}
               variant="outline"
             >
-              <ArrowLeft className="mr-2" /> Previous Page
+              <ArrowLeft className="mr-2 h-4 w-4" /> Previous Page
             </Button>
             <p className="text-sm text-muted-foreground my-4 sm:my-0">
               Page {currentPage + 1} of {totalPages}
@@ -93,7 +93,7 @@ export default function BookReaderClient({ book }: { book: Book }) {
               disabled={currentPage === totalPages - 1}
               variant="outline"
             >
-              Next Page <ArrowRight className="ml-2" />
+              Next Page <ArrowRight className="mr-2 h-4 w-4" />
             </Button>
           </CardFooter>
         </Card>
