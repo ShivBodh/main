@@ -1,3 +1,4 @@
+
 'use client';
 
 import React from 'react';
@@ -12,28 +13,28 @@ import Autoplay from 'embla-carousel-autoplay';
 
 const heroSlides = [
   {
-    title: 'The Eternal Lineage, Unified',
-    description: 'Explore the authentic teachings and rich history of the four cardinal Peethams established by Adi Shankaracharya.',
-    buttonText: 'Explore the Peethams',
-    buttonLink: '/peethams'
+    title: 'Sanatan Social: A New Digital Home for Dharma',
+    description: 'Introducing the first social media platform built exclusively for followers of Sanatana Dharma. Connect, share, and grow with a global community of believers.',
+    buttonText: 'Join the Community',
+    buttonLink: '/social'
   },
   {
-    title: 'Connect with the Community',
-    description: 'Join Sanatan Social, our dedicated platform to connect with devotees, share your journey, and support dharmic causes.',
-    buttonText: 'Enter Sanatan Social',
-    buttonLink: '/social'
+    title: 'Your Personal Dainandini: A Digital Diary for the Soul',
+    description: 'Privately record your daily thoughts, tasks, and spiritual reflections. A modern tool for the ancient practice of self-observation.',
+    buttonText: 'Start Your Diary',
+    buttonLink: '/social?tab=dainandini'
+  },
+    {
+    title: 'Launch Dharmic Campaigns: Be a Catalyst for Change',
+    description: 'Start movements for causes that matter. Rally support for temple restoration, cow protection, or spreading Vedic knowledge in your community.',
+    buttonText: 'Start a Campaign',
+    buttonLink: '/social?tab=campaigns'
   },
   {
     title: 'A Living Archive of Dharma',
     description: 'Discover daily events, discourses, and media from the four Peethams in the comprehensive Bodha Calendar.',
     buttonText: 'View Bodha Calendar',
     buttonLink: '/events'
-  },
-  {
-    title: 'Tools for Your Spiritual Practice',
-    description: 'Enhance your daily Sādhanā with our suite of tools, including a Japa Counter, Meditation Timer, and Daily Wisdom.',
-    buttonText: 'Visit Sādhanā Suite',
-    buttonLink: '/sadhana'
   }
 ];
 
