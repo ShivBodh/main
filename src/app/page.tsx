@@ -1,4 +1,3 @@
-
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
@@ -149,14 +148,27 @@ export default function HomePage() {
                     Dharma Art Wallpapers
                 </h2>
                 <p className="mt-2 text-lg text-foreground/80 max-w-3xl mx-auto">
-                    AI-generated mobile wallpapers to inspire contemplation. Download one of our creations, or generate your own.
+                    A scrolling filmstrip of AI-generated wallpapers. Hover over the art to pause the animation and download.
                 </p>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-                {dharmaSymbols.map((symbol) => (
-                    <DharmaArtFrame key={symbol.prompt} prompt={symbol.prompt} aiHint={symbol.aiHint} />
-                ))}
+
+            <div className="w-full inline-flex flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)] mb-16">
+                <ul className="flex items-center justify-center md:justify-start space-x-8 animate-autoscroll hover:[animation-play-state:paused]">
+                    {dharmaSymbols.map((symbol, index) => (
+                        <li key={`${symbol.prompt}-${index}-1`} className="w-64 flex-shrink-0">
+                            <DharmaArtFrame prompt={symbol.prompt} aiHint={symbol.aiHint} />
+                        </li>
+                    ))}
+                </ul>
+                <ul className="flex items-center justify-center md:justify-start space-x-8 animate-autoscroll hover:[animation-play-state:paused]" aria-hidden="true">
+                     {dharmaSymbols.map((symbol, index) => (
+                        <li key={`${symbol.prompt}-${index}-2`} className="w-64 flex-shrink-0">
+                            <DharmaArtFrame prompt={symbol.prompt} aiHint={symbol.aiHint} />
+                        </li>
+                    ))}
+                </ul>
             </div>
+
              <InteractiveWallpaperGenerator />
         </div>
       </section>
