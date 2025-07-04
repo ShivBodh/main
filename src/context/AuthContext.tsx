@@ -3,7 +3,7 @@
 
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import { onAuthStateChanged, signInWithPopup, signOut, User } from 'firebase/auth';
-import { getFirebaseAuth, googleProvider, facebookProvider } from '@/lib/firebase';
+import { auth, googleProvider, facebookProvider } from '@/lib/firebase';
 import { useRouter } from 'next/navigation';
 import { useToast } from '@/hooks/use-toast';
 
@@ -24,19 +24,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const { toast } = useToast();
 
   useEffect(() => {
-    // getFirebaseAuth() will return null if Firebase is not configured.
-    const auth = getFirebaseAuth(); 
-    if (auth) {
-        const unsubscribe = onAuthStateChanged(auth, (user) => {
-          setUser(user);
-          setLoading(false);
-        });
-        return () => unsubscribe();
-    } else {
-        // Handle the case where Firebase is not configured.
-        console.warn("Firebase is not configured. Authentication will be disabled.");
-        setLoading(false);
-    }
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user);
+      setLoading(false);
+    });
+    return () => unsubscribe();
   }, []);
 
   const handleSignInSuccess = (providerName: string) => {
@@ -78,11 +70,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }
 
   const signInWithGoogle = async () => {
-    const auth = getFirebaseAuth();
-    if (!auth) {
-        toast({ variant: 'destructive', title: 'Firebase Not Configured', description: "Please add your Firebase credentials to the .env file."});
-        return;
-    };
     setLoading(true);
     try {
       await signInWithPopup(auth, googleProvider);
@@ -95,11 +82,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
   
   const signInWithFacebook = async () => {
-    const auth = getFirebaseAuth();
-    if (!auth) {
-        toast({ variant: 'destructive', title: 'Firebase Not Configured', description: "Please add your Firebase credentials to the .env file."});
-        return;
-    };
     setLoading(true);
     try {
       await signInWithPopup(auth, facebookProvider);
@@ -112,11 +94,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const logout = async () => {
-    const auth = getFirebaseAuth();
-    if (!auth) {
-        toast({ variant: 'destructive', title: 'Firebase Not Configured' });
-        return;
-    };
     setLoading(true);
     try {
       await signOut(auth);
