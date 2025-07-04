@@ -4,9 +4,10 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { useRouter } from 'next/navigation';
-import { useForm } from 'react-hook-form';
+import { useForm, UseFormReturn } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
+import type { User } from 'firebase/auth';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
@@ -48,6 +49,7 @@ const entrySchema = z.object({
   image: z.any().optional(),
 });
 
+type EntryFormValues = z.infer<typeof entrySchema>;
 
 export default function DainandiniClient() {
   const { user, loading } = useAuth();
@@ -59,8 +61,9 @@ export default function DainandiniClient() {
   const [isDataLoading, setIsDataLoading] = useState(true);
   const [isProfileSetupOpen, setIsProfileSetupOpen] = useState(false);
   const [isEntryDialogOpen, setIsEntryDialogOpen] = useState(false);
+  const [randomQuote, setRandomQuote] = useState<(typeof acharyaQuotes)[0] | null>(null);
 
-  // Load data from localStorage
+  // This useEffect handles data loading and other logic that should only run on the client.
   useEffect(() => {
     if (loading) return;
     if (!user) {
@@ -68,6 +71,7 @@ export default function DainandiniClient() {
       return;
     }
     
+    // Load data from localStorage which is a client-side API
     const savedProfile = localStorage.getItem(`diary_profile_${user.uid}`);
     if (savedProfile) {
       setProfile(JSON.parse(savedProfile));
@@ -82,6 +86,11 @@ export default function DainandiniClient() {
     
     setIsDataLoading(false);
   }, [user, loading, router]);
+  
+  // This useEffect generates the random quote once on the client to avoid hydration mismatch.
+  useEffect(() => {
+    setRandomQuote(acharyaQuotes[Math.floor(Math.random() * acharyaQuotes.length)]);
+  }, []);
 
   // Save profile to localStorage
   useEffect(() => {
@@ -92,7 +101,7 @@ export default function DainandiniClient() {
   
   // Save entries to localStorage
   useEffect(() => {
-    if (user && entries.length > 0) {
+    if (user) {
       localStorage.setItem(`diary_entries_${user.uid}`, JSON.stringify(entries));
     }
   }, [entries, user]);
@@ -101,9 +110,14 @@ export default function DainandiniClient() {
     return [...entries].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
   }, [entries]);
 
-  const randomQuote = useMemo(() => {
-      return acharyaQuotes[Math.floor(Math.random() * acharyaQuotes.length)];
-  }, []);
+  const entryForm = useForm<EntryFormValues>({
+    resolver: zodResolver(entrySchema),
+    defaultValues: {
+      date: new Date().toISOString().split('T')[0],
+      text: '',
+      image: null,
+    },
+  });
 
   const handleProfileSave = (values: z.infer<typeof profileSchema>) => {
     setProfile(values);
@@ -111,7 +125,7 @@ export default function DainandiniClient() {
     toast({ title: "Profile Saved", description: "Your Dainandini is ready!" });
   };
   
-  const handleEntrySave = async (values: z.infer<typeof entrySchema>) => {
+  const handleEntrySave = async (values: EntryFormValues) => {
     let imageUrl: string | undefined = undefined;
     if (values.image && values.image.length > 0) {
       const file = values.image[0];
@@ -136,6 +150,7 @@ export default function DainandiniClient() {
     setEntries(prev => [newEntry, ...prev]);
     setIsEntryDialogOpen(false);
     toast({ title: "Entry Saved", description: "Your memory has been recorded in your Dainandini." });
+    entryForm.reset();
   };
   
   const handleDeleteEntry = (id: string) => {
@@ -175,7 +190,7 @@ export default function DainandiniClient() {
                         <DialogTitle className="font-headline text-2xl">New Diary Entry</DialogTitle>
                         <DialogDescription>Record a new memory or reflection.</DialogDescription>
                     </DialogHeader>
-                    <NewEntryForm onSave={handleEntrySave} />
+                    <NewEntryForm onSave={handleEntrySave} form={entryForm} />
                 </DialogContent>
             </Dialog>
         </div>
@@ -238,8 +253,17 @@ export default function DainandiniClient() {
       
       <Card className="mt-12 bg-gradient-to-tr from-card to-muted/20">
           <CardContent className="p-6 text-center">
-            <p className="text-xl italic text-foreground/80 font-headline">"{randomQuote.quote}"</p>
-            <p className="mt-2 font-semibold text-primary">— {randomQuote.author}</p>
+            {randomQuote ? (
+                <>
+                    <p className="text-xl italic text-foreground/80 font-headline">"{randomQuote.quote}"</p>
+                    <p className="mt-2 font-semibold text-primary">— {randomQuote.author}</p>
+                </>
+            ) : (
+                <div className="space-y-2">
+                    <Skeleton className="h-6 w-3/4 mx-auto" />
+                    <Skeleton className="h-4 w-1/4 mx-auto" />
+                </div>
+            )}
           </CardContent>
       </Card>
 
@@ -288,15 +312,7 @@ function ProfileSetupForm({ user, onSave, existingProfile }: { user: User | null
   );
 }
 
-function NewEntryForm({ onSave }: { onSave: (values: any) => void }) {
-    const form = useForm<z.infer<typeof entrySchema>>({
-        resolver: zodResolver(entrySchema),
-        defaultValues: {
-            date: new Date().toISOString().split('T')[0],
-            text: '',
-        },
-    });
-
+function NewEntryForm({ onSave, form }: { onSave: (values: EntryFormValues) => void, form: UseFormReturn<EntryFormValues> }) {
     return (
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSave)} className="space-y-4">
@@ -361,3 +377,6 @@ function DainandiniSkeleton() {
          </div>
     );
 }
+
+
+    
