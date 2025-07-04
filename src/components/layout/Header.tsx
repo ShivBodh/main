@@ -28,6 +28,7 @@ import { Separator } from '@/components/ui/separator';
 import React from 'react';
 import { cn } from '@/lib/utils';
 import { sadhanaTools } from '@/lib/sadhana-data';
+import { LanguageSwitcher } from './LanguageSwitcher';
 
 const mainNavLinks = [
     { 
@@ -251,6 +252,7 @@ export function Header() {
           <Link href="https://open.spotify.com/show/2junC5HBTu63wvAULgujbR" target="_blank" rel="noopener noreferrer" aria-label="Spotify Podcast">
             <Podcast className="h-5 w-5 text-muted-foreground hover:text-foreground" />
           </Link>
+          <LanguageSwitcher />
           <Separator orientation="vertical" className="h-6" />
           <AuthNav />
         </div>
@@ -304,17 +306,20 @@ export function Header() {
                     </SheetClose>
                   )}
                   <Separator />
-                   <div className="flex items-center space-x-4">
-                    <Link href="https://twitter.com/shivabodha_org" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-                        <Twitter className="h-6 w-6 text-muted-foreground hover:text-foreground" />
-                    </Link>
-                    <Link href="https://www.facebook.com/profile.php?id=61560464994999" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-                        <Facebook className="h-6 w-6 text-muted-foreground hover:text-foreground" />
-                    </Link>
-                    <Link href="https://open.spotify.com/show/2junC5HBTu63wvAULgujbR" target="_blank" rel="noopener noreferrer" aria-label="Spotify Podcast">
-                        <Podcast className="h-6 w-6 text-muted-foreground hover:text-foreground" />
-                    </Link>
-                  </div>
+                   <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-4">
+                        <Link href="https://twitter.com/shivabodha_org" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+                            <Twitter className="h-6 w-6 text-muted-foreground hover:text-foreground" />
+                        </Link>
+                        <Link href="https://www.facebook.com/profile.php?id=61560464994999" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                            <Facebook className="h-6 w-6 text-muted-foreground hover:text-foreground" />
+                        </Link>
+                        <Link href="https://open.spotify.com/show/2junC5HBTu63wvAULgujbR" target="_blank" rel="noopener noreferrer" aria-label="Spotify Podcast">
+                            <Podcast className="h-6 w-6 text-muted-foreground hover:text-foreground" />
+                        </Link>
+                      </div>
+                      <LanguageSwitcher />
+                   </div>
                 </div>
               </div>
             </SheetContent>
