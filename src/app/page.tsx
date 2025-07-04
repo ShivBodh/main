@@ -3,11 +3,12 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowRight, Sparkles, Users, Landmark, Shell, Flag, Mountain, Sun } from 'lucide-react';
+import { ArrowRight, Sparkles, Users, Landmark } from 'lucide-react';
 import { peethams } from '@/lib/peethams-data';
 import type { Metadata } from 'next';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { LineageTimeline } from '@/components/peethams/LineageTimeline';
+import { DharmaArtFrame } from '@/components/home/DharmaArtFrame';
 
 export const metadata: Metadata = {
   title: 'Home',
@@ -16,27 +17,19 @@ export const metadata: Metadata = {
 
 const dharmaSymbols = [
     {
-        title: 'Aum (ॐ)',
-        description: 'The primordial sound of the universe, representing the ultimate reality, Brahman.',
-        icon: Sparkles,
+        prompt: 'A painting of the Aum (ॐ) symbol, the primordial sound of the universe, representing the ultimate reality, Brahman.',
         aiHint: 'aum symbol'
     },
     {
-        title: 'Padma (पद्म)',
-        description: 'The lotus flower, symbolizing purity, spiritual enlightenment, and detachment from the material world.',
-        icon: 'lotus',
+        prompt: 'A painting of the Padma (पद्म), or lotus flower, symbolizing purity, spiritual enlightenment, and detachment from the material world.',
         aiHint: 'lotus flower'
     },
     {
-        title: 'Swastika (स्वस्तिक)',
-        description: 'An ancient symbol of well-being, good fortune, and the eternal nature of Brahman.',
-        icon: Sun, // Using Sun as a representation of auspiciousness
+        prompt: 'A painting of the Swastika (स्वस्तिक), an ancient symbol of well-being, good fortune, and the eternal nature of Brahman.',
         aiHint: 'swastika symbol'
     },
     {
-        title: 'Purna-Kalasha',
-        description: 'A symbol of abundance, wisdom, and immortality; the "vase of plenty."',
-        icon: 'kalasha', // Using a string to identify the custom SVG
+        prompt: 'A painting of the Purna-Kalasha, a pot filled with water and topped with a coconut and mango leaves, symbolizing abundance, wisdom, and immortality.',
         aiHint: 'kalasha pot'
     }
 ];
@@ -152,42 +145,16 @@ export default function HomePage() {
             <div className="text-center mb-12">
                 <Sparkles className="h-10 w-10 text-primary mx-auto" />
                 <h2 className="text-3xl md:text-4xl font-headline font-bold text-center text-primary mt-4">
-                    Symbols of Dharma
+                    Artistic Visions of Dharma
                 </h2>
                 <p className="mt-2 text-lg text-foreground/80 max-w-2xl mx-auto">
-                    Artistic representations of timeless spiritual concepts, imbued with a gentle, life-like pulse.
+                    AI-generated artistic interpretations of timeless spiritual concepts, created to inspire contemplation.
                 </p>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                {dharmaSymbols.map((symbol) => {
-                    const Icon = symbol.icon;
-                    return (
-                         <Card key={symbol.title} className="flex flex-col items-center justify-start p-6 text-center transition-all duration-300 hover:shadow-xl hover:-translate-y-1 h-full">
-                            <div className="p-4 animate-breath h-24 w-24 flex items-center justify-center" data-ai-hint={symbol.aiHint}>
-                                {Icon === 'kalasha' ? (
-                                    <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" className="text-primary">
-                                        <path d="M8 2a3.5 3.5 0 0 1 3.5 -3.5h1a3.5 3.5 0 0 1 3.5 3.5v1a3.5 3.5 0 0 1 -3.5 3.5h-1a3.5 3.5 0 0 1 -3.5 -3.5v-1" />
-                                        <path d="M8 8.5a3.5 3.5 0 0 0 -3.5 3.5v9.5a3.5 3.5 0 0 0 3.5 3.5h8a3.5 3.5 0 0 0 3.5 -3.5v-9.5a3.5 3.5 0 0 0 -3.5 -3.5h-8z" />
-                                    </svg>
-                                ) : Icon === 'lotus' ? (
-                                    <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" className="text-primary">
-                                        <path d="M8 17.3c4-4.2 8-4 8-11.3a4 4 0 1 0-8 0c0 2 1.2 4.3 4 7.3" />
-                                        <path d="M4 14c-1.5-2-2-5-2-7a6 6 0 1 1 12 0c0 1.9-1 4.5-3 7" />
-                                        <path d="M12 20a4 4 0 0 0-8 0h8z" />
-                                    </svg>
-                                ) : (
-                                    <Icon className="w-20 h-20 text-primary" />
-                                )}
-                            </div>
-                            <CardHeader className="p-0 mt-2">
-                                <CardTitle className="font-headline text-xl">{symbol.title}</CardTitle>
-                            </CardHeader>
-                            <CardContent className="p-0 mt-2 flex-grow">
-                                <p className="text-sm text-muted-foreground">{symbol.description}</p>
-                            </CardContent>
-                        </Card>
-                    )
-                })}
+                {dharmaSymbols.map((symbol) => (
+                    <DharmaArtFrame key={symbol.prompt} prompt={symbol.prompt} aiHint={symbol.aiHint} />
+                ))}
             </div>
         </div>
       </section>
