@@ -80,6 +80,19 @@ export default function MissionPage() {
               </p>
             </section>
 
+            <section>
+              <h2 id="policy">Our Stance on Copyright &amp; Sacred Duty</h2>
+                <p>
+                    We, the ShivBodh Group, are devotees of Sanatana Dharma and hold the Jagadguru Shankaracharyas and the sacred lineage of Adi Shankaracharya in the highest reverence, viewing them as manifestations of the divine.
+                </p>
+                <p>
+                    It is our profound belief that the timeless wisdom originating from Adi Shankaracharya and the four Peethams is a universal treasure, intended for the spiritual upliftment of all humanity. Therefore, we operate under the principle that any online or offline content derived from this sacred source should be free from commercial copyright restrictions when used for the noble purpose of spreading the message of Dharma, enhancing knowledge, and fostering peace and unity.
+                </p>
+                <p>
+                    This portal is a non-commercial Seva (selfless service). Our mission is not to generate profit or engage in any fraudulent activity, but to build a strong, united, and enlightened global community of Sanatanis and seekers of truth. All content is shared here in that spirit.
+                </p>
+            </section>
+
             <div className="not-prose text-center mt-16 p-8 bg-card rounded-lg border">
                 <Image
                   src="https://images.unsplash.com/photo-1531206715640-4416d8435b54?q=80&w=80&h=80&fit=crop"
