@@ -200,21 +200,15 @@ function ProfileTab() {
     );
 }
 
-function DainandiniTab() {
-  const { user, loading } = useAuth();
-  const [selectedDate, setSelectedDate] = useState<Date | undefined>();
-  const [isClient, setIsClient] = useState(false);
+function DainandiniClientContent() {
+  const { user } = useAuth();
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date());
   const [notes, setNotes] = useState('');
   const [tasks, setTasks] = useState<Task[]>([]);
   const [newTaskText, setNewTaskText] = useState('');
 
   useEffect(() => {
-    setIsClient(true);
-    setSelectedDate(new Date());
-  }, []);
-
-  useEffect(() => {
-    if (!user || !isClient || !selectedDate) return;
+    if (!user || !selectedDate) return;
     
     const dateKey = format(selectedDate, 'yyyy-MM-dd');
     const data = localStorage.getItem(`dainandini_${user.uid}_${dateKey}`);
@@ -226,10 +220,10 @@ function DainandiniTab() {
       setNotes('');
       setTasks([]);
     }
-  }, [selectedDate, user, isClient]);
+  }, [selectedDate, user]);
 
   useEffect(() => {
-    if (!user || !isClient || !selectedDate) return;
+    if (!user || !selectedDate) return;
     
     const handler = setTimeout(() => {
       const dateKey = format(selectedDate, 'yyyy-MM-dd');
@@ -238,7 +232,7 @@ function DainandiniTab() {
     }, 500); 
 
     return () => clearTimeout(handler);
-  }, [notes, tasks, selectedDate, user, isClient]);
+  }, [notes, tasks, selectedDate, user]);
 
   const handleAddTask = (e: React.FormEvent) => {
     e.preventDefault();
@@ -260,10 +254,6 @@ function DainandiniTab() {
     setTasks(prev => prev.filter(task => task.id !== taskId));
   };
   
-  if (!isClient || loading) {
-    return <Skeleton className="h-[80vh] w-full" />;
-  }
-
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
         <div className="lg:col-span-1 lg:sticky lg:top-24">
@@ -310,6 +300,34 @@ function DainandiniTab() {
     </div>
   );
 }
+
+function DainandiniTab() {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) {
+    return (
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+        <div className="lg:col-span-1 lg:sticky lg:top-24">
+            <Card>
+                <CardContent className="p-0">
+                    <Skeleton className="m-3 h-[290px] w-[280px]" />
+                </CardContent>
+            </Card>
+        </div>
+        <div className="lg:col-span-2">
+            <Skeleton className="h-[80vh] w-full" />
+        </div>
+      </div>
+    );
+  }
+
+  return <DainandiniClientContent />;
+}
+
 
 function CampaignsTab() {
   const campaigns: any[] = []; // Placeholder
