@@ -28,8 +28,7 @@ export default function PeethamsPage() {
         <div className="text-center mb-16">
           <div className="mb-8">
             <Image
-              src="https://images.unsplash.com/photo-1596541539218-350570a04d12?q=80&w=150&h=150&fit=crop"
-              data-ai-hint="statue guru"
+              src="https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/aadi-guru.png"
               alt="Jagadguru Adi Shankaracharya"
               width={150}
               height={150}
@@ -51,7 +50,7 @@ export default function PeethamsPage() {
                 {peetham.icon ? (
                   <LucideIcon name={peetham.icon} className="w-32 h-32 text-primary/50" />
                 ) : (
-                  <Image src={peetham.image} alt={peetham.name} width={600} height={400} className="w-full h-full object-cover" data-ai-hint={peetham.aiHint} />
+                  <Image src={peetham.image} alt={peetham.name} width={600} height={400} className="w-full h-full object-cover" />
                 )}
               </div>
               <CardHeader>

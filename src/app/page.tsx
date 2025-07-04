@@ -101,7 +101,6 @@ export default function HomePage() {
                     width={600}
                     height={400}
                     className="w-full h-full object-cover"
-                    {...(peetham.aiHint && { 'data-ai-hint': peetham.aiHint })}
                   />
                 </div>
                 <CardHeader>
