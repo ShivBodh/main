@@ -54,7 +54,7 @@ export default function DashboardClient() {
   }
 
   return (
-    <div className="container mx-auto max-w-4xl py-16 md:py-24 px-4">
+    <div className="container mx-auto max-w-5xl py-16 md:py-24 px-4">
         <div className="flex flex-col md:flex-row items-center gap-6 mb-12">
             <Avatar className="h-24 w-24 border-4 border-primary shadow-lg">
                 <AvatarImage src={user.photoURL || ''} alt={user.displayName || 'User Avatar'} />
@@ -68,79 +68,66 @@ export default function DashboardClient() {
                     <Mail className="h-5 w-5" /> {user.email}
                 </p>
             </div>
+             <div className="ml-auto">
+                 <Button onClick={logout} variant="outline">
+                    <LogOut className="mr-2 h-4 w-4" /> Sign Out
+                </Button>
+            </div>
         </div>
       
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mb-8">
-            <Card className="shadow-md">
-                <CardHeader>
-                    <CardTitle className="font-headline flex items-center gap-2">
-                        <UserIcon className="h-6 w-6 text-accent" />
-                        My Profile
-                    </CardTitle>
-                    <CardDescription>
-                        This is your personal dashboard. Use the tools below to enrich your spiritual journey.
-                    </CardDescription>
-                </CardHeader>
-                <CardContent>
-                    <p>Your personalized space is evolving. You can now track your donations and plan your offerings in the Donation Diary below.</p>
-                </CardContent>
-                <CardFooter>
-                    <Button onClick={logout} variant="destructive">
-                        <LogOut className="mr-2 h-4 w-4" /> Sign Out
-                    </Button>
-                </CardFooter>
-            </Card>
+        <div className="grid gap-8 md:grid-cols-3">
+            <div className="md:col-span-1 space-y-8">
+                <Card className="shadow-md">
+                    <CardHeader>
+                        <CardTitle className="font-headline">Quick Links</CardTitle>
+                        <CardDescription>
+                            Continue your journey through the portal.
+                        </CardDescription>
+                    </CardHeader>
+                    <CardContent className="flex flex-col space-y-2">
+                        <Button variant="link" className="justify-start p-0 h-auto text-base" asChild>
+                            <Link href="/sadhana" className="flex items-center gap-2">
+                                <Brain className="h-4 w-4" />
+                                <span>Visit the Sādhanā Suite</span>
+                            </Link>
+                        </Button>
+                        <Button variant="link" className="justify-start p-0 h-auto text-base" asChild>
+                            <Link href="/quiz" className="flex items-center gap-2">
+                                <BookMarked className="h-4 w-4" />
+                                <span>Test Your Knowledge</span>
+                            </Link>
+                        </Button>
+                        <Button variant="link" className="justify-start p-0 h-auto text-base" asChild>
+                            <Link href="/reading" className="flex items-center gap-2">
+                                <BookOpen className="h-4 w-4" />
+                                <span>Go to the Reading Room</span>
+                            </Link>
+                        </Button>
+                    </CardContent>
+                </Card>
 
-            <Card className="shadow-md">
-                <CardHeader>
-                    <CardTitle className="font-headline">Quick Links</CardTitle>
-                    <CardDescription>
-                        Continue your journey through the portal.
-                    </CardDescription>
-                </CardHeader>
-                <CardContent className="flex flex-col space-y-2">
-                    <Button variant="link" className="justify-start p-0 h-auto text-base" asChild>
-                        <Link href="/sadhana" className="flex items-center gap-2">
-                            <Brain className="h-4 w-4" />
-                            <span>Visit the Sādhanā Suite</span>
-                        </Link>
-                    </Button>
-                     <Button variant="link" className="justify-start p-0 h-auto text-base" asChild>
-                        <Link href="/quiz" className="flex items-center gap-2">
-                            <BookMarked className="h-4 w-4" />
-                            <span>Test Your Knowledge</span>
-                        </Link>
-                    </Button>
-                     <Button variant="link" className="justify-start p-0 h-auto text-base" asChild>
-                        <Link href="/reading" className="flex items-center gap-2">
-                            <BookOpen className="h-4 w-4" />
-                            <span>Go to the Reading Room</span>
-                        </Link>
-                    </Button>
-                </CardContent>
-            </Card>
-
-            <Card className="shadow-md md:col-span-2 lg:col-span-1">
-                <CardHeader>
-                    <CardTitle className="font-headline flex items-center gap-2">
-                        <History className="h-6 w-6 text-accent" />
-                        Your Activity
-                    </CardTitle>
-                    <CardDescription>
-                        A log of your recent interactions across the portal.
-                    </CardDescription>
-                </CardHeader>
-                <CardContent>
-                    <p className="text-sm text-muted-foreground text-center p-4">
-                        Activity feed is being configured and will appear here soon.
-                    </p>
-                </CardContent>
-            </Card>
+                <Card className="shadow-md">
+                    <CardHeader>
+                        <CardTitle className="font-headline flex items-center gap-2">
+                            <History className="h-6 w-6 text-accent" />
+                            Your Activity
+                        </CardTitle>
+                        <CardDescription>
+                            A log of your recent interactions across the portal.
+                        </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                        <p className="text-sm text-muted-foreground text-center p-4">
+                            Activity feed is being configured and will appear here soon.
+                        </p>
+                    </CardContent>
+                </Card>
+            </div>
+            <div className="md:col-span-2">
+                <DonationDiary />
+            </div>
         </div>
 
-        <div className="mt-8">
-            <DonationDiary />
-        </div>
     </div>
   );
 }

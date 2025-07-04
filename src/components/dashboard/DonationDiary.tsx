@@ -39,7 +39,7 @@ const initialDonations: Donation[] = [
 export function DonationDiary() {
     const { user } = useAuth();
     const { toast } = useToast();
-    const [donations, setDonations] = useState<Donation[]>(initialDonations);
+    const [donations, setDonations] = useState<Donation[]>([]);
     const [isAdding, setIsAdding] = useState(false);
     
     // Form state for new donation
@@ -47,17 +47,33 @@ export function DonationDiary() {
     const [date, setDate] = useState<Date | undefined>(new Date());
     const [notes, setNotes] = useState('');
     const [status, setStatus] = useState<'completed' | 'planned'>('completed');
-
+    
     // In a real app, you would fetch data for the logged-in user.
+    // For this prototype, we'll use localStorage to persist data per-user.
     useEffect(() => {
         if (user) {
-            // e.g., fetchDonations(user.uid).then(setDonations);
-            console.log("Fetching donations for user:", user.uid);
+            const savedDonations = localStorage.getItem(`donations_${user.uid}`);
+            if (savedDonations) {
+                const parsedDonations = JSON.parse(savedDonations).map((d: any) => ({...d, date: new Date(d.date)}));
+                setDonations(parsedDonations);
+            } else {
+                setDonations(initialDonations);
+            }
         }
     }, [user]);
 
+    useEffect(() => {
+        if (user) {
+            localStorage.setItem(`donations_${user.uid}`, JSON.stringify(donations));
+        }
+    }, [donations, user]);
+
     const handleAddDonation = (e: React.FormEvent) => {
         e.preventDefault();
+        if (!user) {
+            toast({ variant: 'destructive', title: 'Not Logged In', description: 'You must be logged in to add an entry.' });
+            return;
+        }
         if (!amount || !date) {
             toast({
                 variant: 'destructive',
@@ -75,8 +91,6 @@ export function DonationDiary() {
             status,
         };
 
-        // In a real app, you would save this to Firestore
-        // await addDonationForUser(user.uid, newDonation);
         setDonations(prev => [newDonation, ...prev].sort((a,b) => b.date.getTime() - a.date.getTime()));
 
         toast({
@@ -92,8 +106,6 @@ export function DonationDiary() {
     };
 
     const handleDeleteDonation = (id: string) => {
-        // In a real app, you would delete this from Firestore
-        // await deleteDonation(id);
         setDonations(prev => prev.filter(d => d.id !== id));
         toast({
             title: 'Entry Deleted',
@@ -112,7 +124,7 @@ export function DonationDiary() {
                     Donation Diary & Planner
                 </CardTitle>
                 <CardDescription>
-                    Keep a personal record of your past contributions and plan future offerings.
+                    Keep a personal record of your past contributions and plan future offerings. Your data is saved in your browser.
                 </CardDescription>
             </CardHeader>
             <CardContent>
@@ -176,24 +188,24 @@ export function DonationDiary() {
                             />
                         </div>
                         <div className="flex justify-end gap-2">
-                            <Button variant="ghost" onClick={() => setIsAdding(false)}>Cancel</Button>
+                            <Button variant="ghost" type="button" onClick={() => setIsAdding(false)}>Cancel</Button>
                             <Button type="submit">Save Entry</Button>
                         </div>
                     </form>
                 ) : (
                     <Tabs defaultValue="completed" className="w-full">
                         <TabsList className="grid w-full grid-cols-2">
-                            <TabsTrigger value="completed">Completed Donations</TabsTrigger>
-                            <TabsTrigger value="planned">Planned Offerings</TabsTrigger>
+                            <TabsTrigger value="completed">Completed Donations ({completedDonations.length})</TabsTrigger>
+                            <TabsTrigger value="planned">Planned Offerings ({plannedDonations.length})</TabsTrigger>
                         </TabsList>
-                        <TabsContent value="completed" className="mt-4 space-y-3">
+                        <TabsContent value="completed" className="mt-4 space-y-3 max-h-96 overflow-y-auto pr-2">
                            {completedDonations.length > 0 ? completedDonations.map(d => (
                                 <DonationItem key={d.id} donation={d} onDelete={handleDeleteDonation} />
                            )) : (
                             <p className="text-muted-foreground text-center p-4">No completed donations recorded yet.</p>
                            )}
                         </TabsContent>
-                        <TabsContent value="planned" className="mt-4 space-y-3">
+                        <TabsContent value="planned" className="mt-4 space-y-3  max-h-96 overflow-y-auto pr-2">
                             {plannedDonations.length > 0 ? plannedDonations.map(d => (
                                 <DonationItem key={d.id} donation={d} onDelete={handleDeleteDonation} />
                            )) : (
@@ -221,10 +233,11 @@ function DonationItem({ donation, onDelete }: { donation: Donation, onDelete: (i
             <div className="flex-grow">
                 <p className="font-semibold text-primary">₹{donation.amount.toLocaleString('en-IN')}</p>
                 <p className="text-sm text-muted-foreground">{format(donation.date, "MMMM d, yyyy")}</p>
-                {donation.notes && <p className="text-sm text-foreground/80 mt-1">{donation.notes}</p>}
+                {donation.notes && <p className="text-sm text-foreground/80 mt-1 italic">"{donation.notes}"</p>}
             </div>
-            <Button variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground hover:text-destructive" onClick={() => onDelete(donation.id)}>
+            <Button variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground hover:text-destructive flex-shrink-0" onClick={() => onDelete(donation.id)}>
                 <Trash2 className="h-4 w-4" />
+                <span className="sr-only">Delete entry</span>
             </Button>
         </div>
     )
