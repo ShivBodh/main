@@ -36,6 +36,13 @@ const thumbnailGeneratorFlow = ai.defineFlow(
       prompt: `Design an artistic, symbolic, and minimalist book cover for a sacred spiritual text about '${prompt}'. The design should be abstract and evocative, suitable for a classic book on philosophy. Avoid using text. Focus on colors and shapes that convey the essence of the topic.`,
       config: {
         responseModalities: ['TEXT', 'IMAGE'],
+        safetySettings: [
+            { category: 'HARM_CATEGORY_HATE_SPEECH', threshold: 'BLOCK_NONE' },
+            { category: 'HARM_CATEGORY_DANGEROUS_CONTENT', threshold: 'BLOCK_NONE' },
+            { category: 'HARM_CATEGORY_HARASSMENT', threshold: 'BLOCK_NONE' },
+            { category: 'HARM_CATEGORY_SEXUALLY_EXPLICIT', threshold: 'BLOCK_NONE' },
+            { category: 'HARM_CATEGORY_CIVIC_INTEGRITY', threshold: 'BLOCK_NONE' },
+        ],
       },
     });
 
