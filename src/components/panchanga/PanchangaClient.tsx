@@ -2,15 +2,35 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { panchangaData, Panchanga, PanchangaRegion } from '@/lib/panchanga-data';
-import { Sunrise, Sunset, Moon, Star, SunMoon, Download, Atom } from 'lucide-react';
+import { Sunrise, Sunset, Moon, Star, SunMoon, Download, Atom, HandHeart, Users } from 'lucide-react';
 import { format } from 'date-fns';
 import { Skeleton } from '@/components/ui/skeleton';
 import { InstallPWA } from '@/components/pwa/InstallPWA';
+import { useToast } from '@/hooks/use-toast';
+import { Button } from '@/components/ui/button';
 
 const regionOrder: PanchangaRegion[] = ['North', 'South', 'East', 'West'];
+
+const promotionalMessages = [
+  {
+    icon: <Users className="h-5 w-5 text-primary" />,
+    title: 'Join Sanatan Social!',
+    description: 'Connect with a global community of devotees on our new platform.',
+    link: '/social',
+    cta: 'Join Now'
+  },
+  {
+    icon: <HandHeart className="h-5 w-5 text-green-600" />,
+    title: 'Start a Dharmic Campaign',
+    description: 'Have a cause you believe in? Rally support from the community.',
+    link: '/social?tab=campaigns',
+    cta: 'Create Campaign'
+  },
+];
 
 function PanchangaDetail({ icon: Icon, label, value }: { icon: React.ElementType, label: string, value: string }) {
     return (
@@ -35,10 +55,38 @@ function InauspiciousTime({ label, value }: { label: string, value: string }) {
 
 export default function PanchangaClient() {
     const [isClient, setIsClient] = useState(false);
+    const { toast } = useToast();
     
     useEffect(() => {
         setIsClient(true);
-    }, []);
+        
+        // Setup a timer to periodically show promotional toasts
+        const intervalId = setInterval(() => {
+            // Only show a toast some of the time to be less intrusive
+            if (Math.random() > 0.6) { // 40% chance to show a toast
+                const randomMessage = promotionalMessages[Math.floor(Math.random() * promotionalMessages.length)];
+                toast({
+                  description: (
+                    <div className="flex items-center gap-3">
+                        {randomMessage.icon}
+                        <div>
+                            <p className="font-bold">{randomMessage.title}</p>
+                            <p className="text-sm">{randomMessage.description}</p>
+                        </div>
+                    </div>
+                  ),
+                  action: (
+                    <Button asChild size="sm">
+                      <Link href={randomMessage.link}>{randomMessage.cta}</Link>
+                    </Button>
+                  ),
+                  duration: 8000, // 8 seconds
+                });
+            }
+        }, 20000); // Check every 20 seconds
+
+        return () => clearInterval(intervalId); // Cleanup on unmount
+    }, [toast]);
 
     return (
         <div className="container mx-auto max-w-4xl py-16 md:py-24 px-4">
