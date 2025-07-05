@@ -1,3 +1,4 @@
+
 'use client';
 
 import { Button } from '@/components/ui/button';
@@ -44,11 +45,17 @@ export default function LoginClient() {
         </CardHeader>
         <CardContent className="grid gap-4">
           {!isFirebaseConfigured ? (
-             <Alert variant="destructive">
+             <Alert variant="destructive" className="text-left">
                 <AlertTriangle className="h-4 w-4" />
-                <AlertTitle>Authentication Disabled</AlertTitle>
+                <AlertTitle>Authentication Not Configured</AlertTitle>
                 <AlertDescription>
-                   Firebase is not configured. Please add your API key to the .env file to enable login.
+                   <p className="mb-2">The Google Sign-In is currently disabled because the Firebase API key is missing.</p>
+                   <ol className="list-decimal list-inside space-y-1 text-sm">
+                        <li>Open the <code className="font-mono bg-destructive/20 px-1 py-0.5 rounded">.env</code> file in the project's root directory.</li>
+                        <li>Find your Firebase web app's <code className="font-mono bg-destructive/20 px-1 py-0.5 rounded">apiKey</code>.</li>
+                        <li>Add it to the file: <code className="font-mono bg-destructive/20 px-1 py-0.5 rounded">NEXT_PUBLIC_FIREBASE_API_KEY=...</code></li>
+                        <li className="font-bold">You must restart the development server for the change to take effect.</li>
+                   </ol>
                 </AlertDescription>
             </Alert>
           ) : (
