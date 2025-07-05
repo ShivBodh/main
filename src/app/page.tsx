@@ -2,13 +2,11 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowRight, Sparkles, Users, Landmark } from 'lucide-react';
+import { ArrowRight, Users, Landmark } from 'lucide-react';
 import { peethams } from '@/lib/peethams-data';
 import type { Metadata } from 'next';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { LineageTimeline } from '@/components/peethams/LineageTimeline';
-import { DharmaArtFrame } from '@/components/home/DharmaArtFrame';
-import { InteractiveWallpaperGenerator } from '@/components/home/InteractiveWallpaperGenerator';
 import { HeroSection } from '@/components/home/HeroSection';
 import { Button } from '@/components/ui/button';
 
@@ -16,41 +14,6 @@ export const metadata: Metadata = {
   title: 'Home',
   description: 'A single, trusted digital beacon for the timeless wisdom of the four cardinal Peethams established by Adi Shankaracharya. Connecting devotees worldwide.',
 };
-
-const dharmaSymbols = [
-    {
-        prompt: 'Aum (ॐ), the primordial sound of the universe',
-        aiHint: 'aum symbol'
-    },
-    {
-        prompt: 'The Padma (lotus flower), symbolizing purity and enlightenment',
-        aiHint: 'lotus flower'
-    },
-    {
-        prompt: 'The cosmic dance of Shiva (Nataraja) within a ring of fire',
-        aiHint: 'dancing shiva'
-    },
-    {
-        prompt: 'A swastika, an ancient symbol of well-being and good fortune',
-        aiHint: 'swastika symbol'
-    },
-    {
-        prompt: 'Lord Ganesha writing the Mahabharata with his tusk',
-        aiHint: 'ganesha writing'
-    },
-    {
-        prompt: 'The Trimurti (Brahma, Vishnu, Shiva) representing creation, preservation, destruction',
-        aiHint: 'trimurti deities'
-    },
-    {
-        prompt: 'A Kalasha, the sacred pot with a coconut and mango leaves, symbolizing abundance',
-        aiHint: 'kalasha pot'
-    },
-    {
-        prompt: 'The Gayatri Mantra visualized as radiant light and sound waves',
-        aiHint: 'sacred mantra'
-    }
-];
 
 export default function HomePage() {
   return (
@@ -138,39 +101,6 @@ export default function HomePage() {
               })}
             </Accordion>
           </div>
-        </div>
-      </section>
-
-      <section className="w-full py-16 md:py-24">
-        <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
-                <Sparkles className="h-10 w-10 text-primary mx-auto" />
-                <h2 className="text-3xl md:text-4xl font-headline font-bold text-center text-primary mt-4">
-                    Dharma Art Wallpapers
-                </h2>
-                <p className="mt-2 text-lg text-foreground/80 max-w-3xl mx-auto">
-                    A scrolling filmstrip of beautiful, generated wallpapers. Hover over the art to pause the animation and download.
-                </p>
-            </div>
-
-            <div className="w-full inline-flex flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)] mb-16">
-                <ul className="flex items-center justify-center md:justify-start space-x-8 animate-autoscroll hover:[animation-play-state:paused]">
-                    {dharmaSymbols.map((symbol, index) => (
-                        <li key={`${symbol.prompt}-${index}-1`} className="w-64 flex-shrink-0">
-                            <DharmaArtFrame prompt={symbol.prompt} aiHint={symbol.aiHint} />
-                        </li>
-                    ))}
-                </ul>
-                <ul className="flex items-center justify-center md:justify-start space-x-8 animate-autoscroll hover:[animation-play-state:paused]" aria-hidden="true">
-                     {dharmaSymbols.map((symbol, index) => (
-                        <li key={`${symbol.prompt}-${index}-2`} className="w-64 flex-shrink-0">
-                            <DharmaArtFrame prompt={symbol.prompt} aiHint={symbol.aiHint} />
-                        </li>
-                    ))}
-                </ul>
-            </div>
-
-             <InteractiveWallpaperGenerator />
         </div>
       </section>
 
