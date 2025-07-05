@@ -17,8 +17,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        body: ['Inter', 'sans-serif'],
-        headline: ['Lora', 'serif'],
+        body: ['Alegreya', 'serif'],
+        headline: ['Alegreya', 'serif'],
         code: ['monospace'],
       },
       colors: {
