@@ -11,7 +11,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Trash2, Plus, LogOut, Mail, BookMarked, BookOpen, HandHeart, Users, NotebookText, Megaphone, PlusCircle, Image as ImageIcon, Video, Heart, MessageCircle, Share2, Lock, Globe, Bell, Sunrise, Sunset, Moon, Star, SunMoon, Atom, Pencil, Brush, Eraser, Download, Trash, ThumbsUp, ThumbsDown, UserPlus, UserX } from 'lucide-react';
+import { Trash2, Plus, LogOut, Mail, BookMarked, BookOpen, HandHeart, Users, NotebookText, Megaphone, PlusCircle, Image as ImageIcon, Video, Heart, MessageCircle, Share2, Lock, Globe, Bell, Sunrise, Sunset, Moon, Star, SunMoon, Atom, Pencil, Brush, Eraser, Download, Trash, Flag, UserPlus, UserX } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import Link from 'next/link';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -818,11 +818,11 @@ function CampaignsTab({ user }: { user: any }) {
                                 </Button>
                                  <div className="flex items-center gap-4">
                                     <Button onClick={() => handleFlag(campaign.id, 'green')} variant="outline" className={cn("gap-2", campaign.userFlagged === 'green' ? "bg-green-100 text-green-700 border-green-300 hover:bg-green-200" : "text-gray-500 hover:bg-green-50")}>
-                                        <ThumbsUp className="text-green-600"/>
+                                        <Flag className="text-green-600"/>
                                         <span>{campaign.greenFlags}</span>
                                     </Button>
                                     <Button onClick={() => handleFlag(campaign.id, 'red')} variant="outline" className={cn("gap-2", campaign.userFlagged === 'red' ? "bg-red-100 text-red-700 border-red-300 hover:bg-red-200" : "text-gray-500 hover:bg-red-50")}>
-                                        <ThumbsDown className="text-red-600" />
+                                        <Flag className="text-red-600" />
                                         <span>{campaign.redFlags}</span>
                                     </Button>
                                 </div>
@@ -869,8 +869,12 @@ function NotificationsTab() {
                                 </div>
                                 {notif.type === 'mitra_request' && (
                                     <div className="flex gap-2 self-center sm:self-auto shrink-0">
-                                        <Button size="sm" onClick={() => handleRequest(notif.id, true)}><UserPlus className="mr-2" /> Accept</Button>
-                                        <Button size="sm" variant="outline" onClick={() => handleRequest(notif.id, false)}><UserX className="mr-2" /> Decline</Button>
+                                        <Button size="sm" onClick={() => handleRequest(notif.id, true)} variant="outline" className="border-green-600 text-green-600 hover:bg-green-100 hover:text-green-700">
+                                            <Flag className="mr-2" /> Accept
+                                        </Button>
+                                        <Button size="sm" variant="outline" onClick={() => handleRequest(notif.id, false)} className="border-red-600 text-red-600 hover:bg-red-100 hover:text-red-700">
+                                            <Flag className="mr-2" /> Decline
+                                        </Button>
                                     </div>
                                 )}
                             </li>
