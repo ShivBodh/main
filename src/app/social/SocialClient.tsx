@@ -11,7 +11,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Trash2, Plus, LogOut, Mail, BookMarked, BookOpen, HandHeart, Users, NotebookText, Megaphone, PlusCircle, Image as ImageIcon, Video, Heart, MessageCircle, Share2, Lock, Globe, Bell, Sunrise, Sunset, Moon, Star, SunMoon, Atom, Pencil, Brush, Eraser, Download, Trash, Flag, UserPlus, UserX, Award } from 'lucide-react';
+import { Trash2, Plus, LogOut, Mail, BookMarked, BookOpen, HandHeart, Users, NotebookText, Megaphone, PlusCircle, Image as ImageIcon, Video, Heart, MessageCircle, Share2, Lock, Globe, Bell, Sunrise, Sunset, Moon, Star, SunMoon, Atom, Pencil, Brush, Eraser, Download, Trash, Flag, UserPlus, UserX, Award, Gamepad2, Puzzle, Dice5 } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import Link from 'next/link';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -386,6 +386,33 @@ function ProfileTab() {
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-2">
                 {dashboardLinks.map(link => { const Icon = link.icon; return (<Link href={link.href} key={link.href} className="block group"><Card className="h-full flex flex-col items-start p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border-border/50"><Icon className="h-8 w-8 text-primary mb-4" /><CardTitle className="font-headline text-xl group-hover:text-accent transition-colors">{link.title}</CardTitle><CardDescription className="mt-2 text-foreground/80 flex-grow">{link.description}</CardDescription></Card></Link>); })}
             </div>
+            
+             <Card>
+                <CardHeader>
+                    <CardTitle className="font-headline text-xl flex items-center gap-2"><Gamepad2 className="h-6 w-6"/> Bodhi's Game Room</CardTitle>
+                    <CardDescription>Challenge our resident AI, Bodhi, to a game of strategy and wisdom.</CardDescription>
+                </CardHeader>
+                <CardContent className="grid gap-4 md:grid-cols-2">
+                    <Link href="/games/chess" className="block group">
+                        <div className="flex items-center gap-4 p-4 rounded-lg border bg-muted/50 hover:bg-accent hover:text-accent-foreground transition-colors">
+                            <Puzzle className="h-8 w-8 text-primary group-hover:text-accent-foreground" />
+                            <div>
+                                <h3 className="font-semibold">Play Chess</h3>
+                                <p className="text-sm text-muted-foreground group-hover:text-accent-foreground">A classic game of strategy.</p>
+                            </div>
+                        </div>
+                    </Link>
+                    <Link href="/games/ludo" className="block group">
+                        <div className="flex items-center gap-4 p-4 rounded-lg border bg-muted/50 hover:bg-accent hover:text-accent-foreground transition-colors">
+                            <Dice5 className="h-8 w-8 text-primary group-hover:text-accent-foreground" />
+                            <div>
+                                <h3 className="font-semibold">Play Ludo</h3>
+                                <p className="text-sm text-muted-foreground group-hover:text-accent-foreground">A fun game of chance and tactics.</p>
+                            </div>
+                        </div>
+                    </Link>
+                </CardContent>
+            </Card>
 
              <Card>
                 <CardHeader>
@@ -935,10 +962,10 @@ function NotificationsTab() {
                                 {notif.type === 'mitra_request' && (
                                     <div className="flex gap-2 self-center sm:self-auto shrink-0">
                                         <Button size="sm" onClick={() => handleRequest(notif.id, true)} variant="outline" className="border-green-600 text-green-600 hover:bg-green-100 hover:text-green-700">
-                                            <Flag className="mr-2" /> Accept
+                                            <Flag className="mr-2 text-green-600" /> Accept
                                         </Button>
                                         <Button size="sm" variant="outline" onClick={() => handleRequest(notif.id, false)} className="border-red-600 text-red-600 hover:bg-red-100 hover:text-red-700">
-                                            <Flag className="mr-2" /> Decline
+                                            <Flag className="mr-2 text-red-600" /> Decline
                                         </Button>
                                     </div>
                                 )}
@@ -1013,8 +1040,3 @@ export default function SocialClient() {
         </Suspense>
     )
 }
-
-    
-
-    
-

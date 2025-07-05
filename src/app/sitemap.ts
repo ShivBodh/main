@@ -1,3 +1,4 @@
+
 import { MetadataRoute } from 'next';
 import { peethams } from '@/lib/peethams-data';
 
@@ -22,6 +23,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/contact',
     '/privacy-policy',
     '/user-agreement',
+    '/games/chess',
+    '/games/ludo',
   ].map((route) => ({
     url: `${siteUrl}${route}`,
     lastModified: new Date(),
