@@ -11,7 +11,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Trash2, Plus, LogOut, Mail, Brain, BookMarked, BookOpen, HandHeart, Users, NotebookText, Megaphone, PlusCircle, Image as ImageIcon, Video, Heart, MessageCircle, Share2, Lock, Globe, Bell, Sunrise, Sunset, Moon, Star, SunMoon, Atom, Pencil, Brush, Eraser, Download, Trash, ThumbsUp, ThumbsDown, UserPlus, UserX } from 'lucide-react';
+import { Trash2, Plus, LogOut, Mail, BookMarked, BookOpen, HandHeart, Users, NotebookText, Megaphone, PlusCircle, Image as ImageIcon, Video, Heart, MessageCircle, Share2, Lock, Globe, Bell, Sunrise, Sunset, Moon, Star, SunMoon, Atom, Pencil, Brush, Eraser, Download, Trash, ThumbsUp, ThumbsDown, UserPlus, UserX } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import Link from 'next/link';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -147,7 +147,7 @@ const placeholderCampaigns: Campaign[] = [
 ];
 
 const dashboardLinks = [
-    { title: "Sādhanā Suite", description: "Tools for japa, meditation, and daily wisdom.", href: "/sadhana", icon: Brain },
+    { title: "Sādhanā Suite", description: "Tools for japa, meditation, and daily wisdom.", href: "/sadhana", icon: Atom },
     { title: "Knowledge Quiz", description: "Test your knowledge on the four Peethams.", href: "/quiz", icon: BookMarked },
     { title: "Reading Room", description: "Read foundational texts from great masters.", href: "/reading", icon: BookOpen },
     { title: "Seva Hub", description: "Find meaningful volunteer opportunities.", href: "/seva", icon: HandHeart },
@@ -305,7 +305,7 @@ function ProfileTab() {
                 </div>
                 <div className="ml-auto"><Button onClick={logout} variant="outline"><LogOut className="mr-2 h-4 w-4" /> Sign Out</Button></div>
             </div>
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-2">
                 {dashboardLinks.map(link => { const Icon = link.icon; return (<Link href={link.href} key={link.href} className="block group"><Card className="h-full flex flex-col items-start p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border-border/50"><Icon className="h-8 w-8 text-primary mb-4" /><CardTitle className="font-headline text-xl group-hover:text-accent transition-colors">{link.title}</CardTitle><CardDescription className="mt-2 text-foreground/80 flex-grow">{link.description}</CardDescription></Card></Link>); })}
             </div>
             <div className="grid gap-8 md:grid-cols-2">

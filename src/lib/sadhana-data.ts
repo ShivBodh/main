@@ -1,5 +1,5 @@
 
-import { Scroll, BrainCircuit, Sparkles } from 'lucide-react';
+import { Scroll, BrainCircuit, Sparkles, Atom } from 'lucide-react';
 
 export const sadhanaTools = [
   {
