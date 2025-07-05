@@ -2,16 +2,16 @@
 'use client';
 
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
-import { onAuthStateChanged, signInWithPopup, signOut, User } from 'firebase/auth';
-import { auth, googleProvider, facebookProvider } from '@/lib/firebase';
+import { onAuthStateChanged, signInWithPopup, signOut, User, GoogleAuthProvider } from 'firebase/auth';
+import { auth, googleProvider } from '@/lib/firebase';
 import { useRouter } from 'next/navigation';
 import { useToast } from '@/hooks/use-toast';
 
 interface AuthContextType {
   user: User | null;
   loading: boolean;
+  isFirebaseConfigured: boolean;
   signInWithGoogle: () => Promise<void>;
-  signInWithFacebook: () => Promise<void>;
   logout: () => Promise<void>;
 }
 
@@ -23,20 +23,26 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
   const { toast } = useToast();
 
+  const isFirebaseConfigured = !!auth;
+
   useEffect(() => {
+    if (!isFirebaseConfigured) {
+        setLoading(false);
+        return;
+    }
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
       setLoading(false);
     });
     return () => unsubscribe();
-  }, []);
+  }, [isFirebaseConfigured]);
 
   const handleSignInSuccess = (providerName: string) => {
     toast({
         title: 'Successfully Signed In',
         description: `Welcome back! You are now signed in with ${providerName}.`,
     });
-    router.push('/dashboard');
+    router.push('/social');
   }
 
   const handleSignInError = (error: any, providerName: string) => {
@@ -70,30 +76,27 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }
 
   const signInWithGoogle = async () => {
-    setLoading(true);
-    try {
-      await signInWithPopup(auth, googleProvider);
-      handleSignInSuccess('Google');
-    } catch (error) {
-      handleSignInError(error, 'Google');
-    } finally {
-        setLoading(false);
-    }
-  };
-  
-  const signInWithFacebook = async () => {
-    setLoading(true);
-    try {
-      await signInWithPopup(auth, facebookProvider);
-      handleSignInSuccess('Facebook');
-    } catch (error) {
-      handleSignInError(error, 'Facebook');
-    } finally {
-      setLoading(false);
-    }
+      if (!isFirebaseConfigured || !auth) {
+        toast({
+            variant: 'destructive',
+            title: 'Firebase Not Configured',
+            description: 'Authentication is disabled because the Firebase API key is missing. Please add it to your .env file.',
+        });
+        return;
+      }
+      setLoading(true);
+      try {
+        await signInWithPopup(auth, googleProvider);
+        handleSignInSuccess('Google');
+      } catch (error) {
+        handleSignInError(error, 'Google');
+      } finally {
+          setLoading(false);
+      }
   };
 
   const logout = async () => {
+    if (!isFirebaseConfigured || !auth) return;
     setLoading(true);
     try {
       await signOut(auth);
@@ -115,7 +118,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, signInWithGoogle, signInWithFacebook, logout }}>
+    <AuthContext.Provider value={{ user, loading, isFirebaseConfigured, signInWithGoogle, logout }}>
       {children}
     </AuthContext.Provider>
   );

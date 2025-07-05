@@ -2,19 +2,20 @@
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { useAuth } from '@/context/AuthContext';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import { Chrome } from 'lucide-react';
+import { Chrome, AlertTriangle } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 
 export default function LoginClient() {
-  const { user, signInWithGoogle, loading } = useAuth();
+  const { user, signInWithGoogle, loading, isFirebaseConfigured } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
     if (!loading && user) {
-      router.push('/dashboard');
+      router.push('/social');
     }
   }, [user, loading, router]);
   
@@ -42,9 +43,19 @@ export default function LoginClient() {
           <CardDescription>Sign in to access your dashboard and personal features.</CardDescription>
         </CardHeader>
         <CardContent className="grid gap-4">
-          <Button onClick={signInWithGoogle} className="w-full" size="lg" variant="outline">
-            <Chrome className="mr-2 h-5 w-5" /> Sign in with Google
-          </Button>
+          {!isFirebaseConfigured ? (
+             <Alert variant="destructive">
+                <AlertTriangle className="h-4 w-4" />
+                <AlertTitle>Authentication Disabled</AlertTitle>
+                <AlertDescription>
+                   Firebase is not configured. Please add your API key to the .env file to enable login.
+                </AlertDescription>
+            </Alert>
+          ) : (
+            <Button onClick={signInWithGoogle} className="w-full" size="lg" variant="outline">
+                <Chrome className="mr-2 h-5 w-5" /> Sign in with Google
+            </Button>
+          )}
         </CardContent>
       </Card>
     </div>
