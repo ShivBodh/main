@@ -41,7 +41,7 @@ const dailyWisdomFlow = ai.defineFlow(
     outputSchema: DailyWisdomOutputSchema,
   },
   async () => {
-    const {output} = await prompt();
+    const {output} = await prompt({}, { model: 'googleai/gemini-2.0-flash' });
     return output!;
   }
 );

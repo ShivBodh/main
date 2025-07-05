@@ -48,7 +48,7 @@ const bodhiMoveFlow = ai.defineFlow(
   },
   async (input) => {
     // For now, this is a placeholder. A real implementation would call the prompt.
-    // const {output} = await prompt(input);
+    // const {output} = await prompt(input, { model: 'googleai/gemini-2.0-flash' });
     // return output!;
     if (input.game === 'chess') {
         return {

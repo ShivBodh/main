@@ -1,10 +1,13 @@
 import {genkit} from 'genkit';
 import {googleAI} from '@genkit-ai/googleai';
-import {config} from 'dotenv';
 
-config(); // Load environment variables from .env file
+// The .env file is loaded automatically by Next.js and the Genkit CLI.
+// There is no need to use the `dotenv` package.
 
 export const ai = genkit({
   plugins: [googleAI({apiKey: process.env.GOOGLE_API_KEY})],
-  model: 'googleai/gemini-2.0-flash',
+  // It's best practice to specify the model in each AI call
+  // instead of setting a global default. This avoids confusion,
+  // especially when using different models for different tasks
+  // (e.g., text vs. image generation).
 });
