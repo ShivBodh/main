@@ -41,7 +41,7 @@ export function InteractiveWallpaperGenerator() {
             toast({
                 variant: 'destructive',
                 title: 'Art Generation Failed',
-                description: 'Could not generate the wallpaper. Please try a different prompt or try again later.',
+                description: 'Could not generate wallpaper. Please ensure your GOOGLE_API_KEY is configured in the .env file.',
             });
         } finally {
             setIsLoading(false);

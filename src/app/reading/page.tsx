@@ -33,8 +33,8 @@ export default function ReadingPage() {
         console.error("Failed to generate book cover:", error);
         toast({
           variant: 'destructive',
-          title: 'Generation Error',
-          description: 'Could not generate a new book cover. Displaying default.',
+          title: 'Cover Generation Failed',
+          description: 'Could not generate a new book cover. Please ensure GOOGLE_API_KEY is set. Displaying default.',
         });
         setCoverImageUrl(book.imageUrl); // Fallback to placeholder
       } finally {

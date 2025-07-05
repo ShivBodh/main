@@ -29,7 +29,7 @@ export function DharmaArtFrame({ prompt, aiHint }: { prompt: string; aiHint: str
         toast({
           variant: 'destructive',
           title: 'AI Art Generation Failed',
-          description: `Could not generate the image.`,
+          description: 'Could not generate image. Please ensure your GOOGLE_API_KEY is configured in the .env file.',
         });
       } finally {
         setIsLoading(false);
