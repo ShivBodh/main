@@ -1,9 +1,10 @@
+
 'use client';
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetClose, SheetHeader, SheetTitle } from '@/components/ui/sheet';
-import { Menu, Mail, Twitter, Facebook, Podcast, Gem, LogIn, LogOut, LayoutDashboard, ChevronDown, HandHeart, Users, Landmark, CalendarDays, Camera, BookOpen, Heart, Sparkles, Smile, MessageSquareQuote } from 'lucide-react';
+import { Menu, Mail, Twitter, Facebook, Podcast, Gem, LogIn, LogOut, LayoutDashboard, ChevronDown, HandHeart, Users, Landmark, CalendarDays, Camera, BookOpen, Heart, Sparkles, Smile, MessageSquareQuote, Bell } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
@@ -112,7 +113,7 @@ const AuthNav = () => {
     const { user, loading, logout } = useAuth();
 
     if (loading) {
-        return <Skeleton className="h-10 w-10 rounded-full" />;
+        return <Skeleton className="h-10 w-24 rounded-md" />;
     }
 
     if (user) {
@@ -239,7 +240,7 @@ export function Header() {
           </NavigationMenu>
         </div>
 
-        <div className="hidden lg:flex items-center space-x-4">
+        <div className="hidden lg:flex items-center space-x-2">
           <Link href="https://twitter.com/shivabodha_org" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
             <Twitter className="h-5 w-5 text-muted-foreground hover:text-foreground" />
           </Link>
@@ -250,7 +251,18 @@ export function Header() {
             <Podcast className="h-5 w-5 text-muted-foreground hover:text-foreground" />
           </Link>
           <LanguageSwitcher />
-          <Separator orientation="vertical" className="h-6" />
+          <Separator orientation="vertical" className="h-6 mx-2" />
+          {!loading && user && (
+            <Button asChild variant="ghost" size="icon" className="relative">
+                <Link href="/social?tab=notifications" aria-label="Notifications">
+                    <Bell className="h-5 w-5" />
+                    <span className="absolute top-2 right-2 flex h-2 w-2">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                    </span>
+                </Link>
+            </Button>
+          )}
           <AuthNav />
         </div>
 
@@ -288,6 +300,16 @@ export function Header() {
                         <Link href="/social" className="flex items-center space-x-2 text-lg font-medium transition-colors hover:text-accent">
                           <LayoutDashboard className="h-6 w-6" />
                           <span>My Hub</span>
+                        </Link>
+                      </SheetClose>
+                      <SheetClose asChild>
+                        <Link href="/social?tab=notifications" className="flex items-center gap-3 text-lg font-medium transition-colors hover:text-accent py-1 relative">
+                            <Bell className="h-5 w-5" />
+                            <span>Notifications</span>
+                            <span className="absolute top-1 left-4 flex h-2.5 w-2.5">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary"></span>
+                            </span>
                         </Link>
                       </SheetClose>
                        <SheetClose asChild>

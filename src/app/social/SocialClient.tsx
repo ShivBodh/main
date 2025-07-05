@@ -11,7 +11,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Trash2, Plus, LogOut, Mail, Brain, BookMarked, BookOpen, HandHeart, Users, NotebookText, Megaphone, PlusCircle, Image as ImageIcon, Video, Heart, MessageCircle, Share2, Lock, Globe, Bell, Sunrise, Sunset, Moon, Star, SunMoon, Atom, Pencil, Brush, Eraser, Download, Trash } from 'lucide-react';
+import { Trash2, Plus, LogOut, Mail, Brain, BookMarked, BookOpen, HandHeart, Users, NotebookText, Megaphone, PlusCircle, Image as ImageIcon, Video, Heart, MessageCircle, Share2, Lock, Globe, Bell, Sunrise, Sunset, Moon, Star, SunMoon, Atom, Pencil, Brush, Eraser, Download, Trash, ThumbsUp, ThumbsDown, UserPlus, UserX } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import Link from 'next/link';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -38,15 +38,33 @@ interface Post {
     isPublic: boolean;
     timestamp: Date;
 }
+interface Mitra {
+    name: string;
+    handle: string;
+    avatar?: string;
+}
+interface Notification {
+    id: string;
+    type: 'mitra_request' | 'campaign_support' | 'post_like';
+    actor: { name: string; avatar?: string; };
+    message: string;
+    timestamp: Date;
+    isRead: boolean;
+}
 interface Campaign {
     id: string;
     author: { name: string; handle: string; avatar?: string; };
     title: string;
     description: string;
+    image: string | null;
+    aiHint?: string;
     supporters: number;
+    greenFlags: number;
+    redFlags: number;
     isPublic: boolean;
     timestamp: Date;
     userHasSupported?: boolean;
+    userFlagged?: 'green' | 'red' | null;
 }
 interface Task { id: string; text: string; completed: boolean; }
 interface DayEntry { notes: string; tasks: Task[]; sketchData?: string; }
@@ -59,6 +77,8 @@ const getInitials = (name: string | null | undefined) => {
     if (names.length > 1) return names[0][0] + names[names.length - 1][0];
     return names[0][0];
 };
+
+// --- PLACEHOLDER DATA ---
 
 const placeholderPosts: Post[] = [
     {
@@ -82,6 +102,48 @@ const placeholderPosts: Post[] = [
         isPublic: true,
         timestamp: new Date()
     }
+];
+
+const placeholderMitras: Mitra[] = [
+    { name: 'Ravi Sharma', handle: '@rsharma', avatar: 'https://placehold.co/40x40.png?text=RS' },
+    { name: 'Priya Patel', handle: '@priya_p', avatar: 'https://placehold.co/40x40.png?text=PP' },
+];
+
+const placeholderNotifications: Notification[] = [
+    {
+        id: 'notif-1',
+        type: 'mitra_request',
+        actor: { name: 'Arjun Das', avatar: 'https://placehold.co/40x40.png?text=AD' },
+        message: 'sent you a Mitra request.',
+        timestamp: new Date(),
+        isRead: false
+    },
+    {
+        id: 'notif-2',
+        type: 'campaign_support',
+        actor: { name: 'Sita Iyer', avatar: 'https://placehold.co/40x40.png?text=SI' },
+        message: 'raised a green flag on your campaign "Preserve Local Temple Murals".',
+        timestamp: new Date(new Date().setDate(new Date().getDate() - 1)),
+        isRead: true
+    }
+];
+
+const placeholderCampaigns: Campaign[] = [
+     {
+        id: "campaign-1",
+        author: { name: 'Community Seva Group', handle: '@seva_group' },
+        title: "Clean the Ganga Riverbank",
+        description: "Let's organize a community effort next month to clean a 2km stretch of the Ganga riverbank in Rishikesh. We need volunteers and support for cleaning supplies.",
+        image: 'https://images.unsplash.com/photo-1588616149463-7a4a6a5b61de?q=80&w=600&h=300&fit=crop',
+        aiHint: 'ganga river',
+        supporters: 152,
+        greenFlags: 210,
+        redFlags: 5,
+        isPublic: true,
+        timestamp: new Date(new Date().setDate(new Date().getDate() - 2)),
+        userHasSupported: true,
+        userFlagged: 'green',
+    },
 ];
 
 const dashboardLinks = [
@@ -216,7 +278,23 @@ function FeedTab({ user }: { user: any }) {
 
 function ProfileTab() {
     const { user, logout } = useAuth();
+    const { toast } = useToast();
     if (!user) return null;
+
+    const handleSendRequest = (e: React.FormEvent) => {
+        e.preventDefault();
+        const form = e.target as HTMLFormElement;
+        const emailInput = form.elements.namedItem('email') as HTMLInputElement;
+        const email = emailInput.value;
+        if (!email) return;
+        toast({
+            title: 'Mitra Request Sent',
+            description: `Your request has been sent to ${email}.`,
+        });
+        form.reset();
+    };
+
+
     return (
         <div className="space-y-8">
             <div className="flex flex-col md:flex-row items-center gap-6">
@@ -229,6 +307,39 @@ function ProfileTab() {
             </div>
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {dashboardLinks.map(link => { const Icon = link.icon; return (<Link href={link.href} key={link.href} className="block group"><Card className="h-full flex flex-col items-start p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border-border/50"><Icon className="h-8 w-8 text-primary mb-4" /><CardTitle className="font-headline text-xl group-hover:text-accent transition-colors">{link.title}</CardTitle><CardDescription className="mt-2 text-foreground/80 flex-grow">{link.description}</CardDescription></Card></Link>); })}
+            </div>
+            <div className="grid gap-8 md:grid-cols-2">
+                <Card>
+                    <CardHeader>
+                        <CardTitle>Find Mitras</CardTitle>
+                        <CardDescription>Connect with others on the platform.</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                        <form onSubmit={handleSendRequest} className="flex gap-2">
+                            <Input name="email" type="email" placeholder="Enter user's email" required />
+                            <Button type="submit">Send Request</Button>
+                        </form>
+                    </CardContent>
+                </Card>
+                <Card>
+                    <CardHeader>
+                        <CardTitle>My Mitras ({placeholderMitras.length})</CardTitle>
+                        <CardDescription>Your list of connected friends.</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                        <ul className="space-y-3">
+                            {placeholderMitras.map(mitra => (
+                                <li key={mitra.handle} className="flex items-center gap-3">
+                                    <Avatar><AvatarImage src={mitra.avatar} /><AvatarFallback>{getInitials(mitra.name)}</AvatarFallback></Avatar>
+                                    <div>
+                                        <p className="font-semibold">{mitra.name}</p>
+                                        <p className="text-sm text-muted-foreground">{mitra.handle}</p>
+                                    </div>
+                                </li>
+                            ))}
+                        </ul>
+                    </CardContent>
+                </Card>
             </div>
         </div>
     );
@@ -518,16 +629,30 @@ function DainandiniTab() {
     return <DainandiniClientContent />;
 }
 
-function CreateCampaign({ onCreateCampaign }: { onCreateCampaign: (data: { title: string, description: string, isPublic: boolean }) => void }) {
+function CreateCampaign({ onCreateCampaign }: { onCreateCampaign: (data: { title: string, description: string, image: string | null, isPublic: boolean }) => void }) {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
+    const [image, setImage] = useState<string | null>(null);
     const [isPublic, setIsPublic] = useState(true);
+
+    const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files[0]) {
+            const file = e.target.files[0];
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setImage(reader.result as string);
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
 
     const handleSubmit = () => {
         if (!title.trim() || !description.trim()) return;
-        onCreateCampaign({ title, description, isPublic });
+        onCreateCampaign({ title, description, image, isPublic });
         setTitle('');
         setDescription('');
+        setImage(null);
     };
 
     return (
@@ -539,6 +664,11 @@ function CreateCampaign({ onCreateCampaign }: { onCreateCampaign: (data: { title
             <CardContent className="space-y-4">
                 <div className="space-y-2"><Label htmlFor="campaign-title">Campaign Title</Label><Input id="campaign-title" placeholder="e.g., Preserve Local Temple Murals" value={title} onChange={(e) => setTitle(e.target.value)} /></div>
                 <div className="space-y-2"><Label htmlFor="campaign-desc">Description</Label><Textarea id="campaign-desc" placeholder="Explain the purpose and importance of your campaign and what action you are proposing." value={description} onChange={(e) => setDescription(e.target.value)} /></div>
+                <div className="space-y-2">
+                    <Label htmlFor="campaign-image">Attach an Image (Optional)</Label>
+                    <Input id="campaign-image" type="file" accept="image/*" onChange={handleImageChange} />
+                    {image && <img src={image} alt="Campaign preview" className="rounded-lg border max-h-60 w-auto mt-2" />}
+                </div>
             </CardContent>
             <CardFooter className="flex justify-between items-center">
                  <div className="flex items-center space-x-2">
@@ -555,30 +685,58 @@ function CreateCampaign({ onCreateCampaign }: { onCreateCampaign: (data: { title
 }
 
 function CampaignsTab({ user }: { user: any }) {
-    const [campaigns, setCampaigns] = useState<Campaign[]>([]);
+    const [campaigns, setCampaigns] = useState<Campaign[]>(placeholderCampaigns);
 
-    const handleCreateCampaign = (newCampaignData: { title: string; description: string; isPublic: boolean }) => {
+    const handleCreateCampaign = (newCampaignData: { title: string; description: string; image: string | null; isPublic: boolean }) => {
         const newCampaign: Campaign = {
             id: new Date().toISOString(),
             author: { name: user?.displayName || 'Anonymous', handle: `@${user?.email?.split('@')[0] || 'user'}`, avatar: user?.photoURL || undefined },
             title: newCampaignData.title,
             description: newCampaignData.description,
-            supporters: Math.floor(Math.random() * 250),
+            image: newCampaignData.image,
+            aiHint: 'campaign image',
+            supporters: 0,
+            greenFlags: 0,
+            redFlags: 0,
             isPublic: newCampaignData.isPublic,
             timestamp: new Date(),
             userHasSupported: false,
+            userFlagged: null,
         };
         setCampaigns(prev => [newCampaign, ...prev]);
     };
 
-    const handleSupport = (campaignId: string) => {
+    const handleFlag = (campaignId: string, flag: 'green' | 'red') => {
         setCampaigns(campaigns.map(c => {
             if (c.id === campaignId) {
-                return { 
-                    ...c, 
-                    supporters: c.userHasSupported ? c.supporters - 1 : c.supporters + 1,
-                    userHasSupported: !c.userHasSupported
-                };
+                const alreadyFlaggedGreen = c.userFlagged === 'green';
+                const alreadyFlaggedRed = c.userFlagged === 'red';
+
+                let newGreenFlags = c.greenFlags;
+                let newRedFlags = c.redFlags;
+                let newUserFlagged: 'green' | 'red' | null = c.userFlagged;
+                
+                if (flag === 'green') {
+                    if (alreadyFlaggedGreen) { // un-flag green
+                        newGreenFlags--;
+                        newUserFlagged = null;
+                    } else { // flag green
+                        newGreenFlags++;
+                        if (alreadyFlaggedRed) newRedFlags--; // remove red flag if present
+                        newUserFlagged = 'green';
+                    }
+                } else { // flag === 'red'
+                    if (alreadyFlaggedRed) { // un-flag red
+                        newRedFlags--;
+                        newUserFlagged = null;
+                    } else { // flag red
+                        newRedFlags++;
+                        if (alreadyFlaggedGreen) newGreenFlags--; // remove green flag if present
+                        newUserFlagged = 'red';
+                    }
+                }
+
+                return { ...c, greenFlags: newGreenFlags, redFlags: newRedFlags, userFlagged: newUserFlagged };
             }
             return c;
         }))
@@ -608,16 +766,29 @@ function CampaignsTab({ user }: { user: any }) {
                             </CardHeader>
                             <CardContent>
                                 <p className="mb-4">{campaign.description}</p>
+                                {campaign.image && (
+                                    <img src={campaign.image} alt="Campaign image" className="rounded-lg border w-full object-cover aspect-video mb-4" data-ai-hint={campaign.aiHint || ''} />
+                                )}
                                 <div className="flex items-center gap-2 text-primary font-semibold">
                                     <Users className="h-5 w-5" />
                                     <span>{campaign.supporters.toLocaleString()} Supporters</span>
                                 </div>
                             </CardContent>
-                            <CardFooter>
-                                <Button onClick={() => handleSupport(campaign.id)} variant={campaign.userHasSupported ? 'secondary' : 'default'}>
+                            <CardFooter className="flex justify-between items-center">
+                                <Button onClick={() => {}} variant={campaign.userHasSupported ? 'secondary' : 'default'}>
                                     <Heart className="mr-2" />
                                     {campaign.userHasSupported ? 'Supported' : 'Show Support'}
                                 </Button>
+                                 <div className="flex items-center gap-4">
+                                    <Button onClick={() => handleFlag(campaign.id, 'green')} variant="outline" className={cn("gap-2", campaign.userFlagged === 'green' ? "bg-green-100 text-green-700 border-green-300 hover:bg-green-200" : "text-gray-500 hover:bg-green-50")}>
+                                        <ThumbsUp className="text-green-600"/>
+                                        <span>{campaign.greenFlags}</span>
+                                    </Button>
+                                    <Button onClick={() => handleFlag(campaign.id, 'red')} variant="outline" className={cn("gap-2", campaign.userFlagged === 'red' ? "bg-red-100 text-red-700 border-red-300 hover:bg-red-200" : "text-gray-500 hover:bg-red-50")}>
+                                        <ThumbsDown className="text-red-600" />
+                                        <span>{campaign.redFlags}</span>
+                                    </Button>
+                                </div>
                             </CardFooter>
                         </Card>
                     ))}
@@ -627,6 +798,54 @@ function CampaignsTab({ user }: { user: any }) {
     );
 }
 
+function NotificationsTab() {
+    const [notifications, setNotifications] = useState(placeholderNotifications);
+    const { toast } = useToast();
+
+    const handleRequest = (id: string, accepted: boolean) => {
+        const notification = notifications.find(n => n.id === id);
+        if (!notification) return;
+
+        toast({
+            title: `Request ${accepted ? 'Accepted' : 'Declined'}`,
+            description: `You have ${accepted ? 'accepted' : 'declined'} the mitra request from ${notification.actor.name}.`
+        });
+
+        setNotifications(notifications.filter(n => n.id !== id));
+    };
+
+    return (
+        <Card>
+            <CardHeader>
+                <CardTitle>Notifications</CardTitle>
+                <CardDescription>Your recent activity and requests.</CardDescription>
+            </CardHeader>
+            <CardContent>
+                {notifications.length > 0 ? (
+                    <ul className="space-y-4">
+                        {notifications.map(notif => (
+                            <li key={notif.id} className={cn("flex flex-col sm:flex-row items-start gap-4 p-4 rounded-lg border", !notif.isRead && "bg-primary/5")}>
+                                <Avatar><AvatarImage src={notif.actor.avatar} /><AvatarFallback>{getInitials(notif.actor.name)}</AvatarFallback></Avatar>
+                                <div className="flex-grow">
+                                    <p><span className="font-semibold">{notif.actor.name}</span> {notif.message}</p>
+                                    <p className="text-xs text-muted-foreground mt-1">{format(notif.timestamp, 'MMM d, yyyy HH:mm')}</p>
+                                </div>
+                                {notif.type === 'mitra_request' && (
+                                    <div className="flex gap-2 self-center sm:self-auto shrink-0">
+                                        <Button size="sm" onClick={() => handleRequest(notif.id, true)}><UserPlus className="mr-2" /> Raise Flag</Button>
+                                        <Button size="sm" variant="outline" onClick={() => handleRequest(notif.id, false)}><UserX className="mr-2" /> Down Flag</Button>
+                                    </div>
+                                )}
+                            </li>
+                        ))}
+                    </ul>
+                ) : (
+                    <p className="text-muted-foreground text-center py-8">No new notifications.</p>
+                )}
+            </CardContent>
+        </Card>
+    );
+}
 
 // --- MAIN ROUTER ---
 
@@ -662,11 +881,12 @@ function SocialPageRouter() {
         </div>
         <Tabs defaultValue={tab} onValueChange={(t) => router.push(`/social?tab=${t}`)} className="w-full">
             <ScrollArea className="w-full whitespace-nowrap rounded-lg">
-                <TabsList className="grid w-max grid-cols-4 mb-8">
+                <TabsList className="grid w-max grid-cols-5 mb-8">
                     <TabsTrigger value="feed">Feed</TabsTrigger>
                     <TabsTrigger value="profile">My Profile</TabsTrigger>
                     <TabsTrigger value="dainandini">Dainandini</TabsTrigger>
                     <TabsTrigger value="campaigns">Campaigns</TabsTrigger>
+                    <TabsTrigger value="notifications">Notifications</TabsTrigger>
                 </TabsList>
                  <ScrollBar orientation="horizontal" />
             </ScrollArea>
@@ -674,6 +894,7 @@ function SocialPageRouter() {
             <TabsContent value="profile"><ProfileTab /></TabsContent>
             <TabsContent value="dainandini"><DainandiniTab /></TabsContent>
             <TabsContent value="campaigns"><CampaignsTab user={user} /></TabsContent>
+            <TabsContent value="notifications"><NotificationsTab /></TabsContent>
         </Tabs>
       </div>
     );
