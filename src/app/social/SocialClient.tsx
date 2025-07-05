@@ -11,7 +11,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Trash2, Plus, LogOut, Mail, BookMarked, BookOpen, HandHeart, Users, NotebookText, Megaphone, PlusCircle, Image as ImageIcon, Video, Heart, MessageCircle, Share2, Lock, Globe, Bell, Sunrise, Sunset, Moon, Star, SunMoon, Atom, Pencil, Brush, Eraser, Download, Trash, Flag, UserPlus, UserX } from 'lucide-react';
+import { Trash2, Plus, LogOut, Mail, BookMarked, BookOpen, HandHeart, Users, NotebookText, Megaphone, PlusCircle, Image as ImageIcon, Video, Heart, MessageCircle, Share2, Lock, Globe, Bell, Sunrise, Sunset, Moon, Star, SunMoon, Atom, Pencil, Brush, Eraser, Download, Trash, Flag, UserPlus, UserX, Award } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import Link from 'next/link';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -24,6 +24,8 @@ import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import { Slider } from '@/components/ui/slider';
+import { badges, Badge as BadgeType } from '@/lib/badge-data';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
 
 // --- TYPES ---
@@ -313,9 +315,39 @@ function FeedTab({ user }: { user: any }) {
     );
 }
 
+function BadgeDisplay({ badge }: { badge: BadgeType }) {
+    const Icon = badge.icon;
+    return (
+        <TooltipProvider>
+            <Tooltip>
+                <TooltipTrigger>
+                    <div className="flex flex-col items-center gap-2 p-2 rounded-lg bg-muted/50 border border-transparent hover:border-accent transition-colors">
+                        <Icon className="h-10 w-10 text-primary" />
+                        <p className="text-xs font-semibold text-center">{badge.name}</p>
+                    </div>
+                </TooltipTrigger>
+                <TooltipContent>
+                    <p>{badge.description}</p>
+                </TooltipContent>
+            </Tooltip>
+        </TooltipProvider>
+    );
+}
+
 function ProfileTab() {
     const { user, logout } = useAuth();
     const { toast } = useToast();
+    const [quizScore, setQuizScore] = useState<number | null>(null);
+
+    useEffect(() => {
+        if (user) {
+            const scoreStr = localStorage.getItem(`quizScore_${user.uid}`);
+            if (scoreStr) {
+                setQuizScore(parseInt(scoreStr, 10));
+            }
+        }
+    }, [user]);
+
     if (!user) return null;
 
     const handleSendRequest = (e: React.FormEvent) => {
@@ -330,7 +362,16 @@ function ProfileTab() {
         });
         form.reset();
     };
-
+    
+    // Mock data for badge conditions
+    const earnedBadges = badges.filter(badge => {
+        if (badge.id === 'quiz-master') return badge.condition(quizScore || 0);
+        if (badge.id === 'campaign-starter') return badge.condition(placeholderCampaigns.length);
+        if (badge.id === 'socialist') return badge.condition(placeholderMitras.length);
+        if (badge.id === 'very-active') return badge.condition(placeholderPosts.length);
+        if (badge.id === 'humankind') return badge.condition(1); // Mock: Assume user supported 1 campaign
+        return false;
+    });
 
     return (
         <div className="space-y-8">
@@ -345,6 +386,30 @@ function ProfileTab() {
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-2">
                 {dashboardLinks.map(link => { const Icon = link.icon; return (<Link href={link.href} key={link.href} className="block group"><Card className="h-full flex flex-col items-start p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border-border/50"><Icon className="h-8 w-8 text-primary mb-4" /><CardTitle className="font-headline text-xl group-hover:text-accent transition-colors">{link.title}</CardTitle><CardDescription className="mt-2 text-foreground/80 flex-grow">{link.description}</CardDescription></Card></Link>); })}
             </div>
+
+             <Card>
+                <CardHeader>
+                    <CardTitle className="font-headline text-xl flex items-center gap-2"><Award className="h-6 w-6"/> Achievements</CardTitle>
+                    <CardDescription>Your points and badges earned across the portal.</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                    <div>
+                        <h3 className="text-lg font-semibold">Quiz Points</h3>
+                        <p className="text-4xl font-bold text-primary">{quizScore ?? 0} <span className="text-base font-normal text-muted-foreground">points</span></p>
+                    </div>
+                     <div>
+                        <h3 className="text-lg font-semibold">Badges</h3>
+                        {earnedBadges.length > 0 ? (
+                             <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4 mt-2">
+                                {earnedBadges.map(badge => <BadgeDisplay key={badge.id} badge={badge} />)}
+                            </div>
+                        ) : (
+                            <p className="text-muted-foreground mt-2">No badges earned yet. Participate in quizzes and community activities to earn them!</p>
+                        )}
+                    </div>
+                </CardContent>
+            </Card>
+
             <div className="grid gap-8 md:grid-cols-2">
                 <Card>
                     <CardHeader>
@@ -952,3 +1017,4 @@ export default function SocialClient() {
     
 
     
+

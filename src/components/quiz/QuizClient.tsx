@@ -9,8 +9,12 @@ import { Label } from '@/components/ui/label';
 import { peethamQuiz, QuizQuestion } from '@/lib/quiz-data';
 import { CheckCircle, XCircle, RotateCcw } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
+import { useAuth } from '@/context/AuthContext';
+import { useToast } from '@/hooks/use-toast';
 
 export default function QuizClient() {
+  const { user } = useAuth();
+  const { toast } = useToast();
   const [questions, setQuestions] = useState<QuizQuestion[]>(peethamQuiz);
   const [isClient, setIsClient] = useState(false);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -26,9 +30,11 @@ export default function QuizClient() {
   }, []);
 
   const handleNext = () => {
+    let currentScore = score;
     if (showResult) { // only count score if result was shown
         if (selectedAnswer === questions[currentQuestionIndex].correctAnswer) {
-            setScore(prev => prev + 1);
+            currentScore = score + 1;
+            setScore(currentScore);
         }
     }
     
@@ -39,6 +45,19 @@ export default function QuizClient() {
       setCurrentQuestionIndex(prev => prev + 1);
     } else {
       setQuizFinished(true);
+      // Save final score
+      if (user) {
+          const finalScore = currentScore;
+          const key = `quizScore_${user.uid}`;
+          const existingScore = parseInt(localStorage.getItem(key) || '0', 10);
+          if (finalScore > existingScore) {
+              localStorage.setItem(key, finalScore.toString());
+              toast({
+                title: 'New High Score!',
+                description: `Your new high score of ${finalScore} has been saved to your profile.`,
+              });
+          }
+      }
     }
   };
 
