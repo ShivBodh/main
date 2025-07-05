@@ -14,7 +14,6 @@ export function Footer() {
             <Link href="/reading" className="text-sm hover:text-accent">Reading</Link>
             <Link href="/sadhana" className="text-sm hover:text-accent">Sadhana</Link>
             <Link href="/quiz" className="text-sm hover:text-accent">Quiz</Link>
-            <Link href="/kids" className="text-sm hover:text-accent">Kids Corner</Link>
             <Link href="/seva" className="text-sm hover:text-accent">Seva Hub</Link>
             <Link href="/philosophy" className="text-sm hover:text-accent">Our Philosophy</Link>
             <Link href="/mission" className="text-sm hover:text-accent">Our Mission</Link>

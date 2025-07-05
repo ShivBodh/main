@@ -98,12 +98,6 @@ const communityLinks = [
         description: "Test your knowledge about the Peethams.",
         icon: MessageSquareQuote,
     },
-    {
-        title: "Kids Corner",
-        href: "/kids",
-        description: "A fun and creative space for young devotees.",
-        icon: Smile,
-    },
 ];
 
 const getInitials = (name: string | null | undefined) => {

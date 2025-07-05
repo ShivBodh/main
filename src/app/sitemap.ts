@@ -18,7 +18,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/sadhana/daily-wisdom',
     '/panchanga',
     '/quiz',
-    '/kids',
     '/seva',
     '/contact',
     '/privacy-policy',
