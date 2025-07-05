@@ -78,31 +78,10 @@ const getInitials = (name: string | null | undefined) => {
     return names[0][0];
 };
 
-// --- PLACEHOLDER DATA ---
-
-const placeholderPosts: Post[] = [
-    {
-        id: "placeholder-1",
-        author: { name: 'Sringeri Peetham', handle: '@sringeri_matham' },
-        content: "The annual Sharada Sharannavaratri Mahotsava begins today. Join us in celebrating the Divine Mother. Watch the live stream on our YouTube channel.",
-        image: 'https://images.unsplash.com/photo-1617478324403-56272b3a9e33?q=80&w=600&h=300&fit=crop',
-        aiHint: 'festival procession',
-        likes: 1200,
-        comments: 88,
-        isPublic: true,
-        timestamp: new Date()
-    },
-    {
-        id: "placeholder-2",
-        author: { name: 'Gita Devotee', handle: '@gita_seeker' },
-        content: "Just finished reading Chapter 2 of the Bhagavad Gita. The concept of the eternal, indestructible nature of the Atman is truly profound. 'nainam chindanti shastrani...'",
-        image: null,
-        likes: 256,
-        comments: 42,
-        isPublic: true,
-        timestamp: new Date()
-    }
-];
+// --- DEMO & PLACEHOLDER DATA ---
+// The feed and campaigns are now empty, to be populated by user actions.
+// Mitra and notification data remains to demonstrate connection features.
+const placeholderPosts: Post[] = [];
 
 const placeholderMitras: Mitra[] = [
     { name: 'Ravi Sharma', handle: '@rsharma', avatar: 'https://placehold.co/40x40.png?text=RS' },
@@ -128,22 +107,13 @@ const placeholderNotifications: Notification[] = [
     }
 ];
 
-const placeholderCampaigns: Campaign[] = [
-     {
-        id: "campaign-1",
-        author: { name: 'Community Seva Group', handle: '@seva_group' },
-        title: "Clean the Ganga Riverbank",
-        description: "Let's organize a community effort next month to clean a 2km stretch of the Ganga riverbank in Rishikesh. We need volunteers and support for cleaning supplies.",
-        image: 'https://images.unsplash.com/photo-1588616149463-7a4a6a5b61de?q=80&w=600&h=300&fit=crop',
-        aiHint: 'ganga river',
-        supporters: 152,
-        greenFlags: 210,
-        redFlags: 5,
-        isPublic: true,
-        timestamp: new Date(new Date().setDate(new Date().getDate() - 2)),
-        userHasSupported: true,
-        userFlagged: 'green',
-    },
+const placeholderCampaigns: Campaign[] = [];
+
+// New data for suggestions to simulate AI matching
+const suggestedMitras: Mitra[] = [
+    { name: 'Sita Iyer', handle: '@sita_iyer', avatar: 'https://placehold.co/40x40.png?text=SI' },
+    { name: 'Krishna Rao', handle: '@k_rao', avatar: 'https://placehold.co/40x40.png?text=KR' },
+    { name: 'Gauri Desai', handle: '@gauridesai', avatar: 'https://placehold.co/40x40.png?text=GD' },
 ];
 
 const dashboardLinks = [
@@ -154,6 +124,42 @@ const dashboardLinks = [
 ];
 
 // --- SUB-COMPONENTS ---
+
+function PostCard({ post }: { post: Post }) {
+    return (
+        <Card>
+            <CardHeader>
+                <div className="flex justify-between items-start">
+                    <div className="flex gap-3">
+                        <Avatar>
+                            <AvatarImage src={post.author.avatar} />
+                            <AvatarFallback>{getInitials(post.author.name)}</AvatarFallback>
+                        </Avatar>
+                        <div>
+                            <p className="font-bold">{post.author.name}</p>
+                            <p className="text-sm text-muted-foreground">{post.author.handle} &middot; {format(post.timestamp, 'MMM d')}</p>
+                        </div>
+                    </div>
+                        <Badge variant={post.isPublic ? "outline" : "secondary"} className="flex items-center gap-1.5">
+                        {post.isPublic ? <Globe className="h-3 w-3" /> : <Lock className="h-3 w-3" />}
+                        {post.isPublic ? 'Public' : 'Personal'}
+                    </Badge>
+                </div>
+            </CardHeader>
+            <CardContent>
+                <p className="mb-4 whitespace-pre-wrap">{post.content}</p>
+                {post.image && (
+                    <img src={post.image} alt="Post image" className="rounded-lg border w-full object-cover aspect-video" data-ai-hint={post.aiHint || ''} />
+                )}
+            </CardContent>
+            <CardFooter className="flex justify-between text-muted-foreground">
+                <Button variant="ghost" size="sm" className="flex items-center gap-2"><Heart className="h-4 w-4" /> {post.likes}</Button>
+                <Button variant="ghost" size="sm" className="flex items-center gap-2"><MessageCircle className="h-4 w-4" /> {post.comments}</Button>
+                <Button variant="ghost" size="sm" className="flex items-center gap-2"><Share2 className="h-4 w-4" /> Share</Button>
+            </CardFooter>
+        </Card>
+    );
+}
 
 function CreatePost({ onCreatePost, user }: { onCreatePost: (data: { content: string, image: string | null, isPublic: boolean }) => void, user: any }) {
     const [content, setContent] = useState('');
@@ -215,6 +221,60 @@ function CreatePost({ onCreatePost, user }: { onCreatePost: (data: { content: st
     );
 }
 
+function EmptyFeedState() {
+    return (
+        <Card className="text-center py-16 px-6">
+            <CardHeader>
+                <Users className="mx-auto h-12 w-12 text-muted-foreground" />
+                <CardTitle className="mt-4 text-2xl font-headline">Your Feed is Quiet</CardTitle>
+            </CardHeader>
+            <CardContent>
+                <p className="text-muted-foreground">
+                    This is your community feed. Start by creating a post, or connect with suggested Mitras to see their updates here.
+                </p>
+            </CardContent>
+        </Card>
+    )
+}
+
+function MitraSuggestions() {
+    const { toast } = useToast();
+    const handleAddMitra = (name: string) => {
+        toast({
+            title: "Mitra Request Sent",
+            description: `Your request has been sent to ${name}.`
+        })
+    }
+    return (
+        <Card>
+            <CardHeader>
+                <CardTitle>Mitra Suggestions</CardTitle>
+                <CardDescription>Connect with others on the platform.</CardDescription>
+            </CardHeader>
+            <CardContent>
+                <ul className="space-y-4">
+                    {suggestedMitras.map(mitra => (
+                        <li key={mitra.handle} className="flex items-center gap-3">
+                            <Avatar>
+                                <AvatarImage src={mitra.avatar} />
+                                <AvatarFallback>{getInitials(mitra.name)}</AvatarFallback>
+                            </Avatar>
+                            <div className="flex-1">
+                                <p className="font-semibold">{mitra.name}</p>
+                                <p className="text-sm text-muted-foreground">{mitra.handle}</p>
+                            </div>
+                            <Button size="sm" variant="outline" onClick={() => handleAddMitra(mitra.name)}>
+                                <UserPlus className="mr-2 h-4 w-4" />
+                                Add
+                            </Button>
+                        </li>
+                    ))}
+                </ul>
+            </CardContent>
+        </Card>
+    )
+}
+
 function FeedTab({ user }: { user: any }) {
     const [posts, setPosts] = useState<Post[]>(placeholderPosts);
 
@@ -237,41 +297,18 @@ function FeedTab({ user }: { user: any }) {
     };
 
     return (
-        <div className="space-y-6">
-            <CreatePost onCreatePost={handleCreatePost} user={user} />
-            {posts.map(post => (
-                <Card key={post.id}>
-                    <CardHeader>
-                        <div className="flex justify-between items-start">
-                            <div className="flex gap-3">
-                                <Avatar>
-                                    <AvatarImage src={post.author.avatar} />
-                                    <AvatarFallback>{getInitials(post.author.name)}</AvatarFallback>
-                                </Avatar>
-                                <div>
-                                    <p className="font-bold">{post.author.name}</p>
-                                    <p className="text-sm text-muted-foreground">{post.author.handle} &middot; {format(post.timestamp, 'MMM d')}</p>
-                                </div>
-                            </div>
-                             <Badge variant={post.isPublic ? "outline" : "secondary"} className="flex items-center gap-1.5">
-                                {post.isPublic ? <Globe className="h-3 w-3" /> : <Lock className="h-3 w-3" />}
-                                {post.isPublic ? 'Public' : 'Personal'}
-                            </Badge>
-                        </div>
-                    </CardHeader>
-                    <CardContent>
-                        <p className="mb-4 whitespace-pre-wrap">{post.content}</p>
-                        {post.image && (
-                            <img src={post.image} alt="Post image" className="rounded-lg border w-full object-cover aspect-video" data-ai-hint={post.aiHint || ''} />
-                        )}
-                    </CardContent>
-                    <CardFooter className="flex justify-between text-muted-foreground">
-                        <Button variant="ghost" size="sm" className="flex items-center gap-2"><Heart className="h-4 w-4" /> {post.likes}</Button>
-                        <Button variant="ghost" size="sm" className="flex items-center gap-2"><MessageCircle className="h-4 w-4" /> {post.comments}</Button>
-                        <Button variant="ghost" size="sm" className="flex items-center gap-2"><Share2 className="h-4 w-4" /> Share</Button>
-                    </CardFooter>
-                </Card>
-            ))}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+            <main className="lg:col-span-2 space-y-6">
+                <CreatePost onCreatePost={handleCreatePost} user={user} />
+                {posts.length > 0 ? (
+                    posts.map(post => <PostCard key={post.id} post={post} />)
+                ) : (
+                    <EmptyFeedState />
+                )}
+            </main>
+            <aside className="lg:col-span-1 space-y-6 lg:sticky lg:top-24">
+                <MitraSuggestions />
+            </aside>
         </div>
     );
 }
@@ -746,7 +783,7 @@ function CampaignsTab({ user }: { user: any }) {
         <div className="space-y-8">
             <CreateCampaign onCreateCampaign={handleCreateCampaign} />
             {campaigns.length === 0 ? (
-                <Card className="text-center py-16">
+                <Card className="text-center py-16 px-6">
                     <CardHeader><Megaphone className="mx-auto h-12 w-12 text-muted-foreground" /><CardTitle className="mt-4 text-2xl font-headline">No Active Campaigns Yet</CardTitle></CardHeader>
                     <CardContent><p className="text-muted-foreground mb-6">Be the first to start a movement for a cause you believe in.</p></CardContent>
                 </Card>
@@ -808,7 +845,7 @@ function NotificationsTab() {
 
         toast({
             title: `Request ${accepted ? 'Accepted' : 'Declined'}`,
-            description: `You have ${accepted ? 'accepted' : 'declined'} the mitra request from ${notification.actor.name}.`
+            description: `You have ${accepted ? 'accepted' : 'declined'} the mitra request from ${notification.actor.name}.${accepted ? ' They are now in your Mitra list.' : ''}`
         });
 
         setNotifications(notifications.filter(n => n.id !== id));
@@ -832,8 +869,8 @@ function NotificationsTab() {
                                 </div>
                                 {notif.type === 'mitra_request' && (
                                     <div className="flex gap-2 self-center sm:self-auto shrink-0">
-                                        <Button size="sm" onClick={() => handleRequest(notif.id, true)}><UserPlus className="mr-2" /> Raise Flag</Button>
-                                        <Button size="sm" variant="outline" onClick={() => handleRequest(notif.id, false)}><UserX className="mr-2" /> Down Flag</Button>
+                                        <Button size="sm" onClick={() => handleRequest(notif.id, true)}><UserPlus className="mr-2" /> Accept</Button>
+                                        <Button size="sm" variant="outline" onClick={() => handleRequest(notif.id, false)}><UserX className="mr-2" /> Decline</Button>
                                     </div>
                                 )}
                             </li>
@@ -907,5 +944,7 @@ export default function SocialClient() {
         </Suspense>
     )
 }
+
+    
 
     
