@@ -11,7 +11,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Trash2, Plus, LogOut, Mail, BookMarked, BookOpen, HandHeart, Users, NotebookText, Megaphone, PlusCircle, Image as ImageIcon, Video, Heart, MessageCircle, Share2, Lock, Globe, Bell, Sunrise, Sunset, Moon, Star, SunMoon, Atom, Pencil, Brush, Eraser, Download, Trash, Flag, UserPlus, UserX, Award, Gamepad2, Puzzle, Dice5 } from 'lucide-react';
+import { Trash2, Plus, LogOut, Mail, BookMarked, BookOpen, HandHeart, Users, NotebookText, Megaphone, PlusCircle, Image as ImageIcon, Video, Heart, MessageCircle, Share2, Lock, Globe, Bell, Sunrise, Sunset, Moon, Star, SunMoon, Atom, Pencil, Brush, Eraser, Download, Trash, Flag, UserPlus, UserX, Award, Gamepad2, Puzzle, Dice5, Gem, ShieldCheck } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import Link from 'next/link';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -124,6 +124,40 @@ const dashboardLinks = [
     { title: "Reading Room", description: "Read foundational texts from great masters.", href: "/reading", icon: BookOpen },
     { title: "Seva Hub", description: "Find meaningful volunteer opportunities.", href: "/seva", icon: HandHeart },
 ];
+
+const socialFeatures = [
+    {
+        icon: Users,
+        title: "Connect with Community",
+        description: "Share your spiritual journey on the feed, find and connect with Mitras (friends), and join discussions on dharmic topics."
+    },
+    {
+        icon: NotebookText,
+        title: "Your Private Dainandini",
+        description: "A secure, personal diary for your daily notes, tasks, and reflections. Your data is saved only on your device, ensuring complete privacy."
+    },
+    {
+        icon: Megaphone,
+        title: "Support Dharmic Causes",
+        description: "Create or support campaigns that matter to the Sanatana Dharma community. Raise awareness and rally support for positive action."
+    },
+    {
+        icon: Gamepad2,
+        title: "Engage & Learn",
+        description: "Challenge the wise Bodhi AI to a game of Ludo, test your knowledge with our Peetham quiz, and deepen your understanding."
+    },
+    {
+        icon: Award,
+        title: "Personalized Experience",
+        description: "Track your progress across the portal. Earn points from quizzes and unlock special badges for your community contributions."
+    },
+    {
+        icon: ShieldCheck,
+        title: "A Secure, Private Platform",
+        description: "Sanatan Social is built as a safe harbor for devotees. We prioritize your privacy and foster a respectful, positive environment."
+    }
+];
+
 
 // --- SUB-COMPONENTS ---
 
@@ -971,6 +1005,46 @@ function NotificationsTab() {
     );
 }
 
+// --- NEW COMPONENT FOR UNAUTHENTICATED USERS ---
+
+function SocialLandingPage() {
+    return (
+        <div className="container mx-auto max-w-5xl py-16 md:py-24 px-4 text-center">
+            <Gem className="mx-auto h-12 w-12 text-primary animate-in fade-in-0 slide-in-from-bottom-5 duration-500" />
+            <h1 className="mt-4 text-4xl md:text-5xl font-headline font-bold text-primary tracking-tight animate-in fade-in-0 slide-in-from-bottom-5 duration-500 delay-100">
+                A Sacred Space for Sanatanis
+            </h1>
+            <p className="mt-4 text-lg md:text-xl text-foreground/80 max-w-3xl mx-auto animate-in fade-in-0 slide-in-from-bottom-5 duration-500 delay-200">
+                Sanatan Social is a private, secure platform for devotees and seekers to connect, share knowledge, and support dharmic causes.
+            </p>
+
+            <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
+                {socialFeatures.map((feature, index) => {
+                    const Icon = feature.icon;
+                    return (
+                         <Card key={feature.title} className="animate-in fade-in-0 slide-in-from-bottom-10 duration-500" style={{animationDelay: `${200 + index * 100}ms`}}>
+                            <CardHeader className="flex flex-row items-center gap-4">
+                                <Icon className="h-8 w-8 text-accent flex-shrink-0" />
+                                <CardTitle className="font-headline text-xl mt-0">{feature.title}</CardTitle>
+                            </CardHeader>
+                            <CardContent>
+                                <p className="text-foreground/80">{feature.description}</p>
+                            </CardContent>
+                        </Card>
+                    )
+                })}
+            </div>
+
+            <div className="mt-16 animate-in fade-in-0 slide-in-from-bottom-10 duration-700 delay-[800ms]">
+                <Button asChild size="lg">
+                    <Link href="/login">Join the Community to Enter</Link>
+                </Button>
+            </div>
+        </div>
+    );
+}
+
+
 // --- MAIN ROUTER ---
 
 function SocialPageRouter() {
@@ -979,11 +1053,7 @@ function SocialPageRouter() {
     const searchParams = useSearchParams();
     const tab = searchParams.get('tab') || 'feed';
 
-    useEffect(() => {
-        if (!loading && !user) router.push('/login');
-    }, [user, loading, router]);
-
-    if (loading || !user) {
+    if (loading) {
         return (
             <div className="container mx-auto max-w-5xl py-16 md:py-24 px-4">
                 <div className="space-y-4">
@@ -992,6 +1062,10 @@ function SocialPageRouter() {
                 </div>
             </div>
         );
+    }
+
+    if (!user) {
+        return <SocialLandingPage />;
     }
     
     return (
