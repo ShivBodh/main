@@ -3,10 +3,8 @@
  * @fileoverview A more robust Scraper Tool for the Sanatana Peethams Portal.
  *
  * This script uses Puppeteer to scrape a target page and leverages a Genkit AI
- * flow to process the scraped text into titles and keywords.
- *
- * This tool is designed to be configurable and serves as a strong foundation
- * for building a data pipeline.
+ * flow to process the scraped text into titles and keywords. It now saves
+ * the output to a structured JSON file, creating a local database.
  *
  * =============================================================================
  *  IMPORTANT: How to Use This AI-Powered Scraper
@@ -28,9 +26,9 @@
  *     `node scripts/run-scraper.js`
  *
  * 4.  **Check the Output:**
- *     Images will be saved locally. AI-processed metadata for each image will
- *     be logged to the console. This metadata can then be uploaded to your
- *     cloud database (e.g., Firestore).
+ *     Images will be saved locally to the `SAVE_DIR`. The AI-processed metadata
+ *     for all images will be saved as a database in the `OUTPUT_FILE`. This
+ *     JSON file can then be uploaded to your cloud database (e.g., Firestore).
  *
  * For a full architectural overview, please see `docs/scraper-tool-guide.md`.
  */
@@ -49,6 +47,8 @@ const CONFIG = {
   TARGET_URL: 'https://www.facebook.com/sringerimath/photos_by',
   // Directory to save the scraped images. This will be created if it doesn't exist.
   SAVE_DIR: path.join(__dirname, '../public/scraped_media'),
+  // The output JSON file that will act as our local database.
+  OUTPUT_FILE: path.join(__dirname, 'scraped-data.json'),
   // The maximum number of images to scrape in a single run.
   MAX_IMAGES_TO_SCRAPE: 5, // Reduced for faster testing with AI
   // How many times to scroll down the page to load more content.
@@ -134,6 +134,7 @@ async function runScraper() {
 
   const page = await browser.newPage();
   await page.setViewport({ width: 1280, height: 900 });
+  const allMediaDocs = []; // Array to hold all our scraped data.
 
   try {
     if (!fs.existsSync(CONFIG.SAVE_DIR)) {
@@ -210,14 +211,17 @@ async function runScraper() {
             };
             
             console.log(`[SUCCESS] Saved image to ${savePath}.`);
-            console.log('[METADATA]', JSON.stringify(mediaDoc, null, 2));
+            allMediaDocs.push(mediaDoc);
 
         } catch (downloadError) {
             console.error(`[ERROR] Failed to download/process image from ${item.sourceUrl}:`, downloadError.message);
         }
     }
+
+    // Write the collected data to the output file.
+    fs.writeFileSync(CONFIG.OUTPUT_FILE, JSON.stringify(allMediaDocs, null, 2));
     
-    console.log(`\n[COMPLETE] Scraping finished.`);
+    console.log(`\n[COMPLETE] Scraping finished. ${allMediaDocs.length} records saved to ${CONFIG.OUTPUT_FILE}`);
 
   } catch (error) {
     console.error('[FATAL] An error occurred:', error);
