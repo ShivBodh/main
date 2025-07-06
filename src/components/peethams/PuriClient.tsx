@@ -1,3 +1,4 @@
+
 'use client';
 
 import Image from 'next/image';
@@ -5,17 +6,18 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { ExternalLink, BookOpen, Calendar, Camera, MapPin, Mail, Briefcase, Globe, Flag, ArrowRight, Video, Landmark } from 'lucide-react';
-import { allSevaOpportunities } from '@/lib/seva-data';
-import { Badge } from '@/components/ui/badge';
-import { Separator } from '@/components/ui/separator';
+import { ExternalLink, BookOpen, Landmark, Calendar, Camera, Video, ArrowRight, MapPin, Globe } from 'lucide-react';
+import { peethams } from '@/lib/peethams-data';
+import { LineageTimeline } from '@/components/peethams/LineageTimeline';
+import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import { useMemo } from 'react';
 import { allCalendarItems, CalendarEventItem, CalendarPhotoItem, CalendarVideoItem } from '@/lib/calendar-data';
 import { format } from 'date-fns';
 import { PhotoCard } from '@/components/media/PhotoCard';
 import { VideoCard } from '@/components/media/VideoCard';
-import { peethams } from '@/lib/peethams-data';
-import { LineageTimeline } from './LineageTimeline';
+import { allSevaOpportunities } from '@/lib/seva-data';
+import { Badge } from '@/components/ui/badge';
+import { Separator } from '@/components/ui/separator';
 
 const puriSeva = allSevaOpportunities.filter(o => o.peetham === 'Puri');
 const peethamInfo = peethams.find(p => p.name.includes('Puri'))!;
@@ -35,7 +37,7 @@ export default function PuriClient() {
             <Image
               src={peethamInfo.acharyaImage}
               data-ai-hint={peethamInfo.acharyaAiHint}
-              alt="Jagadguru Shankaracharya of Govardhana Peetham"
+              alt={`Jagadguru Shankaracharya of ${peethamInfo.name}`}
               width={800}
               height={600}
               className="rounded-lg shadow-lg object-cover aspect-[4/3]"
@@ -43,7 +45,7 @@ export default function PuriClient() {
           </div>
           <div className="md:w-2/3">
             <h1 className="text-4xl md:text-5xl font-headline font-bold text-primary tracking-tight mb-4">
-              Govardhana Peetham, Puri
+              {peethamInfo.name}
             </h1>
             <p className="text-lg text-foreground/80 mb-2">
               The Eastern Āmnāya Pīṭham, the custodian of the Rig Veda.
@@ -62,15 +64,18 @@ export default function PuriClient() {
         </section>
 
         <Tabs defaultValue="about" className="w-full">
-          <TabsList className="grid w-full grid-cols-3 sm:grid-cols-4 md:grid-cols-7 mb-8">
-            <TabsTrigger value="about">About</TabsTrigger>
-            <TabsTrigger value="teachings">Teachings</TabsTrigger>
-            <TabsTrigger value="lineage">Lineage</TabsTrigger>
-            <TabsTrigger value="events">Events</TabsTrigger>
-            <TabsTrigger value="gallery">Photos</TabsTrigger>
-            <TabsTrigger value="videos">Videos</TabsTrigger>
-            <TabsTrigger value="seva">Seva</TabsTrigger>
-          </TabsList>
+          <ScrollArea className="w-full whitespace-nowrap rounded-lg">
+              <TabsList className="mb-8 inline-flex w-max">
+                <TabsTrigger value="about">About</TabsTrigger>
+                <TabsTrigger value="teachings">Teachings</TabsTrigger>
+                <TabsTrigger value="lineage">Lineage</TabsTrigger>
+                <TabsTrigger value="events">Events</TabsTrigger>
+                <TabsTrigger value="gallery">Photos</TabsTrigger>
+                <TabsTrigger value="videos">Videos</TabsTrigger>
+                <TabsTrigger value="seva">Seva</TabsTrigger>
+              </TabsList>
+            <ScrollBar orientation="horizontal" />
+          </ScrollArea>
           
           <TabsContent value="about" className="prose prose-lg lg:prose-xl max-w-none text-foreground/90 leading-relaxed">
             <h2 className="font-headline text-primary">History and Significance</h2>
@@ -94,6 +99,7 @@ export default function PuriClient() {
              <Card>
                 <CardHeader>
                     <CardTitle className="font-headline text-primary flex items-center gap-2"><BookOpen className="h-6 w-6" /> Core Philosophy</CardTitle>
+                    <CardDescription>The foundational teachings of the Peetham, rooted in the Mahāvākya "Prajñānam Brahma" (Consciousness is Brahman).</CardDescription>
                 </CardHeader>
                 <CardContent className="prose max-w-none text-foreground/90">
                     <p>
@@ -116,7 +122,7 @@ export default function PuriClient() {
              <h3 className="font-headline text-2xl text-primary mb-6 flex items-center gap-2"><Landmark className="h-6 w-6" /> Guru Parampara</h3>
              {peethamInfo.lineage && <LineageTimeline lineage={peethamInfo.lineage} />}
           </TabsContent>
-
+          
           <TabsContent value="events">
             <Card>
                 <CardHeader>
@@ -165,7 +171,7 @@ export default function PuriClient() {
                     ))}
                 </div>
             ) : (
-                <p className="text-center text-muted-foreground py-8">No photos available.</p>
+                <p className="text-center text-muted-foreground py-8">No photos available for this Peetham.</p>
             )}
              <div className="text-center mt-8">
                 <Button asChild>
@@ -183,8 +189,13 @@ export default function PuriClient() {
                     ))}
                 </div>
             ) : (
-                <p className="text-center text-muted-foreground py-8">No videos available.</p>
+                <p className="text-center text-muted-foreground py-8">No videos available for this Peetham.</p>
             )}
+             <div className="text-center mt-8">
+                <Button asChild>
+                    <Link href="/events">View Full Bodha Calendar</Link>
+                </Button>
+             </div>
           </TabsContent>
 
            <TabsContent value="seva">
@@ -214,26 +225,6 @@ export default function PuriClient() {
             ) : (
                 <p className="text-muted-foreground">There are currently no specific Seva opportunities listed for Puri. Please check the main <Link href="/seva" className="text-accent underline">Seva Hub</Link> for remote opportunities or contact the Peetham directly.</p>
             )}
-
-            <Separator className="my-12" />
-
-            <h3 className="font-headline text-2xl text-primary mb-6">Main Ashram & Center</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="md:col-span-1">
-                    <Card>
-                        <CardHeader>
-                            <CardTitle className="font-headline text-lg">Govardhan Math</CardTitle>
-                        </CardHeader>
-                        <CardContent className="space-y-2 text-sm">
-                            <p className="flex items-start gap-2"><MapPin className="h-4 w-4 mt-1 shrink-0"/><span>Govardhan Math, Puri, Odisha - 752001, India.</span></p>
-                            <p className="flex items-center gap-2"><Mail className="h-4 w-4 shrink-0"/><a href="mailto:info.puri@example.com" className="text-accent hover:underline">info.puri@example.com</a></p>
-                        </CardContent>
-                    </Card>
-                </div>
-                <div className="md:col-span-2">
-                     <Image src="https://images.unsplash.com/photo-1594398972283-a74797a92237?q=80&w=1200&h=600&fit=crop" alt="Map of Puri Peetham" width={1200} height={600} className="rounded-lg object-cover w-full h-full aspect-video" data-ai-hint="map location" />
-                </div>
-            </div>
           </TabsContent>
         </Tabs>
       </div>
