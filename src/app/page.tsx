@@ -6,7 +6,6 @@ import { ArrowRight, Users, Landmark } from 'lucide-react';
 import { peethams } from '@/lib/peethams-data';
 import type { Metadata } from 'next';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { LineageTimeline } from '@/components/peethams/LineageTimeline';
 import { HeroSection } from '@/components/home/HeroSection';
 import { Button } from '@/components/ui/button';
 
@@ -57,50 +56,19 @@ export default function HomePage() {
       </section>
 
        <section className="w-full py-16 md:py-24 bg-card">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-headline font-bold text-primary flex items-center justify-center gap-3">
-              <Landmark className="h-8 w-8" />
+        <div className="container mx-auto px-4 text-center">
+          <Landmark className="h-12 w-12 text-primary mx-auto" />
+          <h2 className="text-3xl md:text-4xl font-headline font-bold text-primary mt-4 mb-6">
               The Great Guru Parampara
-            </h2>
-            <p className="mt-2 text-lg text-foreground/80 max-w-2xl mx-auto">
-             From one great root, four branches of wisdom grew. Explore the sacred, unbroken lineage of spiritual masters who have guided each Peetham for centuries.
+          </h2>
+           <p className="mt-2 text-lg text-foreground/80 max-w-2xl mx-auto">
+             From Jagadguru Adi Shankaracharya to the present day, the four Peethams have been guided by an unbroken lineage of spiritual masters. Explore the history and meet the current pontiffs safeguarding this sacred tradition.
             </p>
-          </div>
-
-          <div className="relative w-full max-w-4xl mx-auto mt-16">
-            {/* Trunk Line */}
-            <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-primary/20" />
-
-            {/* Root Node: Adi Shankaracharya */}
-            <div className="pl-20 relative mb-12">
-                <div className="absolute left-6 top-1/2 -translate-y-1/2 -translate-x-1/2 h-5 w-5 rounded-full bg-primary ring-8 ring-card z-10" />
-                <h3 className="text-3xl font-headline font-bold text-primary">Jagadguru Adi Shankaracharya</h3>
-                <p className="text-foreground/80">The Fountainhead of the Lineage</p>
+          <div className="mt-8">
+                <Button asChild size="lg">
+                    <Link href="/peethams">Explore the Lineage</Link>
+                </Button>
             </div>
-
-            {/* Accordion for Peethams (Branches) */}
-            <Accordion type="single" collapsible defaultValue="sringeri" className="w-full">
-              {peethams.map((peetham) => {
-                const shortName = peetham.link.split('/').pop()!;
-                return (
-                  <AccordionItem key={shortName} value={shortName} className="border-b-0 pl-20 relative">
-                    {/* Branch Node */}
-                    <div className="absolute left-6 top-8 -translate-y-1/2 -translate-x-1/2 h-5 w-5 rounded-full bg-primary/50 ring-8 ring-card z-10" />
-                    {/* Branch Line */}
-                    <div className="absolute left-6 top-8 w-14 h-0.5 bg-primary/20" />
-                    
-                    <AccordionTrigger className="text-2xl font-headline hover:text-primary py-6 text-primary/80 data-[state=open]:text-primary text-left">
-                      {peetham.name}
-                    </AccordionTrigger>
-                    <AccordionContent className="pt-4 pb-8">
-                      <LineageTimeline lineage={peetham.lineage} />
-                    </AccordionContent>
-                  </AccordionItem>
-                )
-              })}
-            </Accordion>
-          </div>
         </div>
       </section>
 

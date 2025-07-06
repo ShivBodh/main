@@ -1,3 +1,4 @@
+
 'use client';
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -14,6 +15,8 @@ interface LineageTimelineProps {
   lineage: Acharya[];
 }
 
+// This component is being phased out in favor of the new AcharyaCard.
+// It is kept for now to avoid breaking the peetham detail pages but can be removed later.
 export function LineageTimeline({ lineage }: LineageTimelineProps) {
   if (!lineage || lineage.length === 0) {
     return (

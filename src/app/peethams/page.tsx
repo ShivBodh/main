@@ -1,3 +1,4 @@
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -5,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight, icons } from 'lucide-react';
 import { peethams } from '@/lib/peethams-data';
 import type { Metadata } from 'next';
+import { CurrentAcharyas } from '@/components/peethams/CurrentAcharyas';
 
 export const metadata: Metadata = {
   title: 'The Four Peethams | Sanatana Peethams Portal',
@@ -69,6 +71,17 @@ export default function PeethamsPage() {
             </Card>
           ))}
         </div>
+
+        <section className="py-16 md:py-24">
+            <div className="text-center mb-12">
+                <h2 className="text-3xl md:text-4xl font-headline font-bold text-primary">The Living Lineage: Current Shankaracharyas</h2>
+                <p className="mt-3 text-lg text-foreground/80 max-w-3xl mx-auto">
+                    Meet the present-day pontiffs who uphold the sacred tradition and guide millions of devotees worldwide.
+                </p>
+            </div>
+            <CurrentAcharyas />
+        </section>
+
       </div>
     </div>
   );

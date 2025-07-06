@@ -17,7 +17,16 @@ export const peethams = [
         { name: 'Sri Chandrashekhara Bharati III', period: '1912-1954', description: 'A great sage and scholar of immense spiritual attainment, revered as a Jivanmukta.' },
         { name: 'Sri Abhinava Vidyatirtha', period: '1954-1989', description: 'The 35th Jagadguru, he traveled extensively and established many branches of the Matha across India.' },
         { name: 'Sri Bharathi Tirtha', period: '1989-Present', description: 'The 36th Jagadguru, a profound scholar in Tarka, Mimamsa, and Vedanta, who continues to guide millions.' },
-    ]
+    ],
+    acharyaDetails: {
+      name: "Jagadguru Śrī Śrī Vidyushēkhara Bhāratī Svāmī",
+      peetham: "Śṛṅgeri Śāradā Pīṭham",
+      appointment: "Succeeded Jagadguru Śrī Bhāratī Tīrtha Svāmī in November 2015.",
+      focus: "Spiritual leadership, preserving Sanatana Dharma, promoting Vedic studies and Sanskrit, overseeing the Śṛṅgeri Maṭha's vast network of temples and educational institutions. Known for his erudition and accessibility.",
+      heroImage: "https://placehold.co/400x175.png",
+      heroImageHint: "Sringeri temple",
+      galleryImages: Array(9).fill({ url: "https://placehold.co/100x100.png", hint: "temple architecture" }),
+    }
   },
   {
     name: 'Dwaraka Sharada Peetham',
@@ -34,7 +43,16 @@ export const peethams = [
         { name: 'Sri Madhavatirtha', period: 'Early 20th Century', description: 'An influential Acharya who contributed significantly to the administration and activities of the Peetham.' },
         { name: 'Sri Abhinava Satchidananda Tirtha', period: '1945–1982', description: 'The 77th Shankaracharya, he was a powerful orator and worked tirelessly to promote Sanatana Dharma.' },
         { name: 'Sri Swaroopanand Saraswati', period: '1982-2022', description: 'The 79th Shankaracharya, who was also the head of the Jyotirmath Peetham, a prominent voice for Hindu unity.' },
-    ]
+    ],
+    acharyaDetails: {
+      name: "Jagadguru Śrī Śrī Sadānanda Sarasvatī Svāmī",
+      peetham: "Kālikā Maṭha, Dwārkā",
+      appointment: "Succeeded the revered Jagadguru Śrī Swarūpānanda Sarasvatī Svāmī in February 2024.",
+      focus: "Currently focused on establishing his leadership, continuing the Maṭha's traditions, spiritual guidance, and managing the vast responsibilities of the Paścimāmnāya Pīṭha. Known for his humility and devotion.",
+      heroImage: "https://placehold.co/400x175.png",
+      heroImageHint: "Dwaraka ocean",
+      galleryImages: Array(9).fill({ url: "https://placehold.co/100x100.png", hint: "ocean temple" }),
+    }
   },
   {
     name: 'Govardhana Peetham, Puri',
@@ -51,7 +69,16 @@ export const peethams = [
         { name: 'Swami Bharati Krishna Tirtha', period: '1925–1960', description: 'The 143rd Shankaracharya, he was a polymath renowned for his work on "Vedic Mathematics".' },
         { name: 'Swami Niranjana Deva Tirtha', period: '1964-1992', description: 'The 144th Shankaracharya, known for his strong advocacy for Hindu rights and traditions.' },
         { name: 'Swami Nischalananda Saraswati', period: '1992-Present', description: 'The 145th Shankaracharya, a renowned scholar of scripture and mathematics, and a powerful voice on national issues.' },
-    ]
+    ],
+     acharyaDetails: {
+      name: "Jagadguru Śrī Śrī Nischalānanda Sarasvatī Svāmī",
+      peetham: "Govardhana Maṭha, Pūri",
+      appointment: "Ascended the Pīṭha in 1992.",
+      focus: "Strong emphasis on traditional Vedic rituals (Yajñas), scholarly discourse on Advaita Vedanta, social issues, environmental consciousness ('Save Ganga' movement), and vocal commentary on contemporary challenges to Hinduism.",
+      heroImage: "https://placehold.co/400x175.png",
+      heroImageHint: "Puri beach",
+      galleryImages: Array(9).fill({ url: "https://placehold.co/100x100.png", hint: "Jagannath temple" }),
+    }
   },
   {
     name: 'Jyotirmath Peetham, Badrinath',
@@ -68,6 +95,15 @@ export const peethams = [
         { name: 'Swami Vishnudevanand Saraswati', period: '1980-1990', description: 'A revered Acharya who continued the traditions of the northern Matha.' },
         { name: 'Swami Brahmananda Saraswati', period: '1941–1953', description: 'A revered master who revived the Jyotirmath Peetham after a long period of dormancy, restoring its significance as the northern seat.' },
         { name: 'Sri Swaroopanand Saraswati', period: '1973-2022', description: 'He also held the title of Shankaracharya of Dwaraka Peetham, working for Hindu welfare.' },
-    ]
+    ],
+    acharyaDetails: {
+      name: "Jagadguru Śrī Śrī Avimukteśvarānanda Sarasvatī Svāmī",
+      peetham: "Jyotirmaṭha, Badarikāśrama",
+      appointment: "Formally ascended the Pīṭha in March 2024.",
+      focus: "Revitalizing the Jyotirmaṭha traditions, establishing his presence, providing spiritual guidance, and overseeing the Pīṭha's activities. Focus on Advaita philosophy and pilgrimage at Badrinath.",
+      heroImage: "https://placehold.co/400x175.png",
+      heroImageHint: "Himalayas mountains",
+      galleryImages: Array(9).fill({ url: "https://placehold.co/100x100.png", hint: "mountain valley" }),
+    }
   },
 ];
