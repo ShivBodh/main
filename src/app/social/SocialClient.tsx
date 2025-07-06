@@ -11,7 +11,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Trash2, Plus, LogOut, Mail, BookMarked, BookOpen, HandHeart, Users, NotebookText, Megaphone, PlusCircle, Image as ImageIcon, Video, Heart, MessageCircle, Share2, Lock, Globe, Bell, Sunrise, Sunset, Moon, Star, SunMoon, Atom, Pencil, Brush, Eraser, Download, Trash, Flag, UserPlus, UserX, Award, Gamepad2, Puzzle, Dice5, Gem, ShieldCheck } from 'lucide-react';
+import { Trash2, Plus, LogOut, Mail, BookMarked, BookOpen, HandHeart, Users, NotebookText, Megaphone, PlusCircle, Image as ImageIcon, Video, Heart, MessageCircle, Share2, Lock, Globe, Bell, Sunrise, Sunset, Moon, Star, SunMoon, Atom, Pencil, Brush, Eraser, Download, Trash, Flag, UserPlus, UserX, Award, Gamepad2, Puzzle, Dice5, Gem, ShieldCheck, ArrowRight } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import Link from 'next/link';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -128,33 +128,21 @@ const dashboardLinks = [
 const socialFeatures = [
     {
         icon: Users,
-        title: "Connect with Community",
-        description: "Share your spiritual journey on the feed, find and connect with Mitras (friends), and join discussions on dharmic topics."
-    },
-    {
-        icon: NotebookText,
-        title: "Your Private Dainandini",
-        description: "A secure, personal diary for your daily notes, tasks, and reflections. Your data is saved only on your device, ensuring complete privacy."
+        title: "Connect & Share",
+        description: "Join a feed of devotees, share your spiritual journey, and discuss dharmic topics.",
+        gradient: "bg-[linear-gradient(170deg,_#01E4F8_0%,_#1D3EDE_100%)]",
     },
     {
         icon: Megaphone,
-        title: "Support Dharmic Causes",
-        description: "Create or support campaigns that matter to the Sanatana Dharma community. Raise awareness and rally support for positive action."
+        title: "Support Causes",
+        description: "Create or support campaigns that matter to the Sanatana Dharma community.",
+        gradient: "bg-[linear-gradient(170deg,_#B4EC51_0%,_#429321_100%)]",
     },
     {
-        icon: Gamepad2,
-        title: "Engage & Learn",
-        description: "Challenge the wise Bodhi AI to a game of Ludo, test your knowledge with our Peetham quiz, and deepen your understanding."
-    },
-    {
-        icon: Award,
-        title: "Personalized Experience",
-        description: "Track your progress across the portal. Earn points from quizzes and unlock special badges for your community contributions."
-    },
-    {
-        icon: ShieldCheck,
-        title: "A Secure, Private Platform",
-        description: "Sanatan Social is built as a safe harbor for devotees. We prioritize your privacy and foster a respectful, positive environment."
+        icon: NotebookText,
+        title: "Private Dainandini",
+        description: "A secure, personal diary for your daily notes, tasks, and reflections, saved only on your device.",
+        gradient: "bg-[linear-gradient(170deg,_#C86DD7_0%,_#3023AE_100%)]",
     }
 ];
 
@@ -1009,30 +997,33 @@ function NotificationsTab() {
 
 function SocialLandingPage() {
     return (
-        <div className="container mx-auto max-w-5xl py-16 md:py-24 px-4 text-center">
-            <Gem className="mx-auto h-16 w-16 text-primary animate-in fade-in-0 slide-in-from-bottom-5 duration-500" />
-            <h1 className="mt-4 text-4xl md:text-5xl font-headline font-bold text-primary tracking-tight animate-in fade-in-0 slide-in-from-bottom-5 duration-500 delay-100">
+        <div className="container mx-auto max-w-7xl py-16 md:py-24 px-4 text-center">
+             <Gem className="mx-auto h-16 w-16 text-primary animate-in fade-in-0 slide-in-from-bottom-5 duration-500" />
+            <h1 className="mt-4 text-4xl md:text-5xl font-headline font-bold text-primary tracking-tight animate-in fade-in-0 slide-in-from-bottom-5 duration-500">
                 A Sacred Space for Sanatanis
             </h1>
             <p className="mt-4 text-lg md:text-xl text-foreground/80 max-w-3xl mx-auto animate-in fade-in-0 slide-in-from-bottom-5 duration-500 delay-200">
                 Sanatan Social is a private, secure platform for devotees and seekers to connect, share knowledge, and support dharmic causes.
             </p>
 
-            <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
+            <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {socialFeatures.map((feature, index) => {
                     const Icon = feature.icon;
                     return (
-                         <Card key={feature.title} className="animate-in fade-in-0 slide-in-from-bottom-10 duration-500" style={{animationDelay: `${200 + index * 100}ms`}}>
-                            <CardHeader className="flex flex-row items-center gap-4 p-4">
-                                <div className="p-3 bg-accent/10 rounded-full">
-                                    <Icon className="h-8 w-8 text-accent flex-shrink-0" />
-                                </div>
-                                <CardTitle className="font-headline text-xl mt-0">{feature.title}</CardTitle>
-                            </CardHeader>
-                            <CardContent className="p-4 pt-0">
-                                <p className="text-foreground/80">{feature.description}</p>
-                            </CardContent>
-                        </Card>
+                        <div key={feature.title} className="group relative min-h-[220px] rounded-xl shadow-lg text-white p-6 flex flex-col justify-between overflow-hidden animate-in fade-in-0 slide-in-from-bottom-10 duration-500" style={{animationDelay: `${200 + index * 100}ms`}}>
+                             <div className={cn("absolute inset-0 transition-transform duration-500 group-hover:scale-105", feature.gradient)} />
+                             <Icon className="absolute -right-8 -bottom-8 h-40 w-40 text-white/10 transition-all duration-500 group-hover:scale-125 group-hover:text-white/20" />
+                             
+                             <div className="relative z-10 transition-transform duration-500 group-hover:-translate-y-1">
+                                <h2 className="text-2xl font-bold uppercase font-headline">{feature.title}</h2>
+                                <p className="mt-2 text-white/80 opacity-0 transition-opacity duration-500 group-hover:opacity-100">{feature.description}</p>
+                             </div>
+
+                             <Link href="/login" className="relative z-10 font-semibold uppercase flex items-center gap-2 self-start transition-transform duration-500 group-hover:-translate-y-1">
+                                Join to Access
+                                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                             </Link>
+                        </div>
                     )
                 })}
             </div>
@@ -1107,3 +1098,5 @@ export default function SocialClient() {
         </Suspense>
     )
 }
+
+    
