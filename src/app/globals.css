@@ -88,4 +88,8 @@
   .flash-highlight {
     animation: flash-bg 1.5s ease-out;
   }
+
+  .grid-cols-15 {
+    grid-template-columns: repeat(15, minmax(0, 1fr));
+  }
 }

@@ -1,7 +1,7 @@
 
 'use server';
 /**
- * @fileOverview An AI flow for generating game moves for Chess and Ludo.
+ * @fileOverview An AI flow for generating game moves for Ludo.
  *
  * - getBodhiMove - A function that returns a suggested move from the AI.
  */
@@ -10,8 +10,8 @@ import {ai} from '@/ai/genkit';
 import {z}from 'zod';
 
 const GameMoveInputSchema = z.object({
-  game: z.enum(['chess', 'ludo']),
-  gameState: z.string().describe('The current state of the game board, e.g., in FEN notation for chess, or a description of the last move.'),
+  game: z.enum(['ludo']),
+  gameState: z.string().describe('The current state of the game board, e.g., a description of the last move.'),
 });
 export type GameMoveInput = z.infer<typeof GameMoveInputSchema>;
 
