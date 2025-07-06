@@ -1,12 +1,16 @@
 
-import GalleryClient from '@/components/gallery/GalleryClient';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Photo Gallery',
-  description: 'A rich, chronological gallery of photos from the events, festivals, and daily life of the four cardinal Shankaracharya Peethams: Sringeri, Dwaraka, Puri, and Jyotirmath.',
+  title: 'Gallery Removed',
+  robots: {
+    index: false,
+    follow: false,
+  }
 };
 
+// This page has been removed to streamline the user experience.
+// Media is now primarily accessible via the Bodha Calendar and user posts on Sanatan Social.
 export default function GalleryPage() {
-  return <GalleryClient />;
+  return null;
 }

@@ -13,28 +13,28 @@ import Autoplay from 'embla-carousel-autoplay';
 
 const heroSlides = [
   {
-    title: 'Sanatan Social: A New Digital Home for Dharma',
-    description: 'Introducing the first social media platform built exclusively for followers of Sanatana Dharma. Connect, share, and grow with a global community of believers.',
+    title: 'Sanatan Social: The Global Hub for Sanatanis',
+    description: 'Connect, share, and grow with a community of believers on a platform built for Dharma. Create your profile and start a campaign today.',
     buttonText: 'Join the Community',
     buttonLink: '/social'
   },
   {
-    title: 'Your Personal Dainandini: A Digital Diary for the Soul',
-    description: 'Privately record your daily thoughts, tasks, and spiritual reflections. A modern tool for the ancient practice of self-observation.',
-    buttonText: 'Start Your Diary',
-    buttonLink: '/social?tab=dainandini'
+    title: 'The Shankaracharya Encyclopedia',
+    description: 'Explore the timeless wisdom of the four Peethams. A searchable, structured knowledge base on the life and teachings of the great Acharyas.',
+    buttonText: 'Explore the Peethams',
+    buttonLink: '/peethams'
   },
     {
-    title: 'Launch Dharmic Campaigns: Be a Catalyst for Change',
-    description: 'Start movements for causes that matter. Rally support for temple restoration, cow protection, or spreading Vedic knowledge in your community.',
-    buttonText: 'Start a Campaign',
-    buttonLink: '/social?tab=campaigns'
+    title: 'Your Daily Spiritual Companion',
+    description: 'Access the daily Panchanga, read sacred texts in the Reading Room, and use tools to support your Sādhanā.',
+    buttonText: 'View Daily Panchanga',
+    buttonLink: '/panchanga'
   },
   {
-    title: 'A Living Archive of Dharma',
-    description: 'Discover daily events, discourses, and media from the four Peethams in the comprehensive Bodha Calendar.',
-    buttonText: 'View Bodha Calendar',
-    buttonLink: '/events'
+    title: 'Build the Future of Dharma',
+    description: 'Start campaigns, join discussions, and contribute to a unified digital home for Sanatana Dharma.',
+    buttonText: 'Start a Campaign',
+    buttonLink: '/social?tab=campaigns'
   }
 ];
 
