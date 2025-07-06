@@ -86,15 +86,15 @@ const getInitials = (name: string | null | undefined) => {
 const placeholderPosts: Post[] = [];
 
 const placeholderMitras: Mitra[] = [
-    { name: 'Ravi Sharma', handle: '@rsharma', avatar: 'https://placehold.co/40x40.png?text=RS' },
-    { name: 'Priya Patel', handle: '@priya_p', avatar: 'https://placehold.co/40x40.png?text=PP' },
+    { name: 'Ravi Sharma', handle: '@rsharma', avatar: 'https://placehold.co/40x40.png' },
+    { name: 'Priya Patel', handle: '@priya_p', avatar: 'https://placehold.co/40x40.png' },
 ];
 
 const placeholderNotifications: Notification[] = [
     {
         id: 'notif-1',
         type: 'mitra_request',
-        actor: { name: 'Arjun Das', avatar: 'https://placehold.co/40x40.png?text=AD' },
+        actor: { name: 'Arjun Das', avatar: 'https://placehold.co/40x40.png' },
         message: 'sent you a Mitra request.',
         timestamp: new Date(),
         isRead: false
@@ -102,7 +102,7 @@ const placeholderNotifications: Notification[] = [
     {
         id: 'notif-2',
         type: 'campaign_support',
-        actor: { name: 'Sita Iyer', avatar: 'https://placehold.co/40x40.png?text=SI' },
+        actor: { name: 'Sita Iyer', avatar: 'https://placehold.co/40x40.png' },
         message: 'raised a green flag on your campaign "Preserve Local Temple Murals".',
         timestamp: new Date(new Date().setDate(new Date().getDate() - 1)),
         isRead: true
@@ -113,9 +113,9 @@ const placeholderCampaigns: Campaign[] = [];
 
 // New data for suggestions to simulate AI matching
 const suggestedMitras: Mitra[] = [
-    { name: 'Sita Iyer', handle: '@sita_iyer', avatar: 'https://placehold.co/40x40.png?text=SI' },
-    { name: 'Krishna Rao', handle: '@k_rao', avatar: 'https://placehold.co/40x40.png?text=KR' },
-    { name: 'Gauri Desai', handle: '@gauridesai', avatar: 'https://placehold.co/40x40.png?text=GD' },
+    { name: 'Sita Iyer', handle: '@sita_iyer', avatar: 'https://placehold.co/40x40.png' },
+    { name: 'Krishna Rao', handle: '@k_rao', avatar: 'https://placehold.co/40x40.png' },
+    { name: 'Gauri Desai', handle: '@gauridesai', avatar: 'https://placehold.co/40x40.png' },
 ];
 
 const dashboardLinks = [
@@ -1010,7 +1010,7 @@ function NotificationsTab() {
 function SocialLandingPage() {
     return (
         <div className="container mx-auto max-w-5xl py-16 md:py-24 px-4 text-center">
-            <Gem className="mx-auto h-12 w-12 text-primary animate-in fade-in-0 slide-in-from-bottom-5 duration-500" />
+            <Gem className="mx-auto h-16 w-16 text-primary animate-in fade-in-0 slide-in-from-bottom-5 duration-500" />
             <h1 className="mt-4 text-4xl md:text-5xl font-headline font-bold text-primary tracking-tight animate-in fade-in-0 slide-in-from-bottom-5 duration-500 delay-100">
                 A Sacred Space for Sanatanis
             </h1>
@@ -1023,11 +1023,13 @@ function SocialLandingPage() {
                     const Icon = feature.icon;
                     return (
                          <Card key={feature.title} className="animate-in fade-in-0 slide-in-from-bottom-10 duration-500" style={{animationDelay: `${200 + index * 100}ms`}}>
-                            <CardHeader className="flex flex-row items-center gap-4">
-                                <Icon className="h-8 w-8 text-accent flex-shrink-0" />
+                            <CardHeader className="flex flex-row items-center gap-4 p-4">
+                                <div className="p-3 bg-accent/10 rounded-full">
+                                    <Icon className="h-8 w-8 text-accent flex-shrink-0" />
+                                </div>
                                 <CardTitle className="font-headline text-xl mt-0">{feature.title}</CardTitle>
                             </CardHeader>
-                            <CardContent>
+                            <CardContent className="p-4 pt-0">
                                 <p className="text-foreground/80">{feature.description}</p>
                             </CardContent>
                         </Card>
@@ -1035,8 +1037,8 @@ function SocialLandingPage() {
                 })}
             </div>
 
-            <div className="mt-16 animate-in fade-in-0 slide-in-from-bottom-10 duration-700 delay-[800ms]">
-                <Button asChild size="lg">
+            <div className="mt-20 animate-in fade-in-0 slide-in-from-bottom-10 duration-700 delay-[800ms]">
+                <Button asChild size="lg" className="text-lg py-7 px-10">
                     <Link href="/login">Join the Community to Enter</Link>
                 </Button>
             </div>
