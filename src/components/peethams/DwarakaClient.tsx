@@ -12,22 +12,25 @@ import { LineageTimeline } from '@/components/peethams/LineageTimeline';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import { useMemo } from 'react';
 import { allCalendarItems, CalendarEventItem, CalendarPhotoItem, CalendarVideoItem } from '@/lib/calendar-data';
-import { format } from 'date-fns';
+import { format, parseISO } from 'date-fns';
 import { PhotoCard } from '@/components/media/PhotoCard';
 import { VideoCard } from '@/components/media/VideoCard';
 import { allSevaOpportunities } from '@/lib/seva-data';
 import { Badge } from '@/components/ui/badge';
-import { Separator } from '@/components/ui/separator';
 
 const dwarakaSeva = allSevaOpportunities.filter(o => o.peetham === 'Dwaraka');
 const peethamInfo = peethams.find(p => p.name.includes('Dwaraka'))!;
+
+const dwarakaEvents: CalendarEventItem[] = [
+    { id: 'dwaraka-event-1', date: '2025-05-02', peetham: 'Dwaraka', type: 'event', title: "Speaker at Global Festival of Oneness (GFO2025)", description: "Listed as a featured speaker for the Global Festival of Oneness, an online event scheduled to take place from May 2 to June 1, 2025.", category: 'Online Event' },
+    { id: 'dwaraka-event-2', date: '2025-07-15', peetham: 'Dwaraka', type: 'event', title: "2025 Chaturmasya Vrata", description: "The 2025 Chaturmasyavratanushthan will be observed at the Paramhansi Ganga Ashram, Shridham, in Narsinghpur, Madhya Pradesh.", category: 'Vrata' },
+];
 
 export default function DwarakaClient() {
 
     const dwarakaMedia = useMemo(() => allCalendarItems.filter(item => item.peetham === 'Dwaraka'), []);
     const dwarakaPhotos = useMemo(() => dwarakaMedia.filter((item): item is CalendarPhotoItem => item.type === 'photo'), [dwarakaMedia]);
     const dwarakaVideos = useMemo(() => dwarakaMedia.filter((item): item is CalendarVideoItem => item.type === 'video'), [dwarakaMedia]);
-    const dwarakaEvents = useMemo(() => dwarakaMedia.filter((item): item is CalendarEventItem => item.type === 'event').slice(0, 3), [dwarakaMedia]);
 
   return (
     <div className="bg-background text-foreground">
@@ -51,7 +54,7 @@ export default function DwarakaClient() {
               The Western Āmnāya Pīṭham, overlooking the Arabian Sea.
             </p>
             <div className="text-md text-foreground/90 mb-4">
-              <p><span className="font-semibold">Current Acharya:</span> Jagadguru Shankaracharya Sri Sri Sadananda Saraswatiji Maharaj</p>
+              <p><span className="font-semibold">Current Acharya:</span> Jagadguru Shankaracharya Swami Sri Sadananda Saraswatiji Maharaj</p>
               <p><span className="font-semibold">Associated Veda:</span> Sama Veda</p>
               <p><span className="font-semibold">Mahāvākya:</span> Tat Tvam Asi</p>
             </div>
@@ -66,8 +69,8 @@ export default function DwarakaClient() {
         <Tabs defaultValue="about" className="w-full">
           <ScrollArea className="w-full whitespace-nowrap rounded-lg">
               <TabsList className="mb-8 inline-flex w-max">
-                <TabsTrigger value="about">About</TabsTrigger>
-                <TabsTrigger value="teachings">Teachings</TabsTrigger>
+                <TabsTrigger value="about">About the Acharya</TabsTrigger>
+                <TabsTrigger value="teachings">Teachings & Activities</TabsTrigger>
                 <TabsTrigger value="lineage">Lineage</TabsTrigger>
                  <TabsTrigger value="events">Events</TabsTrigger>
                 <TabsTrigger value="gallery">Photos</TabsTrigger>
@@ -78,44 +81,28 @@ export default function DwarakaClient() {
           </ScrollArea>
           
           <TabsContent value="about" className="prose prose-lg lg:prose-xl max-w-none text-foreground/90 leading-relaxed">
-            <h2 className="font-headline text-primary">History and Significance</h2>
-            <p>
-              The Dwaraka Sharada Peetham, also known as the Kalika Matha, is the western cardinal peetham established by Sri Adi Shankaracharya. Located in the sacred city of Dwaraka, Gujarat, it holds immense significance as a centre for the preservation of the Sama Veda. The Peetham's mission is to uphold the tenets of Advaita Vedanta and guide devotees on the path of Dharma.
-            </p>
-            <p>
-              The city of Dwaraka itself is famously associated with Lord Krishna, making the Peetham a site of great spiritual power and pilgrimage. The lineage of Shankaracharyas at Dwaraka has been responsible for the spiritual welfare of Western India for centuries, fostering a deep-rooted culture of devotion and knowledge.
-            </p>
-            <h3 className="font-headline text-primary/90">Main Ashram Details</h3>
-            <p>
-              Shree Sharada Peeth,
-              <br />
-              Near Iskon Gate, Dwarka,
-              <br />
-              Gujarat - 361335, India.
-            </p>
+            <h2 className="font-headline text-primary">The Present Pontiff: Jagadguru Shankaracharya Swami Sadananda Saraswati</h2>
+            <p>Swami Sadananda Saraswati is the current Shankaracharya of the Dwarka Sharada Peetham. He was appointed to the position in September 2022 following the passing of his predecessor, Swami Swaroopanand Saraswati, who had held the titles for both the Dwarka and Jyotir Peethams. His anointment ceremony took place on September 12, 2022, at the Paramhansi Ganga Ashram in Narsinghpur, Madhya Pradesh. Prior to his elevation, he was known as Dandi Swami Sadanand Maharaj and served as the "second-in-command" to Swami Swaroopanand Saraswati.</p>
+            <p>There is a significant scarcity of publicly available information regarding Swami Sadananda Saraswati's purvāśrama (pre-monastic life), including his birth name, family, and early education. It is important to note that the name "Swami Sadananda" has been held by other notable monastic figures in Hindu history, and care must be taken not to confuse the current Shankaracharya of Dwaraka with these other historical personalities.</p>
           </TabsContent>
 
           <TabsContent value="teachings">
              <Card>
                 <CardHeader>
-                    <CardTitle className="font-headline text-primary flex items-center gap-2"><BookOpen className="h-6 w-6" /> Core Philosophy</CardTitle>
-                    <CardDescription>The foundational teachings of the Peetham, rooted in the Mahāvākya "Tat Tvam Asi" (That Thou Art).</CardDescription>
+                    <CardTitle className="font-headline text-primary flex items-center gap-2"><BookOpen className="h-6 w-6" /> Recent Activities and Public Statements</CardTitle>
+                    <CardDescription>The foundational teachings of the Peetham are rooted in the Mahāvākya "Tat Tvam Asi" (That Thou Art).</CardDescription>
                 </CardHeader>
                 <CardContent className="prose max-w-none text-foreground/90">
-                    <p>
-                       The Dwaraka Peetham is a bastion of the Sama Veda and the Mahāvākya "Tat Tvam Asi" (That Thou Art). The teachings focus on guiding the seeker to realize the inherent identity between the individual consciousness and the universal consciousness. The philosophy emphasizes Bhakti (devotion) as a powerful means to purify the mind, making it receptive to the ultimate truth of non-duality.
-                    </p>
+                    <p>Since his anointment, Swami Sadananda Saraswati has engaged in several public activities:</p>
+                    <ul>
+                        <li>In August 2024, he voiced grave concern over the safety and security of the Hindu minority in Bangladesh following political unrest there.</li>
+                        <li>In January 2024, the Dwarka Peetham issued a formal statement clarifying that it was not opposed to the Pran Pratishtha (consecration) ceremony of the Ram Mandir in Ayodhya.</li>
+                        <li>In July 2024, he, along with Swami Avimukteshwaranand Saraswati, graced the Aashirwad (blessing) ceremony for the wedding of Anant Ambani and Radhika Merchant in Mumbai.</li>
+                        <li>In May 2025, he visited the Tapobhoomi Gurupeeth in Goa, where he participated in religious ceremonies, including a tree plantation drive.</li>
+                        <li>He also undertook a visit to Sringeri in April-May 2024, where he met with both the senior and junior Shankaracharyas of the Sharada Peetham.</li>
+                    </ul>
                 </CardContent>
              </Card>
-             <h3 className="font-headline text-2xl text-primary mt-8 mb-4">Wisdom from the Lineage</h3>
-             <div className="space-y-4">
-                <blockquote className="border-l-4 border-accent pl-4 italic text-foreground/80">
-                "Realize that you are not the body, but the eternal, blissful consciousness that witnesses all." - A Teaching from the Dwaraka Lineage
-                </blockquote>
-                <blockquote className="border-l-4 border-accent pl-4 italic text-foreground/80">
-                "Service to humanity is service to God. See the divine in every being and act with compassion." - A Teaching from the Dwaraka Lineage
-                </blockquote>
-             </div>
           </TabsContent>
 
           <TabsContent value="lineage">
@@ -127,10 +114,10 @@ export default function DwarakaClient() {
             <Card>
                 <CardHeader>
                     <CardTitle className="font-headline text-primary flex items-center gap-2">
-                        <Calendar className="h-6 w-6" /> Recent & Upcoming Events
+                        <Calendar className="h-6 w-6" /> Upcoming Events (2025)
                     </CardTitle>
                     <CardDescription>
-                        The latest happenings connected to the Dwaraka Sharada Peetham.
+                        Key upcoming events for the Dwaraka Shankaracharya.
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -140,7 +127,7 @@ export default function DwarakaClient() {
                                 <li key={event.id} className="flex flex-col sm:flex-row justify-between sm:items-center p-3 rounded-md border bg-muted/20">
                                     <div>
                                         <p className="font-semibold text-foreground/90">{event.title}</p>
-                                        <p className="text-sm text-muted-foreground">{format(new Date(event.date.replace(/-/g, '/')), 'MMMM d, yyyy')}</p>
+                                        <p className="text-sm text-muted-foreground">{format(parseISO(event.date), 'MMMM d, yyyy')}</p>
                                     </div>
                                     <p className="text-sm font-medium text-primary mt-2 sm:mt-0">{event.category}</p>
                                 </li>
@@ -173,11 +160,6 @@ export default function DwarakaClient() {
             ) : (
                 <p className="text-center text-muted-foreground py-8">No photos available for this Peetham.</p>
             )}
-             <div className="text-center mt-8">
-                <Button asChild>
-                    <Link href="/gallery">View Full Chronological Gallery</Link>
-                </Button>
-             </div>
           </TabsContent>
 
            <TabsContent value="videos">

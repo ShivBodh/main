@@ -17,10 +17,17 @@ import { PhotoCard } from '@/components/media/PhotoCard';
 import { VideoCard } from '@/components/media/VideoCard';
 import { allSevaOpportunities } from '@/lib/seva-data';
 import { Badge } from '@/components/ui/badge';
-import { Separator } from '@/components/ui/separator';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 
 const puriSeva = allSevaOpportunities.filter(o => o.peetham === 'Puri');
 const peethamInfo = peethams.find(p => p.name.includes('Puri'))!;
+
+const literaryWorks = [
+    { category: 'Philosophy & Vedanta', works: 'Veda Vimarsha, Srimad Bhagavad Gita Saptashati, Dharma Darshan, Bauddh Siddhant aur Vedant' },
+    { category: 'Mathematics', works: 'Elementary Vedic Arithmetic, Swastik Mathematics' },
+    { category: 'Social & National Issues', works: 'Vyuharachana (Strategy to Foil Conspiracy Against Hinduism), Desh ki Dasha aur Apekshit Disha (Country\'s Condition and Expected Direction)' },
+    { category: 'Biographical', works: 'Divyanubhuti (Biography of Swami Nischalanand Saraswati), Sri Shivavatar Bhagavatpada Shankaracharya' },
+];
 
 export default function PuriClient() {
 
@@ -66,8 +73,8 @@ export default function PuriClient() {
         <Tabs defaultValue="about" className="w-full">
           <ScrollArea className="w-full whitespace-nowrap rounded-lg">
               <TabsList className="mb-8 inline-flex w-max">
-                <TabsTrigger value="about">About</TabsTrigger>
-                <TabsTrigger value="teachings">Teachings</TabsTrigger>
+                <TabsTrigger value="about">About the Acharya</TabsTrigger>
+                <TabsTrigger value="teachings">Teachings & Works</TabsTrigger>
                 <TabsTrigger value="lineage">Lineage</TabsTrigger>
                 <TabsTrigger value="events">Events</TabsTrigger>
                 <TabsTrigger value="gallery">Photos</TabsTrigger>
@@ -78,44 +85,43 @@ export default function PuriClient() {
           </ScrollArea>
           
           <TabsContent value="about" className="prose prose-lg lg:prose-xl max-w-none text-foreground/90 leading-relaxed">
-            <h2 className="font-headline text-primary">History and Significance</h2>
-            <p>
-              The Govardhana Peetham, located in the sacred coastal city of Puri, Odisha, is the eastern cardinal peetham established by Sri Adi Shankaracharya. It is intrinsically linked with the famous Jagannath Temple and is the traditional custodian of the Rig Veda. The primary deity is Lord Jagannath (a form of Vishnu/Krishna) and Vimala Devi.
-            </p>
-            <p>
-              This Peetham plays a crucial role in the spiritual and cultural life of Eastern India. The Shankaracharyas of Puri have historically been consulted on all religious matters pertaining to the Jagannath tradition. The matha stands as a powerful center for the propagation of Advaita Vedanta and the rich spiritual heritage of the region.
-            </p>
-            <h3 className="font-headline text-primary/90">Main Ashram Details</h3>
-            <p>
-              Govardhan Math,
-              <br />
-              Puri,
-              <br />
-              Odisha - 752001, India.
-            </p>
+            <h2 className="font-headline text-primary">The 145th Pontiff: Jagadguru Shankaracharya Swami Nischalananda Saraswati</h2>
+            <p>Swami Nischalananda Saraswati is the 145th Shankaracharya in the lineage of the Govardhana Peetham, having ascended the seat on February 9, 1992. His pre-monastic (purvāśrama) name was Nilambar Jha. He was born on June 30, 1943, in Haripur Bakshi Tol, a village in the Madhubani district of Bihar, into a distinguished Maithil Brahmin family. His father, Pandit Lalvamshi Jha, was a highly respected Sanskrit scholar who held the prestigious position of Rāja-Paṇḍita (royal court scholar) in the Darbhanga Kingdom.</p>
+            <p>Displaying a studious nature from childhood, he left home at the age of 17 to embark on a spiritual quest. He undertook rigorous study of the Vedas and various Shastras in holy cities across India. He became a devoted disciple of the renowned sage Dharma Samrat Swami Karpatriji Maharaj. As a young man, he was deeply involved in social causes, most notably the cow protection movement, for which he was imprisoned in Delhi's Tihar Jail for 52 days in 1966.</p>
+            <p>On April 18, 1974, he was initiated into the order of sannyāsa in Haridwar by Swami Karpatriji himself, who gave him the monastic name Nischalananda Saraswati. His profound scholarship and unwavering dedication impressed the then Shankaracharya of Puri, Swami Niranjanadev Tirtha, who anointed him as his successor.</p>
           </TabsContent>
 
           <TabsContent value="teachings">
              <Card>
                 <CardHeader>
-                    <CardTitle className="font-headline text-primary flex items-center gap-2"><BookOpen className="h-6 w-6" /> Core Philosophy</CardTitle>
-                    <CardDescription>The foundational teachings of the Peetham, rooted in the Mahāvākya "Prajñānam Brahma" (Consciousness is Brahman).</CardDescription>
+                    <CardTitle className="font-headline text-primary flex items-center gap-2"><BookOpen className="h-6 w-6" /> Philosophical Teachings and Literary Contributions</CardTitle>
+                    <CardDescription>Rooted in the Mahāvākya "Prajñānam Brahma" (Consciousness is Brahman).</CardDescription>
                 </CardHeader>
                 <CardContent className="prose max-w-none text-foreground/90">
-                    <p>
-                      The philosophical foundation of the Govardhana Peetham is "Prajñānam Brahma" (Consciousness is Brahman). The teachings emphasize that the ultimate reality is pure, undifferentiated consciousness. The path involves rigorous scriptural study, contemplation, and meditation to realize this truth. The Peetham also integrates the deep devotional traditions of Lord Jagannath within the framework of Advaita.
-                    </p>
+                    <p>As the Shankaracharya of Puri, Swami Nischalananda Saraswati travels extensively. His teachings often address contemporary national issues such as the unity of India, cow protection, women's empowerment, and environmental concerns, all viewed through the lens of Sanatana Dharma. To further these objectives, he has established two organizations, Aditya Vahini and Ananda Vahini.</p>
+                    <p>He is a prolific author, credited with writing over 130 books on diverse subjects. He is also an authority on Vedic Mathematics and has authored several acclaimed books on the subject, including Swastik Mathematics.</p>
+                     <div className="not-prose my-6">
+                        <Table>
+                            <TableHeader>
+                                <TableRow>
+                                    <TableHead>Category</TableHead>
+                                    <TableHead>Selected Works</TableHead>
+                                </TableRow>
+                            </TableHeader>
+                            <TableBody>
+                                {literaryWorks.map((item) => (
+                                    <TableRow key={item.category}>
+                                        <TableCell className="font-medium">{item.category}</TableCell>
+                                        <TableCell>{item.works}</TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </div>
+                    <h4 className="font-headline">Public Stance and Controversies</h4>
+                    <p>Swami Nischalananda Saraswati is known for his assertive and often controversial public statements, rooted in the traditionalist and orthodox positions of his guru, Swami Karpatriji. He has been a vocal critic on matters of temple rituals and other national issues, reflecting a consistent philosophical lineage.</p>
                 </CardContent>
              </Card>
-             <h3 className="font-headline text-2xl text-primary mt-8 mb-4">Wisdom from the Lineage</h3>
-             <div className="space-y-4">
-                <blockquote className="border-l-4 border-accent pl-4 italic text-foreground/80">
-                "Pure consciousness is the substratum of the entire universe. Realizing this is the ultimate goal of human life." - Swami Sri Nischalananda Saraswatiji Maharaj
-                </blockquote>
-                <blockquote className="border-l-4 border-accent pl-4 italic text-foreground/80">
-                "Dharma is not a set of rules, but the very law that sustains existence. To live in harmony with Dharma is to live in harmony with the cosmos." - A Teaching from the Puri Lineage
-                </blockquote>
-             </div>
           </TabsContent>
 
           <TabsContent value="lineage">
@@ -127,30 +133,16 @@ export default function PuriClient() {
             <Card>
                 <CardHeader>
                     <CardTitle className="font-headline text-primary flex items-center gap-2">
-                        <Calendar className="h-6 w-6" /> Recent & Upcoming Events
+                        <Calendar className="h-6 w-6" /> Upcoming Events (2025)
                     </CardTitle>
                     <CardDescription>
                         The latest happenings connected to the Govardhana Peetham.
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
-                    {puriEvents.length > 0 ? (
-                        <ul className="space-y-4">
-                            {puriEvents.map(event => (
-                                <li key={event.id} className="flex flex-col sm:flex-row justify-between sm:items-center p-3 rounded-md border bg-muted/20">
-                                    <div>
-                                        <p className="font-semibold text-foreground/90">{event.title}</p>
-                                        <p className="text-sm text-muted-foreground">{format(new Date(event.date.replace(/-/g, '/')), 'MMMM d, yyyy')}</p>
-                                    </div>
-                                    <p className="text-sm font-medium text-primary mt-2 sm:mt-0">{event.category}</p>
-                                </li>
-                            ))}
-                        </ul>
-                    ) : (
-                        <p className="text-muted-foreground text-center p-4">
-                            No specific events found. Check the main Bodha Calendar for all activities.
-                        </p>
-                    )}
+                    <p className="text-muted-foreground text-center p-4">
+                        Information regarding the 2025 Chaturmasya program for Swami Nischalananda Saraswati is not yet publicly available. Devotees are advised to consult the official Govardhan Math website for announcements.
+                    </p>
                 </CardContent>
                 <CardFooter>
                     <Button asChild className="w-full">
@@ -173,11 +165,6 @@ export default function PuriClient() {
             ) : (
                 <p className="text-center text-muted-foreground py-8">No photos available for this Peetham.</p>
             )}
-             <div className="text-center mt-8">
-                <Button asChild>
-                    <Link href="/gallery">View Full Chronological Gallery</Link>
-                </Button>
-             </div>
           </TabsContent>
 
             <TabsContent value="videos">

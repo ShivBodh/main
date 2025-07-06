@@ -17,17 +17,20 @@ import { PhotoCard } from '@/components/media/PhotoCard';
 import { VideoCard } from '@/components/media/VideoCard';
 import { allSevaOpportunities } from '@/lib/seva-data';
 import { Badge } from '@/components/ui/badge';
-import { Separator } from '@/components/ui/separator';
 
 const sringeriSeva = allSevaOpportunities.filter(o => o.peetham === 'Sringeri');
 const peethamInfo = peethams.find(p => p.name.includes('Sringeri'))!;
+const sringeriEvents: CalendarEventItem[] = [
+    { id: 'sringeri-event-1', date: '2025-04-03', peetham: 'Sringeri', type: 'event', title: "75th Vardhanti of Sri Bharathi Tirtha Mahaswamiji", description: "The 75th birthday celebrations of Jagadguru Sri Bharathi Tirtha Mahaswamiji will be held in Sringeri.", category: 'Festival' },
+    { id: 'sringeri-event-2', date: '2025-07-10', peetham: 'Sringeri', type: 'event', title: "Chaturmasya Vrata Begins", description: "Both Jagadgurus will observe their annual Chaturmasya Vrata at the headquarters in Sringeri, commencing with Vyasa Puja.", category: 'Vrata' },
+    { id: 'sringeri-event-3', date: '2025-07-15', peetham: 'Sringeri', type: 'event', title: "Vijaya Yatra to Tiruchendur & Rameswaram", description: "Jagadguru Sri Vidhushekhara Bharati Mahaswamiji is scheduled to undertake a Vijaya Yatra.", category: 'Yatra' },
+];
 
 export default function SringeriClient() {
 
     const sringeriMedia = useMemo(() => allCalendarItems.filter(item => item.peetham === 'Sringeri'), []);
     const sringeriPhotos = useMemo(() => sringeriMedia.filter((item): item is CalendarPhotoItem => item.type === 'photo'), [sringeriMedia]);
     const sringeriVideos = useMemo(() => sringeriMedia.filter((item): item is CalendarVideoItem => item.type === 'video'), [sringeriMedia]);
-    const sringeriEvents = useMemo(() => sringeriMedia.filter((item): item is CalendarEventItem => item.type === 'event').slice(0, 3), [sringeriMedia]);
 
   return (
     <div className="bg-background text-foreground">
@@ -51,7 +54,7 @@ export default function SringeriClient() {
               The Southern Āmnāya Pīṭham, established by Sri Adi Shankaracharya.
             </p>
             <div className="text-md text-foreground/90 mb-4">
-              <p><span className="font-semibold">Current Acharya:</span> Jagadguru Shankaracharya Sri Sri Vidhushekhara Bharati Mahaswamiji</p>
+              <p><span className="font-semibold">Current Acharyas:</span> Jagadguru Shankaracharya Sri Sri Bharathi Tirtha Mahaswamiji & Sri Sri Vidhushekhara Bharati Mahaswamiji</p>
               <p><span className="font-semibold">Associated Veda:</span> Yajur Veda</p>
               <p><span className="font-semibold">Mahāvākya:</span> Aham Brahmāsmi</p>
             </div>
@@ -66,7 +69,7 @@ export default function SringeriClient() {
         <Tabs defaultValue="about" className="w-full">
           <ScrollArea className="w-full whitespace-nowrap rounded-lg">
               <TabsList className="mb-8 inline-flex w-max">
-                <TabsTrigger value="about">About</TabsTrigger>
+                <TabsTrigger value="about">About the Acharyas</TabsTrigger>
                 <TabsTrigger value="teachings">Teachings</TabsTrigger>
                 <TabsTrigger value="lineage">Lineage</TabsTrigger>
                 <TabsTrigger value="events">Events</TabsTrigger>
@@ -78,43 +81,30 @@ export default function SringeriClient() {
           </ScrollArea>
 
           <TabsContent value="about" className="prose prose-lg lg:prose-xl max-w-none text-foreground/90 leading-relaxed">
-            <h2 className="font-headline text-primary">History and Significance</h2>
-            <p>
-              The Sringeri Sharada Peetham is the first and foremost of the four cardinal peethams established by the revered pontiff Jagadguru Sri Adi Shankaracharya in the 8th century C.E. It is the southern seat of the Advaita Vedanta tradition, located on the serene banks of the river Tunga in Sringeri, Karnataka. The Peetham is dedicated to the propagation of Sanatana Dharma and the philosophy of non-dualism.
-            </p>
-            <p>
-              Sri Shankaracharya installed a sandalwood idol of Goddess Sharada, the goddess of learning and wisdom, which was later replaced with a golden idol by Sri Vidyaranya in the 14th century. The Peetham has been a focal point for spiritual learning and has been blessed by an unbroken lineage of illustrious Jagadgurus who have guided the faithful for over 1200 years.
-            </p>
-            <h3 className="font-headline text-primary/90">Main Ashram Details</h3>
-            <p>
-              Sri Sharada Peetham,<br />
-              Sringeri,<br />
-              Chikkamagaluru District,<br />
-              Karnataka - 577139, India.
-            </p>
+            <h2 className="font-headline text-primary">Dakṣiṇāmnāya Śrī Śāradā Pīṭham, Sringeri: The Southern Seat</h2>
+            <p>The Sringeri Sharada Peetham, the first and foremost Maṭha established by Adi Shankaracharya, is renowned for its unbroken lineage of realized masters and its profound contributions to Vedic scholarship. It is associated with the Kṛṣṇa Yajur Veda and the Mahāvākya, Ahaṃ Brahmāsmi ("I am Brahman").</p>
+            
+            <h3 className="font-headline text-primary/90">A Note on the Dual Leadership: The Guru-Shishya Parampara in Practice</h3>
+            <p>The Sringeri Peetham currently operates under a unique dual-leadership model, embodying the living tradition of the Guru-Shishya Paramparā (master-disciple lineage). The senior pontiff, Jagadguru Shankaracharya Sri Sri Bharathi Tirtha Mahaswamiji, is referred to as "Mahasannidhanam." He is assisted in all duties by his chosen successor-designate, Jagadguru Shankaracharya Sri Sri Vidhushekhara Bharati Mahaswamiji, who is referred to as "Sannidhanam". This arrangement ensures a seamless transition and continuity of the sacred tradition.</p>
+
+            <h3 className="font-headline text-primary/90">The Reigning Pontiff: Jagadguru Shankaracharya Sri Sri Bharathi Tirtha Mahaswamiji (36th Acharya)</h3>
+            <p>The 36th Jagadguru of the Sringeri Sharada Peetham, Sri Bharathi Tirtha Mahaswamiji, was born as Seetharama Anjaneyalu on April 11, 1951, in Machilipatnam, Andhra Pradesh. From a young age, he displayed a deep religious inclination and a prodigious intellect. He was a devoted worshipper of Lord Shiva and showed remarkable proficiency in Sanskrit and the Vedas, which he learned from his father. In 1966, at the age of 15, he approached the 35th Jagadguru, Sri Abhinava Vidyatirtha Mahaswamiji, seeking spiritual guidance. The senior Acharya recognized his potential and accepted him as a disciple. On November 11, 1974, the young Brahmachari was initiated into the holy order of sannyāsa and given the monastic name Bharathi Tirtha. He formally ascended the Vyakhyana Simhasana (throne of wisdom) as the 36th Jagadguru on October 19, 1989, following the mahāsamādhi of his Guru. He is widely revered as a sage of the highest order, with extraordinary knowledge of Vedanta, the Shastras, and multiple languages.</p>
+
+            <h3 className="font-headline text-primary/90">The Successor-Designate: Jagadguru Shankaracharya Sri Sri Vidhushekhara Bharati Mahaswamiji</h3>
+            <p>The successor-designate, Sri Vidhushekhara Bharati Mahaswamiji, was born as Sri Kuppa Venkateshwara Prasada Sharma on July 24, 1993, in the holy town of Tirupati, Andhra Pradesh. Born into a family of Vedic scholars, his spiritual education began early. His upanayana (sacred thread ceremony) was performed at the tender age of five, after which he began his formal study of the Kṛṣṇa Yajur Veda, which he quickly mastered. A pivotal moment in his life occurred in 2006, when as a teenager he had his first darśana (audience) with Sri Bharathi Tirtha Mahaswamiji. In 2009, he returned to Sringeri and expressed his deep desire to study the Shastras directly at the feet of the Jagadguru. Impressed by his sincerity and sharp intellect, the Mahasannidhanam took him under his personal tutelage. On January 23, 2015, Sri Bharathi Tirtha Mahaswamiji initiated him into sannyāsa, bestowing upon him the monastic name Vidhushekhara Bharati and anointing him as his successor.</p>
           </TabsContent>
 
           <TabsContent value="teachings">
              <Card>
                 <CardHeader>
-                    <CardTitle className="font-headline text-primary flex items-center gap-2"><BookOpen className="h-6 w-6" /> Core Philosophy</CardTitle>
-                    <CardDescription>The foundational teachings of the Peetham, rooted in the Mahāvākya "Aham Brahmāsmi" (I am Brahman).</CardDescription>
+                    <CardTitle className="font-headline text-primary flex items-center gap-2"><BookOpen className="h-6 w-6" /> Propagating Advaita Vedanta</CardTitle>
+                    <CardDescription>The core philosophy of the Sringeri Peetham, rooted in the Mahāvākya "Aham Brahmāsmi" (I am Brahman).</CardDescription>
                 </CardHeader>
                 <CardContent className="prose max-w-none text-foreground/90">
-                    <p>
-                        The core teaching of the Sringeri Sharada Peetham is Advaita Vedanta, as expounded by Sri Adi Shankaracharya. It emphasizes the non-duality of the individual soul (Atman) and the ultimate reality (Brahman). The path to liberation (Moksha) is through the attainment of Self-knowledge (Atma-jnana), which dispels the illusion of separation born of ignorance (Avidya).
-                    </p>
+                    <p>Since his initiation, Sri Vidhushekhara Bharati has devoutly assisted his Guru in all the affairs of the Maṭha, undertaking extensive Vijaya Yatras and delivering discourses (anugraha bhāṣaṇam). His teachings are deeply rooted in the philosophy of Advaita Vedanta, focusing on its core tenets. He expounds upon the non-difference between the jīva (the individual self) and Brahman (the ultimate reality), the nature of māyā (the cosmic illusion), and the concept of mithyā (the transactional or dependent reality of the phenomenal world). He consistently emphasizes the importance of ātma-vicāra (self-enquiry) and deep contemplation on the teachings of the Upanishads and the Bhagavad Gita as the path to liberation (mokṣa).</p>
+                    <p>The Sringeri Peetham, under the guidance of both Acharyas, has effectively blended ancient tradition with modern technology to propagate these teachings globally. This is evident in their sophisticated digital ecosystem, which includes a comprehensive official website (sringeri.net), an active YouTube channel for livestreaming events, and dedicated online portals for booking sevas and making donations.</p>
                 </CardContent>
              </Card>
-             <h3 className="font-headline text-2xl text-primary mt-8 mb-4">Wisdom from the Lineage</h3>
-             <div className="space-y-4">
-                <blockquote className="border-l-4 border-accent pl-4 italic text-foreground/80">
-                "Just as the one sun illumines the whole world, so does the one Atman illumine the whole body." - Sri Adi Shankaracharya
-                </blockquote>
-                <blockquote className="border-l-4 border-accent pl-4 italic text-foreground/80">
-                "A mind that is not agitated by desires and is free from cravings is the fittest to receive the knowledge of the Self." - Sri Sri Bharati Tirtha Mahaswamiji
-                </blockquote>
-             </div>
           </TabsContent>
 
           <TabsContent value="lineage">
@@ -126,10 +116,10 @@ export default function SringeriClient() {
             <Card>
                 <CardHeader>
                     <CardTitle className="font-headline text-primary flex items-center gap-2">
-                        <Calendar className="h-6 w-6" /> Recent & Upcoming Events
+                        <Calendar className="h-6 w-6" /> Recent & Upcoming Events (2025)
                     </CardTitle>
                     <CardDescription>
-                        The latest happenings connected to the Sringeri Sharada Peetham.
+                        Key upcoming events for the Sringeri Acharyas.
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -172,11 +162,6 @@ export default function SringeriClient() {
             ) : (
                 <p className="text-center text-muted-foreground py-8">No photos available for this Peetham.</p>
             )}
-             <div className="text-center mt-8">
-                <Button asChild>
-                    <Link href="/gallery">View Full Chronological Gallery</Link>
-                </Button>
-             </div>
           </TabsContent>
 
            <TabsContent value="videos">

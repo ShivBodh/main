@@ -12,22 +12,25 @@ import { LineageTimeline } from '@/components/peethams/LineageTimeline';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import { useMemo } from 'react';
 import { allCalendarItems, CalendarEventItem, CalendarPhotoItem, CalendarVideoItem } from '@/lib/calendar-data';
-import { format } from 'date-fns';
+import { format, parseISO } from 'date-fns';
 import { PhotoCard } from '@/components/media/PhotoCard';
 import { VideoCard } from '@/components/media/VideoCard';
 import { allSevaOpportunities } from '@/lib/seva-data';
 import { Badge } from '@/components/ui/badge';
-import { Separator } from '@/components/ui/separator';
 
 const jyotirmathSeva = allSevaOpportunities.filter(o => o.peetham === 'Jyotirmath');
 const peethamInfo = peethams.find(p => p.name.includes('Jyotirmath'))!;
+
+const jyotirmathEvents: CalendarEventItem[] = [
+    { id: 'jyotirmath-event-1', date: '2025-01-15', peetham: 'Jyotirmath', type: 'event', title: "Arrival at Maha Kumbh Mela 2025", description: "Arrived at the Mela grounds in Prayagraj with a grand procession in early January 2025.", category: 'Festival' },
+    { id: 'jyotirmath-event-2', date: '2025-07-15', peetham: 'Jyotirmath', type: 'event', title: "2025 Chaturmasya Vrata", description: "Information not yet available. To be announced.", category: 'Vrata' }
+];
 
 export default function JyotirmathClient() {
 
     const jyotirmathMedia = useMemo(() => allCalendarItems.filter(item => item.peetham === 'Jyotirmath'), []);
     const jyotirmathPhotos = useMemo(() => jyotirmathMedia.filter((item): item is CalendarPhotoItem => item.type === 'photo'), [jyotirmathMedia]);
     const jyotirmathVideos = useMemo(() => jyotirmathMedia.filter((item): item is CalendarVideoItem => item.type === 'video'), [jyotirmathMedia]);
-    const jyotirmathEvents = useMemo(() => jyotirmathMedia.filter((item): item is CalendarEventItem => item.type === 'event').slice(0, 3), [jyotirmathMedia]);
 
   return (
     <div className="bg-background text-foreground">
@@ -66,9 +69,9 @@ export default function JyotirmathClient() {
         <Tabs defaultValue="about" className="w-full">
           <ScrollArea className="w-full whitespace-nowrap rounded-lg">
               <TabsList className="mb-8 inline-flex w-max">
-                <TabsTrigger value="about">About</TabsTrigger>
-                <TabsTrigger value="teachings">Teachings</TabsTrigger>
-                <TabsTrigger value="lineage">Lineage</TabsTrigger>
+                <TabsTrigger value="about">About the Acharya</TabsTrigger>
+                <TabsTrigger value="teachings">Teachings & Stances</TabsTrigger>
+                <TabsTrigger value="lineage">Lineage & Succession</TabsTrigger>
                 <TabsTrigger value="events">Events</TabsTrigger>
                 <TabsTrigger value="gallery">Photos</TabsTrigger>
                 <TabsTrigger value="videos">Videos</TabsTrigger>
@@ -78,48 +81,40 @@ export default function JyotirmathClient() {
           </ScrollArea>
           
           <TabsContent value="about" className="prose prose-lg lg:prose-xl max-w-none text-foreground/90 leading-relaxed">
-            <h2 className="font-headline text-primary">History and Significance</h2>
-            <p>
-              Jyotirmath, also known as the 'Uttaramnaya Matha', is the northern cardinal peetham established by Sri Adi Shankaracharya in the pristine Himalayas, near the sacred shrine of Badrinath in Uttarakhand. This Peetham holds the responsibility for the Atharva Veda. The location itself, deep in the mountains revered as the abode of sages, gives Jyotirmath a unique spiritual aura.
-            </p>
-            <p>
-              After a period of dormancy, the seat was revived in the 20th century, and it continues to be a vital center for Vedic learning and spiritual practice for seekers and ascetics who brave the harsh climate for profound sadhana. The Peetham's motto is "Ayam Ātmā Brahma," emphasizing the truth that the individual Self is indeed Brahman.
-            </p>
-            <h3 className="font-headline text-primary/90">Main Ashram Details</h3>
-            <p>
-              Jyotirmath,
-              <br />
-              Chamoli District,
-              <br />
-              Uttarakhand - 246443, India.
-            </p>
+            <h2 className="font-headline text-primary">The 46th Pontiff: Jagadguru Shankaracharya Swami Avimukteshwarananda Saraswati</h2>
+            <p>Swami Avimukteshwarananda Saraswati was born as Umashankar Upadhyay on August 15, 1969, in Brahmanpur village, Uttar Pradesh. His spiritual inclinations were shaped by the teachings of Swami Karpatriji Maharaj. He pursued higher education in Sanskrit studies at the Sampurnanand Sanskrit University in Varanasi, earning both Shastri and Acharya degrees. During his time at the university, he was actively involved in student politics and was elected president of the student union in 1994.</p>
+            <p>He received his formal monastic initiation (dīkṣā) from Swami Swaroopanand Saraswati in 2006. Following his initiation, he became a key aide and was entrusted with supervising the religious and administrative activities of the Jyotir Math.</p>
           </TabsContent>
 
           <TabsContent value="teachings">
              <Card>
                 <CardHeader>
-                    <CardTitle className="font-headline text-primary flex items-center gap-2"><BookOpen className="h-6 w-6" /> Core Philosophy</CardTitle>
-                    <CardDescription>The foundational teachings of the Peetham, rooted in the Mahāvākya "Ayam Ātmā Brahma" (This Self is Brahman).</CardDescription>
+                    <CardTitle className="font-headline text-primary flex items-center gap-2"><BookOpen className="h-6 w-6" /> Teachings on Dharma, Seva, and National Issues</CardTitle>
+                    <CardDescription>Rooted in the Mahāvākya "Ayam Ātmā Brahma" (This Self is Brahman).</CardDescription>
                 </CardHeader>
                 <CardContent className="prose max-w-none text-foreground/90">
-                    <p>
-                      The philosophical essence of Jyotirmath is encapsulated in the Mahāvākya "Ayam Ātmā Brahma" (This Self is Brahman). The teachings here guide the seeker to look inward and recognize the divine nature of their own consciousness. Given its Himalayan location, the teachings often emphasize vairagya (dispassion), dhyana (meditation), and tapas (austerity) as key practices for realizing this ultimate truth.
-                    </p>
+                    <p>Swami Avimukteshwarananda's teachings emphasize that Dharma is not merely personal piety but encompasses one's duties to society, God, and all of creation. He advocates for a life of service (sevā), humility, and compassion, and has been a proponent of environmental causes, particularly the cleanup of the river Ganga.</p>
+                    <p>He is an outspoken figure who frequently comments on national, political, and social issues:</p>
+                    <ul>
+                        <li>He is a staunch advocate for cow protection, demanding that the cow be declared Rāṣṭra Mātā (National Mother).</li>
+                        <li>He has recently supported the call for a review of the words "secular" and "socialist" in the Preamble to the Indian Constitution.</li>
+                        <li>He has been at the center of several public controversies, including his decision to decline the invitation to the Ram Mandir consecration ceremony and his criticism of a replica Kedarnath temple being built in Delhi.</li>
+                    </ul>
                 </CardContent>
              </Card>
-             <h3 className="font-headline text-2xl text-primary mt-8 mb-4">Wisdom from the Lineage</h3>
-             <div className="space-y-4">
-                <blockquote className="border-l-4 border-accent pl-4 italic text-foreground/80">
-                "The silence of the Himalayas is not empty; it is full of the voice of the Self. Listen to it." - A Teaching from the Jyotirmath Lineage
-                </blockquote>
-                <blockquote className="border-l-4 border-accent pl-4 italic text-foreground/80">
-                "True renunciation is not of the world, but of the ego that claims ownership of it." - A Teaching from the Jyotirmath Lineage
-                </blockquote>
-             </div>
           </TabsContent>
 
           <TabsContent value="lineage">
-             <h3 className="font-headline text-2xl text-primary mb-6 flex items-center gap-2"><Landmark className="h-6 w-6" /> Guru Parampara</h3>
+            <h3 className="font-headline text-2xl text-primary mb-6 flex items-center gap-2"><Landmark className="h-6 w-6" /> The Contested Succession</h3>
+            <div className="prose prose-lg lg:prose-xl max-w-none text-foreground/90 leading-relaxed">
+                <p>The appointment of Swami Avimukteshwarananda as the Shankaracharya of Jyotir Peetham is mired in a complex crisis stemming from a confluence of historical, institutional, and legal factors.</p>
+                <ul>
+                    <li><strong>Historical Precedent:</strong> The Jyotir Peetham itself was dormant for a period of 165 years before its revival in 1941. This long vacancy broke the traditional chain of direct Guru-Shishya succession.</li>
+                    <li><strong>Dual Headship Anomaly:</strong> His predecessor, Swami Swaroopanand Saraswati, held the unique position of being the Shankaracharya of two cardinal Peethams—Dwaraka and Jyotir Math—simultaneously. His will designated two separate successors, creating a complex dual succession that deviates from the traditional single-lineage model.</li>
+                    <li><strong>Legal and Peer Intervention:</strong> In October 2022, the Supreme Court of India issued a stay on the coronation of Swami Avimukteshwarananda. This was prompted by an affidavit filed by the Shankaracharya of Puri. The succession is further complicated by claims from other disciples, transforming an internal religious matter into a public legal battle.</li>
+                </ul>
+            </div>
+             <h3 className="font-headline text-2xl text-primary mt-8 mb-6 flex items-center gap-2"><Landmark className="h-6 w-6" /> Guru Parampara</h3>
              {peethamInfo.lineage && <LineageTimeline lineage={peethamInfo.lineage} />}
           </TabsContent>
           
@@ -127,10 +122,10 @@ export default function JyotirmathClient() {
             <Card>
                 <CardHeader>
                     <CardTitle className="font-headline text-primary flex items-center gap-2">
-                        <Calendar className="h-6 w-6" /> Recent & Upcoming Events
+                        <Calendar className="h-6 w-6" /> Upcoming Events (2025)
                     </CardTitle>
                     <CardDescription>
-                        The latest happenings connected to the Jyotirmath Peetham.
+                        Key upcoming events for the Jyotirmath Shankaracharya.
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -140,7 +135,7 @@ export default function JyotirmathClient() {
                                 <li key={event.id} className="flex flex-col sm:flex-row justify-between sm:items-center p-3 rounded-md border bg-muted/20">
                                     <div>
                                         <p className="font-semibold text-foreground/90">{event.title}</p>
-                                        <p className="text-sm text-muted-foreground">{format(new Date(event.date.replace(/-/g, '/')), 'MMMM d, yyyy')}</p>
+                                        <p className="text-sm text-muted-foreground">{format(parseISO(event.date), 'MMMM d, yyyy')}</p>
                                     </div>
                                     <p className="text-sm font-medium text-primary mt-2 sm:mt-0">{event.category}</p>
                                 </li>
@@ -173,11 +168,6 @@ export default function JyotirmathClient() {
             ) : (
                 <p className="text-center text-muted-foreground py-8">No photos available for this Peetham.</p>
             )}
-             <div className="text-center mt-8">
-                <Button asChild>
-                    <Link href="/gallery">View Full Chronological Gallery</Link>
-                </Button>
-             </div>
           </TabsContent>
 
            <TabsContent value="videos">
