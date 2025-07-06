@@ -1,0 +1,6 @@
+# Allow all user agents to crawl the entire site.
+User-agent: *
+Allow: /
+
+# Provide the path to the sitemap.
+Sitemap: https://shivala.info/sitemap.xml
