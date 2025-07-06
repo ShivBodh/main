@@ -5,9 +5,22 @@ import Image from 'next/image';
 import { Clock, MessageCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import type { Peetham } from '@/lib/peethams-data';
+import { useAIImage } from '@/hooks/use-ai-image';
+import { Skeleton } from '@/components/ui/skeleton';
 
 interface AcharyaCardProps {
   acharya: Peetham['acharyaDetails'];
+}
+
+// A small wrapper component to use the hook and manage loading state
+const DynamicImage = ({ hint, fallbackSrc, ...props }: any) => {
+    const { imageUrl, isLoading } = useAIImage(hint, fallbackSrc);
+    
+    if (isLoading) {
+        return <Skeleton className="w-full h-full bg-muted/50" />;
+    }
+
+    return <Image src={imageUrl} {...props} />;
 }
 
 export function AcharyaCard({ acharya }: AcharyaCardProps) {
@@ -15,8 +28,9 @@ export function AcharyaCard({ acharya }: AcharyaCardProps) {
     <div className="w-full h-[500px] bg-card shadow-lg rounded-lg overflow-hidden">
       {/* Hero Image Section */}
       <div className="group relative w-full h-[175px] bg-secondary/20">
-        <Image
-          src={acharya.heroImage}
+        <DynamicImage
+          hint={acharya.heroImageHint}
+          fallbackSrc={acharya.heroImage}
           alt={`Image related to ${acharya.peetham}`}
           data-ai-hint={acharya.heroImageHint}
           fill
@@ -35,8 +49,9 @@ export function AcharyaCard({ acharya }: AcharyaCardProps) {
                 <div key={rowIndex} className="flex w-full h-1/3 gap-1">
                   {[...Array(3)].map((_, colIndex) => (
                     <div key={colIndex} className="relative w-1/3 h-full bg-black/20 opacity-70 hover:opacity-100 transition-opacity">
-                       <Image
-                        src={acharya.galleryImages[rowIndex * 3 + colIndex].url}
+                       <DynamicImage
+                        hint={acharya.galleryImages[rowIndex * 3 + colIndex].hint}
+                        fallbackSrc={acharya.galleryImages[rowIndex * 3 + colIndex].url}
                         alt={`Gallery image ${rowIndex * 3 + colIndex + 1}`}
                         data-ai-hint={acharya.galleryImages[rowIndex * 3 + colIndex].hint}
                         fill
