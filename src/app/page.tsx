@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowRight, Users, Landmark } from 'lucide-react';
+import { ArrowRight, Users, Landmark, Map } from 'lucide-react';
 import { peethams } from '@/lib/peethams-data';
 import type { Metadata } from 'next';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
@@ -57,16 +57,16 @@ export default function HomePage() {
 
        <section className="w-full py-16 md:py-24 bg-card">
         <div className="container mx-auto px-4 text-center">
-          <Landmark className="h-12 w-12 text-primary mx-auto" />
+          <Map className="h-12 w-12 text-primary mx-auto" />
           <h2 className="text-3xl md:text-4xl font-headline font-bold text-primary mt-4 mb-6">
-              The Great Guru Parampara
+              Explore the Sacred Geography
           </h2>
            <p className="mt-2 text-lg text-foreground/80 max-w-2xl mx-auto">
-             From Jagadguru Adi Shankaracharya to the present day, the four Peethams have been guided by an unbroken lineage of spiritual masters. Explore the history and meet the current pontiffs safeguarding this sacred tradition.
+             Embark on an interactive 3D journey to the four cardinal Peethams established by Adi Shankaracharya. Discover their locations and explore the sacred landscapes.
             </p>
           <div className="mt-8">
                 <Button asChild size="lg">
-                    <Link href="/peethams">Explore the Lineage</Link>
+                    <Link href="/seva">Launch Interactive Map</Link>
                 </Button>
             </div>
         </div>
