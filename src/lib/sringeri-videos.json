@@ -1,2 +1,19 @@
 
-[]
+[
+  {
+    "id": "sringeri-video-1",
+    "title": "Guru Purnima Anugraha Bhashanam",
+    "date": "2024-07-21",
+    "url": "https://www.youtube.com/embed/S9yS-T4i3gY?autoplay=1",
+    "description": "The sacred Anugraha Bhashanam delivered by the Jagadguru on the auspicious occasion of Guru Purnima. A discourse on the importance of the Guru-shishya parampara.",
+    "thumbnailUrl": "https://placehold.co/400x225.png"
+  },
+  {
+    "id": "sringeri-video-2",
+    "title": "Sharada Navaratri Darbar",
+    "date": "2023-10-20",
+    "url": "https://www.youtube.com/embed/i0Q50SoGAkY?autoplay=1",
+    "description": "A glimpse into the royal court (Darbar) held nightly during Navaratri, where the Jagadguru presides in regal splendor, a tradition continuing for centuries.",
+    "thumbnailUrl": "https://placehold.co/400x225.png"
+  }
+]

@@ -1,2 +1,19 @@
 
-[]
+[
+    {
+        "id": "jyotirmath-video-1",
+        "title": "A Message from the Himalayas",
+        "date": "2024-04-20",
+        "url": "https://www.youtube.com/embed/R2vXbFp5C9o?autoplay=1",
+        "description": "The Shankaracharya delivers a message of peace and spiritual discipline from the serene environment of Jyotirmath.",
+        "thumbnailUrl": "https://placehold.co/400x225.png"
+    },
+    {
+        "id": "jyotirmath-video-2",
+        "title": "Kumbh Mela Preparations",
+        "date": "2025-01-10",
+        "url": "https://www.youtube.com/embed/e64BswsM7Gw?autoplay=1",
+        "description": "A look at the preparations and significance of the camp established by the Jyotirmath Peetham for the 2025 Maha Kumbh Mela.",
+        "thumbnailUrl": "https://placehold.co/400x225.png"
+    }
+]

@@ -1,2 +1,19 @@
 
-[]
+[
+    {
+        "id": "puri-video-1",
+        "title": "Highlights from the Annual Rath Yatra",
+        "date": "2024-07-07",
+        "url": "https://www.youtube.com/embed/ksM0iV8nUeA?autoplay=1",
+        "description": "A video showcasing the magnificent chariots and the devotional fervor of the millions who participate in the Puri Rath Yatra.",
+        "thumbnailUrl": "https://placehold.co/400x225.png"
+    },
+    {
+        "id": "puri-video-2",
+        "title": "Swami Nischalananda Saraswati on Dharma",
+        "date": "2024-05-10",
+        "url": "https://www.youtube.com/embed/rokGy0huYEA?autoplay=1",
+        "description": "A powerful talk by the Shankaracharya on the role of Dharma in modern society and the path of righteousness.",
+        "thumbnailUrl": "https://placehold.co/400x225.png"
+    }
+]

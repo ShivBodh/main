@@ -1,2 +1,30 @@
 
-[]
+[
+  {
+    "id": "dwaraka-photo-1",
+    "date": "2024-08-26",
+    "title": "Shankaracharya Performs Aarti at Dwarkadhish Temple",
+    "description": "The Shankaracharya of Dwaraka performing the evening Aarti at the main Dwarkadhish temple during Janmashtami celebrations.",
+    "imageUrl": "https://images.unsplash.com/photo-1599321683993-274744743e49?q=80&w=600&h=400&fit=crop",
+    "thumbnailUrl": "https://images.unsplash.com/photo-1599321683993-274744743e49?q=80&w=400&h=300&fit=crop",
+    "aiHint": "hindu ritual aarti"
+  },
+  {
+    "id": "dwaraka-photo-2",
+    "date": "2024-07-20",
+    "title": "View of the Gomti Ghat at Sunset",
+    "description": "A serene evening view of the Gomti Ghat, a sacred bathing spot for pilgrims visiting Dwaraka.",
+    "imageUrl": "https://images.unsplash.com/photo-1582056294548-c89d2759714d?q=80&w=600&h=400&fit=crop",
+    "thumbnailUrl": "https://images.unsplash.com/photo-1582056294548-c89d2759714d?q=80&w=400&h=300&fit=crop",
+    "aiHint": "ganges river ghat"
+  },
+  {
+    "id": "dwaraka-photo-3",
+    "date": "2024-08-26",
+    "title": "Devotees During Janmashtami Celebrations",
+    "description": "A large gathering of devotees celebrating the birth of Lord Krishna with fervor and devotion.",
+    "imageUrl": "https://images.unsplash.com/photo-1598653222372-687d6928d254?q=80&w=600&h=400&fit=crop",
+    "thumbnailUrl": "https://images.unsplash.com/photo-1598653222372-687d6928d254?q=80&w=400&h=300&fit=crop",
+    "aiHint": "hindu festival crowd"
+  }
+]

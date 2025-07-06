@@ -1,2 +1,30 @@
 
-[]
+[
+  {
+    "id": "puri-photo-1",
+    "date": "2024-07-01",
+    "title": "Rath Yatra Preparations at Govardhan Peetham",
+    "description": "Volunteers and artisans giving final touches to the grand chariots for the annual Rath Yatra festival.",
+    "imageUrl": "https://images.unsplash.com/photo-1589283733839-845778a36b32?q=80&w=600&h=400&fit=crop",
+    "thumbnailUrl": "https://images.unsplash.com/photo-1589283733839-845778a36b32?q=80&w=400&h=300&fit=crop",
+    "aiHint": "hindu chariot festival"
+  },
+  {
+    "id": "puri-photo-2",
+    "date": "2024-09-05",
+    "title": "Shankaracharya Offering Prayers to Lord Jagannath",
+    "description": "Swami Nischalananda Saraswati performing special prayers inside the precincts of the ancient Jagannath Temple.",
+    "imageUrl": "https://images.unsplash.com/photo-1595183840399-8800b659725f?q=80&w=600&h=400&fit=crop",
+    "thumbnailUrl": "https://images.unsplash.com/photo-1595183840399-8800b659725f?q=80&w=400&h=300&fit=crop",
+    "aiHint": "priest worship"
+  },
+  {
+    "id": "puri-photo-3",
+    "date": "2024-11-18",
+    "title": "A Discourse on the Rig Veda",
+    "description": "The Shankaracharya delivering a profound discourse on the hymns of the Rig Veda to an assembly of scholars and devotees.",
+    "imageUrl": "https://images.unsplash.com/photo-1524309326201-903334882c3c?q=80&w=600&h=400&fit=crop",
+    "thumbnailUrl": "https://images.unsplash.com/photo-1524309326201-903334882c3c?q=80&w=400&h=300&fit=crop",
+    "aiHint": "spiritual discourse"
+  }
+]
