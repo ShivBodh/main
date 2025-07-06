@@ -17,8 +17,9 @@
  *     `npm run genkit:watch`
  *
  * 2.  **Configure Scraper Settings:**
- *     Update the `CONFIG` object below with your target URL, Facebook
- *     credentials (in your .env file), and other options.
+ *     Update the `CONFIG` object below with your target URL.
+ *     **Crucially, you must open the `.env` file in the project's root
+ *     directory and replace the placeholder Facebook credentials with your own.**
  *
  * 3.  **Run the Scraper:**
  *     Once the Genkit server is running, open a new terminal and execute this
@@ -56,8 +57,8 @@ const CONFIG = {
   // Set to `false` to see the browser in action. `true` is faster.
   HEADLESS_MODE: true,
   // Your Facebook credentials, loaded from the .env file.
-  FACEBOOK_EMAIL: process.env.FACEBOOK_EMAIL || '',
-  FACEBOOK_PASSWORD: process.env.FACEBOOK_PASSWORD || '',
+  FACEBOOK_EMAIL: process.env.FACEBOOK_EMAIL,
+  FACEBOOK_PASSWORD: process.env.FACEBOOK_PASSWORD,
   // The URL for the local Genkit AI server flow.
   AI_PROCESSOR_URL: 'http://localhost:4000/flows/contentProcessorFlow',
 };
@@ -119,8 +120,9 @@ function downloadImage(url, filepath) {
  * The main scraper function.
  */
 async function runScraper() {
-  if (!CONFIG.FACEBOOK_EMAIL || !CONFIG.FACEBOOK_PASSWORD) {
-    console.error('ERROR: Facebook credentials are not set in your .env file.');
+  if (!CONFIG.FACEBOOK_EMAIL || !CONFIG.FACEBOOK_PASSWORD || CONFIG.FACEBOOK_EMAIL === 'your_email@example.com' || CONFIG.FACEBOOK_PASSWORD === 'your_facebook_password') {
+    console.error('\nERROR: Facebook credentials are not set correctly in your .env file.');
+    console.error('Please open the .env file in the root directory of your project and replace the placeholder values with your actual Facebook login information.\n');
     return;
   }
 
@@ -233,3 +235,5 @@ async function runScraper() {
 }
 
 runScraper().catch(console.error);
+
+    
