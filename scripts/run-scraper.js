@@ -26,9 +26,9 @@
  *     `node scripts/run-scraper.js`
  *
  * 4.  **Check the Output:**
- *     Images will be saved locally to the `SAVE_DIR`. The AI-processed metadata
- *     for all images will be saved as a database in the `OUTPUT_FILE`. This
- *     JSON file can then be uploaded to your cloud database (e.g., Firestore).
+ *     - Images will be saved locally to the `SAVE_DIR`.
+ *     - The AI-processed metadata will be saved as a database in `OUTPUT_FILE`.
+ *     - **The scraped images will automatically appear on the Bodha Calendar page.**
  *
  * For a full architectural overview, please see `docs/scraper-tool-guide.md`.
  */
@@ -200,13 +200,12 @@ async function runScraper() {
             const mediaDoc = {
                 id: `scraped-${Date.now()}`,
                 date: new Date().toISOString().split('T')[0],
+                peetham: 'Sringeri', // Hardcoded for this scraper; could be a parameter
+                type: 'photo', // Essential for the calendar to render correctly
                 title: aiContent.title, // Using AI-generated title
                 description: item.description, // Keeping original description
-                peetham: 'Sringeri',
-                sourceUrl: item.sourceUrl,
-                localPath: savePath,
-                imageUrl: `/scraped_media/${imageName}`,
-                thumbnailUrl: `/scraped_media/${imageName}`,
+                imageUrl: `/scraped_media/${imageName}`, // Path relative to the public folder
+                thumbnailUrl: `/scraped_media/${imageName}`, // Use same image for thumbnail
                 aiHint: aiContent.keywords, // Using AI-generated keywords
             };
             
@@ -222,6 +221,7 @@ async function runScraper() {
     fs.writeFileSync(CONFIG.OUTPUT_FILE, JSON.stringify(allMediaDocs, null, 2));
     
     console.log(`\n[COMPLETE] Scraping finished. ${allMediaDocs.length} records saved to ${CONFIG.OUTPUT_FILE}`);
+    console.log(`[ACTION] Refresh your Bodha Calendar page to see the new images.`);
 
   } catch (error) {
     console.error('[FATAL] An error occurred:', error);
