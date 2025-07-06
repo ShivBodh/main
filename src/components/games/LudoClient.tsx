@@ -41,11 +41,34 @@ const colors = {
     yellow: { bg: 'bg-yellow-400', border: 'border-yellow-600' },
 };
 const safeSpots = [1, 9, 14, 22, 27, 35, 40, 48];
+const startSpots: Record<PlayerColor, number> = { red: 27, green: 1, yellow: 40, blue: 14 };
+
+const boardPath = [
+    [6,1], [6,2], [6,3], [6,4], [6,5],
+    [5,6], [4,6], [3,6], [2,6], [1,6], [0,6],
+    [0,7], [0,8],
+    [1,8], [2,8], [3,8], [4,8], [5,8],
+    [6,9], [6,10], [6,11], [6,12], [6,13], [6,14],
+    [7,14], [8,14],
+    [8,13], [8,12], [8,11], [8,10], [8,9],
+    [9,8], [10,8], [11,8], [12,8], [13,8], [14,8],
+    [14,7], [14,6],
+    [13,6], [12,6], [11,6], [10,6], [9,6],
+    [8,5], [8,4], [8,3], [8,2], [8,1], [8,0],
+    [7,0], [6,0],
+];
+
+const homePaths = {
+    green: [[1,7], [2,7], [3,7], [4,7], [5,7]], // Corrected green path
+    red: [[13,7], [12,7], [11,7], [10,7], [9,7]], // Corrected red path
+    blue: [[7,1], [7,2], [7,3], [7,4], [7,5]], // Corrected blue path
+    yellow: [[7,13], [7,12], [7,11], [7,10], [7,9]], // Corrected yellow path
+};
 
 // --- SUB-COMPONENTS ---
 
 const Pawn = ({ color }: { color: PlayerColor }) => (
-    <div className={cn("h-5 w-5 sm:h-6 sm:w-6 rounded-full flex items-center justify-center border-2 border-black/20 shadow-md", colors[color].bg)}>
+    <div className={cn("h-5 w-5 sm:h-6 sm:w-6 rounded-full flex items-center justify-center border-2 border-black/20 shadow-md shrink-0", colors[color].bg)}>
         <div className="h-1 w-1 sm:h-2 sm:w-2 rounded-full bg-white/50" />
     </div>
 );
@@ -65,10 +88,10 @@ const HomeBase = ({ color, pawns }: { color: PlayerColor, pawns: PawnState[] }) 
     );
 };
 
-const PathSquare = ({ children, color, isSafe }: { children?: React.ReactNode; color?: string; isSafe?: boolean }) => (
-    <div className={cn("w-full h-full border border-black/10 flex items-center justify-center relative", color || 'bg-background')}>
+const PathSquare = ({ children, color, isSafe, isStart }: { children?: React.ReactNode; color?: string; isSafe?: boolean, isStart?: boolean }) => (
+    <div className={cn("w-full h-full border border-black/10 flex items-center justify-center relative p-0.5", color || 'bg-background', isStart && color)}>
         {isSafe && <Star className="absolute h-3 w-3 sm:h-4 sm:w-4 text-black/20" />}
-        <div className="z-10">{children}</div>
+        <div className="z-10 flex flex-wrap items-center justify-center gap-0.5">{children}</div>
     </div>
 );
 
@@ -94,31 +117,83 @@ const Dice = ({ value, isRolling, onRoll }: { value: number | null, isRolling: b
     );
 };
 
-const boardPath = [
-    // Yellow path
-    [6,1], [6,2], [6,3], [6,4], [6,5],
-    [5,6], [4,6], [3,6], [2,6], [1,6], [0,6],
-    [0,7], [0,8],
-    // Green path
-    [1,8], [2,8], [3,8], [4,8], [5,8],
-    [6,9], [6,10], [6,11], [6,12], [6,13], [6,14],
-    [7,14], [8,14],
-    // Red path
-    [8,13], [8,12], [8,11], [8,10], [8,9],
-    [9,8], [10,8], [11,8], [12,8], [13,8], [14,8],
-    [14,7], [14,6],
-    // Blue path
-    [13,6], [12,6], [11,6], [10,6], [9,6],
-    [8,5], [8,4], [8,3], [8,2], [8,1], [8,0],
-    [7,0],
-];
+const LudoBoard = ({ gameState }: { gameState: GameState }) => {
+  const pawnsOnBoard = useMemo(() => {
+    const pawnMap = new Map<string, PlayerColor[]>();
+    Object.values(gameState).forEach(player => {
+      player.pawns.forEach(pawn => {
+        let key = '';
+        if (pawn.state === 'active' || pawn.state === 'safe') {
+          const [row, col] = boardPath[pawn.pos];
+          key = `${row}-${col}`;
+        } else if (pawn.state === 'finished') {
+          const path = homePaths[player.color];
+          const [row, col] = path[pawn.pos - 52];
+          key = `${row}-${col}`;
+        }
+        if (key) {
+            if (!pawnMap.has(key)) pawnMap.set(key, []);
+            pawnMap.get(key)!.push(player.color);
+        }
+      });
+    });
+    return pawnMap;
+  }, [gameState]);
 
-const homePaths = {
-    yellow: [[7,1], [7,2], [7,3], [7,4], [7,5]],
-    green: [[1,7], [2,7], [3,7], [4,7], [5,7]],
-    red: [[9,7], [10,7], [11,7], [12,7], [13,7]],
-    blue: [[7,13], [7,12], [7,11], [7,10], [7,9]],
-}
+  const renderPawns = (row: number, col: number) => {
+    const key = `${row}-${col}`;
+    const pawns = pawnsOnBoard.get(key);
+    if (!pawns) return null;
+    return pawns.map((color, i) => <Pawn key={`${color}-${i}`} color={color} />);
+  };
+
+  return (
+    <div className="grid grid-cols-15 grid-rows-15 aspect-square w-full max-w-2xl mx-auto p-2 sm:p-4 bg-muted rounded-lg shadow-inner">
+      {/* Bases */}
+      <div className="col-start-1 col-span-6 row-start-1 row-span-6">
+        <HomeBase color="yellow" pawns={gameState.yellow.pawns} />
+      </div>
+      <div className="col-start-10 col-span-6 row-start-1 row-span-6">
+        <HomeBase color="green" pawns={gameState.green.pawns} />
+      </div>
+      <div className="col-start-1 col-span-6 row-start-10 row-span-6">
+        <HomeBase color="blue" pawns={gameState.blue.pawns} />
+      </div>
+      <div className="col-start-10 col-span-6 row-start-10 row-span-6">
+        <HomeBase color="red" pawns={gameState.red.pawns} />
+      </div>
+
+      {/* Center Home Triangle */}
+      <div className="col-start-7 col-span-3 row-start-7 row-span-3">
+        <HomeTriangle />
+      </div>
+      
+      {/* Main Path */}
+      {boardPath.map(([row, col], i) => {
+        const startColor = Object.keys(startSpots).find(c => startSpots[c as PlayerColor] === i+1) as PlayerColor | undefined;
+        return (
+            <div key={`path-${i}`} style={{ gridRow: row + 1, gridColumn: col + 1 }}>
+                <PathSquare isSafe={safeSpots.includes(i + 1)} isStart={!!startColor} color={startColor ? colors[startColor].bg : undefined}>
+                    {renderPawns(row, col)}
+                </PathSquare>
+            </div>
+        )
+      })}
+      
+      {/* Home Paths */}
+      {Object.entries(homePaths).map(([color, path]) => (
+        path.map(([row, col], i) => (
+          <div key={`${color}-home-${i}`} style={{ gridRow: row + 1, gridColumn: col + 1 }}>
+            <PathSquare color={colors[color as PlayerColor].bg}>
+              {renderPawns(row, col)}
+            </PathSquare>
+          </div>
+        ))
+      ))}
+    </div>
+  );
+};
+
 
 // --- MAIN COMPONENT ---
 export default function LudoClient() {
@@ -168,43 +243,6 @@ export default function LudoClient() {
         return names[0][0];
     };
 
-    const boardGrid = useMemo(() => {
-        const grid: (React.ReactNode | null)[][] = Array(15).fill(0).map(() => Array(15).fill(null));
-        // Bases
-        grid[0][0] = <HomeBase color="yellow" pawns={gameState.yellow.pawns} />;
-        grid[0][9] = <HomeBase color="green" pawns={gameState.green.pawns} />;
-        grid[9][0] = <HomeBase color="blue" pawns={gameState.blue.pawns} />;
-        grid[9][9] = <HomeBase color="red" pawns={gameState.red.pawns} />;
-        // Home Triangle
-        grid[7][7] = <HomeTriangle />;
-        // Paths
-        boardPath.forEach((pos, i) => {
-            const [row, col] = pos;
-            grid[row][col] = <PathSquare isSafe={safeSpots.includes(i + 1)} />;
-        });
-        Object.entries(homePaths).forEach(([color, path]) => {
-            path.forEach(([row, col]) => {
-                 grid[row][col] = <PathSquare color={colors[color as PlayerColor].bg} />;
-            })
-        });
-
-        // Place Pawns
-        Object.values(gameState).forEach(player => {
-            player.pawns.forEach(pawn => {
-                if (pawn.state === 'active' || pawn.state === 'safe') {
-                    const [row, col] = boardPath[pawn.pos];
-                     grid[row][col] = <PathSquare isSafe={safeSpots.includes(pawn.pos + 1)}><Pawn color={player.color} /></PathSquare>;
-                }
-                if (pawn.state === 'finished') {
-                    const [row, col] = homePaths[player.color][pawn.pos-52];
-                    grid[row][col] = <PathSquare color={colors[player.color].bg}><Pawn color={player.color} /></PathSquare>;
-                }
-            })
-        })
-
-        return grid;
-    }, [gameState]);
-    
     return (
         <div className="container mx-auto max-w-7xl py-12 px-4">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
@@ -215,28 +253,7 @@ export default function LudoClient() {
                             <CardDescription>{status}</CardDescription>
                         </CardHeader>
                         <CardContent>
-                             <div className="aspect-square w-full max-w-2xl mx-auto p-2 sm:p-4 bg-muted rounded-lg shadow-inner">
-                                <div className="grid h-full w-full grid-cols-15">
-                                    {boardGrid.flat().map((cell, i) => {
-                                        const row = Math.floor(i / 15);
-                                        const col = i % 15;
-                                        let gridClass = '';
-                                        if (row < 6 && col < 6) gridClass = 'col-start-1 col-span-6 row-start-1 row-span-6';
-                                        else if (row < 6 && col > 8) gridClass = 'col-start-10 col-span-6 row-start-1 row-span-6';
-                                        else if (row > 8 && col < 6) gridClass = 'col-start-1 col-span-6 row-start-10 row-span-6';
-                                        else if (row > 8 && col > 8) gridClass = 'col-start-10 col-span-6 row-start-10 row-span-6';
-                                        else if (row >=6 && row < 9 && col >=6 && col < 9) gridClass = 'col-start-7 col-span-3 row-start-7 row-span-3';
-
-                                        if (cell && gridClass) {
-                                            return <div key={i} className={gridClass}>{cell}</div>
-                                        }
-                                        if(cell) {
-                                            return <div key={i}>{cell}</div>
-                                        }
-                                        return <div key={i} />;
-                                    })}
-                                </div>
-                            </div>
+                            <LudoBoard gameState={gameState} />
                         </CardContent>
                     </Card>
                 </main>
@@ -285,15 +302,3 @@ export default function LudoClient() {
         </div>
     );
 }
-
-// Extend grid template columns for the Ludo board
-const tailwindConfig = `
-@layer base {
-  .grid-cols-15 {
-    grid-template-columns: repeat(15, minmax(0, 1fr));
-  }
-}
-`
-// This setup doesn't allow adding to tailwind.config.ts directly,
-// but the concept is to enable `grid-cols-15` for the board.
-// The component uses inline styles as a workaround.
