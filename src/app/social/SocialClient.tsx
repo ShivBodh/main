@@ -393,15 +393,6 @@ function ProfileTab() {
                     <CardDescription>Challenge our resident AI, Bodhi, to a game of strategy and wisdom.</CardDescription>
                 </CardHeader>
                 <CardContent className="grid gap-4 md:grid-cols-2">
-                    <Link href="/games/chess" className="block group">
-                        <div className="flex items-center gap-4 p-4 rounded-lg border bg-muted/50 hover:bg-accent hover:text-accent-foreground transition-colors">
-                            <Puzzle className="h-8 w-8 text-primary group-hover:text-accent-foreground" />
-                            <div>
-                                <h3 className="font-semibold">Play Chess</h3>
-                                <p className="text-sm text-muted-foreground group-hover:text-accent-foreground">A classic game of strategy.</p>
-                            </div>
-                        </div>
-                    </Link>
                     <Link href="/games/ludo" className="block group">
                         <div className="flex items-center gap-4 p-4 rounded-lg border bg-muted/50 hover:bg-accent hover:text-accent-foreground transition-colors">
                             <Dice5 className="h-8 w-8 text-primary group-hover:text-accent-foreground" />
@@ -914,7 +905,7 @@ function CampaignsTab({ user }: { user: any }) {
                                         <span>{campaign.greenFlags}</span>
                                     </Button>
                                     <Button onClick={() => handleFlag(campaign.id, 'red')} variant="outline" className={cn("gap-2", campaign.userFlagged === 'red' ? "bg-red-100 text-red-700 border-red-300 hover:bg-red-200" : "text-gray-500 hover:bg-red-50")}>
-                                        <Flag className="text-red-600 transform scale-y-[-1]" />
+                                        <Flag className="text-red-600 transform -scale-y-100" />
                                         <span>{campaign.redFlags}</span>
                                     </Button>
                                 </div>
@@ -965,7 +956,7 @@ function NotificationsTab() {
                                             <Flag className="mr-2 text-green-600" /> Accept
                                         </Button>
                                         <Button size="sm" variant="outline" onClick={() => handleRequest(notif.id, false)} className="border-red-600 text-red-600 hover:bg-red-100 hover:text-red-700">
-                                            <Flag className="mr-2 text-red-600 transform scale-y-[-1]" /> Decline
+                                            <Flag className="mr-2 text-red-600 transform -scale-y-100" /> Decline
                                         </Button>
                                     </div>
                                 )}

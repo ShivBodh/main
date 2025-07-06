@@ -1,16 +1,15 @@
 
 import type { Metadata } from 'next';
-import ChessClient from '@/components/games/ChessClient';
 
 export const metadata: Metadata = {
-  title: 'Play Chess | Sanatan Social',
-  description: 'Play a game of chess against Bodhi AI.',
+  title: 'Game Removed',
   robots: {
     index: false,
     follow: false,
   }
 };
 
+// This page has been removed.
 export default function ChessPage() {
-  return <ChessClient />;
+  return null;
 }

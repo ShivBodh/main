@@ -23,7 +23,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/contact',
     '/privacy-policy',
     '/user-agreement',
-    '/games/chess',
     '/games/ludo',
   ].map((route) => ({
     url: `${siteUrl}${route}`,
