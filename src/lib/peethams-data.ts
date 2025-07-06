@@ -23,9 +23,18 @@ export const peethams = [
       peetham: "Śṛṅgeri Śāradā Pīṭham",
       appointment: "Succeeded Jagadguru Śrī Bhāratī Tīrtha Svāmī in November 2015.",
       focus: "Spiritual leadership, preserving Sanatana Dharma, promoting Vedic studies and Sanskrit, overseeing the Śṛṅgeri Maṭha's vast network of temples and educational institutions. Known for his erudition and accessibility.",
-      heroImage: "https://placehold.co/400x175.png",
-      heroImageHint: "Sringeri temple",
-      galleryImages: Array(9).fill({ url: "https://placehold.co/100x100.png", hint: "temple architecture" }),
+      heroImage: "https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/sringeri.png",
+      galleryImages: [
+        { url: "https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/sringeri-gallery-1.png" },
+        { url: "https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/sringeri-gallery-2.png" },
+        { url: "https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/sringeri-gallery-3.png" },
+        { url: "https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/sringeri-gallery-4.png" },
+        { url: "https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/sringeri-gallery-5.png" },
+        { url: "https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/sringeri-gallery-6.png" },
+        { url: "https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/sringeri-gallery-7.png" },
+        { url: "https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/sringeri-gallery-8.png" },
+        { url: "https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/sringeri-gallery-9.png" },
+      ]
     }
   },
   {
@@ -34,7 +43,7 @@ export const peethams = [
     link: '/peethams/dwaraka',
     icon: 'Shell',
     image: 'https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/sharda-peetha.png',
-    acharyaImage: 'https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/sharda-peetha.png',
+    acharyaImage: 'https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/dwaraka-acharya.png',
     acharyaAiHint: 'acharya portrait',
     lineage: [
         { name: 'Sri Adi Shankaracharya', period: 'c. 509 BCE', description: 'The founder who established this western seat of learning.' },
@@ -49,9 +58,18 @@ export const peethams = [
       peetham: "Kālikā Maṭha, Dwārkā",
       appointment: "Succeeded the revered Jagadguru Śrī Swarūpānanda Sarasvatī Svāmī in February 2024.",
       focus: "Currently focused on establishing his leadership, continuing the Maṭha's traditions, spiritual guidance, and managing the vast responsibilities of the Paścimāmnāya Pīṭha. Known for his humility and devotion.",
-      heroImage: "https://placehold.co/400x175.png",
-      heroImageHint: "Dwaraka ocean",
-      galleryImages: Array(9).fill({ url: "https://placehold.co/100x100.png", hint: "ocean temple" }),
+      heroImage: "https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/dwaraka-acharya.png",
+      galleryImages: [
+          { url: "https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/dwaraka-gallery-1.png" },
+          { url: "https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/dwaraka-gallery-2.png" },
+          { url: "https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/dwaraka-gallery-3.png" },
+          { url: "https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/dwaraka-gallery-4.png" },
+          { url: "https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/dwaraka-gallery-5.png" },
+          { url: "https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/dwaraka-gallery-6.png" },
+          { url: "https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/dwaraka-gallery-7.png" },
+          { url: "https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/dwaraka-gallery-8.png" },
+          { url: "https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/dwaraka-gallery-9.png" },
+      ]
     }
   },
   {
@@ -75,9 +93,18 @@ export const peethams = [
       peetham: "Govardhana Maṭha, Pūri",
       appointment: "Ascended the Pīṭha in 1992.",
       focus: "Strong emphasis on traditional Vedic rituals (Yajñas), scholarly discourse on Advaita Vedanta, social issues, environmental consciousness ('Save Ganga' movement), and vocal commentary on contemporary challenges to Hinduism.",
-      heroImage: "https://placehold.co/400x175.png",
-      heroImageHint: "Puri beach",
-      galleryImages: Array(9).fill({ url: "https://placehold.co/100x100.png", hint: "Jagannath temple" }),
+      heroImage: "https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/puri.png",
+      galleryImages: [
+        { url: "https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/puri-gallery-1.png" },
+        { url: "https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/puri-gallery-2.png" },
+        { url: "https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/puri-gallery-3.png" },
+        { url: "https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/puri-gallery-4.png" },
+        { url: "https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/puri-gallery-5.png" },
+        { url: "https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/puri-gallery-6.png" },
+        { url: "https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/puri-gallery-7.png" },
+        { url: "https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/puri-gallery-8.png" },
+        { url: "https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/puri-gallery-9.png" },
+      ]
     }
   },
   {
@@ -101,9 +128,18 @@ export const peethams = [
       peetham: "Jyotirmaṭha, Badarikāśrama",
       appointment: "Formally ascended the Pīṭha in March 2024.",
       focus: "Revitalizing the Jyotirmaṭha traditions, establishing his presence, providing spiritual guidance, and overseeing the Pīṭha's activities. Focus on Advaita philosophy and pilgrimage at Badrinath.",
-      heroImage: "https://placehold.co/400x175.png",
-      heroImageHint: "Himalayas mountains",
-      galleryImages: Array(9).fill({ url: "https://placehold.co/100x100.png", hint: "mountain valley" }),
+      heroImage: "https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/jyotirpeetha.png",
+      galleryImages: [
+        { url: "https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/jyotirmath-gallery-1.png" },
+        { url: "https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/jyotirmath-gallery-2.png" },
+        { url: "https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/jyotirmath-gallery-3.png" },
+        { url: "https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/jyotirmath-gallery-4.png" },
+        { url: "https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/jyotirmath-gallery-5.png" },
+        { url: "https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/jyotirmath-gallery-6.png" },
+        { url: "https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/jyotirmath-gallery-7.png" },
+        { url: "https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/jyotirmath-gallery-8.png" },
+        { url: "https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/jyotirmath-gallery-9.png" },
+      ]
     }
   },
 ];
