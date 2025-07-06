@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { peethamQuiz, QuizQuestion } from '@/lib/quiz-data';
-import { CheckCircle, XCircle, RotateCcw } from 'lucide-react';
+import { CheckCircle, XCircle, RotateCcw, ArrowRight } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useAuth } from '@/context/AuthContext';
 import { useToast } from '@/hooks/use-toast';
@@ -22,56 +22,59 @@ export default function QuizClient() {
   const [score, setScore] = useState(0);
   const [quizFinished, setQuizFinished] = useState(false);
   const [showResult, setShowResult] = useState(false);
+  const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
 
   useEffect(() => {
     // Shuffle questions only on the client side to avoid hydration mismatch
     setQuestions(prev => [...prev].sort(() => Math.random() - 0.5));
     setIsClient(true);
   }, []);
-
-  const handleNext = () => {
-    let currentScore = score;
-    if (showResult) { // only count score if result was shown
-        if (selectedAnswer === questions[currentQuestionIndex].correctAnswer) {
-            currentScore = score + 1;
-            setScore(currentScore);
+  
+  useEffect(() => {
+      // Save score to local storage when the quiz is finished.
+      if (quizFinished && user) {
+        const key = `quizScore_${user.uid}`;
+        const existingScore = parseInt(localStorage.getItem(key) || '0', 10);
+        if (score > existingScore) {
+          localStorage.setItem(key, score.toString());
+          toast({
+            title: 'New High Score!',
+            description: `Your new score of ${score} has been saved. Check your achievements on your profile!`,
+          });
         }
-    }
-    
+      }
+  }, [quizFinished, score, user, toast]);
+
+
+  const handleNextQuestion = () => {
     setShowResult(false);
     setSelectedAnswer(null);
+    setIsCorrect(null);
 
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex(prev => prev + 1);
     } else {
       setQuizFinished(true);
-      // Save final score
-      if (user) {
-          const finalScore = currentScore;
-          const key = `quizScore_${user.uid}`;
-          const existingScore = parseInt(localStorage.getItem(key) || '0', 10);
-          if (finalScore > existingScore) {
-              localStorage.setItem(key, finalScore.toString());
-              toast({
-                title: 'New High Score!',
-                description: `Your new high score of ${finalScore} has been saved to your profile.`,
-              });
-          }
-      }
     }
   };
 
-  const handleAnswerSelection = () => {
+  const handleCheckAnswer = () => {
     if (!selectedAnswer) return;
+
+    const correct = selectedAnswer === questions[currentQuestionIndex].correctAnswer;
+    setIsCorrect(correct);
+    if (correct) {
+      setScore(prev => prev + 1);
+    }
     setShowResult(true);
 
-    if (selectedAnswer === questions[currentQuestionIndex].correctAnswer) {
-        // If correct, we can move to the next question automatically after a short delay
-        setTimeout(() => {
-            handleNext();
-        }, 1500);
+    // Auto-advance if correct
+    if (correct) {
+      setTimeout(() => {
+        handleNextQuestion();
+      }, 1500);
     }
-  }
+  };
 
   const restartQuiz = () => {
     setCurrentQuestionIndex(0);
@@ -79,6 +82,7 @@ export default function QuizClient() {
     setScore(0);
     setQuizFinished(false);
     setShowResult(false);
+    setIsCorrect(null);
     // Re-shuffle questions for a new game
     setQuestions(prev => [...prev].sort(() => Math.random() - 0.5));
   };
@@ -151,21 +155,28 @@ export default function QuizClient() {
         </div>
       <Card>
         <CardHeader>
-          <p className="text-sm text-muted-foreground">Question {currentQuestionIndex + 1} of {questions.length}</p>
+          <p className="text-sm text-muted-foreground font-semibold">
+            Question {currentQuestionIndex + 1} of {questions.length}
+            <span className="mx-2">|</span>
+            Score: {score}
+          </p>
           <CardTitle className="font-headline text-2xl mt-2">{currentQuestion.question}</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <RadioGroup value={selectedAnswer ?? ''} onValueChange={setSelectedAnswer} disabled={showResult}>
             {currentQuestion.options.map((option, index) => {
-              const isCorrect = option === currentQuestion.correctAnswer;
-              const isSelected = option === selectedAnswer;
+              const isSelectedCorrect = showResult && option === currentQuestion.correctAnswer;
+              const isSelectedIncorrect = showResult && option === selectedAnswer && selectedAnswer !== currentQuestion.correctAnswer;
               
               return (
-                <div key={index} className={`flex items-center space-x-3 p-3 rounded-md border transition-colors ${showResult && isSelected && !isCorrect ? 'border-destructive bg-destructive/10' : ''} ${showResult && isCorrect ? 'border-primary bg-primary/10' : ''}`}>
+                <div key={index} className={`flex items-center space-x-3 p-3 rounded-md border transition-colors 
+                  ${isSelectedIncorrect ? 'border-destructive bg-destructive/10' : ''} 
+                  ${isSelectedCorrect ? 'border-primary bg-primary/10' : ''}`
+                }>
                   <RadioGroupItem value={option} id={`option-${index}`} />
                   <Label htmlFor={`option-${index}`} className="flex-1 cursor-pointer">{option}</Label>
-                  {showResult && isCorrect && <CheckCircle className="h-5 w-5 text-primary" />}
-                  {showResult && isSelected && !isCorrect && <XCircle className="h-5 w-5 text-destructive" />}
+                  {isSelectedCorrect && <CheckCircle className="h-5 w-5 text-primary" />}
+                  {isSelectedIncorrect && <XCircle className="h-5 w-5 text-destructive" />}
                 </div>
               );
             })}
@@ -179,11 +190,14 @@ export default function QuizClient() {
         </CardContent>
         <CardFooter>
             {showResult ? (
-                 <Button onClick={handleNext} className="w-full">
-                    {currentQuestionIndex < questions.length - 1 ? 'Next Question' : 'Finish Quiz'}
-                </Button>
+                isCorrect === false && (
+                    <Button onClick={handleNextQuestion} className="w-full">
+                        {currentQuestionIndex < questions.length - 1 ? 'Next Question' : 'Finish Quiz'}
+                        <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                )
             ) : (
-                <Button onClick={handleAnswerSelection} disabled={!selectedAnswer} className="w-full">
+                <Button onClick={handleCheckAnswer} disabled={!selectedAnswer} className="w-full">
                     Check Answer
                 </Button>
             )}

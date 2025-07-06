@@ -914,7 +914,7 @@ function CampaignsTab({ user }: { user: any }) {
                                         <span>{campaign.greenFlags}</span>
                                     </Button>
                                     <Button onClick={() => handleFlag(campaign.id, 'red')} variant="outline" className={cn("gap-2", campaign.userFlagged === 'red' ? "bg-red-100 text-red-700 border-red-300 hover:bg-red-200" : "text-gray-500 hover:bg-red-50")}>
-                                        <Flag className="text-red-600" />
+                                        <Flag className="text-red-600 transform scale-y-[-1]" />
                                         <span>{campaign.redFlags}</span>
                                     </Button>
                                 </div>
@@ -965,7 +965,7 @@ function NotificationsTab() {
                                             <Flag className="mr-2 text-green-600" /> Accept
                                         </Button>
                                         <Button size="sm" variant="outline" onClick={() => handleRequest(notif.id, false)} className="border-red-600 text-red-600 hover:bg-red-100 hover:text-red-700">
-                                            <Flag className="mr-2 text-red-600" /> Decline
+                                            <Flag className="mr-2 text-red-600 transform scale-y-[-1]" /> Decline
                                         </Button>
                                     </div>
                                 )}

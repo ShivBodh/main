@@ -7,11 +7,11 @@
  */
 
 import {ai} from '@/ai/genkit';
-import {z} from 'zod';
+import {z}from 'zod';
 
 const GameMoveInputSchema = z.object({
   game: z.enum(['chess', 'ludo']),
-  gameState: z.string().describe('The current state of the game board, e.g., in FEN notation for chess.'),
+  gameState: z.string().describe('The current state of the game board, e.g., in FEN notation for chess, or a description of the last move.'),
 });
 export type GameMoveInput = z.infer<typeof GameMoveInputSchema>;
 
@@ -47,18 +47,7 @@ const bodhiMoveFlow = ai.defineFlow(
     outputSchema: GameMoveOutputSchema,
   },
   async (input) => {
-    // For now, this is a placeholder. A real implementation would call the prompt.
-    // const {output} = await prompt(input, { model: 'googleai/gemini-2.0-flash' });
-    // return output!;
-    if (input.game === 'chess') {
-        return {
-            move: 'e4',
-            commentary: 'A classic opening! Just as a journey of a thousand miles begins with a single step, a game of chess begins with a single pawn move. Your turn!'
-        }
-    }
-    return {
-        move: 'Roll a 6, move a piece out.',
-        commentary: 'The dice of karma rolls! Let us see where this path takes us. Good luck!'
-    }
+    const {output} = await prompt(input, { model: 'googleai/gemini-2.0-flash' });
+    return output!;
   }
 );
