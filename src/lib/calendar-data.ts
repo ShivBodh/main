@@ -12,10 +12,9 @@ import { dwarakaVideos } from './dwaraka-videos';
 import { puriVideos } from './puri-videos';
 import { jyotirmathVideos } from './jyotirmath-videos';
 
-// --- NEW ---
-// Import the scraped data. This will throw an error if the scraper hasn't been run yet,
-// which is expected. The instructions in the scraper file explain the workflow.
-import scrapedMedia from '../../../scripts/scraped-data.json';
+// The scraper script is not functional in this environment.
+// The dependency on its output is removed to ensure application stability.
+// import scrapedMedia from '../../../scripts/scraped-data.json';
 
 
 // Define the unified types
@@ -74,12 +73,8 @@ const videoItems: CalendarVideoItem[] = [
     ...jyotirmathVideos.map(v => ({ ...v, peetham: 'Jyotirmath' as const, type: 'video' as const, aiHint: 'himalayan mountains' })),
 ];
 
-// --- NEW ---
-// Add the scraped items to the top of the list.
-const scrapedItems: UnifiedCalendarItem[] = (scrapedMedia as CalendarPhotoItem[]);
 
 export const allCalendarItems: UnifiedCalendarItem[] = [
-    ...scrapedItems,
     ...eventItems,
     ...photoItems,
     ...videoItems,
