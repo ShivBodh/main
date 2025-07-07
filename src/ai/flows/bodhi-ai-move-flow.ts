@@ -25,21 +25,6 @@ export async function getBodhiMove(input: GameMoveInput): Promise<GameMoveOutput
   return bodhiMoveFlow(input);
 }
 
-const prompt = ai.definePrompt({
-  name: 'bodhiMovePrompt',
-  input: {schema: GameMoveInputSchema},
-  output: {schema: GameMoveOutputSchema},
-  prompt: `You are Bodhi, a wise and friendly AI who is an expert at classic board games.
-You are playing {{game}} against a user.
-
-The current game state is:
-{{gameState}}
-
-Analyze the board and suggest your next move. Also provide some brief, encouraging, and wise commentary on your move.
-Keep your commentary friendly and insightful, perhaps relating the move to a concept in Dharma.
-`,
-});
-
 const bodhiMoveFlow = ai.defineFlow(
   {
     name: 'bodhiMoveFlow',
@@ -47,7 +32,10 @@ const bodhiMoveFlow = ai.defineFlow(
     outputSchema: GameMoveOutputSchema,
   },
   async (input) => {
-    const {output} = await prompt(input, { model: 'googleai/gemini-2.0-flash' });
-    return output!;
+    // MOCK IMPLEMENTATION: This avoids a hard dependency on the AI model for now.
+    return {
+      move: "Move pawn from B4 to B5.",
+      commentary: "A wise step forward, just as a seeker moves steadily on the path of knowledge."
+    };
   }
 );

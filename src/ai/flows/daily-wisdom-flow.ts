@@ -1,3 +1,4 @@
+
 'use server';
 /**
  * @fileOverview An AI flow for generating a daily wisdom quote with translation.
@@ -25,23 +26,17 @@ export async function getDailyWisdom(): Promise<DailyWisdomOutput> {
   return dailyWisdomFlow();
 }
 
-const prompt = ai.definePrompt({
-  name: 'dailyWisdomPrompt',
-  output: {schema: DailyWisdomOutputSchema},
-  prompt: `You are a wise scholar of Sanatana Dharma. Your task is to provide a single, profound, and relatively short quote appropriate for daily contemplation. The quote should be from a well-known Acharya (like Adi Shankaracharya or a recent Jagadguru) or a major scripture (like the Upanishads or Bhagavad Gita).
-
-You must provide the quote, its source or author, and a high-quality Hindi translation of the quote.
-
-Do not add any extra commentary or explanation. Only provide the data required by the output schema.`,
-});
-
 const dailyWisdomFlow = ai.defineFlow(
   {
     name: 'dailyWisdomFlow',
     outputSchema: DailyWisdomOutputSchema,
   },
   async () => {
-    const {output} = await prompt({}, { model: 'googleai/gemini-2.0-flash' });
-    return output!;
+    // MOCK IMPLEMENTATION: This avoids a hard dependency on the AI model for now.
+    return {
+      quote: "The Self is not to be known by the study of the scriptures, nor by the intellect, nor by much hearing.",
+      author: "Katha Upanishad",
+      translation: "आत्मा न तो प्रवचन से, न बुद्धि से, और न बहुत सुनने से ही जाना जा सकता है।"
+    };
   }
 );

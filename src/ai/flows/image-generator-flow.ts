@@ -1,3 +1,4 @@
+
 'use server';
 /**
  * @fileOverview An AI flow for generating images from a text prompt.
@@ -28,18 +29,11 @@ const imageGeneratorFlow = ai.defineFlow(
     outputSchema: ImageResponseSchema,
   },
   async ({prompt}) => {
-    const {media} = await ai.generate({
-      model: 'googleai/gemini-2.0-flash-preview-image-generation',
-      prompt: `Generate a photorealistic image of: ${prompt}. Ensure the image is aesthetically pleasing, high quality, and suitable for a spiritual website.`,
-      config: {
-        responseModalities: ['TEXT', 'IMAGE'],
-      },
-    });
-
-    if (!media?.url) {
-        throw new Error('Image generation failed to return an image.');
-    }
-
-    return {imageUrl: media.url};
+    // MOCK IMPLEMENTATION: Returns a placeholder image to avoid dependency on a live AI model.
+    console.log(`[AI Flow - Image] Received prompt, returning mock image: ${prompt}`);
+    return {
+      // This is a data URI for a simple placeholder image.
+      imageUrl: 'https://placehold.co/512x512.png',
+    };
   }
 );
