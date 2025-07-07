@@ -30,19 +30,6 @@ export async function processContent(input: ContentProcessorInput): Promise<Cont
   return contentProcessorFlow(input);
 }
 
-const prompt = ai.definePrompt({
-  name: 'contentProcessorPrompt',
-  input: {schema: ContentProcessorInputSchema},
-  output: {schema: ContentProcessorOutputSchema},
-  prompt: `You are an expert content curator for a spiritual website. Your task is to process raw text scraped from a social media post and extract a clean, concise title and relevant keywords.
-
-The raw text is:
-{{{rawContent}}}
-
-Based on this text, generate a suitable title and keywords. The title should be short and descriptive. The keywords will be used for image search hints, so they should be simple and visual.
-`,
-});
-
 const contentProcessorFlow = ai.defineFlow(
   {
     name: 'contentProcessorFlow',
@@ -52,25 +39,30 @@ const contentProcessorFlow = ai.defineFlow(
   async (input) => {
     console.log('[AI Flow] Starting contentProcessorFlow...');
     try {
-      // By explicitly selecting a powerful model like Gemini Flash, we ensure
-      // it can handle the structured output request reliably.
-      const result = await prompt(input, { model: 'googleai/gemini-2.0-flash' });
+      const prompt = `You are an expert content curator for a spiritual website. Your task is to process raw text scraped from a social media post and extract a clean, concise title and relevant keywords.
 
-      console.log('[AI Flow] Raw result from prompt call:', JSON.stringify(result, null, 2));
+The raw text is:
+"${input.rawContent}"
 
-      const output = result.output;
+Based on this text, generate a suitable title and keywords. The title should be short and descriptive. The keywords will be used for image search hints, so they should be simple and visual.
+`;
+      
+      const { output } = await ai.generate({
+        model: 'googleai/gemini-2.0-flash',
+        prompt: prompt,
+        output: { schema: ContentProcessorOutputSchema },
+      });
 
-      // We add a check to ensure the AI returns a valid output.
       if (!output) {
-        console.error("[AI Flow] AI content processor failed to generate a valid output object.");
+        console.error("[AI Flow] AI generation returned no output. This can happen if the API key is invalid or the model is unavailable.");
         throw new Error("AI processing returned no output.");
       }
       
-      console.log('[AI Flow] Successfully extracted output.');
+      console.log('[AI Flow] Successfully extracted output:', JSON.stringify(output));
       return output;
     } catch (e: any) {
         console.error("[AI Flow] An error occurred within the flow:", e.message);
-        throw e; // Re-throw the error to ensure the client gets a non-200 response
+        throw e;
     }
   }
 );
