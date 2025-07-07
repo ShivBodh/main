@@ -54,7 +54,7 @@ const SAMPLE_RAW_CONTENT = `Jagadguru Shankaracharya Sri Sri Bharati Tirtha Maha
 /**
  * Calls the Genkit AI flow to process raw text content.
  * @param {string} rawContent The raw text scraped from the page.
- * @returns {Promise<{title: string, keywords: string}>} A promise that resolves to the structured data.
+ * @returns {Promise<{title: string, keywords: string}|null>} A promise that resolves to the structured data or null on failure.
  */
 async function processContentWithAI(rawContent) {
   try {
@@ -71,11 +71,8 @@ async function processContentWithAI(rawContent) {
     } else {
         console.error('Error details:', error.message);
     }
-    // Return default values on AI failure to avoid crashing the script
-    return {
-        title: rawContent.substring(0, 70) + (rawContent.length > 70 ? '...' : ''),
-        keywords: 'default image',
-    };
+    // Return null on AI failure so the caller can handle it gracefully.
+    return null;
   }
 }
 
@@ -92,7 +89,18 @@ async function runProcessor() {
     }
 
     // Process the sample content with our AI flow
-    const aiContent = await processContentWithAI(SAMPLE_RAW_CONTENT);
+    let aiContent = await processContentWithAI(SAMPLE_RAW_CONTENT);
+
+    // Defensive check to prevent crashes if the AI returns an unexpected structure.
+    if (!aiContent || typeof aiContent.title === 'undefined' || typeof aiContent.keywords === 'undefined') {
+        console.error('[FATAL] AI processing did not return the expected data structure (title, keywords).');
+        console.error('[DEBUG] Received from AI flow:', JSON.stringify(aiContent, null, 2));
+        console.log('[INFO] Using fallback data to create database entry.');
+        aiContent = {
+            title: SAMPLE_RAW_CONTENT.substring(0, 70) + (SAMPLE_RAW_CONTENT.length > 70 ? '...' : ''),
+            keywords: 'default image',
+        };
+    }
 
     // Create a database document with the AI-processed data
     // We use a placeholder image here, as the browser automation part is not viable.
@@ -101,11 +109,11 @@ async function runProcessor() {
         date: new Date().toISOString().split('T')[0],
         peetham: 'Sringeri', // This can be inferred or set as a parameter
         type: 'photo', // Essential for the calendar to render correctly
-        title: aiContent.title, // Using AI-generated title
+        title: aiContent.title, // This is now safe
         description: SAMPLE_RAW_CONTENT, // Keeping original description for context
         imageUrl: 'https://images.unsplash.com/photo-1596701532936-64619d8039a8?q=80&w=600&h=400&fit=crop',
         thumbnailUrl: 'https://images.unsplash.com/photo-1596701532936-64619d8039a8?q=80&w=400&h=300&fit=crop',
-        aiHint: aiContent.keywords, // Using AI-generated keywords
+        aiHint: aiContent.keywords, // This is also safe
     };
     
     // For this demonstration, we'll save a single processed item.
