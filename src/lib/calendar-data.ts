@@ -12,9 +12,9 @@ import { dwarakaVideos } from './dwaraka-videos';
 import { puriVideos } from './puri-videos';
 import { jyotirmathVideos } from './jyotirmath-videos';
 
-// The scraper script is not functional in this environment.
-// The dependency on its output is removed to ensure application stability.
-// import scrapedMedia from '../../../scripts/scraped-data.json';
+// Import the output from our new AI content processor script.
+// This allows us to see the results of the script directly on the website.
+import scrapedMedia from '../../../scripts/scraped-data.json';
 
 
 // Define the unified types
@@ -75,6 +75,7 @@ const videoItems: CalendarVideoItem[] = [
 
 
 export const allCalendarItems: UnifiedCalendarItem[] = [
+    ...(scrapedMedia as CalendarPhotoItem[]), // Add the AI-processed content here
     ...eventItems,
     ...photoItems,
     ...videoItems,

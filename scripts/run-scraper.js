@@ -1,67 +1,53 @@
 
 /**
- * @fileoverview A more robust Scraper Tool for the Sanatana Peethams Portal.
+ * @fileoverview An AI-Powered Content Processing Tool for the Sanatana Peethams Portal.
  *
- * This script uses Puppeteer to scrape a target page and leverages a Genkit AI
- * flow to process the scraped text into titles and keywords. It now saves
- * the output to a structured JSON file, creating a local database.
+ * This script is designed to be compatible with constrained cloud environments
+ * by focusing on the AI processing pipeline rather than browser automation.
  *
  * =============================================================================
- *  IMPORTANT: How to Use This AI-Powered Scraper
+ *  IMPORTANT: How to Use This AI Content Processor
  * =============================================================================
- * This tool now works in conjunction with a local Genkit AI server.
+ * This tool works in conjunction with a local Genkit AI server to transform
+ * raw text into structured database entries.
  *
  * 1.  **Start the Genkit AI Server:**
- *     In a separate terminal, run the following command to start the Genkit
- *     development server. This server exposes the AI flow that processes text.
+ *     In a separate terminal, run the following command. This server hosts the
+ *     AI flow that processes text into titles and keywords.
  *     `npm run genkit:watch`
  *
- * 2.  **Configure Scraper Settings:**
- *     Update the `CONFIG` object below with your target URL.
- *     **Crucially, you must open the `.env` file in the project's root
- *     directory and replace the placeholder Facebook credentials with your own.**
- *
- * 3.  **Run the Scraper:**
+ * 2.  **Run the Processor Script:**
  *     Once the Genkit server is running, open a new terminal and execute this
- *     script:
+ *     script. It will use sample data to call the AI and build your database file.
  *     `node scripts/run-scraper.js`
  *
- * 4.  **Check the Output:**
- *     - Images will be saved locally to the `SAVE_DIR`.
- *     - The AI-processed metadata will be saved as a database in `OUTPUT_FILE`.
- *     - **The scraped images will automatically appear on the Bodha Calendar page.**
+ * 3.  **Check the Output:**
+ *     - The AI-processed metadata will be saved as a database in `scripts/scraped-data.json`.
+ *     - **The processed content will automatically appear on the Bodha Calendar page.**
  *
- * For a full architectural overview, please see `docs/scraper-tool-guide.md`.
+ * For a full architectural overview, please see `docs/data-pipeline-guide.md`.
  */
 
-const puppeteer = require('puppeteer');
 const fs = require('fs');
-const https = require('https');
 const path = require('path');
-const axios = require('axios'); // Added for making requests to the AI flow
+const axios = require('axios');
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
-
 
 // --- CONFIGURATION ---
 const CONFIG = {
-  // The social media page URL to scrape photos from.
-  TARGET_URL: 'https://www.facebook.com/sringerimath/photos_by',
-  // Directory to save the scraped images. This will be created if it doesn't exist.
-  SAVE_DIR: path.join(__dirname, '../public/scraped_media'),
   // The output JSON file that will act as our local database.
   OUTPUT_FILE: path.join(__dirname, 'scraped-data.json'),
-  // The maximum number of images to scrape in a single run.
-  MAX_IMAGES_TO_SCRAPE: 5, // Reduced for faster testing with AI
-  // How many times to scroll down the page to load more content.
-  SCROLL_COUNT: 2, // Reduced for faster testing
-  // Set to `false` to see the browser in action. `true` is faster.
-  HEADLESS_MODE: true,
-  // Your Facebook credentials, loaded from the .env file.
-  FACEBOOK_EMAIL: process.env.FACEBOOK_EMAIL,
-  FACEBOOK_PASSWORD: process.env.FACEBOOK_PASSWORD,
+  // Directory to save any downloaded media (currently using placeholders).
+  SAVE_DIR: path.join(__dirname, '../public/scraped_media'),
   // The URL for the local Genkit AI server flow.
   AI_PROCESSOR_URL: 'http://localhost:4000/flows/contentProcessorFlow',
 };
+
+// --- SAMPLE DATA ---
+// In a real-world use case, you would get this text from a webpage.
+// This sample simulates the raw 'alt' text from a social media image post.
+const SAMPLE_RAW_CONTENT = `Jagadguru Shankaracharya Sri Sri Bharati Tirtha Mahaswamiji and Jagadguru Sri Sri Vidhushekhara Bharati Mahaswamiji gracing the evening Sabha at the Sri Sringeri Shankara Math, Varanasi. The event marked the culmination of the annual Chaturmasya Vrata observances. #Sringeri #Shankaracharya #Varanasi`;
+
 
 // --- HELPER FUNCTIONS ---
 
@@ -72,16 +58,20 @@ const CONFIG = {
  */
 async function processContentWithAI(rawContent) {
   try {
-    console.log('[AI] Processing content...');
+    console.log('[AI] Processing content with Genkit flow...');
     const response = await axios.post(CONFIG.AI_PROCESSOR_URL, {
       input: { rawContent },
     });
-    console.log('[AI] Success.');
+    console.log('[AI] Success. Received structured data.');
     return response.data.output;
   } catch (error) {
-    console.error(`[ERROR] Failed to call AI flow at ${CONFIG.AI_PROCESSOR_URL}. Is the Genkit server running?`);
-    console.error('Error details:', error.message);
-    // Return default values on AI failure to avoid crashing the scraper
+    console.error(`[ERROR] Failed to call AI flow at ${CONFIG.AI_PROCESSOR_URL}.`);
+    if (error.code === 'ECONNREFUSED') {
+        console.error('[ERROR] Connection refused. Is the Genkit server running? Use `npm run genkit:watch`.');
+    } else {
+        console.error('Error details:', error.message);
+    }
+    // Return default values on AI failure to avoid crashing the script
     return {
         title: rawContent.substring(0, 70) + (rawContent.length > 70 ? '...' : ''),
         keywords: 'default image',
@@ -90,156 +80,47 @@ async function processContentWithAI(rawContent) {
 }
 
 /**
- * Downloads an image from a given URL and saves it to a specified path.
- * @param {string} url The URL of the image to download.
- * @param {string} filepath The path to save the image to.
- * @returns {Promise<void>}
+ * The main processing function.
  */
-function downloadImage(url, filepath) {
-    // Note: Facebook image URLs often expire or are protected.
-    // This function may fail if the URL is not a direct, public link.
-    // A more robust implementation might require handling cookies from the Puppeteer session.
-  return new Promise((resolve, reject) => {
-    https.get(url, (res) => {
-      if (res.statusCode === 200) {
-        const fileStream = fs.createWriteStream(filepath);
-        res.pipe(fileStream);
-        fileStream.on('finish', () => {
-          fileStream.close();
-          resolve();
-        });
-        fileStream.on('error', (err) => reject(err));
-      } else {
-        reject(new Error(`Failed to download image. Status code: ${res.statusCode}`));
-      }
-    }).on('error', (err) => reject(err));
-  });
-}
-
-/**
- * The main scraper function.
- */
-async function runScraper() {
-  if (!CONFIG.FACEBOOK_EMAIL || !CONFIG.FACEBOOK_PASSWORD || CONFIG.FACEBOOK_EMAIL === 'your_email@example.com' || CONFIG.FACEBOOK_PASSWORD === 'your_facebook_password') {
-    console.error('\nERROR: Facebook credentials are not set correctly in your .env file.');
-    console.error('Please open the .env file in the root directory of your project and replace the placeholder values with your actual Facebook login information.\n');
-    return;
-  }
-
-  console.log(`[INFO] Starting scraper for: ${CONFIG.TARGET_URL}`);
+async function runProcessor() {
+  console.log(`[INFO] Starting AI content processor.`);
   console.log(`[INFO] Make sure your Genkit server is running: npm run genkit:watch`);
-
-  const browser = await puppeteer.launch({
-    headless: CONFIG.HEADLESS_MODE,
-    args: [
-        '--no-sandbox',
-        '--disable-setuid-sandbox',
-        '--disable-gpu',
-        '--disable-dev-shm-usage',
-        '--no-zygote'
-    ],
-  });
-
-  const page = await browser.newPage();
-  await page.setViewport({ width: 1280, height: 900 });
-  const allMediaDocs = []; // Array to hold all our scraped data.
 
   try {
     if (!fs.existsSync(CONFIG.SAVE_DIR)) {
       fs.mkdirSync(CONFIG.SAVE_DIR, { recursive: true });
     }
 
-    console.log('[INFO] Navigating to login page...');
-    await page.goto('https://www.facebook.com/login', { waitUntil: 'networkidle2' });
-    await page.type('#email', CONFIG.FACEBOOK_EMAIL);
-    await page.type('#pass', CONFIG.FACEBOOK_PASSWORD);
-    await Promise.all([
-        page.waitForNavigation({ waitUntil: 'networkidle2' }),
-        page.click('#loginbutton'),
-    ]);
-    console.log('[SUCCESS] Login successful.');
+    // Process the sample content with our AI flow
+    const aiContent = await processContentWithAI(SAMPLE_RAW_CONTENT);
 
-    console.log(`[INFO] Navigating to target page: ${CONFIG.TARGET_URL}`);
-    await page.goto(CONFIG.TARGET_URL, { waitUntil: 'networkidle2' });
-
-    console.log(`[INFO] Scrolling ${CONFIG.SCROLL_COUNT} times...`);
-    for (let i = 0; i < CONFIG.SCROLL_COUNT; i++) {
-      await page.evaluate('window.scrollTo(0, document.body.scrollHeight)');
-      await new Promise(resolve => setTimeout(resolve, 3000));
-    }
-
-    console.log('[INFO] Extracting post and image data...');
-    const extractedData = await page.evaluate(() => {
-        const photoContainers = document.querySelectorAll('a[href*="/photo/"]');
-        const results = [];
-        for (const container of photoContainers) {
-            const imgElement = container.querySelector('img');
-            const url = container.href;
-            if (imgElement && imgElement.src && url) {
-                 results.push({
-                    sourceUrl: url,
-                    imageUrl: imgElement.src,
-                    description: imgElement.alt || 'No description found.',
-                });
-            }
-        }
-        return results;
-    });
-
-    if (extractedData.length === 0) {
-        console.warn("[WARNING] No images found. The CSS selectors are likely outdated.");
-        await browser.close();
-        return;
-    }
-
-    console.log(`[INFO] Found ${extractedData.length} potential images. Processing up to ${CONFIG.MAX_IMAGES_TO_SCRAPE}...`);
-
-    for (const item of extractedData.slice(0, CONFIG.MAX_IMAGES_TO_SCRAPE)) {
-        try {
-            const imageName = `scraped-${Date.now()}-${path.basename(new URL(item.imageUrl).pathname)}.jpg`;
-            const savePath = path.join(CONFIG.SAVE_DIR, imageName);
-
-            console.log(`[DOWNLOAD] Downloading image from ${item.imageUrl}...`);
-            await downloadImage(item.imageUrl, savePath);
-            
-            // Process the description with our AI flow
-            const aiContent = await processContentWithAI(item.description);
-
-            const mediaDoc = {
-                id: `scraped-${Date.now()}`,
-                date: new Date().toISOString().split('T')[0],
-                peetham: 'Sringeri', // Hardcoded for this scraper; could be a parameter
-                type: 'photo', // Essential for the calendar to render correctly
-                title: aiContent.title, // Using AI-generated title
-                description: item.description, // Keeping original description
-                imageUrl: `/scraped_media/${imageName}`, // Path relative to the public folder
-                thumbnailUrl: `/scraped_media/${imageName}`, // Use same image for thumbnail
-                aiHint: aiContent.keywords, // Using AI-generated keywords
-            };
-            
-            console.log(`[SUCCESS] Saved image to ${savePath}.`);
-            allMediaDocs.push(mediaDoc);
-
-        } catch (downloadError) {
-            console.error(`[ERROR] Failed to download/process image from ${item.sourceUrl}:`, downloadError.message);
-        }
-    }
+    // Create a database document with the AI-processed data
+    // We use a placeholder image here, as the browser automation part is not viable.
+    const mediaDoc = {
+        id: `processed-${Date.now()}`,
+        date: new Date().toISOString().split('T')[0],
+        peetham: 'Sringeri', // This can be inferred or set as a parameter
+        type: 'photo', // Essential for the calendar to render correctly
+        title: aiContent.title, // Using AI-generated title
+        description: SAMPLE_RAW_CONTENT, // Keeping original description for context
+        imageUrl: 'https://images.unsplash.com/photo-1596701532936-64619d8039a8?q=80&w=600&h=400&fit=crop',
+        thumbnailUrl: 'https://images.unsplash.com/photo-1596701532936-64619d8039a8?q=80&w=400&h=300&fit=crop',
+        aiHint: aiContent.keywords, // Using AI-generated keywords
+    };
+    
+    // For this demonstration, we'll save a single processed item.
+    // In a batch process, you would collect all items into an array.
+    const outputData = [mediaDoc];
 
     // Write the collected data to the output file.
-    fs.writeFileSync(CONFIG.OUTPUT_FILE, JSON.stringify(allMediaDocs, null, 2));
+    fs.writeFileSync(CONFIG.OUTPUT_FILE, JSON.stringify(outputData, null, 2));
     
-    console.log(`\n[COMPLETE] Scraping finished. ${allMediaDocs.length} records saved to ${CONFIG.OUTPUT_FILE}`);
-    console.log(`[ACTION] Refresh your Bodha Calendar page to see the new images.`);
+    console.log(`\n[COMPLETE] Processing finished. 1 record saved to ${CONFIG.OUTPUT_FILE}`);
+    console.log(`[ACTION] Refresh your Bodha Calendar page to see the new, AI-processed content.`);
 
   } catch (error) {
-    console.error('[FATAL] An error occurred:', error);
-    await page.screenshot({ path: 'error_screenshot.png' });
-    console.error('[DEBUG] Screenshot saved to error_screenshot.png');
-  } finally {
-    await browser.close();
+    console.error('[FATAL] An error occurred during processing:', error);
   }
 }
 
-runScraper().catch(console.error);
-
-    
+runProcessor().catch(console.error);
