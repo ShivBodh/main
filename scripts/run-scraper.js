@@ -131,7 +131,13 @@ async function runScraper() {
 
   const browser = await puppeteer.launch({
     headless: CONFIG.HEADLESS_MODE,
-    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    args: [
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+        '--disable-gpu',
+        '--disable-dev-shm-usage',
+        '--no-zygote'
+    ],
   });
 
   const page = await browser.newPage();
