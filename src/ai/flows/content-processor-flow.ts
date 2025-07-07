@@ -37,22 +37,17 @@ const contentProcessorFlow = ai.defineFlow(
     outputSchema: ContentProcessorOutputSchema,
   },
   async (input) => {
-    console.log('[AI Flow] Starting contentProcessorFlow...');
-    try {
-        // MOCK IMPLEMENTATION: To bypass potential environment/API key issues,
-        // we are returning a hardcoded, structured response. This ensures the
-        // data pipeline between the scraper and the AI flow works correctly.
-        const mockOutput = {
-            title: "Jagadgurus Grace Evening Sabha in Varanasi",
-            keywords: "shankaracharya varanasi",
-        };
-        
-        console.log('[AI Flow] Successfully generated MOCK output:', JSON.stringify(mockOutput));
-        return mockOutput;
-
-    } catch (e: any) {
-        console.error("[AI Flow] An error occurred within the flow:", e.message);
-        throw e;
-    }
+    // MOCK IMPLEMENTATION: With the googleAI() plugin disabled in genkit.ts,
+    // this mock implementation is guaranteed to run, bypassing any potential
+    // environment or API key issues. This ensures the data pipeline works correctly.
+    console.log('[AI Flow] Running MOCK contentProcessorFlow...');
+    
+    const mockOutput = {
+        title: "Jagadgurus Grace Evening Sabha in Varanasi",
+        keywords: "shankaracharya varanasi",
+    };
+    
+    console.log('[AI Flow] Successfully generated MOCK output.');
+    return mockOutput;
   }
 );
