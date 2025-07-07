@@ -50,17 +50,27 @@ const contentProcessorFlow = ai.defineFlow(
     outputSchema: ContentProcessorOutputSchema,
   },
   async (input) => {
-    // By explicitly selecting a powerful model like Gemini Flash, we ensure
-    // it can handle the structured output request reliably.
-    const {output} = await prompt(input, { model: 'googleai/gemini-2.0-flash' });
+    console.log('[AI Flow] Starting contentProcessorFlow...');
+    try {
+      // By explicitly selecting a powerful model like Gemini Flash, we ensure
+      // it can handle the structured output request reliably.
+      const result = await prompt(input, { model: 'googleai/gemini-2.0-flash' });
 
-    // We add a check to ensure the AI returns a valid output.
-    if (!output) {
-      console.error("AI content processor failed to generate a valid output.");
-      // The calling script will handle this and use fallback data.
-      throw new Error("AI processing returned no output.");
+      console.log('[AI Flow] Raw result from prompt call:', JSON.stringify(result, null, 2));
+
+      const output = result.output;
+
+      // We add a check to ensure the AI returns a valid output.
+      if (!output) {
+        console.error("[AI Flow] AI content processor failed to generate a valid output object.");
+        throw new Error("AI processing returned no output.");
+      }
+      
+      console.log('[AI Flow] Successfully extracted output.');
+      return output;
+    } catch (e: any) {
+        console.error("[AI Flow] An error occurred within the flow:", e.message);
+        throw e; // Re-throw the error to ensure the client gets a non-200 response
     }
-    
-    return output;
   }
 );

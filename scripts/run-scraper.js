@@ -68,7 +68,13 @@ async function processContentWithAI(rawContent) {
     console.error(`[ERROR] Failed to call AI flow at ${CONFIG.AI_PROCESSOR_URL}.`);
     if (error.code === 'ECONNREFUSED') {
         console.error('[ERROR] Connection refused. Is the Genkit server running? Use `npm run genkit:watch`.');
+    } else if (error.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        console.error('[ERROR] The AI flow reported an error. Check the Genkit server terminal for details.');
+        console.error(`[DEBUG] Status: ${error.response.status}, Data: ${JSON.stringify(error.response.data)}`);
     } else {
+        console.error('[ERROR] An unexpected error occurred during the request.');
         console.error('Error details:', error.message);
     }
     // Return null on AI failure so the caller can handle it gracefully.
