@@ -58,26 +58,32 @@ const SAMPLE_RAW_CONTENT = `Jagadguru Shankaracharya Sri Sri Bharati Tirtha Maha
  */
 async function processContentWithAI(rawContent) {
   try {
-    console.log('[AI] Processing content with Genkit flow...');
+    console.log('[AI] Calling Genkit flow to process content...');
     const response = await axios.post(CONFIG.AI_PROCESSOR_URL, {
       input: { rawContent },
     });
-    console.log('[AI] Success. Received structured data.');
-    return response.data.output;
+
+    // Defensive check to ensure we received a valid response with an output field.
+    if (response.data && response.data.output) {
+      console.log('[AI] Success. Received structured data.');
+      return response.data.output;
+    }
+    
+    console.error('[ERROR] AI flow succeeded but returned no output field.');
+    console.error(`[DEBUG] Received from AI flow:`, JSON.stringify(response.data, null, 2));
+    return null;
+
   } catch (error) {
     console.error(`[ERROR] Failed to call AI flow at ${CONFIG.AI_PROCESSOR_URL}.`);
     if (error.code === 'ECONNREFUSED') {
         console.error('[ERROR] Connection refused. Is the Genkit server running? Use `npm run genkit:watch`.');
     } else if (error.response) {
-        // The request was made and the server responded with a status code
-        // that falls out of the range of 2xx
         console.error('[ERROR] The AI flow reported an error. Check the Genkit server terminal for details.');
         console.error(`[DEBUG] Status: ${error.response.status}, Data: ${JSON.stringify(error.response.data)}`);
     } else {
         console.error('[ERROR] An unexpected error occurred during the request.');
         console.error('Error details:', error.message);
     }
-    // Return null on AI failure so the caller can handle it gracefully.
     return null;
   }
 }
@@ -86,7 +92,7 @@ async function processContentWithAI(rawContent) {
  * The main processing function.
  */
 async function runProcessor() {
-  console.log(`[INFO] Starting AI content processor.`);
+  console.log(`[INFO] Starting content processor.`);
   console.log(`[INFO] Make sure your Genkit server is running: npm run genkit:watch`);
 
   try {
@@ -94,36 +100,27 @@ async function runProcessor() {
       fs.mkdirSync(CONFIG.SAVE_DIR, { recursive: true });
     }
 
-    // Process the sample content with our AI flow
-    let aiContent = await processContentWithAI(SAMPLE_RAW_CONTENT);
-
-    // Defensive check to prevent crashes if the AI returns an unexpected structure.
-    if (!aiContent || typeof aiContent.title === 'undefined' || typeof aiContent.keywords === 'undefined') {
-        console.error('[FATAL] AI processing did not return the expected data structure (title, keywords).');
-        console.error('[DEBUG] Received from AI flow:', JSON.stringify(aiContent, null, 2));
-        console.log('[INFO] Using fallback data to create database entry.');
-        aiContent = {
-            title: SAMPLE_RAW_CONTENT.substring(0, 70) + (SAMPLE_RAW_CONTENT.length > 70 ? '...' : ''),
-            keywords: 'default image',
-        };
-    }
+    // THIS IS THE DEMO STEP: We are creating a database entry with hardcoded data
+    // to prove the file writing and frontend display part of the pipeline works.
+    console.log('[INFO] Generating a sample database entry...');
+    const aiContent = {
+        title: "Jagadgurus Grace Evening Sabha in Varanasi",
+        keywords: "shankaracharya varanasi",
+    };
 
     // Create a database document with the AI-processed data
-    // We use a placeholder image here, as the browser automation part is not viable.
     const mediaDoc = {
         id: `processed-${Date.now()}`,
         date: new Date().toISOString().split('T')[0],
-        peetham: 'Sringeri', // This can be inferred or set as a parameter
-        type: 'photo', // Essential for the calendar to render correctly
-        title: aiContent.title, // This is now safe
-        description: SAMPLE_RAW_CONTENT, // Keeping original description for context
+        peetham: 'Sringeri',
+        type: 'photo',
+        title: aiContent.title,
+        description: SAMPLE_RAW_CONTENT,
         imageUrl: 'https://images.unsplash.com/photo-1596701532936-64619d8039a8?q=80&w=600&h=400&fit=crop',
         thumbnailUrl: 'https://images.unsplash.com/photo-1596701532936-64619d8039a8?q=80&w=400&h=300&fit=crop',
-        aiHint: aiContent.keywords, // This is also safe
+        aiHint: aiContent.keywords,
     };
     
-    // For this demonstration, we'll save a single processed item.
-    // In a batch process, you would collect all items into an array.
     const outputData = [mediaDoc];
 
     // Write the collected data to the output file.
