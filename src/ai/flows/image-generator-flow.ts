@@ -32,7 +32,7 @@ const imageGeneratorFlow = ai.defineFlow(
     // MOCK IMPLEMENTATION: Returns a placeholder image to avoid dependency on a live AI model.
     console.log(`[AI Flow - Image] Received prompt, returning mock image: ${prompt}`);
     return {
-      imageUrl: 'https://images.unsplash.com/photo-1691453267598-37d4511a13a8?q=80&w=512&h=512&fit=crop',
+      imageUrl: 'https://images.unsplash.com/photo-1620058866387-a3c39a04a52c?q=80&w=512&h=512&fit=crop',
     };
   }
 );
