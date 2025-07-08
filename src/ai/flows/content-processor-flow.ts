@@ -5,6 +5,7 @@
  * This file defines the `contentProcessorFlow`, which takes raw text
  * and returns a structured title and keywords.
  *
+ * - processScrapedContent - A function that handles the content processing.
  * - ContentProcessorInput - The input type for the contentProcessorFlow.
  * - ContentProcessorOutput - The return type for the contentProcessorFlow.
  */
@@ -26,6 +27,11 @@ const ContentProcessorOutputSchema = z.object({
   keywords: z.string().describe('Two or three relevant keywords, separated by spaces. For example: "temple festival" or "acharya discourse".'),
 });
 export type ContentProcessorOutput = z.infer<typeof ContentProcessorOutputSchema>;
+
+// This is the exported wrapper function for server-side use.
+export async function processScrapedContent(input: ContentProcessorInput): Promise<ContentProcessorOutput> {
+  return contentProcessorFlow(input);
+}
 
 
 const contentProcessorPrompt = ai.definePrompt({
