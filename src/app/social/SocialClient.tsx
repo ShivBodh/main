@@ -454,7 +454,7 @@ function ProfileTab() {
                 <Card>
                     <CardHeader>
                         <CardTitle>Find Mitras</CardTitle>
-                        <CardDescription>Connect with others on the platform.</CardHeader>
+                        <CardDescription>Connect with others on the platform.</CardDescription>
                     </CardHeader>
                     <CardContent>
                         <form onSubmit={handleSendRequest} className="flex gap-2">
