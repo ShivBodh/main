@@ -23,7 +23,7 @@ export const peethams = [
       peetham: "Śṛṅgeri Śāradā Pīṭham",
       appointment: "Succeeded Jagadguru Śrī Bhāratī Tīrtha Svāmī in November 2015.",
       focus: "Spiritual leadership, preserving Sanatana Dharma, promoting Vedic studies and Sanskrit, overseeing the Śṛṅgeri Maṭha's vast network of temples and educational institutions. Known for his erudition and accessibility.",
-      heroImage: "https://images.unsplash.com/photo-1620058866387-a3c39a04a52c?q=80&w=400&h=175&fit=crop",
+      heroImage: "https://images.unsplash.com/photo-1628882782353-a50e181e5b87?q=80&w=400&h=175&fit=crop",
       galleryImages: [
         { url: "https://images.unsplash.com/photo-1620058866387-a3c39a04a52c?q=80&w=200&h=200&fit=crop" },
         { url: "https://images.unsplash.com/photo-1628882782353-a50e181e5b87?q=80&w=200&h=200&fit=crop" },

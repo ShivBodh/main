@@ -31,6 +31,7 @@ export const metadata: Metadata = {
         url: 'https://images.unsplash.com/photo-1620058866387-a3c39a04a52c?q=80&w=1200&h=630&fit=crop',
         width: 1200,
         height: 630,
+        alt: 'A painting of a wise sage writing a sacred text',
       },
     ],
     locale: 'en_US',
@@ -53,6 +54,7 @@ export const metadata: Metadata = {
     description: 'A single, trusted digital beacon for the timeless wisdom of the four cardinal Peethams.',
     creator: '@shivabodha_org',
     images: ['https://images.unsplash.com/photo-1620058866387-a3c39a04a52c?q=80&w=1200&h=600&fit=crop'],
+    alt: 'A painting of a wise sage writing a sacred text',
   },
   manifest: '/manifest.json',
 };

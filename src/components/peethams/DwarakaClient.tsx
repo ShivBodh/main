@@ -24,8 +24,6 @@ import { Skeleton } from '@/components/ui/skeleton';
 const dwarakaSeva = allSevaOpportunities.filter(o => o.peetham === 'Dwaraka');
 const peethamInfo = peethams.find(p => p.name.includes('Dwaraka'))!;
 
-const TABS_WITH_MEDIA = ['gallery', 'videos', 'events'];
-
 const MediaGridSkeleton = () => (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {[...Array(3)].map((_, i) => <Skeleton key={i} className="h-80 w-full" />)}
@@ -101,7 +99,7 @@ export default function DwarakaClient() {
                                 <li key={event.id} className="flex flex-col sm:flex-row justify-between sm:items-center p-3 rounded-md border bg-muted/20">
                                     <div>
                                         <p className="font-semibold text-foreground/90">{event.title}</p>
-                                        <p className="text-sm text-muted-foreground">{format(parseISO(event.date), 'MMMM d, yyyy')}</p>
+                                        <p className="text-sm text-muted-foreground">{format(new Date(event.date.replace(/-/g, '/')), 'MMMM d, yyyy')}</p>
                                     </div>
                                     <p className="text-sm font-medium text-primary mt-2 sm:mt-0">{(event as CalendarEventItem).category}</p>
                                 </li>
@@ -118,14 +116,13 @@ export default function DwarakaClient() {
     <div className="bg-background text-foreground">
       <div className="container mx-auto max-w-6xl py-16 md:py-24 px-4">
         <section className="flex flex-col md:flex-row items-center gap-8 mb-12">
-          <div className="w-full md:w-1/3">
+          <div className="w-full md:w-1/3 relative aspect-[4/3]">
             <Image
               src={peethamInfo.acharyaImage}
               data-ai-hint={peethamInfo.acharyaAiHint}
               alt={`Jagadguru Shankaracharya of ${peethamInfo.name}`}
-              width={800}
-              height={600}
-              className="rounded-lg shadow-lg object-cover aspect-[4/3]"
+              fill
+              className="rounded-lg shadow-lg object-cover"
             />
           </div>
           <div className="md:w-2/3">

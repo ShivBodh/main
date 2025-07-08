@@ -49,7 +49,7 @@ export default function HomePage() {
       {/* Social Section */}
       <section className="py-16 md:py-24 bg-background">
         <div className="container mx-auto grid md:grid-cols-2 gap-12 items-center">
-            <div className="relative aspect-video rounded-lg shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+            <div className="relative aspect-video rounded-lg shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 order-last md:order-first">
               <Image 
                   src="https://images.unsplash.com/photo-1617634661839-92161289942c?q=80&w=600&h=400&fit=crop"
                   alt="An artistic painting depicting a community connecting in a spiritual setting"
@@ -58,7 +58,7 @@ export default function HomePage() {
                   data-ai-hint="community art spiritual"
               />
             </div>
-            <div className="md:order-first">
+            <div className="md:order-last">
                 <h2 className="text-3xl md:text-4xl font-headline font-bold text-primary">Sanatan Social: A Community for Dharma</h2>
                 <p className="mt-4 text-lg text-foreground/80">
                     Join a private, secure platform for devotees to connect, share knowledge, and support dharmic causes. Create your profile, write in your personal Dainandini (diary), and launch campaigns that matter.

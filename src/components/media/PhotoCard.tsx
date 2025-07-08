@@ -8,7 +8,7 @@ import { peethamBadgeColors } from '@/lib/events-data';
 
 export function PhotoCard({ item }: { item: CalendarPhotoItem }) {
   return (
-    <Card className="overflow-hidden border-border/50 group h-full">
+    <Card className="overflow-hidden border-border/50 group h-full flex flex-col">
       <div className="relative aspect-video w-full">
         <Image
           src={item.thumbnailUrl || item.imageUrl}
@@ -19,7 +19,7 @@ export function PhotoCard({ item }: { item: CalendarPhotoItem }) {
           data-ai-hint={item.aiHint}
         />
       </div>
-      <div className="p-4">
+      <div className="p-4 flex flex-col flex-grow">
         <div className="flex justify-between items-start gap-2">
           <CardTitle className="font-headline text-lg leading-snug group-hover:text-primary transition-colors">
             {item.title}
@@ -29,10 +29,8 @@ export function PhotoCard({ item }: { item: CalendarPhotoItem }) {
           </Badge>
         </div>
         <p className="text-sm text-muted-foreground pt-1">{format(new Date(item.date.replace(/-/g, '/')), 'MMMM d, yyyy')}</p>
-        <p className="text-foreground/80 text-sm line-clamp-3 mt-2">{item.description}</p>
+        <p className="text-foreground/80 text-sm line-clamp-3 mt-2 flex-grow">{item.description}</p>
       </div>
     </Card>
   );
 }
-
-    

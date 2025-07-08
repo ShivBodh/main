@@ -95,14 +95,15 @@ export default function MissionPage() {
             </section>
 
             <div className="not-prose text-center mt-16 p-8 bg-card rounded-lg border">
-                <Image
-                  src="https://images.unsplash.com/photo-1620058866387-a3c39a04a52c?q=80&w=80&h=80&fit=crop"
-                  alt="An artistic painting representing selfless service (Seva)"
-                  data-ai-hint="seva hands painting"
-                  width={80}
-                  height={80}
-                  className="mx-auto mb-4 rounded-full"
-                />
+                 <div className="relative w-20 h-20 mx-auto mb-4 rounded-full">
+                    <Image
+                      src="https://images.unsplash.com/photo-1628882782353-a50e181e5b87?q=80&w=80&h=80&fit=crop"
+                      alt="An artistic painting representing selfless service (Seva)"
+                      data-ai-hint="seva hands painting"
+                      fill
+                      className="rounded-full object-cover"
+                    />
+                </div>
                 <h2 className="text-2xl font-headline font-bold text-primary">Join Us in this Seva</h2>
                 <p className="mt-4 text-foreground/90 leading-relaxed">
                     This platform is built by the community, for the community. If you have skills in content curation, translation, web development, or simply a heartfelt desire to contribute, we welcome your participation in our shared vision.
