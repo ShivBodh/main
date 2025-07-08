@@ -34,13 +34,14 @@ export default function HomePage() {
                         </Link>
                     </Button>
               </div>
-              <div className="relative aspect-video overflow-hidden rounded-lg shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+              <div className="overflow-hidden rounded-lg shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
                 <Image 
-                    src="https://images.unsplash.com/photo-1598493132219-4591a2790938?q=80&w=600&h=400&fit=crop" 
-                    alt="Ancient texts and scriptures"
-                    fill
-                    className="object-cover rounded-lg"
-                    data-ai-hint="ancient scripture book"
+                    src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?q=80&w=600&h=400&fit=crop" 
+                    alt="A vast library of ancient texts and scriptures"
+                    width={600}
+                    height={400}
+                    className="rounded-lg w-full h-auto object-cover"
+                    data-ai-hint="library knowledge"
                 />
               </div>
           </div>
