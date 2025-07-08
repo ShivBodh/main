@@ -12,7 +12,4 @@ dotenv.config({ path: path.resolve(process.cwd(), '.env') });
 import './flows/bodhi-ai-move-flow';
 import './flows/daily-wisdom-flow';
 import './flows/image-generator-flow';
-
-// We explicitly export the contentProcessorFlow to ensure it's registered
-// for the scraper script to call.
-export { contentProcessorFlow } from './flows/content-processor-flow';
+import './flows/content-processor-flow';
