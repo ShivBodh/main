@@ -28,5 +28,34 @@ export const scrapingSourceData = [
       aiHint: 'himalayan monastery snow',
       description: 'A breathtaking view of the Jyotirmath premises covered in a light summer snow, a rare and beautiful sight in the Himalayas.',
     },
+    {
+      date: '2025-07-19',
+      peetham: 'Sringeri',
+      imageUrl: 'https://images.unsplash.com/photo-1617664693373-57c2a5315579?q=80&w=600&h=400&fit=crop',
+      aiHint: 'hindu temple night',
+      description: 'The main temple of Goddess Sharadamba beautifully illuminated for a special festival, attracting thousands of devotees from across the country.',
+    },
+    {
+      date: '2025-07-20',
+      peetham: 'Dwaraka',
+      imageUrl: 'https://images.unsplash.com/photo-1582056294548-c89d2759714d?q=80&w=600&h=400&fit=crop',
+      aiHint: 'ganges river ghat',
+      description: 'A serene evening view of the Gomti Ghat at sunset, a sacred bathing spot for pilgrims visiting the holy city of Dwaraka.',
+    },
+     {
+      date: '2025-07-21',
+      peetham: 'Puri',
+      imageUrl: 'https://images.unsplash.com/photo-1595183840399-8800b659725f?q=80&w=600&h=400&fit=crop',
+      aiHint: 'priest worship',
+      description: 'Swami Nischalananda Saraswati performing special prayers inside the precincts of the ancient Jagannath Temple during a holy festival.',
+    },
+     {
+      date: '2025-07-22',
+      peetham: 'Jyotirmath',
+      imageUrl: 'https://images.unsplash.com/photo-1619472653844-3e3a9856f6b1?q=80&w=600&h=400&fit=crop',
+      aiHint: 'spiritual leader crowd',
+      description: 'The Shankaracharya of Jyotirmath interacting with and blessing pilgrims visiting the holy shrine of Badrinath in the Himalayas.',
+    },
   ];
 
+    

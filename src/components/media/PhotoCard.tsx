@@ -8,16 +8,18 @@ import { peethamBadgeColors } from '@/lib/events-data';
 
 export function PhotoCard({ item }: { item: CalendarPhotoItem }) {
   return (
-    <Card className="overflow-hidden border-border/50 group">
-      <Image
-        src={item.thumbnailUrl || item.imageUrl}
-        alt={item.title}
-        width={400}
-        height={225}
-        className="w-full object-cover"
-        data-ai-hint={item.aiHint}
-      />
-      <CardHeader>
+    <Card className="overflow-hidden border-border/50 group h-full">
+      <div className="relative aspect-video w-full">
+        <Image
+          src={item.thumbnailUrl || item.imageUrl}
+          alt={item.title}
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          className="object-cover transition-transform duration-300 group-hover:scale-105"
+          data-ai-hint={item.aiHint}
+        />
+      </div>
+      <div className="p-4">
         <div className="flex justify-between items-start gap-2">
           <CardTitle className="font-headline text-lg leading-snug group-hover:text-primary transition-colors">
             {item.title}
@@ -27,10 +29,10 @@ export function PhotoCard({ item }: { item: CalendarPhotoItem }) {
           </Badge>
         </div>
         <p className="text-sm text-muted-foreground pt-1">{format(new Date(item.date.replace(/-/g, '/')), 'MMMM d, yyyy')}</p>
-      </CardHeader>
-      <CardContent className="pt-0">
-        <p className="text-foreground/80 text-sm line-clamp-3">{item.description}</p>
-      </CardContent>
+        <p className="text-foreground/80 text-sm line-clamp-3 mt-2">{item.description}</p>
+      </div>
     </Card>
   );
 }
+
+    

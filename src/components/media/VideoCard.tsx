@@ -14,21 +14,21 @@ export function VideoCard({ item }: { item: CalendarVideoItem }) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Card className="overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border-border/50 cursor-pointer group">
-          <div className="relative">
+        <Card className="overflow-hidden border-border/50 group h-full cursor-pointer">
+           <div className="relative aspect-video w-full">
             <Image
               src={item.thumbnailUrl}
               alt={item.title}
-              width={400}
-              height={225}
-              className="w-full object-cover"
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              className="object-cover transition-transform duration-300 group-hover:scale-105"
               data-ai-hint={item.aiHint || 'video thumbnail'}
             />
             <div className="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
               <PlayCircle className="h-16 w-16 text-white/80" />
             </div>
           </div>
-          <CardHeader>
+          <div className="p-4">
             <div className="flex justify-between items-start gap-2">
                 <CardTitle className="font-headline text-lg leading-snug">{item.title}</CardTitle>
                 <Badge variant="outline" className={`flex-shrink-0 ${peethamBadgeColors[item.peetham]}`}>
@@ -36,10 +36,8 @@ export function VideoCard({ item }: { item: CalendarVideoItem }) {
                 </Badge>
             </div>
               <p className="text-sm text-muted-foreground pt-1">{format(new Date(item.date.replace(/-/g, '/')), 'MMMM d, yyyy')}</p>
-          </CardHeader>
-            <CardContent className="pt-0">
-              <p className="text-foreground/80 text-sm line-clamp-3">{item.description}</p>
-          </CardContent>
+              <p className="text-foreground/80 text-sm line-clamp-3 mt-2">{item.description}</p>
+          </div>
         </Card>
       </DialogTrigger>
       <DialogContent className="max-w-4xl p-0 border-0 bg-background">
@@ -60,3 +58,5 @@ export function VideoCard({ item }: { item: CalendarVideoItem }) {
     </Dialog>
   );
 }
+
+    
