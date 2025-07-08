@@ -41,7 +41,7 @@ Raw Content:
 
 
 // The scraper script calls this flow directly via its HTTP endpoint.
-ai.defineFlow(
+export const contentProcessorFlow = ai.defineFlow(
   {
     name: 'contentProcessorFlow',
     inputSchema: ContentProcessorInputSchema,
