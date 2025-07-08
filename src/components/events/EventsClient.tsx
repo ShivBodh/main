@@ -143,7 +143,7 @@ export default function EventsClient() {
     const peethamsByDate = useMemo(() => {
         const map = new Map<string, Set<Peetham>>();
         filteredItems.forEach(item => {
-            const dateStr = item.date; // The date is already in 'YYYY-MM-DD' format
+            const dateStr = format(new Date(item.date.replace(/-/g, '/')), 'yyyy-MM-dd');
             if (!map.has(dateStr)) {
                 map.set(dateStr, new Set());
             }
@@ -233,13 +233,11 @@ export default function EventsClient() {
                           className="w-full"
                           opts={{ loop: latestItems.length > 1, align: 'start' }}
                         >
-                            <CarouselContent className="-ml-4">
+                            <CarouselContent className="-ml-4 py-4">
                                 {latestItems.map((item) => (
                                      <CarouselItem key={item.id} className="pl-4 md:basis-1/2 lg:basis-1/3">
-                                        <div className="p-1">
-                                            {item.type === 'photo' && <PhotoCard item={item as CalendarPhotoItem} />}
-                                            {item.type === 'video' && <VideoCard item={item as CalendarVideoItem} />}
-                                        </div>
+                                        {item.type === 'photo' && <PhotoCard item={item as CalendarPhotoItem} />}
+                                        {item.type === 'video' && <VideoCard item={item as CalendarVideoItem} />}
                                     </CarouselItem>
                                 ))}
                             </CarouselContent>

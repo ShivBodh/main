@@ -42,11 +42,11 @@ export function VideoCard({ item }: { item: CalendarVideoItem }) {
           </CardContent>
         </Card>
       </DialogTrigger>
-      <DialogContent className="max-w-4xl p-0 border-0 bg-transparent">
+      <DialogContent className="max-w-4xl p-0 border-0 bg-background">
           <DialogHeader className="sr-only">
               <DialogTitle>{item.title}</DialogTitle>
           </DialogHeader>
-          <div className="aspect-video">
+          <div className="aspect-video w-full">
             <iframe
               src={item.url}
               title={item.title}
