@@ -1,11 +1,9 @@
 rules_version = '2';
-
 service cloud.firestore {
   match /databases/{database}/documents {
-    // WARNING: These are open rules for development.
-    // Anyone can read or write to your database.
-    // You should secure these before launching your app.
-    match /{document=**} {
+    // Allow public read and write access only to the 'media' collection.
+    // This is for development and will be secured before launch.
+    match /media/{docId} {
       allow read, write: if true;
     }
   }
