@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRight, BookOpen, Calendar, SunMoon, Atom, Users, Megaphone, NotebookText } from 'lucide-react';
 import type { Metadata } from 'next';
+import { PanchangaWidgetPreview } from '@/components/home/PanchangaWidgetPreview';
 
 export const metadata: Metadata = {
   // The title and description will be inherited from the RootLayout,
@@ -107,6 +108,9 @@ export default function HomePage() {
             </div>
         </div>
       </section>
+      
+      {/* Panchanga Widgets Section */}
+      <PanchangaWidgetPreview />
     </>
   );
 }
