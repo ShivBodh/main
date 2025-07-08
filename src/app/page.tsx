@@ -33,7 +33,7 @@ export default function HomePage() {
                         </Link>
                     </Button>
               </div>
-              <div className="relative aspect-video rounded-lg shadow-lg">
+              <div className="relative aspect-video rounded-lg shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
                 <Image 
                     src="https://images.unsplash.com/photo-1598493132219-4591a2790938?q=80&w=600&h=400&fit=crop" 
                     alt="Ancient texts and scriptures"
@@ -48,7 +48,7 @@ export default function HomePage() {
       {/* Social Section */}
       <section className="py-16 md:py-24 bg-background">
         <div className="container mx-auto grid md:grid-cols-2 gap-12 items-center">
-            <div className="relative aspect-video rounded-lg shadow-lg">
+            <div className="relative aspect-video rounded-lg shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
               <Image 
                   src="https://images.unsplash.com/photo-1531545514256-b1400bc00f31?q=80&w=600&h=400&fit=crop"
                   alt="A community of people connecting"
@@ -96,7 +96,7 @@ export default function HomePage() {
                       </Link>
                   </Button>
             </div>
-            <div className="relative aspect-video rounded-lg shadow-lg">
+            <div className="relative aspect-video rounded-lg shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
               <Image 
                   src="https://images.unsplash.com/photo-1544716278-e513176f20b5?q=80&w=600&h=400&fit=crop"
                   alt="A library of ancient spiritual books"
