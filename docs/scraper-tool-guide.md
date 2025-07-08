@@ -1,59 +1,43 @@
-# Guide: Building Your Independent Scraper Tool
+# Guide: The Content Processor Tool
 
-This document outlines the professional architecture for creating a robust, independent scraper tool to populate your media database for the Sanatana Peethams Portal. The goal is to source images from public pages (like Facebook), store them securely under your control, and organize the metadata in Firestore.
+This document explains the architecture and use of the Content Processor, a powerful tool for curating and enhancing content for the Sanatana Peethams Portal.
 
-This process transforms your portal from being dependent on external platforms to being a self-reliant, authoritative archive. For information on how the website *displays* this data, see `docs/data-pipeline-guide.md`.
+**Important Clarification:** This tool is **not** a live, automated web scraper. It does not connect to social media sites. Instead, it provides a robust, manual pipeline to process content that you have gathered, ensuring high quality and relevance for your portal. For information on how the website *displays* this data, see `docs/data-pipeline-guide.md`.
 
 ---
 
-## The Architecture: The Five-Step Process
+## The Manual Curation Workflow
 
-Building a proper media pipeline involves five key steps. This is a backend process that you would run separately from the website itself using a tool like the one provided in `scripts/run-scraper.js`.
+This professional workflow gives you complete control over the content that appears on your site. It involves three simple steps.
 
-### Step 1: Scraping from the Source (e.g., Facebook)
+### Step 1: Find Your Source Content
 
-This is the process of programmatically gathering data from a website.
+Your role is that of a digital curator. Browse the official social media pages (Facebook, Instagram, X) or websites of the four Peethams. When you find a post with a high-quality image and meaningful description you want to feature, you have your source.
 
-*   **Tool:** The industry-standard tool for this is **Puppeteer**, a library that allows you to control a web browser with code. You would write a script (e.g., in Node.js) to do this.
+*   **Action:**
+    1.  Copy the post's description text.
+    2.  Right-click the image and copy its direct URL (e.g., "Copy Image Address").
+
+### Step 2: Add Content to the Source File
+
+This is where you tell the tool what content to process.
+
+*   **File:** `src/lib/scraping-source-data.ts`
+*   **Action:**
+    1.  Open this file in your editor.
+    2.  Add a new object to the `scrapingSourceData` array.
+    3.  Paste the description and image URL into the appropriate fields.
+    4.  Fill in the `date`, `peetham`, and a one or two-word `aiHint` for the image.
+
+### Step 3: Run the Processor
+
+This final step uses AI to enhance your content and saves it to the database.
+
+*   **Command:** In your terminal, run `npm run scrape`.
 *   **Process:**
-    1.  The script launches a browser.
-    2.  It navigates to a Peetham's Facebook page.
-    3.  It scrolls down to load historical posts and images.
-    4.  For each image, it extracts the image URL, the post text (for the description), and the date.
-*   **Important Note:** This can be complex. It requires handling logins and may need to be updated if Facebook changes its website structure.
+    1.  **Wipe & Replace:** The script first **deletes all old media** from your Firestore database, ensuring a clean slate.
+    2.  **AI Enhancement:** For each item you added, the script sends the description to an AI model to generate a concise, engaging title and relevant keywords.
+    3.  **Thumbnail Generation:** It creates an optimized thumbnail URL for fast loading on the website.
+    4.  **Database Storage:** The script saves the final, structured object (original description, image URL, thumbnail URL, AI-generated title, etc.) to your `media` collection in Firestore.
 
-### Step 2: Storing Your Media (Firebase Cloud Storage)
-
-Once you have the image URLs, you need to download them and save them in your own system. The best place for this is **Firebase Cloud Storage**.
-
-*   **Process:** Your scraper script would download each image and then upload it to a designated bucket in your Firebase Cloud Storage.
-*   **Benefit:** The images are now yours. They are stored securely, and you are not dependent on the original source link remaining active.
-
-### Step 3: Generating Thumbnails (Storage Extension)
-
-This is a critical step for website performance. The gallery pages will show many images at once, and loading the full-resolution versions would be very slow.
-
-*   **Tool:** You have the **`storage-generate-thumbnails`** extension installed.
-*   **Process:** This extension runs automatically. Whenever a new image is uploaded to your Firebase Cloud Storage (in Step 2), it will instantly create a smaller, optimized "thumbnail" version of that image. You don't need to do anything manually.
-*   **Benefit:** Your website can now load the small thumbnails on gallery pages for a fast user experience, and only show the large, high-quality image when a user clicks on it.
-
-### Step 4: Organizing Your Metadata (Firestore)
-
-An image file is useless without its context. **Firestore** is the perfect database for this.
-
-*   **Process:** For each image you save to Cloud Storage, your scraper script would create a new document in a Firestore collection (e.g., `media`). This document would store the "metadata":
-    *   `title`: The title of the image or event.
-    *   `description`: The text from the original post.
-    *   `date`: The date of the event.
-    *   `peetham`: The Peetham it belongs to (e.g., 'Sringeri').
-    *   `imageUrl`: The new URL of the image in your own Firebase Cloud Storage.
-    *   `thumbnailUrl`: The URL of the automatically generated thumbnail.
-    *   `sourceUrl`: The original Facebook post URL, for reference.
-*   **Benefit:** This creates a structured, searchable database of all your media content.
-
-### Step 5: Backing Up Your Assets (Google Drive)
-
-You have the `storage-googledrive-export` extension installed. This provides an excellent, automated backup solution.
-
-*   **Process:** Once an image is uploaded to Firebase Cloud Storage (in Step 2), this extension can automatically copy it to a folder in your Google Drive.
-*   **Benefit:** This gives you an extra layer of security and a human-readable archive of all your media assets, completely independent of the application.
+This semi-automated process combines the best of human curation with the power of AI, resulting in a high-quality, authentic, and performant digital portal.

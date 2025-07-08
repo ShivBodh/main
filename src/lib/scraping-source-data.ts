@@ -1,29 +1,51 @@
 
 /**
- * @fileoverview This file is the source of truth for the content processing script.
+ * @fileoverview This is your content source file.
  *
- * To populate your Bodha Calendar with content, add objects to the array below.
- * Each object should represent a piece of media you want to process and display.
+ * To add real content to your portal, follow these steps:
+ * 1. Find a post on social media (e.g., from a Peetham's Facebook page).
+ * 2. Right-click the image and select "Copy Image Address" or "Copy Image Link".
+ * 3. Add a new object to the `scrapingSourceData` array below.
+ * 4. Paste the image link into the `imageUrl` field.
+ * 5. Copy the post's text and paste it into the `description` field.
+ * 6. Set the `date` and `peetham`.
+ * 7. Provide a one or two-word `aiHint` for the image.
  *
- * Each object requires:
- * - date: "YYYY-MM-DD" format.
- * - peetham: 'Sringeri', 'Dwaraka', 'Puri', or 'Jyotirmath'.
- * - imageUrl: A direct link to a high-quality image.
- * - aiHint: One or two keywords for the image (e.g., "hindu temple").
- * - description: The text content to be processed by the AI for a title.
+ * =============================================================================
+ *  EXAMPLE:
+ * =============================================================================
  *
- * After adding your data, run the following command in your terminal:
+ * export const scrapingSourceData = [
+ *   {
+ *     date: '2024-07-21',
+ *     peetham: 'Sringeri',
+ *     imageUrl: 'https://www.sringeri.net/wp-content/uploads/2024/07/Vardhanti-Mahotsava-July-21-2024-1.jpeg',
+ *     aiHint: 'acharya blessing',
+ *     description: 'On July 21, 2024, the second day of the 31st Vardhanti Mahotsava of Jagadguru Shankaracharya Sri Sri Vidhushekhara Bharati Sannidhanam, Sahasra Modaka Ganapati Homa was performed.',
+ *   },
+ *   {
+ *     date: '2024-07-20',
+ *     peetham: 'Puri',
+ *     imageUrl: 'https://govardhanpeeth.org/wp-content/uploads/2024/07/news-20-07-24-1.jpg',
+ *     aiHint: 'acharya discourse',
+ *     description: 'Discourse by the Shankaracharya of Puri on the topic of Dharma and its application in modern life, delivered to a large gathering of devotees.',
+ *   }
+ * ];
+ *
+ * =============================================================================
+ *
+ * After adding your data, run this command in the terminal:
+ *
  * npm run scrape
  *
- * Then, go to the Bodha Calendar page and click "Refresh Content".
  */
 
-export const scrapingSourceData = [
-  // {
-  //   date: '2025-07-25',
-  //   peetham: 'Sringeri',
-  //   imageUrl: 'https://images.unsplash.com/your-image-url-here',
-  //   aiHint: 'your hint',
-  //   description: 'Your description here for the AI to process.',
-  // },
+export const scrapingSourceData: {
+  date: string,
+  peetham: 'Sringeri' | 'Dwaraka' | 'Puri' | 'Jyotirmath',
+  imageUrl: string,
+  aiHint: string,
+  description: string,
+}[] = [
+  // Add your content here
 ];
