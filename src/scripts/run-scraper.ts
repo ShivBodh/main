@@ -5,7 +5,7 @@
  * 1.  It loads the project's environment variables to access the AI API key.
  * 2.  It imports structured data directly from a local data source file.
  * 3.  It directly calls a Genkit AI flow (`processScrapedContent`) to process the text.
- * 4.  It saves the combined, structured data to a Firebase Firestore collection.
+ * 4.  It DELETES all old data and saves the new, combined data to a Firebase Firestore collection.
  *
  * =============================================================================
  *  IMPORTANT: How to Use This Tool
@@ -15,13 +15,12 @@
  * 1.  **Run the Scraper Script:**
  *     `npm run scrape`
  *
- *     The script will read local data, process it with the AI, and save the
- *     results directly to your Firestore database.
+ *     The script will wipe the 'media' collection and re-populate it with fresh data.
  */
 
 import { processScrapedContent } from '@/ai/flows/content-processor-flow';
 import { db } from '@/lib/firebase-script';
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, getDocs, deleteDoc, addDoc } from 'firebase/firestore';
 import { scrapingSourceData } from '@/lib/scraping-source-data'; // Import data directly
 
 // The .env file is now loaded by the `npm run scrape` command via the `--env-file` flag.
@@ -37,6 +36,26 @@ async function runProcessor() {
     return;
   }
 
+  const mediaCollection = collection(db, 'media');
+
+  // --- DELETION LOGIC ---
+  console.log('[INFO] Deleting all existing documents from the "media" collection to ensure a fresh start...');
+  try {
+    const existingDocsSnapshot = await getDocs(mediaCollection);
+    if (existingDocsSnapshot.size > 0) {
+        const deletePromises = existingDocsSnapshot.docs.map(doc => deleteDoc(doc.ref));
+        await Promise.all(deletePromises);
+        console.log(`[INFO] Successfully deleted ${existingDocsSnapshot.size} old documents.`);
+    } else {
+        console.log('[INFO] No old documents to delete.');
+    }
+  } catch (error: any) {
+    console.error("[ERROR] Could not delete existing documents. Please check your Firestore security rules for delete permissions.", error.message);
+    return; // Stop if we can't delete
+  }
+  // --- END DELETION LOGIC ---
+
+
   const postsToProcess = scrapingSourceData;
   console.log(`[SCRAPER] Found ${postsToProcess.length} posts in the local data source.`);
   
@@ -45,7 +64,6 @@ async function runProcessor() {
     return;
   }
   
-  const mediaCollection = collection(db, 'media');
   let processedCount = 0;
 
   for (const post of postsToProcess) {

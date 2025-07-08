@@ -71,7 +71,7 @@ export default function EventsClient() {
         Puri: true,
         Jyotirmath: true,
     });
-    const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date());
+    const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
     const [error, setError] = useState<string | null>(null);
 
     const fetchData = useCallback(async () => {
@@ -272,12 +272,12 @@ export default function EventsClient() {
                             </Card>
                         </div>
                         <div className="lg:col-span-2">
-                            <h3 className="font-headline text-xl mb-4">
-                                Activities for {selectedDate ? format(selectedDate, 'MMMM d, yyyy') : '...'}
+                             <h3 className="font-headline text-xl mb-4">
+                                {selectedDate ? `Activities for ${format(selectedDate, 'MMMM d, yyyy')}` : 'Select a date to view activities'}
                             </h3>
                             <ScrollArea className="h-[60vh] pr-4">
                                 <div className="space-y-4">
-                                    {itemsForSelectedDate.length > 0 ? itemsForSelectedDate.map(item => (
+                                    {selectedDate && itemsForSelectedDate.length > 0 ? itemsForSelectedDate.map(item => (
                                         <div key={item.id}>
                                              {item.type === 'photo' && <PhotoCard item={item as CalendarPhotoItem} />}
                                              {item.type === 'video' && <VideoCard item={item as CalendarVideoItem} />}
@@ -285,7 +285,9 @@ export default function EventsClient() {
                                         </div>
                                     )) : (
                                         <Card className="flex items-center justify-center h-48 border-dashed">
-                                            <p className="text-muted-foreground text-center">No activities found for this day. <br/> Select another date on the calendar.</p>
+                                            <p className="text-muted-foreground text-center">
+                                                {selectedDate ? 'No activities found for this day.' : 'Please select a date on the calendar.'}
+                                            </p>
                                         </Card>
                                     )}
                                 </div>
