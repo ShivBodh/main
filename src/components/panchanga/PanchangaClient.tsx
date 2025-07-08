@@ -98,7 +98,7 @@ export default function PanchangaClient() {
                     Today's astrological details based on traditional Hindu timekeeping, presented for the four cardinal regions.
                 </p>
                 <div className="mt-6">
-                    <InstallPWA />
+                    {isClient && <InstallPWA />}
                 </div>
             </div>
 

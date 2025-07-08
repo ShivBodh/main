@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next';
 import { peethams } from '@/lib/peethams-data';
+import { readingList } from '@/lib/reading-data';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const siteUrl = 'https://shivala.info';
@@ -23,7 +24,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/privacy-policy',
     '/user-agreement',
     '/games/ludo',
-    '/scraping-source',
   ].map((route) => ({
     url: `${siteUrl}${route}`,
     lastModified: new Date(),
@@ -37,6 +37,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: 'weekly' as const,
     priority: 0.9,
   }));
+  
+  const readingPages = readingList.map((book) => ({
+    url: `${siteUrl}/reading/${book.id}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  }));
 
-  return [...staticPages, ...peethamPages];
+  return [...staticPages, ...peethamPages, ...readingPages];
 }
