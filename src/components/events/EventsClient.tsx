@@ -201,28 +201,43 @@ export default function EventsClient() {
                 </div>
             )}
             
-            {!isLoading && !error && (
+            {!isLoading && !error && calendarItems.length === 0 && (
+                <Card className="flex flex-col items-center justify-center h-64 border-dashed text-center p-6">
+                    <CardTitle className="text-2xl font-headline">Your Calendar is Empty</CardTitle>
+                    <CardContent className="p-0 mt-4 max-w-lg mx-auto">
+                        <p className="text-muted-foreground mb-4">
+                            This is where media and events from the Peethams will appear. To populate it, you need to provide the source content.
+                        </p>
+                        <ol className="text-left list-decimal list-inside space-y-2">
+                            <li>
+                                Open the file: <code className="bg-muted px-2 py-1 rounded-md font-mono text-sm">src/lib/scraping-source-data.ts</code>
+                            </li>
+                            <li>
+                                Add items to the array with real image URLs and descriptions you want to see.
+                            </li>
+                            <li>
+                                Run the processing script in your terminal: <code className="bg-muted px-2 py-1 rounded-md font-mono text-sm">npm run scrape</code>
+                            </li>
+                            <li>
+                                Click the "Refresh Content" button above to see your live data.
+                            </li>
+                        </ol>
+                    </CardContent>
+                </Card>
+            )}
+
+            {!isLoading && !error && calendarItems.length > 0 && (
                 <>
                 <section className="mb-16">
                     <h2 className="text-2xl font-headline font-bold text-center mb-8">Latest Media Updates</h2>
-                    {latestItems.length > 0 ? (
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                            {latestItems.map((item) => (
-                                <div key={item.id}>
-                                    {item.type === 'photo' && <PhotoCard item={item as CalendarPhotoItem} />}
-                                    {item.type === 'video' && <VideoCard item={item as CalendarVideoItem} />}
-                                </div>
-                            ))}
-                        </div>
-                    ) : (
-                        <Card className="flex flex-col items-center justify-center h-48 border-dashed text-center p-4">
-                            <CardTitle>No Media Found</CardTitle>
-                            <CardDescription className="mt-2 max-w-md">
-                                Your database appears to be empty. Run the scraper script to populate it with content.
-                            </CardDescription>
-                            <code className="mt-4 inline-block bg-muted px-2 py-1 rounded-md font-mono text-sm">npm run scrape</code>
-                        </Card>
-                    )}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {latestItems.map((item) => (
+                            <div key={item.id}>
+                                {item.type === 'photo' && <PhotoCard item={item as CalendarPhotoItem} />}
+                                {item.type === 'video' && <VideoCard item={item as CalendarVideoItem} />}
+                            </div>
+                        ))}
+                    </div>
                 </section>
                 
                 <section className="mb-16">
@@ -300,7 +315,3 @@ export default function EventsClient() {
         </div>
     );
 }
-
-    
-
-    

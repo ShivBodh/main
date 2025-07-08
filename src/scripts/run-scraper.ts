@@ -1,9 +1,9 @@
 /**
- * @fileoverview An AI-Powered Content Scraper and Processor (TypeScript Version).
+ * @fileoverview An AI-Powered Content Processor (TypeScript Version).
  *
  * This script demonstrates a complete, self-contained pipeline:
  * 1.  It loads the project's environment variables to access the AI API key.
- * 2.  It imports structured data directly from a local data source file.
+ * 2.  It imports structured data directly from `src/lib/scraping-source-data.ts`.
  * 3.  It directly calls a Genkit AI flow (`processScrapedContent`) to process the text.
  * 4.  It DELETES all old data and saves the new, combined data to a Firebase Firestore collection.
  *
@@ -12,10 +12,13 @@
  * =============================================================================
  * This tool is now self-contained and no longer requires the Next.js server to be running.
  *
- * 1.  **Run the Scraper Script:**
+ * 1.  **Add Your Content:** Open the file `src/lib/scraping-source-data.ts` and add
+ *     the image URLs and descriptions you want to process.
+ * 
+ * 2.  **Run the Script:**
  *     `npm run scrape`
  *
- *     The script will wipe the 'media' collection and re-populate it with fresh data.
+ *     The script will wipe the 'media' collection and re-populate it with your new data.
  */
 
 import { processScrapedContent } from '@/ai/flows/content-processor-flow';
@@ -36,10 +39,19 @@ async function runProcessor() {
     return;
   }
 
+  const postsToProcess = scrapingSourceData;
+
+  if (postsToProcess.length === 0) {
+    console.log('\n[INFO] The scraping source file is empty.');
+    console.log('[ACTION] Please add content to `src/lib/scraping-source-data.ts` to be processed.');
+    console.log('[INFO] The script will now exit.');
+    return;
+  }
+
   const mediaCollection = collection(db, 'media');
 
   // --- DELETION LOGIC ---
-  console.log('[INFO] Deleting all existing documents from the "media" collection to ensure a fresh start...');
+  console.log(`[INFO] Deleting all existing documents from the "media" collection to process the ${postsToProcess.length} new item(s)...`);
   try {
     const existingDocsSnapshot = await getDocs(mediaCollection);
     if (existingDocsSnapshot.size > 0) {
@@ -54,15 +66,6 @@ async function runProcessor() {
     return; // Stop if we can't delete
   }
   // --- END DELETION LOGIC ---
-
-
-  const postsToProcess = scrapingSourceData;
-  console.log(`[SCRAPER] Found ${postsToProcess.length} posts in the local data source.`);
-  
-  if (postsToProcess.length === 0) {
-    console.log('[INFO] No posts found to process. Exiting script.');
-    return;
-  }
   
   let processedCount = 0;
 
