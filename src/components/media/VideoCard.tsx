@@ -15,13 +15,12 @@ export function VideoCard({ item }: { item: CalendarVideoItem }) {
     <Dialog>
       <DialogTrigger asChild>
         <Card className="h-full flex flex-col overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border-border/50 cursor-pointer group">
-          <CardContent className="p-0 relative">
+          <CardContent className="p-0 relative aspect-video bg-secondary/20">
             <Image
               src={item.thumbnailUrl}
               alt={item.title}
-              width={400}
-              height={225}
-              className="w-full h-auto object-cover aspect-video rounded-t-lg bg-secondary/20"
+              fill
+              className="object-cover"
               data-ai-hint={item.aiHint || 'video thumbnail'}
             />
             <div className="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">

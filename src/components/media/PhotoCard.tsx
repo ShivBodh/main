@@ -12,13 +12,12 @@ export function PhotoCard({ item }: { item: CalendarPhotoItem }) {
     <Dialog>
       <DialogTrigger asChild>
         <Card className="h-full flex flex-col overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border-border/50 cursor-pointer group">
-          <CardContent className="p-0">
+          <CardContent className="p-0 relative aspect-video bg-secondary/20">
             <Image
               src={item.thumbnailUrl || item.imageUrl}
               alt={item.title}
-              width={400}
-              height={225}
-              className="w-full object-cover aspect-video rounded-t-lg bg-secondary/20"
+              fill
+              className="object-cover"
               data-ai-hint={item.aiHint}
             />
           </CardContent>
