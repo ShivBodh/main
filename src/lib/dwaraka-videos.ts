@@ -10,4 +10,4 @@ export type VideoItem = {
     thumbnailUrl: string;
 };
 
-export const dwarakaVideos: VideoItem[] = dwarakaVideoData;
+export const dwarakaVideos: VideoItem[] = [];

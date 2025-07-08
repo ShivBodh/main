@@ -1,3 +1,4 @@
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BadgeCheck, ShieldCheck, Network } from "lucide-react";
 import Link from "next/link";
@@ -95,7 +96,7 @@ export default function MissionPage() {
 
             <div className="not-prose text-center mt-16 p-8 bg-card rounded-lg border">
                 <Image
-                  src="https://placehold.co/80x80.png"
+                  src="https://images.unsplash.com/photo-1593113646773-69316955a8a7?q=80&w=80&h=80&fit=crop"
                   alt="An illustration representing selfless service (Seva)"
                   data-ai-hint="seva hands"
                   width={80}

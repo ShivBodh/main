@@ -11,4 +11,4 @@ type PhotoGalleryItem = {
     aiHint: string;
 };
 
-export const dwarakaPhotoGallery: PhotoGalleryItem[] = dwarakaPhotoData;
+export const dwarakaPhotoGallery: PhotoGalleryItem[] = [];

@@ -11,4 +11,4 @@ type PhotoGalleryItem = {
     aiHint: string;
 };
 
-export const sringeriPhotoGallery: PhotoGalleryItem[] = sringeriPhotoData;
+export const sringeriPhotoGallery: PhotoGalleryItem[] = [];

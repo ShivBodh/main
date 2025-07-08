@@ -10,4 +10,4 @@ export type VideoItem = {
     thumbnailUrl: string;
 };
 
-export const puriVideos: VideoItem[] = puriVideoData;
+export const puriVideos: VideoItem[] = [];

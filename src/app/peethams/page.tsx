@@ -28,7 +28,7 @@ export default function PeethamsPage() {
         <div className="text-center mb-16">
           <div className="mb-8">
             <Image
-              src="https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/aadi-guru.png"
+              src="https://images.unsplash.com/photo-1695632738261-a02251012359?q=80&w=150&h=150&fit=crop"
               alt="Jagadguru Adi Shankaracharya"
               width={150}
               height={150}

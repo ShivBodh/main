@@ -10,4 +10,4 @@ export type VideoItem = {
     thumbnailUrl: string;
 };
 
-export const sringeriVideos: VideoItem[] = sringeriVideoData;
+export const sringeriVideos: VideoItem[] = [];

@@ -11,4 +11,4 @@ type PhotoGalleryItem = {
     aiHint: string;
 };
 
-export const puriPhotoGallery: PhotoGalleryItem[] = puriPhotoData;
+export const puriPhotoGallery: PhotoGalleryItem[] = [];

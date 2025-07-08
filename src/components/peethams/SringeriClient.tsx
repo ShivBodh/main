@@ -10,27 +10,125 @@ import { ExternalLink, BookOpen, Landmark, Calendar, Camera, Video, ArrowRight, 
 import { peethams } from '@/lib/peethams-data';
 import { LineageTimeline } from '@/components/peethams/LineageTimeline';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
-import { useMemo } from 'react';
-import { allCalendarItems, CalendarEventItem, CalendarPhotoItem, CalendarVideoItem } from '@/lib/calendar-data';
-import { format } from 'date-fns';
+import { useState, useMemo, useEffect, useCallback } from 'react';
+import { UnifiedCalendarItem, CalendarEventItem, CalendarPhotoItem, CalendarVideoItem } from '@/lib/calendar-data';
+import { format, parseISO } from 'date-fns';
 import { PhotoCard } from '@/components/media/PhotoCard';
 import { VideoCard } from '@/components/media/VideoCard';
 import { allSevaOpportunities } from '@/lib/seva-data';
 import { Badge } from '@/components/ui/badge';
+import { db } from '@/lib/firebase';
+import { collection, getDocs, query, where, orderBy } from 'firebase/firestore';
+import { Skeleton } from '@/components/ui/skeleton';
 
 const sringeriSeva = allSevaOpportunities.filter(o => o.peetham === 'Sringeri');
 const peethamInfo = peethams.find(p => p.name.includes('Sringeri'))!;
-const sringeriEvents: CalendarEventItem[] = [
-    { id: 'sringeri-event-1', date: '2025-04-03', peetham: 'Sringeri', type: 'event', title: "75th Vardhanti of Sri Bharathi Tirtha Mahaswamiji", description: "The 75th birthday celebrations of Jagadguru Sri Bharathi Tirtha Mahaswamiji will be held in Sringeri.", category: 'Festival' },
-    { id: 'sringeri-event-2', date: '2025-07-10', peetham: 'Sringeri', type: 'event', title: "Chaturmasya Vrata Begins", description: "Both Jagadgurus will observe their annual Chaturmasya Vrata at the headquarters in Sringeri, commencing with Vyasa Puja.", category: 'Vrata' },
-    { id: 'sringeri-event-3', date: '2025-07-15', peetham: 'Sringeri', type: 'event', title: "Vijaya Yatra to Tiruchendur & Rameswaram", description: "Jagadguru Sri Vidhushekhara Bharati Mahaswamiji is scheduled to undertake a Vijaya Yatra.", category: 'Yatra' },
-];
+
+const TABS_WITH_MEDIA = ['gallery', 'videos', 'events'];
+
+const MediaGridSkeleton = () => (
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {[...Array(3)].map((_, i) => <Skeleton key={i} className="h-80 w-full" />)}
+    </div>
+);
 
 export default function SringeriClient() {
+    const [media, setMedia] = useState<UnifiedCalendarItem[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
 
-    const sringeriMedia = useMemo(() => allCalendarItems.filter(item => item.peetham === 'Sringeri'), []);
-    const sringeriPhotos = useMemo(() => sringeriMedia.filter((item): item is CalendarPhotoItem => item.type === 'photo'), [sringeriMedia]);
-    const sringeriVideos = useMemo(() => sringeriMedia.filter((item): item is CalendarVideoItem => item.type === 'video'), [sringeriMedia]);
+    const fetchData = useCallback(async () => {
+        setIsLoading(true);
+        setError(null);
+        if (!db) {
+            setError("Firebase is not configured.");
+            setIsLoading(false);
+            return;
+        }
+
+        try {
+            const mediaCollection = collection(db, 'media');
+            const q = query(mediaCollection, where("peetham", "==", "Sringeri"), orderBy('date', 'desc'));
+            const querySnapshot = await getDocs(q);
+            const items = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as UnifiedCalendarItem));
+            setMedia(items);
+        } catch (err) {
+            console.error("Error fetching Sringeri media from Firestore:", err);
+            setError("Could not fetch media from Firestore. Please check connection and security rules.");
+        } finally {
+            setIsLoading(false);
+        }
+    }, []);
+
+    useEffect(() => {
+        fetchData();
+    }, [fetchData]);
+
+    const sringeriPhotos = useMemo(() => media.filter((item): item is CalendarPhotoItem => item.type === 'photo'), [media]);
+    const sringeriVideos = useMemo(() => media.filter((item): item is CalendarVideoItem => item.type === 'video'), [media]);
+    const sringeriEvents = useMemo(() => media.filter((item): item is CalendarEventItem => item.type === 'event'), [media]);
+
+    const renderMediaTabContent = (items: UnifiedCalendarItem[], type: 'photo' | 'video' | 'event') => {
+        if (isLoading) return <MediaGridSkeleton />;
+        if (error) return <p className="text-center text-destructive py-8">{error}</p>;
+        if (items.length === 0) return (
+            <div className="text-center text-muted-foreground py-8">
+                <p>No {type}s found for this Peetham.</p>
+                <p className="text-sm mt-1">Add content via the scraper and refresh the Bodha Calendar.</p>
+            </div>
+        );
+        
+        if (type === 'photo') {
+            return (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {items.map(item => <PhotoCard key={item.id} item={item as CalendarPhotoItem} />)}
+                </div>
+            );
+        }
+        if (type === 'video') {
+             return (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {items.map(item => <VideoCard key={item.id} item={item as CalendarVideoItem} />)}
+                </div>
+            );
+        }
+        if (type === 'event') {
+             return (
+                 <Card>
+                    <CardHeader>
+                        <CardTitle className="font-headline text-primary flex items-center gap-2">
+                            <Calendar className="h-6 w-6" /> Recent & Upcoming Events
+                        </CardTitle>
+                        <CardDescription>
+                            Key events for the Sringeri Acharyas.
+                        </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                         <ul className="space-y-4">
+                            {items.map(event => (
+                                <li key={event.id} className="flex flex-col sm:flex-row justify-between sm:items-center p-3 rounded-md border bg-muted/20">
+                                    <div>
+                                        <p className="font-semibold text-foreground/90">{event.title}</p>
+                                        <p className="text-sm text-muted-foreground">{format(parseISO(event.date), 'MMMM d, yyyy')}</p>
+                                    </div>
+                                    <p className="text-sm font-medium text-primary mt-2 sm:mt-0">{(event as CalendarEventItem).category}</p>
+                                </li>
+                            ))}
+                        </ul>
+                    </CardContent>
+                    <CardFooter>
+                        <Button asChild className="w-full">
+                            <Link href="/events">
+                                View Full Bodha Calendar <ArrowRight className="ml-2 h-4 w-4" />
+                            </Link>
+                        </Button>
+                    </CardFooter>
+                 </Card>
+            );
+        }
+        return null;
+    }
+
 
   return (
     <div className="bg-background text-foreground">
@@ -113,68 +211,17 @@ export default function SringeriClient() {
           </TabsContent>
           
           <TabsContent value="events">
-            <Card>
-                <CardHeader>
-                    <CardTitle className="font-headline text-primary flex items-center gap-2">
-                        <Calendar className="h-6 w-6" /> Recent & Upcoming Events (2025)
-                    </CardTitle>
-                    <CardDescription>
-                        Key upcoming events for the Sringeri Acharyas.
-                    </CardDescription>
-                </CardHeader>
-                <CardContent>
-                    {sringeriEvents.length > 0 ? (
-                        <ul className="space-y-4">
-                            {sringeriEvents.map(event => (
-                                <li key={event.id} className="flex flex-col sm:flex-row justify-between sm:items-center p-3 rounded-md border bg-muted/20">
-                                    <div>
-                                        <p className="font-semibold text-foreground/90">{event.title}</p>
-                                        <p className="text-sm text-muted-foreground">{format(new Date(event.date.replace(/-/g, '/')), 'MMMM d, yyyy')}</p>
-                                    </div>
-                                    <p className="text-sm font-medium text-primary mt-2 sm:mt-0">{event.category}</p>
-                                </li>
-                            ))}
-                        </ul>
-                    ) : (
-                        <p className="text-muted-foreground text-center p-4">
-                            No specific events found. Check the main Bodha Calendar for all activities.
-                        </p>
-                    )}
-                </CardContent>
-                <CardFooter>
-                    <Button asChild className="w-full">
-                        <Link href="/events">
-                            View Full Bodha Calendar <ArrowRight className="ml-2 h-4 w-4" />
-                        </Link>
-                    </Button>
-                </CardFooter>
-            </Card>
+            {renderMediaTabContent(sringeriEvents, 'event')}
           </TabsContent>
 
           <TabsContent value="gallery">
             <h3 className="font-headline text-2xl text-primary mb-4 flex items-center gap-2"><Camera className="h-6 w-6" /> Photo Gallery</h3>
-            {sringeriPhotos.length > 0 ? (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {sringeriPhotos.map(photo => (
-                        <PhotoCard key={photo.id} item={photo} />
-                    ))}
-                </div>
-            ) : (
-                <p className="text-center text-muted-foreground py-8">No photos available for this Peetham.</p>
-            )}
+            {renderMediaTabContent(sringeriPhotos, 'photo')}
           </TabsContent>
 
            <TabsContent value="videos">
              <h3 className="font-headline text-2xl text-primary mb-4 flex items-center gap-2"><Video className="h-6 w-6" /> Video Gallery</h3>
-             {sringeriVideos.length > 0 ? (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {sringeriVideos.map(video => (
-                       <VideoCard key={video.id} item={video} />
-                    ))}
-                </div>
-            ) : (
-                <p className="text-center text-muted-foreground py-8">No videos available for this Peetham.</p>
-            )}
+             {renderMediaTabContent(sringeriVideos, 'video')}
              <div className="text-center mt-8">
                 <Button asChild>
                     <Link href="/events">View Full Bodha Calendar</Link>

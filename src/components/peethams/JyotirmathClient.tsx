@@ -10,27 +10,110 @@ import { ExternalLink, BookOpen, Landmark, Calendar, Camera, Video, ArrowRight, 
 import { peethams } from '@/lib/peethams-data';
 import { LineageTimeline } from '@/components/peethams/LineageTimeline';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
-import { useMemo } from 'react';
-import { allCalendarItems, CalendarEventItem, CalendarPhotoItem, CalendarVideoItem } from '@/lib/calendar-data';
+import { useState, useMemo, useEffect, useCallback } from 'react';
+import { UnifiedCalendarItem, CalendarEventItem, CalendarPhotoItem, CalendarVideoItem } from '@/lib/calendar-data';
 import { format, parseISO } from 'date-fns';
 import { PhotoCard } from '@/components/media/PhotoCard';
 import { VideoCard } from '@/components/media/VideoCard';
 import { allSevaOpportunities } from '@/lib/seva-data';
 import { Badge } from '@/components/ui/badge';
+import { db } from '@/lib/firebase';
+import { collection, getDocs, query, where, orderBy } from 'firebase/firestore';
+import { Skeleton } from '@/components/ui/skeleton';
 
 const jyotirmathSeva = allSevaOpportunities.filter(o => o.peetham === 'Jyotirmath');
 const peethamInfo = peethams.find(p => p.name.includes('Jyotirmath'))!;
 
-const jyotirmathEvents: CalendarEventItem[] = [
-    { id: 'jyotirmath-event-1', date: '2025-01-15', peetham: 'Jyotirmath', type: 'event', title: "Arrival at Maha Kumbh Mela 2025", description: "Arrived at the Mela grounds in Prayagraj with a grand procession in early January 2025.", category: 'Festival' },
-    { id: 'jyotirmath-event-2', date: '2025-07-15', peetham: 'Jyotirmath', type: 'event', title: "2025 Chaturmasya Vrata", description: "Information not yet available. To be announced.", category: 'Vrata' }
-];
+const TABS_WITH_MEDIA = ['gallery', 'videos', 'events'];
+
+const MediaGridSkeleton = () => (
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {[...Array(3)].map((_, i) => <Skeleton key={i} className="h-80 w-full" />)}
+    </div>
+);
+
 
 export default function JyotirmathClient() {
+    const [media, setMedia] = useState<UnifiedCalendarItem[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
 
-    const jyotirmathMedia = useMemo(() => allCalendarItems.filter(item => item.peetham === 'Jyotirmath'), []);
-    const jyotirmathPhotos = useMemo(() => jyotirmathMedia.filter((item): item is CalendarPhotoItem => item.type === 'photo'), [jyotirmathMedia]);
-    const jyotirmathVideos = useMemo(() => jyotirmathMedia.filter((item): item is CalendarVideoItem => item.type === 'video'), [jyotirmathMedia]);
+    const fetchData = useCallback(async () => {
+        setIsLoading(true);
+        setError(null);
+        if (!db) {
+            setError("Firebase is not configured.");
+            setIsLoading(false);
+            return;
+        }
+
+        try {
+            const mediaCollection = collection(db, 'media');
+            const q = query(mediaCollection, where("peetham", "==", "Jyotirmath"), orderBy('date', 'desc'));
+            const querySnapshot = await getDocs(q);
+            const items = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as UnifiedCalendarItem));
+            setMedia(items);
+        } catch (err) {
+            console.error("Error fetching Jyotirmath media from Firestore:", err);
+            setError("Could not fetch media from Firestore. Please check connection and security rules.");
+        } finally {
+            setIsLoading(false);
+        }
+    }, []);
+
+    useEffect(() => {
+        fetchData();
+    }, [fetchData]);
+
+    const jyotirmathPhotos = useMemo(() => media.filter((item): item is CalendarPhotoItem => item.type === 'photo'), [media]);
+    const jyotirmathVideos = useMemo(() => media.filter((item): item is CalendarVideoItem => item.type === 'video'), [media]);
+    const jyotirmathEvents = useMemo(() => media.filter((item): item is CalendarEventItem => item.type === 'event'), [media]);
+    
+    const renderMediaTabContent = (items: UnifiedCalendarItem[], type: 'photo' | 'video' | 'event') => {
+        if (isLoading) return <MediaGridSkeleton />;
+        if (error) return <p className="text-center text-destructive py-8">{error}</p>;
+        if (items.length === 0) return (
+            <div className="text-center text-muted-foreground py-8">
+                <p>No {type}s found for this Peetham.</p>
+                <p className="text-sm mt-1">Add content via the scraper and refresh the Bodha Calendar.</p>
+            </div>
+        );
+        
+        if (type === 'photo') {
+            return (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {items.map(item => <PhotoCard key={item.id} item={item as CalendarPhotoItem} />)}
+                </div>
+            );
+        }
+        if (type === 'video') {
+             return (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {items.map(item => <VideoCard key={item.id} item={item as CalendarVideoItem} />)}
+                </div>
+            );
+        }
+        if (type === 'event') {
+             return (
+                 <Card>
+                    <CardContent className="pt-6">
+                         <ul className="space-y-4">
+                            {items.map(event => (
+                                <li key={event.id} className="flex flex-col sm:flex-row justify-between sm:items-center p-3 rounded-md border bg-muted/20">
+                                    <div>
+                                        <p className="font-semibold text-foreground/90">{event.title}</p>
+                                        <p className="text-sm text-muted-foreground">{format(parseISO(event.date), 'MMMM d, yyyy')}</p>
+                                    </div>
+                                    <p className="text-sm font-medium text-primary mt-2 sm:mt-0">{(event as CalendarEventItem).category}</p>
+                                </li>
+                            ))}
+                        </ul>
+                    </CardContent>
+                 </Card>
+            );
+        }
+        return null;
+    }
 
   return (
     <div className="bg-background text-foreground">
@@ -119,68 +202,23 @@ export default function JyotirmathClient() {
           </TabsContent>
           
            <TabsContent value="events">
-            <Card>
-                <CardHeader>
-                    <CardTitle className="font-headline text-primary flex items-center gap-2">
-                        <Calendar className="h-6 w-6" /> Upcoming Events (2025)
-                    </CardTitle>
-                    <CardDescription>
-                        Key upcoming events for the Jyotirmath Shankaracharya.
-                    </CardDescription>
-                </CardHeader>
-                <CardContent>
-                    {jyotirmathEvents.length > 0 ? (
-                        <ul className="space-y-4">
-                            {jyotirmathEvents.map(event => (
-                                <li key={event.id} className="flex flex-col sm:flex-row justify-between sm:items-center p-3 rounded-md border bg-muted/20">
-                                    <div>
-                                        <p className="font-semibold text-foreground/90">{event.title}</p>
-                                        <p className="text-sm text-muted-foreground">{format(parseISO(event.date), 'MMMM d, yyyy')}</p>
-                                    </div>
-                                    <p className="text-sm font-medium text-primary mt-2 sm:mt-0">{event.category}</p>
-                                </li>
-                            ))}
-                        </ul>
-                    ) : (
-                        <p className="text-muted-foreground text-center p-4">
-                            No specific events found. Check the main Bodha Calendar for all activities.
-                        </p>
-                    )}
-                </CardContent>
-                <CardFooter>
-                    <Button asChild className="w-full">
-                        <Link href="/events">
-                            View Full Bodha Calendar <ArrowRight className="ml-2 h-4 w-4" />
-                        </Link>
+                <h3 className="font-headline text-2xl text-primary mb-4 flex items-center gap-2"><Calendar className="h-6 w-6" /> Events</h3>
+                {renderMediaTabContent(jyotirmathEvents, 'event')}
+                <div className="text-center mt-8">
+                    <Button asChild>
+                        <Link href="/events">View Full Bodha Calendar</Link>
                     </Button>
-                </CardFooter>
-            </Card>
+                </div>
           </TabsContent>
           
           <TabsContent value="gallery">
             <h3 className="font-headline text-2xl text-primary mb-4 flex items-center gap-2"><Camera className="h-6 w-6" /> Photo Gallery</h3>
-            {jyotirmathPhotos.length > 0 ? (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {jyotirmathPhotos.map(photo => (
-                       <PhotoCard key={photo.id} item={photo} />
-                    ))}
-                </div>
-            ) : (
-                <p className="text-center text-muted-foreground py-8">No photos available for this Peetham.</p>
-            )}
+            {renderMediaTabContent(jyotirmathPhotos, 'photo')}
           </TabsContent>
 
            <TabsContent value="videos">
              <h3 className="font-headline text-2xl text-primary mb-4 flex items-center gap-2"><Video className="h-6 w-6" /> Video Gallery</h3>
-             {jyotirmathVideos.length > 0 ? (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {jyotirmathVideos.map(video => (
-                       <VideoCard key={video.id} item={video} />
-                    ))}
-                </div>
-            ) : (
-                <p className="text-center text-muted-foreground py-8">No videos available for this Peetham.</p>
-            )}
+             {renderMediaTabContent(jyotirmathVideos, 'video')}
              <div className="text-center mt-8">
                 <Button asChild>
                     <Link href="/events">View Full Bodha Calendar</Link>

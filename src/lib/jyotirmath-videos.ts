@@ -10,4 +10,4 @@ export type VideoItem = {
     thumbnailUrl: string;
 };
 
-export const jyotirmathVideos: VideoItem[] = jyotirmathVideoData;
+export const jyotirmathVideos: VideoItem[] = [];
