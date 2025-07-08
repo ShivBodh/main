@@ -1,10 +1,21 @@
+
 rules_version = '2';
+
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Allow public read and write access only to the 'media' collection.
-    // This is for development and will be secured before launch.
-    match /media/{docId} {
-      allow read, write: if true;
+    
+    // This is a public portal, so media content should be readable by anyone.
+    // Writes are disabled from the client to prevent unauthorized modification. 
+    // Data should only be added by the trusted scraper script.
+    match /media/{mediaId} {
+      allow read: if true;
+      allow write: if false; 
+    }
+
+    // By default, other collections require users to be logged in.
+    // This is a secure starting point for features like user profiles.
+    match /{path=**}/{document} {
+      allow read, write: if request.auth != null;
     }
   }
 }
