@@ -110,10 +110,6 @@ export default function EventsClient() {
         return calendarItems.filter(item => activePeethams.includes(item.peetham));
     }, [filters, calendarItems]);
 
-    const latestItems = useMemo(() => {
-        return filteredItems.filter(item => item.type === 'photo' || item.type === 'video').slice(0, 6)
-    }, [filteredItems]);
-
     const peethamsByDate = useMemo(() => {
         const map = new Map<string, Set<Peetham>>();
         filteredItems.forEach(item => {
@@ -190,7 +186,6 @@ export default function EventsClient() {
 
             {isLoading && (
                 <div className="space-y-12">
-                    <Skeleton className="h-64 w-full" />
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                         {[...Array(4)].map((_, i) => <Skeleton key={i} className="h-24 w-full" />)}
                     </div>
@@ -228,18 +223,6 @@ export default function EventsClient() {
 
             {!isLoading && !error && calendarItems.length > 0 && (
                 <>
-                <section className="mb-16">
-                    <h2 className="text-2xl font-headline font-bold text-center mb-8">Latest Media Updates</h2>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {latestItems.map((item) => (
-                            <div key={item.id}>
-                                {item.type === 'photo' && <PhotoCard item={item as CalendarPhotoItem} />}
-                                {item.type === 'video' && <VideoCard item={item as CalendarVideoItem} />}
-                            </div>
-                        ))}
-                    </div>
-                </section>
-                
                 <section className="mb-16">
                     <h2 className="text-2xl font-headline font-bold text-center mb-8">Explore by Peetham</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
