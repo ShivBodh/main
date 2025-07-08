@@ -79,7 +79,7 @@ async function runProcessor() {
   }
   
   console.log(`\n[COMPLETE] Processing finished. ${processedCount} records saved to Firestore.`);
-  console.log(`[ACTION] Refresh the Bodha Calendar page in your browser to see the new content.`);
+  console.log(`[ACTION] Go to the Bodha Calendar page and click the 'Refresh Content' button to see your updates.`);
 }
 
 runProcessor().catch(console.error);
