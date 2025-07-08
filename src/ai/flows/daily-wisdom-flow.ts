@@ -26,17 +26,23 @@ export async function getDailyWisdom(): Promise<DailyWisdomOutput> {
   return dailyWisdomFlow();
 }
 
+const dailyWisdomPrompt = ai.definePrompt({
+    name: 'dailyWisdomPrompt',
+    output: { schema: DailyWisdomOutputSchema },
+    model: 'googleai/gemini-1.5-flash-latest',
+    prompt: `You are a wise scholar of Sanatana Dharma. Generate a single, profound, and relatively short quote from a recognized Hindu scripture (like the Upanishads, Puranas, or Bhagavad Gita) or a revered sage (like Adi Shankaracharya, Ramakrishna Paramahamsa, or Ramana Maharshi).
+
+    Provide the quote, its source/author, and a high-quality Hindi translation.`
+});
+
+
 const dailyWisdomFlow = ai.defineFlow(
   {
     name: 'dailyWisdomFlow',
     outputSchema: DailyWisdomOutputSchema,
   },
   async () => {
-    // MOCK IMPLEMENTATION: This avoids a hard dependency on the AI model for now.
-    return {
-      quote: "The Self is not to be known by the study of the scriptures, nor by the intellect, nor by much hearing.",
-      author: "Katha Upanishad",
-      translation: "आत्मा न तो प्रवचन से, न बुद्धि से, और न बहुत सुनने से ही जाना जा सकता है।"
-    };
+    const { output } = await dailyWisdomPrompt();
+    return output!;
   }
 );
