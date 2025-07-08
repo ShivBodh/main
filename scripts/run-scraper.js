@@ -39,8 +39,8 @@ const CONFIG = {
   OUTPUT_FILE: path.join(__dirname, 'scraped-data.json'),
   // Directory to save any downloaded media (currently using placeholders).
   SAVE_DIR: path.join(__dirname, '../public/scraped_media'),
-  // The URL for the local Genkit AI server flow.
-  AI_PROCESSOR_URL: 'http://localhost:4000/flows/contentProcessorFlow',
+  // The URL for the local Genkit AI server flow API endpoint.
+  AI_PROCESSOR_URL: 'http://localhost:4000/api/flows/contentProcessorFlow',
 };
 
 // --- SAMPLE DATA ---
