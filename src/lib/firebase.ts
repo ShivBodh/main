@@ -1,5 +1,6 @@
 import { initializeApp, getApps, getApp, FirebaseOptions, FirebaseApp } from 'firebase/app';
 import { getAuth, GoogleAuthProvider, Auth } from 'firebase/auth';
+import { getFirestore, Firestore } from 'firebase/firestore';
 import { getAnalytics, isSupported } from "firebase/analytics";
 
 // Your web app's Firebase configuration
@@ -15,11 +16,13 @@ const firebaseConfig: FirebaseOptions = {
 
 let app: FirebaseApp | undefined;
 let auth: Auth | undefined;
+let db: Firestore | undefined;
 
 // Initialize Firebase only if the API key is provided
 if (firebaseConfig.apiKey) {
     app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
     auth = getAuth(app);
+    db = getFirestore(app);
     // Initialize analytics only on the client
     if (typeof window !== 'undefined') {
       isSupported().then(supported => {
@@ -36,4 +39,4 @@ if (firebaseConfig.apiKey) {
 
 const googleProvider = new GoogleAuthProvider();
 
-export { auth, googleProvider };
+export { auth, googleProvider, db };

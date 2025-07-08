@@ -15,6 +15,8 @@ import { Gem, Camera } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { PhotoCard } from '@/components/media/PhotoCard';
+import { db } from '@/lib/firebase';
+import { collection, getDocs, query, orderBy } from 'firebase/firestore';
 
 const EventCard = ({ event }: { event: CalendarEventItem }) => (
     <Card key={event.id} className="border-l-4" style={{ borderColor: peethamDotColors[event.peetham] }}>
@@ -67,7 +69,8 @@ const groupItemsByDate = (items: UnifiedCalendarItem[]): Record<string, UnifiedC
 };
 
 export default function EventsClient() {
-    const [isClient, setIsClient] = useState(false);
+    const [allItems, setAllItems] = useState<UnifiedCalendarItem[]>(allCalendarItems);
+    const [isLoading, setIsLoading] = useState(true);
     const [filters, setFilters] = useState<Record<Peetham, boolean>>({
         Sringeri: true,
         Dwaraka: true,
@@ -77,7 +80,48 @@ export default function EventsClient() {
     const [jumpToDate, setJumpToDate] = useState<Date | undefined>();
 
     useEffect(() => {
-        setIsClient(true);
+        async function fetchScrapedMedia() {
+            if (!db) {
+                console.log("Firestore not configured, using only static data.");
+                setAllItems(allCalendarItems);
+                setIsLoading(false);
+                return;
+            }
+
+            try {
+                const mediaCollection = collection(db, 'media');
+                const q = query(mediaCollection, orderBy('date', 'desc'));
+                const querySnapshot = await getDocs(q);
+                
+                const firestoreItems: UnifiedCalendarItem[] = querySnapshot.docs.map(doc => {
+                    const data = doc.data();
+                    return {
+                        id: doc.id,
+                        date: data.date, 
+                        peetham: data.peetham,
+                        type: data.type,
+                        title: data.title,
+                        description: data.description,
+                        imageUrl: data.imageUrl,
+                        thumbnailUrl: data.thumbnailUrl,
+                        aiHint: data.aiHint,
+                    } as CalendarPhotoItem;
+                });
+                
+                const combinedItems = [...firestoreItems, ...allCalendarItems]
+                    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+                
+                setAllItems(combinedItems);
+
+            } catch (error) {
+                console.error("Error fetching media from Firestore:", error);
+                setAllItems(allCalendarItems);
+            } finally {
+                setIsLoading(false);
+            }
+        }
+
+        fetchScrapedMedia();
     }, []);
 
     useEffect(() => {
@@ -91,11 +135,11 @@ export default function EventsClient() {
                     element.classList.remove('flash-highlight');
                 }, 1500);
 
-                setJumpToDate(undefined); // Reset state after triggering
+                setJumpToDate(undefined);
                 
-                return () => clearTimeout(timer); // Cleanup timer on unmount or re-run
+                return () => clearTimeout(timer);
             } else {
-                 setJumpToDate(undefined); // Reset even if element not found
+                 setJumpToDate(undefined);
             }
         }
     }, [jumpToDate]);
@@ -106,8 +150,8 @@ export default function EventsClient() {
     };
 
     const filteredItems = useMemo(() => {
-        return allCalendarItems.filter(item => filters[item.peetham]);
-    }, [filters]);
+        return allItems.filter(item => filters[item.peetham]);
+    }, [filters, allItems]);
 
     const groupedItems = useMemo(() => groupItemsByDate(filteredItems), [filteredItems]);
     const sortedDates = useMemo(() => Object.keys(groupedItems).sort((a, b) => new Date(b).getTime() - new Date(a).getTime()), [groupedItems]);
@@ -205,7 +249,21 @@ export default function EventsClient() {
                 </aside>
                 
                 <main className="lg:col-span-3">
-                    {isClient ? (
+                    {isLoading ? (
+                        <div className="space-y-8">
+                             {[...Array(3)].map((_, i) => (
+                                <Card key={i}>
+                                    <CardHeader className="bg-muted/50 border-b">
+                                        <Skeleton className="h-8 w-64" />
+                                    </CardHeader>
+                                    <CardContent className="p-4 space-y-4">
+                                        <Skeleton className="h-40 w-full" />
+                                        <Skeleton className="h-40 w-full" />
+                                    </CardContent>
+                                </Card>
+                            ))}
+                        </div>
+                    ) : (
                         sortedDates.length > 0 ? (
                             <div className="space-y-8">
                                 {sortedDates.map(date => (
@@ -250,20 +308,6 @@ export default function EventsClient() {
                                 </CardContent>
                             </Card>
                         )
-                    ) : (
-                        <div className="space-y-8">
-                             {[...Array(3)].map((_, i) => (
-                                <Card key={i}>
-                                    <CardHeader className="bg-muted/50 border-b">
-                                        <Skeleton className="h-8 w-64" />
-                                    </CardHeader>
-                                    <CardContent className="p-4 space-y-4">
-                                        <Skeleton className="h-40 w-full" />
-                                        <Skeleton className="h-40 w-full" />
-                                    </CardContent>
-                                </Card>
-                            ))}
-                        </div>
                     )}
                 </main>
             </div>

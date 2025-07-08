@@ -6,7 +6,7 @@
  * 2.  It fetches HTML from a local webpage (`/scraping-source`).
  * 3.  It uses `cheerio` to parse the HTML and extract image URLs and descriptions.
  * 4.  It directly calls a Genkit AI flow (`processScrapedContent`) to process the text.
- * 5.  It saves the combined, structured data to `scraped-data.json`.
+ * 5.  It saves the combined, structured data to a Firebase Firestore collection.
  *
  * =============================================================================
  *  IMPORTANT: How to Use This Tool
@@ -29,13 +29,15 @@ import path from 'path';
 import axios from 'axios';
 import * as cheerio from 'cheerio';
 import { processScrapedContent } from '@/ai/flows/content-processor-flow';
+import { db } from '@/lib/firebase-script';
+import { collection, addDoc } from 'firebase/firestore';
 
 // --- CONFIGURATION ---
 // The .env file is now loaded by the `npm run scrape` command via the `--env-file` flag.
 
 const CONFIG = {
   SOURCE_URL: 'http://localhost:3000/scraping-source',
-  OUTPUT_FILE: path.join(__dirname, 'scraped-data.json'),
+  // The output file is no longer used, data is saved to Firestore.
 };
 
 // --- HELPER FUNCTIONS ---
@@ -89,6 +91,11 @@ async function runProcessor() {
   console.log('[INFO] Starting content processor.');
   console.log('[INFO] Make sure the Next.js dev server is running: `npm run dev`');
 
+  if (!db) {
+    console.error("[ERROR] Firestore is not initialized. Please check your Firebase configuration in .env and ensure you've set up a Firestore database in your project.");
+    return;
+  }
+
   const html = await fetchSourcePage();
   if (!html) {
     console.log('[INFO] Could not fetch source page. Exiting script.');
@@ -101,7 +108,8 @@ async function runProcessor() {
     return;
   }
   
-  const allProcessedData = [];
+  const mediaCollection = collection(db, 'media');
+  let processedCount = 0;
 
   for (const post of extractedPosts) {
     console.log(`\n--- Processing post for ${post.peetham} ---`);
@@ -111,8 +119,7 @@ async function runProcessor() {
 
         if (aiContent) {
             console.log('[AI] Success. Received structured data.');
-            const mediaDoc = {
-                id: `scraped-${post.peetham.toLowerCase()}-${Date.now()}`,
+            const mediaData = {
                 date: new Date().toISOString().split('T')[0],
                 peetham: post.peetham,
                 type: 'photo',
@@ -122,7 +129,9 @@ async function runProcessor() {
                 thumbnailUrl: post.imageUrl.replace('600x400', '400x300'), // Simple thumbnail logic for placeholders
                 aiHint: aiContent.keywords,
             };
-            allProcessedData.push(mediaDoc);
+            await addDoc(mediaCollection, mediaData);
+            console.log(`[FIRESTORE] Successfully saved post for ${post.peetham} to 'media' collection.`);
+            processedCount++;
         } else {
              console.log(`[WARN] AI processing did not return content for ${post.peetham}. Skipping this post.`);
         }
@@ -131,10 +140,8 @@ async function runProcessor() {
         console.error("Error details:", error.message);
     }
   }
-
-  fs.writeFileSync(CONFIG.OUTPUT_FILE, JSON.stringify(allProcessedData, null, 2));
   
-  console.log(`\n[COMPLETE] Processing finished. ${allProcessedData.length} records saved to ${CONFIG.OUTPUT_FILE}`);
+  console.log(`\n[COMPLETE] Processing finished. ${processedCount} records saved to Firestore.`);
   console.log(`[ACTION] Refresh the Bodha Calendar page in your browser to see the new content.`);
 }
 

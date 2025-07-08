@@ -12,11 +12,6 @@ import { dwarakaVideos } from './dwaraka-videos';
 import { puriVideos } from './puri-videos';
 import { jyotirmathVideos } from './jyotirmath-videos';
 
-// Import the output from our new AI content processor script.
-// This allows us to see the results of the script directly on the website.
-import scrapedMedia from '../../scripts/scraped-data.json';
-
-
 // Define the unified types
 export type CalendarItemType = 'event' | 'photo' | 'video';
 
@@ -75,7 +70,6 @@ const videoItems: CalendarVideoItem[] = [
 
 
 export const allCalendarItems: UnifiedCalendarItem[] = [
-    ...(scrapedMedia as CalendarPhotoItem[]), // Add the AI-processed content here
     ...eventItems,
     ...photoItems,
     ...videoItems,
