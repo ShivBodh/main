@@ -17,25 +17,25 @@ export default function ScrapingSourcePage() {
   const posts = [
     {
       peetham: 'Sringeri',
-      image: 'https://images.unsplash.com/photo-1617664693373-57c2a5315579?q=80&w=600&h=400&fit=crop',
+      image: 'https://placehold.co/600x400.png',
       aiHint: 'hindu temple night',
       description: 'The main temple of Goddess Sharadamba beautifully illuminated for the Navaratri festival, attracting thousands of devotees.',
     },
     {
       peetham: 'Dwaraka',
-      image: 'https://images.unsplash.com/photo-1599321683993-274744743e49?q=80&w=600&h=400&fit=crop',
+      image: 'https://placehold.co/600x400.png',
       aiHint: 'hindu ritual aarti',
       description: 'The Shankaracharya of Dwaraka performing the evening Aarti at the main Dwarkadhish temple during Janmashtami celebrations.',
     },
     {
       peetham: 'Puri',
-      image: 'https://images.unsplash.com/photo-1589283733839-845778a36b32?q=80&w=600&h=400&fit=crop',
+      image: 'https://placehold.co/600x400.png',
       aiHint: 'hindu chariot festival',
       description: 'Volunteers and artisans giving final touches to the grand chariots for the annual Rath Yatra festival.',
     },
     {
       peetham: 'Jyotirmath',
-      image: 'https://images.unsplash.com/photo-1565448343270-36a5a9018443?q=80&w=600&h=400&fit=crop',
+      image: 'https://placehold.co/600x400.png',
       aiHint: 'himalayan monastery snow',
       description: 'A breathtaking view of the Jyotirmath premises covered in a thick blanket of snow during the winter months.',
     }

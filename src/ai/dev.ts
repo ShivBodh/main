@@ -1,3 +1,4 @@
+
 import dotenv from 'dotenv';
 import path from 'path';
 
@@ -9,7 +10,7 @@ dotenv.config({ path: path.resolve(process.cwd(), '.env') });
 
 // By importing the flows here, we ensure they are registered with the Genkit server
 // when running `genkit:watch`.
-import './flows/bodhi-ai-move-flow';
-import './flows/daily-wisdom-flow';
-import './flows/image-generator-flow';
+// import './flows/bodhi-ai-move-flow';
+// import './flows/daily-wisdom-flow';
+// import './flows/image-generator-flow';
 import './flows/content-processor-flow';

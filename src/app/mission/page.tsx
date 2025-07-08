@@ -95,7 +95,7 @@ export default function MissionPage() {
 
             <div className="not-prose text-center mt-16 p-8 bg-card rounded-lg border">
                 <Image
-                  src="https://images.unsplash.com/photo-1531206715640-4416d8435b54?q=80&w=80&h=80&fit=crop"
+                  src="https://placehold.co/80x80.png"
                   alt="An illustration representing selfless service (Seva)"
                   data-ai-hint="seva hands"
                   width={80}
