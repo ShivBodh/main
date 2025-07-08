@@ -7,16 +7,17 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription }
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { format, isSameDay } from 'date-fns';
-import { allCalendarItems, UnifiedCalendarItem, CalendarEventItem, CalendarPhotoItem, CalendarVideoItem } from '@/lib/calendar-data';
+import { db } from '@/lib/firebase';
+import { collection, getDocs, query, orderBy } from 'firebase/firestore';
+import type { UnifiedCalendarItem, CalendarEventItem, CalendarPhotoItem, CalendarVideoItem } from '@/lib/calendar-data';
 import { peethamBadgeColors, peethamDotColors, Peetham, peethamFilterCards } from '@/lib/events-data';
-import { Gem, Camera, Video, Calendar as CalendarIcon, BookOpenText } from 'lucide-react';
+import { Gem, Camera, Video, Calendar as CalendarIcon, BookOpenText, RefreshCw, AlertCircle } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { PhotoCard } from '@/components/media/PhotoCard';
 import { VideoCard } from '@/components/media/VideoCard';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
-import Autoplay from "embla-carousel-autoplay";
 import { Calendar } from '@/components/ui/calendar';
 import type { DayProps } from 'react-day-picker';
 import { cn } from '@/lib/utils';
@@ -61,25 +62,44 @@ const EventCard = ({ event }: { event: CalendarEventItem }) => (
     </Card>
 );
 
-
 export default function EventsClient() {
     const [isLoading, setIsLoading] = useState(true);
+    const [calendarItems, setCalendarItems] = useState<UnifiedCalendarItem[]>([]);
     const [filters, setFilters] = useState<Record<Peetham, boolean>>({
         Sringeri: true,
         Dwaraka: true,
         Puri: true,
         Jyotirmath: true,
     });
-    const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
+    const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date());
+    const [error, setError] = useState<string | null>(null);
+
+    const fetchData = useCallback(async () => {
+        setIsLoading(true);
+        setError(null);
+        if (!db) {
+            setError("Firebase is not configured. Please add your API keys to the .env file.");
+            setIsLoading(false);
+            return;
+        }
+
+        try {
+            const mediaCollection = collection(db, 'media');
+            const q = query(mediaCollection, orderBy('date', 'desc'));
+            const querySnapshot = await getDocs(q);
+            const items = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as UnifiedCalendarItem));
+            setCalendarItems(items);
+        } catch (err) {
+            console.error("Error fetching from Firestore:", err);
+            setError("Could not fetch data from Firestore. Ensure your project's security rules allow reads from the 'media' collection.");
+        } finally {
+            setIsLoading(false);
+        }
+    }, []);
 
     useEffect(() => {
-        setIsLoading(false);
-        if (allCalendarItems.length > 0 && !selectedDate) {
-            setSelectedDate(new Date(allCalendarItems[0].date.replace(/-/g, '/')));
-        } else if (allCalendarItems.length === 0) {
-            setSelectedDate(new Date()); // Default to today if no items
-        }
-    }, [selectedDate]);
+        fetchData();
+    }, [fetchData]);
     
     const handleFilterChange = (peetham: Peetham, checked: boolean) => {
         setFilters(prev => ({ ...prev, [peetham]: checked }));
@@ -87,11 +107,11 @@ export default function EventsClient() {
 
     const filteredItems = useMemo(() => {
         const activePeethams = (Object.keys(filters) as Peetham[]).filter(p => filters[p]);
-        return allCalendarItems.filter(item => activePeethams.includes(item.peetham));
-    }, [filters]);
+        return calendarItems.filter(item => activePeethams.includes(item.peetham));
+    }, [filters, calendarItems]);
 
     const latestItems = useMemo(() => {
-        return filteredItems.filter(item => item.type === 'photo' || item.type === 'video').slice(0, 5)
+        return filteredItems.filter(item => item.type === 'photo' || item.type === 'video').slice(0, 6)
     }, [filteredItems]);
 
     const peethamsByDate = useMemo(() => {
@@ -108,7 +128,16 @@ export default function EventsClient() {
 
     const itemsForSelectedDate = useMemo(() => {
         if (!selectedDate) return [];
-        return filteredItems.filter(item => isSameDay(new Date(item.date.replace(/-/g, '/')), selectedDate));
+        return filteredItems.filter(item => {
+            try {
+                // Add robust date parsing
+                const itemDate = new Date(item.date.replace(/-/g, '/'));
+                return isSameDay(itemDate, selectedDate);
+            } catch (e) {
+                console.warn("Invalid date format for item:", item);
+                return false;
+            }
+        });
     }, [selectedDate, filteredItems]);
 
     function DayContent(props: DayProps) {
@@ -143,7 +172,21 @@ export default function EventsClient() {
                 <p className="mt-4 text-lg md:text-xl text-foreground/80 max-w-3xl mx-auto">
                     A living encyclopedia of daily events, discourses, and media from the four cardinal Peethams.
                 </p>
+                <Button onClick={fetchData} disabled={isLoading} className="mt-6">
+                    <RefreshCw className={cn("mr-2 h-4 w-4", isLoading && "animate-spin")} />
+                    Refresh Content
+                </Button>
             </div>
+
+            {error && (
+                <Card className="bg-destructive/10 border-destructive/20 text-center p-8 max-w-2xl mx-auto">
+                     <AlertCircle className="mx-auto h-12 w-12 text-destructive mb-4" />
+                     <CardTitle className="text-destructive font-bold text-xl">Error Loading Data</CardTitle>
+                     <CardContent className="p-0 mt-2 text-destructive/90">
+                        <p>{error}</p>
+                     </CardContent>
+                 </Card>
+            )}
 
             {isLoading && (
                 <div className="space-y-12">
@@ -158,29 +201,27 @@ export default function EventsClient() {
                 </div>
             )}
             
-            {!isLoading && (
+            {!isLoading && !error && (
                 <>
                 <section className="mb-16">
                     <h2 className="text-2xl font-headline font-bold text-center mb-8">Latest Media Updates</h2>
                     {latestItems.length > 0 ? (
-                        <Carousel
-                          plugins={[Autoplay({ delay: 5000, stopOnInteraction: true })]}
-                          className="w-full"
-                          opts={{ loop: latestItems.length > 1, align: 'start' }}
-                        >
-                            <CarouselContent className="-ml-4 py-4">
-                                {latestItems.map((item) => (
-                                     <CarouselItem key={item.id} className="pl-4 md:basis-1/2 lg:basis-1/3">
-                                        {item.type === 'photo' && <PhotoCard item={item as CalendarPhotoItem} />}
-                                        {item.type === 'video' && <VideoCard item={item as CalendarVideoItem} />}
-                                    </CarouselItem>
-                                ))}
-                            </CarouselContent>
-                            <CarouselPrevious className="hidden sm:flex" />
-                            <CarouselNext className="hidden sm:flex" />
-                        </Carousel>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                            {latestItems.map((item) => (
+                                <div key={item.id}>
+                                    {item.type === 'photo' && <PhotoCard item={item as CalendarPhotoItem} />}
+                                    {item.type === 'video' && <VideoCard item={item as CalendarVideoItem} />}
+                                </div>
+                            ))}
+                        </div>
                     ) : (
-                        <p className="text-center text-muted-foreground">No recent media found for the selected Peethams.</p>
+                        <Card className="flex flex-col items-center justify-center h-48 border-dashed text-center p-4">
+                            <CardTitle>No Media Found</CardTitle>
+                            <CardDescription className="mt-2 max-w-md">
+                                Your database appears to be empty. Run the scraper script to populate it with content.
+                            </CardDescription>
+                            <code className="mt-4 inline-block bg-muted px-2 py-1 rounded-md font-mono text-sm">npm run scrape</code>
+                        </Card>
                     )}
                 </section>
                 
@@ -257,3 +298,5 @@ export default function EventsClient() {
         </div>
     );
 }
+
+    
