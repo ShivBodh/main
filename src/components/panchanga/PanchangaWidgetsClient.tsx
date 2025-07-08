@@ -46,6 +46,13 @@ function WidgetCard({ panchanga, style, date }: WidgetCardProps) {
     Sunset: Sunset
   };
 
+  const styleClasses: { [key: string]: string } = {
+    'Dharma Gold': 'rounded-lg',
+    'Cosmic Blue': 'rounded-[2.5rem]',
+    'Sacred Fire': 'rounded-lg animate-breath',
+    'Forest Green': 'rounded-lg [clip-path:polygon(0_0,_100%_0,_100%_88%,_50%_100%,_0_88%)]'
+  };
+
   return (
     <Card>
       <CardHeader>
@@ -54,9 +61,13 @@ function WidgetCard({ panchanga, style, date }: WidgetCardProps) {
       <CardContent className="space-y-4">
         <div 
           ref={ref} 
-          className={cn("p-6 rounded-lg text-white shadow-lg overflow-hidden relative", style.bgClass)}
+          className={cn(
+            "p-6 text-white shadow-lg overflow-hidden relative h-96 flex flex-col",
+            style.bgClass,
+            styleClasses[style.name as keyof typeof styleClasses]
+          )}
         >
-          <div className="z-10 relative">
+          <div className="z-10 relative flex-grow flex flex-col">
             <div className="flex justify-between items-start mb-4">
                 <div>
                     <p className="font-bold text-2xl">{format(date, 'dd')}</p>
@@ -65,7 +76,7 @@ function WidgetCard({ panchanga, style, date }: WidgetCardProps) {
                 </div>
                  <Gem className="h-8 w-8 opacity-80"/>
             </div>
-            <div className="space-y-2">
+            <div className="space-y-2 mt-auto">
               {style.details.map(detailKey => {
                 const Icon = IconMapping[detailKey];
                 let value = '';
@@ -125,7 +136,7 @@ export default function PanchangaWidgetsClient() {
 
       {isLoading ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[...Array(4)].map((_, i) => <Skeleton key={i} className="h-96 w-full" />)}
+            {[...Array(4)].map((_, i) => <Skeleton key={i} className="h-[550px] w-full" />)}
         </div>
       ) : panchanga ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
