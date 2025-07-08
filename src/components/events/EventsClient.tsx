@@ -10,21 +10,17 @@ import { Badge } from '@/components/ui/badge';
 import { format, isSameDay } from 'date-fns';
 import { allCalendarItems, UnifiedCalendarItem, CalendarEventItem, CalendarPhotoItem, CalendarVideoItem } from '@/lib/calendar-data';
 import { peethamBadgeColors, peethamDotColors, Peetham, peethamFilterCards } from '@/lib/events-data';
-import { Gem, Camera, Video, Calendar as CalendarIcon, BookOpenText, RefreshCw, AlertTriangle } from 'lucide-react';
+import { Gem, Camera, Video, Calendar as CalendarIcon, BookOpenText } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { PhotoCard } from '@/components/media/PhotoCard';
 import { VideoCard } from '@/components/media/VideoCard';
-import { db } from '@/lib/firebase';
-import { collection, getDocs, query, orderBy } from 'firebase/firestore';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import Autoplay from "embla-carousel-autoplay";
 import { Calendar } from '@/components/ui/calendar';
 import type { DayProps } from 'react-day-picker';
 import { cn } from '@/lib/utils';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { Button } from '@/components/ui/button';
-import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 
 const EventCard = ({ event }: { event: CalendarEventItem }) => (
     <Card className="border-l-4" style={{ borderColor: peethamDotColors[event.peetham] }}>
@@ -67,7 +63,6 @@ const EventCard = ({ event }: { event: CalendarEventItem }) => (
 
 
 export default function EventsClient() {
-    const [allItems, setAllItems] = useState<UnifiedCalendarItem[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [filters, setFilters] = useState<Record<Peetham, boolean>>({
         Sringeri: true,
@@ -77,55 +72,14 @@ export default function EventsClient() {
     });
     const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
 
-    const fetchScrapedMedia = useCallback(async () => {
-        setIsLoading(true);
-        let firestoreItems: UnifiedCalendarItem[] = [];
-        if (db) {
-            try {
-                const mediaCollection = collection(db, 'media');
-                const q = query(mediaCollection, orderBy('date', 'desc'));
-                const querySnapshot = await getDocs(q);
-                
-                firestoreItems = querySnapshot.docs.map(doc => {
-                    const data = doc.data();
-                    return {
-                        id: doc.id,
-                        date: data.date, 
-                        peetham: data.peetham,
-                        type: data.type,
-                        title: data.title,
-                        description: data.description,
-                        imageUrl: data.imageUrl,
-                        thumbnailUrl: data.thumbnailUrl,
-                        aiHint: data.aiHint,
-                    } as CalendarPhotoItem;
-                });
-            } catch (error) {
-                console.error("Error fetching media from Firestore:", error);
-            }
-        } else {
-             console.log("Firestore not configured, using only static data.");
-        }
-        
-        const combinedItems = [...firestoreItems, ...allCalendarItems]
-            .sort((a, b) => new Date(b.date.replace(/-/g, '/')).getTime() - new Date(a.date.replace(/-/g, '/')).getTime());
-        
-        setAllItems(combinedItems);
-        
-        if (combinedItems.length > 0 && !selectedDate) {
-            setSelectedDate(new Date(combinedItems[0].date.replace(/-/g, '/')));
-        } else if (combinedItems.length > 0 && selectedDate) {
-             // Keep existing selected date
-        } else {
+    useEffect(() => {
+        setIsLoading(false);
+        if (allCalendarItems.length > 0 && !selectedDate) {
+            setSelectedDate(new Date(allCalendarItems[0].date.replace(/-/g, '/')));
+        } else if (allCalendarItems.length === 0) {
             setSelectedDate(new Date()); // Default to today if no items
         }
-
-        setIsLoading(false);
     }, [selectedDate]);
-
-    useEffect(() => {
-        fetchScrapedMedia();
-    }, [fetchScrapedMedia]);
     
     const handleFilterChange = (peetham: Peetham, checked: boolean) => {
         setFilters(prev => ({ ...prev, [peetham]: checked }));
@@ -133,8 +87,8 @@ export default function EventsClient() {
 
     const filteredItems = useMemo(() => {
         const activePeethams = (Object.keys(filters) as Peetham[]).filter(p => filters[p]);
-        return allItems.filter(item => activePeethams.includes(item.peetham));
-    }, [filters, allItems]);
+        return allCalendarItems.filter(item => activePeethams.includes(item.peetham));
+    }, [filters]);
 
     const latestItems = useMemo(() => {
         return filteredItems.filter(item => item.type === 'photo' || item.type === 'video').slice(0, 5)
@@ -189,10 +143,6 @@ export default function EventsClient() {
                 <p className="mt-4 text-lg md:text-xl text-foreground/80 max-w-3xl mx-auto">
                     A living encyclopedia of daily events, discourses, and media from the four cardinal Peethams.
                 </p>
-                <Button onClick={fetchScrapedMedia} variant="outline" className="mt-6">
-                    <RefreshCw className={`mr-2 h-4 w-4 ${isLoading ? 'animate-spin' : ''}`} />
-                    Refresh Content
-                </Button>
             </div>
 
             {isLoading && (
@@ -208,22 +158,7 @@ export default function EventsClient() {
                 </div>
             )}
             
-            {!isLoading && allItems.length === 0 && (
-                <Alert variant="destructive" className="max-w-2xl mx-auto">
-                    <AlertTriangle className="h-4 w-4" />
-                    <AlertTitle>No Content Found in Firestore</AlertTitle>
-                    <AlertDescription>
-                        <p>The calendar is empty. This is expected if you haven't run the content scraper yet.</p>
-                        <ol className="list-decimal list-inside mt-2 space-y-1">
-                          <li>Open a terminal in your project root.</li>
-                          <li>Run the command: <code className="font-mono bg-muted px-1.5 py-0.5 rounded">npm run scrape</code></li>
-                          <li>Once it completes, come back here and click the "Refresh Content" button.</li>
-                        </ol>
-                    </AlertDescription>
-                </Alert>
-            )}
-
-            {!isLoading && allItems.length > 0 && (
+            {!isLoading && (
                 <>
                 <section className="mb-16">
                     <h2 className="text-2xl font-headline font-bold text-center mb-8">Latest Media Updates</h2>
