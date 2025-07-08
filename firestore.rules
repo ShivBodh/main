@@ -2,16 +2,12 @@ rules_version = '2';
 
 service cloud.firestore {
   match /databases/{database}/documents {
-    // By default, lock down all access to other collections.
-    match /{document=**} {
-      allow read, write: if false;
+    // Allow public read for the calendar and public write for the scraper.
+    // In a production app, write access should be restricted.
+    match /media/{documentId} {
+      allow read, write: if true;
     }
 
-    // Allow public read access to the 'media' collection so the app can display content.
-    // Allow public create access so the scraper script can add new documents.
-    // This is suitable for development but should be secured further for production.
-    match /media/{docId} {
-      allow read, create: if true;
-    }
+    // Any other collection is denied by default.
   }
 }
