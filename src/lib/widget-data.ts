@@ -30,5 +30,11 @@ export const widgetStyles: WidgetStyle[] = [
     bgClass: 'bg-gradient-to-tl from-green-800 to-teal-900',
     patternUrl: 'https://www.transparenttextures.com/patterns/inspiration-geometry.png',
     details: ['Tithi', 'Nakshatra', 'Yoga', 'Sunrise'],
+  },
+  {
+    name: 'Celestial Dial',
+    bgClass: 'bg-gradient-to-br from-slate-800 via-gray-900 to-black',
+    patternUrl: 'https://www.transparenttextures.com/patterns/stardust.png',
+    details: ['Tithi', 'Nakshatra', 'Sunrise', 'Sunset'],
   }
 ];

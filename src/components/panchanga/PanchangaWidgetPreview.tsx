@@ -24,7 +24,8 @@ function WidgetPreview({ panchanga, style, date }: { panchanga: PanchangaDetails
     'Dharma Gold': 'rounded-lg',
     'Cosmic Blue': 'rounded-[2.5rem]',
     'Sacred Fire': 'rounded-lg animate-breath',
-    'Forest Green': 'rounded-lg [clip-path:polygon(0_0,_100%_0,_100%_88%,_50%_100%,_0_88%)]'
+    'Forest Green': 'rounded-lg',
+    'Celestial Dial': 'rounded-full'
   };
   
   return (
@@ -33,8 +34,11 @@ function WidgetPreview({ panchanga, style, date }: { panchanga: PanchangaDetails
         style.bgClass,
         styleClasses[style.name as keyof typeof styleClasses]
       )}>
-      <div className="z-10 relative flex-grow flex flex-col">
-        <div className="flex justify-between items-start mb-4">
+      <div className={cn(
+          "z-10 relative flex-grow flex flex-col",
+          style.name === 'Celestial Dial' && 'items-center justify-center text-center'
+        )}>
+        <div className="flex justify-between items-start mb-4 w-full">
           <div>
             <p className="font-bold text-2xl">{format(date, 'dd')}</p>
             <p className="font-semibold">{format(date, 'MMM yyyy')}</p>
@@ -42,7 +46,7 @@ function WidgetPreview({ panchanga, style, date }: { panchanga: PanchangaDetails
           </div>
           <Gem className="h-8 w-8 opacity-80" />
         </div>
-        <div className="space-y-2 mt-auto">
+        <div className="space-y-2 mt-auto w-full">
           {style.details.map(detailKey => {
             let value = '';
             if (detailKey === 'Tithi') value = panchanga.tithi.name;
@@ -62,7 +66,7 @@ function WidgetPreview({ panchanga, style, date }: { panchanga: PanchangaDetails
             );
           })}
         </div>
-        <p className="text-xs text-center mt-4 opacity-70 font-semibold">Sanatana Peethams Portal</p>
+        <p className="text-xs text-center mt-4 opacity-70 font-semibold w-full">Sanatana Peethams Portal</p>
       </div>
       {style.patternUrl && <div className="absolute inset-0 bg-repeat bg-center opacity-10" style={{ backgroundImage: `url(${style.patternUrl})` }} />}
     </div>
