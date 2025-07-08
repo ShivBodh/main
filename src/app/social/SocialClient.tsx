@@ -19,7 +19,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { useToast } from '@/hooks/use-toast';
-import { panchangaData, PanchangaDetails } from '@/lib/panchanga-data';
+import { getDailyPanchanga, type PanchangaDetails } from '@/lib/panchanga-data';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
@@ -454,7 +454,7 @@ function ProfileTab() {
                 <Card>
                     <CardHeader>
                         <CardTitle>Find Mitras</CardTitle>
-                        <CardDescription>Connect with others on the platform.</CardDescription>
+                        <CardDescription>Connect with others on the platform.</CardHeader>
                     </CardHeader>
                     <CardContent>
                         <form onSubmit={handleSendRequest} className="flex gap-2">
@@ -629,7 +629,7 @@ function DainandiniClientContent() {
     const [brushSize, setBrushSize] = useState(5);
     const [color, setColor] = useState('#000000');
     
-    const todayPanchang = useMemo(() => panchangaData.find(p => p.region === 'North')?.data, []);
+    const todayPanchang = useMemo(() => getDailyPanchanga(new Date(), 'North').data, []);
 
     const saveDayEntry = (data: Partial<DayEntry>) => {
         if (!user || !selectedDate) return;
