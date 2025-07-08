@@ -5,7 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { format } from 'date-fns';
 import type { CalendarPhotoItem } from '@/lib/calendar-data';
 import { peethamBadgeColors } from '@/lib/events-data';
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 
 export function PhotoCard({ item }: { item: CalendarPhotoItem }) {
   return (
@@ -37,6 +37,9 @@ export function PhotoCard({ item }: { item: CalendarPhotoItem }) {
         </Card>
       </DialogTrigger>
       <DialogContent className="max-w-5xl p-0 border-0 bg-transparent shadow-none">
+        <DialogHeader className="sr-only">
+          <DialogTitle>{item.title}</DialogTitle>
+        </DialogHeader>
         <Image
           src={item.imageUrl}
           alt={item.title}
