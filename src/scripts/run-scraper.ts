@@ -60,7 +60,8 @@ async function runProcessor() {
             // Smarter thumbnail generation for different URL types
             let thumbnailUrl = post.imageUrl;
             if (post.imageUrl.includes('unsplash.com')) {
-                thumbnailUrl = post.imageUrl.replace(/w=\d+/, 'w=400').replace(/h=\d+/, 'h=225');
+                const baseUrl = post.imageUrl.split('?')[0];
+                thumbnailUrl = `${baseUrl}?q=80&w=400&h=225&fit=crop`;
             } else if (post.imageUrl.includes('placehold.co')) {
                 thumbnailUrl = post.imageUrl.replace('600x400', '400x225');
             }
