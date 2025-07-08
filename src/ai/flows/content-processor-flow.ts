@@ -27,6 +27,19 @@ const ContentProcessorOutputSchema = z.object({
 });
 export type ContentProcessorOutput = z.infer<typeof ContentProcessorOutputSchema>;
 
+
+const contentProcessorPrompt = ai.definePrompt({
+  name: 'contentProcessorPrompt',
+  input: { schema: ContentProcessorInputSchema },
+  output: { schema: ContentProcessorOutputSchema },
+  prompt: `You are an expert content editor for a spiritual website. Your task is to analyze the following raw text from a social media post and extract a concise title and relevant keywords.
+
+Raw Content:
+{{{rawContent}}}
+`,
+});
+
+
 // The scraper script calls this flow directly via its HTTP endpoint.
 ai.defineFlow(
   {
@@ -35,12 +48,7 @@ ai.defineFlow(
     outputSchema: ContentProcessorOutputSchema,
   },
   async (input) => {
-    // MOCK IMPLEMENTATION: With the googleAI() plugin disabled in genkit.ts,
-    // this mock implementation is guaranteed to run, bypassing any potential
-    // environment or API key issues. This ensures the data pipeline works correctly.
-    return {
-        title: "Jagadgurus Grace Evening Sabha in Varanasi",
-        keywords: "shankaracharya varanasi",
-    };
+    const { output } = await contentProcessorPrompt(input);
+    return output!;
   }
 );
