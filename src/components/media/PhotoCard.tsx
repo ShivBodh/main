@@ -9,16 +9,14 @@ import { peethamBadgeColors } from '@/lib/events-data';
 export function PhotoCard({ item }: { item: CalendarPhotoItem }) {
   return (
     <Card className="overflow-hidden border-border/50 group">
-      <div className="relative aspect-video bg-muted">
-        <Image
-          src={item.thumbnailUrl || item.imageUrl}
-          alt={item.title}
-          fill
-          className="object-cover"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          data-ai-hint={item.aiHint}
-        />
-      </div>
+      <Image
+        src={item.thumbnailUrl || item.imageUrl}
+        alt={item.title}
+        width={400}
+        height={225}
+        className="w-full object-cover"
+        data-ai-hint={item.aiHint}
+      />
       <CardHeader>
         <div className="flex justify-between items-start gap-2">
           <CardTitle className="font-headline text-lg leading-snug group-hover:text-primary transition-colors">
