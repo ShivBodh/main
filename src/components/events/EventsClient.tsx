@@ -7,7 +7,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription }
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
-import { format, isSameDay, parseISO } from 'date-fns';
+import { format, isSameDay } from 'date-fns';
 import { allCalendarItems, UnifiedCalendarItem, CalendarEventItem, CalendarPhotoItem, CalendarVideoItem } from '@/lib/calendar-data';
 import { peethamBadgeColors, peethamDotColors, Peetham, peethamFilterCards } from '@/lib/events-data';
 import { Gem, Camera, Video, Calendar as CalendarIcon, BookOpenText } from 'lucide-react';
@@ -112,7 +112,8 @@ export default function EventsClient() {
             setAllItems(combinedItems);
             // Set initial selected date to the date of the most recent item
             if (combinedItems.length > 0) {
-                setSelectedDate(parseISO(combinedItems[0].date));
+                // Use replace to avoid timezone issues with YYYY-MM-DD parsing
+                setSelectedDate(new Date(combinedItems[0].date.replace(/-/g, '/')));
             }
 
             setIsLoading(false);
@@ -135,7 +136,7 @@ export default function EventsClient() {
     const peethamsByDate = useMemo(() => {
         const map = new Map<string, Set<Peetham>>();
         filteredItems.forEach(item => {
-            const dateStr = format(parseISO(item.date), 'yyyy-MM-dd');
+            const dateStr = item.date; // The date is already in 'YYYY-MM-DD' format
             if (!map.has(dateStr)) {
                 map.set(dateStr, new Set());
             }
@@ -146,7 +147,7 @@ export default function EventsClient() {
 
     const itemsForSelectedDate = useMemo(() => {
         if (!selectedDate) return [];
-        return filteredItems.filter(item => isSameDay(parseISO(item.date), selectedDate));
+        return filteredItems.filter(item => isSameDay(new Date(item.date.replace(/-/g, '/')), selectedDate));
     }, [selectedDate, filteredItems]);
 
     function DayContent(props: DayProps) {
