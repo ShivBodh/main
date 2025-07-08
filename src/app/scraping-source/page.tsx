@@ -1,8 +1,8 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { peethams } from '@/lib/peethams-data';
 import type { Metadata } from 'next';
 import Image from 'next/image';
+import { scrapingSourceData } from '@/lib/scraping-source-data';
 
 export const metadata: Metadata = {
   title: 'Scraping Source Page',
@@ -14,32 +14,7 @@ export const metadata: Metadata = {
 };
 
 export default function ScrapingSourcePage() {
-  const posts = [
-    {
-      peetham: 'Sringeri',
-      image: 'https://placehold.co/600x400.png',
-      aiHint: 'hindu temple night',
-      description: 'The main temple of Goddess Sharadamba beautifully illuminated for the Navaratri festival, attracting thousands of devotees.',
-    },
-    {
-      peetham: 'Dwaraka',
-      image: 'https://placehold.co/600x400.png',
-      aiHint: 'hindu ritual aarti',
-      description: 'The Shankaracharya of Dwaraka performing the evening Aarti at the main Dwarkadhish temple during Janmashtami celebrations.',
-    },
-    {
-      peetham: 'Puri',
-      image: 'https://placehold.co/600x400.png',
-      aiHint: 'hindu chariot festival',
-      description: 'Volunteers and artisans giving final touches to the grand chariots for the annual Rath Yatra festival.',
-    },
-    {
-      peetham: 'Jyotirmath',
-      image: 'https://placehold.co/600x400.png',
-      aiHint: 'himalayan monastery snow',
-      description: 'A breathtaking view of the Jyotirmath premises covered in a thick blanket of snow during the winter months.',
-    }
-  ];
+  const posts = scrapingSourceData;
 
   return (
     <div className="bg-muted/40">
@@ -56,7 +31,7 @@ export default function ScrapingSourcePage() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <Image
-                  src={post.image}
+                  src={post.imageUrl}
                   alt={`A post from ${post.peetham}`}
                   width={600}
                   height={400}

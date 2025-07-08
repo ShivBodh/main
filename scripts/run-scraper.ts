@@ -3,107 +3,44 @@
  *
  * This script demonstrates a complete, self-contained pipeline:
  * 1.  It loads the project's environment variables to access the AI API key.
- * 2.  It fetches HTML from a local webpage (`/scraping-source`).
- * 3.  It uses `cheerio` to parse the HTML and extract image URLs and descriptions.
- * 4.  It directly calls a Genkit AI flow (`processScrapedContent`) to process the text.
- * 5.  It saves the combined, structured data to a Firebase Firestore collection.
+ * 2.  It imports structured data directly from a local data source file.
+ * 3.  It directly calls a Genkit AI flow (`processScrapedContent`) to process the text.
+ * 4.  It saves the combined, structured data to a Firebase Firestore collection.
  *
  * =============================================================================
  *  IMPORTANT: How to Use This Tool
  * =============================================================================
- * This tool now requires only two terminal sessions to run correctly.
+ * This tool is now self-contained and no longer requires the Next.js server to be running.
  *
- * 1.  **Start the Next.js App Server:**
- *     This serves the source page for scraping and the results page.
- *     `npm run dev`
- *
- * 2.  **Run the Scraper Script:**
- *     Once the Next.js server is running, execute this script to start the process.
+ * 1.  **Run the Scraper Script:**
  *     `npm run scrape`
  *
- *     (There is no longer a need to run a separate `genkit:watch` server).
+ *     The script will read local data, process it with the AI, and save the
+ *     results directly to your Firestore database.
  */
 
-import fs from 'fs';
-import path from 'path';
-import axios from 'axios';
-import * as cheerio from 'cheerio';
 import { processScrapedContent } from '@/ai/flows/content-processor-flow';
 import { db } from '@/lib/firebase-script';
 import { collection, addDoc } from 'firebase/firestore';
+import { scrapingSourceData } from '@/lib/scraping-source-data'; // Import data directly
 
-// --- CONFIGURATION ---
 // The .env file is now loaded by the `npm run scrape` command via the `--env-file` flag.
-
-const CONFIG = {
-  SOURCE_URL: 'http://localhost:3000/scraping-source',
-  // The output file is no longer used, data is saved to Firestore.
-};
-
-// --- HELPER FUNCTIONS ---
-
-/**
- * Fetches the HTML content of the source page.
- * @returns {Promise<string|null>} The HTML content or null on failure.
- */
-async function fetchSourcePage(): Promise<string | null> {
-  try {
-    console.log(`[SCRAPER] Fetching HTML from ${CONFIG.SOURCE_URL}...`);
-    const response = await axios.get(CONFIG.SOURCE_URL);
-    return response.data;
-  } catch (error: any) {
-    console.error(`[ERROR] Failed to fetch source page at ${CONFIG.SOURCE_URL}.`);
-    if (error.code === 'ECONNREFUSED') {
-      console.error('[ERROR] Connection refused. Is the Next.js server running? Use `npm run dev`.');
-    } else {
-      console.error('Error details:', error.message);
-    }
-    return null;
-  }
-}
-
-/**
- * Parses the HTML to extract post data.
- * @param {string} html The HTML content of the page.
- * @returns {{imageUrl: string, description: string, peetham: string}[]} An array of extracted post data.
- */
-function extractDataFromHtml(html: string): { imageUrl: string; description: string; peetham: string }[] {
-  const $ = cheerio.load(html);
-  const posts: { imageUrl: string; description: string; peetham: string }[] = [];
-
-  $('.peetham-post').each((_i, el) => {
-    const peetham = $(el).data('peetham');
-    const imageUrl = $(el).find('img').attr('src');
-    const description = $(el).find('p').text().trim();
-    if (peetham && imageUrl && description) {
-      posts.push({ peetham, imageUrl, description });
-    }
-  });
-
-  console.log(`[SCRAPER] Found ${posts.length} posts on the source page.`);
-  return posts;
-}
 
 /**
  * The main processing function.
  */
 async function runProcessor() {
   console.log('[INFO] Starting content processor.');
-  console.log('[INFO] Make sure the Next.js dev server is running: `npm run dev`');
 
   if (!db) {
     console.error("[ERROR] Firestore is not initialized. Please check your Firebase configuration in .env and ensure you've set up a Firestore database in your project.");
     return;
   }
 
-  const html = await fetchSourcePage();
-  if (!html) {
-    console.log('[INFO] Could not fetch source page. Exiting script.');
-    return;
-  }
-
-  const extractedPosts = extractDataFromHtml(html);
-  if (extractedPosts.length === 0) {
+  const postsToProcess = scrapingSourceData;
+  console.log(`[SCRAPER] Found ${postsToProcess.length} posts in the local data source.`);
+  
+  if (postsToProcess.length === 0) {
     console.log('[INFO] No posts found to process. Exiting script.');
     return;
   }
@@ -111,7 +48,7 @@ async function runProcessor() {
   const mediaCollection = collection(db, 'media');
   let processedCount = 0;
 
-  for (const post of extractedPosts) {
+  for (const post of postsToProcess) {
     console.log(`\n--- Processing post for ${post.peetham} ---`);
     try {
         console.log('[AI] Calling Genkit flow to process description...');
