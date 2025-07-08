@@ -57,7 +57,7 @@ async function runProcessor() {
         if (aiContent) {
             console.log('[AI] Success. Received structured data.');
             const mediaData = {
-                date: new Date().toISOString().split('T')[0],
+                date: post.date,
                 peetham: post.peetham,
                 type: 'photo',
                 title: aiContent.title,
@@ -67,7 +67,7 @@ async function runProcessor() {
                 aiHint: aiContent.keywords,
             };
             await addDoc(mediaCollection, mediaData);
-            console.log(`[FIRESTORE] Successfully saved post for ${post.peetham} to 'media' collection.`);
+            console.log(`[FIRESTORE] Successfully saved post for ${post.peetham} for date ${post.date} to 'media' collection.`);
             processedCount++;
         } else {
              console.log(`[WARN] AI processing did not return content for ${post.peetham}. Skipping this post.`);
