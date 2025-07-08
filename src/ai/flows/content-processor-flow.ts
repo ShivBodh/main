@@ -47,6 +47,7 @@ Raw Content:
 
 
 // The scraper script calls this flow directly via its HTTP endpoint.
+// Exporting the flow makes it available to the Genkit server as an API endpoint.
 export const contentProcessorFlow = ai.defineFlow(
   {
     name: 'contentProcessorFlow',
