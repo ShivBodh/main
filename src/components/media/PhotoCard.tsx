@@ -11,7 +11,7 @@ export function PhotoCard({ item }: { item: CalendarPhotoItem }) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Card className="flex flex-col overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border-border/50 cursor-pointer group">
+        <Card className="overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border-border/50 cursor-pointer group">
           <div className="relative aspect-video bg-secondary/20">
             <Image
               src={item.thumbnailUrl || item.imageUrl}
@@ -22,20 +22,18 @@ export function PhotoCard({ item }: { item: CalendarPhotoItem }) {
               data-ai-hint={item.aiHint}
             />
           </div>
-          <div className="flex flex-col p-4">
-              <CardHeader className="p-0">
-                <div className="flex justify-between items-start gap-2">
-                  <CardTitle className="font-headline text-lg leading-snug flex-grow">{item.title}</CardTitle>
-                  <Badge variant="outline" className={`flex-shrink-0 ${peethamBadgeColors[item.peetham]}`}>
-                    {item.peetham}
-                  </Badge>
-                </div>
-                <p className="text-sm text-muted-foreground pt-1">{format(new Date(item.date.replace(/-/g, '/')), 'MMMM d, yyyy')}</p>
-              </CardHeader>
-              <CardContent className="p-0 pt-3">
-                <p className="text-foreground/80 text-sm line-clamp-3">{item.description}</p>
-              </CardContent>
-          </div>
+          <CardHeader>
+            <div className="flex justify-between items-start gap-2">
+              <CardTitle className="font-headline text-lg leading-snug">{item.title}</CardTitle>
+              <Badge variant="outline" className={`flex-shrink-0 ${peethamBadgeColors[item.peetham]}`}>
+                {item.peetham}
+              </Badge>
+            </div>
+            <p className="text-sm text-muted-foreground pt-1">{format(new Date(item.date.replace(/-/g, '/')), 'MMMM d, yyyy')}</p>
+          </CardHeader>
+          <CardContent className="pt-0">
+            <p className="text-foreground/80 text-sm line-clamp-3">{item.description}</p>
+          </CardContent>
         </Card>
       </DialogTrigger>
       <DialogContent className="max-w-5xl p-0 border-0 bg-transparent shadow-none">
