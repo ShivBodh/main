@@ -44,7 +44,8 @@ const contentProcessorPrompt = ai.definePrompt({
   name: 'contentProcessorPrompt',
   input: { schema: ContentProcessorInputSchema },
   output: { schema: ContentProcessorOutputSchema },
-  prompt: `You are an expert content editor for a spiritual website. Your task is to analyze the following raw text from a social media post and extract a concise title and relevant keywords.
+  model: 'googleai/gemini-1.5-flash-latest',
+  prompt: `You are an expert content editor for a spiritual website. Your task is to analyze the following raw text from a social media post and extract a concise title and a few relevant keywords.
 
 Raw Content:
 {{{rawContent}}}
