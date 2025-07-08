@@ -2,6 +2,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import type { Metadata } from 'next';
 import { BookOpen, Calendar, Activity, MessageSquareQuote } from 'lucide-react';
+import { QuoteOfTheDay } from '@/components/sadhana/QuoteOfTheDay';
 
 export const metadata: Metadata = {
   title: 'Sādhanā Suite Dashboard',
@@ -43,7 +44,7 @@ export default function DashboardPage() {
               <MessageSquareQuote className="w-6 h-6 text-accent" />
             </CardHeader>
             <CardContent>
-               <p className="text-muted-foreground italic">"The Self is not to be known by the study of the scriptures..." (Coming soon)</p>
+               <QuoteOfTheDay />
             </CardContent>
           </Card>
 
