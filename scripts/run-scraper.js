@@ -100,13 +100,14 @@ async function runProcessor() {
       fs.mkdirSync(CONFIG.SAVE_DIR, { recursive: true });
     }
 
-    // THIS IS THE DEMO STEP: We are creating a database entry with hardcoded data
-    // to prove the file writing and frontend display part of the pipeline works.
-    console.log('[INFO] Generating a sample database entry...');
-    const aiContent = {
-        title: "Jagadgurus Grace Evening Sabha in Varanasi",
-        keywords: "shankaracharya varanasi",
-    };
+    // Call the AI processor with the sample raw text.
+    const aiContent = await processContentWithAI(SAMPLE_RAW_CONTENT);
+
+    // If the AI processing fails, exit gracefully.
+    if (!aiContent) {
+      console.log('[INFO] AI processing failed. Exiting script.');
+      return;
+    }
 
     // Create a database document with the AI-processed data
     const mediaDoc = {
