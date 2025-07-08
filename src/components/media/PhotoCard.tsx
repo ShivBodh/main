@@ -37,9 +37,7 @@ export function PhotoCard({ item }: { item: CalendarPhotoItem }) {
         </Card>
       </DialogTrigger>
       <DialogContent className="max-w-5xl p-0 border-0 bg-transparent shadow-none">
-        <DialogHeader>
-          <DialogTitle className="sr-only">{item.title}</DialogTitle>
-        </DialogHeader>
+        <DialogTitle className="sr-only">{item.title}</DialogTitle>
         <Image
           src={item.imageUrl}
           alt={item.title}
