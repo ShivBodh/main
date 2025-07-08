@@ -3,11 +3,9 @@ import {googleAI} from '@genkit-ai/googleai';
 import dotenv from 'dotenv';
 import path from 'path';
 
-// Explicitly load environment variables from the root .env file.
-// This is the first file loaded in the AI chain, ensuring the
-// GOOGLE_API_KEY is available before any plugins are initialized.
-dotenv.config({ path: path.resolve(process.cwd(), '.env') });
-
+// The .env file is now loaded in `dev.ts`, which is the entry point
+// for the Genkit server. This ensures the environment variables are
+// available before this file is even imported.
 
 export const ai = genkit({
   // The googleAI() plugin will automatically look for the
