@@ -18,8 +18,8 @@ export type Panchanga = {
   data: PanchangaDetails;
 };
 
-// Placeholder data for today
-export const panchangaData: Panchanga[] = [
+// Base data for sunrise/sunset and timings which are region-specific
+const basePanchangaData: Panchanga[] = [
   {
     region: 'South',
     peetham: 'Sringeri',
@@ -81,3 +81,51 @@ export const panchangaData: Panchanga[] = [
     },
   },
 ];
+
+// Expanded lists for dynamic generation
+const allTithis = [
+  'Pratipada', 'Dwitiya', 'Tritiya', 'Chaturthi', 'Panchami', 'Shashthi', 'Saptami', 'Ashtami', 'Navami', 'Dashami', 'Ekadashi', 'Dwadashi', 'Trayodashi', 'Chaturdashi', 'Purnima',
+  'Pratipada', 'Dwitiya', 'Tritiya', 'Chaturthi', 'Panchami', 'Shashthi', 'Saptami', 'Ashtami', 'Navami', 'Dashami', 'Ekadashi', 'Dwadashi', 'Trayodashi', 'Chaturdashi', 'Amavasya'
+];
+const allNakshatras = [
+  'Ashwini', 'Bharani', 'Krittika', 'Rohini', 'Mrigashira', 'Ardra', 'Punarvasu', 'Pushya', 'Ashlesha', 'Magha', 'Purva Phalguni', 'Uttara Phalguni', 'Hasta', 'Chitra', 'Swati', 'Vishakha', 'Anuradha', 'Jyeshtha', 'Mula', 'Purva Ashadha', 'Uttara Ashadha', 'Shravana', 'Dhanishtha', 'Shatabhisha', 'Purva Bhadrapada', 'Uttara Bhadrapada', 'Revati'
+];
+const allYogas = [
+  'Vishkambha', 'Priti', 'Ayushman', 'Saubhagya', 'Shobhana', 'Atiganda', 'Sukarman', 'Dhriti', 'Shula', 'Ganda', 'Vriddhi', 'Dhruva', 'Vyaghata', 'Harshana', 'Vajra', 'Siddhi', 'Vyatipata', 'Variyana', 'Parigha', 'Shiva', 'Siddha', 'Sadhya', 'Shubha', 'Shukla', 'Brahma', 'Indra', 'Vaidhriti'
+];
+const allKaranas = [
+  'Bava', 'Balava', 'Kaulava', 'Taitila', 'Gara', 'Vanija', 'Visti (Bhadra)', 'Shakuni', 'Chatushpada', 'Naga', 'Kintughna'
+];
+
+/**
+ * Simulates fetching Panchanga data for a specific date and region.
+ * In a real application, this would involve complex astrological calculations or an API call.
+ * @param date The selected Gregorian date.
+ * @param region The geographical region.
+ * @returns A complete Panchanga object for that day.
+ */
+export function getDailyPanchanga(date: Date, region: PanchangaRegion): Panchanga {
+    const day = date.getDate(); // 1-31
+    const basePanchanga = basePanchangaData.find(p => p.region === region)!;
+    
+    // Simple modulo arithmetic to simulate dynamic data based on the day of the month
+    const tithiName = allTithis[(day - 1) % 30];
+    const nakshatraName = allNakshatras[(day - 1) % 27];
+    const yogaName = allYogas[(day - 1) % 27];
+    const karanaName = allKaranas[Math.floor(((day - 1) * 2)) % 11];
+
+    const paksha = (day <= 15) ? 'Shukla Paksha' : 'Krishna Paksha';
+
+    const dynamicData: PanchangaDetails = {
+      ...basePanchanga.data,
+      tithi: { name: `${tithiName} (${paksha})`, endTime: '08:45 PM' },
+      nakshatra: { name: nakshatraName, endTime: '10:00 PM' },
+      yoga: { name: yogaName, endTime: '01:20 PM' },
+      karana: { name: karanaName, endTime: '09:30 AM' },
+    };
+
+    return {
+        ...basePanchanga,
+        data: dynamicData
+    };
+}

@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { panchangaData, Panchanga, PanchangaRegion } from '@/lib/panchanga-data';
+import { getDailyPanchanga, PanchangaRegion } from '@/lib/panchanga-data';
 import { Sunrise, Sunset, Moon, Star, SunMoon, Download, Atom, HandHeart, Users } from 'lucide-react';
 import { format } from 'date-fns';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -88,6 +88,26 @@ export default function PanchangaClient() {
         return () => clearInterval(intervalId);
     }, [toast]);
 
+    if (!isClient) {
+        return (
+             <div className="container mx-auto max-w-6xl py-16 md:py-24 px-4">
+                <div className="text-center mb-12">
+                    <Skeleton className="h-12 w-3/4 mx-auto" />
+                    <Skeleton className="h-6 w-1/2 mx-auto mt-4" />
+                </div>
+                <div className="flex flex-col lg:flex-row gap-8 items-start">
+                    <aside className="w-full lg:w-auto lg:sticky lg:top-24">
+                        <Skeleton className="h-[290px] w-[280px]" />
+                    </aside>
+                    <main className="flex-1 w-full">
+                        <Skeleton className="h-10 w-full mb-8" />
+                        <Skeleton className="h-96 w-full" />
+                    </main>
+                </div>
+            </div>
+        )
+    }
+
     return (
         <div className="container mx-auto max-w-6xl py-16 md:py-24 px-4">
             <div className="text-center mb-12">
@@ -95,10 +115,10 @@ export default function PanchangaClient() {
                     Daily Panchanga
                 </h1>
                 <p className="mt-4 text-lg md:text-xl text-foreground/80 max-w-3xl mx-auto">
-                   Select a date to view astrological details. Data is currently for demonstration and does not change daily.
+                   Select a date to view astrological details. Data is dynamically simulated for demonstration.
                 </p>
                 <div className="mt-6">
-                    {isClient && <InstallPWA />}
+                    <InstallPWA />
                 </div>
             </div>
 
@@ -106,16 +126,12 @@ export default function PanchangaClient() {
                 <aside className="w-full lg:w-auto lg:sticky lg:top-24">
                      <Card>
                         <CardContent className="p-0">
-                            {isClient ? (
-                                 <Calendar
-                                    mode="single"
-                                    selected={selectedDate}
-                                    onSelect={setSelectedDate}
-                                    className="p-0"
-                                />
-                            ) : (
-                                <Skeleton className="h-[290px] w-[280px]" />
-                            )}
+                             <Calendar
+                                mode="single"
+                                selected={selectedDate}
+                                onSelect={setSelectedDate}
+                                className="p-0"
+                            />
                         </CardContent>
                      </Card>
                 </aside>
@@ -128,46 +144,49 @@ export default function PanchangaClient() {
                             ))}
                         </TabsList>
                         
-                        {isClient ? (
-                             <p className="text-center text-lg font-semibold text-muted-foreground mb-6">
-                                {selectedDate ? format(selectedDate, 'EEEE, MMMM d, yyyy') : 'Select a date'}
-                            </p>
-                        ) : (
-                            <div className="flex justify-center mb-6">
-                                <Skeleton className="h-7 w-56" />
-                            </div>
-                        )}
+                         <p className="text-center text-lg font-semibold text-muted-foreground mb-6">
+                            {selectedDate ? format(selectedDate, 'EEEE, MMMM d, yyyy') : 'Select a date'}
+                        </p>
                        
-                        {panchangaData.map(item => (
-                            <TabsContent key={item.region} value={item.region}>
-                                <Card>
-                                    <CardHeader>
-                                        <CardTitle className="font-headline text-2xl text-center text-primary">
-                                            {item.peetham} Peetham ({item.region})
-                                        </CardTitle>
-                                    </CardHeader>
-                                    <CardContent className="space-y-2">
-                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2">
-                                            <PanchangaDetail icon={Sunrise} label="Sunrise" value={item.data.sunrise} />
-                                            <PanchangaDetail icon={Sunset} label="Sunset" value={item.data.sunset} />
-                                        </div>
-                                        <PanchangaDetail icon={Moon} label="Tithi" value={`${item.data.tithi.name} (until ${item.data.tithi.endTime})`} />
-                                        <PanchangaDetail icon={Star} label="Nakshatra" value={`${item.data.nakshatra.name} (until ${item.data.nakshatra.endTime})`} />
-                                        <PanchangaDetail icon={SunMoon} label="Yoga" value={`${item.data.yoga.name} (until ${item.data.yoga.endTime})`} />
-                                        <PanchangaDetail icon={Atom} label="Karana" value={`${item.data.karana.name} (until ${item.data.karana.endTime})`} />
+                        {regionOrder.map(region => {
+                            // Calculate data for the current region and selected date
+                            const panchanga = selectedDate ? getDailyPanchanga(selectedDate, region) : null;
 
-                                        <div className="pt-6">
-                                             <h3 className="font-headline text-lg text-center text-primary mb-4">Inauspicious Timings</h3>
-                                             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                                <InauspiciousTime label="Rahu Kalam" value={item.data.rahuKalam} />
-                                                <InauspiciousTime label="Gulika Kalam" value={item.data.gulikaKalam} />
-                                                <InauspiciousTime label="Yamaganda" value={item.data.yamagandaKalam} />
-                                             </div>
-                                        </div>
-                                    </CardContent>
-                                </Card>
-                            </TabsContent>
-                        ))}
+                            return (
+                                <TabsContent key={region} value={region}>
+                                    {panchanga ? (
+                                        <Card>
+                                            <CardHeader>
+                                                <CardTitle className="font-headline text-2xl text-center text-primary">
+                                                    {panchanga.peetham} Peetham ({panchanga.region})
+                                                </CardTitle>
+                                            </CardHeader>
+                                            <CardContent className="space-y-2">
+                                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2">
+                                                    <PanchangaDetail icon={Sunrise} label="Sunrise" value={panchanga.data.sunrise} />
+                                                    <PanchangaDetail icon={Sunset} label="Sunset" value={panchanga.data.sunset} />
+                                                </div>
+                                                <PanchangaDetail icon={Moon} label="Tithi" value={`${panchanga.data.tithi.name} (until ${panchanga.data.tithi.endTime})`} />
+                                                <PanchangaDetail icon={Star} label="Nakshatra" value={`${panchanga.data.nakshatra.name} (until ${panchanga.data.nakshatra.endTime})`} />
+                                                <PanchangaDetail icon={SunMoon} label="Yoga" value={`${panchanga.data.yoga.name} (until ${panchanga.data.yoga.endTime})`} />
+                                                <PanchangaDetail icon={Atom} label="Karana" value={`${panchanga.data.karana.name} (until ${panchanga.data.karana.endTime})`} />
+
+                                                <div className="pt-6">
+                                                     <h3 className="font-headline text-lg text-center text-primary mb-4">Inauspicious Timings</h3>
+                                                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                                        <InauspiciousTime label="Rahu Kalam" value={panchanga.data.rahuKalam} />
+                                                        <InauspiciousTime label="Gulika Kalam" value={panchanga.data.gulikaKalam} />
+                                                        <InauspiciousTime label="Yamaganda" value={panchanga.data.yamagandaKalam} />
+                                                     </div>
+                                                </div>
+                                            </CardContent>
+                                        </Card>
+                                    ) : (
+                                        <Skeleton className="h-96 w-full" />
+                                    )}
+                                </TabsContent>
+                            );
+                        })}
                     </Tabs>
                 </main>
             </div>
