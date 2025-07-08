@@ -86,15 +86,15 @@ const getInitials = (name: string | null | undefined) => {
 const placeholderPosts: Post[] = [];
 
 const placeholderMitras: Mitra[] = [
-    { name: 'Ravi Sharma', handle: '@rsharma', avatar: 'https://placehold.co/40x40.png' },
-    { name: 'Priya Patel', handle: '@priya_p', avatar: 'https://placehold.co/40x40.png' },
+    { name: 'Ravi Sharma', handle: '@rsharma', avatar: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=40&h=40&fit=crop&crop=faces' },
+    { name: 'Priya Patel', handle: '@priya_p', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=40&h=40&fit=crop&crop=faces' },
 ];
 
 const placeholderNotifications: Notification[] = [
     {
         id: 'notif-1',
         type: 'mitra_request',
-        actor: { name: 'Arjun Das', avatar: 'https://placehold.co/40x40.png' },
+        actor: { name: 'Arjun Das', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=40&h=40&fit=crop&crop=faces' },
         message: 'sent you a Mitra request.',
         timestamp: new Date(),
         isRead: false
@@ -102,7 +102,7 @@ const placeholderNotifications: Notification[] = [
     {
         id: 'notif-2',
         type: 'campaign_support',
-        actor: { name: 'Sita Iyer', avatar: 'https://placehold.co/40x40.png' },
+        actor: { name: 'Sita Iyer', avatar: 'https://images.unsplash.com/photo-1521119989659-a83eee488004?q=80&w=40&h=40&fit=crop&crop=faces' },
         message: 'raised a green flag on your campaign "Preserve Local Temple Murals".',
         timestamp: new Date(new Date().setDate(new Date().getDate() - 1)),
         isRead: true
@@ -113,9 +113,9 @@ const placeholderCampaigns: Campaign[] = [];
 
 // New data for suggestions to simulate AI matching
 const suggestedMitras: Mitra[] = [
-    { name: 'Sita Iyer', handle: '@sita_iyer', avatar: 'https://placehold.co/40x40.png' },
-    { name: 'Krishna Rao', handle: '@k_rao', avatar: 'https://placehold.co/40x40.png' },
-    { name: 'Gauri Desai', handle: '@gauridesai', avatar: 'https://placehold.co/40x40.png' },
+    { name: 'Sita Iyer', handle: '@sita_iyer', avatar: 'https://images.unsplash.com/photo-1521119989659-a83eee488004?q=80&w=40&h=40&fit=crop&crop=faces' },
+    { name: 'Krishna Rao', handle: '@k_rao', avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=40&h=40&fit=crop&crop=faces' },
+    { name: 'Gauri Desai', handle: '@gauridesai', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=40&h=40&fit=crop&crop=faces' },
 ];
 
 const dashboardLinks = [

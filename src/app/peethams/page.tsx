@@ -30,6 +30,7 @@ export default function PeethamsPage() {
             <Image
               src="https://images.unsplash.com/photo-1695632738261-a02251012359?q=80&w=150&h=150&fit=crop"
               alt="Jagadguru Adi Shankaracharya"
+              data-ai-hint="adi shankaracharya"
               width={150}
               height={150}
               className="mx-auto object-cover aspect-square rounded-full"

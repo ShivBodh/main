@@ -1,3 +1,4 @@
+
 'use client';
 
 import { Card, CardContent } from '@/components/ui/card';
@@ -24,9 +25,9 @@ export default function SevaClient() {
             <Card>
                 <CardContent className="p-0 relative w-full aspect-video overflow-hidden rounded-lg border shadow-lg group">
                     <Image
-                        src="https://placehold.co/1200x675.png"
+                        src="https://images.unsplash.com/photo-1588206941151-fe202b857a22?q=80&w=1200&h=675&fit=crop"
                         alt="Interactive 3D Map Preview"
-                        data-ai-hint="interactive map"
+                        data-ai-hint="india map"
                         width={1200}
                         height={675}
                         className="w-full h-full object-cover"
