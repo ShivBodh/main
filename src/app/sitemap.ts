@@ -24,6 +24,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/privacy-policy',
     '/user-agreement',
     '/games/ludo',
+    '/scraping-source',
+    '/scraper-result',
   ].map((route) => ({
     url: `${siteUrl}${route}`,
     lastModified: new Date(),
