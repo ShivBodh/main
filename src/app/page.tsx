@@ -36,7 +36,7 @@ export default function HomePage() {
               </div>
               <div className="relative aspect-video rounded-lg shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
                 <Image 
-                    src="https://images.unsplash.com/photo-1620058866387-a3c39a04a52c?q=80&w=600&h=400&fit=crop"
+                    src="https://images.unsplash.com/photo-1618635189724-44b41a38c234?q=80&w=600&h=400&fit=crop"
                     alt="A painting of a wise sage writing a sacred text"
                     fill
                     className="rounded-lg object-cover"
@@ -51,7 +51,7 @@ export default function HomePage() {
         <div className="container mx-auto grid md:grid-cols-2 gap-12 items-center">
             <div className="relative aspect-video rounded-lg shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 order-last md:order-first">
               <Image 
-                  src="https://images.unsplash.com/photo-1617634661839-92161289942c?q=80&w=600&h=400&fit=crop"
+                  src="https://images.unsplash.com/photo-1619364424997-1b0a88a4e32e?q=80&w=600&h=400&fit=crop"
                   alt="An artistic painting depicting a community connecting in a spiritual setting"
                   fill
                   className="object-cover rounded-lg"
@@ -99,7 +99,7 @@ export default function HomePage() {
             </div>
             <div className="relative aspect-video rounded-lg shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
               <Image 
-                  src="https://images.unsplash.com/photo-1617877924522-3599b5a45a0b?q=80&w=600&h=400&fit=crop"
+                  src="https://images.unsplash.com/photo-1618335934988-a0c1a1a79872?q=80&w=600&h=400&fit=crop"
                   alt="An artistic painting of sacred books and spiritual items"
                   fill
                   className="object-cover rounded-lg"
