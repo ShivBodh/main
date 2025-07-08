@@ -2,12 +2,11 @@ rules_version = '2';
 
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Allow public read for the calendar and public write for the scraper.
-    // In a production app, write access should be restricted.
-    match /media/{documentId} {
+    // WARNING: These are open rules for development.
+    // Anyone can read or write to your database.
+    // You should secure these before launching your app.
+    match /{document=**} {
       allow read, write: if true;
     }
-
-    // Any other collection is denied by default.
   }
 }
