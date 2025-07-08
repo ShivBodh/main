@@ -3,10 +3,10 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { getDailyPanchanga, PanchangaRegion } from '@/lib/panchanga-data';
-import { Sunrise, Sunset, Moon, Star, SunMoon, Download, Atom, HandHeart, Users } from 'lucide-react';
+import { Sunrise, Sunset, Moon, Star, SunMoon, Download, Atom, HandHeart, Users, LayoutGrid } from 'lucide-react';
 import { format } from 'date-fns';
 import { Skeleton } from '@/components/ui/skeleton';
 import { InstallPWA } from '@/components/pwa/InstallPWA';
@@ -98,6 +98,7 @@ export default function PanchangaClient() {
                 <div className="flex flex-col lg:flex-row gap-8 items-start">
                     <aside className="w-full lg:w-auto lg:sticky lg:top-24">
                         <Skeleton className="h-[290px] w-[280px]" />
+                         <Skeleton className="h-40 w-full mt-8" />
                     </aside>
                     <main className="flex-1 w-full">
                         <Skeleton className="h-10 w-full mb-8" />
@@ -123,15 +124,33 @@ export default function PanchangaClient() {
             </div>
 
             <div className="flex flex-col lg:flex-row gap-8 items-start">
-                <aside className="w-full lg:w-auto lg:sticky lg:top-24">
+                <aside className="w-full lg:w-96 lg:sticky lg:top-24 space-y-8">
                      <Card>
                         <CardContent className="p-0">
                              <Calendar
                                 mode="single"
                                 selected={selectedDate}
                                 onSelect={setSelectedDate}
-                                className="p-0"
+                                className="p-0 w-full"
                             />
+                        </CardContent>
+                     </Card>
+                     <Card>
+                        <CardHeader>
+                            <CardTitle className="font-headline text-xl flex items-center gap-2">
+                                <LayoutGrid className="h-5 w-5" />
+                                Panchanga Widgets
+                            </CardTitle>
+                            <CardDescription>
+                                Get today's Panchanga as a downloadable image for your phone's home screen.
+                            </CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                            <Button asChild className="w-full">
+                                <Link href="/panchanga/widgets">
+                                    View Widget Styles
+                                </Link>
+                            </Button>
                         </CardContent>
                      </Card>
                 </aside>
