@@ -7,8 +7,6 @@ import type { CalendarPhotoItem } from '@/lib/calendar-data';
 import { peethamBadgeColors } from '@/lib/events-data';
 
 export function PhotoCard({ item }: { item: CalendarPhotoItem }) {
-  // NOTE: The Dialog wrapper has been temporarily removed to debug image rendering.
-  // It can be re-added once the basic display is confirmed to be working.
   return (
     <Card className="overflow-hidden border-border/50 group">
       <div className="relative aspect-video bg-muted">
