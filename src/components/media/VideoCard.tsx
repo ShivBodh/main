@@ -27,7 +27,7 @@ export function VideoCard({ item }: { item: CalendarVideoItem }) {
               <PlayCircle className="h-16 w-16 text-white/80" />
             </div>
           </div>
-          <div className="flex flex-col flex-grow p-4">
+          <div className="flex flex-col p-4">
               <CardHeader className="p-0">
                 <div className="flex justify-between items-start gap-2">
                     <CardTitle className="font-headline text-lg leading-snug flex-grow">{item.title}</CardTitle>
@@ -37,7 +37,7 @@ export function VideoCard({ item }: { item: CalendarVideoItem }) {
                 </div>
                  <p className="text-sm text-muted-foreground pt-1">{format(new Date(item.date.replace(/-/g, '/')), 'MMMM d, yyyy')}</p>
               </CardHeader>
-               <CardContent className="p-0 pt-3 flex-grow">
+               <CardContent className="p-0 pt-3">
                   <p className="text-foreground/80 text-sm line-clamp-3">{item.description}</p>
               </CardContent>
           </div>

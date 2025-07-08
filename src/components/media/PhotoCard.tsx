@@ -22,7 +22,7 @@ export function PhotoCard({ item }: { item: CalendarPhotoItem }) {
               data-ai-hint={item.aiHint}
             />
           </div>
-          <div className="flex flex-col flex-grow p-4">
+          <div className="flex flex-col p-4">
               <CardHeader className="p-0">
                 <div className="flex justify-between items-start gap-2">
                   <CardTitle className="font-headline text-lg leading-snug flex-grow">{item.title}</CardTitle>
@@ -32,15 +32,15 @@ export function PhotoCard({ item }: { item: CalendarPhotoItem }) {
                 </div>
                 <p className="text-sm text-muted-foreground pt-1">{format(new Date(item.date.replace(/-/g, '/')), 'MMMM d, yyyy')}</p>
               </CardHeader>
-              <CardContent className="p-0 pt-3 flex-grow">
+              <CardContent className="p-0 pt-3">
                 <p className="text-foreground/80 text-sm line-clamp-3">{item.description}</p>
               </CardContent>
           </div>
         </Card>
       </DialogTrigger>
       <DialogContent className="max-w-5xl p-0 border-0 bg-transparent shadow-none">
-        <DialogHeader className="sr-only">
-          <DialogTitle>{item.title}</DialogTitle>
+        <DialogHeader>
+          <DialogTitle className="sr-only">{item.title}</DialogTitle>
         </DialogHeader>
         <Image
           src={item.imageUrl}
