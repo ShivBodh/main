@@ -1,9 +1,10 @@
+
 'use client';
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetClose, SheetHeader, SheetTitle } from '@/components/ui/sheet';
-import { Menu, Mail, Twitter, Facebook, Podcast, Gem, LogIn, LogOut, LayoutDashboard, ChevronDown, HandHeart, Users, Landmark, CalendarDays, Camera, BookOpen, Heart, Sparkles, Smile, MessageSquareQuote, Bell, Atom, SunMoon, TestTube2 } from 'lucide-react';
+import { Menu, Mail, Twitter, Facebook, Podcast, Gem, LogIn, LogOut, LayoutDashboard, ChevronDown, HandHeart, Users, Landmark, CalendarDays, BookOpen, Heart, Sparkles, SunMoon, TestTube2, Atom } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
@@ -21,32 +22,57 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Separator } from '@/components/ui/separator';
 import React from 'react';
 import { cn } from '@/lib/utils';
-import { sadhanaTools } from '@/lib/sadhana-data';
 import { LanguageSwitcher } from './LanguageSwitcher';
+import { peethams } from '@/lib/peethams-data';
 
-const mainNavLinks = [
+
+const getInitials = (name: string | null | undefined) => {
+    if (!name) return 'U';
+    const names = name.split(' ');
+    if (names.length > 1) {
+        return names[0][0] + names[names.length-1][0];
+    }
+    return names[0][0];
+}
+
+const peethamLinks = peethams.map(p => ({
+    title: p.name,
+    href: p.link,
+    description: p.description,
+    icon: Landmark
+}));
+
+const socialLinks = [
     { 
-        title: "Peethams",
-        href: "/peethams",
-        description: "Explore the four cardinal institutions established by Adi Shankaracharya.",
-        icon: Landmark
-    },
-    { 
-        title: "Social",
+        title: "Social Hub",
         href: "/social",
         description: "Connect with the global Sanatani community on our secure platform.",
         icon: Users
     },
     { 
+        title: "Knowledge Quiz",
+        href: "/quiz",
+        description: "Test your knowledge about the four cardinal Peethams.",
+        icon: TestTube2,
+    },
+    { 
+        title: "Seva Hub",
+        href: "/seva",
+        description: "Explore the sacred geography via an interactive map.",
+        icon: HandHeart,
+    },
+];
+
+const bodhaLinks = [
+     { 
         title: "Bodha Calendar",
         href: "/events",
-        description: "A living archive of events, discourses, and media from the Peethams.",
+        description: "A living archive of events, media, and discourses from the Peethams.",
         icon: CalendarDays,
     },
     { 
@@ -60,6 +86,12 @@ const mainNavLinks = [
         href: "/panchanga",
         description: "View daily astrological details for the four cardinal regions.",
         icon: SunMoon,
+    },
+     { 
+        title: "Sādhanā Suite",
+        href: "/sadhana",
+        description: "Digital tools to support your daily spiritual practice.",
+        icon: Atom,
     },
 ];
 
@@ -82,31 +114,15 @@ const aboutLinks = [
         description: "Get in touch with the volunteer team.",
         icon: Mail,
     }
-]
-
-const communityLinks = [
-    {
-        title: "Seva Hub",
-        href: "/seva",
-        description: "Find meaningful volunteer opportunities.",
-        icon: HandHeart,
-    },
-     {
-        title: "Knowledge Quiz",
-        href: "/quiz",
-        description: "Test your knowledge about the Peethams.",
-        icon: MessageSquareQuote,
-    },
 ];
 
-const getInitials = (name: string | null | undefined) => {
-    if (!name) return 'U';
-    const names = name.split(' ');
-    if (names.length > 1) {
-        return names[0][0] + names[names.length-1][0];
-    }
-    return names[0][0];
-}
+const allMobileLinks = [
+  { group: 'Peethams', links: peethamLinks },
+  { group: 'Social', links: socialLinks },
+  { group: 'Bodha', links: bodhaLinks },
+  { group: 'About', links: aboutLinks },
+];
+
 
 const AuthNav = () => {
     const { user, loading, logout } = useAuth();
@@ -135,7 +151,7 @@ const AuthNav = () => {
                     </DropdownMenuLabel>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem asChild>
-                        <Link href="/social">
+                        <Link href="/social?tab=profile">
                             <LayoutDashboard className="mr-2 h-4 w-4" />
                             <span>My Hub</span>
                         </Link>
@@ -173,47 +189,49 @@ export function Header() {
           </Link>
           <NavigationMenu className="hidden lg:flex">
             <NavigationMenuList>
-                {mainNavLinks.map(link => (
-                    <NavigationMenuItem key={link.href}>
-                        <NavigationMenuLink asChild>
-                            <Link href={link.href} className={navigationMenuTriggerStyle()}>
-                                <link.icon className="mr-2 h-4 w-4" />
-                                {link.title}
-                            </Link>
-                        </NavigationMenuLink>
-                    </NavigationMenuItem>
-                ))}
                 <NavigationMenuItem>
-                    <NavigationMenuTrigger>Sādhanā</NavigationMenuTrigger>
+                    <NavigationMenuTrigger>Peethams</NavigationMenuTrigger>
                     <NavigationMenuContent>
                         <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-                            {sadhanaTools.map((tool) => (
-                                <ListItem key={tool.title} title={tool.title} href={tool.link}>
-                                    {tool.description}
+                            {peethamLinks.map((link) => (
+                                <ListItem key={link.title} title={link.title} href={link.href} icon={link.icon}>
+                                    {link.description}
                                 </ListItem>
                             ))}
                         </ul>
                     </NavigationMenuContent>
                 </NavigationMenuItem>
                  <NavigationMenuItem>
-                    <NavigationMenuTrigger>Community</NavigationMenuTrigger>
+                    <NavigationMenuTrigger>Social</NavigationMenuTrigger>
                     <NavigationMenuContent>
-                        <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+                        <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] lg:w-[600px] lg:grid-cols-[.75fr_1fr]">
                             <li className="row-span-3">
                                 <NavigationMenuLink asChild>
-                                    <a className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md" href="/seva">
-                                        <HandHeart className="h-8 w-8 text-primary" />
+                                    <a className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md" href="/social">
+                                        <Users className="h-8 w-8 text-primary" />
                                         <div className="mb-2 mt-4 text-lg font-headline font-medium">
-                                            Seva Hub
+                                            Sanatan Social
                                         </div>
                                         <p className="text-sm leading-tight text-muted-foreground">
-                                            Contribute your skills and time. Find meaningful volunteer opportunities.
+                                           A private, secure platform for devotees to connect and support dharmic causes.
                                         </p>
                                     </a>
                                 </NavigationMenuLink>
                             </li>
-                            {communityLinks.map((link) => (
-                                <ListItem key={link.title} title={link.title} href={link.href}>
+                             {socialLinks.slice(1).map((link) => ( // Show other links except the main hub
+                                <ListItem key={link.title} title={link.title} href={link.href} icon={link.icon}>
+                                    {link.description}
+                                </ListItem>
+                            ))}
+                        </ul>
+                    </NavigationMenuContent>
+                </NavigationMenuItem>
+                 <NavigationMenuItem>
+                    <NavigationMenuTrigger>Bodha</NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                         <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
+                            {bodhaLinks.map((link) => (
+                                <ListItem key={link.title} title={link.title} href={link.href} icon={link.icon}>
                                     {link.description}
                                 </ListItem>
                             ))}
@@ -225,7 +243,7 @@ export function Header() {
                     <NavigationMenuContent>
                          <ul className="grid w-[300px] gap-3 p-4">
                             {aboutLinks.map((link) => (
-                                <ListItem key={link.title} title={link.title} href={link.href}>
+                                <ListItem key={link.title} title={link.title} href={link.href} icon={link.icon}>
                                     {link.description}
                                 </ListItem>
                             ))}
@@ -279,33 +297,28 @@ export function Header() {
                     <Gem className="h-7 w-7 text-primary" />
                     <span className="font-bold font-headline text-primary text-lg">Sanatana Peethams Portal</span>
                 </Link>
-                <nav className="flex flex-col space-y-2">
-                    {[...mainNavLinks, ...sadhanaTools, ...communityLinks, ...aboutLinks].map((item: any) => (
-                      <SheetClose asChild key={item.title}>
-                       <Link href={item.href || item.link} className="flex items-center gap-3 text-lg font-medium transition-colors hover:text-accent py-1">
-                          <item.icon className="h-5 w-5" />
-                          {item.title}
-                       </Link>
-                      </SheetClose>
+                <nav className="flex flex-col space-y-1">
+                    {allMobileLinks.map((group) => (
+                      <div key={group.group}>
+                        <h3 className="px-1 pt-4 pb-1 text-sm font-semibold text-muted-foreground">{group.group}</h3>
+                        {group.links.map((item) => (
+                          <SheetClose asChild key={item.title}>
+                          <Link href={item.href} className="flex items-center gap-3 text-lg font-medium transition-colors hover:text-accent py-2 px-1 rounded-md">
+                              <item.icon className="h-5 w-5 text-primary/80" />
+                              {item.title}
+                          </Link>
+                          </SheetClose>
+                        ))}
+                      </div>
                     ))}
                 </nav>
                 <div className="border-t pt-6 space-y-4">
                   {loading ? <Skeleton className="h-10 w-full" /> : user ? (
                     <>
                       <SheetClose asChild>
-                        <Link href="/social" className="flex items-center space-x-2 text-lg font-medium transition-colors hover:text-accent">
+                        <Link href="/social?tab=profile" className="flex items-center space-x-2 text-lg font-medium transition-colors hover:text-accent">
                           <LayoutDashboard className="h-6 w-6" />
                           <span>My Hub</span>
-                        </Link>
-                      </SheetClose>
-                      <SheetClose asChild>
-                        <Link href="/social?tab=notifications" className="flex items-center gap-3 text-lg font-medium transition-colors hover:text-accent py-1 relative">
-                            <Bell className="h-5 w-5" />
-                            <span>Notifications</span>
-                            <span className="absolute top-1 left-4 flex h-2.5 w-2.5">
-                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary"></span>
-                            </span>
                         </Link>
                       </SheetClose>
                        <SheetClose asChild>
@@ -351,8 +364,8 @@ export function Header() {
 
 const ListItem = React.forwardRef<
   React.ElementRef<"a">,
-  React.ComponentPropsWithoutRef<"a">
->(({ className, title, children, ...props }, ref) => {
+  React.ComponentPropsWithoutRef<"a"> & { icon: React.ElementType }
+>(({ className, title, children, icon: Icon, ...props }, ref) => {
   return (
     <li>
       <NavigationMenuLink asChild>
@@ -364,8 +377,11 @@ const ListItem = React.forwardRef<
           )}
           {...props}
         >
-          <div className="text-sm font-medium leading-none">{title}</div>
-          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+          <div className="flex items-center gap-2">
+            <Icon className="h-5 w-5 text-primary/80"/>
+            <div className="text-sm font-medium leading-none">{title}</div>
+          </div>
+          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground pl-7">
             {children}
           </p>
         </a>
@@ -374,3 +390,5 @@ const ListItem = React.forwardRef<
   )
 })
 ListItem.displayName = "ListItem"
+
+    
