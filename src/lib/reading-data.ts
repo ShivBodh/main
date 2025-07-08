@@ -24,7 +24,7 @@ export const readingList: Book[] = [
     author: 'Adi Shankaracharya',
     description: 'A powerful hymn that emphasizes the importance of devotion and seeking Govinda (God) as the ultimate goal, cutting through worldly attachments.',
     pdfUrl: '#',
-    imageUrl: 'https://images.unsplash.com/photo-1547973787-82772a814c33?q=80&w=400&h=600&fit=crop',
+    imageUrl: 'https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/aadi-shankara-bhaja-govindam-book-cover-shivbodh-group.png',
     aiHint: 'devotion supreme being',
     content: [
       {
@@ -83,7 +83,7 @@ export const readingList: Book[] = [
       },
       {
         number: 10,
-        sanskrit: ['वयसि गते कः कामविकारः, शुष्के नीरे कः कासारः ।', 'क्षीणे वित्ते कः परिवारः, ज्ञाते तत्त्वे कः संसारः ॥'],
+        sanskrit: ['वयसि गते कः कामविकारः, शुष्के नीरे कः कासारः ।', 'क्षीणे वित्te कः परिवारः, ज्ञाते तत्त्वे कः संसारः ॥'],
         hindi: 'आयु बीत जाने पर काम-विकार कहाँ रहता है? पानी सूख जाने पर तालाब कहाँ रहता है? धन चले जाने पर परिवार कहाँ रहता है? और तत्त्व का ज्ञान हो जाने पर संसार कहाँ रहता है?',
         english: 'When youth is gone, where is lust? When water dries up, where is the lake? When wealth is gone, where is the family? When the truth is known, where is the world?'
       },
