@@ -18,7 +18,7 @@ export function PhotoCard({ item }: { item: CalendarPhotoItem }) {
               alt={item.title}
               width={400}
               height={225}
-              className="w-full h-auto object-cover aspect-video rounded-t-lg bg-secondary/20"
+              className="w-full object-cover aspect-video rounded-t-lg bg-secondary/20"
               data-ai-hint={item.aiHint}
             />
           </CardContent>
