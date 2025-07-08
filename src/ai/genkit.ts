@@ -1,16 +1,14 @@
 import {genkit} from 'genkit';
 import {googleAI} from '@genkit-ai/googleai';
-import dotenv from 'dotenv';
-import path from 'path';
 
 // The .env file is now loaded in `dev.ts`, which is the entry point
 // for the Genkit server. This ensures the environment variables are
 // available before this file is even imported.
 
 export const ai = genkit({
-  // The googleAI() plugin will automatically look for the
-  // GOOGLE_API_KEY in the environment variables.
-  plugins: [googleAI()],
+  // Explicitly passing the API key to the plugin is a more robust
+  // way to ensure it's loaded correctly.
+  plugins: [googleAI({apiKey: process.env.GOOGLE_API_KEY})],
   // It's best practice to specify the model in each AI call
   // instead of setting a global default. This avoids confusion,
   // especially when using different models for different tasks
