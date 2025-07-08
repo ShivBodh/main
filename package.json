@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "genkit:dev": "genkit start --port 4000 -- tsx src/ai/dev.ts",
-    "genkit:watch": "genkit start --port 4000 -- tsx --watch src/ai/dev.ts",
+    "scrape": "tsx scripts/run-scraper.ts",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -70,6 +69,7 @@
     "genkit-cli": "^1.13.0",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
+    "tsx": "^4.16.2",
     "typescript": "^5"
   }
 }

@@ -28,8 +28,14 @@ const ContentProcessorOutputSchema = z.object({
 });
 export type ContentProcessorOutput = z.infer<typeof ContentProcessorOutputSchema>;
 
-// This is the exported wrapper function for server-side use.
+/**
+ * This is the primary exported function. The scraper script imports and calls this directly.
+ * @param input The raw content to be processed by the AI.
+ * @returns A promise that resolves to the structured data (title and keywords).
+ */
 export async function processScrapedContent(input: ContentProcessorInput): Promise<ContentProcessorOutput> {
+  // We call the internally defined flow. This allows us to keep the core AI logic
+  // separate from its execution context.
   return contentProcessorFlow(input);
 }
 
@@ -45,10 +51,9 @@ Raw Content:
 `,
 });
 
-
-// The scraper script calls this flow directly via its HTTP endpoint.
-// Exporting the flow makes it available to the Genkit server as an API endpoint.
-export const contentProcessorFlow = ai.defineFlow(
+// This flow is defined internally and is NOT exported.
+// It is called by the `processScrapedContent` wrapper function.
+const contentProcessorFlow = ai.defineFlow(
   {
     name: 'contentProcessorFlow',
     inputSchema: ContentProcessorInputSchema,
