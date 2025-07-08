@@ -56,6 +56,15 @@ async function runProcessor() {
 
         if (aiContent) {
             console.log('[AI] Success. Received structured data.');
+            
+            // Smarter thumbnail generation for different URL types
+            let thumbnailUrl = post.imageUrl;
+            if (post.imageUrl.includes('unsplash.com')) {
+                thumbnailUrl = post.imageUrl.replace(/w=\d+/, 'w=400').replace(/h=\d+/, 'h=300');
+            } else if (post.imageUrl.includes('placehold.co')) {
+                thumbnailUrl = post.imageUrl.replace('600x400', '400x300');
+            }
+
             const mediaData = {
                 date: post.date,
                 peetham: post.peetham,
@@ -63,7 +72,7 @@ async function runProcessor() {
                 title: aiContent.title,
                 description: post.description,
                 imageUrl: post.imageUrl,
-                thumbnailUrl: post.imageUrl.replace('600x400', '400x300'), // Simple thumbnail logic for placeholders
+                thumbnailUrl: thumbnailUrl,
                 aiHint: aiContent.keywords,
             };
             await addDoc(mediaCollection, mediaData);
