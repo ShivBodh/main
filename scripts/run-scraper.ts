@@ -1,4 +1,3 @@
-
 /**
  * @fileoverview An AI-Powered Content Scraper and Processor (TypeScript Version).
  *
@@ -29,12 +28,10 @@ import fs from 'fs';
 import path from 'path';
 import axios from 'axios';
 import * as cheerio from 'cheerio';
-import dotenv from 'dotenv';
 import { processScrapedContent } from '@/ai/flows/content-processor-flow';
 
 // --- CONFIGURATION ---
-// Manually load the environment variables from the root .env file
-dotenv.config({ path: path.resolve(__dirname, '../../.env') });
+// The .env file is now loaded by the `npm run scrape` command via the `--env-file` flag.
 
 const CONFIG = {
   SOURCE_URL: 'http://localhost:3000/scraping-source',
@@ -138,7 +135,7 @@ async function runProcessor() {
   fs.writeFileSync(CONFIG.OUTPUT_FILE, JSON.stringify(allProcessedData, null, 2));
   
   console.log(`\n[COMPLETE] Processing finished. ${allProcessedData.length} records saved to ${CONFIG.OUTPUT_FILE}`);
-  console.log(`[ACTION] Visit http://localhost:3000/scraper-result to see the output.`);
+  console.log(`[ACTION] Refresh the Bodha Calendar page in your browser to see the new content.`);
 }
 
 runProcessor().catch(console.error);

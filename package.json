@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "scrape": "tsx scripts/run-scraper.ts",
+    "scrape": "tsx --env-file=.env scripts/run-scraper.ts",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",

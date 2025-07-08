@@ -1,4 +1,3 @@
-
 'use client';
 
 import Link from 'next/link';
@@ -55,12 +54,6 @@ const mainNavLinks = [
         href: "/reading",
         description: "A curated library of foundational texts by great masters.",
         icon: BookOpen,
-    },
-     { 
-        title: "Scraper Result",
-        href: "/scraper-result",
-        description: "See the output of our independent scraper tool.",
-        icon: TestTube2,
     },
     { 
         title: "Panchanga",

@@ -1,4 +1,3 @@
-
 import { MetadataRoute } from 'next';
 import { peethams } from '@/lib/peethams-data';
 
@@ -25,7 +24,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/user-agreement',
     '/games/ludo',
     '/scraping-source',
-    '/scraper-result',
   ].map((route) => ({
     url: `${siteUrl}${route}`,
     lastModified: new Date(),
