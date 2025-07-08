@@ -2,33 +2,35 @@
 export interface WidgetStyle {
   name: string;
   bgClass: string;
+  textColor?: string;
   patternUrl?: string;
   details: ('Tithi' | 'Nakshatra' | 'Yoga' | 'Sunrise' | 'Sunset')[];
 }
 
 export const widgetStyles: WidgetStyle[] = [
   {
-    name: 'Dharma Gold',
-    bgClass: 'bg-gradient-to-br from-yellow-400 via-amber-500 to-orange-700',
-    patternUrl: 'https://www.transparenttextures.com/patterns/az-subtle.png',
+    name: 'Vintage Scroll',
+    bgClass: 'bg-gradient-to-br from-yellow-800 via-amber-700 to-yellow-900',
+    patternUrl: 'https://www.transparenttextures.com/patterns/old-paper.png',
     details: ['Tithi', 'Nakshatra', 'Yoga', 'Sunrise', 'Sunset'],
   },
   {
-    name: 'Cosmic Blue',
+    name: 'Digital Squircle',
     bgClass: 'bg-gradient-to-tr from-blue-500 via-indigo-600 to-purple-800',
     patternUrl: 'https://www.transparenttextures.com/patterns/stardust.png',
     details: ['Tithi', 'Nakshatra', 'Yoga', 'Sunrise', 'Sunset'],
   },
   {
-    name: 'Sacred Fire',
-    bgClass: 'bg-gradient-to-bl from-red-500 via-orange-500 to-yellow-400',
+    name: 'Living Ember',
+    bgClass: 'bg-gradient-to-bl from-red-600 via-orange-500 to-yellow-600',
     patternUrl: 'https://www.transparenttextures.com/patterns/gplay.png',
     details: ['Tithi', 'Nakshatra', 'Sunrise', 'Sunset'],
   },
   {
-    name: 'Forest Green',
-    bgClass: 'bg-gradient-to-tl from-emerald-500 via-green-600 to-teal-800',
-    patternUrl: 'https://www.transparenttextures.com/patterns/inspiration-geometry.png',
+    name: 'Temple Calendar',
+    bgClass: 'bg-gradient-to-b from-stone-100 to-stone-200',
+    textColor: 'text-stone-800',
+    patternUrl: 'https://www.transparenttextures.com/patterns/concrete-wall-2.png',
     details: ['Tithi', 'Nakshatra', 'Yoga', 'Sunrise'],
   },
   {
