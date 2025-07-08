@@ -1,10 +1,9 @@
 
 import { HeroSection } from '@/components/home/HeroSection';
-import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowRight, Users, Calendar, Atom } from 'lucide-react';
+import { ArrowRight, BookOpen, Calendar, SunMoon, Atom, Users, Megaphone, NotebookText } from 'lucide-react';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -12,68 +11,12 @@ export const metadata: Metadata = {
   // which is appropriate for the main homepage.
 };
 
-const mainFeatures = [
-    {
-        icon: Users,
-        title: "Sanatan Social",
-        description: "A private, secure platform for devotees to connect, share knowledge, and support dharmic causes.",
-        href: "/social"
-    },
-    {
-        icon: Calendar,
-        title: "Bodha Calendar",
-        description: "A living archive of events, media, and discourses from the four cardinal Peethams.",
-        href: "/events"
-    },
-    {
-        icon: Atom,
-        title: "Sādhanā Suite",
-        description: "A suite of digital tools including a Japa counter and meditation timer to support your daily spiritual practice.",
-        href: "/sadhana"
-    }
-];
-
 export default function HomePage() {
   return (
     <>
       <HeroSection />
 
-      <section className="py-16 md:py-24 bg-background">
-        <div className="container mx-auto">
-            <div className="text-center mb-12">
-                <h2 className="text-3xl md:text-4xl font-headline font-bold text-primary">A Unified Platform for Dharma</h2>
-                <p className="mt-3 text-lg text-foreground/80 max-w-2xl mx-auto">
-                    All the tools and community features you need, integrated into a single, trusted source.
-                </p>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {mainFeatures.map((feature) => {
-                    const Icon = feature.icon;
-                    return (
-                        <Card key={feature.title} className="text-center flex flex-col">
-                            <CardHeader>
-                                <div className="mx-auto bg-primary/10 p-4 rounded-full w-max">
-                                    <Icon className="h-8 w-8 text-primary" />
-                                </div>
-                                <CardTitle className="font-headline text-2xl mt-4">{feature.title}</CardTitle>
-                            </CardHeader>
-                            <CardContent className="flex-grow">
-                                <p className="text-muted-foreground">{feature.description}</p>
-                            </CardContent>
-                            <CardFooter>
-                                <Button asChild variant="secondary" className="w-full">
-                                    <Link href={feature.href}>
-                                        Explore <ArrowRight className="ml-2 h-4 w-4" />
-                                    </Link>
-                                </Button>
-                            </CardFooter>
-                        </Card>
-                    )
-                })}
-            </div>
-        </div>
-      </section>
-
+      {/* Peethams Section */}
       <section className="py-16 md:py-24 bg-muted/50">
           <div className="container mx-auto grid md:grid-cols-2 gap-12 items-center">
               <div>
@@ -86,7 +29,7 @@ export default function HomePage() {
                   </p>
                    <Button asChild size="lg" className="mt-8">
                         <Link href="/peethams">
-                            Explore the Peethams
+                            Explore the Peethams <ArrowRight className="ml-2 h-4 w-4" />
                         </Link>
                     </Button>
               </div>
@@ -100,6 +43,69 @@ export default function HomePage() {
                 />
               </div>
           </div>
+      </section>
+
+      {/* Social Section */}
+      <section className="py-16 md:py-24 bg-background">
+        <div className="container mx-auto grid md:grid-cols-2 gap-12 items-center">
+            <div className="relative aspect-video rounded-lg shadow-lg">
+              <Image 
+                  src="https://images.unsplash.com/photo-1531545514256-b1400bc00f31?q=80&w=600&h=400&fit=crop"
+                  alt="A community of people connecting"
+                  fill
+                  className="object-cover rounded-lg"
+                  data-ai-hint="community connection"
+              />
+            </div>
+            <div className="md:order-first">
+                <h2 className="text-3xl md:text-4xl font-headline font-bold text-primary">Sanatan Social: A Community for Dharma</h2>
+                <p className="mt-4 text-lg text-foreground/80">
+                    Join a private, secure platform for devotees to connect, share knowledge, and support dharmic causes. Create your profile, write in your personal Dainandini (diary), and launch campaigns that matter.
+                </p>
+                <ul className="mt-4 space-y-2 text-foreground/80">
+                    <li className="flex items-center gap-3"><Users className="h-5 w-5 text-accent"/><span>Community Feed & Mitra Connections</span></li>
+                    <li className="flex items-center gap-3"><Megaphone className="h-5 w-5 text-accent"/><span>Dharmic Campaign Support</span></li>
+                    <li className="flex items-center gap-3"><NotebookText className="h-5 w-5 text-accent"/><span>Private Digital Diary (Dainandini)</span></li>
+                </ul>
+                 <Button asChild size="lg" className="mt-8">
+                      <Link href="/social">
+                          Join the Community <ArrowRight className="ml-2 h-4 w-4" />
+                      </Link>
+                  </Button>
+            </div>
+        </div>
+      </section>
+
+      {/* Bodha Section */}
+      <section className="py-16 md:py-24 bg-muted/50">
+        <div className="container mx-auto grid md:grid-cols-2 gap-12 items-center">
+            <div>
+                <h2 className="text-3xl md:text-4xl font-headline font-bold text-primary">Bodha: Your Knowledge & Sādhanā Suite</h2>
+                <p className="mt-4 text-lg text-foreground/80">
+                    Deepen your understanding and support your daily spiritual practice with our integrated suite of tools and resources. Everything you need for learning and practice, all in one place.
+                </p>
+                <ul className="mt-4 space-y-2 text-foreground/80">
+                    <li className="flex items-center gap-3"><Calendar className="h-5 w-5 text-accent"/><span>Unified Bodha Calendar of Events & Media</span></li>
+                    <li className="flex items-center gap-3"><SunMoon className="h-5 w-5 text-accent"/><span>Daily Regional Panchanga</span></li>
+                    <li className="flex items-center gap-3"><BookOpen className="h-5 w-5 text-accent"/><span>Library of Sacred Texts</span></li>
+                    <li className="flex items-center gap-3"><Atom className="h-5 w-5 text-accent"/><span>Japa Counter & Meditation Timer</span></li>
+                </ul>
+                 <Button asChild size="lg" className="mt-8">
+                      <Link href="/events">
+                          Explore Bodha <ArrowRight className="ml-2 h-4 w-4" />
+                      </Link>
+                  </Button>
+            </div>
+            <div className="relative aspect-video rounded-lg shadow-lg">
+              <Image 
+                  src="https://images.unsplash.com/photo-1544716278-e513176f20b5?q=80&w=600&h=400&fit=crop"
+                  alt="A library of ancient spiritual books"
+                  fill
+                  className="object-cover rounded-lg"
+                  data-ai-hint="spiritual knowledge practice"
+              />
+            </div>
+        </div>
       </section>
     </>
   );
