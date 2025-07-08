@@ -1,1 +1,46 @@
-[]
+[
+  {
+    "id": "scraped-sringeri-1751998725592",
+    "date": "2025-07-08",
+    "peetham": "Sringeri",
+    "type": "photo",
+    "title": "Sharadamba Temple Illuminated for Navaratri",
+    "description": "The main temple of Goddess Sharadamba beautifully illuminated for the Navaratri festival, attracting thousands of devotees.",
+    "imageUrl": "/_next/image?url=https%3A%2F%2Fplacehold.co%2F600x400.png&w=1200&q=75",
+    "thumbnailUrl": "/_next/image?url=https%3A%2F%2Fplacehold.co%2F400x300.png&w=1200&q=75",
+    "aiHint": "Sharadamba Navaratri temple festival"
+  },
+  {
+    "id": "scraped-dwaraka-1751998726291",
+    "date": "2025-07-08",
+    "peetham": "Dwaraka",
+    "type": "photo",
+    "title": "Shankaracharya Performs Evening Aarti",
+    "description": "The Shankaracharya of Dwaraka performing the evening Aarti at the main Dwarkadhish temple during Janmashtami celebrations.",
+    "imageUrl": "/_next/image?url=https%3A%2F%2Fplacehold.co%2F600x400.png&w=1200&q=75",
+    "thumbnailUrl": "/_next/image?url=https%3A%2F%2Fplacehold.co%2F400x300.png&w=1200&q=75",
+    "aiHint": "Shankaracharya Aarti Janmashtami"
+  },
+  {
+    "id": "scraped-puri-1751998726960",
+    "date": "2025-07-08",
+    "peetham": "Puri",
+    "type": "photo",
+    "title": "Rath Yatra Chariots Ready",
+    "description": "Volunteers and artisans giving final touches to the grand chariots for the annual Rath Yatra festival.",
+    "imageUrl": "/_next/image?url=https%3A%2F%2Fplacehold.co%2F600x400.png&w=1200&q=75",
+    "thumbnailUrl": "/_next/image?url=https%3A%2F%2Fplacehold.co%2F400x300.png&w=1200&q=75",
+    "aiHint": "Rath Yatra festival artisans volunteers"
+  },
+  {
+    "id": "scraped-jyotirmath-1751998727684",
+    "date": "2025-07-08",
+    "peetham": "Jyotirmath",
+    "type": "photo",
+    "title": "Jyotirmath in Winter Snow",
+    "description": "A breathtaking view of the Jyotirmath premises covered in a thick blanket of snow during the winter months.",
+    "imageUrl": "/_next/image?url=https%3A%2F%2Fplacehold.co%2F600x400.png&w=1200&q=75",
+    "thumbnailUrl": "/_next/image?url=https%3A%2F%2Fplacehold.co%2F400x300.png&w=1200&q=75",
+    "aiHint": "snow Jyotirmath winter"
+  }
+]
