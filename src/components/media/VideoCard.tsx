@@ -14,8 +14,8 @@ export function VideoCard({ item }: { item: CalendarVideoItem }) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Card className="h-full flex flex-col overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border-border/50 cursor-pointer group">
-          <CardContent className="p-0 relative aspect-video bg-secondary/20">
+        <Card className="flex flex-col overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border-border/50 cursor-pointer group">
+          <div className="relative aspect-video bg-secondary/20">
             <Image
               src={item.thumbnailUrl}
               alt={item.title}
@@ -26,19 +26,21 @@ export function VideoCard({ item }: { item: CalendarVideoItem }) {
             <div className="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
               <PlayCircle className="h-16 w-16 text-white/80" />
             </div>
-          </CardContent>
-          <CardHeader>
-            <div className="flex justify-between items-start gap-2">
-                <CardTitle className="font-headline text-lg leading-snug flex-grow">{item.title}</CardTitle>
-                <Badge variant="outline" className={`flex-shrink-0 ${peethamBadgeColors[item.peetham]}`}>
-                    {item.peetham}
-                </Badge>
-            </div>
-             <p className="text-sm text-muted-foreground pt-1">{format(new Date(item.date.replace(/-/g, '/')), 'MMMM d, yyyy')}</p>
-          </CardHeader>
-           <CardContent className="flex-grow">
-              <p className="text-foreground/80 text-sm line-clamp-3">{item.description}</p>
-          </CardContent>
+          </div>
+          <div className="flex flex-col flex-grow p-4">
+              <CardHeader className="p-0">
+                <div className="flex justify-between items-start gap-2">
+                    <CardTitle className="font-headline text-lg leading-snug flex-grow">{item.title}</CardTitle>
+                    <Badge variant="outline" className={`flex-shrink-0 ${peethamBadgeColors[item.peetham]}`}>
+                        {item.peetham}
+                    </Badge>
+                </div>
+                 <p className="text-sm text-muted-foreground pt-1">{format(new Date(item.date.replace(/-/g, '/')), 'MMMM d, yyyy')}</p>
+              </CardHeader>
+               <CardContent className="p-0 pt-3 flex-grow">
+                  <p className="text-foreground/80 text-sm line-clamp-3">{item.description}</p>
+              </CardContent>
+          </div>
         </Card>
       </DialogTrigger>
       <DialogContent className="max-w-4xl p-0 border-0 bg-transparent">
