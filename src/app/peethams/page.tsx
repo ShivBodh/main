@@ -15,10 +15,10 @@ export const metadata: Metadata = {
 };
 
 const peethamTableData = [
-    { peetham: 'Dakṣiṇāmnāya Śrī Śāradā Pīṭham', location: 'Sringeri, Karnataka (South)', veda: 'Kṛṣṇa Yajur Veda', mahavakya: 'Ahaṃ Brahmāsmi (I am Brahman)', pontiffs: 'Sri Bharathi Tirtha Mahaswamiji & Sri Vidhushekhara Bharati Mahaswamiji' },
-    { peetham: 'Pūrvāmnāya Śrī Govardhana Pīṭham', location: 'Puri, Odisha (East)', veda: 'Ṛg Veda', mahavakya: 'Prajñānaṃ Brahma (Consciousness is Brahman)', pontiffs: 'Swami Nischalananda Saraswati' },
-    { peetham: 'Paścimāmnāya Śrī Śāradā Pīṭham', location: 'Dwaraka, Gujarat (West)', veda: 'Sāma Veda', mahavakya: 'Tattvamasi (That Thou Art)', pontiffs: 'Swami Sadananda Saraswati' },
-    { peetham: 'Uttarāmnāya Śrī Jyotir Pīṭham', location: 'Joshimath, Uttarakhand (North)', veda: 'Atharva Veda', mahavakya: 'Ayamātmā Brahma (This Self is Brahman)', pontiffs: 'Swami Avimukteshwarananda Saraswati' },
+    { peetham: 'Dakṣiṇāmnāya Śrī Śāradā Pīṭham', location: 'Sringeri, Karnataka (South)', veda: 'Kṛṣṇa Yajur Veda', mahavakya: 'Ahaṃ Brahmāsmi (I am Brahman)'},
+    { peetham: 'Pūrvāmnāya Śrī Govardhana Pīṭham', location: 'Puri, Odisha (East)', veda: 'Ṛg Veda', mahavakya: 'Prajñānaṃ Brahma (Consciousness is Brahman)'},
+    { peetham: 'Paścimāmnāya Śrī Śāradā Pīṭham', location: 'Dwaraka, Gujarat (West)', veda: 'Sāma Veda', mahavakya: 'Tattvamasi (That Thou Art)'},
+    { peetham: 'Uttarāmnāya Śrī Jyotir Pīṭham', location: 'Joshimath, Uttarakhand (North)', veda: 'Atharva Veda', mahavakya: 'Ayamātmā Brahma (This Self is Brahman)'},
 ];
 
 export default function PeethamsPage() {
@@ -67,7 +67,6 @@ export default function PeethamsPage() {
                                 <TableHead>Location & Direction</TableHead>
                                 <TableHead>Associated Veda</TableHead>
                                 <TableHead>Mahavakya (Great Utterance)</TableHead>
-                                <TableHead>Current Pontiff(s)</TableHead>
                             </TableRow>
                         </TableHeader>
                         <TableBody>
@@ -77,7 +76,6 @@ export default function PeethamsPage() {
                                     <TableCell>{row.location}</TableCell>
                                     <TableCell>{row.veda}</TableCell>
                                     <TableCell>{row.mahavakya}</TableCell>
-                                    <TableCell>{row.pontiffs}</TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
