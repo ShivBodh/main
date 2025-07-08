@@ -55,9 +55,9 @@ function WidgetCard({ panchanga, style, date }: WidgetCardProps) {
   };
 
   return (
-    <Card>
+    <Card className="bg-card/5 border-border/20">
       <CardHeader>
-        <CardTitle>{style.name}</CardTitle>
+        <CardTitle className="text-gray-200">{style.name}</CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
         <div 
@@ -128,29 +128,31 @@ export default function PanchangaWidgetsClient() {
   }, []);
 
   return (
-    <div className="container mx-auto max-w-7xl py-16 md:py-24 px-4">
-      <div className="text-center mb-16">
-        <h1 className="text-4xl md:text-5xl font-headline font-bold text-primary tracking-tight">
-          Downloadable Panchanga Widgets
-        </h1>
-        <p className="mt-4 text-lg md:text-xl text-foreground/80 max-w-3xl mx-auto">
-          Choose a style and download today's Panchanga as an image. Perfect for your phone's home screen or sharing with friends and family.
-        </p>
-      </div>
+    <div className="bg-gray-950">
+        <div className="container mx-auto max-w-7xl py-16 md:py-24 px-4">
+            <div className="text-center mb-16">
+                <h1 className="text-4xl md:text-5xl font-headline font-bold text-primary tracking-tight">
+                Downloadable Panchanga Widgets
+                </h1>
+                <p className="mt-4 text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
+                Choose a style and download today's Panchanga as an image. Perfect for your phone's home screen or sharing with friends and family.
+                </p>
+            </div>
 
-      {isLoading ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-8">
-            {[...Array(5)].map((_, i) => <Skeleton key={i} className="h-[550px] w-full" />)}
+            {isLoading ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-8">
+                    {[...Array(5)].map((_, i) => <Skeleton key={i} className="h-[550px] w-full bg-gray-800" />)}
+                </div>
+            ) : panchanga ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-8">
+                {widgetStyles.map(style => (
+                    <WidgetCard key={style.name} panchanga={panchanga} style={style} date={new Date()} />
+                ))}
+                </div>
+            ) : (
+                <p className="text-center text-red-400">Could not load Panchanga data.</p>
+            )}
         </div>
-      ) : panchanga ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-8">
-          {widgetStyles.map(style => (
-            <WidgetCard key={style.name} panchanga={panchanga} style={style} date={new Date()} />
-          ))}
-        </div>
-      ) : (
-        <p className="text-center text-destructive">Could not load Panchanga data.</p>
-      )}
     </div>
   );
 }
