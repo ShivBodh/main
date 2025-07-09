@@ -40,7 +40,7 @@ export default function HomePage() {
                     alt="A painting of a wise sage writing a sacred text"
                     width={600}
                     height={400}
-                    className="rounded-lg object-cover shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-2"
+                    className="rounded-lg object-cover shadow-lg"
                     data-ai-hint="sage painting knowledge"
                 />
               </div>
@@ -56,7 +56,7 @@ export default function HomePage() {
                   alt="An artistic painting depicting a community connecting in a spiritual setting"
                   width={600}
                   height={400}
-                  className="object-cover rounded-lg shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-2"
+                  className="rounded-lg object-cover shadow-lg"
                   data-ai-hint="community art spiritual"
               />
             </div>
@@ -105,7 +105,7 @@ export default function HomePage() {
                   alt="An artistic painting of sacred books and spiritual items"
                   width={600}
                   height={400}
-                  className="object-cover rounded-lg shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-2"
+                  className="rounded-lg object-cover shadow-lg"
                   data-ai-hint="spiritual knowledge art"
               />
             </div>

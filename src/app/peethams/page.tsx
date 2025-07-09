@@ -26,13 +26,14 @@ export default function PeethamsPage() {
     <div className="bg-background text-foreground">
       <div className="container mx-auto max-w-6xl py-16 md:py-24 px-4">
         <div className="text-center mb-16">
-          <div className="mb-8 relative w-[150px] h-[150px] mx-auto rounded-full shadow-lg">
+          <div className="mb-8 mx-auto inline-block">
             <Image
               src="https://images.unsplash.com/photo-1618635189724-44b41a38c234?q=80&w=150&h=150&fit=crop"
               alt="A painting of Jagadguru Adi Shankaracharya"
               data-ai-hint="adi shankaracharya painting"
-              fill
-              className="mx-auto object-cover rounded-full"
+              width={150}
+              height={150}
+              className="mx-auto object-cover rounded-full shadow-lg"
             />
           </div>
           <h1 className="text-4xl md:text-5xl font-headline font-bold text-primary tracking-tight">

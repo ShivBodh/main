@@ -159,12 +159,13 @@ export default function PuriClient() {
     <div className="bg-background text-foreground">
       <div className="container mx-auto max-w-6xl py-16 md:py-24 px-4">
         <section className="flex flex-col md:flex-row items-center gap-8 mb-12">
-          <div className="w-full md:w-1/3 relative aspect-[4/3]">
+          <div className="w-full md:w-1/3">
             <Image
               src={peethamInfo.acharyaImage}
               data-ai-hint={peethamInfo.acharyaAiHint}
               alt={`Jagadguru Shankaracharya of ${peethamInfo.name}`}
-              fill
+              width={400}
+              height={533}
               className="rounded-lg shadow-lg object-cover"
             />
           </div>

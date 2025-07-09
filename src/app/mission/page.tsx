@@ -95,12 +95,13 @@ export default function MissionPage() {
             </section>
 
             <div className="not-prose text-center mt-16 p-8 bg-card rounded-lg border">
-                 <div className="relative w-20 h-20 mx-auto mb-4 rounded-full">
+                 <div className="mx-auto mb-4">
                     <Image
                       src="https://images.unsplash.com/photo-1628793473432-1595eb488349?q=80&w=80&h=80&fit=crop"
                       alt="An artistic painting representing selfless service (Seva)"
                       data-ai-hint="seva hands painting"
-                      fill
+                      width={80}
+                      height={80}
                       className="rounded-full object-cover"
                     />
                 </div>
