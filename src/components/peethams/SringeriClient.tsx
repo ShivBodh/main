@@ -30,6 +30,31 @@ const MediaGridSkeleton = () => (
     </div>
 );
 
+const EmptyMediaState = ({ peethamName }: { peethamName: string }) => (
+    <Card className="flex flex-col items-center justify-center min-h-[24rem] border-dashed text-center p-6">
+        <CardTitle className="text-2xl font-headline">This Gallery is Empty</CardTitle>
+        <CardContent className="p-0 mt-4 max-w-lg mx-auto">
+            <p className="text-muted-foreground mb-4">
+                To add media to the {peethamName} gallery, you need to provide the source content.
+            </p>
+            <ol className="text-left list-decimal list-inside space-y-2 bg-muted/50 p-4 rounded-md">
+                <li>
+                    Open the file: <br/><code className="bg-muted px-2 py-1 rounded-md font-mono text-sm">src/lib/scraping-source-data.ts</code>
+                </li>
+                <li>
+                    Add an item for <span className="font-bold">'{peethamName}'</span> with an image URL and description.
+                </li>
+                <li>
+                    Run the command in your terminal: <br/><code className="bg-muted px-2 py-1 rounded-md font-mono text-sm">npm run scrape</code>
+                </li>
+                <li>
+                    Refresh this page to see your live content.
+                </li>
+            </ol>
+        </CardContent>
+    </Card>
+);
+
 export default function SringeriClient() {
     const [media, setMedia] = useState<UnifiedCalendarItem[]>([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -69,12 +94,7 @@ export default function SringeriClient() {
     const renderMediaTabContent = (items: UnifiedCalendarItem[], type: 'photo' | 'video' | 'event') => {
         if (isLoading) return <MediaGridSkeleton />;
         if (error) return <p className="text-center text-destructive py-8">{error}</p>;
-        if (items.length === 0) return (
-            <div className="text-center text-muted-foreground py-8">
-                <p>No {type}s found for this Peetham.</p>
-                <p className="text-sm mt-1">Add content via the scraper and refresh the Bodha Calendar.</p>
-            </div>
-        );
+        if (items.length === 0) return <EmptyMediaState peethamName="Sringeri" />;
         
         if (type === 'photo') {
             return (
