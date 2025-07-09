@@ -36,7 +36,7 @@ export default function HomePage() {
               </div>
               <div className="relative aspect-video rounded-lg shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
                 <Image 
-                    src="https://images.unsplash.com/photo-1618635189724-44b41a38c234?q=80&w=600&h=400&fit=crop"
+                    src="https://images.unsplash.com/photo-1620058866387-a3c39a04a52c?q=80&w=600&h=400&fit=crop"
                     alt="A painting of a wise sage writing a sacred text"
                     fill
                     className="rounded-lg object-cover"

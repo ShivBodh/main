@@ -97,7 +97,7 @@ export default function MissionPage() {
             <div className="not-prose text-center mt-16 p-8 bg-card rounded-lg border">
                  <div className="relative w-20 h-20 mx-auto mb-4 rounded-full">
                     <Image
-                      src="https://images.unsplash.com/photo-1628882782353-a50e181e5b87?q=80&w=80&h=80&fit=crop"
+                      src="https://images.unsplash.com/photo-1628793473432-1595eb488349?q=80&w=80&h=80&fit=crop"
                       alt="An artistic painting representing selfless service (Seva)"
                       data-ai-hint="seva hands painting"
                       fill
