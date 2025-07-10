@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -11,6 +12,11 @@ export function useAIImage(prompt: string, fallbackUrl: string) {
   useEffect(() => {
     let isMounted = true;
     const generate = async () => {
+      if (!prompt) {
+          setIsLoading(false);
+          setImageUrl(fallbackUrl);
+          return;
+      }
       setIsLoading(true);
       setError(null);
       try {
@@ -31,17 +37,12 @@ export function useAIImage(prompt: string, fallbackUrl: string) {
       }
     };
 
-    if (prompt) {
-      generate();
-    } else {
-        setIsLoading(false);
-    }
-
+    generate();
 
     return () => {
       isMounted = false;
     };
-  }, [prompt]);
+  }, [prompt, fallbackUrl]);
 
   return { imageUrl, isLoading, error };
 }
