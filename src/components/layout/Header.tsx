@@ -93,12 +93,6 @@ const bodhaLinks = [
         description: "Digital tools to support your daily spiritual practice.",
         icon: Atom,
     },
-    {
-        title: "Dharma Art",
-        href: "/dharma-art",
-        description: "Use AI to generate beautiful, spiritually inspired images.",
-        icon: Brush
-    }
 ];
 
 const aboutLinks = [

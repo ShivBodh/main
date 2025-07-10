@@ -1,12 +1,11 @@
 
 import type { Metadata } from 'next';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { BookOpen, Image as ImageIcon, Sparkles } from 'lucide-react';
-import DharmaArtFrame from '@/components/home/DharmaArtFrame';
+import { BookOpen, Image as ImageIcon, Sparkles, AlertTriangle } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'AI Content Generation Hub',
-  description: 'Use AI to generate beautiful art and insightful text content for the portal.',
+  description: 'Tools to create and enhance content for the portal using generative AI.',
 };
 
 export default function DharmaArtPage() {
@@ -30,11 +29,16 @@ export default function DharmaArtPage() {
                     AI Art Generator
                 </CardTitle>
                 <CardDescription>
-                    Create beautiful, AI-powered art inspired by the concepts of Sanatana Dharma. Enter a prompt describing the art you wish to create.
+                    Create beautiful, AI-powered art inspired by the concepts of Sanatana Dharma.
                 </CardDescription>
             </CardHeader>
             <CardContent>
-               <DharmaArtFrame />
+               <div className="p-8 bg-muted rounded-lg border text-center">
+                    <AlertTriangle className="h-8 w-8 text-amber-500 mx-auto mb-4" />
+                    <p className="text-muted-foreground">
+                        This feature is temporarily unavailable while we perform an essential upgrade to the AI model. Thank you for your patience.
+                    </p>
+                </div>
             </CardContent>
         </Card>
         
