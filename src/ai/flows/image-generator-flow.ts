@@ -29,7 +29,9 @@ const imageGeneratorFlow = ai.defineFlow(
     outputSchema: ImageResponseSchema,
   },
   async ({prompt}) => {
-    // MOCK IMPLEMENTATION: Returns a placeholder image to avoid dependency on a live AI model.
+    // MOCK IMPLEMENTATION: Returns a high-quality painting to avoid dependency on a live AI model.
+    // This allows the UI to be built and tested reliably.
+    // In a production environment, this would call a real image generation model.
     console.log(`[AI Flow - Image] Received prompt, returning mock painting: ${prompt}`);
     return {
       imageUrl: 'https://images.unsplash.com/photo-1620058866387-a3c39a04a52c?q=80&w=512&h=512&fit=crop',

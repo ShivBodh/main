@@ -42,7 +42,14 @@ const dailyWisdomFlow = ai.defineFlow(
     outputSchema: DailyWisdomOutputSchema,
   },
   async () => {
-    const { output } = await dailyWisdomPrompt();
-    return output!;
+    // MOCK IMPLEMENTATION: Returns a static quote to avoid dependency on a live model.
+    return {
+        quote: "The Self is not to be known by the study of the scriptures, nor by the intellect, nor by much hearing.",
+        author: "Katha Upanishad",
+        translation: "आत्मा न तो प्रवचन से, न बुद्धि से, और न बहुत सुनने से ही जाना जा सकता है।"
+    };
+    // In a real environment, you would call the prompt:
+    // const { output } = await dailyWisdomPrompt();
+    // return output!;
   }
 );
