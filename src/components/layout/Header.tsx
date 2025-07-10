@@ -44,7 +44,7 @@ const peethamLinks = peethams.map(p => ({
     title: p.name,
     href: p.link,
     description: p.description,
-    icon: Landmark
+    icon: p.icon
 }));
 
 const socialLinks = [

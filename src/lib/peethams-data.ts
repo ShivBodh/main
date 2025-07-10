@@ -1,10 +1,12 @@
 
+import { BookOpen, Shell, Flag, Mountain } from 'lucide-react';
+
 export const peethams = [
   {
     name: 'Sringeri Sharada Peetham',
     description: 'The first and foremost of the four Amnaya Peethams, the southern seat of wisdom for the Yajur Veda.',
     link: '/peethams/sringeri',
-    icon: 'BookOpen',
+    icon: BookOpen,
     image: 'https://images.unsplash.com/photo-1618635189724-44b41a38c234?q=80&w=600&h=400&fit=crop',
     acharyaImage: 'https://images.unsplash.com/photo-1620058866387-a3c39a04a52c?q=80&w=800&h=600&fit=crop', // Painting of Acharya
     acharyaAiHint: 'sage painting',
@@ -41,7 +43,7 @@ export const peethams = [
     name: 'Dwaraka Sharada Peetham',
     description: 'The western Peetham, representing the Sama Veda in the ancient city of Dwaraka.',
     link: '/peethams/dwaraka',
-    icon: 'Shell',
+    icon: Shell,
     image: 'https://images.unsplash.com/photo-1628882782353-a50e181e5b87?q=80&w=600&h=400&fit=crop',
     acharyaImage: 'https://images.unsplash.com/photo-1601140994903-b09590822554?q=80&w=800&h=600&fit=crop', // Dwaraka temple art
     acharyaAiHint: 'dwaraka painting',
@@ -76,7 +78,7 @@ export const peethams = [
     name: 'Govardhana Peetham, Puri',
     description: 'The eastern Peetham in the sacred city of Puri, associated with the Rig Veda.',
     link: '/peethams/puri',
-    icon: 'Flag',
+    icon: Flag,
     image: 'https://images.unsplash.com/photo-1617877924522-3599b5a45a0b?q=80&w=600&h=400&fit=crop',
     acharyaImage: 'https://images.unsplash.com/photo-1632285886676-b0761e3d36b7?q=80&w=800&h=600&fit=crop', // Rath Yatra art
     acharyaAiHint: 'puri chariot art',
@@ -111,7 +113,7 @@ export const peethams = [
     name: 'Jyotirmath Peetham, Badrinath',
     description: 'The northern Peetham, situated in the holy town of Jyotirmath in the Himalayas.',
     link: '/peethams/jyotirmath',
-    icon: 'Mountain',
+    icon: Mountain,
     image: 'https://images.unsplash.com/photo-1618163989396-85764724a737?q=80&w=600&h=400&fit=crop',
     acharyaImage: 'https://images.unsplash.com/photo-1549619845-107f95a4a52d?q=80&w=800&h=600&fit=crop', // Himalayas art
     acharyaAiHint: 'himalayas painting',
