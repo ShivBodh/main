@@ -1,3 +1,4 @@
+
 'use client';
 
 import Image from 'next/image';
@@ -32,8 +33,9 @@ export default function ReadingPage() {
               <Image
                 src={book.imageUrl}
                 alt={`Cover for ${book.title}`}
-                fill
-                className="object-cover"
+                width={400}
+                height={600}
+                className="object-cover w-full h-full"
                 data-ai-hint={book.aiHint}
               />
             </div>

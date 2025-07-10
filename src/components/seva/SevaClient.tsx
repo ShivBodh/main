@@ -28,7 +28,8 @@ export default function SevaClient() {
                         src="https://images.unsplash.com/photo-1590214224524-7431a4b5744a?q=80&w=1200&h=675&fit=crop"
                         alt="An artistic rendering of a map of India"
                         data-ai-hint="india map painting"
-                        fill
+                        width={1200}
+                        height={675}
                         className="w-full h-full object-cover transition-all duration-300 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center">

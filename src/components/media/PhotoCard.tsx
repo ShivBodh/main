@@ -13,9 +13,9 @@ export function PhotoCard({ item }: { item: CalendarPhotoItem }) {
         <Image
           src={item.thumbnailUrl || item.imageUrl}
           alt={item.title}
-          fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          className="object-cover transition-transform duration-300 group-hover:scale-105"
+          width={400}
+          height={225}
+          className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
           data-ai-hint={item.aiHint}
         />
       </div>

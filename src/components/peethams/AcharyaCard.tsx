@@ -20,6 +20,7 @@ export function AcharyaCard({ acharya }: AcharyaCardProps) {
           src={acharya.heroImage}
           alt={`Image related to ${acharya.peetham}`}
           fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="object-cover"
         />
         <div className="absolute right-4 top-4 w-16 h-16 bg-primary rounded-full text-primary-foreground flex flex-col justify-center items-center font-headline shadow-md">
@@ -39,6 +40,7 @@ export function AcharyaCard({ acharya }: AcharyaCardProps) {
                         src={acharya.galleryImages[rowIndex * 3 + colIndex].url}
                         alt={`Gallery image ${rowIndex * 3 + colIndex + 1}`}
                         fill
+                        sizes="10vw"
                         className="object-cover"
                       />
                     </div>

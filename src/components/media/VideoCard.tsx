@@ -19,9 +19,9 @@ export function VideoCard({ item }: { item: CalendarVideoItem }) {
             <Image
               src={item.thumbnailUrl}
               alt={item.title}
-              fill
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              className="object-cover transition-transform duration-300 group-hover:scale-105"
+              width={400}
+              height={225}
+              className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
               data-ai-hint={item.aiHint || 'video thumbnail'}
             />
             <div className="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
@@ -58,5 +58,3 @@ export function VideoCard({ item }: { item: CalendarVideoItem }) {
     </Dialog>
   );
 }
-
-    

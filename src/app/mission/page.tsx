@@ -95,7 +95,7 @@ export default function MissionPage() {
             </section>
 
             <div className="not-prose text-center mt-16 p-8 bg-card rounded-lg border">
-                 <div className="mx-auto mb-4">
+                 <div className="mx-auto mb-4 inline-block">
                     <Image
                       src="https://images.unsplash.com/photo-1628793473432-1595eb488349?q=80&w=80&h=80&fit=crop"
                       alt="An artistic painting representing selfless service (Seva)"
