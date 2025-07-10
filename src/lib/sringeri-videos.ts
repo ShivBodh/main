@@ -1,13 +1,5 @@
+// This file is now obsolete as all media data is sourced from Firestore.
+// The data is initially populated by `scraping-source-data.ts` and the `npm run scrape` script.
+// This file can be safely deleted.
 
-import sringeriVideoData from './sringeri-videos.json';
-
-export type VideoItem = {
-    id: string;
-    title: string;
-    date: string; // YYYY-MM-DD
-    url: string; // Direct embed link
-    description: string;
-    thumbnailUrl: string;
-};
-
-export const sringeriVideos: VideoItem[] = [];
+export const sringeriVideos: any[] = [];

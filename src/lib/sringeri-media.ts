@@ -1,14 +1,5 @@
+// This file is now obsolete as all media data is sourced from Firestore.
+// The data is initially populated by `scraping-source-data.ts` and the `npm run scrape` script.
+// This file can be safely deleted.
 
-import sringeriPhotoData from './sringeri-media.json';
-
-type PhotoGalleryItem = {
-    id: string;
-    date: string;
-    title: string;
-    description: string;
-    imageUrl: string;
-    thumbnailUrl: string;
-    aiHint: string;
-};
-
-export const sringeriPhotoGallery: PhotoGalleryItem[] = [];
+export const sringeriPhotoGallery: any[] = [];
