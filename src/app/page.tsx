@@ -1,3 +1,4 @@
+
 import { HeroSection } from '@/components/home/HeroSection';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
@@ -34,7 +35,7 @@ export default function HomePage() {
                     </Button>
               </div>
               <div className="flex justify-center items-center">
-                <div className="relative w-full max-w-[600px] aspect-video">
+                <div className="relative w-full max-w-[600px]">
                     <Image 
                         src="https://images.unsplash.com/photo-1622055113979-3970119358f2?q=80&w=600&h=400&fit=crop"
                         alt="An artistic representation of Jagadguru Adi Shankaracharya."
@@ -52,7 +53,7 @@ export default function HomePage() {
       <section className="py-16 md:py-24 bg-background">
         <div className="container mx-auto grid md:grid-cols-2 gap-12 items-center">
             <div className="flex justify-center items-center order-last md:order-first">
-             <div className="relative w-full max-w-[600px] aspect-video">
+             <div className="relative w-full max-w-[600px]">
               <Image 
                   src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=600&h=400&fit=crop"
                   alt="A diverse group of people collaborating and connecting."
@@ -103,7 +104,7 @@ export default function HomePage() {
                   </Button>
             </div>
             <div className="flex justify-center items-center">
-              <div className="relative w-full max-w-[600px] aspect-video">
+              <div className="relative w-full max-w-[600px]">
               <Image 
                   src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?q=80&w=600&h=400&fit=crop"
                   alt="A library of ancient books representing spiritual knowledge."
