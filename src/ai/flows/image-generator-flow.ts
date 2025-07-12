@@ -35,7 +35,7 @@ const imageGeneratorFlow = ai.defineFlow(
   },
   async (input) => {
     
-    const fullPrompt = `${input.prompt}, in an artistic painting style, spiritual, vibrant colors, reverent mood`;
+    const fullPrompt = `${input.prompt}, ethereal concept art, sacred, spiritual, reverent mood, vibrant colors, artistic painting style`;
 
     const {media} = await ai.generate({
       model: 'googleai/gemini-2.0-flash-preview-image-generation',
