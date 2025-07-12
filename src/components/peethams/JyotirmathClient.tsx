@@ -1,4 +1,3 @@
-
 'use client';
 
 import Image from 'next/image';
@@ -137,14 +136,15 @@ export default function JyotirmathClient() {
       <div className="container mx-auto max-w-6xl py-16 md:py-24 px-4">
         <section className="flex flex-col md:flex-row items-center gap-8 mb-12">
           <div className="w-full md:w-1/3">
-            <Image
-              src={peethamInfo.acharyaImage}
-              data-ai-hint={peethamInfo.acharyaAiHint}
-              alt={`Jagadguru Shankaracharya of ${peethamInfo.name}`}
-              width={400}
-              height={533}
-              className="rounded-lg shadow-lg object-cover"
-            />
+             <div className="relative aspect-[3/4] w-full">
+                <Image
+                  src={peethamInfo.acharyaImage}
+                  data-ai-hint={peethamInfo.acharyaAiHint}
+                  alt={`Jagadguru Shankaracharya of ${peethamInfo.name}`}
+                  fill
+                  className="rounded-lg shadow-lg object-cover"
+                />
+            </div>
           </div>
           <div className="md:w-2/3">
             <h1 className="text-4xl md:text-5xl font-headline font-bold text-primary tracking-tight mb-4">

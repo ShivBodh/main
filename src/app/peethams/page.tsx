@@ -1,4 +1,3 @@
-
 import Link from 'next/link';
 import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -26,7 +25,7 @@ export default function PeethamsPage() {
     <div className="bg-background text-foreground">
       <div className="container mx-auto max-w-6xl py-16 md:py-24 px-4">
         <div className="text-center mb-16">
-          <div className="mb-8 mx-auto inline-block">
+          <div className="mb-8 mx-auto inline-block relative h-[150px] w-[150px]">
             <Image
               src="https://images.unsplash.com/photo-1618635189724-44b41a38c234?q=80&w=150&h=150&fit=crop"
               alt="A painting of Jagadguru Adi Shankaracharya"

@@ -1,4 +1,3 @@
-
 import { HeroSection } from '@/components/home/HeroSection';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
@@ -35,14 +34,16 @@ export default function HomePage() {
                     </Button>
               </div>
               <div className="flex justify-center items-center">
-                <Image 
-                    src="https://images.unsplash.com/photo-1620058866387-a3c39a04a52c?q=80&w=600&h=400&fit=crop"
-                    alt="A painting of a wise sage writing a sacred text"
-                    width={600}
-                    height={400}
-                    className="rounded-lg object-cover shadow-lg"
-                    data-ai-hint="sage painting knowledge"
-                />
+                <div className="relative aspect-video w-full max-w-[600px]">
+                    <Image 
+                        src="https://images.unsplash.com/photo-1620058866387-a3c39a04a52c?q=80&w=600&h=400&fit=crop"
+                        alt="A painting of a wise sage writing a sacred text"
+                        width={600}
+                        height={400}
+                        className="rounded-lg object-cover shadow-lg"
+                        data-ai-hint="sage painting knowledge"
+                    />
+                </div>
               </div>
           </div>
       </section>
@@ -51,6 +52,7 @@ export default function HomePage() {
       <section className="py-16 md:py-24 bg-background">
         <div className="container mx-auto grid md:grid-cols-2 gap-12 items-center">
             <div className="flex justify-center items-center order-last md:order-first">
+             <div className="relative aspect-video w-full max-w-[600px]">
               <Image 
                   src="https://images.unsplash.com/photo-1619364424997-1b0a88a4e32e?q=80&w=600&h=400&fit=crop"
                   alt="An artistic painting depicting a community connecting in a spiritual setting"
@@ -59,6 +61,7 @@ export default function HomePage() {
                   className="rounded-lg object-cover shadow-lg"
                   data-ai-hint="community art spiritual"
               />
+              </div>
             </div>
             <div className="md:order-last">
                 <h2 className="text-3xl md:text-4xl font-headline font-bold text-primary">Sanatan Social: A Community for Dharma</h2>
@@ -100,6 +103,7 @@ export default function HomePage() {
                   </Button>
             </div>
             <div className="flex justify-center items-center">
+              <div className="relative aspect-video w-full max-w-[600px]">
               <Image 
                   src="https://images.unsplash.com/photo-1618335934988-a0c1a1a79872?q=80&w=600&h=400&fit=crop"
                   alt="An artistic painting of sacred books and spiritual items"
@@ -108,6 +112,7 @@ export default function HomePage() {
                   className="rounded-lg object-cover shadow-lg"
                   data-ai-hint="spiritual knowledge art"
               />
+              </div>
             </div>
         </div>
       </section>
