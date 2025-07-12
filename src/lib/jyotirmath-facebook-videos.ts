@@ -1,13 +1,146 @@
+import { BookOpen, Shell, Flag, Mountain } from 'lucide-react';
 
-import jyotirmathVideoData from './jyotirmath-videos.json';
-
-export type VideoItem = {
-    id: string;
-    title: string;
-    date: string; // YYYY-MM-DD
-    url: string; // Direct embed link
-    description: string;
-    thumbnailUrl: string;
-};
-
-export const jyotirmathVideos: VideoItem[] = jyotirmathVideoData;
+export const peethams = [
+  {
+    name: 'Sringeri Sharada Peetham',
+    description: 'The first and foremost of the four Amnaya Peethams, the southern seat of wisdom for the Yajur Veda.',
+    link: '/peethams/sringeri',
+    icon: BookOpen,
+    image: 'https://images.unsplash.com/photo-1698064312159-4c2885141e6e?q=80&w=600&h=400&fit=crop',
+    acharyaImage: 'https://images.unsplash.com/photo-1621489423910-445a1334965c?q=80&w=600&h=800&fit=crop',
+    acharyaAiHint: 'sringeri sage painting',
+    lineage: [
+        { name: 'Sri Adi Shankaracharya', period: 'c. 509 BCE', description: 'The founder of the four Peethams and the foremost exponent of Advaita Vedanta.' },
+        { name: 'Sri Sureshwaracharya', period: 'c. 5th Century BCE', description: 'A direct disciple of Adi Shankaracharya and the first head of the Sringeri Peetham.' },
+        { name: 'Sri Vidyaranya', period: '1380–1386', description: 'A renowned sage and commentator, often credited as a guiding force in the establishment of the Vijayanagara Empire.' },
+        { name: 'Sri Narasimha Bharati VIII', period: '1817-1879', description: 'A great scholar and tapasvin who initiated many public works and renovations at Sringeri.' },
+        { name: 'Sri Sacchidananda Sivabhinava Nrisimha Bharati', period: '1879–1912', description: 'A revered Jivanmukta (liberated soul) who rediscovered the birthplace of Adi Shankaracharya at Kalady and consecrated a shrine there.' },
+        { name: 'Sri Chandrashekhara Bharati III', period: '1912-1954', description: 'A great sage and scholar of immense spiritual attainment, revered as a Jivanmukta.' },
+        { name: 'Sri Abhinava Vidyatirtha', period: '1954-1989', description: 'The 35th Jagadguru, he traveled extensively and established many branches of the Matha across India.' },
+        { name: 'Sri Bharathi Tirtha', period: '1989-Present', description: 'The 36th Jagadguru, a profound scholar in Tarka, Mimamsa, and Vedanta, who continues to guide millions.' },
+    ],
+    acharyaDetails: {
+      name: "Jagadguru Śrī Śrī Vidyushēkhara Bhāratī Svāmī",
+      peetham: "Śṛṅgeri Śāradā Pīṭham",
+      appointment: "Succeeded Jagadguru Śrī Bhāratī Tīrtha Svāmī in November 2015.",
+      focus: "Spiritual leadership, preserving Sanatana Dharma, promoting Vedic studies and Sanskrit, overseeing the Śṛṅgeri Maṭha's vast network of temples and educational institutions. Known for his erudition and accessibility.",
+      heroImage: "https://images.unsplash.com/photo-1542652697-797a7834a362?q=80&w=400&h=175&fit=crop",
+      galleryImages: [
+        { url: "https://images.unsplash.com/photo-1621489423910-445a1334965c?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1542652697-797a7834a362?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1698064312159-4c2885141e6e?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1505703909778-9954784a54c3?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1596701398235-87300439a397?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1690035342730-82695869389a?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1558985228-a35b13689114?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1563584092-33375b31f544?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1619374092049-9c6a7dd8354c?q=80&w=200&h=200&fit=crop" },
+      ],
+    }
+  },
+  {
+    name: 'Dwaraka Sharada Peetham',
+    description: 'The western Peetham, representing the Sama Veda in the ancient city of Dwaraka.',
+    link: '/peethams/dwaraka',
+    icon: Shell,
+    image: 'https://images.unsplash.com/photo-1596701398235-87300439a397?q=80&w=600&h=400&fit=crop',
+    acharyaImage: 'https://images.unsplash.com/photo-1690035342730-82695869389a?q=80&w=600&h=800&fit=crop',
+    acharyaAiHint: 'dwaraka temple painting',
+    lineage: [
+        { name: 'Sri Adi Shankaracharya', period: 'c. 509 BCE', description: 'The founder who established this western seat of learning.' },
+        { name: 'Sri Hastamalakacharya', period: 'c. 5th Century BCE', description: 'A direct disciple of Adi Shankaracharya and the first Acharya of the Dwaraka Peetham.' },
+        { name: 'Sri Rajarajeshwarashram', period: '18th Century', description: 'A notable Acharya known for his scholarly works and efforts in preserving Vedic traditions in Western India.' },
+        { name: 'Sri Madhavatirtha', period: 'Early 20th Century', description: 'An influential Acharya who contributed significantly to the administration and activities of the Peetham.' },
+        { name: 'Sri Abhinava Satchidananda Tirtha', period: '1945–1982', description: 'The 77th Shankaracharya, he was a powerful orator and worked tirelessly to promote Sanatana Dharma.' },
+        { name: 'Sri Swaroopanand Saraswati', period: '1982-2022', description: 'The 79th Shankaracharya, who was also the head of the Jyotirmath Peetham, a prominent voice for Hindu unity.' },
+    ],
+    acharyaDetails: {
+      name: "Jagadguru Śrī Śrī Sadānanda Sarasvatī Svāmī",
+      peetham: "Kālikā Maṭha, Dwārkā",
+      appointment: "Succeeded the revered Jagadguru Śrī Swarūpānanda Sarasvatī Svāmī in February 2024.",
+      focus: "Currently focused on establishing his leadership, continuing the Maṭha's traditions, spiritual guidance, and managing the vast responsibilities of the Paścimāmnāya Pīṭha. Known for his humility and devotion.",
+      heroImage: "https://images.unsplash.com/photo-1596701398235-87300439a397?q=80&w=400&h=175&fit=crop",
+      galleryImages: [
+        { url: "https://images.unsplash.com/photo-1621489423910-445a1334965c?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1542652697-797a7834a362?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1698064312159-4c2885141e6e?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1505703909778-9954784a54c3?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1596701398235-87300439a397?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1690035342730-82695869389a?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1558985228-a35b13689114?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1563584092-33375b31f544?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1619374092049-9c6a7dd8354c?q=80&w=200&h=200&fit=crop" },
+      ],
+    }
+  },
+  {
+    name: 'Govardhana Peetham, Puri',
+    description: 'The eastern Peetham in the sacred city of Puri, associated with the Rig Veda.',
+    link: '/peethams/puri',
+    icon: Flag,
+    image: 'https://images.unsplash.com/photo-1505703909778-9954784a54c3?q=80&w=600&h=400&fit=crop',
+    acharyaImage: 'https://images.unsplash.com/photo-1621489423910-445a1334965c?q=80&w=600&h=800&fit=crop',
+    acharyaAiHint: 'puri chariot painting',
+    lineage: [
+        { name: 'Sri Adi Shankaracharya', period: 'c. 509 BCE', description: 'The founder of the eastern seat, intrinsically linked with Lord Jagannath.' },
+        { name: 'Sri Padmapadacharya', period: 'c. 5th Century BCE', description: 'A direct disciple of Adi Shankaracharya and the first Acharya of the Puri Peetham. He was a profound scholar and author of the "Panchapadika".' },
+        { name: 'Sri Narasimha Bharati', period: '17th Century', description: 'An Acharya who played a key role in the religious affairs concerning the Jagannath Temple.' },
+        { name: 'Swami Bharati Krishna Tirtha', period: '1925–1960', description: 'The 143rd Shankaracharya, he was a polymath renowned for his work on "Vedic Mathematics".' },
+        { name: 'Swami Niranjana Deva Tirtha', period: '1964-1992', description: 'The 144th Shankaracharya, known for his strong advocacy for Hindu rights and traditions.' },
+        { name: 'Swami Nischalananda Saraswati', period: '1992-Present', description: 'The 145th Shankaracharya, a renowned scholar of scripture and mathematics, and a powerful voice on national issues.' },
+    ],
+     acharyaDetails: {
+      name: "Jagadguru Śrī Śrī Nischalānanda Sarasvatī Svāmī",
+      peetham: "Govardhana Maṭha, Pūri",
+      appointment: "Ascended the Pīṭha in 1992.",
+      focus: "Strong emphasis on traditional Vedic rituals (Yajñas), scholarly discourse on Advaita Vedanta, social issues, environmental consciousness ('Save Ganga' movement), and vocal commentary on contemporary challenges to Hinduism.",
+      heroImage: "https://images.unsplash.com/photo-1505703909778-9954784a54c3?q=80&w=400&h=175&fit=crop",
+      galleryImages: [
+        { url: "https://images.unsplash.com/photo-1621489423910-445a1334965c?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1542652697-797a7834a362?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1698064312159-4c2885141e6e?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1505703909778-9954784a54c3?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1596701398235-87300439a397?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1690035342730-82695869389a?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1558985228-a35b13689114?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1563584092-33375b31f544?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1619374092049-9c6a7dd8354c?q=80&w=200&h=200&fit=crop" },
+      ],
+    }
+  },
+  {
+    name: 'Jyotirmath Peetham, Badrinath',
+    description: 'The northern Peetham, situated in the holy town of Jyotirmath in the Himalayas.',
+    link: '/peethams/jyotirmath',
+    icon: Mountain,
+    image: 'https://images.unsplash.com/photo-1558985228-a35b13689114?q=80&w=600&h=400&fit=crop',
+    acharyaImage: 'https://images.unsplash.com/photo-1621489423910-445a1334965c?q=80&w=600&h=800&fit=crop',
+    acharyaAiHint: 'himalayas monastery painting',
+    lineage: [
+        { name: 'Sri Adi Shankaracharya', period: 'c. 509 BCE', description: 'The founder who established this northern seat in the serene Himalayas.' },
+        { name: 'Sri Totakacharya', period: 'c. 5th Century BCE', description: 'A direct disciple of Adi Shankaracharya, known for his deep devotion and humility. He composed the "Totakashtakam".' },
+        { name: 'Swami Shantanand Saraswati', period: '1953–1980', description: 'An Acharya who played a key role during a transitional period for the Peetham.' },
+        { name: 'Swami Vishnudevanand Saraswati', period: '1980-1990', description: 'A revered Acharya who continued the traditions of the northern Matha.' },
+        { name: 'Swami Brahmananda Saraswati', period: '1941–1953', description: 'A revered master who revived the Jyotirmath Peetham after a long period of dormancy, restoring its significance as the northern seat.' },
+        { name: 'Sri Swaroopanand Saraswati', period: '1973-2022', description: 'He also held the title of Shankaracharya of Dwaraka Peetham, working for Hindu welfare.' },
+    ],
+    acharyaDetails: {
+      name: "Jagadguru Śrī Śrī Avimukteśvarānanda Sarasvatī Svāmī",
+      peetham: "Jyotirmaṭha, Badarikāśrama",
+      appointment: "Formally ascended the Pīṭha in March 2024.",
+      focus: "Revitalizing the Jyotirmaṭha traditions, establishing his presence, providing spiritual guidance, and overseeing the Pīṭha's activities. Focus on Advaita philosophy and pilgrimage at Badrinath.",
+      heroImage: "https://images.unsplash.com/photo-1558985228-a35b13689114?q=80&w=400&h=175&fit=crop",
+      galleryImages: [
+        { url: "https://images.unsplash.com/photo-1621489423910-445a1334965c?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1542652697-797a7834a362?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1698064312159-4c2885141e6e?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1505703909778-9954784a54c3?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1596701398235-87300439a397?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1690035342730-82695869389a?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1558985228-a35b13689114?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1563584092-33375b31f544?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1619374092049-9c6a7dd8354c?q=80&w=200&h=200&fit=crop" },
+      ],
+    }
+  },
+];

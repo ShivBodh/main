@@ -1,4 +1,3 @@
-
 import { BookOpen, Shell, Flag, Mountain } from 'lucide-react';
 
 export const peethams = [
@@ -25,8 +24,18 @@ export const peethams = [
       peetham: "Śṛṅgeri Śāradā Pīṭham",
       appointment: "Succeeded Jagadguru Śrī Bhāratī Tīrtha Svāmī in November 2015.",
       focus: "Spiritual leadership, preserving Sanatana Dharma, promoting Vedic studies and Sanskrit, overseeing the Śṛṅgeri Maṭha's vast network of temples and educational institutions. Known for his erudition and accessibility.",
-      heroImage: "https://images.unsplash.com/photo-1698064312159-4c2885141e6e?q=80&w=400&h=175&fit=crop",
-      galleryImages: Array.from({ length: 9 }, (_, i) => ({ url: `https://images.unsplash.com/photo-1621489423910-445a1334965c?q=80&w=200&h=200&fit=crop&ixid=${i}` })),
+      heroImage: "https://images.unsplash.com/photo-1542652697-797a7834a362?q=80&w=400&h=175&fit=crop",
+      galleryImages: [
+        { url: "https://images.unsplash.com/photo-1621489423910-445a1334965c?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1542652697-797a7834a362?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1698064312159-4c2885141e6e?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1505703909778-9954784a54c3?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1596701398235-87300439a397?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1690035342730-82695869389a?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1558985228-a35b13689114?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1563584092-33375b31f544?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1619374092049-9c6a7dd8354c?q=80&w=200&h=200&fit=crop" },
+      ],
     }
   },
   {
@@ -51,7 +60,17 @@ export const peethams = [
       appointment: "Succeeded the revered Jagadguru Śrī Swarūpānanda Sarasvatī Svāmī in February 2024.",
       focus: "Currently focused on establishing his leadership, continuing the Maṭha's traditions, spiritual guidance, and managing the vast responsibilities of the Paścimāmnāya Pīṭha. Known for his humility and devotion.",
       heroImage: "https://images.unsplash.com/photo-1596701398235-87300439a397?q=80&w=400&h=175&fit=crop",
-      galleryImages: Array.from({ length: 9 }, (_, i) => ({ url: `https://images.unsplash.com/photo-1690035342730-82695869389a?q=80&w=200&h=200&fit=crop&ixid=${i+10}` })),
+      galleryImages: [
+        { url: "https://images.unsplash.com/photo-1621489423910-445a1334965c?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1542652697-797a7834a362?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1698064312159-4c2885141e6e?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1505703909778-9954784a54c3?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1596701398235-87300439a397?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1690035342730-82695869389a?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1558985228-a35b13689114?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1563584092-33375b31f544?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1619374092049-9c6a7dd8354c?q=80&w=200&h=200&fit=crop" },
+      ],
     }
   },
   {
@@ -76,7 +95,17 @@ export const peethams = [
       appointment: "Ascended the Pīṭha in 1992.",
       focus: "Strong emphasis on traditional Vedic rituals (Yajñas), scholarly discourse on Advaita Vedanta, social issues, environmental consciousness ('Save Ganga' movement), and vocal commentary on contemporary challenges to Hinduism.",
       heroImage: "https://images.unsplash.com/photo-1505703909778-9954784a54c3?q=80&w=400&h=175&fit=crop",
-      galleryImages: Array.from({ length: 9 }, (_, i) => ({ url: `https://images.unsplash.com/photo-1621489423910-445a1334965c?q=80&w=200&h=200&fit=crop&ixid=${i+20}` })),
+      galleryImages: [
+        { url: "https://images.unsplash.com/photo-1621489423910-445a1334965c?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1542652697-797a7834a362?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1698064312159-4c2885141e6e?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1505703909778-9954784a54c3?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1596701398235-87300439a397?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1690035342730-82695869389a?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1558985228-a35b13689114?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1563584092-33375b31f544?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1619374092049-9c6a7dd8354c?q=80&w=200&h=200&fit=crop" },
+      ],
     }
   },
   {
@@ -101,7 +130,17 @@ export const peethams = [
       appointment: "Formally ascended the Pīṭha in March 2024.",
       focus: "Revitalizing the Jyotirmaṭha traditions, establishing his presence, providing spiritual guidance, and overseeing the Pīṭha's activities. Focus on Advaita philosophy and pilgrimage at Badrinath.",
       heroImage: "https://images.unsplash.com/photo-1558985228-a35b13689114?q=80&w=400&h=175&fit=crop",
-      galleryImages: Array.from({ length: 9 }, (_, i) => ({ url: `https://images.unsplash.com/photo-1621489423910-445a1334965c?q=80&w=200&h=200&fit=crop&ixid=${i+30}` })),
+      galleryImages: [
+        { url: "https://images.unsplash.com/photo-1621489423910-445a1334965c?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1542652697-797a7834a362?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1698064312159-4c2885141e6e?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1505703909778-9954784a54c3?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1596701398235-87300439a397?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1690035342730-82695869389a?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1558985228-a35b13689114?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1563584092-33375b31f544?q=80&w=200&h=200&fit=crop" },
+        { url: "https://images.unsplash.com/photo-1619374092049-9c6a7dd8354c?q=80&w=200&h=200&fit=crop" },
+      ],
     }
   },
 ];
