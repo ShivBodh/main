@@ -1,4 +1,3 @@
-
 import { BookOpen, Shell, Flag, Mountain } from 'lucide-react';
 
 export const peethams = [
@@ -8,8 +7,8 @@ export const peethams = [
     link: '/peethams/sringeri',
     icon: BookOpen,
     image: 'https://placehold.co/600x400.png',
-    acharyaImage: 'https://placehold.co/800x600.png',
-    acharyaAiHint: 'sage',
+    acharyaImage: 'https://placehold.co/600x800.png',
+    acharyaAiHint: 'sringeri sage',
     lineage: [
         { name: 'Sri Adi Shankaracharya', period: 'c. 509 BCE', description: 'The founder of the four Peethams and the foremost exponent of Advaita Vedanta.' },
         { name: 'Sri Sureshwaracharya', period: 'c. 5th Century BCE', description: 'A direct disciple of Adi Shankaracharya and the first head of the Sringeri Peetham.' },
@@ -35,8 +34,8 @@ export const peethams = [
     link: '/peethams/dwaraka',
     icon: Shell,
     image: 'https://placehold.co/600x400.png',
-    acharyaImage: 'https://placehold.co/800x600.png',
-    acharyaAiHint: 'dwaraka',
+    acharyaImage: 'https://placehold.co/600x800.png',
+    acharyaAiHint: 'dwaraka temple',
     lineage: [
         { name: 'Sri Adi Shankaracharya', period: 'c. 509 BCE', description: 'The founder who established this western seat of learning.' },
         { name: 'Sri Hastamalakacharya', period: 'c. 5th Century BCE', description: 'A direct disciple of Adi Shankaracharya and the first Acharya of the Dwaraka Peetham.' },
@@ -60,7 +59,7 @@ export const peethams = [
     link: '/peethams/puri',
     icon: Flag,
     image: 'https://placehold.co/600x400.png',
-    acharyaImage: 'https://placehold.co/800x600.png',
+    acharyaImage: 'https://placehold.co/600x800.png',
     acharyaAiHint: 'puri chariot',
     lineage: [
         { name: 'Sri Adi Shankaracharya', period: 'c. 509 BCE', description: 'The founder of the eastern seat, intrinsically linked with Lord Jagannath.' },
@@ -85,8 +84,8 @@ export const peethams = [
     link: '/peethams/jyotirmath',
     icon: Mountain,
     image: 'https://placehold.co/600x400.png',
-    acharyaImage: 'https://placehold.co/800x600.png',
-    acharyaAiHint: 'himalayas',
+    acharyaImage: 'https://placehold.co/600x800.png',
+    acharyaAiHint: 'himalayas monastery',
     lineage: [
         { name: 'Sri Adi Shankaracharya', period: 'c. 509 BCE', description: 'The founder who established this northern seat in the serene Himalayas.' },
         { name: 'Sri Totakacharya', period: 'c. 5th Century BCE', description: 'A direct disciple of Adi Shankaracharya, known for his deep devotion and humility. He composed the "Totakashtakam".' },

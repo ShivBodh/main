@@ -1,4 +1,3 @@
-
 export interface Verse {
   number: number;
   sanskrit: string[];
@@ -24,7 +23,7 @@ export const readingList: Book[] = [
     author: 'Adi Shankaracharya',
     description: 'A powerful hymn that emphasizes the importance of devotion and seeking Govinda (God) as the ultimate goal, cutting through worldly attachments.',
     pdfUrl: '#',
-    imageUrl: 'https://images.unsplash.com/photo-1618335934988-a0c1a1a79872?q=80&w=400&h=600&fit=crop',
+    imageUrl: 'https://placehold.co/400x600.png',
     aiHint: 'devotion supreme being',
     content: [
       {

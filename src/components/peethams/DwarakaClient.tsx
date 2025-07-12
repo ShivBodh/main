@@ -127,7 +127,8 @@ export default function DwarakaClient() {
                 src={peethamInfo.acharyaImage}
                 data-ai-hint={peethamInfo.acharyaAiHint}
                 alt={`Jagadguru Shankaracharya of ${peethamInfo.name}`}
-                fill
+                width={600}
+                height={800}
                 className="rounded-lg shadow-lg object-cover"
               />
             </div>
