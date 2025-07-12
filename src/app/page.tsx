@@ -54,7 +54,7 @@ export default function HomePage() {
             <div className="flex justify-center items-center order-last md:order-first">
              <div className="relative w-full max-w-[600px]">
               <Image 
-                  src="https://images.unsplash.com/photo-1542823184-a828da22ca3e?q=80&w=600&h=400&fit=crop"
+                  src="https://images.unsplash.com/photo-1621489423910-445a1334965c?q=80&w=600&h=400&fit=crop"
                   alt="An artistic painting showing a diverse group of people collaborating and connecting."
                   width={600}
                   height={400}
@@ -105,7 +105,7 @@ export default function HomePage() {
             <div className="flex justify-center items-center">
               <div className="relative w-full max-w-[600px]">
               <Image 
-                  src="https://images.unsplash.com/photo-1542823184-a828da22ca3e?q=80&w=600&h=400&fit=crop"
+                  src="https://images.unsplash.com/photo-1698064312159-4c2885141e6e?q=80&w=600&h=400&fit=crop"
                   alt="An artistic painting of a library of ancient books representing spiritual knowledge."
                   width={600}
                   height={400}
