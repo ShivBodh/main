@@ -1,14 +1,14 @@
 
 'use client';
 
-import { useState, useMemo, useEffect, useCallback } from 'react';
+import { useState, useMemo, useEffect, useCallback, useRef } from 'react';
 import Image from 'next/image';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { format, isSameDay } from 'date-fns';
+import { format, isSameDay, addMonths } from 'date-fns';
 import { db } from '@/lib/firebase';
 import { collection, getDocs, query, orderBy } from 'firebase/firestore';
 import type { UnifiedCalendarItem, CalendarEventItem, CalendarPhotoItem, CalendarVideoItem } from '@/lib/calendar-data';
@@ -22,6 +22,7 @@ import { Calendar } from '@/components/ui/calendar';
 import type { DayProps } from 'react-day-picker';
 import { cn } from '@/lib/utils';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { useSwipeable } from 'react-swipeable';
 
 const EventCard = ({ event }: { event: CalendarEventItem }) => (
     <Card className="border-l-4" style={{ borderColor: peethamDotColors[event.peetham] }}>
@@ -72,7 +73,9 @@ export default function EventsClient() {
         Jyotirmath: true,
     });
     const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
+    const [currentMonth, setCurrentMonth] = useState<Date>(new Date());
     const [error, setError] = useState<string | null>(null);
+    const [flashKey, setFlashKey] = useState(0);
 
     const fetchData = useCallback(async () => {
         setIsLoading(true);
@@ -96,14 +99,22 @@ export default function EventsClient() {
             setIsLoading(false);
         }
     }, []);
-
+    
     useEffect(() => {
         fetchData();
     }, [fetchData]);
-    
+
     const handleFilterChange = (peetham: Peetham, checked: boolean) => {
         setFilters(prev => ({ ...prev, [peetham]: checked }));
     };
+
+    const handleDateSelect = (date: Date | undefined) => {
+        setSelectedDate(date);
+        if (date) {
+          setCurrentMonth(date);
+          setFlashKey(prev => prev + 1); // Trigger re-render with flash animation
+        }
+    }
 
     const filteredItems = useMemo(() => {
         const activePeethams = (Object.keys(filters) as Peetham[]).filter(p => filters[p]);
@@ -135,6 +146,12 @@ export default function EventsClient() {
             }
         });
     }, [selectedDate, filteredItems]);
+    
+    const swipeHandlers = useSwipeable({
+        onSwipedLeft: () => setCurrentMonth(prev => addMonths(prev, 1)),
+        onSwipedRight: () => setCurrentMonth(prev => addMonths(prev, -1)),
+        trackMouse: true
+    });
 
     function DayContent(props: DayProps) {
         const peethamsOnDay = peethamsByDate.get(format(props.date, 'yyyy-MM-dd'));
@@ -233,13 +250,15 @@ export default function EventsClient() {
                 
                 <section>
                      <h2 className="text-2xl font-headline font-bold text-center mb-8">Daily Activity</h2>
-                    <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
-                        <div className="lg:col-span-3">
+                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-8">
+                        <div className="md:col-span-1 xl:col-span-3" {...swipeHandlers}>
                             <Card>
                                 <Calendar
                                     mode="single"
                                     selected={selectedDate}
-                                    onSelect={setSelectedDate}
+                                    onSelect={handleDateSelect}
+                                    month={currentMonth}
+                                    onMonthChange={setCurrentMonth}
                                     components={{ Day: DayContent }}
                                     className="p-4"
                                     footer={
@@ -255,11 +274,11 @@ export default function EventsClient() {
                                 />
                             </Card>
                         </div>
-                        <div className="lg:col-span-2">
+                        <div className="md:col-span-1 xl:col-span-2">
                              <h3 className="font-headline text-xl mb-4">
                                 {selectedDate ? `Activities for ${format(selectedDate, 'MMMM d, yyyy')}` : 'Select a date to view activities'}
                             </h3>
-                            <ScrollArea className="h-[60vh] pr-4">
+                            <ScrollArea key={flashKey} className={cn("h-[60vh] pr-4 rounded-lg", selectedDate && 'flash-highlight')}>
                                 <div className="space-y-4">
                                     {selectedDate && itemsForSelectedDate.length > 0 ? itemsForSelectedDate.map(item => (
                                         <div key={item.id}>
