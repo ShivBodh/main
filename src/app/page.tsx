@@ -37,7 +37,9 @@ export default function HomePage() {
               <div className="flex justify-center items-center">
                 <div className="relative w-full max-w-[600px]">
                      <AiImage 
-                        data-ai-hint="An artistic representation of Jagadguru Adi Shankaracharya teaching his disciples"
+                        src="https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/aadi-guru-from-shivbodha-.png"
+                        alt="An artistic representation of Jagadguru Adi Shankaracharya"
+                        data-ai-hint="adi shankaracharya painting"
                         width={600}
                         height={400}
                         className="rounded-lg object-cover shadow-lg w-full h-auto"
