@@ -35,7 +35,7 @@ const imageGeneratorFlow = ai.defineFlow(
   },
   async (input) => {
     
-    const fullPrompt = `Create an artistic painting in the style of Indian classical art, reminiscent of the texture and rich color palette of Raja Ravi Varma. The artwork should focus on symbolic and abstract representations of '${input.prompt}' rather than depicting human figures, faces, or deities. It should use sacred geometry, elemental forces (like light, fire, water), and symbolic shapes to represent the concept. The mood should be vibrant, spiritual, and sophisticated, suitable for a deep exploration of Sanatana Dharma.`;
+    const fullPrompt = `Create a symbolic artwork representing '${input.prompt}'. The style should be that of a classical Indian painting, rich with intricate patterns, lush flora and fauna, and architectural motifs. Avoid depicting human figures or deities. Instead, use symbolism, nature, and sacred geometry to convey the concept with a divine, serene, and deeply spiritual mood. The color palette should be vibrant yet traditional, reminiscent of ancient temple art.`;
 
     const {media} = await ai.generate({
       model: 'googleai/gemini-2.0-flash-preview-image-generation',
