@@ -35,7 +35,7 @@ const imageGeneratorFlow = ai.defineFlow(
   },
   async (input) => {
     
-    const fullPrompt = `Create a hyper-realistic, detailed, 8k resolution, creative, symbolic artwork representing '${input.prompt}'. The piece should be in the style of a master painter, suitable for a website about Sanatan Dharma.`;
+    const fullPrompt = `Create an authentic, artistic representation of '${input.prompt}'. The style should be a beautiful painting, honoring the traditional iconography of Sanatana Dharma's sages and concepts. The mood should be reverent, spiritual, and deeply symbolic. Avoid generic human figures; instead, create art that is knowledgeable and representative of Hindu spirituality.`;
 
     const {media} = await ai.generate({
       model: 'googleai/gemini-2.0-flash-preview-image-generation',
