@@ -14,7 +14,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Skeleton } from '../ui/skeleton';
 
 // --- TYPES & CONSTANTS ---
-type PlayerColor = 'red' | 'blue' | 'green' | 'yellow';
+type PlayerColor = 'red' | 'green' | 'yellow' | 'blue';
 type PawnState = { pos: number; state: 'home' | 'safe' | 'active' | 'finished' };
 type PlayerState = { pawns: PawnState[]; color: PlayerColor; name: string; isAI: boolean };
 type GameState = Record<PlayerColor, PlayerState>;
@@ -245,7 +245,7 @@ export default function LudoClient() {
                 if(pawn.pos > homeEntryPos) stepsToHomeEntry = 52 - pawn.pos + homeEntryPos;
 
                 if (stepsToHomeEntry < roll) { // moving into home path
-                    const homePathSteps = roll - stepsToHomeEntry -1;
+                    const homePathSteps = roll - stepsToHomeEntry - 1;
                     if(homePathSteps < 6) validPawnIndices.push(index);
                 } else {
                     validPawnIndices.push(index);
