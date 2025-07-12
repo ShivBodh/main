@@ -31,7 +31,7 @@ export default function ReadingPage() {
           <Card key={book.id} className="flex flex-col overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 group">
             <div className="relative aspect-[2/3] w-full bg-card">
               <AiImage
-                data-ai-hint={book.aiHint}
+                data-ai-hint="vedanta art"
                 width={400}
                 height={600}
                 className="object-cover w-full h-full"

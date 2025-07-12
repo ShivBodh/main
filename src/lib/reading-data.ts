@@ -25,7 +25,7 @@ export const readingList: Book[] = [
     description: 'A powerful hymn that emphasizes the importance of devotion and seeking Govinda (God) as the ultimate goal, cutting through worldly attachments.',
     pdfUrl: '#',
     imageUrl: 'https://images.unsplash.com/photo-1690035342730-82695869389a?q=80&w=400&h=600&fit=crop',
-    aiHint: 'devotion painting',
+    aiHint: 'vedanta art',
     content: [
       {
         number: 1,

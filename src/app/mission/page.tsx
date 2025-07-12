@@ -97,7 +97,7 @@ export default function MissionPage() {
             <div className="not-prose text-center mt-16 p-8 bg-card rounded-lg border">
                  <div className="mx-auto mb-4 inline-block relative h-20 w-20">
                     <AiImage
-                      data-ai-hint="seva hands painting"
+                      data-ai-hint="vedanta art"
                       width={80}
                       height={80}
                       className="rounded-full object-cover"

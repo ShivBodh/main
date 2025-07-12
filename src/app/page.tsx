@@ -55,7 +55,7 @@ export default function HomePage() {
             <div className="flex justify-center items-center order-last md:order-first">
              <div className="relative w-full max-w-[600px]">
               <AiImage 
-                  data-ai-hint="community painting diverse people connecting"
+                  data-ai-hint="vedanta art"
                   width={600}
                   height={400}
                   className="rounded-lg object-cover shadow-lg"
@@ -104,7 +104,7 @@ export default function HomePage() {
             <div className="flex justify-center items-center">
               <div className="relative w-full max-w-[600px]">
               <AiImage 
-                  data-ai-hint="knowledge library painting ancient books"
+                  data-ai-hint="vedanta art"
                   width={600}
                   height={400}
                   className="rounded-lg object-cover shadow-lg"

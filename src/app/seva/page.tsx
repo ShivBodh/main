@@ -25,7 +25,7 @@ export default function SevaClient() {
             <Card>
                 <CardContent className="p-0 relative w-full aspect-video overflow-hidden rounded-lg border shadow-lg group">
                     <AiImage
-                        data-ai-hint="india map painting ancient style"
+                        data-ai-hint="vedanta art"
                         width={1200}
                         height={675}
                         className="w-full h-full object-cover transition-all duration-300 group-hover:scale-105"
