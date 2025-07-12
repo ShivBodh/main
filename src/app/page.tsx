@@ -36,7 +36,7 @@ export default function HomePage() {
               <div className="flex justify-center items-center">
                 <div className="relative w-full max-w-[600px] aspect-video">
                     <Image 
-                        src="https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/aadi-guru-from-shivbodha-.png"
+                        src="https://images.unsplash.com/photo-1622055113979-3970119358f2?q=80&w=600&h=400&fit=crop"
                         alt="An artistic representation of Jagadguru Adi Shankaracharya."
                         width={600}
                         height={400}

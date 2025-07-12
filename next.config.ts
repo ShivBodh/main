@@ -22,12 +22,6 @@ const nextConfig: NextConfig = {
         port: '',
         pathname: '/**',
       },
-      {
-        protocol: 'https',
-        hostname: 'lightcoral-echidna-355938.hostingersite.com',
-        port: '',
-        pathname: '/**',
-      }
     ],
   },
 };
