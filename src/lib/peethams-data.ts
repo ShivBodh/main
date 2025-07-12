@@ -1,3 +1,4 @@
+
 import { BookOpen, Shell, Flag, Mountain } from 'lucide-react';
 
 export const peethams = [
@@ -6,8 +7,8 @@ export const peethams = [
     description: 'The first and foremost of the four Amnaya Peethams, the southern seat of wisdom for the Yajur Veda.',
     link: '/peethams/sringeri',
     icon: BookOpen,
-    image: 'https://images.unsplash.com/photo-1621232044813-a43c239d6732?q=80&w=600&h=400&fit=crop',
-    acharyaImage: 'https://images.unsplash.com/photo-1621232044813-a43c239d6732?q=80&w=600&h=800&fit=crop',
+    image: 'https://images.unsplash.com/photo-1593179448852-6a56e2e5055b?q=80&w=600&h=400&fit=crop',
+    acharyaImage: 'https://images.unsplash.com/photo-1593179448852-6a56e2e5055b?q=80&w=600&h=800&fit=crop',
     acharyaAiHint: 'sringeri sage painting',
     lineage: [
         { name: 'Sri Adi Shankaracharya', period: 'c. 509 BCE', description: 'The founder of the four Peethams and the foremost exponent of Advaita Vedanta.' },
@@ -24,7 +25,7 @@ export const peethams = [
       peetham: "Śṛṅgeri Śāradā Pīṭham",
       appointment: "Succeeded Jagadguru Śrī Bhāratī Tīrtha Svāmī in November 2015.",
       focus: "Spiritual leadership, preserving Sanatana Dharma, promoting Vedic studies and Sanskrit, overseeing the Śṛṅgeri Maṭha's vast network of temples and educational institutions. Known for his erudition and accessibility.",
-      heroImage: "https://images.unsplash.com/photo-1621232044813-a43c239d6732?q=80&w=400&h=175&fit=crop",
+      heroImage: "https://images.unsplash.com/photo-1593179448852-6a56e2e5055b?q=80&w=400&h=175&fit=crop",
       galleryImages: Array.from({ length: 9 }, (_, i) => ({ url: `https://images.unsplash.com/photo-1593179448852-6a56e2e5055b?q=80&w=200&h=200&fit=crop&ixid=${i}` })),
     }
   },
@@ -33,8 +34,8 @@ export const peethams = [
     description: 'The western Peetham, representing the Sama Veda in the ancient city of Dwaraka.',
     link: '/peethams/dwaraka',
     icon: Shell,
-    image: 'https://images.unsplash.com/photo-1628747443197-6a9a5a5a1e2f?q=80&w=600&h=400&fit=crop',
-    acharyaImage: 'https://images.unsplash.com/photo-1628747443197-6a9a5a5a1e2f?q=80&w=600&h=800&fit=crop',
+    image: 'https://images.unsplash.com/photo-1593179448852-6a56e2e5055b?q=80&w=600&h=400&fit=crop',
+    acharyaImage: 'https://images.unsplash.com/photo-1593179448852-6a56e2e5055b?q=80&w=600&h=800&fit=crop',
     acharyaAiHint: 'dwaraka temple painting',
     lineage: [
         { name: 'Sri Adi Shankaracharya', period: 'c. 509 BCE', description: 'The founder who established this western seat of learning.' },
@@ -49,7 +50,7 @@ export const peethams = [
       peetham: "Kālikā Maṭha, Dwārkā",
       appointment: "Succeeded the revered Jagadguru Śrī Swarūpānanda Sarasvatī Svāmī in February 2024.",
       focus: "Currently focused on establishing his leadership, continuing the Maṭha's traditions, spiritual guidance, and managing the vast responsibilities of the Paścimāmnāya Pīṭha. Known for his humility and devotion.",
-      heroImage: "https://images.unsplash.com/photo-1628747443197-6a9a5a5a1e2f?q=80&w=400&h=175&fit=crop",
+      heroImage: "https://images.unsplash.com/photo-1593179448852-6a56e2e5055b?q=80&w=400&h=175&fit=crop",
       galleryImages: Array.from({ length: 9 }, (_, i) => ({ url: `https://images.unsplash.com/photo-1593179448852-6a56e2e5055b?q=80&w=200&h=200&fit=crop&ixid=${i+10}` })),
     }
   },
@@ -58,8 +59,8 @@ export const peethams = [
     description: 'The eastern Peetham in the sacred city of Puri, associated with the Rig Veda.',
     link: '/peethams/puri',
     icon: Flag,
-    image: 'https://images.unsplash.com/photo-1588611914264-b3c077b24397?q=80&w=600&h=400&fit=crop',
-    acharyaImage: 'https://images.unsplash.com/photo-1588611914264-b3c077b24397?q=80&w=600&h=800&fit=crop',
+    image: 'https://images.unsplash.com/photo-1593179448852-6a56e2e5055b?q=80&w=600&h=400&fit=crop',
+    acharyaImage: 'https://images.unsplash.com/photo-1593179448852-6a56e2e5055b?q=80&w=600&h=800&fit=crop',
     acharyaAiHint: 'puri chariot painting',
     lineage: [
         { name: 'Sri Adi Shankaracharya', period: 'c. 509 BCE', description: 'The founder of the eastern seat, intrinsically linked with Lord Jagannath.' },
@@ -74,7 +75,7 @@ export const peethams = [
       peetham: "Govardhana Maṭha, Pūri",
       appointment: "Ascended the Pīṭha in 1992.",
       focus: "Strong emphasis on traditional Vedic rituals (Yajñas), scholarly discourse on Advaita Vedanta, social issues, environmental consciousness ('Save Ganga' movement), and vocal commentary on contemporary challenges to Hinduism.",
-      heroImage: "https://images.unsplash.com/photo-1588611914264-b3c077b24397?q=80&w=400&h=175&fit=crop",
+      heroImage: "https://images.unsplash.com/photo-1593179448852-6a56e2e5055b?q=80&w=400&h=175&fit=crop",
       galleryImages: Array.from({ length: 9 }, (_, i) => ({ url: `https://images.unsplash.com/photo-1593179448852-6a56e2e5055b?q=80&w=200&h=200&fit=crop&ixid=${i+20}` })),
     }
   },
@@ -83,8 +84,8 @@ export const peethams = [
     description: 'The northern Peetham, situated in the holy town of Jyotirmath in the Himalayas.',
     link: '/peethams/jyotirmath',
     icon: Mountain,
-    image: 'https://images.unsplash.com/photo-1565563207997-7c7a0d4b53a4?q=80&w=600&h=400&fit=crop',
-    acharyaImage: 'https://images.unsplash.com/photo-1565563207997-7c7a0d4b53a4?q=80&w=600&h=800&fit=crop',
+    image: 'https://images.unsplash.com/photo-1593179448852-6a56e2e5055b?q=80&w=600&h=400&fit=crop',
+    acharyaImage: 'https://images.unsplash.com/photo-1593179448852-6a56e2e5055b?q=80&w=600&h=800&fit=crop',
     acharyaAiHint: 'himalayas monastery painting',
     lineage: [
         { name: 'Sri Adi Shankaracharya', period: 'c. 509 BCE', description: 'The founder who established this northern seat in the serene Himalayas.' },
@@ -99,7 +100,7 @@ export const peethams = [
       peetham: "Jyotirmaṭha, Badarikāśrama",
       appointment: "Formally ascended the Pīṭha in March 2024.",
       focus: "Revitalizing the Jyotirmaṭha traditions, establishing his presence, providing spiritual guidance, and overseeing the Pīṭha's activities. Focus on Advaita philosophy and pilgrimage at Badrinath.",
-      heroImage: "https://images.unsplash.com/photo-1565563207997-7c7a0d4b53a4?q=80&w=400&h=175&fit=crop",
+      heroImage: "https://images.unsplash.com/photo-1593179448852-6a56e2e5055b?q=80&w=400&h=175&fit=crop",
       galleryImages: Array.from({ length: 9 }, (_, i) => ({ url: `https://images.unsplash.com/photo-1593179448852-6a56e2e5055b?q=80&w=200&h=200&fit=crop&ixid=${i+30}` })),
     }
   },

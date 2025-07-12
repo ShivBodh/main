@@ -52,9 +52,9 @@ export default function HomePage() {
       <section className="py-16 md:py-24 bg-background">
         <div className="container mx-auto grid md:grid-cols-2 gap-12 items-center">
             <div className="flex justify-center items-center order-last md:order-first">
-             <div className="relative w-full max-w-[600px]">
+             <div className="relative w-full max-w-[600px] aspect-video">
               <Image 
-                  src="https://placehold.co/600x400.png"
+                  src="https://images.unsplash.com/photo-1542823184-a828da22ca3e?q=80&w=600&h=400&fit=crop"
                   alt="An artistic painting showing a diverse group of people collaborating and connecting."
                   width={600}
                   height={400}
@@ -103,9 +103,9 @@ export default function HomePage() {
                   </Button>
             </div>
             <div className="flex justify-center items-center">
-              <div className="relative w-full max-w-[600px]">
+              <div className="relative w-full max-w-[600px] aspect-video">
               <Image 
-                  src="https://placehold.co/600x400.png"
+                  src="https://images.unsplash.com/photo-1542823184-a828da22ca3e?q=80&w=600&h=400&fit=crop"
                   alt="An artistic painting of a library of ancient books representing spiritual knowledge."
                   width={600}
                   height={400}
