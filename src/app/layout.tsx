@@ -28,10 +28,10 @@ export const metadata: Metadata = {
     siteName: 'Sanatana Peethams Portal',
     images: [
       {
-        url: 'https://placehold.co/1200x630.png',
+        url: 'https://images.unsplash.com/photo-1621232044813-a43c239d6732?q=80&w=1200&h=630&fit=crop',
         width: 1200,
         height: 630,
-        alt: 'Sanatana Peethams Portal Open Graph Image',
+        alt: 'An artistic representation of a Hindu temple.',
       },
     ],
     locale: 'en_US',
@@ -53,8 +53,8 @@ export const metadata: Metadata = {
     title: 'Sanatana Peethams Portal',
     description: 'A single, trusted digital beacon for the timeless wisdom of the four cardinal Peethams.',
     creator: '@shivabodha_org',
-    images: ['https://placehold.co/1200x600.png'],
-    alt: 'Sanatana Peethams Portal Twitter Card Image',
+    images: ['https://images.unsplash.com/photo-1621232044813-a43c239d6732?q=80&w=1200&h=600&fit=crop'],
+    alt: 'An artistic representation of a Hindu temple.',
   },
   manifest: '/manifest.json',
 };
