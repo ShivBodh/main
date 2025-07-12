@@ -81,7 +81,7 @@ export default function RootLayout({
             gtag('config', 'G-F89VPW7ZMF');
           `}
         </Script>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23800000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M6 3h12l4 6-10 13L2 9z' /><path d='M12 22V9' /><path d='M2 9h20' /></svg>" type="image/svg+xml" />
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23800000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><style>@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } } g { transform-origin: center; animation: spin 4s linear infinite; }</style><g><path d='M6 3h12l4 6-10 13L2 9z' /><path d='M12 22V9' /><path d='M2 9h20' /></g></svg>" type="image/svg+xml" />
         <meta name="theme-color" content="#800000" />
       </head>
       <body className="font-body antialiased" suppressHydrationWarning>
