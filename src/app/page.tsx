@@ -36,12 +36,12 @@ export default function HomePage() {
               <div className="flex justify-center items-center">
                 <div className="relative aspect-video w-full max-w-[600px]">
                     <Image 
-                        src="https://images.unsplash.com/photo-1620058866387-a3c39a04a52c?q=80&w=600&h=400&fit=crop"
-                        alt="A painting of a wise sage writing a sacred text"
+                        src="https://placehold.co/600x400.png"
+                        alt="A placeholder image for the Shankaracharya Encyclopedia"
                         width={600}
                         height={400}
                         className="rounded-lg object-cover shadow-lg"
-                        data-ai-hint="sage painting knowledge"
+                        data-ai-hint="sage knowledge"
                     />
                 </div>
               </div>
@@ -54,12 +54,12 @@ export default function HomePage() {
             <div className="flex justify-center items-center order-last md:order-first">
              <div className="relative aspect-video w-full max-w-[600px]">
               <Image 
-                  src="https://images.unsplash.com/photo-1619364424997-1b0a88a4e32e?q=80&w=600&h=400&fit=crop"
-                  alt="An artistic painting depicting a community connecting in a spiritual setting"
+                  src="https://placehold.co/600x400.png"
+                  alt="A placeholder image for Sanatan Social"
                   width={600}
                   height={400}
                   className="rounded-lg object-cover shadow-lg"
-                  data-ai-hint="community art spiritual"
+                  data-ai-hint="community spiritual"
               />
               </div>
             </div>
@@ -105,12 +105,12 @@ export default function HomePage() {
             <div className="flex justify-center items-center">
               <div className="relative aspect-video w-full max-w-[600px]">
               <Image 
-                  src="https://images.unsplash.com/photo-1618335934988-a0c1a1a79872?q=80&w=600&h=400&fit=crop"
-                  alt="An artistic painting of sacred books and spiritual items"
+                  src="https://placehold.co/600x400.png"
+                  alt="A placeholder image for the Bodha Sādhanā Suite"
                   width={600}
                   height={400}
                   className="rounded-lg object-cover shadow-lg"
-                  data-ai-hint="spiritual knowledge art"
+                  data-ai-hint="spiritual knowledge"
               />
               </div>
             </div>
