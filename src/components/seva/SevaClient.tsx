@@ -24,7 +24,7 @@ export default function SevaClient() {
             <Card>
                 <CardContent className="p-0 relative w-full aspect-video overflow-hidden rounded-lg border shadow-lg group">
                     <Image
-                        src="https://images.unsplash.com/photo-1590214224524-7431a4b5744a?q=80&w=1200&h=675&fit=crop"
+                        src="https://placehold.co/1200x675.png"
                         alt="An artistic rendering of a map of India"
                         data-ai-hint="india map painting"
                         width={1200}

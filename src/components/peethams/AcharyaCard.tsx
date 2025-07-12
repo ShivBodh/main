@@ -18,7 +18,7 @@ export function AcharyaCard({ acharya }: AcharyaCardProps) {
       <div className="group relative w-full h-[175px] bg-secondary/20">
         <Image
           src={acharya.heroImage}
-          alt={`Image related to ${acharya.peetham}`}
+          alt={`An artistic painting related to ${acharya.peetham}`}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="object-cover"
@@ -38,7 +38,7 @@ export function AcharyaCard({ acharya }: AcharyaCardProps) {
                     <div key={colIndex} className="relative w-1/3 h-full bg-black/20 opacity-70 hover:opacity-100 transition-opacity">
                        <Image
                         src={acharya.galleryImages[rowIndex * 3 + colIndex].url}
-                        alt={`Gallery image ${rowIndex * 3 + colIndex + 1}`}
+                        alt={`Artistic painting ${rowIndex * 3 + colIndex + 1}`}
                         fill
                         sizes="10vw"
                         className="object-cover"

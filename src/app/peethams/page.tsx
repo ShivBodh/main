@@ -27,9 +27,9 @@ export default function PeethamsPage() {
         <div className="text-center mb-16">
           <div className="mb-8 mx-auto inline-block relative h-[150px] w-[150px]">
             <Image
-              src="https://images.unsplash.com/photo-1622055113979-3970119358f2?q=80&w=150&h=150&fit=crop"
+              src="https://placehold.co/150x150.png"
               alt="An artistic painting of Jagadguru Adi Shankaracharya"
-              data-ai-hint="adi shankaracharya"
+              data-ai-hint="adi shankaracharya painting"
               width={150}
               height={150}
               className="mx-auto object-cover rounded-full shadow-lg"

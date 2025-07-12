@@ -6,9 +6,9 @@ export const peethams = [
     description: 'The first and foremost of the four Amnaya Peethams, the southern seat of wisdom for the Yajur Veda.',
     link: '/peethams/sringeri',
     icon: BookOpen,
-    image: 'https://images.unsplash.com/photo-1594780762143-75a13c9577a7?q=80&w=600&h=400&fit=crop',
-    acharyaImage: 'https://images.unsplash.com/photo-1622055113979-3970119358f2?q=80&w=600&h=800&fit=crop',
-    acharyaAiHint: 'sringeri sage',
+    image: 'https://placehold.co/600x400.png',
+    acharyaImage: 'https://placehold.co/600x800.png',
+    acharyaAiHint: 'sringeri sage painting',
     lineage: [
         { name: 'Sri Adi Shankaracharya', period: 'c. 509 BCE', description: 'The founder of the four Peethams and the foremost exponent of Advaita Vedanta.' },
         { name: 'Sri Sureshwaracharya', period: 'c. 5th Century BCE', description: 'A direct disciple of Adi Shankaracharya and the first head of the Sringeri Peetham.' },
@@ -24,8 +24,8 @@ export const peethams = [
       peetham: "Śṛṅgeri Śāradā Pīṭham",
       appointment: "Succeeded Jagadguru Śrī Bhāratī Tīrtha Svāmī in November 2015.",
       focus: "Spiritual leadership, preserving Sanatana Dharma, promoting Vedic studies and Sanskrit, overseeing the Śṛṅgeri Maṭha's vast network of temples and educational institutions. Known for his erudition and accessibility.",
-      heroImage: "https://images.unsplash.com/photo-1594780762143-75a13c9577a7?q=80&w=400&h=175&fit=crop",
-      galleryImages: Array.from({ length: 9 }, (_, i) => ({ url: `https://images.unsplash.com/photo-1622055113979-3970119358f2?q=80&w=200&h=200&fit=crop&text=${i+1}` })),
+      heroImage: "https://placehold.co/400x175.png",
+      galleryImages: Array.from({ length: 9 }, (_, i) => ({ url: `https://placehold.co/200x200.png` })),
     }
   },
   {
@@ -33,9 +33,9 @@ export const peethams = [
     description: 'The western Peetham, representing the Sama Veda in the ancient city of Dwaraka.',
     link: '/peethams/dwaraka',
     icon: Shell,
-    image: 'https://images.unsplash.com/photo-1594780762143-75a13c9577a7?q=80&w=600&h=400&fit=crop',
-    acharyaImage: 'https://images.unsplash.com/photo-1622055113979-3970119358f2?q=80&w=600&h=800&fit=crop',
-    acharyaAiHint: 'dwaraka temple',
+    image: 'https://placehold.co/600x400.png',
+    acharyaImage: 'https://placehold.co/600x800.png',
+    acharyaAiHint: 'dwaraka temple painting',
     lineage: [
         { name: 'Sri Adi Shankaracharya', period: 'c. 509 BCE', description: 'The founder who established this western seat of learning.' },
         { name: 'Sri Hastamalakacharya', period: 'c. 5th Century BCE', description: 'A direct disciple of Adi Shankaracharya and the first Acharya of the Dwaraka Peetham.' },
@@ -49,8 +49,8 @@ export const peethams = [
       peetham: "Kālikā Maṭha, Dwārkā",
       appointment: "Succeeded the revered Jagadguru Śrī Swarūpānanda Sarasvatī Svāmī in February 2024.",
       focus: "Currently focused on establishing his leadership, continuing the Maṭha's traditions, spiritual guidance, and managing the vast responsibilities of the Paścimāmnāya Pīṭha. Known for his humility and devotion.",
-      heroImage: "https://images.unsplash.com/photo-1594780762143-75a13c9577a7?q=80&w=400&h=175&fit=crop",
-      galleryImages: Array.from({ length: 9 }, (_, i) => ({ url: `https://images.unsplash.com/photo-1622055113979-3970119358f2?q=80&w=200&h=200&fit=crop&text=${i+1}` })),
+      heroImage: "https://placehold.co/400x175.png",
+      galleryImages: Array.from({ length: 9 }, (_, i) => ({ url: `https://placehold.co/200x200.png` })),
     }
   },
   {
@@ -58,9 +58,9 @@ export const peethams = [
     description: 'The eastern Peetham in the sacred city of Puri, associated with the Rig Veda.',
     link: '/peethams/puri',
     icon: Flag,
-    image: 'https://images.unsplash.com/photo-1594780762143-75a13c9577a7?q=80&w=600&h=400&fit=crop',
-    acharyaImage: 'https://images.unsplash.com/photo-1622055113979-3970119358f2?q=80&w=600&h=800&fit=crop',
-    acharyaAiHint: 'puri chariot',
+    image: 'https://placehold.co/600x400.png',
+    acharyaImage: 'https://placehold.co/600x800.png',
+    acharyaAiHint: 'puri chariot painting',
     lineage: [
         { name: 'Sri Adi Shankaracharya', period: 'c. 509 BCE', description: 'The founder of the eastern seat, intrinsically linked with Lord Jagannath.' },
         { name: 'Sri Padmapadacharya', period: 'c. 5th Century BCE', description: 'A direct disciple of Adi Shankaracharya and the first Acharya of the Puri Peetham. He was a profound scholar and author of the "Panchapadika".' },
@@ -74,8 +74,8 @@ export const peethams = [
       peetham: "Govardhana Maṭha, Pūri",
       appointment: "Ascended the Pīṭha in 1992.",
       focus: "Strong emphasis on traditional Vedic rituals (Yajñas), scholarly discourse on Advaita Vedanta, social issues, environmental consciousness ('Save Ganga' movement), and vocal commentary on contemporary challenges to Hinduism.",
-      heroImage: "https://images.unsplash.com/photo-1594780762143-75a13c9577a7?q=80&w=400&h=175&fit=crop",
-      galleryImages: Array.from({ length: 9 }, (_, i) => ({ url: `https://images.unsplash.com/photo-1622055113979-3970119358f2?q=80&w=200&h=200&fit=crop&text=${i+1}` })),
+      heroImage: "https://placehold.co/400x175.png",
+      galleryImages: Array.from({ length: 9 }, (_, i) => ({ url: `https://placehold.co/200x200.png` })),
     }
   },
   {
@@ -83,9 +83,9 @@ export const peethams = [
     description: 'The northern Peetham, situated in the holy town of Jyotirmath in the Himalayas.',
     link: '/peethams/jyotirmath',
     icon: Mountain,
-    image: 'https://images.unsplash.com/photo-1594780762143-75a13c9577a7?q=80&w=600&h=400&fit=crop',
-    acharyaImage: 'https://images.unsplash.com/photo-1622055113979-3970119358f2?q=80&w=600&h=800&fit=crop',
-    acharyaAiHint: 'himalayas monastery',
+    image: 'https://placehold.co/600x400.png',
+    acharyaImage: 'https://placehold.co/600x800.png',
+    acharyaAiHint: 'himalayas monastery painting',
     lineage: [
         { name: 'Sri Adi Shankaracharya', period: 'c. 509 BCE', description: 'The founder who established this northern seat in the serene Himalayas.' },
         { name: 'Sri Totakacharya', period: 'c. 5th Century BCE', description: 'A direct disciple of Adi Shankaracharya, known for his deep devotion and humility. He composed the "Totakashtakam".' },
@@ -99,8 +99,8 @@ export const peethams = [
       peetham: "Jyotirmaṭha, Badarikāśrama",
       appointment: "Formally ascended the Pīṭha in March 2024.",
       focus: "Revitalizing the Jyotirmaṭha traditions, establishing his presence, providing spiritual guidance, and overseeing the Pīṭha's activities. Focus on Advaita philosophy and pilgrimage at Badrinath.",
-      heroImage: "https://images.unsplash.com/photo-1594780762143-75a13c9577a7?q=80&w=400&h=175&fit=crop",
-      galleryImages: Array.from({ length: 9 }, (_, i) => ({ url: `https://images.unsplash.com/photo-1622055113979-3970119358f2?q=80&w=200&h=200&fit=crop&text=${i+1}` })),
+      heroImage: "https://placehold.co/400x175.png",
+      galleryImages: Array.from({ length: 9 }, (_, i) => ({ url: `https://placehold.co/200x200.png` })),
     }
   },
 ];
