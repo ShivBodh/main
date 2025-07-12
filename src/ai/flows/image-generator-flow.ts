@@ -40,10 +40,10 @@ const imageGeneratorFlow = ai.defineFlow(
     const {media} = await ai.generate({
       model: 'googleai/gemini-2.0-flash-preview-image-generation',
       prompt: fullPrompt,
+      width: input.width,
+      height: input.height,
       config: {
         responseModalities: ['TEXT', 'IMAGE'],
-        width: input.width,
-        height: input.height,
       },
     });
 
