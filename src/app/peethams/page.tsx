@@ -1,6 +1,5 @@
 
 import Link from 'next/link';
-import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, icons } from 'lucide-react';
@@ -8,6 +7,7 @@ import { peethams } from '@/lib/peethams-data';
 import type { Metadata } from 'next';
 import { CurrentAcharyas } from '@/components/peethams/CurrentAcharyas';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { AiImage } from '@/components/common/AiImage';
 
 export const metadata: Metadata = {
   title: 'The Four Peethams | Sanatana Peethams Portal',
@@ -27,9 +27,7 @@ export default function PeethamsPage() {
       <div className="container mx-auto max-w-6xl py-16 md:py-24 px-4">
         <div className="text-center mb-16">
           <div className="mb-8 mx-auto inline-block relative h-[150px] w-[150px]">
-            <Image
-              src="https://images.unsplash.com/photo-1690035342730-82695869389a?q=80&w=150&h=150&fit=crop"
-              alt="An artistic painting of Jagadguru Adi Shankaracharya"
+            <AiImage
               data-ai-hint="adi shankaracharya painting"
               width={150}
               height={150}

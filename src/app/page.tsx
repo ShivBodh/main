@@ -2,10 +2,10 @@
 import { HeroSection } from '@/components/home/HeroSection';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import Image from 'next/image';
 import { ArrowRight, BookOpen, Calendar, SunMoon, Atom, Users, Megaphone, NotebookText } from 'lucide-react';
 import type { Metadata } from 'next';
 import { PanchangaWidgetPreview } from '@/components/home/PanchangaWidgetPreview';
+import { AiImage } from '@/components/common/AiImage';
 
 export const metadata: Metadata = {
   // The title and description will be inherited from the RootLayout,
@@ -36,9 +36,8 @@ export default function HomePage() {
               </div>
               <div className="flex justify-center items-center">
                 <div className="relative w-full max-w-[600px]">
-                    <img 
-                        src="https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/aadi-guru-from-shivbodha-.png"
-                        alt="An artistic representation of Jagadguru Adi Shankaracharya."
+                     <AiImage 
+                        data-ai-hint="An artistic representation of Jagadguru Adi Shankaracharya teaching his disciples"
                         width={600}
                         height={400}
                         className="rounded-lg object-cover shadow-lg w-full h-auto"
@@ -53,13 +52,11 @@ export default function HomePage() {
         <div className="container mx-auto grid md:grid-cols-2 gap-12 items-center">
             <div className="flex justify-center items-center order-last md:order-first">
              <div className="relative w-full max-w-[600px]">
-              <Image 
-                  src="https://images.unsplash.com/photo-1621489423910-445a1334965c?q=80&w=600&h=400&fit=crop"
-                  alt="An artistic painting showing a diverse group of people collaborating and connecting."
+              <AiImage 
+                  data-ai-hint="community painting diverse people connecting"
                   width={600}
                   height={400}
                   className="rounded-lg object-cover shadow-lg"
-                  data-ai-hint="community painting"
               />
               </div>
             </div>
@@ -104,13 +101,11 @@ export default function HomePage() {
             </div>
             <div className="flex justify-center items-center">
               <div className="relative w-full max-w-[600px]">
-              <Image 
-                  src="https://images.unsplash.com/photo-1698064312159-4c2885141e6e?q=80&w=600&h=400&fit=crop"
-                  alt="An artistic painting of a library of ancient books representing spiritual knowledge."
+              <AiImage 
+                  data-ai-hint="knowledge library painting ancient books"
                   width={600}
                   height={400}
                   className="rounded-lg object-cover shadow-lg"
-                  data-ai-hint="knowledge library painting"
               />
               </div>
             </div>

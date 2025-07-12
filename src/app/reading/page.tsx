@@ -1,12 +1,12 @@
 
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { readingList } from '@/lib/reading-data';
 import { BookOpen, UploadCloud } from 'lucide-react';
+import { AiImage } from '@/components/common/AiImage';
 
 // We can't use generateMetadata in a Client Component,
 // but we can manage the title through other means if needed.
@@ -30,13 +30,11 @@ export default function ReadingPage() {
         <div className="w-full max-w-xs">
           <Card key={book.id} className="flex flex-col overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 group">
             <div className="relative aspect-[2/3] w-full bg-card">
-              <Image
-                src={book.imageUrl}
-                alt={`Cover for ${book.title}`}
+              <AiImage
+                data-ai-hint={book.aiHint}
                 width={400}
                 height={600}
                 className="object-cover w-full h-full"
-                data-ai-hint={book.aiHint}
               />
             </div>
              <div className="flex flex-col flex-grow p-4">

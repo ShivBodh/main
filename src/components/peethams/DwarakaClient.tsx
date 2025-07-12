@@ -1,6 +1,6 @@
+
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
@@ -19,6 +19,7 @@ import { Badge } from '@/components/ui/badge';
 import { db } from '@/lib/firebase';
 import { collection, getDocs, query, where, orderBy } from 'firebase/firestore';
 import { Skeleton } from '@/components/ui/skeleton';
+import { AiImage } from '@/components/common/AiImage';
 
 const dwarakaSeva = allSevaOpportunities.filter(o => o.peetham === 'Dwaraka');
 const peethamInfo = peethams.find(p => p.name.includes('Dwaraka'))!;
@@ -123,10 +124,8 @@ export default function DwarakaClient() {
         <section className="flex flex-col md:flex-row items-center gap-8 mb-12">
           <div className="w-full md:w-1/3">
             <div className="relative aspect-[3/4] w-full">
-              <Image
-                src={peethamInfo.acharyaImage}
+              <AiImage
                 data-ai-hint={peethamInfo.acharyaAiHint}
-                alt={`Jagadguru Shankaracharya of ${peethamInfo.name}`}
                 width={600}
                 height={800}
                 className="rounded-lg shadow-lg object-cover"

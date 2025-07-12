@@ -4,8 +4,8 @@
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import Image from 'next/image';
 import { Landmark, ExternalLink } from 'lucide-react';
+import { AiImage } from '@/components/common/AiImage';
 
 export default function SevaClient() {
     const mapUrl = "https://mcp-maps-3d-540744813374.us-west1.run.app?key=AIzaSyAqWV5SY9xlbqgd15uKAh9fhYzcaB1tIOc";
@@ -24,10 +24,8 @@ export default function SevaClient() {
 
             <Card>
                 <CardContent className="p-0 relative w-full aspect-video overflow-hidden rounded-lg border shadow-lg group">
-                    <Image
-                        src="https://images.unsplash.com/photo-1596701398235-87300439a397?q=80&w=1200&h=675&fit=crop"
-                        alt="An artistic rendering of a map of India"
-                        data-ai-hint="india map painting"
+                    <AiImage
+                        data-ai-hint="india map painting ancient style"
                         width={1200}
                         height={675}
                         className="w-full h-full object-cover transition-all duration-300 group-hover:scale-105"
