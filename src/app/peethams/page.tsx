@@ -28,6 +28,8 @@ export default function PeethamsPage() {
         <div className="text-center mb-16">
           <div className="mb-8 mx-auto inline-block relative h-[150px] w-[150px]">
             <AiImage
+              src="https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/aadi-guru-from-shivbodha-.png"
+              alt="An artistic representation of Adi Shankaracharya"
               data-ai-hint="adi shankaracharya painting"
               width={150}
               height={150}
