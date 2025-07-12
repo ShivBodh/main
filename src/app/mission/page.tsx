@@ -96,8 +96,8 @@ export default function MissionPage() {
             <div className="not-prose text-center mt-16 p-8 bg-card rounded-lg border">
                  <div className="mx-auto mb-4 inline-block relative h-20 w-20">
                     <Image
-                      src="https://placehold.co/80x80.png"
-                      alt="A placeholder image representing selfless service (Seva)"
+                      src="https://images.unsplash.com/photo-1593113598332-cd288d649433?q=80&w=80&h=80&fit=crop"
+                      alt="Hands offering something, representing selfless service (Seva)"
                       data-ai-hint="seva hands"
                       width={80}
                       height={80}

@@ -36,8 +36,8 @@ export default function HomePage() {
               <div className="flex justify-center items-center">
                 <div className="relative w-full max-w-[600px] aspect-video">
                     <Image 
-                        src="https://placehold.co/600x400.png"
-                        alt="A placeholder image for the Shankaracharya Encyclopedia"
+                        src="https://images.unsplash.com/photo-1622055113979-3970119358f2?q=80&w=600&h=400&fit=crop"
+                        alt="An artistic representation of a wise sage surrounded by ancient scriptures."
                         width={600}
                         height={400}
                         className="rounded-lg object-cover shadow-lg"
@@ -54,8 +54,8 @@ export default function HomePage() {
             <div className="flex justify-center items-center order-last md:order-first">
              <div className="relative w-full max-w-[600px] aspect-video">
               <Image 
-                  src="https://placehold.co/600x400.png"
-                  alt="A placeholder image for Sanatan Social"
+                  src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=600&h=400&fit=crop"
+                  alt="A diverse group of people collaborating and connecting."
                   width={600}
                   height={400}
                   className="rounded-lg object-cover shadow-lg"
@@ -105,8 +105,8 @@ export default function HomePage() {
             <div className="flex justify-center items-center">
               <div className="relative w-full max-w-[600px] aspect-video">
               <Image 
-                  src="https://placehold.co/600x400.png"
-                  alt="A placeholder image for the Bodha Sādhanā Suite"
+                  src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?q=80&w=600&h=400&fit=crop"
+                  alt="A library of ancient books representing spiritual knowledge."
                   width={600}
                   height={400}
                   className="rounded-lg object-cover shadow-lg"
