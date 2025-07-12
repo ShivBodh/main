@@ -35,7 +35,7 @@ const imageGeneratorFlow = ai.defineFlow(
   },
   async (input) => {
     
-    const fullPrompt = `${input.prompt}, ethereal concept art, sacred, spiritual, reverent mood, vibrant colors, artistic painting style`;
+    const fullPrompt = `Create a creative, symbolic artwork representing '${input.prompt}'. The piece should be in the style of Indian spiritual art, suitable for a website about Sanatan Dharma.`;
 
     const {media} = await ai.generate({
       model: 'googleai/gemini-2.0-flash-preview-image-generation',
