@@ -200,23 +200,9 @@ export default function EventsClient() {
                 <Card className="flex flex-col items-center justify-center h-64 border-dashed text-center p-6">
                     <CardTitle className="text-2xl font-headline">Your Calendar is Empty</CardTitle>
                     <CardContent className="p-0 mt-4 max-w-lg mx-auto">
-                        <p className="text-muted-foreground mb-4">
-                            This is where media and events from the Peethams will appear. To populate it, you need to provide the source content.
+                        <p className="text-muted-foreground">
+                            This is where media and events from the Peethams will appear. To populate it, you will need to add content to your database.
                         </p>
-                        <ol className="text-left list-decimal list-inside space-y-2">
-                            <li>
-                                Open the file: <code className="bg-muted px-2 py-1 rounded-md font-mono text-sm">src/lib/scraping-source-data.ts</code>
-                            </li>
-                            <li>
-                                Add items to the array with real image URLs and descriptions you want to see.
-                            </li>
-                            <li>
-                                Run the processing script in your terminal: <code className="bg-muted px-2 py-1 rounded-md font-mono text-sm">npm run scrape</code>
-                            </li>
-                            <li>
-                                Click the "Refresh Content" button above to see your live data.
-                            </li>
-                        </ol>
                     </CardContent>
                 </Card>
             )}

@@ -1,14 +1,39 @@
+
 'use client';
 
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { RefreshCw } from 'lucide-react';
-import { getDailyWisdom, DailyWisdomOutput } from '@/ai/flows/daily-wisdom-flow';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Separator } from '@/components/ui/separator';
 
-function WisdomCard({ wisdom }: { wisdom: DailyWisdomOutput | null }) {
+// Since the AI flow is removed, we'll use a local array of quotes.
+const localWisdom = [
+    {
+        quote: "The Self is not to be known by the study of the scriptures, nor by the intellect, nor by much hearing.",
+        author: "Katha Upanishad",
+        translation: "आत्मा न तो प्रवचन से, न बुद्धि से, और न बहुत सुनने से ही जाना जा सकता है।"
+    },
+    {
+        quote: "Just as the one sun illumines the whole world, so does the one Atman illumine the whole body.",
+        author: "Sri Adi Shankaracharya",
+        translation: "जैसे एक ही सूर्य इस संपूर्ण लोक को प्रकाशित करता है, उसी प्रकार एक ही आत्मा संपूर्ण क्षेत्र को प्रकाशित करती है।"
+    },
+    {
+        quote: "True knowledge is that which liberates.",
+        author: "Upanishads",
+        translation: "सा विद्या या विमुक्तये।"
+    }
+];
+
+interface Wisdom {
+    quote: string;
+    author: string;
+    translation: string;
+}
+
+function WisdomCard({ wisdom }: { wisdom: Wisdom | null }) {
     if (!wisdom) {
         return (
             <Card className="w-full text-center shadow-lg">
@@ -47,26 +72,19 @@ function WisdomCard({ wisdom }: { wisdom: DailyWisdomOutput | null }) {
 }
 
 export default function DailyWisdomClient() {
-  const [currentWisdom, setCurrentWisdom] = useState<DailyWisdomOutput | null>(null);
+  const [currentWisdom, setCurrentWisdom] = useState<Wisdom | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  const fetchWisdom = async () => {
+  const fetchWisdom = () => {
     setIsLoading(true);
     setCurrentWisdom(null); // Clear old wisdom to show skeleton
-    try {
-        const wisdom = await getDailyWisdom();
-        setCurrentWisdom(wisdom);
-    } catch (error) {
-        console.error("Failed to fetch wisdom:", error);
-        // Provide a graceful fallback in case of an API error
-        setCurrentWisdom({
-            quote: "The Self is not to be known by the study of the scriptures, nor by the intellect, nor by much hearing.",
-            author: "Katha Upanishad",
-            translation: "आत्मा न तो प्रवचन से, न बुद्धि से, और न बहुत सुनने से ही जाना जा सकता है।"
-        });
-    } finally {
+    
+    // Simulate fetching and show a random quote from the local array
+    setTimeout(() => {
+        const randomIndex = Math.floor(Math.random() * localWisdom.length);
+        setCurrentWisdom(localWisdom[randomIndex]);
         setIsLoading(false);
-    }
+    }, 500);
   };
 
   useEffect(() => {
