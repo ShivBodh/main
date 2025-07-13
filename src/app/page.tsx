@@ -20,7 +20,7 @@ export default function HomePage() {
       {/* Peethams Section */}
       <section className="py-16 md:py-24 bg-muted/50">
           <div className="container mx-auto grid md:grid-cols-2 gap-12 items-center">
-              <div className="md:order-1">
+              <div className="md:order-2">
                   <h2 className="text-3xl md:text-4xl font-headline font-bold text-primary">The Shankaracharya Encyclopedia</h2>
                   <p className="mt-4 text-lg text-foreground/80">
                       Dive deep into the life, teachings, and lineage of the great Acharyas. Our portal provides a structured, searchable, and authoritative knowledge base, making timeless wisdom accessible to all.
@@ -34,15 +34,13 @@ export default function HomePage() {
                         </Link>
                     </Button>
               </div>
-               <div className="flex justify-center items-center md:order-2">
-                 <div className="relative w-full max-w-[600px]">
+               <div className="flex justify-center items-center md:order-1">
+                 <div className="relative w-full max-w-[600px] aspect-[3/2]">
                   <Image
-                      src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExMHU2a2w2Z3RtamhxcjQ2ZDE0djMybDVxZ3h5d3J0aXh4aWViOTZqMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3ohs7SYIm3aJeA_i6Y/giphy.gif"
-                      alt="Abstract light GIF"
-                      width={600}
-                      height={400}
-                      unoptimized
-                      className="rounded-lg object-cover shadow-lg"
+                      src="https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/aadi-guru-from-shivbodha-.png"
+                      alt="An artistic representation of Adi Shankaracharya"
+                      fill
+                      className="rounded-lg object-contain shadow-lg"
                   />
                   </div>
                 </div>
@@ -52,19 +50,18 @@ export default function HomePage() {
       {/* Social Section */}
       <section className="py-16 md:py-24 bg-background">
         <div className="container mx-auto grid md:grid-cols-2 gap-12 items-center">
-            <div className="flex justify-center items-center order-last md:order-first">
-             <div className="relative w-full max-w-[600px]">
+            <div className="flex justify-center items-center">
+             <div className="relative w-full max-w-[600px] aspect-video">
               <Image
                   src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExMHU2a2w2Z3RtamhxcjQ2ZDE0djMybDVxZ3h5d3J0aXh4aWViOTZqMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3ohs7SYIm3aJeA_i6Y/giphy.gif"
                   alt="Abstract light GIF"
-                  width={600}
-                  height={400}
+                  layout="fill"
                   unoptimized
                   className="rounded-lg object-cover shadow-lg"
               />
               </div>
             </div>
-            <div className="md:order-last">
+            <div>
                 <h2 className="text-3xl md:text-4xl font-headline font-bold text-primary">Sanatan Social: A Community for Dharma</h2>
                 <p className="mt-4 text-lg text-foreground/80">
                     Join a private, secure platform for devotees to connect, share knowledge, and support dharmic causes. Create your profile, write in your personal Dainandini (diary), and launch campaigns that matter.
@@ -86,7 +83,7 @@ export default function HomePage() {
       {/* Bodha Section */}
       <section className="py-16 md:py-24 bg-muted/50">
         <div className="container mx-auto grid md:grid-cols-2 gap-12 items-center">
-            <div>
+            <div className="md:order-2">
                 <h2 className="text-3xl md:text-4xl font-headline font-bold text-primary">Bodha: Your Knowledge & Sādhanā Suite</h2>
                 <p className="mt-4 text-lg text-foreground/80">
                     Deepen your understanding and support your daily spiritual practice with our integrated suite of tools and resources. Everything you need for learning and practice, all in one place.
@@ -103,13 +100,12 @@ export default function HomePage() {
                       </Link>
                   </Button>
             </div>
-            <div className="flex justify-center items-center">
-              <div className="relative w-full max-w-[600px]">
+            <div className="flex justify-center items-center md:order-1">
+              <div className="relative w-full max-w-[600px] aspect-video">
               <Image
                   src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExMHU2a2w2Z3RtamhxcjQ2ZDE0djMybDVxZ3h5d3J0aXh4aWViOTZqMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3ohs7SYIm3aJeA_i6Y/giphy.gif"
                   alt="Abstract light GIF"
-                  width={600}
-                  height={400}
+                  layout="fill"
                   unoptimized
                   className="rounded-lg object-cover shadow-lg"
               />
