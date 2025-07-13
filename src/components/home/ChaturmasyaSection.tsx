@@ -87,7 +87,7 @@ export function ChaturmasyaSection() {
                                         <CardHeader className="bg-primary p-4 h-28 relative rounded-t-xl"></CardHeader>
                                         <CardContent className="flex flex-col items-center text-center p-6 pt-0 relative flex-grow">
                                             <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                                                <Image
+                                                <img
                                                     src={item.imageUrl}
                                                     alt={`Image of ${item.acharya}`}
                                                     width={128}
