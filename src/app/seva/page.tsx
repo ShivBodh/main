@@ -25,7 +25,9 @@ export default function SevaClient() {
             <Card>
                 <CardContent className="p-0 relative w-full aspect-video overflow-hidden rounded-lg border shadow-lg group">
                     <AiImage
-                        data-ai-hint="vedanta art"
+                        src="https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/aadi-guru-from-shivbodha-.png"
+                        alt="An artistic rendering of a map of India"
+                        data-ai-hint="india map painting"
                         width={1200}
                         height={675}
                         className="w-full h-full object-cover transition-all duration-300 group-hover:scale-105"
