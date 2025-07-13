@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { ArrowRight, BookOpen, Calendar, SunMoon, Atom, Users, Megaphone, NotebookText } from 'lucide-react';
 import type { Metadata } from 'next';
 import { PanchangaWidgetPreview } from '@/components/home/PanchangaWidgetPreview';
-import { AiImage } from '@/components/common/AiImage';
 import Image from 'next/image';
 
 export const metadata: Metadata = {
@@ -54,11 +53,12 @@ export default function HomePage() {
         <div className="container mx-auto grid md:grid-cols-2 gap-12 items-center">
             <div className="flex justify-center items-center order-last md:order-first">
              <div className="relative w-full max-w-[600px]">
-              <AiImage
-                  src="https://placehold.co/600x400.png"
-                  data-ai-hint="vedanta art"
+              <Image
+                  src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExMHU2a2w2Z3RtamhxcjQ2ZDE0djMybDVxZ3h5d3J0aXh4aWViOTZqMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3ohs7SYIm3aJeA_i6Y/giphy.gif"
+                  alt="Abstract light GIF"
                   width={600}
                   height={400}
+                  unoptimized
                   className="rounded-lg object-cover shadow-lg"
               />
               </div>
@@ -104,11 +104,12 @@ export default function HomePage() {
             </div>
             <div className="flex justify-center items-center">
               <div className="relative w-full max-w-[600px]">
-              <AiImage
-                  src="https://placehold.co/600x400.png"
-                  data-ai-hint="vedanta art"
+              <Image
+                  src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExMHU2a2w2Z3RtamhxcjQ2ZDE0djMybDVxZ3h5d3J0aXh4aWViOTZqMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3ohs7SYIm3aJeA_i6Y/giphy.gif"
+                  alt="Abstract light GIF"
                   width={600}
                   height={400}
+                  unoptimized
                   className="rounded-lg object-cover shadow-lg"
               />
               </div>

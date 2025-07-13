@@ -4,7 +4,7 @@ import { BadgeCheck, ShieldCheck, Network } from "lucide-react";
 import Link from "next/link";
 import type { Metadata } from 'next';
 import { Button } from "@/components/ui/button";
-import { AiImage } from "@/components/common/AiImage";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: 'Our Mission | Sanatana Peethams Portal',
@@ -96,10 +96,12 @@ export default function MissionPage() {
 
             <div className="not-prose text-center mt-16 p-8 bg-card rounded-lg border">
                  <div className="mx-auto mb-4 inline-block relative h-20 w-20">
-                    <AiImage
-                      data-ai-hint="vedanta art"
+                    <Image
+                      src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExMHU2a2w2Z3RtamhxcjQ2ZDE0djMybDVxZ3h5d3J0aXh4aWViOTZqMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3ohs7SYIm3aJeA_i6Y/giphy.gif"
+                      alt="Abstract light GIF"
                       width={80}
                       height={80}
+                      unoptimized
                       className="rounded-full object-cover"
                     />
                 </div>
