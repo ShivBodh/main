@@ -5,7 +5,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { Landmark, ExternalLink } from 'lucide-react';
-import { AiImage } from '@/components/common/AiImage';
+import Image from 'next/image';
 
 export default function SevaClient() {
     const mapUrl = "https://mcp-maps-3d-540744813374.us-west1.run.app?key=AIzaSyAqWV5SY9xlbqgd15uKAh9fhYzcaB1tIOc";
@@ -24,10 +24,9 @@ export default function SevaClient() {
 
             <Card>
                 <CardContent className="p-0 relative w-full aspect-video overflow-hidden rounded-lg border shadow-lg group">
-                    <AiImage
+                    <Image
                         src="https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/aadi-guru-from-shivbodha-.png"
                         alt="An artistic rendering of a map of India"
-                        data-ai-hint="india map painting"
                         width={1200}
                         height={675}
                         className="w-full h-full object-cover transition-all duration-300 group-hover:scale-105"
