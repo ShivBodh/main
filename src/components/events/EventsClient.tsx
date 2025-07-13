@@ -147,11 +147,18 @@ export default function EventsClient() {
         });
     }, [selectedDate, filteredItems]);
     
+    const calendarContainerRef = useRef<HTMLDivElement>(null);
     const swipeHandlers = useSwipeable({
         onSwipedLeft: () => setCurrentMonth(prev => addMonths(prev, 1)),
         onSwipedRight: () => setCurrentMonth(prev => addMonths(prev, -1)),
         trackMouse: true
     });
+    
+    useEffect(() => {
+        if (calendarContainerRef.current) {
+            swipeHandlers.ref(calendarContainerRef.current);
+        }
+    }, [swipeHandlers]);
 
     function DayContent(props: DayProps) {
         const peethamsOnDay = peethamsByDate.get(format(props.date, 'yyyy-MM-dd'));
@@ -262,7 +269,7 @@ export default function EventsClient() {
                 <section>
                      <h2 className="text-2xl font-headline font-bold text-center mb-8">Daily Activity</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-8">
-                        <div className="md:col-span-1 xl:col-span-3" {...swipeHandlers}>
+                        <div className="md:col-span-1 xl:col-span-3" ref={calendarContainerRef}>
                             <Card>
                                 <Calendar
                                     mode="single"

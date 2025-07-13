@@ -25,7 +25,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'media1.giphy.com',
+        hostname: 'lightcoral-echidna-355938.hostingersite.com',
         port: '',
         pathname: '/**',
       }
