@@ -84,7 +84,28 @@
   }
   
   .animate-diamond-spin {
-    animation: spin 10s linear infinite;
+    animation: spin 20s linear infinite;
+  }
+
+  .animate-diamond-light-up {
+    animation: light-up 10s linear infinite;
+  }
+
+  @keyframes light-up {
+    0% { stroke: #ffd700; }
+    15% { stroke: #ff8c00; }
+    30% { stroke: #ff00ff; }
+    45% { stroke: #00ffff; }
+    60% { stroke: #00ff00; }
+    75% { stroke: #ffff00; }
+    90% { stroke: #ff0000; }
+    100% { stroke: #ffd700; }
+  }
+
+
+  @keyframes spin { 
+    from { transform: rotateY(0deg); } 
+    to { transform: rotateY(360deg); } 
   }
 
   @keyframes flash-bg {

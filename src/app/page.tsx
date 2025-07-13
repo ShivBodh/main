@@ -56,11 +56,21 @@ export default function HomePage() {
             <div className="flex justify-center items-center">
              <div className="relative w-[300px] h-[300px] flex items-center justify-center">
                 <div className="absolute inset-0 bg-aurora-gradient opacity-40 blur-2xl animate-aurora"></div>
-                <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='hsl(var(--primary))' strokeWidth='1.5' strokeLinecap='round' strokeLinejoin='round' className="w-48 h-48 animate-diamond-spin">
-                    <g>
-                        <path d='M6 3h12l4 6-10 13L2 9z' />
-                        <path d='M12 22V9' />
-                        <path d='M2 9h20' />
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" className="w-48 h-48 animate-diamond-spin">
+                    <g className="animate-diamond-light-up">
+                        <path d="M50 2 L98 50 L50 98 L2 50 Z" strokeWidth="2" fill="none" />
+                        <path d="M50 2 L50 98" strokeWidth="1" fill="none" />
+                        <path d="M2 50 L98 50" strokeWidth="1" fill="none" />
+                        <path d="M25 25 L75 75" strokeWidth="0.5" fill="none" />
+                        <path d="M75 25 L25 75" strokeWidth="0.5" fill="none" />
+                        <path d="M50 2 L25 25" strokeWidth="0.5" fill="none" />
+                        <path d="M50 2 L75 25" strokeWidth="0.5" fill="none" />
+                        <path d="M2 50 L25 25" strokeWidth="0.5" fill="none" />
+                        <path d="M2 50 L25 75" strokeWidth="0.5" fill="none" />
+                        <path d="M98 50 L75 25" strokeWidth="0.5" fill="none" />
+                        <path d="M98 50 L75 75" strokeWidth="0.5" fill="none" />
+                        <path d="M50 98 L25 75" strokeWidth="0.5" fill="none" />
+                        <path d="M50 98 L75 75" strokeWidth="0.5" fill="none" />
                     </g>
                 </svg>
              </div>
