@@ -16,9 +16,11 @@ export function AcharyaCard({ acharya }: AcharyaCardProps) {
     <div className="w-full h-[500px] bg-card shadow-lg rounded-lg overflow-hidden">
       {/* Hero Image Section */}
       <div className="group relative w-full h-[175px] bg-secondary/20">
-        <img
+        <Image
           src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExMHU2a2w2Z3RtamhxcjQ2ZDE0djMybDVxZ3h5d3J0aXh4aWViOTZqMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3ohs7SYIm3aJeA_i6Y/giphy.gif"
           alt={`An artistic painting related to ${acharya.peetham}`}
+          unoptimized
+          fill
           className="object-cover w-full h-full"
         />
         <div className="absolute right-4 top-4 w-16 h-16 bg-primary rounded-full text-primary-foreground flex flex-col justify-center items-center font-headline shadow-md">
@@ -34,9 +36,11 @@ export function AcharyaCard({ acharya }: AcharyaCardProps) {
                 <div key={rowIndex} className="flex w-full h-1/3 gap-1">
                   {[...Array(3)].map((_, colIndex) => (
                     <div key={colIndex} className="relative w-1/3 h-full bg-black/20 opacity-70 hover:opacity-100 transition-opacity">
-                       <img
+                       <Image
                         src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExMHU2a2w2Z3RtamhxcjQ2ZDE0djMybDVxZ3h5d3J0aXh4aWViOTZqMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3ohs7SYIm3aJeA_i6Y/giphy.gif"
                         alt={`Abstract light GIF ${rowIndex * 3 + colIndex + 1}`}
+                        unoptimized
+                        fill
                         className="object-cover w-full h-full"
                       />
                     </div>

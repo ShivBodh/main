@@ -2,6 +2,7 @@
 import { peethams } from '@/lib/peethams-data';
 import type { Metadata } from 'next';
 import JyotirmathClient from '@/components/peethams/JyotirmathClient';
+import Image from 'next/image';
 
 const peethamInfo = peethams.find(p => p.name.includes('Jyotirmath'))!;
 

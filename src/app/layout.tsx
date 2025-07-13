@@ -7,6 +7,7 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { AuthProvider } from '@/context/AuthContext';
 import { Alegreya } from 'next/font/google';
+import Image from 'next/image';
 
 const alegreya = Alegreya({
   subsets: ['latin'],
