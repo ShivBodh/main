@@ -10,6 +10,7 @@ import { getPanchangDetails, PanchangOutput } from '@/ai/flows/panchang-generato
 import { format, addMonths, subMonths, startOfMonth, getDaysInMonth, getDay, setDate } from 'date-fns';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Sun, Moon, Star, Sunrise, Sunset, Calendar as CalendarIcon, ChevronLeft, ChevronRight, Settings, Code, CheckCircle, Copy } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 
 function AdminPanel() {
   const { toast } = useToast();
@@ -198,7 +199,7 @@ export default function PanchangaClient() {
 
   return (
     <div className="bg-muted/30">
-        <header className="bg-primary text-primary-foreground shadow-md sticky top-0 z-50">
+        <header className="bg-primary text-primary-foreground shadow-md sticky top-16 z-40">
             <div className="container mx-auto p-4 flex justify-between items-center">
                 <h1 className="text-2xl font-bold font-headline">Panchang Service Dashboard</h1>
                 <Button variant="secondary">Admin Login</Button>
@@ -220,14 +221,3 @@ export default function PanchangaClient() {
     </div>
   );
 }
-
-// Simple toast hook placeholder
-const useToast = () => {
-  return {
-    toast: ({ title, description }: { title: string, description: string }) => {
-      console.log(`Toast: ${title} - ${description}`);
-      // In a real app, this would trigger a visual toast notification.
-      alert(`${title}\n${description}`);
-    }
-  };
-};
