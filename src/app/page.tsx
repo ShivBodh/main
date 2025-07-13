@@ -1,4 +1,6 @@
 
+'use client';
+
 import { HeroSection } from '@/components/home/HeroSection';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
@@ -7,12 +9,13 @@ import type { Metadata } from 'next';
 import { PanchangaWidgetPreview } from '@/components/home/PanchangaWidgetPreview';
 import Image from 'next/image';
 import { ChaturmasyaSection } from '@/components/home/ChaturmasyaSection';
-import { ShankaraStoryCanvas } from '@/components/home/ShankaraStoryCanvas';
+import dynamic from 'next/dynamic';
+import { Skeleton } from '@/components/ui/skeleton';
 
-export const metadata: Metadata = {
-  // The title and description will be inherited from the RootLayout,
-  // which is appropriate for the main homepage.
-};
+const ShankaraStoryCanvas = dynamic(() => import('@/components/home/ShankaraStoryCanvas').then(mod => mod.ShankaraStoryCanvas), {
+  ssr: false,
+  loading: () => <Skeleton className="w-full aspect-video" />,
+});
 
 export default function HomePage() {
   return (
@@ -41,7 +44,7 @@ export default function HomePage() {
               </div>
                <div className="flex justify-center items-center md:order-1">
                  <div className="relative w-full max-w-[600px] aspect-[3/2]">
-                  <img
+                  <Image
                       src="https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/aadi-guru-from-shivbodha-.png"
                       alt="An artistic representation of Adi Shankaracharya"
                       width={600}
