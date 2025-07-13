@@ -17,6 +17,15 @@ export default {
       },
     },
     extend: {
+      backgroundImage: {
+        'feature-social': 'linear-gradient(170deg, #01E4F8 0%, #1D3EDE 100%)',
+        'feature-calendar': 'linear-gradient(170deg, #B4EC51 0%, #429321 100%)',
+        'feature-reading': 'linear-gradient(170deg, #F89B29 0%, #FF512F 100%)',
+        'feature-sadhana': 'linear-gradient(170deg, #C86DD7 0%, #3023AE 100%)',
+        'feature-games': 'linear-gradient(170deg, #ff9a9e 0%, #fecfef 100%)',
+        'feature-names': 'linear-gradient(170deg, #a1c4fd 0%, #c2e9fb 100%)',
+        'feature-diary': 'linear-gradient(170deg, #d4fc79 0%, #96e6a1 100%)',
+      },
       fontFamily: {
         body: ['var(--font-alegreya)', 'serif'],
         headline: ['var(--font-alegreya)', 'serif'],
@@ -113,9 +122,10 @@ export default {
           'to': { transform: 'translateX(calc(-50% - 1rem))' },
         },
         'bubble-rise': {
-          '0%': { transform: 'translateY(100vh) scale(0)', opacity: '0' },
-          '50%': { transform: 'translateY(50vh) scale(1.2)', opacity: '0.6' },
-          '100%': { transform: 'translateY(0vh) scale(0.5)', opacity: '0' },
+          '0%': { transform: 'translateY(100vh) scale(0.5)', opacity: '0' },
+          '50%': { opacity: '0.6' },
+          '99%': { transform: 'translateY(0vh) scale(1.2)', opacity: '0' },
+          '100%': { transform: 'translateY(100vh) scale(0.5)', opacity: '0' },
         }
       },
       animation: {

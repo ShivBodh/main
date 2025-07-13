@@ -10,7 +10,6 @@ import { cn } from '@/lib/utils';
 
 export function FeatureShowcase() {
     const bubbleStyles = [
-        // More, smaller bubbles with varied colors and delays
         { size: 'w-8 h-8', position: 'top-1/4 left-1/4', delay: '0s', color: 'bg-primary/20' },
         { size: 'w-12 h-12', position: 'top-1/2 right-1/4', delay: '2s', color: 'bg-accent/20' },
         { size: 'w-16 h-16', position: 'bottom-1/4 left-1/3', delay: '4s', color: 'bg-secondary/20' },
@@ -58,14 +57,14 @@ export function FeatureShowcase() {
                         const Icon = feature.icon;
                         return (
                              <div key={index} className="relative pt-10 transition-all duration-300 hover:-translate-y-2 group">
-                                <div className={`absolute top-0 left-1/2 -translate-x-1/2 h-20 w-20 rounded-full bg-gradient-to-br ${feature.gradient} flex items-center justify-center shadow-lg border-4 border-background z-10`}>
+                                <div className={cn('absolute top-0 left-1/2 -translate-x-1/2 h-20 w-20 rounded-full flex items-center justify-center shadow-lg border-4 border-background z-10', feature.gradient)}>
                                      <Icon className="h-10 w-10 text-white/90" strokeWidth={1.5} />
                                 </div>
                                 <div className="bg-card/60 backdrop-blur-sm border border-border/50 shadow-lg rounded-[28px] overflow-hidden flex flex-col h-full">
                                     <div className="pt-14 p-6 flex flex-col flex-grow text-center">
                                         <h3 className="font-headline text-xl font-bold text-foreground/90">{feature.title}</h3>
                                         <p className="text-sm text-muted-foreground mt-2 flex-grow">{feature.description}</p>
-                                        <Button asChild size="sm" className={`w-full mt-6 text-white ${feature.buttonColor}`}>
+                                        <Button asChild size="sm" className={cn('w-full mt-6 text-white', feature.buttonColor)}>
                                             <Link href={feature.link}>
                                                 Explore <ArrowRight className="ml-2 h-4 w-4" />
                                             </Link>
