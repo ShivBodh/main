@@ -21,7 +21,7 @@ export default function HomePage() {
       {/* Peethams Section */}
       <section className="py-16 md:py-24 bg-muted/50">
           <div className="container mx-auto grid md:grid-cols-2 gap-12 items-center">
-              <div>
+              <div className="md:order-1">
                   <h2 className="text-3xl md:text-4xl font-headline font-bold text-primary">The Shankaracharya Encyclopedia</h2>
                   <p className="mt-4 text-lg text-foreground/80">
                       Dive deep into the life, teachings, and lineage of the great Acharyas. Our portal provides a structured, searchable, and authoritative knowledge base, making timeless wisdom accessible to all.
@@ -35,7 +35,7 @@ export default function HomePage() {
                         </Link>
                     </Button>
               </div>
-               <div className="flex justify-center items-center">
+               <div className="flex justify-center items-center md:order-2">
                  <div className="relative w-full max-w-[600px]">
                   <Image
                       src="https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/aadi-guru-from-shivbodha-.png"
