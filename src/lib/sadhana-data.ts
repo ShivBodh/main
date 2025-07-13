@@ -1,5 +1,5 @@
 
-import { Scroll, BrainCircuit, Sparkles, Atom } from 'lucide-react';
+import { Scroll, BrainCircuit, Sparkles, Atom, Baby } from 'lucide-react';
 
 export const sadhanaTools = [
   {
@@ -22,5 +22,12 @@ export const sadhanaTools = [
     icon: Sparkles,
     link: '/sadhana/daily-wisdom',
     aiHint: 'ancient book'
+  },
+  {
+    title: 'Vedic Name Finder',
+    description: 'Discover auspicious baby names based on Vedic astrology principles, including Rashi (Moon Sign) and Nakshatra Pada.',
+    icon: Baby,
+    link: '/sadhana/vedic-name-finder',
+    aiHint: 'astrology chart'
   }
 ];
