@@ -36,7 +36,8 @@ export default function HomePage() {
               </div>
                <div className="flex justify-center items-center">
                  <div className="relative w-full max-w-[600px]">
-                  <AiImage 
+                  <AiImage
+                      src="https://placehold.co/600x400.png"
                       data-ai-hint="vedanta art"
                       width={600}
                       height={400}
