@@ -113,9 +113,9 @@ export default {
           'to': { transform: 'translateX(calc(-50% - 1rem))' },
         },
         'bubble-rise': {
-          '0%': { transform: 'translateY(0) scale(0)', opacity: '0' },
-          '50%': { opacity: '0.6' },
-          '100%': { transform: 'translateY(-100vh) scale(1)', opacity: '0' },
+          '0%': { transform: 'translateY(100vh) scale(0)', opacity: '0' },
+          '50%': { transform: 'translateY(50vh) scale(1.2)', opacity: '0.6' },
+          '100%': { transform: 'translateY(0vh) scale(0.5)', opacity: '0' },
         }
       },
       animation: {
