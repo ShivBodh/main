@@ -109,9 +109,8 @@ export default {
           'from': { transform: 'rotate(0deg)' },
           'to': { transform: 'rotate(360deg)' },
         },
-        'spin': {
-          'from': { transform: 'rotate(0deg)' },
-          'to': { transform: 'rotate(360deg)' },
+        'autoscroll': {
+          'to': { transform: 'translateX(calc(-50% - 1rem))' },
         }
       },
       animation: {
@@ -122,6 +121,7 @@ export default {
         'breath': 'breath 4s ease-in-out infinite',
         'gradient-pan': 'gradient-pan 15s ease infinite',
         'aurora': 'aurora 20s linear infinite',
+        'autoscroll': 'autoscroll 60s linear infinite',
       },
       perspective: {
         '1000px': '1000px',
