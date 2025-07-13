@@ -109,12 +109,13 @@ export function getDailyPanchanga(date: Date, region: PanchangaRegion): Panchang
     const basePanchanga = basePanchangaData.find(p => p.region === region)!;
     
     // Simple modulo arithmetic to simulate dynamic data based on the day of the month
-    const tithiName = allTithis[(day - 1) % 30];
+    const tithiIndex = (day - 1) % 30;
+    const tithiName = allTithis[tithiIndex];
     const nakshatraName = allNakshatras[(day - 1) % 27];
     const yogaName = allYogas[(day - 1) % 27];
-    const karanaName = allKaranas[Math.floor(((day - 1) * 2)) % 11];
+    const karanaName = allKaranas[Math.floor(((tithiIndex) * 2)) % 11];
 
-    const paksha = (day <= 15) ? 'Shukla Paksha' : 'Krishna Paksha';
+    const paksha = (tithiIndex < 15) ? 'Shukla Paksha' : 'Krishna Paksha';
 
     const dynamicData: PanchangaDetails = {
       ...basePanchanga.data,
