@@ -111,6 +111,11 @@ export default {
         },
         'autoscroll': {
           'to': { transform: 'translateX(calc(-50% - 1rem))' },
+        },
+        'bubble-rise': {
+          '0%': { transform: 'translateY(100vh) scale(0)', opacity: '0' },
+          '50%': { opacity: '1' },
+          '100%': { transform: 'translateY(-100vh) scale(1)', opacity: '0' },
         }
       },
       animation: {
@@ -122,6 +127,7 @@ export default {
         'gradient-pan': 'gradient-pan 15s ease infinite',
         'aurora': 'aurora 20s linear infinite',
         'autoscroll': 'autoscroll 60s linear infinite',
+        'bubble-rise': 'bubble-rise 20s linear infinite',
       },
       perspective: {
         '1000px': '1000px',
