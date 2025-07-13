@@ -79,7 +79,7 @@ export default function PhilosophyPage() {
                 This portal is the practical application of that journey. We take the '0' of countless disconnected articles and scattered schedules, and through reverent curation, we transform it into the '1'—a single, integrated, and trustworthy platform. 
               </p>
               <p>
-                Every event on the calendar and every teaching shared is a data point on the sacred map from Shunya to Purna. This platform is more than a website; it is a seva and a tool in our collective work to build a more beautiful, conscious, and connected world. It is our hope that by providing a clear, accessible path to the authentic lineage, we empower you to not only start your own redefinition of reality but also to become a beacon of light for the future.
+                Every event on the calendar and every teaching shared is a data point on the sacred map from Shunya to Purna. This platform is more than a seva and a tool in our collective work to build a more beautiful, conscious, and connected world. It is our hope that by providing a clear, accessible path to the authentic lineage, we empower you to not only start your own redefinition of reality but also to become a beacon of light for the future.
               </p>
             </section>
           </article>
