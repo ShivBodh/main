@@ -7,6 +7,7 @@ import type { Metadata } from 'next';
 import { PanchangaWidgetPreview } from '@/components/home/PanchangaWidgetPreview';
 import Image from 'next/image';
 import { ChaturmasyaSection } from '@/components/home/ChaturmasyaSection';
+import { ShankaraStoryCanvas } from '@/components/home/ShankaraStoryCanvas';
 
 export const metadata: Metadata = {
   // The title and description will be inherited from the RootLayout,
@@ -120,14 +121,7 @@ export default function HomePage() {
             </div>
             <div className="flex justify-center items-center md:order-1">
               <div className="relative w-full max-w-[600px] aspect-video">
-              <Image
-                  src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExMHU2a2w2Z3RtamhxcjQ2ZDE0djMybDVxZ3h5d3J0aXh4aWViOTZqMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3ohs7SYIm3aJeA_i6Y/giphy.gif"
-                  alt="Abstract light GIF"
-                  unoptimized
-                  width={600}
-                  height={338}
-                  className="rounded-lg object-cover shadow-lg w-full h-full"
-              />
+                <ShankaraStoryCanvas />
               </div>
             </div>
         </div>

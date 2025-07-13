@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -132,5 +133,34 @@
   }
   .text-shadow-md {
     text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+  }
+
+  .animate-draw-erase {
+    stroke-dasharray: 500;
+    stroke-dashoffset: 500;
+    animation-fill-mode: forwards;
+  }
+
+  .animate-draw-erase.draw {
+    animation-name: draw;
+  }
+
+  .animate-draw-erase.erase {
+    animation-name: erase;
+  }
+
+  @keyframes draw {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @keyframes erase {
+    from {
+      stroke-dashoffset: 0;
+    }
+    to {
+      stroke-dashoffset: 500;
+    }
   }
 }
