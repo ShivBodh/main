@@ -19,7 +19,7 @@ export default function HomePage() {
 
       {/* Peethams Section */}
       <section className="py-16 md:py-24 bg-muted/50">
-          <div className="container mx-auto grid md:grid-cols-1 gap-12 items-center text-center md:text-left">
+          <div className="container mx-auto grid md:grid-cols-2 gap-12 items-center">
               <div>
                   <h2 className="text-3xl md:text-4xl font-headline font-bold text-primary">The Shankaracharya Encyclopedia</h2>
                   <p className="mt-4 text-lg text-foreground/80">
@@ -34,6 +34,16 @@ export default function HomePage() {
                         </Link>
                     </Button>
               </div>
+               <div className="flex justify-center items-center">
+                 <div className="relative w-full max-w-[600px]">
+                  <AiImage 
+                      data-ai-hint="vedanta art"
+                      width={600}
+                      height={400}
+                      className="rounded-lg object-cover shadow-lg"
+                  />
+                  </div>
+                </div>
           </div>
       </section>
 
