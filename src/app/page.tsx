@@ -11,6 +11,7 @@ import Image from 'next/image';
 import { ChaturmasyaSection } from '@/components/home/ChaturmasyaSection';
 import dynamic from 'next/dynamic';
 import { Skeleton } from '@/components/ui/skeleton';
+import { FeatureShowcase } from '@/components/home/FeatureShowcase';
 
 const ShankaraStoryCanvas = dynamic(() => import('@/components/home/ShankaraStoryCanvas').then(mod => mod.ShankaraStoryCanvas), {
   ssr: false,
@@ -131,6 +132,9 @@ export default function HomePage() {
             </div>
         </div>
       </section>
+
+      {/* Features Showcase Section */}
+      <FeatureShowcase />
       
       {/* Panchanga Widgets Section */}
       <PanchangaWidgetPreview />
