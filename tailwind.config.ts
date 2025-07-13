@@ -109,6 +109,18 @@ export default {
           '50%': { backgroundPosition: '100% 50%' },
           '100%': { backgroundPosition: '0% 50%' },
         },
+        'slide-active': {
+          '0%': { transform: 'translateX(0) scale(1)', opacity: 1 },
+          '100%': { transform: 'translateX(0) scale(1)', opacity: 1, 'z-index': 3 },
+        },
+        'slide-prev': {
+          '0%': { transform: 'translateX(-2%) scale(0.9)', opacity: 1, 'z-index': 2 },
+          '100%': { transform: 'translateX(-4%) scale(0.8)', opacity: 0, 'z-index': 1, pointerEvents: 'none' },
+        },
+        'slide-next': {
+          '0%': { transform: 'translateX(0) scale(1)', opacity: 1 },
+          '100%': { transform: 'translateX(2%) scale(0.95)', opacity: 1, 'z-index': 2, pointerEvents: 'none' },
+        }
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
@@ -118,8 +130,25 @@ export default {
         'page-flip-in': 'page-flip-in 0.3s ease-in-out forwards',
         'breath': 'breath 4s ease-in-out infinite',
         'gradient-pan': 'gradient-pan 15s ease infinite',
+        'slide-active': 'slide-active 0.7s cubic-bezier(0.23, 1, 0.32, 1) forwards',
+        'slide-prev': 'slide-prev 0.7s cubic-bezier(0.23, 1, 0.32, 1) forwards',
+        'slide-next': 'slide-next 0.7s cubic-bezier(0.23, 1, 0.32, 1) forwards',
       },
+      perspective: {
+        '1000px': '1000px',
+      }
     },
   },
-  plugins: [require('tailwindcss-animate'), require('@tailwindcss/typography'), require('tailwind-scrollbar')],
+  plugins: [
+    require('tailwindcss-animate'), 
+    require('@tailwindcss/typography'), 
+    require('tailwind-scrollbar'),
+    function ({ addUtilities }: { addUtilities: any }) {
+      addUtilities({
+        '.perspective-1000': {
+          perspective: '1000px',
+        },
+      })
+    }
+  ],
 } satisfies Config;

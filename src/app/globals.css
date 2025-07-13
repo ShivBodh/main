@@ -95,95 +95,47 @@
   .grid-rows-15 {
     grid-template-rows: repeat(15, minmax(0, 1fr));
   }
+  .text-shadow-lg {
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  }
+  .text-shadow-md {
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+  }
 }
 
 
-/* Chaturmasya Card Styles */
-.swiper-content {
-  background-color: hsl(var(--card));
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
+/* Chaturmasya Layer Slider Styles */
+.layer-slider-item.active {
+    animation: slide-active 0.7s cubic-bezier(0.23, 1, 0.32, 1) forwards;
 }
 
-.swiper-content .hero {
-  width: 100%;
-  height: 175px;
-  position: relative;
-  background-position: center;
-  background-size: cover;
+.layer-slider-item.prev {
+    animation: slide-prev 0.7s cubic-bezier(0.23, 1, 0.32, 1) forwards;
 }
 
-.swiper-content .hero .calendar {
-  width: 60px;
-  height: 60px;
-  float: right;
-  background-color: hsl(var(--primary));
-  color: hsl(var(--primary-foreground));
-  border-radius: 50%;
-  margin-right: 15px;
-  margin-top: 15px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+.layer-slider-item.next {
+    animation: slide-next 0.7s cubic-bezier(0.23, 1, 0.32, 1) forwards;
 }
 
-.swiper-content .hero .calendar .date {
-  font-size: 1.2rem;
-  line-height: 1.3rem;
-  font-weight: bold;
+.layer-slider-item .layer-slider-image {
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 0% 100%);
+    opacity: 0;
+    transform: scale(1.2);
+    transition: all 0.7s cubic-bezier(0.23, 1, 0.32, 1) 0.2s;
 }
 
-.swiper-content .hero .calendar .month {
-  font-size: 0.8rem;
+.layer-slider-item.active .layer-slider-image {
+    opacity: 1;
+    transform: scale(1);
 }
 
-.swiper-content .copy {
-  padding: 20px;
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-}
-.swiper-content .copy h1 {
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin: 0 0 5px 0;
-  color: hsl(var(--foreground));
-  font-family: var(--font-headline);
-  line-height: 1.4;
-  height: 5.6em; /* 1.2rem * 1.4 * 4 lines */
-  overflow: hidden;
-}
-.swiper-content .copy h3 {
-  font-size: 1rem;
-  margin: 0 0 15px 0;
-  color: hsl(var(--accent));
-  font-weight: bold;
-}
-.swiper-content .copy p {
-  font-size: 0.9rem;
-  line-height: 1.5rem;
-  color: hsl(var(--muted-foreground));
-  flex-grow: 1;
+.layer-slider-item .layer-slider-content {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1) 0.5s;
 }
 
-.swiper-content .footer {
-  margin-top: 20px;
-  color: hsl(var(--muted-foreground));
-  border-top: 1px solid hsl(var(--border));
-  padding-top: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.layer-slider-item.active .layer-slider-content {
+    opacity: 1;
+    transform: translateY(0);
 }
-.swiper-content .footer .time,
-.swiper-content .footer .comments {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.8rem;
-}
-

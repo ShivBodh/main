@@ -1,95 +1,105 @@
 
 'use client';
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel"
-import { Clock, MessageCircle } from "lucide-react";
-
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
 
 const chaturmasyaData = [
     {
-        acharya: "अनंतश्री विभूषित पश्चिमाम्नाय द्वारकाशारदापीठाधीश्वर जगद्गुरू शंकराचार्य स्वामीश्री सदानन्द सरस्वती जी महाराज",
-        location: "परमहंसी गंगा आश्रम श्रीधाम, नरसिंहपुर, मध्यप्रदेश",
-        discourses: "मुण्डकोपनिषद्, वाल्मीकि रामायण",
+        acharya: "Jagadguru Shankaracharya Swami Sri Sadananda Saraswati Ji Maharaj",
+        peetham: "Dwaraka Sharada Peetham",
+        location: "Paramhansi Ganga Ashram, Narsinghpur, MP",
+        discourses: "Discourses on Mundaka Upanishad & Valmiki Ramayana.",
         imageUrl: "https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/dwarakapeetha-shankaracharya.png",
-        date: { day: '21', month: 'JUL' }
+        bgColor: "#003366" // Deep Blue
     },
     {
-        acharya: "जगदगुरु शंकराचार्य स्वामिश्री: अविमुकेश्वरानंद: सरस्वती जी महाराज",
-        location: "वझिरा गणेश मंदिर, बोरीवली, मुंबई",
-        discourses: "नित्य वेदांत वर्ग, सायंकालीन प्रवचन, श्री गोप्रतिष्ठा महायज्ञ",
+        acharya: "Jagadguru Shankaracharya Swami Sri Avimukteshwaranand Saraswati Ji Maharaj",
+        peetham: "Jyotirmath Peetham",
+        location: "Vazhira Ganesh Mandir, Borivali, Mumbai",
+        discourses: "Daily Abhishek of 108 Shivlings, Vedanta classes, evening discourses, and a grand Go Pratishtha Mahayagya.",
         imageUrl: "https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/jyotishpeetha-shankarachaarya-.png",
-        date: { day: '09', month: 'JUL' }
+        bgColor: "#4a148c" // Purple
     },
     {
-        acharya: "अनंत श्री विभूषित गोवर्धन मठ पुरी पीठाधीश्वर जगतगुरु शंकराचार्य स्वामी निश्चलानंद सरस्वती जी महाराज",
-        location: "गोवर्धन मठ, पुरी",
-        discourses: "वेद वेदांत उपनिषद, भागवत कथा",
+        acharya: "Jagadguru Shankaracharya Swami Sri Nischalananda Saraswati Ji Maharaj",
+        peetham: "Govardhana Peetham, Puri",
+        location: "Govardhan Math, Puri",
+        discourses: "Begins July 3rd with Vyasa Pujan. Daily study of Vedas, Vedanta, Upanishads, and discourses on the Bhagavata.",
         imageUrl: "https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/puri-peetha-shankaracharya-.png",
-        date: { day: '03', month: 'JUL' }
+        bgColor: "#b71c1c" // Deep Red
     },
     {
-        acharya: "Jagadguru Shankaracharya Sri Sri Bharati Tirtha Mahaswamiji & Sri Sri Vidhushekhara Bharati Mahaswamiji",
+        acharya: "Jagadguru Sri Sri Bharati Tirtha & Sri Sri Vidhushekhara Bharati Mahaswamiji",
+        peetham: "Sringeri Sharada Peetham",
         location: "Sringeri Sharada Peetham",
-        discourses: "Multilingual discourses on various topics from the Puranas",
+        discourses: "Vrata begins July 10th. Multilingual discourses from the Puranas streamed daily on YouTube & Facebook.",
         imageUrl: "https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/sringeri-shankaracharya-.png",
-        date: { day: '10', month: 'JUL' }
+        bgColor: "#e65100" // Orange
     }
 ];
 
 export function ChaturmasyaSection() {
+    const [activeIndex, setActiveIndex] = useState(0);
+
+    const handleNext = () => {
+        setActiveIndex((prev) => (prev + 1) % chaturmasyaData.length);
+    };
+
+    const handlePrev = () => {
+        setActiveIndex((prev) => (prev - 1 + chaturmasyaData.length) % chaturmasyaData.length);
+    };
+
     return (
-        <section className="py-16 md:py-24 bg-background">
+        <section className="py-16 md:py-24 bg-muted/50">
             <div className="container mx-auto">
                 <div className="text-center mb-12">
                      <h2 className="text-3xl md:text-4xl font-headline font-bold text-primary">Chaturmasya Vrata 2025</h2>
                      <p className="mt-4 text-lg text-foreground/80 max-w-3xl mx-auto">
-                        Authentic news and program details for the sacred Chaturmasya period from the four cardinal Peethams.
+                        Authentic program details for the sacred Chaturmasya period from the four cardinal Peethams.
                      </p>
                 </div>
-                <Carousel
-                    opts={{
-                        align: "start",
-                        loop: true,
-                    }}
-                    className="w-full"
-                >
-                    <CarouselContent>
-                        {chaturmasyaData.map((data, index) => (
-                             <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-                                 <div className="swiper-content">
-                                    <div className="hero" style={{ backgroundImage: `url(${data.imageUrl})` }}>
-                                        <div className="calendar">
-                                            <span className="date">{data.date.day}</span>
-                                            <span className="month">{data.date.month}</span>
-                                        </div>
-                                    </div>
-                                    <div className="copy">
-                                        <h1>{data.acharya}</h1>
-                                        <h3>{data.location}</h3>
-                                        <p>{data.discourses}</p>
-                                        <div className="footer">
-                                            <div className="time">
-                                            <div><Clock className="h-4 w-4 inline-block mr-1" /> Starts</div>
-                                            </div>
-                                            <div className="comments">
-                                            <div><MessageCircle className="h-4 w-4 inline-block mr-1" /> Discourses</div>
-                                            </div>
-                                        </div>
-                                    </div>
+                
+                <div className="layer-slider relative w-full max-w-4xl mx-auto aspect-[16/9] perspective-[1000px]">
+                    <div className="absolute inset-0 transition-all duration-300" style={{ transform: `translateZ(calc(var(--tz) * 1px)) perspective(1000px)` }}>
+                    {chaturmasyaData.map((item, index) => {
+                        const isActive = index === activeIndex;
+                        const classState = isActive ? 'active' : index < activeIndex ? 'prev' : 'next';
+                        return (
+                            <div 
+                                key={index}
+                                className={`layer-slider-item absolute inset-0 transition-all duration-700 ease-in-out ${classState}`}
+                                style={{ '--bg-color': item.bgColor } as React.CSSProperties}
+                            >
+                                <div className="layer-slider-bg absolute inset-0 bg-[var(--bg-color)]"></div>
+                                <div className="layer-slider-image absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${item.imageUrl})`}}></div>
+                                <div className="layer-slider-content absolute inset-0 flex flex-col justify-end p-8 text-white bg-gradient-to-t from-black/80 to-transparent">
+                                    <h3 className="text-2xl lg:text-3xl font-headline font-bold text-shadow-lg">{item.acharya}</h3>
+                                    <p className="text-lg font-semibold text-primary-foreground/90 text-shadow-md">{item.peetham}</p>
+                                    <p className="mt-2 text-md leading-snug max-w-2xl">{item.discourses}</p>
+                                    <p className="mt-1 font-bold text-accent-foreground/80">{item.location}</p>
                                 </div>
-                             </CarouselItem>
-                        ))}
-                    </CarouselContent>
-                    <CarouselPrevious className="hidden sm:flex" />
-                    <CarouselNext className="hidden sm:flex" />
-                </Carousel>
+                            </div>
+                        )
+                    })}
+                    </div>
+                     <Button 
+                        onClick={handlePrev} 
+                        className="layer-slider-prev absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2 z-10"
+                        variant="secondary"
+                        size="icon"
+                     >
+                        &lt;
+                     </Button>
+                     <Button 
+                        onClick={handleNext}
+                        className="layer-slider-next absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 z-10"
+                        variant="secondary"
+                        size="icon"
+                     >
+                        &gt;
+                     </Button>
+                </div>
             </div>
         </section>
     );
 }
-
