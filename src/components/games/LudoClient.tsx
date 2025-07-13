@@ -191,37 +191,6 @@ export default function LudoClient() {
         setHistory(prev => [{ actor, move, commentary }, ...prev]);
     }, []);
 
-    const handleReset = useCallback(() => {
-        setGameState(createInitialState());
-        setDiceValue(null);
-        setCurrentPlayerIndex(0);
-        setIsRolling(false);
-        setHistory([]);
-        setStatus("Your turn to roll the dice!");
-        setWinner(null);
-        addHistory('System', 'Game has been reset.');
-    }, [addHistory, user]);
-
-    const handleRollDice = useCallback(async () => {
-        if (isRolling || winner) return;
-        setIsRolling(true);
-        addHistory(gameState[currentPlayerColor].name, 'is rolling...');
-        const roll = Math.floor(Math.random() * 6) + 1;
-        await new Promise(res => setTimeout(res, 500));
-        setDiceValue(roll);
-        setIsRolling(false);
-        addHistory(gameState[currentPlayerColor].name, `rolled a ${roll}.`);
-        
-        // Check for valid moves
-        const validMoves = getValidMoves(gameState, currentPlayerColor, roll);
-        if (validMoves.length === 0) {
-            addHistory(gameState[currentPlayerColor].name, 'has no valid moves.');
-            setTimeout(() => nextTurn(roll), 1000);
-        } else {
-             setStatus('Select a pawn to move.');
-        }
-    }, [isRolling, winner, gameState, currentPlayerColor, addHistory]);
-    
     const nextTurn = useCallback((lastDiceRoll: number) => {
         setDiceValue(null);
         if (lastDiceRoll !== 6 && !winner) {
@@ -323,6 +292,40 @@ export default function LudoClient() {
 
     }, [winner, currentPlayerColor, diceValue, gameState, addHistory, nextTurn, toast]);
 
+    const handleRollDice = useCallback(async () => {
+        if (isRolling || winner) return;
+        setIsRolling(true);
+        addHistory(gameState[currentPlayerColor].name, 'is rolling...');
+        const roll = Math.floor(Math.random() * 6) + 1;
+        await new Promise(res => setTimeout(res, 500));
+        setDiceValue(roll);
+        setIsRolling(false);
+        addHistory(gameState[currentPlayerColor].name, `rolled a ${roll}.`);
+        
+        // Check for valid moves
+        const validMoves = getValidMoves(gameState, currentPlayerColor, roll);
+        if (validMoves.length === 0) {
+            addHistory(gameState[currentPlayerColor].name, 'has no valid moves.');
+            setTimeout(() => nextTurn(roll), 1000);
+        } else {
+             setStatus('Select a pawn to move.');
+             if (gameState[currentPlayerColor].isAI) {
+                 setTimeout(() => handlePawnClick(currentPlayerColor, validMoves[0]), 1000);
+             }
+        }
+    }, [isRolling, winner, gameState, currentPlayerColor, addHistory, nextTurn, handlePawnClick]);
+
+    const handleReset = useCallback(() => {
+        setGameState(createInitialState());
+        setDiceValue(null);
+        setCurrentPlayerIndex(0);
+        setIsRolling(false);
+        setHistory([]);
+        setStatus("Your turn to roll the dice!");
+        setWinner(null);
+        addHistory('System', 'Game has been reset.');
+    }, [addHistory, user]);
+
     useEffect(() => {
         if(winner) {
             setStatus(`${gameState[winner].name} wins!`);
@@ -333,14 +336,11 @@ export default function LudoClient() {
         setStatus(`${player.name}'s turn.`);
 
         if(player.isAI && diceValue === null) {
-            setTimeout(handleRollDice, 1000);
-        } else if (player.isAI && diceValue !== null) {
-            const validMoves = getValidMoves(gameState, currentPlayerColor, diceValue);
-            if(validMoves.length > 0) {
-                 setTimeout(() => handlePawnClick(currentPlayerColor, validMoves[0]), 1000); // AI picks first valid move
-            }
+            setTimeout(() => {
+                if (!isRolling) handleRollDice();
+            }, 1000);
         }
-    }, [currentPlayerIndex, diceValue, gameState, winner, handleRollDice, handlePawnClick]);
+    }, [currentPlayerIndex, diceValue, gameState, winner, isRolling]);
 
 
     const getInitials = (name: string | null | undefined) => {
