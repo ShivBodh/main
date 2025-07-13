@@ -113,8 +113,8 @@ export default {
           'to': { transform: 'translateX(calc(-50% - 1rem))' },
         },
         'bubble-rise': {
-          '0%': { transform: 'translateY(100vh) scale(0)', opacity: '0' },
-          '50%': { opacity: '1' },
+          '0%': { transform: 'translateY(0) scale(0)', opacity: '0' },
+          '50%': { opacity: '0.6' },
           '100%': { transform: 'translateY(-100vh) scale(1)', opacity: '0' },
         }
       },
@@ -127,7 +127,7 @@ export default {
         'gradient-pan': 'gradient-pan 15s ease infinite',
         'aurora': 'aurora 20s linear infinite',
         'autoscroll': 'autoscroll 60s linear infinite',
-        'bubble-rise': 'bubble-rise 20s linear infinite',
+        'bubble-rise': 'bubble-rise 25s linear infinite',
       },
       perspective: {
         '1000px': '1000px',
