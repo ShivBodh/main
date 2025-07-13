@@ -6,6 +6,7 @@ import { ArrowRight, BookOpen, Calendar, SunMoon, Atom, Users, Megaphone, Notebo
 import type { Metadata } from 'next';
 import { PanchangaWidgetPreview } from '@/components/home/PanchangaWidgetPreview';
 import Image from 'next/image';
+import { ChaturmasyaSection } from '@/components/home/ChaturmasyaSection';
 
 export const metadata: Metadata = {
   // The title and description will be inherited from the RootLayout,
@@ -16,6 +17,9 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
+
+      {/* Chaturmasya Section */}
+      <ChaturmasyaSection />
 
       {/* Peethams Section */}
       <section className="py-16 md:py-24 bg-muted/50">
@@ -36,10 +40,9 @@ export default function HomePage() {
               </div>
                <div className="flex justify-center items-center md:order-1">
                  <div className="relative w-full max-w-[600px] aspect-[3/2]">
-                  <Image
+                  <img
                       src="https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/aadi-guru-from-shivbodha-.png"
                       alt="An artistic representation of Adi Shankaracharya"
-                      fill
                       className="rounded-lg object-contain shadow-lg"
                   />
                   </div>
@@ -52,11 +55,10 @@ export default function HomePage() {
         <div className="container mx-auto grid md:grid-cols-2 gap-12 items-center">
             <div className="flex justify-center items-center">
              <div className="relative w-full max-w-[600px] aspect-video">
-              <Image
+              <img
                   src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExMHU2a2w2Z3RtamhxcjQ2ZDE0djMybDVxZ3h5d3J0aXh4aWViOTZqMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3ohs7SYIm3aJeA_i6Y/giphy.gif"
                   alt="Abstract light GIF"
                   unoptimized
-                  fill
                   className="rounded-lg object-cover shadow-lg w-full h-full"
               />
               </div>
@@ -102,11 +104,10 @@ export default function HomePage() {
             </div>
             <div className="flex justify-center items-center md:order-1">
               <div className="relative w-full max-w-[600px] aspect-video">
-              <Image
+              <img
                   src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExMHU2a2w2Z3RtamhxcjQ2ZDE0djMybDVxZ3h5d3J0aXh4aWViOTZqMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3ohs7SYIm3aJeA_i6Y/giphy.gif"
                   alt="Abstract light GIF"
                   unoptimized
-                  fill
                   className="rounded-lg object-cover shadow-lg w-full h-full"
               />
               </div>
