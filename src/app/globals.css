@@ -64,6 +64,15 @@
     --border: 42 20% 20%;
     --input: 42 20% 20%;
     --ring: 51 100% 60%;
+
+    --sidebar-background: 240 4% 9%;
+    --sidebar-foreground: 240 5% 65%;
+    --sidebar-border: 240 4% 15%;
+    --sidebar-accent: 240 5% 18%;
+    --sidebar-accent-foreground: 240 5% 90%;
+    --sidebar-primary: 240 5% 90%;
+    --sidebar-primary-foreground: 240 5% 10%;
+    --sidebar-ring: 240 5% 18%;
   }
 }
 
@@ -193,4 +202,26 @@
     50%{background-position:100% 50%}
     100%{background-position:0% 50%}
   }
+
+   @keyframes bubble-rise-2 {
+      0% {
+        transform: translateY(100%) scale(0.1);
+        opacity: 0;
+      }
+      20% {
+        opacity: 0.7;
+      }
+      90% {
+        opacity: 0.7;
+      }
+      100% {
+        transform: translateY(-100%) scale(1.2);
+        opacity: 0;
+      }
+    }
+    .animate-bubble-rise {
+        animation-name: bubble-rise-2;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+    }
 }
