@@ -7,7 +7,7 @@ import { peethams } from '@/lib/peethams-data';
 import type { Metadata } from 'next';
 import { CurrentAcharyas } from '@/components/peethams/CurrentAcharyas';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { AiImage } from '@/components/common/AiImage';
+import Image from 'next/image';
 
 export const metadata: Metadata = {
   title: 'The Four Peethams | Sanatana Peethams Portal',
@@ -27,10 +27,9 @@ export default function PeethamsPage() {
       <div className="container mx-auto max-w-6xl py-16 md:py-24 px-4">
         <div className="text-center mb-16">
           <div className="mb-8 mx-auto inline-block relative h-[150px] w-[150px]">
-            <AiImage
+            <Image
               src="https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/aadi-guru-from-shivbodha-.png"
               alt="An artistic representation of Adi Shankaracharya"
-              data-ai-hint="adi shankaracharya painting"
               width={150}
               height={150}
               className="mx-auto object-cover rounded-full shadow-lg"
