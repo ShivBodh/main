@@ -6,8 +6,7 @@ export interface FeatureCardData {
     title: string;
     description: string;
     link: string;
-    gradient: string;
-    buttonColor: string;
+    accentColor: 'blue' | 'pink' | 'green' | 'orange' | 'purple' | 'cyan' | 'yellow';
 }
 
 export const featuresData: FeatureCardData[] = [
@@ -16,55 +15,48 @@ export const featuresData: FeatureCardData[] = [
         title: 'Sanatan Social',
         description: 'A private community for devotees to connect, share, and support dharmic causes.',
         link: '/social',
-        gradient: 'bg-feature-social',
-        buttonColor: 'bg-feature-social'
+        accentColor: 'blue',
     },
     {
         icon: CalendarDays,
         title: 'Bodha Calendar',
         description: 'A living archive of daily events, media, and discourses from all four Peethams.',
         link: '/events',
-        gradient: 'bg-feature-calendar',
-        buttonColor: 'bg-feature-calendar'
+        accentColor: 'pink',
     },
     {
         icon: BookOpen,
         title: 'Reading Room',
         description: 'Immerse yourself in the timeless wisdom of Advaita Vedanta with our library of sacred texts.',
         link: '/reading',
-        gradient: 'bg-feature-reading',
-        buttonColor: 'bg-feature-reading'
+        accentColor: 'green',
     },
     {
         icon: Atom,
         title: 'Sādhanā Suite',
         description: 'Digital tools like a Japa counter and meditation timer to support your daily spiritual practice.',
         link: '/sadhana',
-        gradient: 'bg-feature-sadhana',
-        buttonColor: 'bg-feature-sadhana'
+        accentColor: 'orange',
     },
     {
         icon: Gamepad2,
         title: 'Pasha (Ludo) Game',
         description: 'Challenge our resident AI, Bodhi, to a classic game of Pasha (Ludo) and receive commentary on your moves.',
         link: '/games/ludo',
-        gradient: 'bg-feature-games',
-        buttonColor: 'bg-feature-games'
+        accentColor: 'purple',
     },
     {
         icon: Baby,
         title: 'Vedic Name Finder',
         description: 'Discover auspicious baby names based on Vedic astrology principles like Rashi and Nakshatra Pada.',
         link: '/sadhana/vedic-name-finder',
-        gradient: 'bg-feature-names',
-        buttonColor: 'bg-feature-names'
+        accentColor: 'cyan',
     },
     {
         icon: NotebookText,
         title: 'Digital Dainandini',
         description: 'A secure, private digital diary for your daily notes, tasks, and sketches, saved only on your device.',
         link: '/social?tab=dainandini',
-        gradient: 'bg-feature-diary',
-        buttonColor: 'bg-feature-diary'
+        accentColor: 'yellow',
     }
 ];

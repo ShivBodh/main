@@ -17,20 +17,18 @@ export default {
       },
     },
     extend: {
-      backgroundImage: {
-        'feature-social': 'linear-gradient(170deg, #01E4F8 0%, #1D3EDE 100%)',
-        'feature-calendar': 'linear-gradient(170deg, #B4EC51 0%, #429321 100%)',
-        'feature-reading': 'linear-gradient(170deg, #F89B29 0%, #FF512F 100%)',
-        'feature-sadhana': 'linear-gradient(170deg, #C86DD7 0%, #3023AE 100%)',
-        'feature-games': 'linear-gradient(170deg, #ff9a9e 0%, #fecfef 100%)',
-        'feature-names': 'linear-gradient(170deg, #a1c4fd 0%, #c2e9fb 100%)',
-        'feature-diary': 'linear-gradient(170deg, #d4fc79 0%, #96e6a1 100%)',
-      },
       fontFamily: {
         body: ['var(--font-alegreya)', 'serif'],
         headline: ['var(--font-alegreya)', 'serif'],
       },
       colors: {
+        'feature-blue': '#007BFF',
+        'feature-pink': '#FF007F',
+        'feature-green': '#7FFF00',
+        'feature-orange': '#FFA500',
+        'feature-purple': '#8A2BE2',
+        'feature-cyan': '#00FFFF',
+        'feature-yellow': '#FFD700',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {
