@@ -174,6 +174,17 @@ export default function EventsClient() {
           </div>
         );
     }
+    
+    const getAnimationClass = (peetham: Peetham) => {
+        switch (peetham) {
+            case 'Sringeri': return 'animate-book-flip';
+            case 'Dwaraka': return 'animate-spin';
+            case 'Puri': return 'animate-flag-wave';
+            case 'Jyotirmath': return 'animate-sun-cycle';
+            default: return '';
+        }
+    };
+
 
     return (
         <div className="container mx-auto max-w-7xl py-16 md:py-24 px-4">
@@ -231,7 +242,7 @@ export default function EventsClient() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                         {peethamFilterCards.map(p => (
                             <Card key={p.peetham} className={cn("flex items-center p-4 transition-all duration-300", filters[p.peetham] ? p.colorClasses : 'bg-card border-border')}>
-                                 <div className="p-3 rounded-full mr-4" style={{backgroundColor: peethamDotColors[p.peetham]}}>
+                                 <div className={cn("p-3 rounded-full mr-4 transition-all duration-500", getAnimationClass(p.peetham))} style={{backgroundColor: peethamDotColors[p.peetham]}}>
                                     <p.icon className="h-6 w-6 text-white"/>
                                 </div>
                                 <div className="flex-grow">

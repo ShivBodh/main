@@ -103,10 +103,9 @@
     100% { stroke: #ffd700; }
   }
 
-
   @keyframes spin { 
-    from { transform: rotateY(0deg); } 
-    to { transform: rotateY(360deg); } 
+    from { transform: rotate(0deg); } 
+    to { transform: rotate(360deg); } 
   }
 
   @keyframes flash-bg {
@@ -162,5 +161,36 @@
     to {
       stroke-dashoffset: 500;
     }
+  }
+
+  .animate-book-flip {
+    animation: book-flip 5s ease-in-out infinite;
+    transform-style: preserve-3d;
+  }
+  
+  @keyframes book-flip {
+    0%, 100% { transform: rotateY(0deg); }
+    50% { transform: rotateY(20deg); }
+  }
+
+  .animate-flag-wave {
+    animation: flag-wave 3s ease-in-out infinite;
+  }
+
+  @keyframes flag-wave {
+    0%, 100% { transform: translateX(0) skewX(0); }
+    50% { transform: translateX(-5px) skewX(5deg); }
+  }
+  
+  .animate-sun-cycle {
+    background: linear-gradient(135deg, #ffc9a9, #ff8b8b, #a6c1ee, #fbc2eb);
+    background-size: 400% 400%;
+    animation: sun-cycle 15s ease infinite;
+  }
+
+  @keyframes sun-cycle {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
   }
 }
