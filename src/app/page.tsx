@@ -44,6 +44,8 @@ export default function HomePage() {
                   <img
                       src="https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/aadi-guru-from-shivbodha-.png"
                       alt="An artistic representation of Adi Shankaracharya"
+                      width={600}
+                      height={400}
                       className="rounded-lg object-contain shadow-lg"
                   />
                   </div>
