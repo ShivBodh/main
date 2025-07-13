@@ -54,16 +54,16 @@ export default function HomePage() {
       <section className="py-16 md:py-24 bg-background">
         <div className="container mx-auto grid md:grid-cols-2 gap-12 items-center">
             <div className="flex justify-center items-center">
-             <div className="relative w-full max-w-[600px] aspect-video">
-              <Image
-                  src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExMHU2a2w2Z3RtamhxcjQ2ZDE0djMybDVxZ3h5d3J0aXh4aWViOTZqMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3ohs7SYIm3aJeA_i6Y/giphy.gif"
-                  alt="Abstract light GIF"
-                  unoptimized
-                  width={600}
-                  height={338}
-                  className="rounded-lg object-cover shadow-lg w-full h-full"
-              />
-              </div>
+             <div className="relative w-[300px] h-[300px] flex items-center justify-center">
+                <div className="absolute inset-0 bg-aurora-gradient opacity-40 blur-2xl animate-aurora"></div>
+                <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='hsl(var(--primary))' strokeWidth='1.5' strokeLinecap='round' strokeLinejoin='round' className="w-48 h-48 animate-diamond-spin">
+                    <g>
+                        <path d='M6 3h12l4 6-10 13L2 9z' />
+                        <path d='M12 22V9' />
+                        <path d='M2 9h20' />
+                    </g>
+                </svg>
+             </div>
             </div>
             <div>
                 <h2 className="text-3xl md:text-4xl font-headline font-bold text-primary">Sanatan Social: A Community for Dharma</h2>

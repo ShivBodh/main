@@ -105,6 +105,14 @@ export default {
           '50%': { backgroundPosition: '100% 50%' },
           '100%': { backgroundPosition: '0% 50%' },
         },
+        'aurora': {
+          'from': { transform: 'rotate(0deg)' },
+          'to': { transform: 'rotate(360deg)' },
+        },
+        'spin': {
+          'from': { transform: 'rotate(0deg)' },
+          'to': { transform: 'rotate(360deg)' },
+        }
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
@@ -113,6 +121,7 @@ export default {
         'page-flip-in': 'page-flip-in 0.3s ease-in-out forwards',
         'breath': 'breath 4s ease-in-out infinite',
         'gradient-pan': 'gradient-pan 15s ease infinite',
+        'aurora': 'aurora 20s linear infinite',
       },
       perspective: {
         '1000px': '1000px',

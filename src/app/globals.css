@@ -76,6 +76,17 @@
 }
 
 @layer utilities {
+  .bg-aurora-gradient {
+    background-image: conic-gradient(
+      from 180deg at 50% 50%,
+      #ffd700, #ff8c00, #ff00ff, #00ffff, #00ff00, #ffff00, #ff0000, #ffd700
+    );
+  }
+  
+  .animate-diamond-spin {
+    animation: spin 10s linear infinite;
+  }
+
   @keyframes flash-bg {
     from {
       background-color: hsl(var(--accent) / 0.15);
