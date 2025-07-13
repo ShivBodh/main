@@ -131,7 +131,7 @@ export function PanchangaWidgetPreview() {
 
   if (isLoading || !panchanga) {
     return (
-      <section className="py-16 md:py-24 bg-gray-950">
+      <section className="py-16 md:py-24 bg-background">
         <div className="container mx-auto">
           <div className="text-center mb-12">
             <Skeleton className="h-10 w-3/4 mx-auto bg-gray-800" />
@@ -148,11 +148,11 @@ export function PanchangaWidgetPreview() {
   }
 
   return (
-    <section className="py-16 md:py-24 bg-gray-950">
+    <section className="py-16 md:py-24 bg-background">
       <div className="container mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-headline font-bold text-primary">Daily Panchanga Widgets</h2>
-          <p className="mt-4 text-lg text-gray-300 max-w-2xl mx-auto">
+          <p className="mt-4 text-lg text-foreground/80 max-w-2xl mx-auto">
             Get today's Panchanga on your phone. Download beautiful, shareable widgets in a style that suits you.
           </p>
         </div>
@@ -164,7 +164,7 @@ export function PanchangaWidgetPreview() {
               <WidgetPreview key={`${style.name}-${index}`} panchanga={panchanga} style={style} date={new Date()} />
             ))}
           </div>
-          <div className="absolute inset-0 bg-gradient-to-r from-gray-950 via-transparent via-50% to-gray-950 pointer-events-none"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent via-50% to-background pointer-events-none"></div>
         </div>
 
         <div className="text-center mt-12">

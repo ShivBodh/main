@@ -113,7 +113,7 @@ export default {
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
-        'autoscroll': 'autoscroll 40s linear infinite',
+        'autoscroll': 'autoscroll 60s linear infinite',
         'page-flip-out': 'page-flip-out 0.3s ease-in-out forwards',
         'page-flip-in': 'page-flip-in 0.3s ease-in-out forwards',
         'breath': 'breath 4s ease-in-out infinite',
