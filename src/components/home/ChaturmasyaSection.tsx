@@ -12,6 +12,8 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
+import Autoplay from 'embla-carousel-autoplay';
+import React from 'react';
 
 const chaturmasyaData = [
     {
@@ -49,6 +51,10 @@ const chaturmasyaData = [
 ];
 
 export function ChaturmasyaSection() {
+     const plugin = React.useRef(
+        Autoplay({ delay: 3000, stopOnInteraction: true })
+    );
+
     return (
         <section className="py-16 md:py-24 bg-muted/50">
             <div className="container mx-auto">
@@ -64,6 +70,9 @@ export function ChaturmasyaSection() {
                 </div>
                 
                 <Carousel
+                    plugins={[plugin.current]}
+                    onMouseEnter={plugin.current.stop}
+                    onMouseLeave={plugin.current.reset}
                     opts={{
                         align: "start",
                         loop: true,
