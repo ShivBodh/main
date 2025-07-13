@@ -25,6 +25,11 @@ export default function EventsClient() {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [currentMonth, setCurrentMonth] = useState(new Date());
+    const [isClient, setIsClient] = useState(false);
+
+    useEffect(() => {
+        setIsClient(true);
+    }, []);
 
     const fetchData = useCallback(async () => {
         setIsLoading(true);
@@ -125,11 +130,12 @@ export default function EventsClient() {
                     if (!date) return <div key={key} className="bg-sidebar-background/50"></div>;
                     const dateStr = format(date, 'yyyy-MM-dd');
                     const dayEvents = eventsByDate[dateStr] || [];
+                    const isCurrentDay = isClient && isToday(date);
                     
                     return (
-                        <div key={key} className={cn("bg-sidebar-background p-2 flex flex-col gap-1.5 overflow-hidden", isToday(date) && "bg-sidebar-accent/50 relative")}>
-                             <p className={cn("font-semibold text-xs", isToday(date) ? "text-primary" : "text-muted-foreground")}>{format(date, 'd')}</p>
-                             {isToday(date) && <div className="absolute top-2 right-2 h-2 w-2 rounded-full bg-primary"></div>}
+                        <div key={key} className={cn("bg-sidebar-background p-2 flex flex-col gap-1.5 overflow-hidden", isCurrentDay && "bg-sidebar-accent/50 relative")}>
+                             <p className={cn("font-semibold text-xs", isCurrentDay ? "text-primary" : "text-muted-foreground")}>{format(date, 'd')}</p>
+                             {isCurrentDay && <div className="absolute top-2 right-2 h-2 w-2 rounded-full bg-primary"></div>}
                             <div className="space-y-1 overflow-y-auto scrollbar-thin scrollbar-thumb-sidebar-border">
                                 {dayEvents.map(event => (
                                     <EventItem key={event.id} item={event} />
