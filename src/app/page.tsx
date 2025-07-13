@@ -37,7 +37,7 @@ export default function HomePage() {
                <div className="flex justify-center items-center">
                  <div className="relative w-full max-w-[600px]">
                   <AiImage
-                      src="https://placehold.co/600x400.png"
+                      src="https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/aadi-guru-from-shivbodha-.png"
                       data-ai-hint="vedanta art"
                       width={600}
                       height={400}
