@@ -164,42 +164,27 @@ function InteractiveWidgetDisplay({ panchanga, style, date }: {
   };
 
   return (
-    <div className="flex flex-col items-center gap-4 group perspective-[1000px]">
+    <div className="group" style={{ perspective: '1000px' }}>
       <div 
         ref={ref}
-        className="transition-all duration-300 ease-in-out group-hover:scale-105 group-hover:shadow-2xl group-hover:shadow-primary/40"
+        className="transition-all duration-300 ease-out group-hover:transform group-hover:-translate-y-2 group-hover:shadow-2xl group-hover:shadow-primary/20"
+        style={{ transformStyle: 'preserve-3d' }}
       >
         <WidgetRenderer panchanga={panchanga} style={style} date={date} />
       </div>
 
-      <div
-        className="absolute bottom-0 h-36 w-72 transition-all duration-300 ease-in-out opacity-0 group-hover:opacity-100 transform-gpu"
-        style={{ transform: 'translateY(100%) rotateX(60deg)' }}
-        aria-hidden="true"
-      >
-        <div
-            className="absolute inset-0 opacity-40 transform -scale-y-100"
-            style={{
-                WebkitMaskImage: 'linear-gradient(to bottom, white 30%, transparent 90%)',
-                maskImage: 'linear-gradient(to bottom, white 30%, transparent 90%)',
-            }}
-        >
-          <WidgetRenderer panchanga={panchanga} style={style} date={date} />
-        </div>
-      </div>
-      
-      <div className="text-center mt-2 relative z-10 transition-transform duration-300 ease-in-out group-hover:-translate-y-16">
+      <div className="text-center mt-4 relative z-10">
         <h3 className="font-semibold text-lg text-gray-200">{style.name}</h3>
          <div className="flex justify-center gap-2 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-             <Button onClick={() => handleDownload('iOS')} variant="ghost" size="sm" className="h-auto p-1 text-primary/80 hover:text-primary">
+             <Button onClick={() => handleDownload('iOS')} variant="ghost" size="sm" className="h-auto p-1 text-primary/80 hover:text-primary hover:bg-white/10">
                 <Apple className="h-5 w-5" />
                 <span className="sr-only">Download for iOS</span>
             </Button>
-            <Button onClick={() => handleDownload('Android')} variant="ghost" size="sm" className="h-auto p-1 text-primary/80 hover:text-primary">
+            <Button onClick={() => handleDownload('Android')} variant="ghost" size="sm" className="h-auto p-1 text-primary/80 hover:text-primary hover:bg-white/10">
                 <Smartphone className="h-5 w-5" />
                 <span className="sr-only">Download for Android</span>
             </Button>
-            <Button onClick={() => handleDownload('Desktop')} variant="ghost" size="sm" className="h-auto p-1 text-primary/80 hover:text-primary">
+            <Button onClick={() => handleDownload('Desktop')} variant="ghost" size="sm" className="h-auto p-1 text-primary/80 hover:text-primary hover:bg-white/10">
                 <Laptop className="h-5 w-5" />
                 <span className="sr-only">Download for Desktop</span>
             </Button>
@@ -247,7 +232,7 @@ export default function PanchangaWidgetsClient() {
                     ))}
                 </div>
             ) : panchanga ? (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-x-8 gap-y-24">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-x-8 gap-y-20">
                 {widgetStyles.map(style => (
                     <InteractiveWidgetDisplay key={style.name} panchanga={panchanga} style={style} date={new Date()} />
                 ))}
