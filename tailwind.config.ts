@@ -130,23 +130,26 @@ export default {
             opacity: '0',
           },
         },
-        spin: {
-          'from': { transform: 'rotate(0deg)' },
-          'to': { transform: 'rotate(360deg)' },
+        'fade-in': { from: { opacity: '0' }, to: { opacity: '1' } },
+        'fade-in-slow': { from: { opacity: '0' }, to: { opacity: '0.2' } },
+        'fade-in-down': {
+          '0%': { opacity: '0', transform: 'translateY(-20px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
         },
-        'light-up': {
-          '0%, 100%': { stroke: 'hsl(var(--primary) / 0.8)' },
-          '15%': { stroke: 'hsl(var(--accent) / 0.8)' },
-          '30%': { stroke: '#ff00ff' },
-          '45%': { stroke: '#00ffff' },
-          '60%': { stroke: '#00ff00' },
-          '75%': { stroke: '#ffff00' },
-          '90%': { stroke: '#ff0000' },
+        'particle-float': {
+            '0%': { transform: 'translateY(0px)', opacity: '0.7' },
+            '50%': { transform: 'translateY(-20px)', opacity: '0.3' },
+            '100%': { transform: 'translateY(0px)', opacity: '0.7' },
         },
-        aurora: {
-          '0%, 100%': { 'background-position': '0% 50%' },
-          '50%': { 'background-position': '100% 50%' },
+        'path-draw': {
+            '0%': { transformOrigin: 'left', transform: 'scaleX(0)' },
+            '100%': { transformOrigin: 'left', transform: 'scaleX(1)' }
         },
+        'symbol-glow': {
+            '0%, 100%': { opacity: '0', transform: 'scale(0.5)' },
+            '50%': { opacity: '1', transform: 'scale(1)' },
+            '90%': { opacity: '0', transform: 'scale(0.5)' }
+        }
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
@@ -156,9 +159,12 @@ export default {
         'breath': 'breath 4s ease-in-out infinite',
         'autoscroll': 'autoscroll 60s linear infinite',
         'bubble-rise': 'bubble-rise-2 25s linear infinite',
-        'diamond-spin': 'spin 40s linear infinite',
-        'diamond-light-up': 'light-up 15s linear infinite',
-        'aurora': 'aurora 20s ease infinite',
+        'fade-in': 'fade-in 1.5s ease-out forwards',
+        'fade-in-slow': 'fade-in-slow 3s ease-out forwards',
+        'fade-in-down': 'fade-in-down 1s ease-out forwards',
+        'particle': 'particle-float linear infinite',
+        'path-draw': 'path-draw ease-out forwards',
+        'symbol-glow': 'symbol-glow 4s ease-in-out infinite'
       },
       perspective: {
         '1000px': '1000px',

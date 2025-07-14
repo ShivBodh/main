@@ -1,7 +1,6 @@
 
 'use client';
 
-import { HeroSection } from '@/components/home/HeroSection';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { ArrowRight, BookOpen, Calendar, SunMoon, Atom, Users, Megaphone, NotebookText } from 'lucide-react';
@@ -9,11 +8,12 @@ import { PanchangaWidgetPreview } from '@/components/home/PanchangaWidgetPreview
 import Image from 'next/image';
 import { ChaturmasyaSection } from '@/components/home/ChaturmasyaSection';
 import { FeatureShowcase } from '@/components/home/FeatureShowcase';
+import { ShankaraStoryCanvas } from '@/components/home/ShankaraStoryCanvas';
 
 export default function HomePage() {
   return (
     <>
-      <HeroSection />
+      <ShankaraStoryCanvas />
 
       {/* Chaturmasya Section */}
       <ChaturmasyaSection />
