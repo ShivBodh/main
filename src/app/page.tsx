@@ -55,7 +55,7 @@ export default function HomePage() {
             <div className="flex justify-center items-center">
              <div className="relative w-[300px] h-[300px] flex items-center justify-center">
                  <Image
-                    src="https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/shivala-info-logo-.gif"
+                    src="https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/shivala-social-icon.gif"
                     alt="Sanatan Social Animated Logo"
                     width={300}
                     height={300}
