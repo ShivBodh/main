@@ -6,9 +6,9 @@ import Link from 'next/link';
 import { ArrowRight, BookOpen, Calendar, SunMoon, Atom, Users, Megaphone, NotebookText } from 'lucide-react';
 import { PanchangaWidgetPreview } from '@/components/home/PanchangaWidgetPreview';
 import Image from 'next/image';
-import { ChaturmasyaSection } from '@/components/home/ChaturmasyaSection';
 import { FeatureShowcase } from '@/components/home/FeatureShowcase';
 import { HeroSection } from '@/components/home/HeroSection';
+import { ChaturmasyaSection } from '@/components/home/ChaturmasyaSection';
 
 export default function HomePage() {
   return (
@@ -107,7 +107,7 @@ export default function HomePage() {
             <div className="flex justify-center items-center md:order-1">
               <div className="relative w-full max-w-md aspect-square">
                  <Image
-                      src="https://placehold.co/400x400/212121/FFFFFF.png?text=A+new+way\nto+learn...\n\nLaunching+Soon"
+                      src="https://placehold.co/400x400.png"
                       alt="A blackboard with a chalk message saying 'A new way to learn... Launching Soon'."
                       width={400}
                       height={400}

@@ -52,7 +52,7 @@ const chaturmasyaData = [
 
 export function ChaturmasyaSection() {
      const plugin = React.useRef(
-        Autoplay({ delay: 3000, stopOnInteraction: true })
+        Autoplay({ delay: 5000, stopOnInteraction: true })
     );
 
     return (
