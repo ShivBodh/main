@@ -62,6 +62,7 @@ export function ShankaraStoryCanvas() {
           alt="India Map Sketch"
           width={800}
           height={800}
+          unoptimized
           className="h-auto w-[90%] max-w-[800px] opacity-20 drop-shadow-lg"
         />
       </div>
@@ -114,16 +115,15 @@ export function ShankaraStoryCanvas() {
         />
       </div>
 
-      <div className="relative z-40 text-center">
-        <h1 className="animate-fade-in-down text-4xl font-bold tracking-tight text-primary text-shadow-lg md:text-6xl">
-          The Eternal Journey
+      <div className="relative z-40 text-center p-4">
+        <h1 className="animate-fade-in-down text-4xl font-bold tracking-tight text-primary text-shadow-lg md:text-5xl">
+          Sanatana Peethams Portal
         </h1>
         <p
-          className="mx-auto mt-4 max-w-3xl animate-fade-in-down text-lg text-foreground/90 text-shadow-md md:text-xl"
+          className="mx-auto mt-4 max-w-2xl animate-fade-in-down text-base text-foreground/80 text-shadow-md md:text-lg"
           style={{ animationDelay: '0.5s' }}
         >
-          Witness the path of Adi Shankaracharya as he established the four
-          sacred Peethams, the pillars of Sanatana Dharma.
+          We are the world's first platform dedicated to providing authentic Shankaracharya media, books, and speeches in an organized way for our worldwide Sanatana community.
         </p>
       </div>
 
