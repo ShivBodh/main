@@ -119,6 +119,7 @@ export default {
           '100%': { opacity: '1', transform: 'translateY(0)' },
         },
         'path-draw': {
+          '0%': { width: '0', opacity: '0' },
           to: { width: '180px', opacity: '1' }
         },
         'symbol-appear': {
