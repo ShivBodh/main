@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import { Redo } from 'lucide-react';
+import { Redo, BookOpen, Shell, Mountain, Flag } from 'lucide-react';
 
 const PeethamSymbol = ({
   position,
@@ -27,7 +27,7 @@ const PeethamSymbol = ({
       'border-[1.5px] border-black/15'
     )}
   >
-    <div className="flex h-full max-h-[50px] w-full max-w-[50px] items-center justify-center">
+    <div className="flex h-full max-h-[50px] w-full max-w-[50px] items-center justify-center text-primary">
       {icon}
     </div>
     <div className="mt-1 text-[0.6rem] md:text-[0.75rem] font-medium uppercase tracking-wider text-gray-700">
@@ -76,40 +76,40 @@ export function ShankaraStoryCanvas() {
       </div>
       
       <div key={animationKey} className="absolute inset-0 z-30">
-        <PathLine animationKey={`path-1-${animationKey}`} position="top-[65%] left-[35%]" rotation="-rotate-45" />
-        <PathLine animationKey={`path-2-${animationKey}`} position="top-[40%] left-[25%]" rotation="rotate-[60deg]" />
-        <PathLine animationKey={`path-3-${animationKey}`} position="top-[25%] left-[45%]" rotation="-rotate-30" />
+        <PathLine animationKey={`path-1-${animationKey}`} position="top-[65%] left-[35%] w-[180px] -rotate-45" rotation="path-1" />
+        <PathLine animationKey={`path-2-${animationKey}`} position="top-[40%] left-[25%] w-[180px] rotate-[60deg]" rotation="path-2" />
+        <PathLine animationKey={`path-3-${animationKey}`} position="top-[25%] left-[45%] w-[180px] -rotate-30" rotation="path-3" />
 
         <PeethamSymbol
           animationKey={`sringeri-${animationKey}`}
-          position="top-[65%] left-[35%]"
+          position="top-[65%] left-[35%] sringeri-icon"
           name="Sringeri"
           icon={
-            <svg viewBox="0 0 100 100" fill="currentColor"><path d="M50 0 L0 50 L50 100 L100 50 Z" /></svg>
+            <BookOpen className="h-10 w-10" />
           }
         />
         <PeethamSymbol
           animationKey={`dwaraka-${animationKey}`}
-          position="top-[40%] left-[25%]"
+          position="top-[40%] left-[25%] dwaraka-icon"
           name="Dwaraka"
           icon={
-             <svg viewBox="0 0 100 100" fill="currentColor"><path d="M80 50 C80 20 20 20 20 50 C20 80 80 80 80 50 Z" /></svg>
+            <Shell className="h-10 w-10" />
           }
         />
         <PeethamSymbol
           animationKey={`jyotirmath-${animationKey}`}
-          position="top-[25%] left-[45%]"
+          position="top-[25%] left-[45%] jyotirmath-icon"
           name="Jyotirmath"
           icon={
-             <svg viewBox="0 0 100 100" fill="currentColor"><path d="M50 10 L10 90 L90 90 Z" /></svg>
+            <Mountain className="h-10 w-10" />
           }
         />
         <PeethamSymbol
           animationKey={`puri-${animationKey}`}
-          position="top-[45%] left-[55%]"
+          position="top-[45%] left-[55%] puri-icon"
           name="Puri"
           icon={
-            <svg viewBox="0 0 100 100" fill="currentColor"><circle cx="50" cy="50" r="35" /></svg>
+            <Flag className="h-10 w-10" />
           }
         />
       </div>
