@@ -33,9 +33,16 @@ const bodhiMoveFlow = ai.defineFlow(
   },
   async (input) => {
     // MOCK IMPLEMENTATION: This avoids a hard dependency on the AI model for now.
+    const pawnMoves = ["Move pawn from G4 to G5.", "Move pawn from B2 to B3.", "Move pawn from Y1 to Y2."];
+    const commentaries = [
+      "A wise step forward, just as a seeker moves steadily on the path of knowledge.",
+      "A bold move! Sometimes the path to enlightenment requires courage.",
+      "Patience is a virtue. This move prepares for future opportunities."
+    ];
+    
     return {
-      move: "Move pawn from B4 to B5.",
-      commentary: "A wise step forward, just as a seeker moves steadily on the path of knowledge."
+      move: pawnMoves[Math.floor(Math.random() * pawnMoves.length)],
+      commentary: commentaries[Math.floor(Math.random() * commentaries.length)]
     };
   }
 );

@@ -174,6 +174,7 @@ export default function LudoClient() {
     const [history, setHistory] = useState<HistoryItem[]>([]);
     const [status, setStatus] = useState("Your turn to roll the dice!");
     const [winner, setWinner] = useState<PlayerColor | null>(null);
+    const [isThinking, setIsThinking] = useState(false);
 
     const currentPlayerColor = playerColors[currentPlayerIndex];
     const isMyTurn = !gameState[currentPlayerColor].isAI;
@@ -280,7 +281,7 @@ export default function LudoClient() {
                 });
             }
 
-            if (newState[color].pawns.every(p => p.state === 'finished' && p.pos === 5)) {
+            if (newState[color].pawns.every((p: PawnState) => p.state === 'finished' && p.pos === 5)) {
                 setWinner(color);
                 addHistory('System', `${gameState[color].name} has won the game!`);
             }
@@ -288,6 +289,7 @@ export default function LudoClient() {
             return newState;
         });
 
+        addHistory(gameState[color].name, `moved pawn ${pawnIndex + 1}.`);
         setTimeout(() => nextTurn(diceValue), 500);
 
     }, [winner, currentPlayerColor, diceValue, gameState, addHistory, nextTurn, toast]);
@@ -310,6 +312,10 @@ export default function LudoClient() {
         } else {
              setStatus('Select a pawn to move.');
              if (gameState[currentPlayerColor].isAI) {
+                 setIsThinking(true);
+                 const aiResponse = await getBodhiMove({game: 'ludo', gameState: `Bodhi rolled a ${roll}`});
+                 addHistory(gameState[currentPlayerColor].name, aiResponse.move, aiResponse.commentary);
+                 setIsThinking(false);
                  setTimeout(() => handlePawnClick(currentPlayerColor, validMoves[0]), 1000);
              }
         }
@@ -340,7 +346,7 @@ export default function LudoClient() {
                 if (!isRolling) handleRollDice();
             }, 1000);
         }
-    }, [currentPlayerIndex, diceValue, gameState, winner, isRolling]);
+    }, [currentPlayerIndex, gameState, winner]);
 
 
     const getInitials = (name: string | null | undefined) => {
@@ -384,6 +390,7 @@ export default function LudoClient() {
                          <CardFooter className="flex-col gap-2">
                              <ScrollArea className="h-48 w-full pr-4">
                                 <div className="space-y-4 text-sm">
+                                    {isThinking && <div className="flex gap-3"><div className="flex-shrink-0 mt-1"><BrainCircuit className="h-5 w-5 text-accent animate-pulse" /></div><Skeleton className="h-8 w-3/4" /></div>}
                                     {history.map((item, index) => (
                                         <div key={index} className="flex gap-3">
                                             <div className="flex-shrink-0 mt-1">
@@ -395,7 +402,6 @@ export default function LudoClient() {
                                             </div>
                                         </div>
                                     ))}
-                                    {isRolling && <div className="flex gap-3"><div className="flex-shrink-0 mt-1"><BrainCircuit className="h-5 w-5 text-accent animate-pulse" /></div><Skeleton className="h-8 w-3/4" /></div>}
                                     {history.length === 0 && !isRolling && <p className="text-sm text-center text-muted-foreground py-4">The game has just begun. Roll the dice!</p>}
                                 </div>
                            </ScrollArea>
@@ -407,4 +413,3 @@ export default function LudoClient() {
         </div>
     );
 }
-
