@@ -21,6 +21,9 @@ export default {
         body: ['var(--font-alegreya)', 'serif'],
         headline: ['var(--font-alegreya)', 'serif'],
       },
+      backgroundImage: {
+        'aurora-gradient': 'linear-gradient(135deg, hsl(var(--primary)/0.15), hsl(var(--accent)/0.15), hsl(var(--primary)/0.05), hsl(var(--secondary)/0.15))',
+      },
       colors: {
         'feature-blue': '#007BFF',
         'feature-pink': '#FF007F',
@@ -132,15 +135,18 @@ export default {
           'to': { transform: 'rotate(360deg)' },
         },
         'light-up': {
-          '0%': { stroke: '#ffd700' },
-          '15%': { stroke: '#ff8c00' },
+          '0%, 100%': { stroke: 'hsl(var(--primary) / 0.8)' },
+          '15%': { stroke: 'hsl(var(--accent) / 0.8)' },
           '30%': { stroke: '#ff00ff' },
           '45%': { stroke: '#00ffff' },
           '60%': { stroke: '#00ff00' },
           '75%': { stroke: '#ffff00' },
           '90%': { stroke: '#ff0000' },
-          '100%': { stroke: '#ffd700' },
-        }
+        },
+        aurora: {
+          '0%, 100%': { 'background-position': '0% 50%' },
+          '50%': { 'background-position': '100% 50%' },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
@@ -150,8 +156,9 @@ export default {
         'breath': 'breath 4s ease-in-out infinite',
         'autoscroll': 'autoscroll 60s linear infinite',
         'bubble-rise': 'bubble-rise-2 25s linear infinite',
-        'diamond-spin': 'spin 20s linear infinite',
-        'diamond-light-up': 'light-up 10s linear infinite',
+        'diamond-spin': 'spin 40s linear infinite',
+        'diamond-light-up': 'light-up 15s linear infinite',
+        'aurora': 'aurora 20s ease infinite',
       },
       perspective: {
         '1000px': '1000px',
