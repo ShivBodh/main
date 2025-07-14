@@ -3,6 +3,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import Link from 'next/link';
 import { sadhanaTools } from '@/lib/sadhana-data';
 import type { Metadata } from 'next';
+import { CalendarDays } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 export const metadata: Metadata = {
   title: 'Sādhanā Suite | Sanatana Peethams Portal',
@@ -21,6 +23,26 @@ export default function SadhanaPage() {
                 Digital tools to support your daily spiritual practice and bring the ancient traditions of Sanatana Dharma into your modern life.
             </p>
         </div>
+
+        <div className="mb-12">
+            <Card className="text-center p-8 bg-card-gradient border-primary/20 shadow-lg">
+                <CardHeader>
+                    <CalendarDays className="h-12 w-12 text-primary mx-auto" />
+                    <CardTitle className="font-headline text-3xl mt-4">My Bodha Calendar</CardTitle>
+                </CardHeader>
+                <CardContent>
+                    <p className="text-lg text-foreground/80 max-w-xl mx-auto">
+                        Your personal Sādhanā log. Track your Japa, meditation, and diary entries all in one place to reflect on your spiritual journey.
+                    </p>
+                    <Button asChild size="lg" className="mt-6">
+                        <Link href="/sadhana/bodha-calendar">
+                            Open My Calendar
+                        </Link>
+                    </Button>
+                </CardContent>
+            </Card>
+        </div>
+
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {sadhanaTools.map((tool) => {

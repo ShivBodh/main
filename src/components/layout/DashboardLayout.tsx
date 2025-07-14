@@ -15,16 +15,17 @@ import {
   SidebarMenuButton,
   SidebarInset,
 } from '@/components/ui/sidebar';
-import { Gem, Users, Calendar, BookOpen, Atom, HelpCircle, Gamepad2, Settings, User } from 'lucide-react';
+import { Gem, Users, Calendar, BookOpen, Atom, HelpCircle, Settings, User, CalendarDays } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { getInitials } from '@/lib/utils';
 
 const mainNavLinks = [
   { href: '/social', icon: Users, label: 'Social' },
-  { href: '/events', icon: Calendar, label: 'Calendar' },
+  { href: '/sadhana/bodha-calendar', icon: Calendar, label: 'My Bodha' },
+  { href: '/events', icon: CalendarDays, label: 'Events' },
   { href: '/reading', icon: BookOpen, label: 'Reading' },
-  { href: '/sadhana', icon: Atom, label: 'Sādhanā' },
+  { href: '/sadhana', icon: Atom, label: 'Sādhanā Tools' },
 ];
 
 const helpNavLinks = [

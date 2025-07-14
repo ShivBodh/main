@@ -7,12 +7,39 @@ import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/componen
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Play, Pause, RotateCcw } from 'lucide-react';
+import { useAuth } from '@/context/AuthContext';
+import { useToast } from '@/hooks/use-toast';
+
+export interface MeditationSession {
+    timestamp: number;
+    duration: number; // in minutes
+}
 
 export default function MeditationTimerClient() {
+  const { user } = useAuth();
+  const { toast } = useToast();
   const [duration, setDuration] = useState(10); // Default duration in minutes
   const [timeLeft, setTimeLeft] = useState(duration * 60);
   const [isActive, setIsActive] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
+
+  const saveSession = () => {
+    if (user) {
+        const session: MeditationSession = {
+            timestamp: Date.now(),
+            duration: duration,
+        };
+        const key = `meditationHistory_${user.uid}`;
+        const existingHistory: MeditationSession[] = JSON.parse(localStorage.getItem(key) || '[]');
+        existingHistory.push(session);
+        localStorage.setItem(key, JSON.stringify(existingHistory));
+
+        toast({
+            title: "Meditation Session Complete",
+            description: `Your ${duration}-minute session has been logged in your Bodha Calendar.`,
+        });
+    }
+  };
 
   useEffect(() => {
     if (isActive) {
@@ -21,8 +48,8 @@ export default function MeditationTimerClient() {
           if (prev <= 1) {
             clearInterval(intervalRef.current!);
             setIsActive(false);
+            saveSession();
             // Optionally play a sound here
-            alert("Meditation session complete!");
             return duration * 60;
           }
           return prev - 1;
@@ -55,6 +82,14 @@ export default function MeditationTimerClient() {
   };
 
   const toggleTimer = () => {
+    if (!user) {
+        toast({
+            variant: "destructive",
+            title: "Please Log In",
+            description: "You must be logged in to start and log a meditation session."
+        });
+        return;
+    }
     setIsActive(!isActive);
   };
 
@@ -76,7 +111,7 @@ export default function MeditationTimerClient() {
           Meditation Timer
         </h1>
         <p className="mt-4 text-lg md:text-xl text-foreground/80 max-w-3xl mx-auto">
-          Set your desired duration, find a comfortable posture, and begin your practice.
+          Set your desired duration, find a comfortable posture, and begin your practice. Completed sessions are logged to your Bodha Calendar.
         </p>
       </div>
 

@@ -5,15 +5,39 @@ import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { RotateCcw } from 'lucide-react';
+import { useAuth } from '@/context/AuthContext';
+import { useToast } from '@/hooks/use-toast';
+
+export interface JapaSession {
+    timestamp: number;
+    count: number;
+}
 
 export default function JapaCounterClient() {
+  const { user } = useAuth();
+  const { toast } = useToast();
   const [count, setCount] = useState(0);
 
   const increment = () => {
     setCount(prevCount => prevCount + 1);
   };
 
-  const reset = () => {
+  const saveAndReset = () => {
+    if (count > 0 && user) {
+        const session: JapaSession = {
+            timestamp: Date.now(),
+            count: count
+        };
+        const key = `japaHistory_${user.uid}`;
+        const existingHistory: JapaSession[] = JSON.parse(localStorage.getItem(key) || '[]');
+        existingHistory.push(session);
+        localStorage.setItem(key, JSON.stringify(existingHistory));
+
+        toast({
+            title: "Japa Session Saved",
+            description: `Your session of ${count} malas has been logged in your Bodha Calendar.`,
+        });
+    }
     setCount(0);
   };
 
@@ -24,13 +48,13 @@ export default function JapaCounterClient() {
           Japa Counter
         </h1>
         <p className="mt-4 text-lg md:text-xl text-foreground/80 max-w-3xl mx-auto">
-          Use this digital mala for your mantra recitation practice.
+          Use this digital mala for your mantra recitation practice. Each session is logged to your personal Bodha Calendar.
         </p>
       </div>
 
       <Card className="w-full max-w-sm text-center">
         <CardHeader>
-          <CardTitle className="font-headline text-2xl">Current Count</CardTitle>
+          <CardTitle className="font-headline text-2xl">Current Malas</CardTitle>
         </CardHeader>
         <CardContent>
           <p className="text-7xl font-bold font-mono text-primary tracking-tighter">
@@ -47,12 +71,12 @@ export default function JapaCounterClient() {
             Tap to Count
           </Button>
           <Button
-            onClick={reset}
+            onClick={saveAndReset}
             variant="outline"
             className="w-full"
-            aria-label="Reset count"
+            aria-label="Save and Reset count"
           >
-            <RotateCcw className="mr-2 h-4 w-4" /> Reset
+            <RotateCcw className="mr-2 h-4 w-4" /> Save & Reset Session
           </Button>
         </CardFooter>
       </Card>
