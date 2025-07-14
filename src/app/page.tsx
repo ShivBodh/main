@@ -8,10 +8,14 @@ import { PanchangaWidgetPreview } from '@/components/home/PanchangaWidgetPreview
 import Image from 'next/image';
 import { ChaturmasyaSection } from '@/components/home/ChaturmasyaSection';
 import { FeatureShowcase } from '@/components/home/FeatureShowcase';
+import { HeroSection } from '@/components/home/HeroSection';
 
 export default function HomePage() {
   return (
     <>
+      {/* Hero Section */}
+      <HeroSection />
+
       {/* Chaturmasya Section */}
       <ChaturmasyaSection />
 
