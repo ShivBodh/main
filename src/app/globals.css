@@ -83,6 +83,21 @@
   body {
     @apply bg-background text-foreground;
   }
+  .peetham-symbol {
+    animation: symbol-appear 0.8s forwards;
+  }
+  .peetham-symbol.sringeri-icon { animation-delay: 1.0s; }
+  .peetham-symbol.dwaraka-icon { animation-delay: 2.5s; }
+  .peetham-symbol.jyotirmath-icon { animation-delay: 4.0s; }
+  .peetham-symbol.puri-icon { animation-delay: 5.5s; }
+
+  .path-line {
+    transform-origin: left;
+    animation: path-draw 1.2s forwards;
+  }
+  .path-1 { animation-delay: 0.7s; }
+  .path-2 { animation-delay: 2.2s; }
+  .path-3 { animation-delay: 3.7s; }
 }
 
 @layer utilities {
