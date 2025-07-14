@@ -1,5 +1,5 @@
 
-import { CalendarDays, Users, BookOpen, Atom, Sparkles, Baby, Gamepad2, NotebookText } from 'lucide-react';
+import { CalendarDays, Users, BookOpen, Atom, Sparkles, Baby, Download, FileSignature } from 'lucide-react';
 
 export interface FeatureCardData {
     icon: React.ElementType;
@@ -38,6 +38,13 @@ export const featuresData: FeatureCardData[] = [
         link: '/sadhana',
         accentColor: 'orange',
     },
+     {
+        icon: Download,
+        title: 'Panchanga Widgets',
+        description: 'Download beautiful, shareable widgets of today\'s Panchanga for your iOS, Android, or Desktop device.',
+        link: '/panchanga/widgets',
+        accentColor: 'purple',
+    },
     {
         icon: Baby,
         title: 'Vedic Name Finder',
@@ -46,10 +53,10 @@ export const featuresData: FeatureCardData[] = [
         accentColor: 'cyan',
     },
     {
-        icon: NotebookText,
-        title: 'Digital Dainandini',
-        description: 'A secure, private digital diary for your daily notes, tasks, and sketches, saved only on your device.',
-        link: '/social?tab=dainandini',
+        icon: FileSignature,
+        title: 'Sanatani Petitions',
+        description: 'A platform to raise awareness and support for causes that matter to the Sanatana Dharma community.',
+        link: '/petitions',
         accentColor: 'yellow',
     }
 ];

@@ -6,10 +6,11 @@ import { Button } from '@/components/ui/button';
 import { getDailyPanchanga, PanchangaDetails } from '@/lib/panchanga-data';
 import { widgetStyles, WidgetStyle } from '@/lib/widget-data';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Download, Gem, Sunrise, Sunset, Moon, Star, SunMoon } from 'lucide-react';
+import { Download, Gem, Sunrise, Sunset, Moon, Star, SunMoon, Apple, Smartphone, Laptop } from 'lucide-react';
 import { format } from 'date-fns';
 import { toPng } from 'html-to-image';
 import { cn } from '@/lib/utils';
+import { useToast } from '@/hooks/use-toast';
 
 const IconMapping: { [key: string]: React.ElementType } = {
   Tithi: Moon,
@@ -133,13 +134,19 @@ function InteractiveWidgetDisplay({ panchanga, style, date }: {
   date: Date;
 }) {
   const ref = useRef<HTMLDivElement>(null);
+  const { toast } = useToast();
 
-  const handleDownload = () => {
+  const handleDownload = (platform: 'iOS' | 'Android' | 'Desktop') => {
     if (ref.current === null) {
       return;
     }
+    
+    toast({
+      title: 'Preparing Download...',
+      description: `Generating a high-quality PNG for your ${platform} device.`
+    })
 
-    toPng(ref.current, { cacheBust: true, pixelRatio: 2 })
+    toPng(ref.current, { cacheBust: true, pixelRatio: 3 }) // Increased pixelRatio for better quality
       .then((dataUrl) => {
         const link = document.createElement('a');
         link.download = `panchanga-widget-${style.name.toLowerCase().replace(/\s+/g, '-')}-${format(date, 'yyyy-MM-dd')}.png`;
@@ -148,6 +155,11 @@ function InteractiveWidgetDisplay({ panchanga, style, date }: {
       })
       .catch((err) => {
         console.error('oops, something went wrong!', err);
+        toast({
+          variant: 'destructive',
+          title: 'Download Failed',
+          description: 'Could not generate the widget image. Please try again.'
+        })
       });
   };
 
@@ -176,12 +188,22 @@ function InteractiveWidgetDisplay({ panchanga, style, date }: {
         </div>
       </div>
       
-      <div className="text-center mt-2 relative z-10 transition-transform duration-300 ease-in-out group-hover:-translate-y-8">
+      <div className="text-center mt-2 relative z-10 transition-transform duration-300 ease-in-out group-hover:-translate-y-16">
         <h3 className="font-semibold text-lg text-gray-200">{style.name}</h3>
-        <Button onClick={handleDownload} variant="link" className="text-primary h-auto p-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <Download className="mr-2 h-4 w-4" />
-          Download
-        </Button>
+         <div className="flex justify-center gap-2 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+             <Button onClick={() => handleDownload('iOS')} variant="ghost" size="sm" className="h-auto p-1 text-primary/80 hover:text-primary">
+                <Apple className="h-5 w-5" />
+                <span className="sr-only">Download for iOS</span>
+            </Button>
+            <Button onClick={() => handleDownload('Android')} variant="ghost" size="sm" className="h-auto p-1 text-primary/80 hover:text-primary">
+                <Smartphone className="h-5 w-5" />
+                <span className="sr-only">Download for Android</span>
+            </Button>
+            <Button onClick={() => handleDownload('Desktop')} variant="ghost" size="sm" className="h-auto p-1 text-primary/80 hover:text-primary">
+                <Laptop className="h-5 w-5" />
+                <span className="sr-only">Download for Desktop</span>
+            </Button>
+         </div>
       </div>
     </div>
   );

@@ -154,7 +154,7 @@ export function PanchangaWidgetPreview() {
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-headline font-bold text-primary">Daily Panchanga Widgets</h2>
           <p className="mt-4 text-lg text-gray-300 max-w-2xl mx-auto">
-            Get today's Panchanga on your phone. Download beautiful, shareable widgets in a style that suits you.
+            Today's Panchanga for your phone, desktop, or tablet. Download beautiful, shareable widgets in a style that suits you.
           </p>
         </div>
 
@@ -170,7 +170,7 @@ export function PanchangaWidgetPreview() {
         <div className="text-center mt-12">
           <Button asChild size="lg">
             <Link href="/panchanga/widgets">
-              View All Widget Styles <ArrowRight className="ml-2 h-4 w-4" />
+              View All Widget Styles & Download <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </Button>
         </div>
