@@ -115,12 +115,12 @@ export default {
           'to': { transform: 'translateX(calc(-50% - 1rem))' },
         },
         'fade-in-down': {
-          '0%': { opacity: '0', transform: 'translateY(-20px)' },
-          '100%': { opacity: '1', transform: 'translateY(0)' },
+            '0%': { opacity: '0', transform: 'translateY(-20px)' },
+            '100%': { opacity: '1', transform: 'translateY(0)' },
         },
         'path-draw': {
-          '0%': { width: '0', opacity: '0' },
-          to: { width: '180px', opacity: '1' }
+          'from': { width: '0', opacity: '0' },
+          'to': { width: '180px', opacity: '1' }
         },
         'symbol-appear': {
           '0%': { opacity: '0', transform: 'scale(0)' },
@@ -128,8 +128,8 @@ export default {
           '100%': { opacity: '1', transform: 'scale(1)' },
         },
         'typing': {
-          from: { width: '0' },
-          to: { width: '100%' },
+          'from': { width: '0' },
+          'to': { width: '100%' },
         },
         'blink-caret': {
           'from, to': { borderColor: 'transparent' },
