@@ -106,8 +106,8 @@ export default function HomePage() {
             <div className="flex justify-center items-center md:order-1">
               <div className="relative w-full max-w-md aspect-square">
                  <Image
-                      src="https://placehold.co/400x400.png"
-                      alt="A blackboard with a chalk message saying a new way to learn is launching soon."
+                      src="https://placehold.co/400x400/212121/FFFFFF.png?text=A+new+way\nto+learn...\n\nLaunching+Soon"
+                      alt="A blackboard with a chalk message saying 'A new way to learn... Launching Soon'."
                       width={400}
                       height={400}
                       className="rounded-full object-cover shadow-2xl border-8 border-background"
