@@ -169,8 +169,8 @@ export function PanchangaWidgetPreview() {
 
         <div className="text-center mt-12">
           <Button asChild size="lg">
-            <Link href="/panchanga/widgets">
-              View All Widget Styles & Download <ArrowRight className="ml-2 h-4 w-4" />
+            <Link href="/panchanga">
+              View Panchanga Service <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </Button>
         </div>
