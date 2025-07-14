@@ -3,7 +3,7 @@
 
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { ArrowRight, BookOpen, Calendar, SunMoon, Atom, Users, Megaphone, NotebookText, TestTube2 } from 'lucide-react';
+import { ArrowRight, BookOpen, Calendar, SunMoon, Atom, Users, Megaphone, NotebookText, TestTube2, Laptop, Smartphone } from 'lucide-react';
 import { PanchangaWidgetPreview } from '@/components/home/PanchangaWidgetPreview';
 import Image from 'next/image';
 import { FeatureShowcase } from '@/components/home/FeatureShowcase';
@@ -106,20 +106,15 @@ export default function HomePage() {
                   </Button>
             </div>
             <div className="flex justify-center items-center md:order-1">
-              <div className="relative w-full max-w-md aspect-square group">
-                 <Image
-                      src="https://placehold.co/400x400.png"
-                      alt="An abstract representation of knowledge and learning"
-                      width={400}
-                      height={400}
-                      className="rounded-full object-cover shadow-2xl border-8 border-background"
-                      data-ai-hint="modern learning"
-                  />
-                  <div className="absolute inset-0 bg-black/50 rounded-full flex flex-col items-center justify-center text-center text-white p-4">
-                      <TestTube2 className="h-16 w-16 text-primary animate-pulse"/>
-                      <h3 className="text-2xl font-headline font-bold mt-2">A New Way to Learn</h3>
-                      <Badge variant="secondary" className="mt-4">Launching Soon</Badge>
+              <div className="relative w-full max-w-md aspect-square group bg-background/50 rounded-2xl shadow-2xl border-2 border-dashed border-primary/20 flex flex-col items-center justify-center p-8 text-center">
+                  <div className="flex items-center justify-center space-x-4 text-primary/80">
+                      <BookOpen className="h-16 w-16 opacity-70 transition-all duration-300 group-hover:opacity-100 group-hover:scale-110" style={{animationDelay: '0s'}} />
+                      <Smartphone className="h-20 w-20 transition-all duration-300 group-hover:opacity-100 group-hover:scale-110" style={{animationDelay: '0.2s'}} />
+                      <Laptop className="h-16 w-16 opacity-70 transition-all duration-300 group-hover:opacity-100 group-hover:scale-110" style={{animationDelay: '0.4s'}} />
                   </div>
+                  <h3 className="text-2xl font-headline font-bold mt-6 text-primary">A New Way to Learn</h3>
+                  <p className="text-muted-foreground mt-2">Interactive courses and learning modules.</p>
+                  <Badge variant="secondary" className="mt-4">Launching Soon</Badge>
               </div>
             </div>
         </div>
