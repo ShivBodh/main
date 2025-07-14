@@ -21,6 +21,46 @@ const pathSegments = [
     { id: 'segment-3', delay: 8, duration: 4, top: '40%', left: '68%', transform: 'rotate(110deg) scaleX(0.8)' }
 ];
 
+interface ParticleStyle {
+    width: string;
+    height: string;
+    left: string;
+    top: string;
+    animationDelay: string;
+    animationDuration: string;
+}
+
+function FloatingParticles() {
+    const [particles, setParticles] = useState<ParticleStyle[]>([]);
+
+    useEffect(() => {
+        const generateParticles = () => {
+            const newParticles = Array.from({ length: 50 }).map(() => ({
+                width: `${Math.random() * 3 + 1}px`,
+                height: `${Math.random() * 3 + 1}px`,
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 10}s`,
+                animationDuration: `${Math.random() * 10 + 10}s`,
+            }));
+            setParticles(newParticles);
+        };
+        generateParticles();
+    }, []);
+
+    return (
+        <div className="absolute inset-0 z-0">
+            {particles.map((style, i) => (
+                <div
+                    key={i}
+                    className="absolute rounded-full bg-amber-200/50 animate-particle"
+                    style={style}
+                />
+            ))}
+        </div>
+    );
+}
+
 export function ShankaraStoryCanvas() {
     const [animationState, setAnimationState] = useState(0);
 
@@ -28,29 +68,9 @@ export function ShankaraStoryCanvas() {
         setAnimationState(prev => prev + 1);
     };
 
-    useEffect(() => {
-        // This effect can be used to automatically restart the animation or for other side effects.
-    }, [animationState]);
-
     return (
         <div key={animationState} className="relative w-full h-screen overflow-hidden bg-gradient-to-b from-indigo-950 via-purple-900 to-blue-950 flex flex-col justify-center items-center text-white">
-            <div className="absolute inset-0 z-0">
-                {/* Particles */}
-                {[...Array(50)].map((_, i) => (
-                    <div
-                        key={i}
-                        className="absolute rounded-full bg-amber-200/50 animate-particle"
-                        style={{
-                            width: `${Math.random() * 3 + 1}px`,
-                            height: `${Math.random() * 3 + 1}px`,
-                            left: `${Math.random() * 100}%`,
-                            top: `${Math.random() * 100}%`,
-                            animationDelay: `${Math.random() * 10}s`,
-                            animationDuration: `${Math.random() * 10 + 10}s`
-                        }}
-                    />
-                ))}
-            </div>
+            <FloatingParticles />
 
             <div className="absolute inset-0 z-10">
                 <Image
