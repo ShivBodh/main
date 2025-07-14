@@ -19,7 +19,6 @@ import { Badge } from '@/components/ui/badge';
 import { db } from '@/lib/firebase';
 import { collection, getDocs, query, where, orderBy } from 'firebase/firestore';
 import { Skeleton } from '@/components/ui/skeleton';
-import Image from 'next/image';
 
 const dwarakaSeva = allSevaOpportunities.filter(o => o.peetham === 'Dwaraka');
 const peethamInfo = peethams.find(p => p.name.includes('Dwaraka'))!;
@@ -155,7 +154,7 @@ export default function DwarakaClient() {
           <ScrollArea className="w-full whitespace-nowrap rounded-lg">
               <TabsList className="mb-8 inline-flex w-max">
                 <TabsTrigger value="about">About the Acharya</TabsTrigger>
-                <TabsTrigger value="teachings">Teachings & Activities</TabsTrigger>
+                <TabsTrigger value="teachings">Teachings &amp; Activities</TabsTrigger>
                 <TabsTrigger value="lineage">Lineage</TabsTrigger>
                  <TabsTrigger value="events">Events</TabsTrigger>
                 <TabsTrigger value="gallery">Photos</TabsTrigger>

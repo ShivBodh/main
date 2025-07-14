@@ -1,7 +1,6 @@
 
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
@@ -43,9 +42,9 @@ const EmptyMediaState = ({ peethamName }: { peethamName: string }) => (
 );
 
 const literaryWorks = [
-    { category: 'Philosophy & Vedanta', works: 'Veda Vimarsha, Srimad Bhagavad Gita Saptashati, Dharma Darshan, Bauddh Siddhant aur Vedant' },
+    { category: 'Philosophy &amp; Vedanta', works: 'Veda Vimarsha, Srimad Bhagavad Gita Saptashati, Dharma Darshan, Bauddh Siddhant aur Vedant' },
     { category: 'Mathematics', works: 'Elementary Vedic Arithmetic, Swastik Mathematics' },
-    { category: 'Social & National Issues', works: 'Vyuharachana (Strategy to Foil Conspiracy Against Hinduism), Desh ki Dasha aur Apekshit Disha (Country\'s Condition and Expected Direction)' },
+    { category: 'Social &amp; National Issues', works: 'Vyuharachana (Strategy to Foil Conspiracy Against Hinduism), Desh ki Dasha aur Apekshit Disha (Country\'s Condition and Expected Direction)' },
     { category: 'Biographical', works: 'Divyanubhuti (Biography of Swami Nischalanand Saraswati), Sri Shivavatar Bhagavatpada Shankaracharya' },
 ];
 
@@ -178,7 +177,7 @@ export default function PuriClient() {
           <ScrollArea className="w-full whitespace-nowrap rounded-lg">
               <TabsList className="mb-8 inline-flex w-max">
                 <TabsTrigger value="about">About the Acharya</TabsTrigger>
-                <TabsTrigger value="teachings">Teachings & Works</TabsTrigger>
+                <TabsTrigger value="teachings">Teachings &amp; Works</TabsTrigger>
                 <TabsTrigger value="lineage">Lineage</TabsTrigger>
                 <TabsTrigger value="events">Events</TabsTrigger>
                 <TabsTrigger value="gallery">Photos</TabsTrigger>

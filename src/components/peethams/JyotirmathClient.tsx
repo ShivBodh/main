@@ -1,7 +1,6 @@
 
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
@@ -155,8 +154,8 @@ export default function JyotirmathClient() {
           <ScrollArea className="w-full whitespace-nowrap rounded-lg">
               <TabsList className="mb-8 inline-flex w-max">
                 <TabsTrigger value="about">About the Acharya</TabsTrigger>
-                <TabsTrigger value="teachings">Teachings & Stances</TabsTrigger>
-                <TabsTrigger value="lineage">Lineage & Succession</TabsTrigger>
+                <TabsTrigger value="teachings">Teachings &amp; Stances</TabsTrigger>
+                <TabsTrigger value="lineage">Lineage &amp; Succession</TabsTrigger>
                 <TabsTrigger value="events">Events</TabsTrigger>
                 <TabsTrigger value="gallery">Photos</TabsTrigger>
                 <TabsTrigger value="videos">Videos</TabsTrigger>

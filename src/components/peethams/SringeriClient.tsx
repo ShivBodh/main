@@ -1,7 +1,6 @@
 
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
@@ -101,7 +100,7 @@ export default function SringeriClient() {
                  <Card>
                     <CardHeader>
                         <CardTitle className="font-headline text-primary flex items-center gap-2">
-                            <Calendar className="h-6 w-6" /> Recent & Upcoming Events
+                            <Calendar className="h-6 w-6" /> Recent &amp; Upcoming Events
                         </CardTitle>
                         <CardDescription>
                             Key events for the Sringeri Acharyas.
@@ -155,7 +154,7 @@ export default function SringeriClient() {
               The Southern Āmnāya Pīṭham, established by Sri Adi Shankaracharya.
             </p>
             <div className="text-md text-foreground/90 mb-4">
-              <p><span className="font-semibold">Current Acharyas:</span> Jagadguru Shankaracharya Sri Sri Bharathi Tirtha Mahaswamiji & Sri Sri Vidhushekhara Bharati Mahaswamiji</p>
+              <p><span className="font-semibold">Current Acharyas:</span> Jagadguru Shankaracharya Sri Sri Bharathi Tirtha Mahaswamiji &amp; Sri Sri Vidhushekhara Bharati Mahaswamiji</p>
               <p><span className="font-semibold">Associated Veda:</span> Yajur Veda</p>
               <p><span className="font-semibold">Mahāvākya:</span> Aham Brahmāsmi</p>
             </div>
