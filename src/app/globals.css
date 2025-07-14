@@ -86,20 +86,6 @@
 }
 
 @layer utilities {
-  .bg-aurora-gradient {
-    background-image: conic-gradient(
-      from 180deg at 50% 50%,
-      hsl(var(--primary) / 0.5),
-      hsl(var(--accent) / 0.5),
-      hsl(var(--secondary) / 0.5),
-      #00ffff80,
-      #00ff0080,
-      #ffff0080,
-      #ff000080,
-      hsl(var(--primary) / 0.5)
-    );
-  }
-  
   .animate-diamond-spin {
     animation: spin 40s linear infinite;
   }

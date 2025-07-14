@@ -9,7 +9,7 @@ import {
   CarouselItem,
 } from '@/components/ui/carousel';
 import Autoplay from 'embla-carousel-autoplay';
-import { Diamond } from 'lucide-react';
+import Image from 'next/image';
 
 const heroSlides = [
   {
@@ -45,31 +45,34 @@ export function HeroSection() {
 
   return (
     <section className="w-full py-20 md:py-32 relative overflow-hidden bg-background">
-      <div className="absolute inset-0 bg-aurora-gradient opacity-30 blur-2xl animate-aurora z-0"></div>
-       <div className="absolute inset-0 flex items-center justify-center z-0">
-          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" className="w-96 h-96 opacity-10 animate-diamond-spin">
+      <Image
+        src="https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/aadi-guru-hero-banner-1-scaled.png"
+        alt="Adi Shankaracharya meditating"
+        layout="fill"
+        objectFit="cover"
+        objectPosition="center"
+        className="z-0"
+        priority
+      />
+      <div className="absolute inset-0 bg-black/60 z-10"></div>
+       <div className="absolute inset-0 flex items-center justify-center z-20">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" className="w-96 h-96 opacity-20 animate-diamond-spin">
               <g className="animate-diamond-light-up">
                   <path d="M50 2 L98 50 L50 98 L2 50 Z" strokeWidth="0.5" fill="none" />
                   <path d="M50 2 L50 98" strokeWidth="0.25" fill="none" />
                   <path d="M2 50 L98 50" strokeWidth="0.25" fill="none" />
                   <path d="M25 25 L75 75" strokeWidth="0.1" fill="none" />
                   <path d="M75 25 L25 75" strokeWidth="0.1" fill="none" />
-                  
-                  {/* Inner diamond */}
                   <path d="M50 15 L85 50 L50 85 L15 50 Z" strokeWidth="0.5" fill="none" />
-                  
-                  {/* Connecting lines */}
                   <path d="M50 2 L50 15" strokeWidth="0.25" fill="none" />
                   <path d="M2 50 L15 50" strokeWidth="0.25" fill="none" />
                   <path d="M98 50 L85 50" strokeWidth="0.25" fill="none" />
                   <path d="M50 98 L50 85" strokeWidth="0.25" fill="none" />
-
-                  {/* Corner cuts */}
                   <path d="M15 50 L25 25 L50 15 L75 25 L85 50 L75 75 L50 85 L25 75 Z" strokeWidth="0.25" fill="none" />
               </g>
           </svg>
        </div>
-      <div className="container mx-auto text-center px-4 relative z-10">
+      <div className="container mx-auto text-center px-4 relative z-30">
         <Carousel
           plugins={[plugin.current]}
           className="w-full"
