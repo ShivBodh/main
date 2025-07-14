@@ -120,20 +120,24 @@ export default {
           '0%': { opacity: '0', transform: 'translateY(-20px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
         },
-        'particle': {
-            '0%': { transform: 'translateY(0px)', opacity: '0.7' },
-            '50%': { transform: 'translateY(-20px)', opacity: '0.3' },
-            '100%': { transform: 'translateY(0px)', opacity: '0.7' },
-        },
         'path-draw': {
-            '0%': { transformOrigin: 'left', transform: 'scaleX(0)' },
-            '100%': { transformOrigin: 'left', transform: 'scaleX(1)' }
+          from: {
+            'stroke-dashoffset': '1000',
+          },
+          to: {
+            'stroke-dashoffset': '0',
+          },
         },
         'symbol-glow': {
-            '0%, 100%': { opacity: '0', transform: 'scale(0.5)' },
-            '50%': { opacity: '1', transform: 'scale(1)' },
-            '90%': { opacity: '0', transform: 'scale(0.5)' }
-        }
+          '0%, 100%': {
+            filter: 'drop-shadow(0 0 5px hsl(var(--primary)/0.5))',
+            transform: 'scale(1)',
+          },
+          '50%': {
+            filter: 'drop-shadow(0 0 20px hsl(var(--primary)/1))',
+            transform: 'scale(1.1)',
+          },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
@@ -145,9 +149,8 @@ export default {
         'fade-in': 'fade-in 1.5s ease-out forwards',
         'fade-in-slow': 'fade-in-slow 3s ease-out forwards',
         'fade-in-down': 'fade-in-down 1s ease-out forwards',
-        'particle': 'particle linear infinite',
-        'path-draw': 'path-draw ease-out forwards',
-        'symbol-glow': 'symbol-glow 4s ease-in-out infinite'
+        'path-draw': 'path-draw 3s ease-out forwards',
+        'symbol-glow': 'symbol-glow 2s ease-in-out forwards',
       },
     },
   },
