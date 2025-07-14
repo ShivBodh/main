@@ -128,8 +128,8 @@ export default {
           '100%': { opacity: '1', transform: 'scale(1)' },
         },
         'typing': {
-          'from': { width: '0' },
-          'to': { width: '100%' },
+          from: { width: '0' },
+          to: { width: '100%' },
         },
         'blink-caret': {
           'from, to': { borderColor: 'transparent' },
