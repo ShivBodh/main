@@ -118,23 +118,6 @@ export default {
             '0%': { opacity: '0', transform: 'translateY(-20px)' },
             '100%': { opacity: '1', transform: 'translateY(0)' },
         },
-        'path-draw': {
-          'from': { width: '0', opacity: '0' },
-          'to': { width: '180px', opacity: '1' }
-        },
-        'symbol-appear': {
-          '0%': { opacity: '0', transform: 'scale(0)' },
-          '70%': { opacity: '1', transform: 'scale(1.1)' },
-          '100%': { opacity: '1', transform: 'scale(1)' },
-        },
-        'typing': {
-          'from': { width: '0' },
-          'to': { width: '100%' },
-        },
-        'blink-caret': {
-          'from, to': { borderColor: 'transparent' },
-          '50%': { borderColor: 'hsl(var(--primary))' },
-        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',

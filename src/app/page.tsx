@@ -8,13 +8,10 @@ import { PanchangaWidgetPreview } from '@/components/home/PanchangaWidgetPreview
 import Image from 'next/image';
 import { ChaturmasyaSection } from '@/components/home/ChaturmasyaSection';
 import { FeatureShowcase } from '@/components/home/FeatureShowcase';
-import { ShankaraStoryCanvas } from '@/components/home/ShankaraStoryCanvas';
 
 export default function HomePage() {
   return (
     <>
-      <ShankaraStoryCanvas />
-
       {/* Chaturmasya Section */}
       <ChaturmasyaSection />
 
