@@ -136,7 +136,7 @@ export default {
           '0%': { opacity: '0', transform: 'translateY(-20px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
         },
-        'particle-float': {
+        'particle': {
             '0%': { transform: 'translateY(0px)', opacity: '0.7' },
             '50%': { transform: 'translateY(-20px)', opacity: '0.3' },
             '100%': { transform: 'translateY(0px)', opacity: '0.7' },
@@ -162,7 +162,7 @@ export default {
         'fade-in': 'fade-in 1.5s ease-out forwards',
         'fade-in-slow': 'fade-in-slow 3s ease-out forwards',
         'fade-in-down': 'fade-in-down 1s ease-out forwards',
-        'particle': 'particle-float linear infinite',
+        'particle': 'particle linear infinite',
         'path-draw': 'path-draw ease-out forwards',
         'symbol-glow': 'symbol-glow 4s ease-in-out infinite'
       },
