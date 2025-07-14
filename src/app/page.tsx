@@ -40,7 +40,7 @@ export default function HomePage() {
                <div className="flex justify-center items-center md:order-1">
                  <div className="relative w-full max-w-[600px] aspect-[3/2]">
                   <Image
-                      src="https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/aadi-guru-from-shivbodha-.png"
+                      src="https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/aadi-guru-hero-banner-1-scaled.png"
                       alt="An artistic representation of Adi Shankaracharya"
                       width={600}
                       height={400}
