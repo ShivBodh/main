@@ -114,22 +114,6 @@ export default {
         'autoscroll': {
           'to': { transform: 'translateX(calc(-50% - 1rem))' },
         },
-        'bubble-rise-2': {
-          '0%': {
-            transform: 'translateY(100%) scale(0.1)',
-            opacity: '0',
-          },
-          '20%': {
-            opacity: '0.7',
-          },
-          '90%': {
-            opacity: '0.7',
-          },
-          '100%': {
-            transform: 'translateY(-100%) scale(1.2)',
-            opacity: '0',
-          },
-        },
         'fade-in': { from: { opacity: '0' }, to: { opacity: '1' } },
         'fade-in-slow': { from: { opacity: '0' }, to: { opacity: '0.2' } },
         'fade-in-down': {
@@ -158,7 +142,6 @@ export default {
         'page-flip-in': 'page-flip-in 0.3s ease-in-out forwards',
         'breath': 'breath 4s ease-in-out infinite',
         'autoscroll': 'autoscroll 60s linear infinite',
-        'bubble-rise': 'bubble-rise-2 25s linear infinite',
         'fade-in': 'fade-in 1.5s ease-out forwards',
         'fade-in-slow': 'fade-in-slow 3s ease-out forwards',
         'fade-in-down': 'fade-in-down 1s ease-out forwards',
@@ -166,21 +149,11 @@ export default {
         'path-draw': 'path-draw ease-out forwards',
         'symbol-glow': 'symbol-glow 4s ease-in-out infinite'
       },
-      perspective: {
-        '1000px': '1000px',
-      }
     },
   },
   plugins: [
     require('tailwindcss-animate'), 
     require('@tailwindcss/typography'), 
     require('tailwind-scrollbar'),
-    function ({ addUtilities }: { addUtilities: any }) {
-      addUtilities({
-        '.perspective-1000': {
-          perspective: '1000px',
-        },
-      })
-    }
   ],
 } satisfies Config;
