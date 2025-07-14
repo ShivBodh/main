@@ -151,17 +151,6 @@
   }
 }
 
-@keyframes fade-in-down {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
 @keyframes symbol-appear {
   from {
     opacity: 0;
@@ -173,15 +162,6 @@
   }
 }
 
-@keyframes path-draw {
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-
-.animate-path-draw {
-  animation: path-draw 4s ease-in-out forwards;
-}
 .animate-symbol-appear {
   animation: symbol-appear 0.8s ease-out forwards;
   opacity: 0; /* Start invisible */

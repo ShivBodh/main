@@ -2,7 +2,7 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { ArrowRight, BookOpen, Flag, Mountain, Shell } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
@@ -37,22 +37,6 @@ const PeethamSymbol = React.forwardRef<
 PeethamSymbol.displayName = 'PeethamSymbol';
 
 
-const PathLine = ({ className, style }: { className?: string; style?: React.CSSProperties }) => (
-    <div className={cn("absolute w-full h-full", className)} style={style}>
-        <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="w-full h-full">
-             <path
-                d="M50 15, Q50 50, 20 50, T50 85, Q50 50, 80 50, T50 15"
-                stroke="hsl(var(--primary) / 0.6)"
-                strokeWidth="0.5"
-                fill="none"
-                strokeDasharray="1"
-                strokeDashoffset="1"
-                className="animate-path-draw"
-            />
-        </svg>
-    </div>
-)
-
 export function HeroSection() {
   return (
     <section className="relative w-full h-[80vh] min-h-[500px] flex items-center justify-center text-center text-white overflow-hidden bg-gray-900">
@@ -69,9 +53,8 @@ export function HeroSection() {
 
       <div className="relative z-30 flex flex-col items-center justify-center w-full h-full">
 
-        {/* Peetham Symbols & Paths */}
+        {/* Peetham Symbols */}
         <div className="absolute inset-0 w-full h-full">
-            <PathLine />
             <PeethamSymbol peetham={peethams[3]} className="top-[10%] left-1/2 -translate-x-1/2" style={{ animationDelay: '1s' }} />
             <PeethamSymbol peetham={peethams[2]} className="top-1/2 -translate-y-1/2 right-[15%]" style={{ animationDelay: '2s' }} />
             <PeethamSymbol peetham={peethams[0]} className="bottom-[10%] left-1/2 -translate-x-1/2" style={{ animationDelay: '3s' }} />
@@ -80,13 +63,13 @@ export function HeroSection() {
 
         {/* Content */}
         <div className="relative z-40 mt-auto mb-16 sm:mb-24 px-4">
-            <h1 className="text-4xl md:text-6xl font-headline font-bold text-shadow-lg animate-fade-in-down">
+            <h1 className="text-4xl md:text-6xl font-headline font-bold text-shadow-lg animate-in fade-in-down duration-1000">
                 Sanatana Peethams Portal
             </h1>
-            <p className="mt-4 text-lg md:text-xl max-w-3xl mx-auto text-shadow-md animate-fade-in-down" style={{ animationDelay: '0.3s' }}>
+            <p className="mt-4 text-lg md:text-xl max-w-3xl mx-auto text-shadow-md animate-in fade-in-down duration-1000 delay-300">
                 A single, trusted digital beacon for the timeless wisdom of the four cardinal Peethams established by Adi Shankaracharya.
             </p>
-            <Button asChild size="lg" className="mt-8 animate-fade-in-down" style={{ animationDelay: '0.6s' }}>
+            <Button asChild size="lg" className="mt-8 animate-in fade-in-down duration-1000 delay-600">
                 <Link href="/mission">
                     Discover Our Mission <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
@@ -96,4 +79,3 @@ export function HeroSection() {
     </section>
   );
 }
-
