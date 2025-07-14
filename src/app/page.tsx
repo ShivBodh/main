@@ -1,22 +1,13 @@
-
 'use client';
 
 import { HeroSection } from '@/components/home/HeroSection';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { ArrowRight, BookOpen, Calendar, SunMoon, Atom, Users, Megaphone, NotebookText } from 'lucide-react';
-import type { Metadata } from 'next';
 import { PanchangaWidgetPreview } from '@/components/home/PanchangaWidgetPreview';
 import Image from 'next/image';
 import { ChaturmasyaSection } from '@/components/home/ChaturmasyaSection';
-import dynamic from 'next/dynamic';
-import { Skeleton } from '@/components/ui/skeleton';
 import { FeatureShowcase } from '@/components/home/FeatureShowcase';
-
-const ShankaraStoryCanvas = dynamic(() => import('@/components/home/ShankaraStoryCanvas').then(mod => mod.ShankaraStoryCanvas), {
-  ssr: false,
-  loading: () => <Skeleton className="w-full aspect-video" />,
-});
 
 export default function HomePage() {
   return (
@@ -126,8 +117,15 @@ export default function HomePage() {
                   </Button>
             </div>
             <div className="flex justify-center items-center md:order-1">
-              <div className="relative w-full max-w-[600px] aspect-video">
-                <ShankaraStoryCanvas />
+              <div className="relative w-full max-w-md aspect-square">
+                 <Image
+                      src="https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/aadi-guru-from-shivbodha-.png"
+                      alt="An artistic representation of Adi Shankaracharya"
+                      width={400}
+                      height={400}
+                      className="rounded-full object-cover shadow-2xl border-8 border-background"
+                      data-ai-hint="acharya painting"
+                  />
               </div>
             </div>
         </div>
