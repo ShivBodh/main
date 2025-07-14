@@ -1,3 +1,4 @@
+
 'use client';
 
 import React from 'react';
@@ -45,15 +46,17 @@ export function HeroSection() {
 
   return (
     <section className="w-full py-20 md:py-32 relative overflow-hidden bg-background">
-      <Image
-        src="https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/aadi-guru-hero-banner-1-scaled.png"
-        alt="Adi Shankaracharya meditating"
-        layout="fill"
-        objectFit="cover"
-        objectPosition="center"
-        className="z-0"
-        priority
-      />
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/aadi-guru-hero-banner-1-scaled.png"
+          alt="Adi Shankaracharya meditating"
+          layout="fill"
+          objectFit="cover"
+          objectPosition="center"
+          priority
+          unoptimized
+        />
+      </div>
       <div className="absolute inset-0 bg-black/60 z-10"></div>
        <div className="absolute inset-0 flex items-center justify-center z-20">
           <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" className="w-96 h-96 opacity-20 animate-diamond-spin">
