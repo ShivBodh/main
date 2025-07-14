@@ -74,7 +74,7 @@ export function ShankaraStoryCanvas() {
 
             <div className="absolute inset-0 z-10">
                 <Image
-                    src="https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/india-map-sketch.svg"
+                    src="https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/india-map-shivbodh.info--scaled.png"
                     alt="India Map Sketch"
                     layout="fill"
                     objectFit="contain"
