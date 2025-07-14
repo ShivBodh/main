@@ -130,6 +130,20 @@ export default {
             transform: 'translateY(-100%) scale(1.2)',
             opacity: '0',
           },
+        },
+        spin: {
+          'from': { transform: 'rotate(0deg)' },
+          'to': { transform: 'rotate(360deg)' },
+        },
+        'light-up': {
+          '0%': { stroke: '#ffd700' },
+          '15%': { stroke: '#ff8c00' },
+          '30%': { stroke: '#ff00ff' },
+          '45%': { stroke: '#00ffff' },
+          '60%': { stroke: '#00ff00' },
+          '75%': { stroke: '#ffff00' },
+          '90%': { stroke: '#ff0000' },
+          '100%': { stroke: '#ffd700' },
         }
       },
       animation: {
@@ -141,6 +155,8 @@ export default {
         'aurora': 'aurora 20s linear infinite',
         'autoscroll': 'autoscroll 60s linear infinite',
         'bubble-rise': 'bubble-rise-2 25s linear infinite',
+        'diamond-spin': 'spin 20s linear infinite',
+        'diamond-light-up': 'light-up 10s linear infinite',
       },
       perspective: {
         '1000px': '1000px',
