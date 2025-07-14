@@ -115,7 +115,7 @@ export function ShankaraStoryCanvas() {
         />
       </div>
 
-      <div className="relative z-40 text-center p-4">
+      <div className="absolute z-40 p-4 top-[20%] text-center">
         <h1 className="animate-fade-in-down text-4xl font-bold tracking-tight text-primary text-shadow-lg md:text-5xl">
           Sanatana Peethams Portal
         </h1>
@@ -123,7 +123,7 @@ export function ShankaraStoryCanvas() {
           className="typing-animation mx-auto mt-4 max-w-2xl animate-fade-in-down text-base text-foreground/80 text-shadow-md md:text-lg"
           style={{ animationDelay: '0.5s' }}
         >
-          We are the world's first platform dedicated to providing authentic Shankaracharya media, books, and speeches in an organized way for our worldwide Sanatana community.
+          We are the world's first platform to provide authentic Shankaracharya media, books, and speeches in an organized way for our worldwide Sanatana community.
         </p>
       </div>
 
