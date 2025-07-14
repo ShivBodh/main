@@ -411,24 +411,6 @@ function ProfileTab() {
             
              <Card>
                 <CardHeader>
-                    <CardTitle className="font-headline text-xl flex items-center gap-2"><Gamepad2 className="h-6 w-6"/> Bodhi's Game Room</CardTitle>
-                    <CardDescription>Challenge our resident AI, Bodhi, to a game of strategy and wisdom.</CardDescription>
-                </CardHeader>
-                <CardContent className="grid gap-4 md:grid-cols-2">
-                    <Link href="/games/ludo" className="block group">
-                        <div className="flex items-center gap-4 p-4 rounded-lg border bg-muted/50 hover:bg-accent hover:text-accent-foreground transition-colors">
-                            <Dice5 className="h-8 w-8 text-primary group-hover:text-accent-foreground" />
-                            <div>
-                                <h3 className="font-semibold">Play Ludo</h3>
-                                <p className="text-sm text-muted-foreground group-hover:text-accent-foreground">A fun game of chance and tactics.</p>
-                            </div>
-                        </div>
-                    </Link>
-                </CardContent>
-            </Card>
-
-             <Card>
-                <CardHeader>
                     <CardTitle className="font-headline text-xl flex items-center gap-2"><Award className="h-6 w-6"/> Achievements</CardTitle>
                     <CardDescription>Your points and badges earned across the portal.</CardDescription>
                 </CardHeader>

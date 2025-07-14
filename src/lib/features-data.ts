@@ -39,13 +39,6 @@ export const featuresData: FeatureCardData[] = [
         accentColor: 'orange',
     },
     {
-        icon: Gamepad2,
-        title: 'Pasha (Ludo) Game',
-        description: 'Challenge our resident AI, Bodhi, to a classic game of Pasha (Ludo) and receive commentary on your moves.',
-        link: '/games/ludo',
-        accentColor: 'purple',
-    },
-    {
         icon: Baby,
         title: 'Vedic Name Finder',
         description: 'Discover auspicious baby names based on Vedic astrology principles like Rashi and Nakshatra Pada.',

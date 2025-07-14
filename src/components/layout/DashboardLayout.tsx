@@ -25,7 +25,6 @@ const mainNavLinks = [
   { href: '/events', icon: Calendar, label: 'Calendar' },
   { href: '/reading', icon: BookOpen, label: 'Reading' },
   { href: '/sadhana', icon: Atom, label: 'Sādhanā' },
-  { href: '/games/ludo', icon: Gamepad2, label: 'Games' },
 ];
 
 const helpNavLinks = [
