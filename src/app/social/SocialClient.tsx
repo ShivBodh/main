@@ -70,7 +70,6 @@ interface Campaign {
 }
 interface Task { id: string; text: string; completed: boolean; }
 export interface DayEntry { notes: string; tasks: Task[]; sketchData?: string; }
-type DrawingTool = 'pencil' | 'brush' | 'eraser';
 
 // --- HELPERS ---
 const getInitials = (name: string | null | undefined) => {
