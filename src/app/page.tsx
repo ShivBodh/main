@@ -1,3 +1,4 @@
+
 'use client';
 
 import { HeroSection } from '@/components/home/HeroSection';
@@ -53,28 +54,14 @@ export default function HomePage() {
         <div className="container mx-auto grid md:grid-cols-2 gap-12 items-center">
             <div className="flex justify-center items-center">
              <div className="relative w-[300px] h-[300px] flex items-center justify-center">
-                <div className="absolute inset-0 bg-aurora-gradient opacity-40 blur-2xl animate-aurora"></div>
-                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" className="w-48 h-48 animate-diamond-spin">
-                    <g className="animate-diamond-light-up">
-                        <path d="M50 2 L98 50 L50 98 L2 50 Z" strokeWidth="1" fill="none" />
-                        <path d="M50 2 L50 98" strokeWidth="0.5" fill="none" />
-                        <path d="M2 50 L98 50" strokeWidth="0.5" fill="none" />
-                        <path d="M25 25 L75 75" strokeWidth="0.25" fill="none" />
-                        <path d="M75 25 L25 75" strokeWidth="0.25" fill="none" />
-                        
-                        {/* Inner diamond */}
-                        <path d="M50 15 L85 50 L50 85 L15 50 Z" strokeWidth="0.5" fill="none" />
-                        
-                        {/* Connecting lines */}
-                        <path d="M50 2 L50 15" strokeWidth="0.25" fill="none" />
-                        <path d="M2 50 L15 50" strokeWidth="0.25" fill="none" />
-                        <path d="M98 50 L85 50" strokeWidth="0.25" fill="none" />
-                        <path d="M50 98 L50 85" strokeWidth="0.25" fill="none" />
-
-                        {/* Corner cuts */}
-                        <path d="M15 50 L25 25 L50 15 L75 25 L85 50 L75 75 L50 85 L25 75 Z" strokeWidth="0.25" fill="none" />
-                    </g>
-                </svg>
+                 <Image
+                    src="https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/shivala-info-logo-.gif"
+                    alt="Sanatan Social Animated Logo"
+                    width={300}
+                    height={300}
+                    unoptimized
+                    className="rounded-full"
+                 />
              </div>
             </div>
             <div>
