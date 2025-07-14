@@ -106,12 +106,12 @@ export default function HomePage() {
             <div className="flex justify-center items-center md:order-1">
               <div className="relative w-full max-w-md aspect-square">
                  <Image
-                      src="https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/aadi-guru-from-shivbodha-.png"
-                      alt="An artistic representation of Adi Shankaracharya"
+                      src="https://placehold.co/400x400.png"
+                      alt="A blackboard with a chalk message saying a new way to learn is launching soon."
                       width={400}
                       height={400}
                       className="rounded-full object-cover shadow-2xl border-8 border-background"
-                      data-ai-hint="acharya painting"
+                      data-ai-hint="blackboard chalk"
                   />
               </div>
             </div>
