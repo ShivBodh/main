@@ -1,4 +1,3 @@
-
 'use client';
 
 import React from 'react';
@@ -55,7 +54,18 @@ export function HeroSection() {
                   <path d="M2 50 L98 50" strokeWidth="0.25" fill="none" />
                   <path d="M25 25 L75 75" strokeWidth="0.1" fill="none" />
                   <path d="M75 25 L25 75" strokeWidth="0.1" fill="none" />
-                  <path d="M50 15 L85 50 L50 85 L15 50 Z" strokeWidth="0.25" fill="none" />
+                  
+                  {/* Inner diamond */}
+                  <path d="M50 15 L85 50 L50 85 L15 50 Z" strokeWidth="0.5" fill="none" />
+                  
+                  {/* Connecting lines */}
+                  <path d="M50 2 L50 15" strokeWidth="0.25" fill="none" />
+                  <path d="M2 50 L15 50" strokeWidth="0.25" fill="none" />
+                  <path d="M98 50 L85 50" strokeWidth="0.25" fill="none" />
+                  <path d="M50 98 L50 85" strokeWidth="0.25" fill="none" />
+
+                  {/* Corner cuts */}
+                  <path d="M15 50 L25 25 L50 15 L75 25 L85 50 L75 75 L50 85 L25 75 Z" strokeWidth="0.25" fill="none" />
               </g>
           </svg>
        </div>

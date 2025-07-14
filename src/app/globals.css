@@ -89,27 +89,33 @@
   .bg-aurora-gradient {
     background-image: conic-gradient(
       from 180deg at 50% 50%,
-      #ffd700, #ff8c00, #ff00ff, #00ffff, #00ff00, #ffff00, #ff0000, #ffd700
+      hsl(var(--primary) / 0.5),
+      hsl(var(--accent) / 0.5),
+      hsl(var(--secondary) / 0.5),
+      #00ffff80,
+      #00ff0080,
+      #ffff0080,
+      #ff000080,
+      hsl(var(--primary) / 0.5)
     );
   }
   
   .animate-diamond-spin {
-    animation: spin 20s linear infinite;
+    animation: spin 40s linear infinite;
   }
 
   .animate-diamond-light-up {
-    animation: light-up 10s linear infinite;
+    animation: light-up 15s linear infinite;
   }
 
   @keyframes light-up {
-    0% { stroke: #ffd700; }
-    15% { stroke: #ff8c00; }
+    0%, 100% { stroke: hsl(var(--primary)); }
+    15% { stroke: hsl(var(--accent)); }
     30% { stroke: #ff00ff; }
     45% { stroke: #00ffff; }
     60% { stroke: #00ff00; }
     75% { stroke: #ffff00; }
     90% { stroke: #ff0000; }
-    100% { stroke: #ffd700; }
   }
 
   @keyframes spin { 
