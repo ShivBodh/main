@@ -56,6 +56,19 @@ export function ShankaraStoryCanvas() {
 
   return (
     <div className="relative flex h-screen w-full flex-col items-center justify-center overflow-hidden bg-gradient-to-b from-gray-50 via-gray-100 to-gray-200 text-slate-800">
+        
+       <div className="z-40 pt-16 text-center">
+        <h1 className="animate-fade-in-down text-4xl font-bold tracking-tight text-primary text-shadow-lg md:text-5xl">
+          Sanatana Peethams Portal
+        </h1>
+        <p
+          className="typing-animation mx-auto mt-4 max-w-2xl animate-fade-in-down text-base text-foreground/80 text-shadow-md md:text-lg"
+          style={{ animationDelay: '0.5s' }}
+        >
+          We are the world's first platform to provide authentic Shankaracharya media, books, and speeches in an organized way for our worldwide Sanatana community.
+        </p>
+      </div>
+
       <div className="absolute inset-0 z-10 flex items-center justify-center">
         <Image
           src="https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/india-map-shivbodh.info--scaled.png"
@@ -113,18 +126,6 @@ export function ShankaraStoryCanvas() {
             <Flag className="h-10 w-10" />
           }
         />
-      </div>
-
-      <div className="absolute z-40 p-4 top-[20%] text-center">
-        <h1 className="animate-fade-in-down text-4xl font-bold tracking-tight text-primary text-shadow-lg md:text-5xl">
-          Sanatana Peethams Portal
-        </h1>
-        <p
-          className="typing-animation mx-auto mt-4 max-w-2xl animate-fade-in-down text-base text-foreground/80 text-shadow-md md:text-lg"
-          style={{ animationDelay: '0.5s' }}
-        >
-          We are the world's first platform to provide authentic Shankaracharya media, books, and speeches in an organized way for our worldwide Sanatana community.
-        </p>
       </div>
 
       <div className="absolute bottom-8 left-1/2 z-50 -translate-x-1/2">

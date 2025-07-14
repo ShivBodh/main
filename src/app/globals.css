@@ -108,6 +108,7 @@
     text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
   }
   .typing-animation {
+    width: 150ch; /* Character count of the message */
     overflow: hidden; 
     border-right: .15em solid hsl(var(--primary)); 
     white-space: nowrap; 
