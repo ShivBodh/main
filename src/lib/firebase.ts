@@ -15,31 +15,34 @@ const firebaseConfig: FirebaseOptions = {
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
 };
 
-let app: FirebaseApp | undefined;
-let auth: Auth | undefined;
-let db: Firestore | undefined;
+let app: FirebaseApp;
+let auth: Auth;
+let db: Firestore;
+let googleProvider: GoogleAuthProvider | undefined;
 
 // Initialize Firebase only if the API key and project ID are provided.
 // This prevents errors in environments where the keys are not set.
 if (firebaseConfig.apiKey && firebaseConfig.projectId) {
-    app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
+    if (!getApps().length) {
+        app = initializeApp(firebaseConfig);
+    } else {
+        app = getApp();
+    }
     auth = getAuth(app);
     db = getFirestore(app);
+    googleProvider = new GoogleAuthProvider();
     
     // Initialize analytics only on the client side where it is supported.
     if (typeof window !== 'undefined') {
       isSupported().then(supported => {
-          if (supported && app) {
+          if (supported) {
               getAnalytics(app);
           }
       });
     }
 } else {
     // This warning is helpful for developers during local development.
-    console.warn("Firebase API key or Project ID is not configured. Firebase features will be disabled. Please set the required NEXT_PUBLIC_FIREBASE_* variables in your .env file.");
+    console.warn("Firebase configuration is missing. Firebase features will be disabled.");
 }
-
-
-const googleProvider = auth ? new GoogleAuthProvider() : undefined;
 
 export { app, auth, googleProvider, db };
