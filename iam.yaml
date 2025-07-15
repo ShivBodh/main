@@ -1,0 +1,5 @@
+
+bindings:
+  - role: roles/run.admin
+    members:
+      - serviceAccount:firebase-app-hosting-prod@system.gserviceaccount.com
