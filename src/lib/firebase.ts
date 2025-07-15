@@ -1,30 +1,32 @@
+
 import { initializeApp, getApps, getApp, FirebaseOptions, FirebaseApp } from 'firebase/app';
 import { getAuth, GoogleAuthProvider, Auth } from 'firebase/auth';
 import { getFirestore, Firestore } from 'firebase/firestore';
 import { getAnalytics, isSupported } from "firebase/analytics";
 
-// Your web app's Firebase configuration
+// Your web app's Firebase configuration is provided by environment variables.
 const firebaseConfig: FirebaseOptions = {
-  apiKey: "AIzaSyBGj2TGscv3kJgb0SC8ZS912ZtQ9pGIRcM",
-  authDomain: "sdhan-suite.firebaseapp.com",
-  databaseURL: "https://sdhan-suite-default-rtdb.firebaseio.com",
-  projectId: "sdhan-suite",
-  storageBucket: "sdhan-suite.appspot.com",
-  messagingSenderId: "540744813374",
-  appId: "1:540744813374:web:09b82f9abdafc8ea1efa6f",
-  measurementId: "G-6S4EV301MV"
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
 };
 
 let app: FirebaseApp | undefined;
 let auth: Auth | undefined;
 let db: Firestore | undefined;
 
-// Initialize Firebase only if the API key is provided
+// Initialize Firebase only if the API key is provided.
+// This prevents errors in environments where the keys are not set.
 if (firebaseConfig.apiKey) {
     app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
     auth = getAuth(app);
     db = getFirestore(app);
-    // Initialize analytics only on the client
+    
+    // Initialize analytics only on the client side where it is supported.
     if (typeof window !== 'undefined') {
       isSupported().then(supported => {
           if (supported && app) {
@@ -33,11 +35,11 @@ if (firebaseConfig.apiKey) {
       });
     }
 } else {
-    // This warning is helpful for developers.
-    console.warn("Firebase API key is not configured. Firebase features will be disabled. Please update your .env file with NEXT_PUBLIC_FIREBASE_API_KEY.");
+    // This warning is helpful for developers during local development.
+    console.warn("Firebase API key is not configured. Firebase features will be disabled. Please set NEXT_PUBLIC_FIREBASE_API_KEY in your .env file.");
 }
 
 
-const googleProvider = new GoogleAuthProvider();
+const googleProvider = auth ? new GoogleAuthProvider() : undefined;
 
-export { auth, googleProvider, db };
+export { app, auth, googleProvider, db };
