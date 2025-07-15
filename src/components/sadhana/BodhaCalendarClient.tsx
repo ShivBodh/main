@@ -13,7 +13,7 @@ import { Scroll, Timer, BookOpen, Check, AlertCircle } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { type JapaSession } from '@/components/sadhana/JapaCounterClient';
 import { type MeditationSession } from '@/components/sadhana/MeditationTimerClient';
-import { type DayEntry } from '@/app/social/SocialClient';
+import { type DayEntry } from '@/lib/social-types';
 
 // --- TYPES ---
 
