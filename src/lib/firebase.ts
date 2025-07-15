@@ -19,9 +19,9 @@ let app: FirebaseApp | undefined;
 let auth: Auth | undefined;
 let db: Firestore | undefined;
 
-// Initialize Firebase only if the API key is provided.
+// Initialize Firebase only if the API key and project ID are provided.
 // This prevents errors in environments where the keys are not set.
-if (firebaseConfig.apiKey) {
+if (firebaseConfig.apiKey && firebaseConfig.projectId) {
     app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
     auth = getAuth(app);
     db = getFirestore(app);
@@ -36,7 +36,7 @@ if (firebaseConfig.apiKey) {
     }
 } else {
     // This warning is helpful for developers during local development.
-    console.warn("Firebase API key is not configured. Firebase features will be disabled. Please set NEXT_PUBLIC_FIREBASE_API_KEY in your .env file.");
+    console.warn("Firebase API key or Project ID is not configured. Firebase features will be disabled. Please set the required NEXT_PUBLIC_FIREBASE_* variables in your .env file.");
 }
 
 
