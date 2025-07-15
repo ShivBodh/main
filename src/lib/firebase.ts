@@ -5,13 +5,14 @@ import { getAnalytics, isSupported } from "firebase/analytics";
 
 // Your web app's Firebase configuration
 const firebaseConfig: FirebaseOptions = {
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  apiKey: "AIzaSyBGj2TGscv3kJgb0SC8ZS912ZtQ9pGIRcM",
   authDomain: "sdhan-suite.firebaseapp.com",
+  databaseURL: "https://sdhan-suite-default-rtdb.firebaseio.com",
   projectId: "sdhan-suite",
   storageBucket: "sdhan-suite.appspot.com",
   messagingSenderId: "540744813374",
-  appId: "1:540744813374:web:77568c9e9de991231efa6f",
-  measurementId: "G-99T2Z8JEES"
+  appId: "1:540744813374:web:09b82f9abdafc8ea1efa6f",
+  measurementId: "G-6S4EV301MV"
 };
 
 let app: FirebaseApp | undefined;
