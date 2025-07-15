@@ -1,3 +1,4 @@
+
 // --- TYPES ---
 export interface Post {
     id: string;
