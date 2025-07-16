@@ -13,7 +13,7 @@ runConfig:
   maxInstances: 1
   # Make the secret available as an environment variable
   env:
-    - variable: NEXT_PUBLIC_FIREBASE_API_KEY
+    - variable: FIREBASE_API_KEY
       secret: FIREBASE_API_KEY
 
 # Defines the caching behavior for your site's assets.
