@@ -4,9 +4,9 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import BookReaderClient from '@/components/reading/BookReaderClient';
 
+// This is the corrected type definition for the page props.
 type Props = {
   params: { slug: string };
-  searchParams: { [key: string]: string | string[] | undefined };
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
