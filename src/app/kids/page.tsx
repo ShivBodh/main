@@ -1,23 +1,14 @@
-# Settings to manage and configure a Firebase App Hosting backend.
-# https://firebase.google.com/docs/app-hosting/configure
+// This page has been removed.
+import type { Metadata } from 'next';
 
-# The command that starts your web server
-entrypoint: npm start
+export const metadata: Metadata = {
+  title: 'Section Removed',
+  robots: {
+    index: false,
+    follow: false,
+  }
+};
 
-runConfig:
-  # Increase this value if you'd like to automatically spin up
-  # more instances in response to increased traffic.
-  maxInstances: 1
-
-# Defines the caching behavior for your site's assets.
-headers:
-  # Caches all static assets for a year.
-  - source: /_next/static/**
-    headers:
-      - key: Cache-Control
-        value: public, max-age=31536000, immutable
-# Caches all other content for 5 minutes.
-  - source: /
-    headers:
-      - key: Cache-Control
-        value: public, max-age=300, s-maxage=300
+export default function KidsPage() {
+  return null;
+}

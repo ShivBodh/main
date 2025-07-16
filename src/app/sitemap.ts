@@ -18,6 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/sadhana/meditation-timer',
     '/sadhana/daily-wisdom',
     '/sadhana/bodha-calendar',
+    '/sadhana/vedic-name-finder',
     '/panchanga',
     '/quiz',
     '/seva',
