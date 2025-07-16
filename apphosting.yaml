@@ -3,6 +3,7 @@
 
 # The command that starts your web server
 entrypoint: npm start
+sourceDirectory: ./
 
 runConfig:
   # Increase this value if you'd like to automatically spin up
