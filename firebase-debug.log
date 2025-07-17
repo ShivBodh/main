@@ -48,3 +48,11 @@ Before we get started, keep in mind:
 [debug] [2025-07-17T00:53:07.192Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/sdhan-suite [none]
 [debug] [2025-07-17T00:53:07.378Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/sdhan-suite 200
 [debug] [2025-07-17T00:53:07.378Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/sdhan-suite {"projectId":"sdhan-suite","projectNumber":"540744813374","displayName":"Sdhan Suite","name":"projects/sdhan-suite","resources":{"hostingSite":"sdhan-suite","realtimeDatabaseInstance":"sdhan-suite-default-rtdb"},"state":"ACTIVE","etag":"1_0513b54c-4826-4c94-83d0-789069a463b6"}
+[info] 
+[info] i  Detected a .git folder at /home/user/studio 
+[info] i  Authorizing with GitHub to upload your service account to a GitHub repository's secrets store. 
+[info] 
+[info] Visit this URL on this device to log in:
+[info] https://github.com/login/oauth/authorize?client_id=89cf50f02ac6aaed3484&state=735966561&redirect_uri=http%3A%2F%2Flocalhost%3A9005&scope=read%3Auser%20repo%20public_repo
+[info] 
+[info] Waiting for authentication...
