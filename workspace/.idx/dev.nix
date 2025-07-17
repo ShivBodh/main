@@ -25,7 +25,7 @@
   services.firebase.emulators = {
     detect = true;
     projectId = "sdhan-suite";
-    services = ["auth", "firestore"];
+    services = ["auth" "firestore"];
   };
   idx = {
     # Search for the extensions you want on https://open-vsx.org/ and use "publisher.id"
