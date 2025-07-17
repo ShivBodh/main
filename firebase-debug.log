@@ -1,0 +1,50 @@
+[debug] [2025-07-17T00:52:39.327Z] ----------------------------------------------------------------------
+[debug] [2025-07-17T00:52:39.329Z] Command:       /nix/store/rbdrkcs5kkwpalxcd7c6bnm33lk2955n-nodejs-20.19.0/bin/node /home/user/.global_modules/bin/firebase init
+[debug] [2025-07-17T00:52:39.330Z] CLI Version:   14.10.1
+[debug] [2025-07-17T00:52:39.330Z] Platform:      linux
+[debug] [2025-07-17T00:52:39.330Z] Node Version:  v20.19.0
+[debug] [2025-07-17T00:52:39.330Z] Time:          Thu Jul 17 2025 00:52:39 GMT+0000 (Coordinated Universal Time)
+[debug] [2025-07-17T00:52:39.331Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-07-17T00:52:39.770Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-07-17T00:52:39.771Z] > authorizing via signed-in user (shivbodhavikalp@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /home/user/studio
+
+Before we get started, keep in mind:
+
+  * You are initializing within an existing Firebase project directory
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2025-07-17T00:53:06.852Z] Using project from CLI flag: sdhan-suite
+[debug] [2025-07-17T00:53:06.857Z] No OAuth tokens found
+[debug] [2025-07-17T00:53:06.860Z] No OAuth tokens found
+[debug] [2025-07-17T00:53:06.860Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-07-17T00:53:06.861Z] > authorizing via signed-in user (shivbodhavikalp@gmail.com)
+[debug] [2025-07-17T00:53:06.864Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/sdhan-suite [none]
+[debug] [2025-07-17T00:53:07.167Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/sdhan-suite 200
+[debug] [2025-07-17T00:53:07.168Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/sdhan-suite {"projectId":"sdhan-suite","projectNumber":"540744813374","displayName":"Sdhan Suite","name":"projects/sdhan-suite","resources":{"hostingSite":"sdhan-suite","realtimeDatabaseInstance":"sdhan-suite-default-rtdb"},"state":"ACTIVE","etag":"1_0513b54c-4826-4c94-83d0-789069a463b6"}
+[info] i  Using project sdhan-suite (Sdhan Suite) 
+[info] 
+=== Hosting Setup
+[debug] [2025-07-17T00:53:07.191Z] No OAuth tokens found
+[debug] [2025-07-17T00:53:07.192Z] No OAuth tokens found
+[debug] [2025-07-17T00:53:07.192Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-07-17T00:53:07.192Z] > authorizing via signed-in user (shivbodhavikalp@gmail.com)
+[debug] [2025-07-17T00:53:07.192Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/sdhan-suite [none]
+[debug] [2025-07-17T00:53:07.378Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/sdhan-suite 200
+[debug] [2025-07-17T00:53:07.378Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/sdhan-suite {"projectId":"sdhan-suite","projectNumber":"540744813374","displayName":"Sdhan Suite","name":"projects/sdhan-suite","resources":{"hostingSite":"sdhan-suite","realtimeDatabaseInstance":"sdhan-suite-default-rtdb"},"state":"ACTIVE","etag":"1_0513b54c-4826-4c94-83d0-789069a463b6"}
