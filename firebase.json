@@ -1,11 +1,11 @@
 
 {
-  "firestore": {
-    "rules": "firestore.rules",
-    "indexes": "firestore.indexes.json"
-  },
-  "apphosting": {
-    "backend": "shivala-1",
-    "source": "."
+  "hosting": {
+    "source": "workspace",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
   }
 }
