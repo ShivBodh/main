@@ -17,13 +17,13 @@
     NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET = "sdhan-suite.firebasestorage.app";
     NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID = "540744813374";
     NEXT_PUBLIC_FIREBASE_APP_ID = "1:540744813374:web:b617f1f5a7fe79381efa6f";
-    NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID = "";
+    NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID = "G-F89VPW7ZMF";
   };
   # This adds a file watcher to startup the firebase emulators. The emulators will only start if
   # a firebase.json file is written into the user's directory
   services.firebase.emulators = {
     detect = true;
-    projectId = "demo-app";
+    projectId = "sdhan-suite";
     services = ["auth" "firestore"];
   };
   idx = {
@@ -43,7 +43,8 @@
       enable = true;
       previews = {
         web = {
-          command = ["npm" "run" "dev" "--" "--port" "$PORT" "--hostname" "0.0.0.0"];
+          # Change directory to workspace before running the dev server
+          command = ["bash" "-c" "cd workspace && npm run dev -- --port $PORT --hostname 0.0.0.0"];
           manager = "web";
         };
       };
