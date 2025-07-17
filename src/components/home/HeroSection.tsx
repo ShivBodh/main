@@ -16,8 +16,7 @@ export function HeroSection() {
         src="https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/aadi-guru-from-shivbodha-.png"
         alt="Adi Shankaracharya meditating"
         fill
-        style={{ objectFit: 'contain', objectPosition: 'bottom center' }}
-        className="z-10 opacity-60 pointer-events-none"
+        className="object-contain object-bottom z-10 opacity-60 pointer-events-none"
         priority
       />
       <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent z-20"></div>

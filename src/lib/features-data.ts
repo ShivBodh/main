@@ -42,7 +42,7 @@ export const featuresData: FeatureCardData[] = [
         icon: Download,
         title: 'Panchanga Widgets',
         description: 'Download beautiful, shareable widgets of today\'s Panchanga for your iOS, Android, or Desktop device.',
-        link: '/panchanga/widgets',
+        link: '/panchanga',
         accentColor: 'purple',
     },
     {

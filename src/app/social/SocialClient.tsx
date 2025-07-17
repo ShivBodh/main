@@ -26,50 +26,9 @@ import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import { Slider } from '@/components/ui/slider';
 import { badges, Badge as BadgeType } from '@/lib/badge-data';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import type { Post, Mitra, Notification, Campaign, Task, DayEntry } from '@/lib/social-types';
 
-
-// --- TYPES ---
-interface Post {
-    id: string;
-    author: { name: string; handle: string; avatar?: string; };
-    content: string;
-    image: string | null;
-    aiHint?: string;
-    likes: number;
-    comments: number;
-    isPublic: boolean;
-    timestamp: Date;
-}
-interface Mitra {
-    name: string;
-    handle: string;
-    avatar?: string;
-}
-interface Notification {
-    id: string;
-    type: 'mitra_request' | 'campaign_support' | 'post_like';
-    actor: { name: string; avatar?: string; };
-    message: string;
-    timestamp: Date;
-    isRead: boolean;
-}
-interface Campaign {
-    id: string;
-    author: { name: string; handle: string; avatar?: string; };
-    title: string;
-    description: string;
-    image: string | null;
-    aiHint?: string;
-    supporters: number;
-    greenFlags: number;
-    redFlags: number;
-    isPublic: boolean;
-    timestamp: Date;
-    userHasSupported?: boolean;
-    userFlagged?: 'green' | 'red' | null;
-}
-interface Task { id: string; text: string; completed: boolean; }
-export interface DayEntry { notes: string; tasks: Task[]; sketchData?: string; }
+type DrawingTool = 'pencil' | 'brush' | 'eraser';
 
 // --- HELPERS ---
 const getInitials = (name: string | null | undefined) => {
