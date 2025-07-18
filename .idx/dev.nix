@@ -1,4 +1,3 @@
-
 # To learn more about how to use Nix to configure your environment
 # see: https://firebase.google.com/docs/studio/customize-workspace
 {pkgs}: {
@@ -41,7 +40,16 @@
       previews = [
         {
           # The command to run to start the server
-          command = ["npm", "run", "dev", "--", "--port", "$PORT", "--hostname", "0.0.0.0"];
+          command = [
+            "npm"
+            "run"
+            "dev"
+            "--"
+            "--port"
+            "$PORT"
+            "--hostname"
+            "0.0.0.0"
+          ];
           # The name that shows up in the UI
           id = "web";
           # The file to open in the preview browser
