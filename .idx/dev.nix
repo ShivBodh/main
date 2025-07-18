@@ -3,11 +3,10 @@
 # see: https://firebase.google.com/docs/studio/customize-workspace
 {pkgs}: {
   # Which nixpkgs channel to use.
-  channel = "stable-24.11"; # or "unstable"
+  channel = "stable-23.11"; # or "unstable"
   # Use https://search.nixos.org/packages to find packages
   packages = [
     pkgs.nodejs_20
-    pkgs.zulu
   ];
   # Sets environment variables in the workspace
   env = {
@@ -19,35 +18,36 @@
     NEXT_PUBLIC_FIREBASE_APP_ID = "1:540744813374:web:b617f1f5a7fe79381efa6f";
     NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID = "G-F89VPW7ZMF";
   };
-  # This adds a file watcher to startup the firebase emulators. The emulators will only start if
-  # a firebase.json file is written into the user's directory
-  services.firebase.emulators = {
-    detect = true;
-    projectId = "sdhan-suite";
-    services = ["auth" "firestore"];
-  };
   idx = {
     # Search for the extensions you want on https://open-vsx.org/ and use "publisher.id"
     extensions = [
+      "dbaeumer.vscode-eslint"
       # "vscodevim.vim"
     ];
     workspace = {
+      # Runs when a workspace is first created
       onCreate = {
-        default.openFiles = [
-          "src/app/page.tsx"
-        ];
+        npm-install = "npm install";
+      };
+      # Runs when a workspace is imported or opened
+      onStart = {
+        # Example: start a background task
+        # npm-dev = "npm run dev";
       };
     };
     # Enable previews and customize configuration
     previews = {
       enable = true;
-      previews = {
-        web = {
-          # Change directory to workspace before running the dev server
-          command = ["bash" "-c" "cd workspace && npm run dev -- --port $PORT --hostname 0.0.0.0"];
+      previews = [
+        {
+          # The command to run to start the server
+          command = ["npm", "run", "dev", "--", "--port", "$PORT", "--hostname", "0.0.0.0"];
+          # The name that shows up in the UI
+          id = "web";
+          # The file to open in the preview browser
           manager = "web";
-        };
-      };
+        }
+      ];
     };
   };
 }

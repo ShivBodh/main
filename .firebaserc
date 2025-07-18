@@ -1,5 +1,12 @@
+
 {
   "projects": {
     "default": "sdhan-suite"
+  },
+  "backends": {
+    "shivala-1": {
+      "region": "asia-east1",
+      "projectId": "sdhan-suite"
+    }
   }
 }
