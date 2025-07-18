@@ -70,7 +70,7 @@ export default function RootLayout({
       <head>
         {/* Google tag (gtag.js) */}
         <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-F89VPW7ZMF"
+          src="https://www.googletagmanager.com/gtag/js?id=G-2YGZMSZZ7J"
           strategy="afterInteractive"
         />
         <Script id="google-analytics" strategy="afterInteractive">
@@ -79,7 +79,7 @@ export default function RootLayout({
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
 
-            gtag('config', 'G-F89VPW7ZMF');
+            gtag('config', 'G-2YGZMSZZ7J');
           `}
         </Script>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FFD700' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 2L2 7l10 5 10-5-10-5z' /><path d='M2 17l10 5 10-5' /><path d='M2 12l10 5 10-5' /></svg>" type="image/svg+xml" />
