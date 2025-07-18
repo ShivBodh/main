@@ -17,9 +17,9 @@ export function AcharyaCard({ acharya }: AcharyaCardProps) {
       {/* Hero Image Section */}
       <div className="group relative w-full h-[175px] bg-secondary/20">
         <Image
-          src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExMHU2a2w2Z3RtamhxcjQ2ZDE0djMybDVxZ3h5d3J0aXh4aWViOTZqMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3ohs7SYIm3aJeA_i6Y/giphy.gif"
+          src="https://placehold.co/400x175.png"
           alt={`An artistic painting related to ${acharya.peetham}`}
-          unoptimized
+          data-ai-hint="temple painting"
           fill
           className="object-cover w-full h-full"
         />
@@ -37,9 +37,9 @@ export function AcharyaCard({ acharya }: AcharyaCardProps) {
                   {[...Array(3)].map((_, colIndex) => (
                     <div key={colIndex} className="relative w-1/3 h-full bg-black/20 opacity-70 hover:opacity-100 transition-opacity">
                        <Image
-                        src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExMHU2a2w2Z3RtamhxcjQ2ZDE0djMybDVxZ3h5d3J0aXh4aWViOTZqMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3ohs7SYIm3aJeA_i6Y/giphy.gif"
-                        alt={`Abstract light GIF ${rowIndex * 3 + colIndex + 1}`}
-                        unoptimized
+                        src={`https://placehold.co/100x100.png?text=${rowIndex * 3 + colIndex + 1}`}
+                        alt={`Gallery Image ${rowIndex * 3 + colIndex + 1}`}
+                        data-ai-hint="spiritual gathering"
                         fill
                         className="object-cover w-full h-full"
                       />

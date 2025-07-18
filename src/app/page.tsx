@@ -40,8 +40,9 @@ export default function HomePage() {
                <div className="flex justify-center items-center md:order-1">
                  <div className="relative w-full max-w-[600px] aspect-[3/2]">
                   <Image
-                      src="https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/aadi-guru-hero-banner-1-scaled.png"
+                      src="https://placehold.co/600x400.png"
                       alt="An artistic representation of Adi Shankaracharya"
+                      data-ai-hint="acharya painting"
                       width={600}
                       height={400}
                       className="rounded-lg object-contain shadow-lg"
@@ -57,11 +58,11 @@ export default function HomePage() {
             <div className="flex justify-center items-center">
              <div className="relative w-[300px] h-[300px] flex items-center justify-center">
                  <Image
-                    src="https://lightcoral-echidna-355938.hostingersite.com/wp-content/uploads/2025/07/shivala-social-icon.gif"
-                    alt="Sanatan Social Animated Logo"
+                    src="https://placehold.co/300x300.png"
+                    alt="Sanatan Social Logo Placeholder"
+                    data-ai-hint="logo spiritual"
                     width={300}
                     height={300}
-                    unoptimized
                     className="rounded-full"
                  />
              </div>

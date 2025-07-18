@@ -19,6 +19,7 @@ import { Badge } from '@/components/ui/badge';
 import { db } from '@/lib/firebase';
 import { collection, getDocs, query, where, orderBy } from 'firebase/firestore';
 import { Skeleton } from '@/components/ui/skeleton';
+import Image from 'next/image';
 
 const jyotirmathSeva = allSevaOpportunities.filter(o => o.peetham === 'Jyotirmath');
 const peethamInfo = peethams.find(p => p.name.includes('Jyotirmath'))!;
@@ -123,10 +124,13 @@ export default function JyotirmathClient() {
         <section className="flex flex-col md:flex-row items-center gap-8 mb-12">
           <div className="w-full md:w-1/3">
              <div className="relative aspect-[3/4] w-full">
-                <img
-                  src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExMHU2a2w2Z3RtamhxcjQ2ZDE0djMybDVxZ3h5d3J0aXh4aWViOTZqMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3ohs7SYIm3aJeA_i6Y/giphy.gif"
-                  alt="Abstract light GIF"
+                <Image
+                  src="https://placehold.co/600x800.png"
+                  alt="Placeholder for Jyotirmath Peetham"
+                  data-ai-hint="himalayas monastery"
                   className="rounded-lg shadow-lg object-cover w-full h-full"
+                  width={600}
+                  height={800}
                 />
             </div>
           </div>

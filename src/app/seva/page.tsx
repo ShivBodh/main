@@ -5,6 +5,8 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { Landmark, ExternalLink } from 'lucide-react';
+import Image from 'next/image';
+
 
 export default function SevaClient() {
     const mapUrl = "https://mcp-maps-3d-540744813374.us-west1.run.app?key=AIzaSyAqWV5SY9xlbqgd15uKAh9fhYzcaB1tIOc";
@@ -23,11 +25,12 @@ export default function SevaClient() {
 
             <Card>
                 <CardContent className="p-0 relative w-full aspect-video overflow-hidden rounded-lg border shadow-lg group">
-                    <img
-                        src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExMHU2a2w2Z3RtamhxcjQ2ZDE0djMybDVxZ3h5d3J0aXh4aWViOTZqMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3ohs7SYIm3aJeA_i6Y/giphy.gif"
-                        alt="Abstract light GIF"
-                        width="1200"
-                        height="675"
+                    <Image
+                        src="https://placehold.co/1200x675.png"
+                        alt="3D map placeholder"
+                        data-ai-hint="map 3d"
+                        width={1200}
+                        height={675}
                         className="w-full h-full object-cover transition-all duration-300 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center">

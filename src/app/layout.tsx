@@ -29,10 +29,10 @@ export const metadata: Metadata = {
     siteName: 'Sanatana Peethams Portal',
     images: [
       {
-        url: 'https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExMHU2a2w2Z3RtamhxcjQ2ZDE0djMybDVxZ3h5d3J0aXh4aWViOTZqMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3ohs7SYIm3aJeA_i6Y/giphy.gif',
+        url: 'https://placehold.co/1200x630.png',
         width: 1200,
         height: 630,
-        alt: 'Abstract light GIF',
+        alt: 'Sanatana Peethams Portal',
       },
     ],
     locale: 'en_US',
@@ -54,8 +54,8 @@ export const metadata: Metadata = {
     title: 'Sanatana Peethams Portal',
     description: 'A single, trusted digital beacon for the timeless wisdom of the four cardinal Peethams.',
     creator: '@shivabodha_org',
-    images: ['https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExMHU2a2w2Z3RtamhxcjQ2ZDE0djMybDVxZ3h5d3J0aXh4aWViOTZqMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3ohs7SYIm3aJeA_i6Y/giphy.gif'],
-    alt: 'Abstract light GIF',
+    images: ['https://placehold.co/1200x630.png'],
+    alt: 'Sanatana Peethams Portal',
   },
   manifest: '/manifest.json',
 };
@@ -82,8 +82,8 @@ export default function RootLayout({
             gtag('config', 'G-F89VPW7ZMF');
           `}
         </Script>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23800000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><style>@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } } g { transform-origin: center; animation: spin 4s linear infinite; }</style><g><path d='M6 3h12l4 6-10 13L2 9z' /><path d='M12 22V9' /><path d='M2 9h20' /></g></svg>" type="image/svg+xml" />
-        <meta name="theme-color" content="#800000" />
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FFD700' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 2L2 7l10 5 10-5-10-5z' /><path d='M2 17l10 5 10-5' /><path d='M2 12l10 5 10-5' /></svg>" type="image/svg+xml" />
+        <meta name="theme-color" content="#F5F5DC" />
       </head>
       <body className="font-body antialiased" suppressHydrationWarning>
         <AuthProvider>

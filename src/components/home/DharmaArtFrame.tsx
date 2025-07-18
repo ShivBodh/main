@@ -1,5 +1,4 @@
-// This component has been temporarily removed to resolve a server crash.
-// It will be reimplemented correctly in a future step.
+// This component has been disabled as per user request to remove image generation features.
 export default function DharmaArtFrame() {
   return null;
 }

@@ -31,8 +31,9 @@ export default function ReadingPage() {
           <Card key={book.id} className="flex flex-col overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 group">
             <div className="relative aspect-[2/3] w-full bg-card">
               <img
-                src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExMHU2a2w2Z3RtamhxcjQ2ZDE0djMybDVxZ3h5d3J0aXh4aWViOTZqMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3ohs7SYIm3aJeA_i6Y/giphy.gif"
-                alt="Abstract light GIF"
+                src="https://placehold.co/400x600.png"
+                alt="Book cover placeholder"
+                data-ai-hint={book.aiHint}
                 width={400}
                 height={600}
                 className="object-cover w-full h-full"
