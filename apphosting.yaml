@@ -1,3 +1,4 @@
+
 # The command that starts your web server. This is required for Next.js apps.
 entrypoint: npm start
 
