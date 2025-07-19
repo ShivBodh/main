@@ -55,7 +55,6 @@ export const metadata: Metadata = {
     description: 'A single, trusted digital beacon for the timeless wisdom of the four cardinal Peethams.',
     creator: '@shivabodha_org',
     images: ['https://placehold.co/1200x630.png'],
-    alt: 'Sanatana Peethams Portal',
   },
   manifest: '/manifest.json',
 };
