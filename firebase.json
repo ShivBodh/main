@@ -1,7 +1,7 @@
 
 {
   "hosting": {
-    "source": "workspace",
+    "source": ".",
     "ignore": [
       "firebase.json",
       "**/.*",
