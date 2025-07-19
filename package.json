@@ -39,6 +39,7 @@
     "embla-carousel-autoplay": "^8.0.0-rc22",
     "embla-carousel-react": "^8.0.0-rc22",
     "firebase": "^10.14.1",
+    "firebase-functions": "^6.4.0",
     "geist": "^1.2.2",
     "genkit": "^1.14.1",
     "ics": "^3.7.2",

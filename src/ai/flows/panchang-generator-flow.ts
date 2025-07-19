@@ -7,6 +7,9 @@
 
 import {z} from 'zod';
 import { getDailyPanchanga, PanchangaDetails } from '@/lib/panchanga-data';
+import { ai } from '@/ai/genkit';
+import { onFlow } from 'genkit';
+
 
 export const PanchangInputSchema = z.object({
   date: z.string().describe("The date in YYYY-MM-DD format."),
@@ -33,6 +36,20 @@ export type PanchangOutput = z.infer<typeof PanchangOutputSchema>;
 
 
 export async function getPanchangDetails(input: PanchangInput): Promise<PanchangOutput> {
+    return getPanchangDetailsFlow(input);
+}
+
+export const getPanchangDetailsFlow = onFlow(
+  {
+    name: 'getPanchangDetailsFlow',
+    inputSchema: PanchangInputSchema,
+    outputSchema: PanchangOutputSchema,
+    authPolicy: (auth, input) => {
+      // Allow unauthenticated requests for this flow
+    },
+    enforceAppCheck: true, // This enables App Check for this flow
+  },
+  async (input) => {
     // MOCK IMPLEMENTATION: This uses the simulated data for now.
     // In a real implementation, this would call the Gemini API with the detailed prompt.
     const simulatedData = getDailyPanchanga(new Date(input.date), 'North').data;
@@ -59,4 +76,5 @@ export async function getPanchangDetails(input: PanchangInput): Promise<Panchang
         { name: "Ekadashi Vrata", description: "A day for fasting and spiritual practices. Please verify the exact date with a detailed Panchanga." }
       ]
     };
-}
+  }
+);
