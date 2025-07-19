@@ -3,3 +3,6 @@ bindings:
   - role: roles/run.admin
     members:
       - serviceAccount:firebase-app-hosting-prod@system.gserviceaccount.com
+  - role: roles/run.invoker
+    members:
+      - allUsers
