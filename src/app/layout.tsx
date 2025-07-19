@@ -72,18 +72,6 @@ export default function RootLayout({
         <meta name="theme-color" content="#F5F5DC" />
       </head>
       <body className="font-body antialiased" suppressHydrationWarning>
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-2YGZMSZZ7J"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-2YGZMSZZ7J');
-          `}
-        </Script>
         <AuthProvider>
           <div className="flex flex-col min-h-screen">
             <Header />

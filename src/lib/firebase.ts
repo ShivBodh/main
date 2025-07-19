@@ -2,7 +2,6 @@
 import { initializeApp, getApps, getApp, FirebaseOptions, FirebaseApp } from 'firebase/app';
 import { getAuth, GoogleAuthProvider, Auth } from 'firebase/auth';
 import { getFirestore, Firestore } from 'firebase/firestore';
-import { getAnalytics, isSupported } from "firebase/analytics";
 
 // For the client-side, this is provided by the Next.js environment.
 // For the server-side (in production), this is provided by apphosting.yaml.
@@ -36,14 +35,6 @@ if (firebaseConfig.apiKey && firebaseConfig.projectId) {
     db = getFirestore(app);
     googleProvider = new GoogleAuthProvider();
     
-    // Initialize analytics only on the client side where it is supported.
-    if (typeof window !== 'undefined') {
-      isSupported().then(supported => {
-          if (supported) {
-              getAnalytics(app);
-          }
-      });
-    }
 } else {
     // This warning is helpful for developers during local development.
     console.warn("Firebase configuration is missing. Firebase features will be disabled.");
