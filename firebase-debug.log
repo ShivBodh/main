@@ -98,3 +98,94 @@ Type error: Object literal may only specify known properties, and 'alt' does not
 [debug] [2025-07-19T04:48:30.003Z] Error: ENOENT: no such file or directory, open '/home/user/studio/.next/export-marker.json'
 [error] 
 [error] Error: An unexpected error has occurred.
+[debug] [2025-07-19T04:55:13.610Z] ----------------------------------------------------------------------
+[debug] [2025-07-19T04:55:13.613Z] Command:       /nix/store/qds3rzxwqrkvhzjxgcb95d2qx4sd9b1l-nodejs-20.11.1/bin/node /home/user/.global_modules/bin/firebase deploy --only hosting
+[debug] [2025-07-19T04:55:13.613Z] CLI Version:   14.11.0
+[debug] [2025-07-19T04:55:13.614Z] Platform:      linux
+[debug] [2025-07-19T04:55:13.614Z] Node Version:  v20.11.1
+[debug] [2025-07-19T04:55:13.614Z] Time:          Sat Jul 19 2025 04:55:13 GMT+0000 (Coordinated Universal Time)
+[debug] [2025-07-19T04:55:13.614Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-07-19T04:55:13.987Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-07-19T04:55:13.988Z] > authorizing via signed-in user (shivbodhavikalp@gmail.com)
+[debug] [2025-07-19T04:55:13.988Z] [iam] checking project sdhan-suite for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2025-07-19T04:55:13.990Z] No OAuth tokens found
+[debug] [2025-07-19T04:55:13.990Z] No OAuth tokens found
+[debug] [2025-07-19T04:55:13.991Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-07-19T04:55:13.991Z] > authorizing via signed-in user (shivbodhavikalp@gmail.com)
+[debug] [2025-07-19T04:55:13.993Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/sdhan-suite:testIamPermissions [none]
+[debug] [2025-07-19T04:55:13.993Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/sdhan-suite:testIamPermissions x-goog-quota-user=projects/sdhan-suite
+[debug] [2025-07-19T04:55:13.993Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/sdhan-suite:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-07-19T04:55:14.866Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/sdhan-suite:testIamPermissions 200
+[debug] [2025-07-19T04:55:14.867Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/sdhan-suite:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2025-07-19T04:55:14.868Z] No OAuth tokens found
+[debug] [2025-07-19T04:55:14.868Z] No OAuth tokens found
+[debug] [2025-07-19T04:55:14.868Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-07-19T04:55:14.868Z] > authorizing via signed-in user (shivbodhavikalp@gmail.com)
+[debug] [2025-07-19T04:55:14.869Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/sdhan-suite [none]
+[debug] [2025-07-19T04:55:15.103Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/sdhan-suite 200
+[debug] [2025-07-19T04:55:15.103Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/sdhan-suite {"projectId":"sdhan-suite","projectNumber":"540744813374","displayName":"Sdhan Suite","name":"projects/sdhan-suite","resources":{"hostingSite":"sdhan-suite","realtimeDatabaseInstance":"sdhan-suite-default-rtdb"},"state":"ACTIVE","etag":"1_0513b54c-4826-4c94-83d0-789069a463b6"}
+[debug] [2025-07-19T04:55:17.779Z] No OAuth tokens found
+[debug] [2025-07-19T04:55:17.780Z] No OAuth tokens found
+[debug] [2025-07-19T04:55:17.780Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-07-19T04:55:17.780Z] > authorizing via signed-in user (shivbodhavikalp@gmail.com)
+[debug] [2025-07-19T04:55:17.781Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/sdhan-suite/sites pageToken=&pageSize=10
+[debug] [2025-07-19T04:55:18.241Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/sdhan-suite/sites 200
+[debug] [2025-07-19T04:55:18.244Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/sdhan-suite/sites {"sites":[{"name":"projects/sdhan-suite/sites/sdhan-suite","defaultUrl":"https://sdhan-suite.web.app","appId":"1:540744813374:web:09b82f9abdafc8ea1efa6f","type":"DEFAULT_SITE"}]}
+[debug] [2025-07-19T04:55:18.246Z] No OAuth tokens found
+[debug] [2025-07-19T04:55:18.247Z] No OAuth tokens found
+[debug] [2025-07-19T04:55:18.247Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-07-19T04:55:18.247Z] > authorizing via signed-in user (shivbodhavikalp@gmail.com)
+[debug] [2025-07-19T04:55:18.247Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:540744813374:web:09b82f9abdafc8ea1efa6f/config [none]
+[debug] [2025-07-19T04:55:18.975Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:540744813374:web:09b82f9abdafc8ea1efa6f/config 200
+[debug] [2025-07-19T04:55:18.975Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:540744813374:web:09b82f9abdafc8ea1efa6f/config {"projectId":"sdhan-suite","appId":"1:540744813374:web:09b82f9abdafc8ea1efa6f","databaseURL":"https://sdhan-suite-default-rtdb.firebaseio.com","storageBucket":"sdhan-suite.firebasestorage.app","apiKey":"AIzaSyBGj2TGscv3kJgb0SC8ZS912ZtQ9pGIRcM","authDomain":"sdhan-suite.firebaseapp.com","messagingSenderId":"540744813374","measurementId":"G-6S4EV301MV"}
+[info] 
+   Thank you for trying our early preview of Next.js support on Firebase Hosting.
+   During the preview, support is best-effort and breaking changes can be expected. Proceed with caution.
+
+   Documentation: https://firebase.google.com/docs/hosting/frameworks/nextjs
+   File a bug: https://github.com/firebase/firebase-tools/issues/new?template=bug_report.md
+   Submit a feature request: https://github.com/firebase/firebase-tools/issues/new?template=feature_request.md
+
+   We'd love to learn from you. Express your interest in helping us shape the future of Firebase Hosting: https://goo.gle/41enW5X
+
+[debug] [2025-07-19T04:55:25.903Z] No OAuth tokens found
+[debug] [2025-07-19T04:55:25.903Z] No OAuth tokens found
+[debug] [2025-07-19T04:55:25.904Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-07-19T04:55:25.904Z] > authorizing via signed-in user (shivbodhavikalp@gmail.com)
+[debug] [2025-07-19T04:55:25.905Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/sdhan-suite/sites/sdhan-suite [none]
+[debug] [2025-07-19T04:55:26.249Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/sdhan-suite/sites/sdhan-suite 200
+[debug] [2025-07-19T04:55:26.250Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/sdhan-suite/sites/sdhan-suite {"name":"projects/sdhan-suite/sites/sdhan-suite","defaultUrl":"https://sdhan-suite.web.app","appId":"1:540744813374:web:09b82f9abdafc8ea1efa6f","type":"DEFAULT_SITE"}
+[info]   ▲ Next.js 14.2.3
+
+[info]   - Environments: .env.local, .env
+
+
+[info]    Creating an optimized production build ...
+
+[info] 
+warn - The class `delay-[800ms]` is ambiguous and matches multiple utilities.
+warn - If this is content and not a class, replace it with `delay-&lsqb;800ms&rsqb;` to silence this warning.
+
+[info]  ✓ Compiled successfully
+
+[info]    Linting and checking validity of types ...
+
+[info] Failed to compile.
+
+
+[info] ./src/app/social/SocialClient.tsx:536:21
+Type error: Type '"green" | "red" | null | undefined' is not assignable to type '"green" | "red" | null'.
+  Type 'undefined' is not assignable to type '"green" | "red" | null'.
+
+  534 |                 let newGreenFlags = c.greenFlags;
+  535 |                 let newRedFlags = c.redFlags;
+> 536 |                 let newUserFlagged: 'green' | 'red' | null = c.userFlagged;
+      |                     ^
+  537 |                 
+  538 |                 if (flag === 'green') {
+  539 |                     if (alreadyFlaggedGreen) { // un-flag green
+
+[debug] [2025-07-19T04:56:09.378Z] Error: ENOENT: no such file or directory, open '/home/user/studio/.next/export-marker.json'
+[error] 
+[error] Error: An unexpected error has occurred.
