@@ -49,8 +49,13 @@ export default function LoginClient() {
                 <AlertTriangle className="h-4 w-4" />
                 <AlertTitle>Authentication Not Configured</AlertTitle>
                 <AlertDescription>
-                   <p className="mb-2">The Google Sign-In is currently disabled. The app is missing a Firebase API key.</p>
-                   <p className="text-xs">This feature is not available in the demo. To enable it, you would typically set the <code className="font-mono bg-destructive/20 px-1 py-0.5 rounded">NEXT_PUBLIC_FIREBASE_API_KEY</code> in your environment.</p>
+                   <p className="mb-2">The Google Sign-In is currently disabled because the Firebase API key is missing.</p>
+                   <ol className="list-decimal list-inside space-y-1 text-sm">
+                        <li>Open the <code className="font-mono bg-destructive/20 px-1 py-0.5 rounded">.env</code> file in the project's root directory.</li>
+                        <li>Find your Firebase web app's <code className="font-mono bg-destructive/20 px-1 py-0.5 rounded">apiKey</code>.</li>
+                        <li>Add it to the file: <code className="font-mono bg-destructive/20 px-1 py-0.5 rounded">NEXT_PUBLIC_FIREBASE_API_KEY=...</code></li>
+                        <li className="font-bold">You must restart the development server for the change to take effect.</li>
+                   </ol>
                 </AlertDescription>
             </Alert>
           ) : (
