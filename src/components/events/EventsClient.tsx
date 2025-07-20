@@ -74,9 +74,10 @@ export default function EventsClient() {
         const monthEnd = endOfMonth(currentMonth);
         const days = eachDayOfInterval({ start: monthStart, end: monthEnd });
         const startingDayIndex = getDay(monthStart);
-        return Array.from({ length: startingDayIndex }, (_, i) => ({ key: `empty-${i}`, date: null })).concat(
-            days.map(day => ({ key: day.toISOString(), date: day }))
-        );
+        // Explicitly type the array to handle mixed content (Date | null)
+        const emptyDays: { key: string; date: null }[] = Array.from({ length: startingDayIndex }, (_, i) => ({ key: `empty-${i}`, date: null }));
+        const monthDays: { key: string; date: Date }[] = days.map(day => ({ key: day.toISOString(), date: day }));
+        return [...emptyDays, ...monthDays];
     }, [currentMonth]);
     
     const changeMonth = (amount: number) => {
