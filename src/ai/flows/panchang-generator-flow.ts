@@ -52,7 +52,6 @@ const getPanchangDetailsFlow = ai.defineFlow(
     name: 'getPanchangDetailsFlow',
     inputSchema: PanchangInputSchema,
     outputSchema: PanchangOutputSchema,
-    enforceAppCheck: true, // This enables App Check for this flow
   },
   async (input) => {
     // MOCK IMPLEMENTATION: This uses the simulated data for now.
