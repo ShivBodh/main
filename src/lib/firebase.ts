@@ -18,26 +18,37 @@ const firebaseConfig: FirebaseOptions = {
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
 };
 
-let app: FirebaseApp;
-let auth: Auth;
-let db: Firestore;
+let app: FirebaseApp | undefined;
+let auth: Auth | undefined;
+let db: Firestore | undefined;
 let googleProvider: GoogleAuthProvider | undefined;
 
 // Initialize Firebase only if the API key and project ID are provided.
 // This prevents errors in environments where the keys are not set, such as during the build process.
 if (firebaseConfig.apiKey && firebaseConfig.projectId) {
     if (!getApps().length) {
-        app = initializeApp(firebaseConfig);
+        try {
+            app = initializeApp(firebaseConfig);
+        } catch (e) {
+            console.error("Error initializing Firebase app:", e);
+        }
     } else {
         app = getApp();
     }
-    auth = getAuth(app);
-    db = getFirestore(app);
-    googleProvider = new GoogleAuthProvider();
+    
+    if (app) {
+        auth = getAuth(app);
+        db = getFirestore(app);
+        googleProvider = new GoogleAuthProvider();
+    }
     
 } else {
     // This warning is helpful for developers during local development.
     console.warn("Firebase configuration is missing. Firebase features will be disabled.");
 }
 
-export { app, auth, googleProvider, db };
+// Ensure auth and db are exported correctly, even if undefined.
+const exportedAuth = auth;
+const exportedDb = db;
+
+export { app, exportedAuth as auth, googleProvider, exportedDb as db };
