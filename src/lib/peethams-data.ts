@@ -1,6 +1,31 @@
+import type { LucideIcon } from 'lucide-react';
 import { BookOpen, Shell, Flag, Mountain } from 'lucide-react';
 
-export const peethams = [
+// Define and export the Peetham interface
+export interface Peetham {
+  name: string;
+  description: string;
+  link: string;
+  icon: LucideIcon;
+  image: string;
+  acharyaImage: string;
+  acharyaAiHint: string;
+  lineage: {
+    name: string;
+    period: string;
+    description: string;
+  }[];
+  acharyaDetails: {
+    name: string;
+    peetham: string;
+    appointment: string;
+    focus: string;
+    heroImage: string;
+    galleryImages: { url: string }[];
+  };
+}
+
+export const peethams: Peetham[] = [
   {
     name: 'Sringeri Sharada Peetham',
     description: 'The first and foremost of the four Amnaya Peethams, the southern seat of wisdom for the Yajur Veda.',

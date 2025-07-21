@@ -8,7 +8,7 @@ import type { Peetham } from '@/lib/peethams-data';
 import { Skeleton } from '@/components/ui/skeleton';
 
 interface AcharyaCardProps {
-  acharya: Peetham['acharyaDetails'];
+  acharya: any;
 }
 
 export function AcharyaCard({ acharya }: AcharyaCardProps) {
