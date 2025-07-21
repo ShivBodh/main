@@ -15,7 +15,6 @@
     NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET = "sdhan-suite.firebasestorage.app";
     NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID = "540744813374";
     NEXT_PUBLIC_FIREBASE_APP_ID = "1:540744813374:web:b617f1f5a7fe79381efa6f";
-    NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID = "G-F89VPW7ZMF";
   };
   idx = {
     # Search for the extensions you want on https://open-vsx.org/ and use "publisher.id"
