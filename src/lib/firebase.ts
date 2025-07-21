@@ -24,7 +24,7 @@ let db: Firestore;
 let googleProvider: GoogleAuthProvider | undefined;
 
 // Initialize Firebase only if the API key and project ID are provided.
-// This prevents errors in environments where the keys are not set.
+// This prevents errors in environments where the keys are not set, such as during the build process.
 if (firebaseConfig.apiKey && firebaseConfig.projectId) {
     if (!getApps().length) {
         app = initializeApp(firebaseConfig);
