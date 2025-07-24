@@ -8,7 +8,7 @@ import Image from 'next/image';
 import { Landmark, ExternalLink } from 'lucide-react';
 
 export default function SevaClient() {
-    const mapUrl = "https://mcp-maps-3d-540744813374.us-west1.run.app?key=AIzaSyAqWV5SY9xlbqgd15uKAh9fhYzcaB1tIOc";
+    const mapUrl = "https://6000-firebase-studio-1751398789728.cluster-xpmcxs2fjnhg6xvn446ubtgpio.cloudworkstations.dev/";
 
     return (
         <div className="container mx-auto max-w-5xl py-16 md:py-24 px-4">
