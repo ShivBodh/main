@@ -93,8 +93,10 @@ export async function getPanchangDetails(
 const getPanchangDetailsFlow = ai.defineFlow(
   {
     name: 'getPanchangDetailsFlow',
+    inputSchema: PanchangInputSchema,
+    outputSchema: PanchangOutputSchema,
   },
-  async (input: PanchangInput): Promise<PanchangOutput> => {
+  async (input) => {
      return getPanchangDetails(input);
   }
 );
