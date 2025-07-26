@@ -1,5 +1,12 @@
 
 {
+  "hosting": {
+    "source": ".",
+    "backend": {
+      "id": "main",
+      "region": "us-central1"
+    }
+  },
   "functions": [
     {
       "source": "functions",
