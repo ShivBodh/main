@@ -28,8 +28,6 @@ import { badges, Badge as BadgeType } from '@/lib/badge-data';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import type { Post, Mitra, Notification, Campaign, Task, DayEntry } from '@/lib/social-types';
 
-type DrawingTool = 'pencil' | 'brush' | 'eraser';
-
 // --- HELPERS ---
 const getInitials = (name: string | null | undefined) => {
     if (!name) return 'U';
@@ -533,7 +531,7 @@ function CampaignsTab({ user }: { user: any }) {
 
                 let newGreenFlags = c.greenFlags;
                 let newRedFlags = c.redFlags;
-                let newUserFlagged: 'green' | 'red' | null = c.userFlagged ?? null;
+                let newUserFlagged: 'green' | 'red' | null = c.userFlagged;
                 
                 if (flag === 'green') {
                     if (alreadyFlaggedGreen) { // un-flag green

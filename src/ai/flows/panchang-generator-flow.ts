@@ -86,17 +86,3 @@ export async function getPanchangDetails(
     ],
   };
 }
-
-// NOTE: The Genkit flow definition below is intentionally kept simple
-// to resolve a build issue related to Zod/Genkit type compatibility.
-// It is not currently invoked directly.
-const getPanchangDetailsFlow = ai.defineFlow(
-  {
-    name: 'getPanchangDetailsFlow',
-    inputSchema: PanchangInputSchema,
-    outputSchema: PanchangOutputSchema,
-  },
-  async (input) => {
-     return getPanchangDetails(input);
-  }
-);

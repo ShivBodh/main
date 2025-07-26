@@ -8,7 +8,7 @@ import { RefreshCw } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Separator } from '@/components/ui/separator';
 
-// Since the AI flow is removed, we'll use a local array of quotes.
+// Since the AI flow can cause build issues, we'll use a local array of quotes as a reliable fallback.
 const localWisdom = [
     {
         quote: "The Self is not to be known by the study of the scriptures, nor by the intellect, nor by much hearing.",

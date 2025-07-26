@@ -138,8 +138,8 @@ export function PanchangaWidgetPreview() {
             <Skeleton className="h-6 w-1/2 mx-auto mt-4 bg-gray-800" />
           </div>
           <div className="flex justify-center">
-            <div className="flex space-x-8">
-              {[...Array(4)].map((_, i) => <Skeleton key={i} className="h-96 w-72 bg-gray-800" />)}
+            <div className="flex space-x-8 overflow-hidden">
+              {[...Array(4)].map((_, i) => <Skeleton key={i} className="h-96 w-72 bg-gray-800 shrink-0" />)}
             </div>
           </div>
         </div>
