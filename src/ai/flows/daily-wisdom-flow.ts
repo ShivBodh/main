@@ -23,7 +23,6 @@ export async function getDailyWisdom(): Promise<DailyWisdomOutput> {
 
 const dailyWisdomPrompt = ai.definePrompt({
   name: 'dailyWisdomPrompt',
-  input: { schema: z.void() },
   output: { schema: DailyWisdomOutputSchema },
   prompt: `You are a wise scholar of Vedanta philosophy, steeped in the teachings of the four cardinal Peethams established by Adi Shankaracharya.
 
