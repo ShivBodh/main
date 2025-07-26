@@ -23,8 +23,8 @@ export async function getDailyWisdom(): Promise<DailyWisdomOutput> {
 
 const dailyWisdomPrompt = ai.definePrompt({
   name: 'dailyWisdomPrompt',
-  inputSchema: z.void(),
-  outputSchema: DailyWisdomOutputSchema,
+  input: { schema: z.void() },
+  output: { schema: DailyWisdomOutputSchema },
   prompt: `You are a wise scholar of Vedanta philosophy, steeped in the teachings of the four cardinal Peethams established by Adi Shankaracharya.
 
 Generate a single, profound, and authentic quote for a "Quote of the Day" widget. The quote must be from one of the following sources:
