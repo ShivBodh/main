@@ -1,3 +1,4 @@
+
 import {genkit} from 'genkit';
 import {googleAI} from '@genkit-ai/googleai';
 
@@ -7,8 +8,9 @@ import {googleAI} from '@genkit-ai/googleai';
 
 export const ai = genkit({
   // Explicitly passing the API key to the plugin is a more robust
-  // way to ensure it's loaded correctly.
-  plugins: [googleAI({apiKey: process.env.GOOGLE_API_KEY})],
+  // way to ensure it's loaded correctly. In App Hosting, this will
+  // be provided by the GEMINI_API_KEY secret.
+  plugins: [googleAI({apiKey: process.env.GEMINI_API_KEY})],
   // It's best practice to specify the model in each AI call
   // instead of setting a global default. This avoids confusion,
   // especially when using different models for different tasks
