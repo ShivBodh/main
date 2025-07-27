@@ -155,12 +155,14 @@ export default function BodhaCalendarClient() {
     const fetchLogsForDate = useCallback((date: Date, uid: string) => {
         // Japa Logs
         const japaKey = `japaHistory_${uid}`;
-        const allJapaSessions: JapaSession[] = JSON.parse(localStorage.getItem(japaKey) || '[]');
+        const rawJapa = localStorage.getItem(japaKey);
+        const allJapaSessions: JapaSession[] = rawJapa ? JSON.parse(rawJapa) : [];
         const dayJapa = allJapaSessions.filter(s => isSameDay(new Date(s.timestamp), date));
 
         // Meditation Logs
         const medKey = `meditationHistory_${uid}`;
-        const allMeditationSessions: MeditationSession[] = JSON.parse(localStorage.getItem(medKey) || '[]');
+        const rawMed = localStorage.getItem(medKey);
+        const allMeditationSessions: MeditationSession[] = rawMed ? JSON.parse(rawMed) : [];
         const dayMeditation = allMeditationSessions.filter(s => isSameDay(new Date(s.timestamp), date));
 
         // Dainandini Log
@@ -192,6 +194,7 @@ export default function BodhaCalendarClient() {
         const dataToSave: DayEntry = {
             ...existingData,
             notes: notes,
+            tasks: existingData.tasks || [] // Ensure tasks array exists
         };
         localStorage.setItem(dateKey, JSON.stringify(dataToSave));
         // Refetch to update UI

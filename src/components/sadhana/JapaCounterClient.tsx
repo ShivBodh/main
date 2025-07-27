@@ -29,7 +29,8 @@ export default function JapaCounterClient() {
             count: count
         };
         const key = `japaHistory_${user.uid}`;
-        const existingHistory: JapaSession[] = JSON.parse(localStorage.getItem(key) || '[]');
+        const rawHistory = localStorage.getItem(key);
+        const existingHistory: JapaSession[] = rawHistory ? JSON.parse(rawHistory) : [];
         existingHistory.push(session);
         localStorage.setItem(key, JSON.stringify(existingHistory));
 

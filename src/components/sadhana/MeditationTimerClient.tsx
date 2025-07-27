@@ -30,7 +30,8 @@ export default function MeditationTimerClient() {
             duration: duration,
         };
         const key = `meditationHistory_${user.uid}`;
-        const existingHistory: MeditationSession[] = JSON.parse(localStorage.getItem(key) || '[]');
+        const rawHistory = localStorage.getItem(key);
+        const existingHistory: MeditationSession[] = rawHistory ? JSON.parse(rawHistory) : [];
         existingHistory.push(session);
         localStorage.setItem(key, JSON.stringify(existingHistory));
 
