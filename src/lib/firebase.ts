@@ -51,12 +51,11 @@ if (firebaseConfig.apiKey && firebaseConfig.projectId) {
                 console.log("Auth emulator may already be connected.");
               }
             }
-            if (!(db.toJSON as any).firestore.terminated) {
-              try {
-                connectFirestoreEmulator(db, 'localhost', 8080);
-              } catch (e) {
-                console.log("Firestore emulator may already be connected.");
-              }
+            // A simple try-catch is more robust than checking internal properties.
+            try {
+              connectFirestoreEmulator(db, 'localhost', 8080);
+            } catch (e) {
+              console.log("Firestore emulator may already be connected.");
             }
         }
     }
