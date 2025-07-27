@@ -36,25 +36,23 @@
     # Enable previews and customize configuration
     previews = {
       enable = true;
-      previews = [
-        {
-          # The command to run to start the server
-          command = [
-            "npm"
-            "run"
-            "dev"
-            "--"
-            "--port"
-            "$PORT"
-            "--hostname"
-            "0.0.0.0"
-          ];
-          # The name that shows up in the UI
-          id = "web";
-          # The file to open in the preview browser
-          manager = "web";
-        }
-      ];
+      previews = [{
+        # The command to run to start the server
+        command = [
+          "npm"
+          "run"
+          "dev"
+          "--"
+          "--port"
+          "$PORT"
+          "--hostname"
+          "0.0.0.0"
+        ];
+        # The name that shows up in the UI
+        id = "web";
+        # The file to open in the preview browser
+        manager = "web";
+      }];
     };
   };
 }

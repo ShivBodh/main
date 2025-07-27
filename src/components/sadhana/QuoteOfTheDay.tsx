@@ -2,31 +2,23 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { getDailyWisdom, DailyWisdomOutput } from '@/ai/flows/daily-wisdom-flow';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Separator } from '@/components/ui/separator';
 
 export function QuoteOfTheDay() {
-  const [wisdom, setWisdom] = useState<DailyWisdomOutput | null>(null);
+  const [wisdom, setWisdom] = useState<{ quote: string; author: string; translation: string; } | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function fetchWisdom() {
       setIsLoading(true);
-      try {
-        const result = await getDailyWisdom();
-        setWisdom(result);
-      } catch (error) {
-        console.error("Failed to fetch daily wisdom:", error);
-        // Set a fallback quote on error
-        setWisdom({
-          quote: "True knowledge is that which liberates.",
-          author: "Upanishads",
-          translation: "सा विद्या या विमुक्तये।"
-        });
-      } finally {
-        setIsLoading(false);
-      }
+      // Set a fallback quote on error
+      setWisdom({
+        quote: "True knowledge is that which liberates.",
+        author: "Upanishads",
+        translation: "सा विद्या या विमुक्तये।"
+      });
+      setIsLoading(false);
     }
     fetchWisdom();
   }, []);
