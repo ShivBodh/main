@@ -31,8 +31,7 @@ export default function JapaCounterClient() {
         const key = `japaHistory_${user.uid}`;
         const rawHistory = localStorage.getItem(key);
         const existingHistory: JapaSession[] = rawHistory ? JSON.parse(rawHistory) : [];
-        existingHistory.push(session);
-        localStorage.setItem(key, JSON.stringify(existingHistory));
+        localStorage.setItem(key, JSON.stringify([...existingHistory, session]));
 
         toast({
             title: "Japa Session Saved",
@@ -84,3 +83,5 @@ export default function JapaCounterClient() {
     </div>
   );
 }
+
+    

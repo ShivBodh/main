@@ -175,7 +175,7 @@ export default function BodhaCalendarClient() {
 
     useEffect(() => {
         setIsClient(true);
-        if (user) {
+        if (user && typeof window !== 'undefined') {
             fetchLogsForDate(selectedDate, user.uid);
         }
     }, [user, selectedDate, fetchLogsForDate]);
@@ -189,8 +189,8 @@ export default function BodhaCalendarClient() {
      const handleSaveDainandini = (notes: string) => {
         if (!user) return;
         const dateKey = `dainandini_${user.uid}_${format(selectedDate, 'yyyy-MM-dd')}`;
-        const existingDataRaw = localStorage.getItem(dateKey);
-        const existingData = existingDataRaw ? JSON.parse(existingDataRaw) : {};
+        const rawData = localStorage.getItem(dateKey);
+        const existingData = rawData ? JSON.parse(rawData) : {};
         const dataToSave: DayEntry = {
             ...existingData,
             notes: notes,
@@ -250,3 +250,5 @@ export default function BodhaCalendarClient() {
         </div>
     );
 }
+
+    

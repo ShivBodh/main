@@ -25,16 +25,17 @@ export default function QuizClient() {
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
 
   useEffect(() => {
-    // Shuffle questions only on the client side to avoid hydration mismatch
-    setQuestions(prev => [...prev].sort(() => Math.random() - 0.5));
+    // Shuffle questions and set client-side flag
     setIsClient(true);
+    setQuestions(prev => [...prev].sort(() => Math.random() - 0.5));
   }, []);
   
   useEffect(() => {
-      // Save score to local storage when the quiz is finished.
-      if (quizFinished && user) {
+      // Save score to local storage only on the client side when the quiz is finished.
+      if (isClient && quizFinished && user) {
         const key = `quizScore_${user.uid}`;
-        const existingScore = parseInt(localStorage.getItem(key) || '0', 10);
+        const scoreStr = localStorage.getItem(key);
+        const existingScore = scoreStr ? parseInt(scoreStr, 10) : 0;
         if (score > existingScore) {
           localStorage.setItem(key, score.toString());
           toast({
@@ -43,7 +44,7 @@ export default function QuizClient() {
           });
         }
       }
-  }, [quizFinished, score, user, toast]);
+  }, [quizFinished, score, user, toast, isClient]);
 
 
   const handleNextQuestion = () => {
@@ -206,3 +207,5 @@ export default function QuizClient() {
     </div>
   );
 }
+
+    

@@ -315,9 +315,11 @@ function BadgeDisplay({ badge }: { badge: BadgeType }) {
 function ProfileTab() {
     const { user, logout } = useAuth();
     const { toast } = useToast();
+    const [isClient, setIsClient] = useState(false);
     const [quizScore, setQuizScore] = useState<number | null>(null);
 
-    useEffect(() => {
+     useEffect(() => {
+        setIsClient(true);
         if (user) {
             const scoreStr = localStorage.getItem(`quizScore_${user.uid}`);
             if (scoreStr) {
@@ -325,6 +327,10 @@ function ProfileTab() {
             }
         }
     }, [user]);
+
+    if (!isClient) {
+        return <Skeleton className="h-[50vh] w-full" />;
+    }
 
     if (!user) return null;
 
@@ -773,5 +779,9 @@ export default function SocialClient() {
         </Suspense>
     )
 }
+
+    
+
+    
 
     

@@ -32,8 +32,7 @@ export default function MeditationTimerClient() {
         const key = `meditationHistory_${user.uid}`;
         const rawHistory = localStorage.getItem(key);
         const existingHistory: MeditationSession[] = rawHistory ? JSON.parse(rawHistory) : [];
-        existingHistory.push(session);
-        localStorage.setItem(key, JSON.stringify(existingHistory));
+        localStorage.setItem(key, JSON.stringify([...existingHistory, session]));
 
         toast({
             title: "Meditation Session Complete",
@@ -67,7 +66,7 @@ export default function MeditationTimerClient() {
         clearInterval(intervalRef.current);
       }
     };
-  }, [isActive, duration]);
+  }, [isActive, duration, user, toast]);
 
   useEffect(() => {
     if (!isActive) {
@@ -149,3 +148,5 @@ export default function MeditationTimerClient() {
     </div>
   );
 }
+
+    

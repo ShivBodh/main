@@ -42,8 +42,22 @@ if (firebaseConfig.apiKey && firebaseConfig.projectId) {
         googleProvider = new GoogleAuthProvider();
 
         if (process.env.NODE_ENV === 'development') {
-            connectAuthEmulator(auth, 'http://localhost:9099');
-            connectFirestoreEmulator(db, 'localhost', 8080);
+            // It's important to check if the emulators are already running before connecting.
+            // This avoids errors on hot reloads.
+            if (!auth.emulatorConfig) {
+              try {
+                connectAuthEmulator(auth, 'http://localhost:9099');
+              } catch (e) {
+                console.log("Auth emulator may already be connected.");
+              }
+            }
+            if (!(db.toJSON as any).firestore.terminated) {
+              try {
+                connectFirestoreEmulator(db, 'localhost', 8080);
+              } catch (e) {
+                console.log("Firestore emulator may already be connected.");
+              }
+            }
         }
     }
     
