@@ -531,7 +531,7 @@ function CampaignsTab({ user }: { user: any }) {
 
                 let newGreenFlags = c.greenFlags;
                 let newRedFlags = c.redFlags;
-                let newUserFlagged: 'green' | 'red' | null = c.userFlagged;
+                let newUserFlagged: 'green' | 'red' | null | undefined = c.userFlagged;
                 
                 if (flag === 'green') {
                     if (alreadyFlaggedGreen) { // un-flag green
