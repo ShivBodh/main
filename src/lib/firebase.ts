@@ -1,7 +1,7 @@
 
 import { initializeApp, getApps, getApp, FirebaseOptions, FirebaseApp } from 'firebase/app';
-import { getAuth, GoogleAuthProvider, Auth } from 'firebase/auth';
-import { getFirestore, Firestore } from 'firebase/firestore';
+import { getAuth, GoogleAuthProvider, Auth, connectAuthEmulator } from 'firebase/auth';
+import { getFirestore, Firestore, connectFirestoreEmulator } from 'firebase/firestore';
 
 // For the client-side, this is provided by the Next.js environment.
 // For the server-side (in production), this is provided by apphosting.yaml.
@@ -40,6 +40,11 @@ if (firebaseConfig.apiKey && firebaseConfig.projectId) {
         auth = getAuth(app);
         db = getFirestore(app);
         googleProvider = new GoogleAuthProvider();
+
+        if (process.env.NODE_ENV === 'development') {
+            connectAuthEmulator(auth, 'http://localhost:9099');
+            connectFirestoreEmulator(db, 'localhost', 8080);
+        }
     }
     
 } else {
