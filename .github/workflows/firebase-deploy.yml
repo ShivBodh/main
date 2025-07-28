@@ -1,27 +1,33 @@
-name: Deploy to Firebase
+name: Deploy to Firebase Hosting # Clearly describes the workflow's purpose.
 
 on:
   push:
     branches:
-      - main
+      - main # Triggers the workflow on push events to the 'main' branch.
 
 jobs:
   build_and_deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest # Specifies the runner environment.
+    
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout Repository Code # Step to check out your repository code.
+        uses: actions/checkout@v4 # Using the latest stable version of checkout action.
 
-      # Build the Next.js app
-      - name: Build Frontend
+      - name: Setup Node.js # Explicitly set up Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # Or your desired Node.js version (e.g., '18', '20', or '22')
+          cache: 'npm' # Cache npm dependencies for faster builds
+
+      - name: Install Dependencies and Build Frontend # Install dependencies and build the Next.js app.
         run: npm ci && npm run build
 
-      # Deploy to Firebase
-      - name: Deploy to Firebase
-        uses: FirebaseExtended/action-hosting-deploy@v0
+      - name: Deploy to Firebase Hosting # Deploy the built app to Firebase Hosting.
+        uses: FirebaseExtended/action-hosting-deploy@v0.9.0 # Using a more recent version. Please check for 'v1' or later if available on marketplace.
         with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_SDHAN_SUITE }}'
-          channelId: live
-          projectId: sdhan-suite
+          repoToken: '${{ secrets.GITHUB_TOKEN }}' # GitHub-provided token for repository interaction.
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_SDHAN_SUITE }}' # Your Firebase Service Account JSON key, stored as a GitHub Secret.
+          channelId: live # Specifies the Firebase Hosting channel to deploy to (your main live site).
+          projectId: sdhan-suite # Your Firebase Project ID.
         env:
-          FIREBASE_CLI_PREVIEWS: hostingchannels
+          FIREBASE_CLI_PREVIEWS: hostingchannels # Enables Firebase CLI preview features for hosting channels.

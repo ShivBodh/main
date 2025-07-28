@@ -1,38 +1,39 @@
-# This workflow will trigger Datadog Synthetic tests within your Datadog organisation
-# For more information on running Synthetic tests within your GitHub workflows see: https://docs.datadoghq.com/synthetics/cicd_integrations/github_actions/
+# This workflow will trigger Datadog Synthetic tests within your Datadog organization.
+# For more information on running Synthetic tests within your GitHub workflows,
+# please refer to the official documentation: https://docs.datadoghq.com/synthetics/cicd_integrations/github_actions/
 
+# Disclaimer:
 # This workflow uses actions that are not certified by GitHub.
 # They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
+# separate terms of service, privacy policy, and support documentation.
 
 # To get started:
+# 1. Add your Datadog API Key (DD_API_KEY) and Application Key (DD_APP_KEY)
+#    as secrets to your GitHub repository. For more information, see:
+#    https://docs.datadoghq.com/account_management/api-app-keys/.
+# 2. Integrate this action into your workflow.
 
-# 1. Add your Datadog API (DD_API_KEY) and Application Key (DD_APP_KEY) as secrets to your GitHub repository. For more information, see: https://docs.datadoghq.com/account_management/api-app-keys/.
-# 2. Start using the action within your workflow
-
-name: Run Datadog Synthetic tests
+name: Run Datadog Synthetic Tests
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "main" ] # Triggers the workflow on push events to the 'main' branch.
   pull_request:
-    branches: [ "master" ]
+    branches: [ "main" ] # Triggers the workflow on pull request events targeting the 'main' branch.
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  run_synthetics: # Renamed from 'build' for clarity, as it runs tests, not a build.
+    runs-on: ubuntu-latest # Specifies the runner environment.
 
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout Repository # Standard step to get your code.
+      uses: actions/checkout@v4
 
-    # Run Synthetic tests within your GitHub workflow.
-    # For additional configuration options visit the action within the marketplace: https://github.com/marketplace/actions/datadog-synthetics-ci
-    - name: Run Datadog Synthetic tests
+    - name: Run Datadog Synthetic Tests # Main step to execute Datadog Synthetics.
+      # For additional configuration options, visit the action on the marketplace:
+      # https://github.com/marketplace/actions/datadog-synthetics-ci
       uses: DataDog/synthetics-ci-github-action@87b505388a22005bb8013481e3f73a367b9a53eb # v1.4.0
       with:
-        api_key: ${{secrets.DD_API_KEY}}
-        app_key: ${{secrets.DD_APP_KEY}}
-        test_search_query: 'tag:e2e-tests' #Modify this tag to suit your tagging strategy
-
-
+        api_key: ${{secrets.DD_API_KEY}} # Your Datadog API Key, stored as a GitHub Secret.
+        app_key: ${{secrets.DD_APP_KEY}} # Your Datadog Application Key, stored as a GitHub Secret.
+        test_search_query: 'tag:e2e-tests' # Searches for and runs tests tagged with 'e2e-tests'. Adjust this tag to match your testing strategy.
