@@ -16,13 +16,14 @@ const helloWorldFlow = ai.defineFlow(
   {
     name: 'helloWorldFlow',
     // No input is needed for this simple flow.
-    inputSchema: z.void(),
+    inputSchema: z.object({}),
     outputSchema: HelloWorldOutputSchema,
   },
   async () => {
-    // Return a simple string. In a real flow, this could be a call
-    // to an AI model or another service.
-    return 'Hello, world!';
+    const {output} = await ai.generate({
+      prompt: 'Tell me a "Hello, World!" joke.',
+    });
+    return output!;
   }
 );
 

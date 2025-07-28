@@ -6,7 +6,7 @@
  * - getPanchangDetails - A function that returns detailed Panchang information for a given date and location.
  */
 
-import {getDailyPanchanga} from '@/lib/panchanga-data';
+import {ai} from '@/ai/genkit';
 import {z} from 'zod';
 
 export const PanchangInputSchema = z.object({
@@ -40,56 +40,32 @@ export const PanchangOutputSchema = z.object({
 });
 export type PanchangOutput = z.infer<typeof PanchangOutputSchema>;
 
-/**
- * MOCK IMPLEMENTATION: This function currently uses simulated data.
- *
- * In a real implementation, this function would be a Genkit flow that
- * calls the Gemini API with a detailed prompt to generate accurate Panchang data.
- *
- * @param input - The date and location for the Panchang.
- * @returns A promise that resolves to the Panchang data.
- */
+const diagnosePanchangPrompt = ai.definePrompt({
+  name: 'diagnosePanchangPrompt',
+  input: {schema: PanchangInputSchema},
+  output: {schema: PanchangOutputSchema},
+  prompt: `You are an expert Vedic astrologer. Generate the Panchang for the given date and location.
+
+Date: {{{date}}}
+Location: {{{location}}}
+`,
+});
+
+const panchangGeneratorFlow = ai.defineFlow(
+  {
+    name: 'panchangGeneratorFlow',
+    inputSchema: PanchangInputSchema,
+    outputSchema: PanchangOutputSchema,
+  },
+  async (input: PanchangInput) => {
+    const {output} = await diagnosePanchangPrompt(input);
+    return output!;
+  }
+);
+
+
 export async function getPanchangDetails(
   input: PanchangInput
 ): Promise<PanchangOutput> {
-  const simulatedData = getDailyPanchanga(
-    new Date(input.date),
-    'North'
-  ).data;
-
-  // This structure mirrors the `PanchangOutputSchema`.
-  return {
-    date: input.date,
-    location: input.location,
-    tithi: simulatedData.tithi,
-    nakshatra: simulatedData.nakshatra,
-    yoga: simulatedData.yoga,
-    karana: simulatedData.karana,
-    sunrise: simulatedData.sunrise,
-    sunset: simulatedData.sunset,
-    moonrise: '07:00 AM', // Placeholder
-    moonset: '07:30 PM', // Placeholder
-    auspiciousTimings: [
-      {name: 'Abhijit Muhurat', start: '11:55 AM', end: '12:45 PM'},
-    ],
-    inauspiciousTimings: [
-      {
-        name: 'Rahu Kalam',
-        start: simulatedData.rahuKalam.split(' - ')[0],
-        end: simulatedData.rahuKalam.split(' - ')[1],
-      },
-      {
-        name: 'Yamaganda',
-        start: simulatedData.yamagandaKalam.split(' - ')[0],
-        end: simulatedData.yamagandaKalam.split(' - ')[1],
-      },
-    ],
-    specialDays: [
-      {
-        name: 'Ekadashi Vrata',
-        description:
-          'A day for fasting and spiritual practices. Please verify the exact date with a detailed Panchanga.',
-      },
-    ],
-  };
+  return panchangGeneratorFlow(input);
 }
