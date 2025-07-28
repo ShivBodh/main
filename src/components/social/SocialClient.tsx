@@ -19,7 +19,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { useToast } from '@/hooks/use-toast';
-import { getDailyPanchanga, type PanchangaDetails } from '@/lib/panchanga-data';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
@@ -779,9 +778,3 @@ export default function SocialClient() {
         </Suspense>
     )
 }
-
-    
-
-    
-
-    
