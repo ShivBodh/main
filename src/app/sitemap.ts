@@ -19,7 +19,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/sadhana/daily-wisdom',
     '/sadhana/bodha-calendar',
     '/sadhana/vedic-name-finder',
-    '/panchanga',
     '/quiz',
     '/seva',
     '/contact',

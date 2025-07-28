@@ -81,12 +81,6 @@ const bodhaLinks = [
         description: "A curated library of foundational texts by great masters.",
         icon: BookOpen,
     },
-    { 
-        title: "Panchanga",
-        href: "/panchanga",
-        description: "View daily astrological details for the four cardinal regions.",
-        icon: SunMoon,
-    },
      { 
         title: "Sādhanā Suite",
         href: "/sadhana",

@@ -38,13 +38,6 @@ export const featuresData: FeatureCardData[] = [
         link: '/sadhana',
         accentColor: 'orange',
     },
-     {
-        icon: Download,
-        title: 'Panchanga Widgets',
-        description: 'Download beautiful, shareable widgets of today\'s Panchanga for your iOS, Android, or Desktop device.',
-        link: '/panchanga',
-        accentColor: 'purple',
-    },
     {
         icon: Baby,
         title: 'Vedic Name Finder',

@@ -4,7 +4,6 @@
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { ArrowRight, BookOpen, Calendar, SunMoon, Atom, Users, Megaphone, NotebookText, TestTube2, Laptop, Smartphone } from 'lucide-react';
-import { PanchangaWidgetPreview } from '@/components/home/PanchangaWidgetPreview';
 import Image from 'next/image';
 import { FeatureShowcase } from '@/components/home/FeatureShowcase';
 import { HeroSection } from '@/components/home/HeroSection';
@@ -124,8 +123,6 @@ export default function HomePage() {
       {/* Features Showcase Section */}
       <FeatureShowcase />
       
-      {/* Panchanga Widgets Section */}
-      <PanchangaWidgetPreview />
     </>
   );
 }
