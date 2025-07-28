@@ -1,11 +1,11 @@
 
+
 import { initializeApp, getApps, getApp, FirebaseOptions, FirebaseApp } from 'firebase/app';
 import { getAuth, GoogleAuthProvider, Auth, connectAuthEmulator } from 'firebase/auth';
 import { getFirestore, Firestore, connectFirestoreEmulator } from 'firebase/firestore';
 
 // For the client-side, this is provided by the Next.js environment.
-// For the server-side (in production), this is provided by apphosting.yaml.
-const apiKey = process.env.NEXT_PUBLIC_FIREBASE_API_KEY || process.env.FIREBASE_API_KEY;
+const apiKey = process.env.NEXT_PUBLIC_FIREBASE_API_KEY;
 
 // Your web app's Firebase configuration is provided by environment variables.
 const firebaseConfig: FirebaseOptions = {
@@ -44,7 +44,7 @@ if (firebaseConfig.apiKey && firebaseConfig.projectId) {
         if (process.env.NODE_ENV === 'development') {
             // It's important to check if the emulators are already running before connecting.
             // This avoids errors on hot reloads.
-            if (!auth.emulatorConfig) {
+            if (auth && !('emulatorConfig' in auth) || auth?.emulatorConfig === null) {
               try {
                 connectAuthEmulator(auth, 'http://localhost:9099');
               } catch (e) {
@@ -52,10 +52,12 @@ if (firebaseConfig.apiKey && firebaseConfig.projectId) {
               }
             }
             // A simple try-catch is more robust than checking internal properties.
-            try {
-              connectFirestoreEmulator(db, 'localhost', 8080);
-            } catch (e) {
-              console.log("Firestore emulator may already be connected.");
+            if(db) {
+                try {
+                connectFirestoreEmulator(db, 'localhost', 8080);
+                } catch (e) {
+                console.log("Firestore emulator may already be connected.");
+                }
             }
         }
     }

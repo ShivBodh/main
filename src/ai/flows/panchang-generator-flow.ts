@@ -6,7 +6,6 @@
  * - getPanchangDetails - A function that returns detailed Panchang information for a given date and location.
  */
 
-import {ai} from '@/ai/genkit';
 import {getDailyPanchanga} from '@/lib/panchanga-data';
 import {z} from 'zod';
 
@@ -41,16 +40,24 @@ export const PanchangOutputSchema = z.object({
 });
 export type PanchangOutput = z.infer<typeof PanchangOutputSchema>;
 
+/**
+ * MOCK IMPLEMENTATION: This function currently uses simulated data.
+ *
+ * In a real implementation, this function would be a Genkit flow that
+ * calls the Gemini API with a detailed prompt to generate accurate Panchang data.
+ *
+ * @param input - The date and location for the Panchang.
+ * @returns A promise that resolves to the Panchang data.
+ */
 export async function getPanchangDetails(
   input: PanchangInput
 ): Promise<PanchangOutput> {
-  // MOCK IMPLEMENTATION: This uses the simulated data for now.
-  // In a real implementation, this would call the Gemini API with a detailed prompt.
   const simulatedData = getDailyPanchanga(
     new Date(input.date),
     'North'
   ).data;
 
+  // This structure mirrors the `PanchangOutputSchema`.
   return {
     date: input.date,
     location: input.location,
