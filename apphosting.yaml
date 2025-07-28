@@ -11,14 +11,6 @@ runConfig:
 # The command that starts your web server
 entrypoint: npm start
 
-# Environment variables and secrets.
-# See https://firebase.google.com/docs/app-hosting/configure#secret-parameters
-env:
-  # Grant access to secrets in Cloud Secret Manager.
-  # This makes the secret's value available as an environment variable.
-  - variable: GEMINI_API_KEY
-    secret: GEMINI_API_KEY
-
 # Defines the caching behavior for your site's assets.
 headers:
   # Caches all static assets for a year.
@@ -31,3 +23,4 @@ headers:
     headers:
       - key: Cache-Control
         value: public, max-age=300, s-maxage=300
+

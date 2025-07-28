@@ -1,3 +1,4 @@
+
 {
   "hosting": {
     "public": "public",
@@ -29,9 +30,6 @@
       ]
     }
   ],
-  "genkit": {
-    "source": "src/ai"
-  },
   "apphosting": [
     {
       "backendId": "main",
@@ -47,3 +45,4 @@
     }
   ]
 }
+
