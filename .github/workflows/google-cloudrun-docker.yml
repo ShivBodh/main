@@ -1,95 +1,111 @@
-# This workflow build and push a Docker container to Google Artifact Registry
-# and deploy it on Cloud Run when a commit is pushed to the "master"
-# branch.
+# This workflow builds and pushes a Docker container to Google Artifact Registry
+# and deploys it on Cloud Run when a commit is pushed to the "main" branch.
 #
-# To configure this workflow:
+# Before running this workflow, please ensure the following prerequisites are met:
 #
-# 1. Enable the following Google Cloud APIs:
-#
-#    - Artifact Registry (artifactregistry.googleapis.com)
-#    - Cloud Run (run.googleapis.com)
+# Prerequisites:
+# 1. Enable the following Google Cloud APIs in your project (sdhan-suite):
+#    - Artifact Registry API (artifactregistry.googleapis.com)
+#    - Cloud Run API (run.googleapis.com)
 #    - IAM Credentials API (iamcredentials.googleapis.com)
+#    - Cloud Build API (cloudbuild.googleapis.com) - often needed for builds.
 #
-#    You can learn more about enabling APIs at
-#    https://support.google.com/googleapi/answer/6158841.
+# 2. Create and configure a Workload Identity Provider (WIF) for GitHub in your Google Cloud Project.
+#    This allows your GitHub Actions to authenticate to Google Cloud without
+#    long-lived service account keys.
+#    Refer to the official guide: https://github.com/google-github-actions/auth#preferred-direct-workload-identity-federation
 #
-# 2. Create and configure a Workload Identity Provider for GitHub:
-#    https://github.com/google-github-actions/auth#preferred-direct-workload-identity-federation.
+#    For your project (sdhan-suite, Project Number: 540744813374), a common WIF setup looks like:
+#    - Workload Identity Pool ID: github-actions-pool
+#    - Workload Identity Provider ID: github-actions-oidc
+#    - Full Workload Identity Provider Resource Name:
+#      projects/540744813374/locations/global/workloadIdentityPools/github-actions-pool/providers/github-actions-oidc
 #
-#    Depending on how you authenticate, you will need to grant an IAM principal
-#    permissions on Google Cloud:
+# 3. Create a Google Cloud Service Account that your GitHub Actions will impersonate.
+#    A common naming convention for this service account is:
+#    - Service Account Email: github-actions-workflow@sdhan-suite.iam.gserviceaccount.com
 #
-#    - Artifact Registry Administrator (roles/artifactregistry.admin)
-#    - Cloud Run Developer (roles/run.developer)
+# 4. Grant the following IAM roles to the Service Account (e.g., github-actions-workflow@sdhan-suite.iam.gserviceaccount.com):
+#    - Artifact Registry Writer (roles/artifactregistry.writer)
+#    - Cloud Run Admin (roles/run.admin)
+#    - Service Account User (roles/iam.serviceAccountUser)
+#    - Workload Identity User (roles/iam.workloadIdentityUser)
 #
-#    You can learn more about setting IAM permissions at
-#    https://cloud.google.com/iam/docs/manage-access-other-resources
-#
-# 3. Change the values in the "env" block to match your values.
+# 5. Update the "env" block below with your specific values for SERVICE_NAME,
+#    ARTIFACT_REGISTRY_REPO, and IMAGE_NAME.
 
 name: 'Build and Deploy to Cloud Run'
 
 on:
   push:
     branches:
-      - '"master"'
+      - 'main' # Changed from 'master' to 'main' branch as per your setup.
 
 env:
-  PROJECT_ID: 'my-project' # TODO: update to your Google Cloud project ID
-  REGION: 'us-central1' # TODO: update to your region
-  SERVICE: 'my-service' # TODO: update to your service name
-  WORKLOAD_IDENTITY_PROVIDER: 'projects/123456789/locations/global/workloadIdentityPools/my-pool/providers/my-provider' # TODO: update to your workload identity provider
+  PROJECT_ID: 'sdhan-suite' # Your Google Cloud project ID
+  REGION: 'asia-east1' # The region where your Cloud Run service and Artifact Registry are located (matches your Firebase App Hosting main backend region)
+  
+  # --- IMPORTANT: Update these values to match your Cloud Run and Artifact Registry setup ---
+  CLOUD_RUN_SERVICE_NAME: 'my-web-service' # TODO: Update to your Cloud Run service name (e.g., 'my-app-service').
+  ARTIFACT_REGISTRY_REPO: 'my-app-images' # TODO: Update to your Artifact Registry repository name (e.g., 'cloud-run-containers').
+  IMAGE_NAME: 'my-app-container' # TODO: Update to the name of your Docker image within the repository.
+  # --- End of important updates ---
+
+  WORKLOAD_IDENTITY_PROVIDER: 'projects/540744813374/locations/global/workloadIdentityPools/github-actions-pool/providers/github-actions-oidc' # Your full Workload Identity Provider resource name. VERIFY THIS VALUE IN YOUR GCP CONSOLE.
+  SERVICE_ACCOUNT_EMAIL: 'github-actions-workflow@sdhan-suite.iam.gserviceaccount.com' # The email of the service account GitHub Actions will impersonate. VERIFY THIS VALUE IN YOUR GCP CONSOLE.
+
 
 jobs:
   deploy:
     runs-on: 'ubuntu-latest'
 
     permissions:
-      contents: 'read'
-      id-token: 'write'
+      contents: 'read' # Allows checkout action to read repository contents.
+      id-token: 'write' # Required for Workload Identity Federation authentication.
 
     steps:
-      - name: 'Checkout'
-        uses: 'actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332' # actions/checkout@v4
+      - name: 'Checkout Source Code'
+        uses: 'actions/checkout@v4' # Updated to latest stable version
 
       # Configure Workload Identity Federation and generate an access token.
-      #
-      # See https://github.com/google-github-actions/auth for more options,
-      # including authenticating via a JSON credentials file.
+      # This step authenticates GitHub Actions to Google Cloud.
       - id: 'auth'
         name: 'Authenticate to Google Cloud'
-        uses: 'google-github-actions/auth@f112390a2df9932162083945e46d439060d66ec2' # google-github-actions/auth@v2
+        uses: 'google-github-actions/auth@v2' # Updated to latest stable version
         with:
           workload_identity_provider: '${{ env.WORKLOAD_IDENTITY_PROVIDER }}'
+          service_account: '${{ env.SERVICE_ACCOUNT_EMAIL }}'
 
-      # BEGIN - Docker auth and build
-      #
-      # If you already have a container image, you can omit these steps.
-      - name: 'Docker Auth'
-        uses: 'docker/login-action@9780b0c442fbb1117ed29e0efdff1e18412f7567' # docker/login-action@v3
+      # Authenticate Docker to Google Artifact Registry using the access token.
+      - name: 'Docker Auth to Artifact Registry'
+        uses: 'docker/login-action@v3' # Updated to latest stable version
         with:
           username: 'oauth2accesstoken'
-          password: '${{ steps.auth.outputs.auth_token }}'
+          password: '${{ steps.auth.outputs.access_token }}' # Use access_token output
           registry: '${{ env.REGION }}-docker.pkg.dev'
 
-      - name: 'Build and Push Container'
+      # Build the Docker container image and push it to Artifact Registry.
+      - name: 'Build and Push Container Image'
         run: |-
-          DOCKER_TAG="$${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{ github.sha }}"
-          docker build --tag "${DOCKER_TAG}" .
-          docker push "${DOCKER_TAG}"
-      - name: 'Deploy to Cloud Run'
+          # Define the full image path for Artifact Registry
+          DOCKER_IMAGE_PATH="${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.ARTIFACT_REGISTRY_REPO }}/${{ env.IMAGE_NAME }}:${{ github.sha }}"
+          
+          # Build the Docker image (assumes Dockerfile is in the repository root)
+          docker build --tag "${DOCKER_IMAGE_PATH}" .
+          
+          # Push the built image to Google Artifact Registry
+          docker push "${DOCKER_IMAGE_PATH}"
 
-        # END - Docker auth and build
-
-        uses: 'google-github-actions/deploy-cloudrun@33553064113a37d688aa6937bacbdc481580be17' # google-github-actions/deploy-cloudrun@v2
+      # Deploy the container image to Cloud Run.
+      - name: 'Deploy to Cloud Run Service'
+        uses: 'google-github-actions/deploy-cloudrun@v2' # Updated to latest stable version
         with:
-          service: '${{ env.SERVICE }}'
+          service: '${{ env.CLOUD_RUN_SERVICE_NAME }}'
           region: '${{ env.REGION }}'
-          # NOTE: If using a pre-built image, update the image name below:
+          # Use the image path constructed in the previous step
+          image: '${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.ARTIFACT_REGISTRY_REPO }}/${{ env.IMAGE_NAME }}:${{ github.sha }}'
 
-          image: '${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{ github.sha }}'
-      # If required, use the Cloud Run URL output in later steps
-      - name: 'Show output'
-        run: |2-
-
-          echo ${{ steps.deploy.outputs.url }}
+      # Display the deployed Cloud Run service URL.
+      - name: 'Show Cloud Run Service URL'
+        run: |
+          echo "Cloud Run service URL: ${{ steps.deploy.outputs.url }}"
