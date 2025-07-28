@@ -1,44 +1,61 @@
-# This workflow performs a clean installation of Node.js dependencies,
-# caches/restores them, builds the source code, and runs tests
-# across different versions of Node.js.
-# For more information, refer to: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+# This workflow will run tests using Node.js and then publish a package to GitHub Packages
+# when a new release is created in the repository.
+# For more information, please refer to: https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages
 
-name: Node.js CI # Name of the workflow, as it will appear in GitHub Actions tab
+name: Node.js Package Publishing # More descriptive name for the workflow
 
 on:
-  push:
-    branches: [ "main" ] # Triggers the workflow on push events to the 'main' branch.
-  pull_request:
-    branches: [ "main" ] # Triggers the workflow on pull request events targeting the 'main' branch.
+  release:
+    types: [created] # This workflow triggers automatically when a new release is created on GitHub.
 
 jobs:
-  build_and_test: # Renamed job from 'build' for more clarity on its purpose
-
-    runs-on: ubuntu-latest # Specifies the runner environment for this job
-
-    strategy:
-      matrix:
-        # Define the Node.js versions you want to test against.
-        # It's good practice to include the LTS versions relevant to your project.
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-        node-version: [18.x, 20.x, 22.x] 
+  build:
+    name: Build and Test Package # Clarified job name
+    runs-on: ubuntu-latest # Runs on the latest Ubuntu environment
 
     steps:
-    - name: Checkout Repository Code # Step to check out your repository code
-      uses: actions/checkout@v4 # Using the latest stable version of actions/checkout
+      - name: Checkout Repository Code # Step to get your code from the repository
+        uses: actions/checkout@v4 # Using the latest stable version of actions/checkout
 
-    - name: Use Node.js ${{ matrix.node-version }} # Set up the specific Node.js version for the current matrix run
-      uses: actions/setup-node@v4 # Using the latest stable version of actions/setup-node
-      with:
-        node-version: ${{ matrix.node-version }} # The Node.js version from the matrix
-        cache: 'npm' # Caches npm dependencies to speed up subsequent runs
+      - name: Setup Node.js Environment # Configure the Node.js environment for building and testing
+        uses: actions/setup-node@v4 # Using the latest stable version of actions/setup-node
+        with:
+          node-version: 20 # Specify the Node.js version to use (e.g., LTS version)
 
-    - name: Install Dependencies # Install Node.js dependencies using npm ci (clean install for CI)
-      run: npm ci
+      - name: Install Dependencies # Perform a clean installation of Node.js dependencies
+        run: npm ci # 'npm ci' ensures a clean and consistent dependency installation
 
-    - name: Build Source Code # Build the project, if a build script exists in package.json
-      # '--if-present' ensures the command doesn't fail if there's no 'build' script
-      run: npm run build --if-present 
+      - name: Run Tests # Execute the project's test suite
+        run: npm test # Ensures all tests pass before proceeding to publish
 
-    - name: Run Tests # Execute project tests
-      run: npm test
+  publish-gpr:
+    name: Publish to GitHub Packages # Clarified job name
+    needs: build # This job will only run if the 'build' job (including tests) successfully completes
+    runs-on: ubuntu-latest # Runs on the latest Ubuntu environment
+    
+    # Define permissions required for this job:
+    # 'contents: read' is needed to checkout the repository.
+    # 'packages: write' is crucial for publishing packages to GitHub Packages.
+    permissions:
+      contents: read
+      packages: write
+    
+    steps:
+      - name: Checkout Repository Code # Get the code again for the publish job (each job runs in a fresh environment)
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js for Publishing # Configure Node.js environment for publishing
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20 # Ensure consistent Node.js version
+          registry-url: https://npm.pkg.github.com/ # Crucial: Specifies the GitHub Packages registry URL
+
+      - name: Install Dependencies # Install dependencies again (required for a fresh environment)
+        run: npm ci
+
+      - name: Publish Package to GitHub Packages # Execute the npm publish command
+        run: npm publish
+        env:
+          # NODE_AUTH_TOKEN is used by npm to authenticate with the registry.
+          # ${{secrets.GITHUB_TOKEN}} is a special token provided by GitHub Actions for the current repository.
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
